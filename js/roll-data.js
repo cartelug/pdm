@@ -1,0 +1,38 @@
+/* FAITH IN MOTION — ROLL OF HONOUR
+   This one file drives every page: totals, the road, the ledger.
+   Format per row: ["Name", amountUGX, steps, "paid|pledged|promised", "note"] */
+window.ROLL_DATA = [
+    ["Modest R",100000,100,"paid",""],
+    ["Joshua & Sylvia",1000000,1000,"paid",""],
+    ["MD Rtn Nuwabine J",1000000,1000,"pledged",""],
+    ["Dr Monica Etima",100000,100,"pledged",""],
+    ["Mr Garakumbe",100000,100,"paid","more to be added"],
+    ["Mugabe Charles",20000,20,"paid",""],
+    ["Dr Habomugisha",50000,50,"paid",""],
+    ["Rtn Smart",50000,50,"paid","+ Piano"],
+    ["Dr MD Kanyesigye",100000,100,"promised","to add more"],
+    ["Ms Fortunate",20000,20,"paid",""],
+    ["Mubatsi J",50000,50,"pledged",""],
+    ["Rtn Dr Rusoke",50000,50,"paid",""],
+    ["Eng Rtn Darius",50000,50,"paid",""],
+    ["Rtn HCP Paul",50000,50,"paid",""],
+    ["Rtn Edith",100000,100,"paid",""],
+    ["PAG Muhumuza",100000,100,"paid",""],
+    ["Rtn Harriet",100000,100,"pledged",""],
+    ["Rtn Simon Kagwa",50000,50,"pledged",""],
+    ["Rtn Prof Kwesiga",100000,100,"pledged",""],
+    ["Rtn Dr Kerchan",100000,100,"pledged",""],
+    ["Rtn Budget",100000,100,"pledged",""],
+    ["Rtn Justus",100000,100,"pledged",""],
+    ["IP Anne",100000,100,"pledged",""],
+    ["Jimmy Baluku Odyek",50000,50,"paid",""],
+    ["Bwambale Michael",50000,50,"paid",""],
+    ["President Anne Nsubuga",200000,100,"paid","+ 100k water for the road"],
+    ["Joshua & Rosette Kainja",500000,500,"pledged",""],
+    ["Maria Claire",100000,100,"paid",""],
+    ["Lady Florence Kesiime Mugisha",100000,100,"paid",""],
+    ["Lady Olivia Hasahya",200000,200,"paid",""],
+    ["Caroline Alice Laker Onekalit",100000,100,"paid",""],
+    ["Rtn Isaac Katewanga",100000,100,"paid",""],
+    ["Rtn Allan Kiwumulo",50000,50,"pledged",""]
+  ];

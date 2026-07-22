@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faith in Motion — Collections Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root{
+    --blue:#0F3D8C; --blue-deep:#0B1E3E; --gold:#F4A81D; --clay:#B5462F;
+    --paper:#FBF9F4; --paper-2:#F3EDE0; --line:#E7E0D0; --line-2:#D8CFBB;
+    --ink:#14213D; --stone:#6F7E99;
+    --paid:#2E7D46; --pledged:#B07400; --promised:#3457A6;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Instrument Sans',system-ui,sans-serif; font-size:15px;}
+  h1,h2,h3,.disp{font-family:'Bricolage Grotesque',sans-serif; letter-spacing:-0.02em; margin:0;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 20px;}
+
+  header{background:var(--blue-deep); color:#fff; padding:18px 0;}
+  .hbar{display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;}
+  header h1{font-size:20px; color:#fff;}
+  header .sub{font-size:12px; color:#9fb0cf; letter-spacing:.08em; text-transform:uppercase; margin-top:3px;}
+  .hstats{display:flex; gap:22px; flex-wrap:wrap;}
+  .hstats .s b{font-family:'Bricolage Grotesque',sans-serif; font-size:20px; color:var(--gold); display:block; line-height:1.1;}
+  .hstats .s span{font-size:10.5px; color:#9fb0cf; letter-spacing:.1em; text-transform:uppercase;}
+
+  .tabs{display:flex; gap:4px; border-bottom:1px solid var(--line); background:var(--paper); position:sticky; top:0; z-index:20; padding-top:14px;}
+  .tab{border:none; background:transparent; font-family:inherit; font-size:14.5px; font-weight:700; color:var(--stone); padding:11px 16px; cursor:pointer; border-bottom:3px solid transparent;}
+  .tab.on{color:var(--blue); border-bottom-color:var(--gold);}
+  .panel{display:none; padding:26px 0 60px;} .panel.on{display:block;}
+
+  .card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px; margin-bottom:16px;}
+  .card h3{font-size:17px; color:var(--blue-deep); margin-bottom:4px;}
+  .card .hint{font-size:13px; color:var(--stone); margin:0 0 16px;}
+
+  label.f{display:block; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--stone); font-weight:700; margin-bottom:5px;}
+  input[type=text],input[type=number],select,textarea{
+    width:100%; font-family:inherit; font-size:15px; padding:10px 12px; border:1.5px solid var(--line-2);
+    border-radius:9px; background:#fff; color:var(--ink); outline:none;
+  }
+  input:focus,select:focus,textarea:focus{border-color:var(--blue);}
+  textarea{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12.5px; line-height:1.5; resize:vertical;}
+  .row{display:grid; gap:12px; margin-bottom:12px;}
+  .r-4{grid-template-columns:2fr 1fr 1fr 1fr;} .r-3{grid-template-columns:2fr 1fr 1fr;} .r-2{grid-template-columns:1fr 1fr;}
+  @media(max-width:760px){ .r-4,.r-3,.r-2{grid-template-columns:1fr;} }
+
+  .btn{display:inline-flex; align-items:center; gap:7px; border:none; cursor:pointer; font-family:inherit; font-weight:700;
+       font-size:14px; padding:11px 17px; border-radius:9px; text-decoration:none; transition:.12s;}
+  .btn:active{transform:translateY(1px);}
+  .btn-b{background:var(--blue); color:#fff;} .btn-b:hover{background:#134aa8;}
+  .btn-g{background:var(--gold); color:var(--blue-deep);} .btn-g:hover{background:#ffbb2e;}
+  .btn-o{background:#fff; color:var(--blue); border:1.5px solid var(--line-2);} .btn-o:hover{border-color:var(--blue);}
+  .btn-sm{padding:7px 11px; font-size:12.5px; border-radius:7px;}
+  .btn-danger{background:#fff; color:var(--clay); border:1.5px solid #eecfc8;} .btn-danger:hover{background:#fdf3f1;}
+
+  table{width:100%; border-collapse:collapse; font-size:14px;}
+  th{text-align:left; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--stone); font-weight:700; padding:9px 8px; border-bottom:2px solid var(--blue-deep);}
+  th.num,td.num{text-align:right;}
+  td{padding:9px 8px; border-bottom:1px solid #f0ece2; vertical-align:middle;}
+  tr:hover td{background:#fcfaf5;}
+  td.nm{font-weight:600;}
+  td .note{display:block; font-size:11.5px; color:var(--stone); font-weight:400;}
+  .num{font-variant-numeric:tabular-nums;}
+  .tag{font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:3px 9px; border-radius:999px; cursor:pointer; border:none; font-family:inherit;}
+  .tag.paid{background:#e2f0e6; color:var(--paid);} .tag.pledged{background:#fbeecb; color:var(--pledged);} .tag.promised{background:#e6ecf9; color:var(--promised);}
+
+  .sumrow{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:16px;}
+  @media(max-width:760px){ .sumrow{grid-template-columns:1fr 1fr;} }
+  .sumrow .c{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px;}
+  .sumrow .c .k{font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--stone); font-weight:700;}
+  .sumrow .c .v{font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:21px; color:var(--blue-deep); margin-top:4px;}
+  .sumrow .c .v small{font-size:12px; color:var(--stone); font-weight:600; display:block; margin-top:2px;}
+
+  .linkbox{display:flex; gap:8px; align-items:center; margin-top:8px;}
+  .linkbox input{font-family:ui-monospace,Menlo,monospace; font-size:12.5px;}
+  .qrgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:14px; margin-top:16px;}
+  .qrcard{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px; text-align:center;}
+  .qrcard .qr{display:flex; justify-content:center; margin-bottom:10px;}
+  .qrcard .lbl{font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:17px; color:var(--blue-deep);}
+  .qrcard .amt{font-size:12px; color:var(--stone); margin-bottom:8px;}
+
+  .toast{position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(20px); background:var(--blue-deep); color:#fff;
+         padding:11px 20px; border-radius:999px; font-size:14px; font-weight:600; opacity:0; pointer-events:none; transition:.25s; z-index:99;}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+  .empty{padding:26px; text-align:center; color:var(--stone); font-size:14px;}
+  .warn{background:#fff8e8; border:1px solid #f0dcae; border-radius:10px; padding:12px 14px; font-size:13px; color:#6d5100; margin-bottom:16px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hbar">
+    <div>
+      <h1>Collections Console</h1>
+      <div class="sub">Faith in Motion · St Joseph Rwembyo</div>
+    </div>
+    <div class="hstats">
+      <div class="s"><b id="hTotal">—</b><span>Total raised &amp; pledged</span></div>
+      <div class="s"><b id="hPaid">—</b><span>Received</span></div>
+      <div class="s"><b id="hSteps">—</b><span>Steps sponsored</span></div>
+      <div class="s"><b id="hCount">—</b><span>Sponsors</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="tabs">
+    <button class="tab on" data-p="p-pledges">Pledges</button>
+    <button class="tab" data-p="p-links">Links &amp; QR</button>
+    <button class="tab" data-p="p-publish">Publish</button>
+  </div>
+
+  <!-- PLEDGES -->
+  <div class="panel on" id="p-pledges">
+    <div class="sumrow">
+      <div class="c"><div class="k">Received</div><div class="v" id="sPaid">—<small id="sPaidS"></small></div></div>
+      <div class="c"><div class="k">Pledged</div><div class="v" id="sPled">—<small id="sPledS"></small></div></div>
+      <div class="c"><div class="k">Total</div><div class="v" id="sTot">—<small id="sTotS"></small></div></div>
+      <div class="c"><div class="k">Toward goal</div><div class="v" id="sGoal">—<small id="sGoalS"></small></div></div>
+    </div>
+
+    <div class="card">
+      <h3>Record a contribution</h3>
+      <p class="hint">Enter the amount in UGX — steps calculate automatically at UGX 1,000 per step.</p>
+      <div class="row r-4">
+        <div><label class="f">Contributor name</label><input type="text" id="fName" placeholder="e.g. Rtn Jane Doe"></div>
+        <div><label class="f">Amount (UGX)</label><input type="number" id="fAmt" placeholder="100000" min="0" step="1000"></div>
+        <div><label class="f">Status</label><select id="fStatus"><option value="paid">Paid</option><option value="pledged">Pledged</option><option value="promised">Promised</option></select></div>
+        <div><label class="f">Steps (auto)</label><input type="number" id="fSteps" placeholder="100"></div>
+      </div>
+      <div class="row r-2">
+        <div><label class="f">Note (optional)</label><input type="text" id="fNote" placeholder="e.g. + water for the road"></div>
+        <div style="display:flex; align-items:flex-end; gap:8px;">
+          <button class="btn btn-b" id="btnAdd">Add contribution</button>
+          <button class="btn btn-o" id="btnCancel" style="display:none;">Cancel edit</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px;">
+        <h3 style="margin:0;">Roll of Honour</h3>
+        <input type="text" id="search" placeholder="Search a name…" style="max-width:240px;">
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th style="width:34px;">#</th><th>Contributor</th><th class="num">Amount</th><th class="num">Steps</th><th>Status</th><th style="width:110px;"></th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="emptyMsg" style="display:none;">No contributions match.</div>
+    </div>
+  </div>
+
+  <!-- LINKS & QR -->
+  <div class="panel" id="p-links">
+    <div class="card">
+      <h3>Where the campaign site lives</h3>
+      <p class="hint">Paste your live site address. Every link and QR code below is built from it.</p>
+      <div class="row r-2">
+        <div><label class="f">Campaign site URL</label><input type="text" id="siteUrl" value="https://faithinmotion.org" placeholder="https://your-domain.org"></div>
+        <div><label class="f">Ambassador / referrer tag (optional)</label><input type="text" id="refTag" placeholder="e.g. rtn-edith"></div>
+      </div>
+      <p class="hint" style="margin:0;">A referrer tag tracks who brought the sponsor in — it rides along in the pledge message so you know who to thank.</p>
+    </div>
+
+    <div class="card">
+      <h3>Ready-made sponsor links</h3>
+      <p class="hint">Each link opens the site with the amount already selected — the sponsor just pays and confirms. Share them in WhatsApp, on posters, or in a bio.</p>
+      <div id="linkList"></div>
+    </div>
+
+    <div class="card">
+      <h3>QR codes for print &amp; walk day</h3>
+      <p class="hint">Right-click any code to save it. Put these on banners, T-shirts, order-of-service sheets and photo captions along the route.</p>
+      <div class="qrgrid" id="qrGrid"></div>
+    </div>
+
+    <div class="card">
+      <h3>Message templates</h3>
+      <p class="hint">Copy, paste, send. Written to be forwarded.</p>
+      <div id="msgList"></div>
+    </div>
+  </div>
+
+  <!-- PUBLISH -->
+  <div class="panel" id="p-publish">
+    <div class="warn"><b>How updating works.</b> The whole site reads its sponsor list from one file: <b>js/roll-data.js</b>. Update the roll here, copy the block below, and paste it into that file. Every page — home, the walk, the roll, the road progress — recalculates itself.</div>
+
+    <div class="card">
+      <h3>1 · Copy the updated sponsor list</h3>
+      <p class="hint">Open <b>js/roll-data.js</b> and replace its <code>window.ROLL_DATA = [ … ];</code> block with this. Every page — totals, the road, the ledger — updates from that one file.</p>
+      <textarea id="rollOut" rows="14" readonly></textarea>
+      <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn btn-g" id="copyRoll">Copy the code block</button>
+        <button class="btn btn-o" id="dlCsv">Download CSV for the finance record</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>2 · Keep a backup</h3>
+      <p class="hint">Download a backup file after every update session, and load it back in to carry on where you left off.</p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <button class="btn btn-b" id="dlJson">Download backup</button>
+        <label class="btn btn-o" style="cursor:pointer;">Load a backup<input type="file" id="upJson" accept="application/json" style="display:none;"></label>
+        <button class="btn btn-danger" id="resetAll">Reset to the original 33</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>3 · Weekly reconciliation report</h3>
+      <p class="hint">A short summary to send to the construction committee. Copy it straight into WhatsApp or email.</p>
+      <textarea id="reportOut" rows="12" readonly></textarea>
+      <div style="margin-top:10px;"><button class="btn btn-g" id="copyReport">Copy the report</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Copied</div>
+
+<script>
+(function(){
+  "use strict";
+  var STEP_UGX=1000, TOTAL_STEPS=466200, GOAL_UGX=410000000, ROUTE_KM=345;
+
+  var SEED = [
+    ["Modest R",100000,100,"paid",""],["Joshua & Sylvia",1000000,1000,"paid",""],
+    ["MD Rtn Nuwabine J",1000000,1000,"pledged",""],["Dr Monica Etima",100000,100,"pledged",""],
+    ["Mr Garakumbe",100000,100,"paid","more to be added"],["Mugabe Charles",20000,20,"paid",""],
+    ["Dr Habomugisha",50000,50,"paid",""],["Rtn Smart",50000,50,"paid","+ Piano"],
+    ["Dr MD Kanyesigye",100000,100,"promised","to add more"],["Ms Fortunate",20000,20,"paid",""],
+    ["Mubatsi J",50000,50,"pledged",""],["Rtn Dr Rusoke",50000,50,"paid",""],
+    ["Eng Rtn Darius",50000,50,"paid",""],["Rtn HCP Paul",50000,50,"paid",""],
+    ["Rtn Edith",100000,100,"paid",""],["PAG Muhumuza",100000,100,"paid",""],
+    ["Rtn Harriet",100000,100,"pledged",""],["Rtn Simon Kagwa",50000,50,"pledged",""],
+    ["Rtn Prof Kwesiga",100000,100,"pledged",""],["Rtn Dr Kerchan",100000,100,"pledged",""],
+    ["Rtn Budget",100000,100,"pledged",""],["Rtn Justus",100000,100,"pledged",""],
+    ["IP Anne",100000,100,"pledged",""],["Jimmy Baluku Odyek",50000,50,"paid",""],
+    ["Bwambale Michael",50000,50,"paid",""],["President Anne Nsubuga",200000,100,"paid","+ 100k water for the road"],
+    ["Joshua & Rosette Kainja",500000,500,"pledged",""],["Maria Claire",100000,100,"paid",""],
+    ["Lady Florence Kesiime Mugisha",100000,100,"paid",""],["Lady Olivia Hasahya",200000,200,"paid",""],
+    ["Caroline Alice Laker Onekalit",100000,100,"paid",""],["Rtn Isaac Katewanga",100000,100,"paid",""],
+    ["Rtn Allan Kiwumulo",50000,50,"pledged",""]
+  ];
+
+  var roll = SEED.map(function(r){ return r.slice(); });
+  var editIdx = -1;
+
+  function fmt(n){ return Number(n).toLocaleString('en-US'); }
+  function ugx(n){ return 'UGX '+fmt(n); }
+  var $ = function(id){ return document.getElementById(id); };
+
+  var toast=$('toast');
+  function showToast(t){ toast.textContent=t; toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');},1600); }
+  function copy(text,label){
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){showToast(label);});}
+    else{var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();showToast(label);}
+  }
+
+  function totals(){
+    var t={amt:0,steps:0,paid:0,paidSteps:0,pled:0,pledSteps:0,n:roll.length};
+    roll.forEach(function(r){
+      t.amt+=r[1]; t.steps+=r[2];
+      if(r[3]==='paid'){t.paid+=r[1];t.paidSteps+=r[2];} else {t.pled+=r[1];t.pledSteps+=r[2];}
+    });
+    return t;
+  }
+
+  function renderTotals(){
+    var t=totals();
+    $('hTotal').textContent=ugx(t.amt); $('hPaid').textContent=ugx(t.paid);
+    $('hSteps').textContent=fmt(t.steps); $('hCount').textContent=fmt(t.n);
+    $('sPaid').firstChild.nodeValue=ugx(t.paid); $('sPaidS').textContent=fmt(t.paidSteps)+' steps';
+    $('sPled').firstChild.nodeValue=ugx(t.pled); $('sPledS').textContent=fmt(t.pledSteps)+' steps';
+    $('sTot').firstChild.nodeValue=ugx(t.amt);  $('sTotS').textContent=fmt(t.steps)+' steps';
+    var pct=(t.amt/GOAL_UGX*100);
+    $('sGoal').firstChild.nodeValue=pct.toFixed(2)+'%';
+    $('sGoalS').textContent='of '+ugx(GOAL_UGX);
+  }
+
+  function renderTable(){
+    var q=($('search').value||'').toLowerCase();
+    var tb=$('tbody'); tb.innerHTML='';
+    var shown=0;
+    roll.forEach(function(r,i){
+      if(q && r[0].toLowerCase().indexOf(q)===-1) return;
+      shown++;
+      var tr=document.createElement('tr');
+      tr.innerHTML='<td class="num" style="color:#b3aa96;font-size:12px;">'+String(i+1).padStart(2,'0')+'</td>'
+        +'<td class="nm">'+esc(r[0])+(r[4]?'<span class="note">'+esc(r[4])+'</span>':'')+'</td>'
+        +'<td class="num">'+ugx(r[1])+'</td><td class="num">'+fmt(r[2])+'</td>'
+        +'<td><button class="tag '+r[3]+'" data-cycle="'+i+'" title="Click to change status">'+r[3]+'</button></td>'
+        +'<td style="text-align:right;"><button class="btn btn-o btn-sm" data-edit="'+i+'">Edit</button> '
+        +'<button class="btn btn-danger btn-sm" data-del="'+i+'">Remove</button></td>';
+      tb.appendChild(tr);
+    });
+    $('emptyMsg').style.display = shown ? 'none':'block';
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  function renderPublish(){
+    var lines = roll.map(function(r){
+      return '    ["'+String(r[0]).replace(/"/g,'\\"')+'",'+r[1]+','+r[2]+',"'+r[3]+'","'+String(r[4]||'').replace(/"/g,'\\"')+'"]';
+    }).join(',\n');
+    $('rollOut').value = 'window.ROLL_DATA = [\n'+lines+'\n];';
+
+    var t=totals();
+    var km=(t.steps*(ROUTE_KM*1000/TOTAL_STEPS))/1000;
+    var d=new Date();
+    var rep = 'FAITH IN MOTION — WEEKLY RECONCILIATION\n'
+      + 'St Joseph Rwembyo Catholic Church · Walk 2 August 2026\n'
+      + 'Report date: '+d.toDateString()+'\n\n'
+      + 'RECEIVED         '+ugx(t.paid)+'  ('+fmt(t.paidSteps)+' steps)\n'
+      + 'PLEDGED          '+ugx(t.pled)+'  ('+fmt(t.pledSteps)+' steps)\n'
+      + 'TOTAL            '+ugx(t.amt)+'  ('+fmt(t.steps)+' steps)\n\n'
+      + 'Sponsors on the roll: '+fmt(t.n)+'\n'
+      + 'Distance funded: '+km.toFixed(2)+' km of '+ROUTE_KM+' km\n'
+      + 'Steps still needing a sponsor: '+fmt(TOTAL_STEPS-t.steps)+'\n'
+      + 'Progress toward '+ugx(GOAL_UGX)+': '+(t.amt/GOAL_UGX*100).toFixed(2)+'%\n\n'
+      + 'All contributions are paid directly to the church construction account.\n'
+      + 'Only reconciled figures are published on the campaign site.';
+    $('reportOut').value = rep;
+  }
+
+  function renderAll(){ renderTotals(); renderTable(); renderPublish(); }
+
+  // ---- form ----
+  $('fAmt').addEventListener('input',function(){
+    var v=parseInt($('fAmt').value,10);
+    if(v>0) $('fSteps').value=Math.floor(v/STEP_UGX);
+  });
+  $('btnAdd').addEventListener('click',function(){
+    var nm=$('fName').value.trim(), amt=parseInt($('fAmt').value,10);
+    var st=parseInt($('fSteps').value,10), status=$('fStatus').value, note=$('fNote').value.trim();
+    if(!nm){ showToast('Enter a contributor name'); return; }
+    if(!(amt>0)){ showToast('Enter an amount in UGX'); return; }
+    if(!(st>0)) st=Math.floor(amt/STEP_UGX);
+    var rec=[nm,amt,st,status,note];
+    if(editIdx>-1){ roll[editIdx]=rec; editIdx=-1; $('btnAdd').textContent='Add contribution'; $('btnCancel').style.display='none'; showToast('Contribution updated'); }
+    else { roll.push(rec); showToast('Added to the roll'); }
+    ['fName','fAmt','fSteps','fNote'].forEach(function(id){$(id).value='';});
+    renderAll();
+  });
+  $('btnCancel').addEventListener('click',function(){
+    editIdx=-1; $('btnAdd').textContent='Add contribution'; $('btnCancel').style.display='none';
+    ['fName','fAmt','fSteps','fNote'].forEach(function(id){$(id).value='';});
+  });
+
+  $('tbody').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    if(b.dataset.del!==undefined){
+      var i=+b.dataset.del;
+      if(confirm('Remove '+roll[i][0]+' from the roll?')){ roll.splice(i,1); renderAll(); showToast('Removed'); }
+    } else if(b.dataset.edit!==undefined){
+      var j=+b.dataset.edit, r=roll[j];
+      $('fName').value=r[0]; $('fAmt').value=r[1]; $('fSteps').value=r[2]; $('fStatus').value=r[3]; $('fNote').value=r[4]||'';
+      editIdx=j; $('btnAdd').textContent='Save changes'; $('btnCancel').style.display='inline-flex';
+      window.scrollTo({top:0,behavior:'smooth'});
+    } else if(b.dataset.cycle!==undefined){
+      var k=+b.dataset.cycle, order=['paid','pledged','promised'];
+      roll[k][3]=order[(order.indexOf(roll[k][3])+1)%3];
+      renderAll();
+    }
+  });
+  $('search').addEventListener('input',renderTable);
+
+  // ---- tabs ----
+  Array.prototype.forEach.call(document.querySelectorAll('.tab'),function(t){
+    t.addEventListener('click',function(){
+      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});
+      document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('on');});
+      t.classList.add('on'); $(t.dataset.p).classList.add('on');
+      if(t.dataset.p==='p-links') buildLinks();
+    });
+  });
+
+  // ---- links & QR ----
+  var TIERS=[20,50,100,200,500,1000];
+  function baseUrl(){ return ($('siteUrl').value||'').trim().replace(/\/+$/,''); }
+  function sponsorUrl(steps){
+    var u=baseUrl()+'/?steps='+steps;
+    var ref=($('refTag').value||'').trim();
+    if(ref) u+='&ref='+encodeURIComponent(ref);
+    return u;
+  }
+  function buildLinks(){
+    var ll=$('linkList'); ll.innerHTML='';
+    TIERS.forEach(function(s){
+      var url=sponsorUrl(s);
+      var d=document.createElement('div');
+      d.style.cssText='padding:12px 0;border-bottom:1px solid #f0ece2;';
+      d.innerHTML='<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;">'
+        +'<div><b style="font-family:Bricolage Grotesque,sans-serif;font-size:16px;">'+fmt(s)+' steps</b>'
+        +' <span style="color:var(--stone);font-size:13px;">· '+ugx(s*STEP_UGX)+'</span></div></div>'
+        +'<div class="linkbox"><input type="text" readonly value="'+url+'"><button class="btn btn-o btn-sm" data-copy="'+encodeURIComponent(url)+'">Copy</button></div>';
+      ll.appendChild(d);
+    });
+    var open=document.createElement('div');
+    open.style.cssText='padding:12px 0;';
+    var ou=baseUrl()+'/#sponsor';
+    open.innerHTML='<div><b style="font-family:Bricolage Grotesque,sans-serif;font-size:16px;">Any amount</b>'
+      +' <span style="color:var(--stone);font-size:13px;">· sponsor chooses</span></div>'
+      +'<div class="linkbox"><input type="text" readonly value="'+ou+'"><button class="btn btn-o btn-sm" data-copy="'+encodeURIComponent(ou)+'">Copy</button></div>';
+    ll.appendChild(open);
+
+    // QR codes
+    var g=$('qrGrid'); g.innerHTML='';
+    [100,500,0].forEach(function(s){
+      var url = s ? sponsorUrl(s) : baseUrl()+'/#sponsor';
+      var c=document.createElement('div'); c.className='qrcard';
+      var holder=document.createElement('div'); holder.className='qr';
+      c.appendChild(holder);
+      var lbl=document.createElement('div'); lbl.className='lbl'; lbl.textContent = s? fmt(s)+' steps':'Any amount';
+      var amt=document.createElement('div'); amt.className='amt'; amt.textContent = s? ugx(s*STEP_UGX):'Sponsor chooses';
+      c.appendChild(lbl); c.appendChild(amt);
+      g.appendChild(c);
+      if(window.QRCode){ new QRCode(holder,{text:url,width:140,height:140,colorDark:'#0B1E3E',colorLight:'#ffffff'}); }
+      else { holder.innerHTML='<span style="font-size:12px;color:#6F7E99;">QR needs an internet connection</span>'; }
+    });
+
+    // messages
+    var ml=$('msgList'); ml.innerHTML='';
+    var u100=sponsorUrl(100), uAny=baseUrl()+'/#sponsor';
+    var msgs=[
+      ['WhatsApp — to a friend',
+       'Our brother Shyaka is walking 345 km from Kampala to Kasese to finish building St Joseph Rwembyo Catholic Church. That is 466,200 steps. You can sponsor a step for UGX 1,000.\n\nSponsor 100 steps (UGX 100,000): '+u100+'\nOr choose your own: '+uAny],
+      ['WhatsApp — to a group',
+       'FAITH IN MOTION — 2 August 2026\n\n345 km on foot. 466,200 steps. One church to finish.\n\nEvery UGX 1,000 sponsors one step and carries him closer to Rwembyo. Every sponsor is named on the Roll of Honour.\n\nSponsor here: '+uAny+'\nMobile Money: 0772 495 733 (Sylvia Kaawe, Chair Construction)'],
+      ['For a corporate or parish letter',
+       'St Joseph Rwembyo Catholic Church is being completed at Kiburara, Kisinga, Kasese. To mobilise support, a 345 km walk from Kampala to Kasese takes place on 2 August 2026 — 466,200 steps, each sponsorable at UGX 1,000.\n\nContributions go directly to the church construction account, and every contribution is published on a reconciled public roll.\n\nTo sponsor: '+uAny]
+    ];
+    msgs.forEach(function(m){
+      var d=document.createElement('div'); d.style.cssText='padding:12px 0;border-bottom:1px solid #f0ece2;';
+      d.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:7px;">'
+        +'<b style="font-size:14px;">'+m[0]+'</b>'
+        +'<button class="btn btn-o btn-sm" data-copy="'+encodeURIComponent(m[1])+'">Copy</button></div>'
+        +'<div style="font-size:13px;color:#41506e;white-space:pre-wrap;background:#fbf9f4;border-radius:8px;padding:11px;">'+esc(m[1])+'</div>';
+      ml.appendChild(d);
+    });
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-copy]'); if(!b) return;
+    copy(decodeURIComponent(b.dataset.copy),'Copied');
+  });
+  $('siteUrl').addEventListener('input',buildLinks);
+  $('refTag').addEventListener('input',buildLinks);
+
+  // ---- publish actions ----
+  $('copyRoll').addEventListener('click',function(){ copy($('rollOut').value,'Sponsor list copied'); });
+  $('copyReport').addEventListener('click',function(){ copy($('reportOut').value,'Report copied'); });
+  function download(name,content,type){
+    var b=new Blob([content],{type:type||'text/plain'});
+    var a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=name; a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);},800); showToast('Downloaded');
+  }
+  $('dlCsv').addEventListener('click',function(){
+    var rows=[['#','Contributor','Amount UGX','Steps','Status','Note']];
+    roll.forEach(function(r,i){ rows.push([i+1,r[0],r[1],r[2],r[3],r[4]||'']); });
+    var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+    download('faith-in-motion-roll.csv',csv,'text/csv');
+  });
+  $('dlJson').addEventListener('click',function(){
+    download('faith-in-motion-backup.json',JSON.stringify({saved:new Date().toISOString(),roll:roll},null,2),'application/json');
+  });
+  $('upJson').addEventListener('change',function(e){
+    var f=e.target.files[0]; if(!f) return;
+    var fr=new FileReader();
+    fr.onload=function(){
+      try{ var d=JSON.parse(fr.result);
+        if(d && Array.isArray(d.roll)){ roll=d.roll.map(function(r){return r.slice();}); renderAll(); showToast('Backup loaded'); }
+        else showToast('That file has no roll in it');
+      }catch(err){ showToast('That file could not be read'); }
+    };
+    fr.readAsText(f); e.target.value='';
+  });
+  $('resetAll').addEventListener('click',function(){
+    if(confirm('Reset the roll back to the original 33 contributors? Anything added since will be lost.')){
+      roll=SEED.map(function(r){return r.slice();}); renderAll(); showToast('Reset');
+    }
+  });
+
+  renderAll();
+})();
+</script>
+</body>
+</html>
