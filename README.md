@@ -56,13 +56,13 @@ There is no build step, no framework and no server. Every page is a single self-
 Your site will be at:
 
 ```
-https://<your-username>.github.io/<repository-name>/
+https://cartelug.github.io/pamodzi/
 ```
 
 ### Pushing from a terminal
 
 ```bash
-git remote add origin https://github.com/<your-username>/<repository-name>.git
+git remote add origin https://github.com/cartelug/pamodzi.git
 git branch -M main
 git push -u origin main
 ```
