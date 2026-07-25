@@ -56,13 +56,16 @@ There is no build step, no framework and no server. Every page is a single self-
 Your site will be at:
 
 ```
-https://cartelug.github.io/pamodzi/
+https://cartelug.github.io/faith-in-motion-site/
 ```
+
+(If the repository is later renamed — e.g. to `pamodzi` — this address changes to
+match the new name. GitHub keeps redirects from the old one.)
 
 ### Pushing from a terminal
 
 ```bash
-git remote add origin https://github.com/cartelug/pamodzi.git
+git remote add origin https://github.com/cartelug/faith-in-motion-site.git
 git branch -M main
 git push -u origin main
 ```
