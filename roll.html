@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="css/fim.css">
 </head>
 <body>
+<div class="liveBand" id="liveBand"></div>
 <header id="hdr">
   <div class="wrap nav">
     <a class="brand" href="faith-in-motion.html">
@@ -25,6 +26,7 @@
       <a href="faith-in-motion.html">Home</a>
       <a href="walk.html">The walk</a>
       <a href="church.html">The church</a>
+      <a href="take-part.html">Take part</a>
       <a href="roll.html" class="act">Roll of honour</a>
       <a class="btn btn-gold" href="give.html">Sponsor a step</a>
     </nav>
@@ -49,18 +51,33 @@
       <p class="sec-sub">Every confirmed contribution is recorded here, in the order it was received.</p>
     </div>
 
+    <div class="leadband reveal" id="leadBand"></div>
+
     <div class="ledger reveal">
       <div class="ledger-head">
         <span>№</span><span>Contributor</span><span class="r">Contribution</span><span class="r">Status</span>
       </div>
       <div id="ledgerBody" data-full></div>
-      
     </div>
 
     <div class="tallies reveal">
       <div class="tally"><div class="k">Received</div><div class="v" id="tPaid">—</div><div class="c" id="tPaidC"></div></div>
       <div class="tally"><div class="k">Pledged</div><div class="v" id="tPled">—</div><div class="c" id="tPledC"></div></div>
       <div class="tally hi"><div class="k">Total raised &amp; pledged</div><div class="v" id="tTot">—</div><div class="c" id="tTotC"></div></div>
+    </div>
+
+    <!-- PLEDGED vs FULFILLED -->
+    <div class="pf reveal">
+      <div class="track"><i id="pfBar"></i></div>
+      <div class="legend">
+        <span><span class="sw" style="background:#3E7C5A;"></span>Received <b id="pfPaid">—</b></span>
+        <span><span class="sw" style="background:rgba(181,70,47,.5);"></span>Still pledged <b id="pfPled">—</b></span>
+        <span id="pfPct">—</span>
+      </div>
+      <div style="display:flex;gap:11px;flex-wrap:wrap;align-items:center;margin-top:18px;">
+        <a class="btn btn-wa" id="waFulfil" href="#" target="_blank" rel="noopener">Complete my pledge</a>
+        <span style="font-size:13.5px;color:var(--stone);max-width:44ch;">If you have already pledged, this opens WhatsApp so the balance can be confirmed against your name.</span>
+      </div>
     </div>
   </div>
 </section>
@@ -89,7 +106,7 @@
       </div>
       <div>
         <h4>The campaign</h4>
-        <a href="walk.html">The walk</a><a href="church.html">The church</a><a href="roll.html">Roll of honour</a><a href="index.html">Pamodzi for Development</a>
+        <a href="walk.html">The walk</a><a href="church.html">The church</a><a href="take-part.html">Take part</a><a href="roll.html">Roll of honour</a><a href="accountability.html">Accountability</a><a href="index.html">PCI Uganda</a>
       </div>
       <div>
         <h4>Give</h4>

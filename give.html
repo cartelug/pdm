@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="css/fim.css">
 </head>
 <body>
+<div class="liveBand" id="liveBand"></div>
 <header id="hdr">
   <div class="wrap nav">
     <a class="brand" href="faith-in-motion.html">
@@ -25,6 +26,7 @@
       <a href="faith-in-motion.html">Home</a>
       <a href="walk.html">The walk</a>
       <a href="church.html">The church</a>
+      <a href="take-part.html">Take part</a>
       <a href="roll.html">Roll of honour</a>
       <a class="btn btn-gold" href="give.html">Sponsor a step</a>
     </nav>
@@ -47,6 +49,7 @@
       <span class="survey gold">Sponsor a step</span>
       <h2 class="sec">Choose how far you'll carry him.</h2>
       <p class="sec-sub">Pick your steps, send by Mobile Money, then confirm on WhatsApp so your name joins the Roll of Honour. It takes about two minutes.</p>
+      <p style="margin-top:18px;"><span class="unitline dark" data-unit></span></p>
     </div>
 
     <div class="inst">
@@ -69,6 +72,14 @@
           <div class="metrebar"><i id="outBar"></i></div>
         </div>
 
+        <!-- STEP ATTRIBUTION — the exact stretch these steps claim -->
+        <div class="segbox">
+          <div class="k">The stretch you would own</div>
+          <div class="v" id="outSeg">—</div>
+          <div class="p" id="outPlace">—</div>
+          <div class="p" style="margin-top:9px;color:#8FA3C4;">Your name is recorded against this stretch on the Roll of Honour.</div>
+        </div>
+
         <div class="paybox">
           <div>
             <div class="k">Mobile Money</div>
@@ -89,6 +100,25 @@
           <li><b>Watch the road fill.</b> The gold line moves as confirmed gifts come in.</li>
         </ol>
         <p class="fineprint">Contributions go directly to the church's authorised construction account. The campaign team never receives or holds your donation, and only reconciled figures are published on this page. The number above is the only official channel — treat any other request as fraudulent.</p>
+
+        <!-- DIASPORA LANE -->
+        <div class="intl" style="margin-top:26px;">
+          <span class="survey on-dark">Giving from outside Uganda</span>
+          <p style="font-size:14px;color:#C9D6EC;margin:14px 0 0;">Mobile Money needs a Ugandan number. If you are abroad, send a bank transfer and put the reference below in the payment description so your gift is matched to your name on the Roll of Honour.</p>
+          <dl>
+            <dt>Account name</dt><dd>[TO CONFIRM — church construction account]</dd>
+            <dt>Bank &amp; branch</dt><dd>[TO CONFIRM]</dd>
+            <dt>Account no.</dt><dd>[TO CONFIRM]</dd>
+            <dt>SWIFT / BIC</dt><dd>[TO CONFIRM]</dd>
+            <dt>Currency</dt><dd>USD or UGX</dd>
+            <dt>Reference</dt><dd id="intlRef">FIM-STEPS-YOURNAME</dd>
+          </dl>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;">
+            <button class="copyb" id="copyIban">Copy the reference</button>
+            <a class="btn btn-wa" href="https://wa.me/256772495733?text=I%20am%20giving%20from%20outside%20Uganda%20and%20would%20like%20the%20bank%20transfer%20details%20for%20Faith%20in%20Motion." target="_blank" rel="noopener">Ask for the details</a>
+          </div>
+          <p style="font-size:12.5px;color:#8FA3C4;margin:14px 0 0;">Bank details are published only once the church's authorised account has been confirmed in writing. Until then, request them on WhatsApp and they will be sent directly.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -119,7 +149,7 @@
       </div>
       <div>
         <h4>The campaign</h4>
-        <a href="walk.html">The walk</a><a href="church.html">The church</a><a href="roll.html">Roll of honour</a><a href="index.html">Pamodzi for Development</a>
+        <a href="walk.html">The walk</a><a href="church.html">The church</a><a href="take-part.html">Take part</a><a href="roll.html">Roll of honour</a><a href="accountability.html">Accountability</a><a href="index.html">PCI Uganda</a>
       </div>
       <div>
         <h4>Give</h4>

@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="css/fim.css">
 </head>
 <body>
+<div class="liveBand" id="liveBand"></div>
 <header id="hdr">
   <div class="wrap nav">
     <a class="brand" href="faith-in-motion.html">
@@ -25,6 +26,7 @@
       <a href="faith-in-motion.html" class="act">Home</a>
       <a href="walk.html">The walk</a>
       <a href="church.html">The church</a>
+      <a href="take-part.html">Take part</a>
       <a href="roll.html">Roll of honour</a>
       <a class="btn btn-gold" href="give.html">Sponsor a step</a>
     </nav>
@@ -155,6 +157,15 @@
   </div>
   <div class="scrollcue"><i></i> Scroll to walk</div>
 </section>
+
+<!-- TRANSPARENCY GUARANTEE — above the fold, before anything is asked -->
+<section class="trustline">
+  <div class="wrap in">
+    <div class="g"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" stroke="#F5A81C" stroke-width="1.7"/><path d="M8.5 12 L11 14.5 L15.5 9.5" stroke="#F5A81C" stroke-width="1.7"/></svg><span>Every shilling goes <b>straight to the church construction account</b></span></div>
+    <div class="g"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" stroke="#F5A81C" stroke-width="1.7"/><path d="M8.5 12 L11 14.5 L15.5 9.5" stroke="#F5A81C" stroke-width="1.7"/></svg><span>The campaign team <b>never holds a donation</b></span></div>
+    <div class="g"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" stroke="#F5A81C" stroke-width="1.7"/><path d="M8.5 12 L11 14.5 L15.5 9.5" stroke="#F5A81C" stroke-width="1.7"/></svg><span>Only <b>verified figures</b> appear on this page</span></div>
+  </div>
+</section>
 <!-- JOURNEY RAIL -->
 <div class="rail" id="rail" aria-hidden="true">
   <span class="cap">Kampala</span>
@@ -193,12 +204,21 @@
           <path d="M0,-38 L9,-26 L-9,-26 Z" fill="#B5462F"/>
           <rect x="-2.4" y="-16" width="4.8" height="12" fill="#F5A81C"/>
         </g>
+        <g id="rPins"></g>
         <g id="rWalker"><circle r="10" fill="#B5462F" stroke="#F1EADC" stroke-width="3.5"/></g>
       </svg>
       <div class="road-ends">
         <div class="e"><b>Kampala</b><span>Akright City · flag-off</span></div>
         <div class="e r"><b>Rwembyo, Kasese</b><span>St Joseph's Catholic Church</span></div>
       </div>
+    </div>
+
+    <div class="msrow reveal">
+      <div>
+        <div class="big" id="msNext">—</div>
+        <div class="sub"><span data-t="pct">—</span> of the road is sponsored · <span data-t="km">—</span> claimed so far</div>
+      </div>
+      <span class="unitline dark" data-unit></span>
     </div>
 
     <div class="gap-note reveal">
@@ -273,7 +293,7 @@
       </div>
       <div>
         <h4>The campaign</h4>
-        <a href="walk.html">The walk</a><a href="church.html">The church</a><a href="roll.html">Roll of honour</a><a href="index.html">Pamodzi for Development</a>
+        <a href="walk.html">The walk</a><a href="church.html">The church</a><a href="take-part.html">Take part</a><a href="roll.html">Roll of honour</a><a href="accountability.html">Accountability</a><a href="index.html">PCI Uganda</a>
       </div>
       <div>
         <h4>Give</h4>
