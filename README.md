@@ -37,10 +37,12 @@ There is no build step, no framework and no server. Every page is a single self-
 |---|---|
 | `js/roll-data.js` | **Drives every campaign page** — the sponsor roll |
 | `js/updates-data.js` | Drives the Pamodzi updates feed — add entries here |
-| `js/fim.js` · `js/pdm.js` | Shared page scripts (each feature self-activates per page) |
-| `css/fim.css` · `css/pdm.css` | The two design systems |
+| `js/fim.js` · `js/pdm.js` · `js/pci.js` | Shared page scripts (each feature self-activates per page) |
+| `js/section-scroll.js` · `css/section-scroll.css` | Custom section scroll — one gesture, one move, on desktop and touch |
+| `css/fim.css` · `css/pci.css` · `css/pdm.css` | The three design systems, all on the PCI palette |
 | `admin/index.html` | Collections console — pledges, links, QR, weekly report |
 | `assets/brand/` | Logos · `assets/` is where campaign photos go |
+| `BRAND.md` | **Logo and colour reference — read before touching either** |
 | `404.html` | On-brand not-found page |
 
 ---

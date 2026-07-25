@@ -2,7 +2,7 @@
 
 **Source:** Notion — *"PCI Uganda — Website Development, Digital Strategy & Faith in Motion Command Center"* (Master Update, 24 July 2026).
 **Target repo:** `cartelug/faith-in-motion-site` (static, no-build HTML/CSS/JS; deploys to GitHub Pages).
-**Design system:** reuse the existing Pamodzi system — `css/pdm.css` + `js/pdm.js` (navy `--ink:#0A1A2F`, teal `--cyan:#2FA8A0`, gold `--gold:#F5A81C`, paper). Fonts: Bricolage Grotesque / Instrument Sans / JetBrains Mono.
+**Design system:** reuse the existing Pamodzi system — `css/pdm.css` + `js/pdm.js`. *(Superseded: the palette is now PCI red `#BC2C21` / near-black / white — see `BRAND.md`.)* Fonts: Bricolage Grotesque / Instrument Sans / JetBrains Mono.
 
 ---
 
@@ -23,7 +23,7 @@ These come straight from the doc and gate a public launch. Build with a single s
 | D1 | **Legal/public name** — "Pamodzi Community Initiative (Uganda) / PCI Uganda" vs "Pamodzi for Development / P4D" | Explicitly *unconfirmed*; doc recommends *Pamodzi Community Initiative Uganda · PCI Uganda · "Together for Development"* | Keep visible brand as **Pamodzi for Development** in copy, introduce **PCI Uganda** as the institutional name in a `[NAME TO CONFIRM]` token. One find-replace at confirmation. |
 | D2 | **All impact figures** (UGX ~2.19bn mobilised; 450M/600M/902M/1.24bn ventures; 600+ outreach beneficiaries; 55+ members; 120+ participants) | Doc: *"must be verified and approved before being published as final public claims."* Site governance: *only reconciled figures are published.* | **Publish the qualitative story; mark every figure `[TO CONFIRM]`** and keep it out of headline stats until the finance verifier signs off. |
 | D3 | **Domain** — `pamodzici.com` (new) vs current GitHub Pages URL | Preferred `pamodzici.com`; old `pamodzici.org` access lost | Build domain-agnostic (relative paths already used); add a `CNAME` only once the domain is purchased. |
-| D4 | **Palette** — doc names "forest green, cream, restrained gold"; built site is navy/teal/gold | Divergence | **Keep the built navy/teal/gold `pdm.css` system** (already polished, consistent with Faith in Motion). Revisit only if the client insists on green. |
+| D4 | **Palette** — doc names "forest green, cream, restrained gold"; built site was navy/teal/gold | Resolved | **Superseded.** The palette is now taken from the PCI logo itself: red `#BC2C21`, near-black, white, applied across all three stylesheets. See `BRAND.md`. |
 | D5 | **Member-directory / questionnaire system** (private CRM for 55+ members) | Doc lists it as a digital requirement | **Out of scope for the public static site** — flag as a separate future module (needs a backend). Public site stays static. |
 
 ---

@@ -113,9 +113,9 @@
         var g=document.createElementNS('http://www.w3.org/2000/svg','g');
         g.setAttribute('transform','translate('+pt.x+','+pt.y+')');
         g.setAttribute('class','pin');
-        g.innerHTML='<line x1="0" y1="-9" x2="0" y2="9" stroke="#8B7C63" stroke-width="2"/>'
+        g.innerHTML='<line x1="0" y1="-9" x2="0" y2="9" stroke="#6E6E79" stroke-width="2"/>'
           +'<text x="0" y="-15" text-anchor="middle" font-family="JetBrains Mono, monospace"'
-          +' font-size="11" fill="#8B7C63">'+(p*100)+'%</text>';
+          +' font-size="11" fill="#6E6E79">'+(p*100)+'%</text>';
         pinLayer.appendChild(g);
       });
     }
@@ -271,7 +271,7 @@
       +(LIVE.note?'<span class="note">'+esc(LIVE.note)+'</span>':'')
       +'<span class="tr"><i style="width:'+(pctWalked*100).toFixed(1)+'%"></i></span>'
       +(LIVE.updated?'<span class="upd">confirmed '+esc(LIVE.updated)+'</span>':'')
-      +'<a class="btn btn-gold" href="give.html">Sponsor a step →</a>'
+      +'<a class="btn btn-red" href="give.html">Sponsor a step →</a>'
       +'</div>';
     band.classList.add('on');
     document.body.classList.add('has-live');

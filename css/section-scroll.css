@@ -1,0 +1,101 @@
+/* ═══════════════════════════════════════════════════════════════════
+   PCI UGANDA — custom section scroll
+   Chrome for the section scroller in js/section-scroll.js:
+   a dot rail on wide screens, a progress bar and counter on touch.
+   Shared by all three page families, so it only uses brand literals
+   and its own --ss-* tokens.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root{
+  --ss-red:#BC2C21;
+  --ss-red-lift:#E8574A;
+  --ss-ink:#0B0B0C;
+  --ss-ease:cubic-bezier(.22,.82,.28,1);
+}
+
+/* the scroller drives window.scrollTo frame by frame — native smooth
+   scrolling would fight it, so it is switched off while active */
+html.ss-on{scroll-behavior:auto;}
+
+/* stop text selection dragging mid-glide */
+html.ss-gliding,html.ss-gliding body{-webkit-user-select:none;user-select:none;}
+
+/* ───────── dot rail (pointer / wide screens) ───────── */
+.ssnav{
+  position:fixed;z-index:75;right:max(14px,1.1vw);top:50%;transform:translateY(-50%);
+  display:none;opacity:0;transition:opacity .45s var(--ss-ease);pointer-events:none;
+}
+.ssnav.ready{opacity:1;pointer-events:auto;}
+.ssnav ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;}
+.ssnav button{
+  -webkit-appearance:none;appearance:none;background:none;border:0;margin:0;cursor:pointer;
+  display:flex;align-items:center;justify-content:flex-end;gap:11px;
+  padding:6px 2px 6px 12px;width:100%;font:inherit;color:inherit;
+}
+/* label rides in from the right on hover/focus — quiet until asked for */
+.ssnav .sslabel{
+  font-family:'Instrument Sans',system-ui,sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:.05em;line-height:1;
+  white-space:nowrap;color:#fff;background:var(--ss-ink);
+  padding:6px 9px;border-radius:2px;
+  opacity:0;transform:translateX(6px);
+  transition:opacity .22s var(--ss-ease),transform .22s var(--ss-ease);
+}
+.ssnav .ssdot{
+  position:relative;display:block;width:9px;height:9px;flex:none;border-radius:50%;
+  background:transparent;box-shadow:inset 0 0 0 1.5px currentColor;color:var(--ss-ink);
+  opacity:.34;transition:opacity .25s,transform .25s var(--ss-ease),background .25s;
+}
+.ssnav button:hover .ssdot,.ssnav button:focus-visible .ssdot{opacity:.8;}
+.ssnav button:hover .sslabel,.ssnav button:focus-visible .sslabel{opacity:1;transform:none;}
+.ssnav button[aria-current] .ssdot{
+  opacity:1;background:var(--ss-red);color:var(--ss-red);transform:scale(1.16);
+}
+/* over a dark section the rail inverts, so it never disappears */
+.ssnav.on-dark-bg .ssdot{color:#fff;}
+.ssnav.on-dark-bg button[aria-current] .ssdot{background:var(--ss-red-lift);color:var(--ss-red-lift);}
+.ssnav.on-dark-bg .sslabel{background:#fff;color:var(--ss-ink);}
+.ssnav button:focus-visible{outline:2px solid var(--ss-red);outline-offset:2px;border-radius:2px;}
+
+@media (min-width:1024px) and (pointer:fine){
+  .ssnav{display:block;}
+}
+
+/* ───────── progress bar + counter (touch / narrow) ───────── */
+.ssbar{
+  position:fixed;z-index:95;left:0;right:0;top:0;height:3px;
+  background:rgba(11,11,12,.14);opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.ssbar.ready{opacity:1;}
+.ssbar i{
+  display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:0 50%;
+  background:var(--ss-red);
+  transition:transform .18s linear;
+}
+.ssbar.on-dark-bg{background:rgba(255,255,255,.18);}
+.ssbar.on-dark-bg i{background:var(--ss-red-lift);}
+
+/* section counter — surfaces only while the reader is moving */
+.sscount{
+  position:fixed;z-index:95;right:12px;bottom:14px;
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:10.5px;font-weight:700;letter-spacing:.12em;
+  color:#fff;background:rgba(11,11,12,.82);backdrop-filter:blur(6px);
+  padding:7px 10px;border-radius:2px;
+  opacity:0;transform:translateY(6px);pointer-events:none;
+  transition:opacity .3s var(--ss-ease),transform .3s var(--ss-ease);
+}
+.sscount.show{opacity:1;transform:none;}
+.sscount b{color:var(--ss-red-lift);font-weight:700;}
+
+@media (min-width:1024px) and (pointer:fine){
+  .ssbar,.sscount{display:none;}
+}
+
+/* nothing here should move for readers who asked for less motion */
+@media (prefers-reduced-motion:reduce){
+  .ssnav,.ssnav *,.ssbar,.ssbar *,.sscount{transition:none!important;}
+  .sscount{display:none;}
+}
+
+@media print{ .ssnav,.ssbar,.sscount{display:none!important;} }

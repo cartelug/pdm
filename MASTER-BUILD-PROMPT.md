@@ -74,7 +74,7 @@ Build in this order. Each must be **finished and verified** before the next.
 ### 01 · Campaign site — `faith-in-motion.html`
 Single self-contained HTML file, no build step, deployable to any static host.
 
-- **Design system:** Rotary royal blue `#0F3D8C`, deep navy `#0B1E3E`, Rotary gold `#F4A81D`, murram clay `#B5462F`, warm paper `#FBF9F4`. Display face **Bricolage Grotesque**, body **Instrument Sans**. Do not use a cream-and-serif or dark-mode-neon look.
+- **Design system:** *(Superseded — see `BRAND.md`. The live palette is PCI red `#BC2C21`, near-black and white, taken from the PCI logo.)* Originally briefed as Rotary royal blue `#0F3D8C`, deep navy `#0B1E3E`, Rotary gold `#F4A81D`, murram clay `#B5462F`, warm paper `#FBF9F4`. Display face **Bricolage Grotesque**, body **Instrument Sans**.
 - **Signature element:** an SVG **road from Kampala to Rwembyo** where sponsored steps draw a gold line forward and move a walker marker along it. The unfunded road ahead is the emotional appeal — do not hide how far is left.
 - **Sections:** hero with live counters → route → sponsor engine → the walk → the church → Roll of Honour → trust → share → footer.
 - **Sponsor engine:** step tiers (20/50/100/500) plus a custom field; live UGX total; "carries him *X* metres" feedback; copy-the-MoMo-number button; one-tap WhatsApp pledge with a pre-filled message.
