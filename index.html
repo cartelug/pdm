@@ -3,132 +3,225 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pamodzi for Development — One foundation, many doors</title>
-<meta name="description" content="Pamodzi builds projects across Uganda that outlast the campaigns that fund them. Faith in Motion is live now.">
-<meta property="og:title" content="Pamodzi for Development — One foundation, many doors">
-<meta property="og:description" content="Pamodzi builds projects across Uganda that outlast the campaigns that fund them. Faith in Motion is live now.">
-<meta name="theme-color" content="#0A1A2F">
+<title>PCI Uganda — Pamodzi Community Initiative</title>
+<meta name="description" content="Pamodzi Community Initiative (PCI Uganda) is an indigenous development institution mobilising partnerships, local capital and technical expertise for education, health, climate resilience and financial inclusion.">
+<meta property="og:title" content="PCI Uganda — Pamodzi Community Initiative">
+<meta property="og:description" content="Together for Development. An indigenous Ugandan development institution mobilising partnerships, local capital and expertise across education, health, climate resilience and financial inclusion.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0C241D">
+<link rel="icon" href="assets/brand/pci-mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/pdm.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/pci.css">
 </head>
 <body>
+
 <header id="hdr">
   <div class="wrap nav">
-    <a class="mk" href="index.html">
-      <span class="g"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M2 21 L12 4 L22 21" stroke="#2FA8A0" stroke-width="1.8" stroke-linecap="square"/>
-        <path d="M7 21 L12 12 L17 21" stroke="#F5A81C" stroke-width="1.8" stroke-linecap="square"/>
-      </svg></span>
-      <span class="t"><b>Pamodzi</b><span>For Development</span></span>
+    <a class="brand" href="index.html">
+      <img src="assets/brand/pci-mark.svg" alt="">
+      <span class="t"><b>Pamodzi</b><span>Community Initiative</span></span>
     </a>
     <nav class="nav-links">
       <a href="index.html" class="act">Home</a>
-      <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
-      <a href="governance.html">Governance</a>
-      <a href="updates.html">Updates</a>
-      <a class="btn btn-cy" href="contact.html">Get in touch</a>
+      <a href="what-we-do.html">What we do</a>
+      <a href="model.html">Our model</a>
+      <a href="impact.html">Impact</a>
+      <a href="partnerships.html">Partnerships</a>
+      <a class="btn btn-gold" href="contact.html">Partner with us</a>
     </nav>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><span></span></button>
   </div>
 </header>
+
+<div class="mnav" id="mnav">
+  <div class="wrap">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="what-we-do.html">What we do</a>
+    <a href="model.html">Our model</a>
+    <a href="impact.html">Impact</a>
+    <a href="partnerships.html">Partnerships</a>
+    <a href="faith-in-motion.html">Faith in Motion</a>
+    <a class="btn btn-gold" href="contact.html">Partner with us</a>
+  </div>
+</div>
+
 <section class="hero" id="top">
-  <div class="bp"></div><div class="bp2"></div><div class="vig"></div>
-  <div class="hero-in">
-    <div class="wrap">
-      <span class="spec dark">Pamodzi for Development · Uganda</span>
-      <h1 style="margin-top:24px;">One foundation.<br><em>Many doors.</em></h1>
-      <p class="lede">Pamodzi builds and backs projects across Uganda — places of worship, homes, community work — and makes each one verifiable, fundable and permanent. Every new project opens on the foundation the last one built, instead of starting again from nothing.</p>
-      <p class="mean"><b>Pamodzi</b> means <b>together</b>. That is not a slogan here — it is the method.</p>
-      <div class="cta-row">
-        <a class="btn btn-gold" href="index.html#live">See what's live now →</a>
-        <a class="btn btn-ghost" href="projects.html">Browse the directory</a>
-      </div>
-      <div class="hero-idx">
-        <div class="i"><span class="n">01</span><span><b>Faith in Motion</b><span>Live campaign · walking now</span></span></div>
-        <div class="i"><span class="n">02</span><span><b>Kasese Apartments</b><span>Open to partners</span></span></div>
-        <div class="i"><span class="n">03</span><span><b>Community works</b><span>In preparation</span></span></div>
-      </div>
+  <div class="hero-art" aria-hidden="true">
+    <svg viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#2E6B57" stop-opacity=".38"/>
+          <stop offset="1" stop-color="#0C241D" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <rect width="1440" height="760" fill="url(#hg)"/>
+      <g fill="none" stroke="#7E9C8D" stroke-opacity=".22">
+        <circle cx="1180" cy="250" r="90"/><circle cx="1180" cy="250" r="150"/>
+        <circle cx="1180" cy="250" r="215"/><circle cx="1180" cy="250" r="290"/>
+        <circle cx="1180" cy="250" r="370"/>
+      </g>
+      <g fill="none" stroke="#C08A2E" stroke-opacity=".5" stroke-width="2">
+        <path d="M1180 -40 A290 290 0 0 1 1470 250"/>
+      </g>
+      <g stroke="#7E9C8D" stroke-opacity=".14" stroke-width="1">
+        <path d="M0 620 Q 240 585 480 615 T 960 600 T 1440 630"/>
+        <path d="M0 670 Q 260 640 520 668 T 1000 652 T 1440 680"/>
+        <path d="M0 720 Q 220 695 470 718 T 980 704 T 1440 728"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow on-dark">Uganda · established 2022</span>
+    <h1 style="margin-top:22px;">Communities that invest<br>in their <em>own future.</em></h1>
+    <p class="lede" style="margin-top:26px;">Pamodzi Community Initiative is an indigenous Ugandan development institution. We convene partnerships, mobilise local capital and bring technical expertise to work that communities choose for themselves — in education, health, climate resilience and financial inclusion.</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="partnerships.html">Partner with us →</a>
+      <a class="btn btn-ghost" href="model.html">How our model works</a>
+    </div>
+    <div class="hero-meta">
+      <div class="m"><b class="mono">4</b><span>Strategic pillars</span></div>
+      <div class="m"><b class="mono">120+</b><span>Members, entrepreneurs &amp; investors mobilised</span></div>
+      <div class="m"><b class="mono">UGX 2.19B</b><span>Community &amp; private capital mobilised</span></div>
+      <div class="m"><b class="mono">2022</b><span>Founded</span></div>
     </div>
   </div>
 </section>
+
 <main>
 
-<!-- LIVE -->
-<section class="blk" id="live">
-  <div class="wrap">
-    <div class="reveal">
-      <span class="spec">Live project</span>
-      <h2 class="sec">What Pamodzi is building today.</h2>
+<!-- POSITIONING -->
+<section class="blk">
+  <div class="wrap grid">
+    <div class="c-main reveal">
+      <span class="eyebrow">Who we are</span>
+      <h2 style="margin-top:20px;">Not a donor. A convener.</h2>
+      <p class="lede" style="margin-top:22px;">Most development money arrives from outside and leaves when the project ends. We work the other way round: organising the resources a community already has — savings groups, cooperatives, professionals, businesses, diaspora, local government — into investments large enough to build something permanent.</p>
+      <p style="margin-top:20px;color:var(--ink-60);">PCI Uganda works alongside Government ministries, district local governments, financial institutions, development partners and community structures to deliver infrastructure, institutional capacity and community empowerment programmes across the country.</p>
     </div>
-    <div class="live reveal" style="margin-top:36px;">
-      <div class="bpx"></div>
-      <div class="live-in">
-        <span class="livetag"><span class="dot"></span> Walking now · arrives 2 August 2026</span>
-        <h2>345 kilometres on foot to finish a church.</h2>
-        <p>Faith in Motion is Pamodzi's live campaign. The Walking Rotarian is crossing the country from Kampala to Kasese — 466,200 steps — to complete St Joseph Rwembyo Catholic Church. Every step can be sponsored for UGX 1,000, and every sponsor is named on a public roll.</p>
-        <div class="lstats">
-          <div class="c"><b>345 KM</b><span>Kampala → Kasese</span></div>
-          <div class="c"><b>466,200</b><span>Steps to sponsor</span></div>
-          <div class="c"><b>UGX 1,000</b><span>One step</span></div>
-          <div class="c"><b>33</b><span>Sponsors so far</span></div>
-        </div>
-        <div class="lbar"><i id="lbar"></i></div>
-        <div class="lcap"><span>UGX 5,040,000 RAISED &amp; PLEDGED</span><span>TOWARD UGX 410,000,000</span></div>
-        <div class="cta-row">
-          <a class="btn btn-gold" href="faith-in-motion.html">Open the campaign →</a>
-          <a class="btn btn-ghost" href="give.html">Sponsor a step</a>
-        </div>
+    <div class="c-side reveal">
+      <div class="quote">Sustainable development is most effective when communities become active investors in their own future.</div>
+      <div class="tags">
+        <span class="tag">Convener</span><span class="tag">Catalyst</span><span class="tag">Strategic mobiliser</span>
       </div>
     </div>
   </div>
 </section>
-<!-- DIRECTORY -->
-<section class="blk" id="projects" style="background:var(--paper-2);border-top:1px solid var(--line);">
+
+<!-- PILLARS -->
+<section class="blk on-cream">
   <div class="wrap">
     <div class="reveal">
-      <span class="spec">The directory</span>
-      <h2 class="sec">Every project, one address.</h2>
-      <p class="sec-sub">Each project keeps its own story, its own status and its own way to take part — while sharing one foundation for trust, reporting and contact.</p>
+      <span class="eyebrow">What we do</span>
+      <h2 style="margin-top:20px;max-width:20ch;">Four pillars, one method.</h2>
+      <p class="lede" style="margin-top:20px;">Each pillar applies the same approach — mobilise the community, build the partnership, invest together, then keep the asset working.</p>
     </div>
-    <div class="dir reveal">
-      <a class="pcard" href="faith-in-motion.html">
-        <span class="no">PROJECT 01</span>
-        <span class="st live">Live campaign</span>
-        <h3>Faith in Motion</h3>
-        <p>A 345 km walk from Kampala to Kasese to complete St Joseph Rwembyo Catholic Church. Sponsor a step for UGX 1,000 and join the Roll of Honour.</p>
-        <span class="go">Open the campaign →</span>
+    <div class="pillars reveal">
+      <a class="pillar" href="what-we-do.html#education">
+        <span class="n">PILLAR I</span>
+        <h3>Education</h3>
+        <p>Schools, classroom blocks, science and ICT laboratories, libraries, teachers' housing and sanitation — with digital learning and teacher capacity development.</p>
+        <span class="go">Explore →</span>
       </a>
-      <a class="pcard" href="apartments.html">
-        <span class="no">PROJECT 02</span>
-        <span class="st open">Open to partners</span>
-        <h3>Kasese Apartment Project</h3>
-        <p>A planned residential development. Partners and interested parties can register an expression of interest and request a meeting or site visit.</p>
-        <span class="go">Register interest →</span>
+      <a class="pillar" href="what-we-do.html#health">
+        <span class="n">PILLAR II</span>
+        <h3>Health</h3>
+        <p>Health Centre II, III and IV facilities, maternity wards, theatres and laboratories, staff accommodation, equipment and ambulances.</p>
+        <span class="go">Explore →</span>
       </a>
-      <a class="pcard" href="community.html">
-        <span class="no">PROJECT 03</span>
-        <span class="st soon">In preparation</span>
-        <h3>Community works</h3>
-        <p>The next approved Pamodzi project. It opens on the same foundation — profile, updates, documents and contact routing already built.</p>
-        <span class="go">What's coming →</span>
+      <a class="pillar" href="what-we-do.html#climate">
+        <span class="n">PILLAR III</span>
+        <h3>Climate &amp; green development</h3>
+        <p>Solar, mini-hydro and biogas systems, climate-smart agriculture, irrigation, afforestation, green infrastructure and waste management.</p>
+        <span class="go">Explore →</span>
+      </a>
+      <a class="pillar" href="what-we-do.html#inclusion">
+        <span class="n">PILLAR IV</span>
+        <h3>Financial inclusion</h3>
+        <p>VSLAs, SACCOs and cooperatives, youth and women's enterprises, financial literacy, investment readiness and business incubation.</p>
+        <span class="go">Explore →</span>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ORGANISATION TEASER -->
-<section class="blk" id="how" style="background:var(--paper-2);border-top:1px solid var(--line);">
+<!-- MODEL -->
+<section class="blk on-dark">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-main reveal">
+        <span class="eyebrow on-dark">The ICIADM model</span>
+        <h2 style="margin-top:20px;">Local capital, organised.</h2>
+        <p class="lede" style="margin-top:22px;">Our Integrated Community Investment and Asset Development Model turns fragmented local resources into coordinated investment — and returns the income to the community that raised it.</p>
+        <div class="cta-row"><a class="btn btn-cream" href="model.html">Read the model →</a></div>
+      </div>
+    </div>
+    <div class="pathway reveal">
+      <div class="step"><span class="i">01</span><b>Community mobilisation</b></div>
+      <div class="step"><span class="i">02</span><b>Partnership building</b></div>
+      <div class="step"><span class="i">03</span><b>Local resource mobilisation</b></div>
+      <div class="step"><span class="i">04</span><b>Strategic investment</b></div>
+      <div class="step"><span class="i">05</span><b>Asset development</b></div>
+      <div class="step"><span class="i">06</span><b>Sustainable service delivery</b></div>
+      <div class="step"><span class="i">07</span><b>Income generation</b></div>
+      <div class="step"><span class="i">08</span><b>Reinvestment</b></div>
+      <div class="step"><span class="i">09</span><b>Community transformation</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="blk">
   <div class="wrap">
     <div class="reveal">
-      <span class="spec">The organisation</span>
-      <h2 class="sec">Easy to support. Impossible to misuse.</h2>
-      <p class="sec-sub">Funds go direct to authorised accounts, only reconciled figures are published, and nothing sensitive goes public without approval. Read how the whole system works — and follow every step of it on the updates feed.</p>
-      <div style="display:flex;gap:11px;flex-wrap:wrap;margin-top:26px;">
-        <a class="btn btn-line" href="governance.html">How the money moves →</a>
-        <a class="btn btn-line" href="updates.html">Latest updates →</a>
-        <a class="btn btn-line" href="about.html">About Pamodzi →</a>
+      <span class="eyebrow">Demonstrated impact · 2022–2026</span>
+      <h2 style="margin-top:20px;max-width:22ch;">Evidence, not intentions.</h2>
+      <p class="lede" style="margin-top:20px;">Four community and investment platforms established, and capital mobilised almost entirely from within Uganda.</p>
+    </div>
+    <div class="figs reveal">
+      <div class="fig"><b class="mono">UGX 2.19B</b><span>Community and private capital mobilised (≈ USD 580,000)</span></div>
+      <div class="fig"><b class="mono">120+</b><span>Individuals, entrepreneurs and investors</span></div>
+      <div class="fig"><b class="mono">4+</b><span>Community institutions and platforms</span></div>
+      <div class="fig"><b class="mono">600+</b><span>Reached by community medical outreach</span></div>
+    </div>
+    <div class="cta-row reveal"><a class="btn btn-line" href="impact.html">See the full record →</a></div>
+  </div>
+</section>
+
+<!-- LIVE CAMPAIGN -->
+<section class="blk on-forest">
+  <div class="wrap grid">
+    <div class="c-main reveal">
+      <span class="eyebrow on-dark">Walking for Impact · live campaign</span>
+      <h2 style="margin-top:20px;">345 km on foot to finish a church.</h2>
+      <p class="lede" style="margin-top:22px;">Faith in Motion is our Walking for Impact campaign with the Rotary Club of Akright City and the Walking Rotarian, in support of St Joseph Catholic Church at Rwembyo, Kisinga, Kasese District. Every step is assigned a value and can be sponsored — turning personal commitment into measurable development financing.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold" href="faith-in-motion.html">Open the campaign →</a>
+        <a class="btn btn-ghost" href="give.html">Sponsor a step</a>
+      </div>
+    </div>
+    <div class="c-side reveal">
+      <div class="figs" style="grid-template-columns:1fr;margin-top:0;">
+        <div class="fig"><b class="mono">466,200</b><span>Steps to sponsor</span></div>
+        <div class="fig"><b class="mono">UGX 1,000</b><span>One step</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER CTA -->
+<section class="blk on-cream">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Partner with us</span>
+      <h2 style="margin-top:20px;max-width:20ch;">There is a way in for every partner.</h2>
+      <p class="lede" style="margin-top:20px;">Government, development partner, financial institution, business, foundation or community group — each has a defined pathway into our work.</p>
+      <div class="cta-row">
+        <a class="btn btn-ink" href="partnerships.html">See the pathways →</a>
+        <a class="btn btn-line" href="contact.html">Start a conversation</a>
       </div>
     </div>
   </div>
@@ -140,35 +233,39 @@
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <div class="fmk"><span class="g"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M2 21 L12 4 L22 21" stroke="#2FA8A0" stroke-width="1.8" stroke-linecap="square"/>
-          <path d="M7 21 L12 12 L17 21" stroke="#F5A81C" stroke-width="1.8" stroke-linecap="square"/>
-        </svg></span><b>Pamodzi for Development</b></div>
-        <p style="font-size:14.5px;max-width:36ch;color:#7FA3C4;">One foundation, many doors. Building work across Uganda that outlasts the campaigns that fund it.</p>
-      </div>
-      <div>
-        <h4>Projects</h4>
-        <a href="faith-in-motion.html">Faith in Motion</a>
-        <a href="apartments.html">Kasese Apartment Project</a>
-        <a href="community.html">Community works</a>
-        <a href="projects.html">All projects</a>
+        <div class="fbrand"><img src="assets/brand/pci-mark.svg" alt=""><b>PCI Uganda</b></div>
+        <p style="max-width:34ch;color:var(--sage);">Pamodzi Community Initiative — together for development. An indigenous Ugandan development institution, established 2022.</p>
       </div>
       <div>
         <h4>Organisation</h4>
-        <a href="about.html">About Pamodzi</a>
+        <a href="about.html">About PCI</a>
+        <a href="model.html">Our model</a>
+        <a href="impact.html">Impact</a>
         <a href="governance.html">Governance</a>
+      </div>
+      <div>
+        <h4>Our work</h4>
+        <a href="what-we-do.html#education">Education</a>
+        <a href="what-we-do.html#health">Health</a>
+        <a href="what-we-do.html#climate">Climate &amp; green</a>
+        <a href="what-we-do.html#inclusion">Financial inclusion</a>
+      </div>
+      <div>
+        <h4>Engage</h4>
+        <a href="partnerships.html">Partnerships</a>
+        <a href="faith-in-motion.html">Faith in Motion</a>
         <a href="updates.html">Updates</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
     <div class="fbot">
-      <span>© 2026 PAMODZI FOR DEVELOPMENT · FIGURES RECONCILED BEFORE PUBLICATION</span>
-      <span class="built"><img src="assets/brand/the97-white.png" alt="THE 97"> BUILT BY THE 97 · 97 DESIGN</span>
+      <span>© 2026 Pamodzi Community Initiative (PCI Uganda)</span>
+      <span>Figures reconciled before publication</span>
     </div>
   </div>
 </footer>
 
 <div class="toast" id="toast">Sent</div>
-<script src="js/pdm.js"></script>
+<script src="js/pci.js"></script>
 </body>
 </html>
