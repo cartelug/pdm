@@ -3,9 +3,7 @@
 **How to use this file**
 
 1. Open ChatGPT. Start a **new chat**. Use the strongest model available (GPT‑5 Thinking or better).
-2. **Upload two images first**, before you paste anything:
-   - `pci-brand-sheet.png` — the whole brand system in one image
-   - `pci-mark-1024-transparent.png` — the logo on transparency
+2. **Upload the PCI logo image first**, before you paste anything — the red `PC` + black figure mark.
 3. Then copy **everything between the two `═══` lines** below and paste it as your first message.
 4. It will reply with concepts only. Reply `GO 1`, then `GO 2`, and so on — one full design per message.
 5. Save each result as `design-1.html`, `design-2.html` … and send them back here.
@@ -21,9 +19,8 @@ You are a senior art director and front-end engineer. Your work sits in the top
 Godly.website. You are being hired to design the homepage for a real
 institution, and the bar is: **someone should screenshot this and post it.**
 
-I have uploaded a brand reference sheet and the logo mark. Read them carefully —
-the exact hex values, the typefaces and the logo geometry in those images are
-binding.
+I have uploaded the client's logo. Study it — it is the source of the visual
+language and it is binding.
 
 ## 1. The client
 
@@ -52,55 +49,68 @@ Tone: institutional confidence. Editorial, not corporate. Warm, not soft.
 Evidence, not adjectives. Never saccharine, never poverty imagery, never
 white-saviour framing. Ugandans are the investors here, not the recipients.
 
-## 2. The brand system — binding
+## 2. The logo — read it, then build from it
 
-**Colour** (from the uploaded sheet)
+The uploaded mark is a **wordmark-and-figure lockup**:
+
+- **`PC`** set in heavy geometric red letterforms. The `C` is a large, near-circular counter — an open ring.
+- **The `I` is a human figure in black** — a round head, and two arms sweeping upward and outward in a wide crescent, body below. It reads as *a person standing with arms raised.* Celebration, agency, arrival.
+- The figure's left arm **interlocks with the red `C`**, black crossing red. The letters are not sitting beside each other; they are joined.
+
+**The design language this hands you** — use it, do not invent a different one:
+
+| From the mark | What it gives the page |
+|---|---|
+| The raised-arms figure | **A person at the centre.** Uplift, agency. The human is the subject, never the recipient |
+| The interlock of P, C and I | **Joining.** Overlap, layering, things that connect and hold |
+| The wide crescent sweep of the arms | **Momentum.** Arcs, sweeps, curves that carry the eye |
+| The open ring of the `C` | **A cycle that stays open.** Perfect for the nine-step model below |
+| Red on black on white | **Severe contrast, used sparingly.** Confidence, not noise |
+
+Do **not** redraw, restyle or "improve" the logo. In the header use
+`<img src="pci-logo.png" alt="PCI Uganda — Pamodzi Community Initiative">`
+(assume the file sits next to the HTML). You may echo its *geometry* — crescents,
+the open ring, the standing figure, the interlock — anywhere else on the page.
+
+## 3. The brand system — binding
+
+**Colour**
 
 | Token | Hex | Use |
 |---|---|---|
-| Forest 900 | `#0C241D` | dark canvas, dark sections |
-| Forest 700 | `#1A4A3C` | primary brand green |
-| Forest 500 | `#2E6B57` | secondary green |
-| Sage | `#7E9C8D` | muted text on dark |
-| Gold | `#C08A2E` | accent — **CTA only** |
-| Gold 2 | `#DCA948` | accent on dark |
-| Clay | `#B5462F` | rare alert / fourth pillar |
-| Cream | `#F4EEE1` | warm section fill |
-| Paper | `#FDFAF3` | default page ground |
+| Red | `#D81E26` | the brand accent — **CTA and one hero moment only** |
+| Red bright | `#F04149` | red on black, where `#D81E26` loses contrast |
+| Black | `#0F0F0F` | dark canvas, dark sections |
+| Ink | `#14110F` | body text on light |
+| Stone | `#6B6560` | secondary / muted text on light |
+| Stone light | `#9A938C` | muted text on black |
+| Sand | `#F2EEEA` | warm section fill |
+| Sand deep | `#EAE4DE` | second warm fill, rules and wells |
+| Paper | `#FAF8F6` | default page ground — **warm off-white, never pure white** |
+| Rule | `rgba(15,15,15,.12)` | hairlines |
 
-**Gold is a scalpel, not a paint roller.** Roughly one gold element per
-viewport. If gold appears three times on one screen it has failed.
+**Red is a scalpel, not a paint roller.** Roughly **one red element per
+viewport**, always on the single most important thing on that screen. If red
+appears three times on one screen it has failed. The page's power comes from
+black, off-white and space — red only points.
+
+**The ground is warm.** `#FAF8F6`, not `#FFFFFF`. That single decision is what
+separates this from every stark red-and-black template. Keep it warm.
 
 **Type** — load from Google Fonts:
-- Display / all headings: **Fraunces** (variable — use `opsz` 96, `SOFT` 24, weight 600). Set headings **tight**: `line-height: 1.02`, `letter-spacing: -0.022em`, `text-wrap: balance`.
+- Display / all headings: **Fraunces** (variable — `opsz` 96, `SOFT` 24, weight 600)
 - Body / UI / nav: **Instrument Sans** (400 / 500 / 600)
 - Figures, data, eyebrows: **JetBrains Mono** (400 / 700)
 
-**Logo** — four arcs (forest, gold, forest-500, clay) rotating around a solid
-centre dot. Four arcs = the four strategic pillars. The gaps read as openness;
-the ring reads as collective action and reinvestment. Reproduce it as **inline
-SVG** in your HTML — do not link to an image file, and do not redraw it into
-something else. Here is the exact source, use it verbatim:
+Set headings **tight**: `line-height: 1.02`, `letter-spacing: -0.022em`,
+`text-wrap: balance`. Big type only earns its size when it is set tightly.
 
-```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Pamodzi Community Initiative">
-  <g stroke-linecap="round" fill="none">
-    <path d="M32 6 A26 26 0 0 1 58 32" stroke="#1A4A3C" stroke-width="5"/>
-    <path d="M58 32 A26 26 0 0 1 32 58" stroke="#C08A2E" stroke-width="5"/>
-    <path d="M32 58 A26 26 0 0 1 6 32" stroke="#2E6B57" stroke-width="5"/>
-    <path d="M6 32 A26 26 0 0 1 32 6" stroke="#B5462F" stroke-width="5"/>
-  </g>
-  <circle cx="32" cy="32" r="9" fill="#1A4A3C"/>
-  <circle cx="32" cy="32" r="3.4" fill="#C08A2E"/>
-</svg>
-```
-On dark backgrounds swap `#1A4A3C` → `#F4EEE1` and `#2E6B57` → `#A8BEB1`.
+*One licence:* the client is mid-rebrand, so **one or two** of your directions
+may propose a different display face if — and only if — you argue for it in one
+sentence and it clearly beats Fraunces against this logo. The rest must use
+Fraunces. Do not change the body or mono faces.
 
-**That geometry is your design language.** Arcs, concentric rings, rotation,
-a centre that holds, gaps that stay open. Whatever you build should feel like it
-grew from that mark.
-
-## 3. Real content — use this, never lorem ipsum
+## 4. Real content — use this, never lorem ipsum
 
 **Headline territory** (write your own, but this is the register):
 "Communities that invest in their own future." · "Not a donor. A convener." ·
@@ -120,7 +130,7 @@ medical outreach · founded `2022`
 
 **The model — ICIADM** (Integrated Community Investment and Asset Development
 Model). Nine steps, and the ninth feeds the first — draw it as a **cycle, not a
-straight line**:
+straight line.** The open `C` of the logo is your reference:
 `01` Community mobilisation → `02` Partnership building → `03` Local resource
 mobilisation → `04` Strategic investment → `05` Asset development →
 `06` Sustainable service delivery → `07` Income generation → `08` Reinvestment →
@@ -145,48 +155,49 @@ development partners, financial institutions, Rotary Club of Akright City.
 **Calls to action**: primary `Partner with us` · secondary `How our model works`
 · campaign `Sponsor a step`
 
-## 4. What you must deliver
+## 5. What you must deliver
 
 **Five to seven homepage designs — genuinely different, not five skins of one
 layout.** A recruiter should be able to tell them apart from across the room.
 
 Each direction must differ on at least **four** of these axes:
 
-- **Hero architecture** — full-bleed statement · split editorial · asymmetric type-led · horizontal scroll · oversized figure-first · the mark as the hero object
-- **Ground** — light paper-first vs dark forest-first vs alternating bands
+- **Hero architecture** — full-bleed statement · split editorial · asymmetric type-led · horizontal scroll · oversized figure-first · the standing figure as the hero object
+- **Ground** — light paper-first vs black-first vs alternating bands
 - **Grid** — classic centred · broken/offset editorial · Swiss column-ruled · magazine multi-column · single narrow spine
 - **Type ratio** — restrained (heading 3–4× body) vs extreme (heading 8–10× body, near-poster)
 - **Motion character** — near-still and architectural · reveal-on-scroll · scroll-driven scene · continuous ambient drift
 - **How data appears** — quiet inline figures · giant numerals as the layout itself · a ticker/board · diagrammatic
-- **How the pillars appear** — cards · numbered editorial list · tabbed/accordion · a rotating quadrant echoing the logo
+- **How the pillars appear** — cards · numbered editorial list · tabbed/accordion · four figures/arcs echoing the mark
 
 Suggested starting territories — take them, combine them, or beat them:
 
-1. **The Institutional Broadsheet** — Fraunces at poster scale on paper, hairline rules, column-ruled grid. Reads like the front page of a serious newspaper. Almost no motion; the confidence is in the typography.
-2. **Forest Nightfall** — dark from the first pixel, cream type, a single gold thread. Cinematic, slow, expensive. The figures glow.
+1. **The Institutional Broadsheet** — Fraunces at poster scale on warm paper, hairline rules, column-ruled grid, a single red masthead line. The front page of a serious newspaper. Almost no motion; the confidence is in the typography.
+2. **Blackout** — `#0F0F0F` from the first pixel, off-white type, one red thread running the length of the page. Cinematic, slow, expensive. The figures glow.
 3. **The Ledger** — data is the design. `UGX 2.19B` set at 200px as an actual layout element. Monospace scaffolding, receipts-and-evidence energy. Argues with numbers.
-4. **The Quadrant** — the logo's four arcs become the page's operating system. A rotating quadrant navigates the four pillars; the ICIADM nine steps run as a closed ring you can scrub.
-5. **The Long Road** — the 345 km walk is the spine. A scroll-driven journey from Kampala to Kasese; sections arrive as places along it. Emotional, kinetic, campaign-first.
-6. **Warm Editorial** — cream and paper, generous white space, big photographic voids with intentional illustration in them, magazine pacing. The most human of the six.
+4. **The Standing Figure** — the logo's raised-arms human, scaled enormous, becomes the hero. The sweep of the arms sets the geometry of every section below it. The most literal descendant of the mark, and potentially the most memorable.
+5. **Constructivist** — red and black on off-white, hard diagonals, heavy rules, type on the angle. Poster energy, Rodchenko discipline. Dangerous and probably the boldest thing here — make it institutional, not decorative.
+6. **The Long Road** — the 345 km walk is the spine. A scroll-driven journey from Kampala to Kasese; sections arrive as places along it. Emotional, kinetic, campaign-first.
+7. **Warm Editorial** — sand and paper, generous white space, big photographic voids with intentional illustration in them, magazine pacing. The most human of the seven.
 
 Every direction, regardless, must include:
-sticky/considered header with the mark · hero with headline + lede + two CTAs +
+sticky/considered header with the logo · hero with headline + lede + two CTAs +
 key figures · the positioning block (*Not a donor. A convener.*) · the four
 pillars · the ICIADM cycle · the impact figures · the Faith in Motion campaign
 block · a partner-pathways CTA · a full footer.
 
-## 5. Technical requirements — non-negotiable
+## 6. Technical requirements — non-negotiable
 
 - **One complete, standalone `.html` file per design.** Everything inline: CSS in a `<style>` block, JS in a `<script>` block. Opens by double-clicking. No build step, no framework, no React, no Tailwind CDN.
-- **No external requests except Google Fonts.** No image files — express every visual with CSS, inline SVG, gradients and type. Where a photo would go, design an intentional SVG or CSS placeholder that looks deliberate, and mark it `<!-- PHOTO SLOT: … -->`.
+- **No external requests except Google Fonts, and no image files except `pci-logo.png`.** Express every other visual with CSS, inline SVG, gradients and type. Where a photo would go, design an intentional SVG or CSS placeholder that looks deliberate, and mark it `<!-- PHOTO SLOT: … -->`.
 - **Responsive, mobile-first, from 360px to 1920px.** Fluid type with `clamp()`. Nothing may scroll horizontally on a phone. A working mobile nav.
-- **Accessible.** Semantic landmarks, one `<h1>`, real focus-visible states, 4.5:1 body contrast, `alt`/`aria-label` on meaningful SVG, `aria-hidden` on decorative SVG, and a `@media (prefers-reduced-motion: reduce)` block that genuinely disables motion.
+- **Accessible.** Semantic landmarks, one `<h1>`, real focus-visible states, 4.5:1 body contrast, `alt`/`aria-label` on meaningful SVG, `aria-hidden` on decorative SVG, and a `@media (prefers-reduced-motion: reduce)` block that genuinely disables motion. Note `#D81E26` on `#FAF8F6` is about 4.6:1 — fine for text, but never set small grey-red text.
 - **Motion with taste.** Easing `cubic-bezier(.2,.8,.3,1)`, durations 180–700ms, stagger ~60ms. IntersectionObserver for reveals, never a library. Motion should feel like weight and intention, not decoration. If a direction is deliberately still, say so and commit.
 - **60fps.** Animate `transform` and `opacity` only.
 - Fill `<title>` and `<meta name="description">` properly. Include `<meta name="theme-color">`.
 - Target ~600–1100 lines per file. Density is fine; padding is not.
 
-## 6. How to work
+## 7. How to work
 
 **First message — concepts only, no code.** Give me a numbered list of your 5–7
 directions. For each, in 4–6 lines: the name, the one-sentence idea, the hero
@@ -198,7 +209,7 @@ HTML file in one code block. Nothing else in the message except a two-line note
 on what makes it distinct. One design per message. Never abbreviate with
 `/* ... rest of styles ... */` — the file must be complete and runnable.
 
-## 7. The bar
+## 8. The bar
 
 Before you output any file, check it against these. If it fails one, redesign
 before showing me.
@@ -206,8 +217,10 @@ before showing me.
 - Would this survive a homepage-of-the-year gallery, or does it look like a template?
 - Is there **one** unmistakable idea a person could describe in a sentence?
 - Does the typography carry the page, rather than boxes and shadows carrying it?
-- Is the whitespace **composed** — is there a deliberate rhythm of tight and open — or is everything evenly padded?
-- Is gold used once per viewport, and is it on the thing that matters most?
+- Is the whitespace **composed** — a deliberate rhythm of tight and open — or is everything evenly padded?
+- Is red used once per viewport, and is it on the thing that matters most?
+- Is the ground warm off-white rather than pure white?
+- Does the page descend from **this logo** — the standing figure, the interlock, the open ring — or would it look the same with any mark dropped in?
 - Does it read as a **development institution convening capital**, not a charity asking for money?
 - Would a Ugandan reader see themselves as the investor in this page?
 - Is there a moment of genuine craft — a transition, a diagram, a scale jump — that a competent developer would not have thought of?
@@ -215,8 +228,9 @@ before showing me.
 **Avoid at all costs:** generic SaaS hero with a centred headline and two
 buttons on a gradient · rounded-corner cards in a 3-across grid with drop
 shadows · purple-blue gradients · stock-photo energy · emoji as icons ·
-"Empowering communities worldwide" copy · Bootstrap spacing · anything that
-would look identical with a different logo dropped in.
+"Empowering communities worldwide" copy · Bootstrap spacing · red used as a
+background wash · anything that would look identical with a different logo
+dropped in.
 
 Start now with the concept list. No code yet.
 
@@ -230,10 +244,11 @@ Once it gives you a design, these get more out of it:
 
 - `Push direction 3 twice as far. It is still too safe — make the numbers the architecture, not decoration.`
 - `The hero is generic. Redesign only the hero, three alternatives, same file otherwise.`
+- `You used red four times on the first screen. Cut it to one. Rebuild the hierarchy in black and space.`
 - `Now cut 30% of the elements. What survives is the design.`
 - `Show me this at 390px wide. Rewrite anything that breaks or feels cramped.`
-- `Critique your own file against the bar in section 7, honestly, then fix what you flagged.`
-- `Combine the hero of 2 with the pillar system of 4 and the pacing of 6.`
+- `Critique your own file against the bar in section 8, honestly, then fix what you flagged.`
+- `Combine the hero of 2 with the pillar system of 4 and the pacing of 7.`
 
 ## What to send back here
 
