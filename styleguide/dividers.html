@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Section dividers — specimen · PCI Uganda</title>
+<meta name="theme-color" content="#0B0B0C">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../assets/brand/pci-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/pci.css">
+<link rel="stylesheet" href="../css/dividers.css">
+<style>
+  /* specimen chrome only — not part of the system */
+  body{padding-bottom:0;}
+  .sg-head{background:var(--ink-900);color:var(--paper-2);padding:var(--sp-xl) 0 var(--sp-l);}
+  .sg-head h1{color:var(--paper-2);font-size:var(--t-3);}
+  .sg-head p{color:var(--grey-200);margin-top:14px;}
+  .sg-tag{
+    position:absolute;left:0;top:0;z-index:6;
+    font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+    letter-spacing:.14em;text-transform:uppercase;
+    background:var(--red-600);color:#fff;padding:5px 9px;
+  }
+  .sg-tag.safe{background:var(--ink-800);}
+  .sg-tag.mid{background:var(--red-700);}
+  .sg-case{position:relative;}
+  .sg-note{
+    font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.6;
+    color:var(--ink-45);letter-spacing:.02em;margin-top:10px;max-width:62ch;
+  }
+  .on-dark .sg-note{color:var(--grey-400);}
+  .sg-lab{font-size:var(--t-1);font-weight:600;font-family:'Fraunces',serif;}
+  .sg-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:var(--sp-m);}
+  .sg-legend span{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--grey-200);display:flex;align-items:center;gap:7px;}
+  .sg-legend i{width:11px;height:11px;display:block;}
+</style>
+</head>
+<body class="ss-off">
+
+<header id="hdr" class="solid" style="position:static;">
+  <div class="wrap nav">
+    <a class="brand" href="../index.html" aria-label="PCI Uganda — home">
+      <span class="logo" aria-hidden="true">
+        <img class="lt" src="../assets/brand/pci-logo.svg" alt="">
+        <img class="dk" src="../assets/brand/pci-logo-onblack.svg" alt="">
+      </span>
+      <span class="t"><b>Pamodzi</b><span>Section dividers</span></span>
+    </a>
+  </div>
+</header>
+
+<section class="sg-head">
+  <div class="wrap">
+    <span class="eyebrow on-dark">Specimen · not a public page</span>
+    <h1 style="margin-top:18px;">Section dividers, at real scale.</h1>
+    <p class="lede" style="color:var(--grey-200);">Each candidate below sits at a genuine boundary from the
+      live site. Judge them scrolling, not as thumbnails — a divider is a moment of
+      pacing, and pacing does not survive a screenshot.</p>
+    <div class="sg-legend">
+      <span><i style="background:#16161B"></i> Tier 1 · safe</span>
+      <span><i style="background:#9C231A"></i> Tier 2 · branded</span>
+      <span><i style="background:#BC2C21"></i> Tier 3 · signature</span>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<!-- ══════════ A · NONE ══════════ -->
+<section class="blk sg-case">
+  <span class="sg-tag safe">A · none — tonal flip</span>
+  <div class="wrap">
+    <span class="eyebrow">Baseline</span>
+    <h2 style="margin-top:16px;">Let the surface do it.</h2>
+    <p class="sg-note">40 of your 83 boundaries flip between near-black and white. The
+      tone change is already the strongest divider available; drawing a line across it
+      adds a second announcement of something the eye has read. Applies to: hero→content,
+      any .on-dark edge.</p>
+  </div>
+</section>
+<section class="blk on-dark sg-case">
+  <div class="wrap">
+    <h2>The flip is the divider.</h2>
+    <p class="sg-note">Nothing was drawn between these two sections.</p>
+  </div>
+</section>
+
+<!-- ══════════ B · HAIRLINE ══════════ -->
+<section class="blk sg-case dv-hair">
+  <span class="sg-tag safe">B · hairline, full bleed</span>
+  <div class="wrap">
+    <span class="eyebrow">Tier 1</span>
+    <h2 style="margin-top:16px;">A 1px rule, edge to edge.</h2>
+    <p class="sg-note">The default. Honest, invisible when it should be, never wrong.
+      Full-bleed reads as structural — it divides the page, not the column.</p>
+  </div>
+</section>
+
+<!-- ══════════ C · MEASURE RULE ══════════ -->
+<section class="blk sg-case dv-measure">
+  <span class="sg-tag safe">C · hairline, measure width</span>
+  <div class="wrap">
+    <span class="eyebrow">Tier 1</span>
+    <h2 style="margin-top:16px;">The same rule, held to the column.</h2>
+    <p class="sg-note">Stopping the rule at the content measure is quieter and more
+      editorial — it reads as a paragraph break rather than a page break. Better between
+      two sections of the same argument.</p>
+  </div>
+</section>
+
+<!-- ══════════ D · NUMBER + RULE ══════════ -->
+<section class="blk sg-case dv-index" data-index="04">
+  <span class="sg-tag safe">D · numbered index</span>
+  <div class="wrap">
+    <span class="eyebrow">Tier 1 · recommended workhorse</span>
+    <h2 style="margin-top:16px;">Give the reader their position.</h2>
+    <p class="sg-note">The rule carries a section number set in Fraunces at 300 weight —
+      the .secno token already in pci.css and currently unused. This is the highest
+      perceived quality per unit of risk on the list: it looks considered, it costs one
+      pseudo-element, and it tells the reader where they are.</p>
+  </div>
+</section>
+
+<!-- ══════════ E · RED SEAM ══════════ -->
+<section class="blk sg-case dv-seam">
+  <span class="sg-tag mid">E · red seam</span>
+  <div class="wrap">
+    <span class="eyebrow">Tier 2 · recommended</span>
+    <h2 style="margin-top:16px;">The eyebrow dash, promoted.</h2>
+    <p class="sg-note">A hairline with a short brand-red segment at the measure's left
+      edge. It is the exact idiom your .eyebrow::before already uses 36 times, scaled up
+      to structural duty — so it reads as native rather than added. This is the one I
+      would ship site-wide.</p>
+  </div>
+</section>
+
+<!-- ══════════ F · CROP TICKS ══════════ -->
+<section class="blk sg-case dv-ticks">
+  <span class="sg-tag mid">F · crop ticks</span>
+  <div class="wrap">
+    <span class="eyebrow">Tier 2</span>
+    <h2 style="margin-top:16px;">Marks at the trim edge.</h2>
+    <p class="sg-note">Short verticals where the measure meets the bleed. Reads as
+      drawing-office registration, which suits the blueprint language on the project
+      pages more than the institutional pages.</p>
+  </div>
+</section>
+
+<!-- ══════════ G · DRAW-ON ══════════ -->
+<section class="blk sg-case dv-seam dv-draw">
+  <span class="sg-tag mid">G · seam that draws on scroll</span>
+  <div class="wrap">
+    <span class="eyebrow">Tier 2 · motion</span>
+    <h2 style="margin-top:16px;">The same seam, arriving.</h2>
+    <p class="sg-note">E, but the rule scales from the left as the boundary enters —
+      driven by the .reveal observer already running, and flattened to a static rule
+      under prefers-reduced-motion. Scroll this one back up to see it again.</p>
+  </div>
+</section>
+
+<!-- ══════════ H · THE ARC ══════════ -->
+<section class="blk sg-case dv-arc">
+  <span class="sg-tag">H · the arc</span>
+  <div class="wrap">
+    <span class="eyebrow">Tier 3 · signature</span>
+    <h2 style="margin-top:16px;">Borrowed from the mark itself.</h2>
+    <p class="sg-note">A single very large, very faint crescent — the same sweep as the
+      C in your logo — straddling the boundary. It is the only option here that could not
+      belong to another organisation. It is also the only one that will look cheap if it
+      is used more than once on a page.</p>
+  </div>
+</section>
+
+<section class="blk on-dark sg-case dv-arc dv-arc-dark">
+  <span class="sg-tag">H · the arc, inverted</span>
+  <div class="wrap">
+    <span class="eyebrow on-dark">Tier 3 · signature</span>
+    <h2 style="margin-top:16px;">On black it earns more room.</h2>
+    <p class="sg-note">Red at low opacity on near-black carries further than ink on
+      white, so the dark placement can be larger and still stay subordinate to the copy.</p>
+  </div>
+</section>
+
+<!-- ══════════ I · INSET STEP ══════════ -->
+<section class="blk on-paper sg-case dv-inset">
+  <span class="sg-tag mid">I · inset step</span>
+  <div class="wrap">
+    <span class="eyebrow">Tier 2</span>
+    <h2 style="margin-top:16px;">The surface starts short.</h2>
+    <p class="sg-note">The incoming surface is inset by one grid column, leaving a sliver
+      of the previous one down the side. Architectural, and it needs a genuine surface
+      change to work at all — useless on your 14 flat boundaries.</p>
+  </div>
+</section>
+
+<!-- ══════════ REJECTED ══════════ -->
+<section class="blk on-dark sg-case">
+  <div class="wrap">
+    <span class="eyebrow on-dark">Considered and rejected</span>
+    <h2 style="margin-top:16px;">What I would not put on this site.</h2>
+    <ul class="dlist" style="margin-top:var(--sp-m);">
+      <li><span class="mk">01</span><div><b>Diagonal / angled splits</b>
+        <span>Fight a strict 12-column editorial grid, and date to a specific mid-2010s
+        SaaS look. Every angle is a second, competing axis.</span></div></li>
+      <li><span class="mk">02</span><div><b>Wave and blob SVG dividers</b>
+        <span>Read as consumer-app decoration. Wrong register for an institution that
+        publishes reconciled figures.</span></div></li>
+      <li><span class="mk">03</span><div><b>Torn-paper and brush edges</b>
+        <span>Texture implies craft-market or charity-appeal. Undercuts the convener
+        positioning the copy works hard to establish.</span></div></li>
+      <li><span class="mk">04</span><div><b>Gradient fades between surfaces</b>
+        <span>Muddies the black-and-white discipline the logo sets, and puts text over
+        an indeterminate tone — the exact problem the hero scrim had to fix.</span></div></li>
+      <li><span class="mk">05</span><div><b>Full-width image bands as separators</b>
+        <span>Costs real bandwidth on Ugandan mobile data for pure ornament.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fbrand"><img src="../assets/brand/pci-logo-onblack.svg" alt="" aria-hidden="true"><b>PCI Uganda</b></div>
+    <p style="max-width:44ch;color:var(--grey-400);">Specimen page. Not linked from the site and marked noindex.
+      Delete it, or keep it as the reference for whichever set is adopted.</p>
+  </div>
+</footer>
+
+<script src="../js/pci.js"></script>
+</body>
+</html>

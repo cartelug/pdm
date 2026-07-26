@@ -1,0 +1,152 @@
+/* ═══════════════════════════════════════════════════════════════════
+   PCI UGANDA — section dividers
+   Candidates for the boundary system. See SECTION-DIVIDERS-PLAN.md for
+   which boundary type takes which treatment, and styleguide/dividers.html
+   for the specimen.
+
+   Two constraints shape every rule in here:
+
+   1. NO EXTRA DOM. Dividers are pseudo-elements on the section that owns
+      them. js/section-scroll.js measures section tops and heights to
+      decide snap behaviour — a wrapper div would change that geometry.
+   2. DRAWN INSIDE THE PADDING BOX, NEVER ABOVE THE TOP EDGE. The scroller
+      parks a section top at `y - headerHeight`. Anything painted above
+      that edge lands under the fixed header when the section is snapped.
+      So a divider belongs to the top of the *incoming* section, inset by
+      part of its own padding.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root{
+  --dv-inset:clamp(26px,4.2vw,52px);   /* distance from the section's top edge */
+  --dv-seam:clamp(52px,7vw,92px);      /* length of the red segment on E */
+  --dv-line:var(--line);
+  /* left edge of the content measure — the same axis .wrap resolves to.
+     Computed rather than transformed: a percentage inside translateX()
+     resolves against the pseudo-element's own width, not the container,
+     which is the trap this avoids. */
+  --dv-x:max(var(--sp-m),calc(50% - var(--wrap)/2));
+}
+.on-dark,.on-ink{ --dv-line:rgba(255,255,255,.16); }
+
+/* shared hairline, held to the measure unless a variant overrides it */
+[class*="dv-"]::before{
+  content:"";
+  position:absolute;
+  top:var(--dv-inset);
+  left:var(--dv-x);
+  right:var(--dv-x);
+  height:1px;
+  background:var(--dv-line);
+  pointer-events:none;
+}
+
+/* ── B · hairline, full bleed ─────────────────────────────────────── */
+.dv-hair::before{ left:0; right:0; }
+
+/* ── C · hairline, measure width ──────────────────────────────────── */
+/* inherits the shared rule as-is */
+
+/* ── D · numbered index ───────────────────────────────────────────── */
+.dv-index::after{
+  content:attr(data-index);
+  position:absolute;
+  top:calc(var(--dv-inset) - .58em);
+  left:var(--dv-x);
+  padding-right:18px;
+  background:inherit;                    /* punches a hole in the rule */
+  font-family:'Fraunces',Georgia,serif;
+  font-variation-settings:'SOFT' 0,'WONK' 0,'opsz' 144;
+  font-size:var(--t-2); font-weight:300; line-height:1;
+  color:var(--line-2);
+  pointer-events:none;
+}
+.on-dark.dv-index::after,.on-ink.dv-index::after{color:rgba(255,255,255,.34);}
+
+/* ── E · red seam ─────────────────────────────────────────────────── */
+/* the .eyebrow::before dash, promoted to structural duty. The red sits
+   slightly proud of the hairline so it reads as a tab, not a colour change */
+.dv-seam::after{
+  content:"";
+  position:absolute;
+  top:calc(var(--dv-inset) - 1px);
+  left:var(--dv-x);
+  width:var(--dv-seam);
+  height:3px;
+  background:var(--red-600);
+  pointer-events:none;
+}
+.on-dark.dv-seam::after,.on-ink.dv-seam::after{ background:var(--red-400); }
+
+/* ── F · crop ticks ───────────────────────────────────────────────── */
+.dv-ticks::after{
+  content:"";
+  position:absolute;
+  top:calc(var(--dv-inset) - 6px);
+  left:var(--dv-x);
+  right:var(--dv-x);
+  height:13px;
+  pointer-events:none;
+  background:
+    linear-gradient(var(--red-600),var(--red-600)) left  center / 2px 13px no-repeat,
+    linear-gradient(var(--dv-line),var(--dv-line))  right center / 2px 13px no-repeat;
+}
+.on-dark.dv-ticks::after,.on-ink.dv-ticks::after{
+  background:
+    linear-gradient(var(--red-400),var(--red-400)) left  center / 2px 13px no-repeat,
+    linear-gradient(var(--dv-line),var(--dv-line))  right center / 2px 13px no-repeat;
+}
+
+/* ── G · draws on scroll ──────────────────────────────────────────── */
+/* rides the .reveal IntersectionObserver already running in the page script */
+.dv-draw::before,.dv-draw::after{
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform var(--dur-5) var(--ease-out);
+}
+.dv-draw::after{ transition-delay:90ms; }
+.dv-draw.in::before,.dv-draw.in::after{ transform:scaleX(1); }
+
+/* ── H · the arc (signature) ──────────────────────────────────────── */
+/* A circle far wider than the viewport, with only its crown showing: what
+   crosses the boundary is a long shallow sweep, the same gesture as the C
+   in the mark. Offset right so the curve falls into the open half of the
+   grid rather than behind the copy. */
+.dv-arc{ overflow:hidden; }
+.dv-arc::after{
+  content:"";
+  position:absolute;
+  top:var(--dv-inset);
+  left:26%;
+  width:150vw;
+  aspect-ratio:1;
+  border-radius:50%;
+  border:clamp(18px,2.4vw,38px) solid var(--red-600);
+  opacity:.085;
+  pointer-events:none;
+}
+.dv-arc-dark::after{ border-color:var(--red-400); opacity:.20; }
+@media(max-width:760px){
+  .dv-arc::after{ left:8%; width:210vw; opacity:.07; }
+  .dv-arc-dark::after{ opacity:.17; }
+}
+/* the arc replaces the rule rather than sitting under it */
+.dv-arc::before{ display:none; }
+.dv-arc.dv-seam::before{ display:block; }
+
+/* ── I · inset step ───────────────────────────────────────────────── */
+/* the incoming surface starts one column short down its whole left side,
+   leaving a strip of the previous surface showing. The edge must stay
+   vertical — a sloped edge introduces a second axis against the grid. */
+.dv-inset{ clip-path:inset(0 0 0 clamp(18px,4vw,64px)); }
+@media(max-width:760px){ .dv-inset{ clip-path:none; } }
+
+/* ── reduced motion ───────────────────────────────────────────────── */
+@media (prefers-reduced-motion:reduce){
+  .dv-draw::before,.dv-draw::after{ transform:none; transition:none; }
+}
+
+/* ── print ────────────────────────────────────────────────────────── */
+@media print{
+  [class*="dv-"]::before{ background:#000; }
+  .dv-arc::after{ display:none; }
+}
