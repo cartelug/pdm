@@ -2,45 +2,46 @@
    This one file drives every page: totals, the road, the ledger, step attribution.
 
    Format per row:
-     ["Name", amountUGX, steps, "paid|pledged|promised", "note", "YYYY-MM-DD"]
+     ["Public label", amountUGX, steps, "paid|pledged|promised", "public note", "YYYY-MM-DD"]
 
    The 6th field (date received/pledged) is OPTIONAL and may be omitted.
    When present the Roll of Honour shows recency ("sponsored 2 days ago").
-   Never invent a date — leave it out if it is not known. */
+   Never invent a date — leave it out if it is not known.
+   Public labels are anonymised; identifying names and notes stay off the site. */
 window.ROLL_DATA = [
-    ["Modest R",100000,100,"paid",""],
-    ["Joshua & Sylvia",1000000,1000,"paid",""],
-    ["MD Rtn Nuwabine J",1000000,1000,"pledged",""],
-    ["Dr Monica Etima",100000,100,"pledged",""],
-    ["Mr Garakumbe",100000,100,"paid","more to be added"],
-    ["Mugabe Charles",20000,20,"paid",""],
-    ["Dr Habomugisha",50000,50,"paid",""],
-    ["Rtn Smart",50000,50,"paid","+ Piano"],
-    ["Dr MD Kanyesigye",100000,100,"promised","to add more"],
-    ["Ms Fortunate",20000,20,"paid",""],
-    ["Mubatsi J",50000,50,"pledged",""],
-    ["Rtn Dr Rusoke",50000,50,"paid",""],
-    ["Eng Rtn Darius",50000,50,"paid",""],
-    ["Rtn HCP Paul",50000,50,"paid",""],
-    ["Rtn Edith",100000,100,"paid",""],
-    ["PAG Muhumuza",100000,100,"paid",""],
-    ["Rtn Harriet",100000,100,"pledged",""],
-    ["Rtn Simon Kagwa",50000,50,"pledged",""],
-    ["Rtn Prof Kwesiga",100000,100,"pledged",""],
-    ["Rtn Dr Kerchan",100000,100,"pledged",""],
-    ["Rtn Budget",100000,100,"pledged",""],
-    ["Rtn Justus",100000,100,"pledged",""],
-    ["IP Anne",100000,100,"pledged",""],
-    ["Jimmy Baluku Odyek",50000,50,"paid",""],
-    ["Bwambale Michael",50000,50,"paid",""],
-    ["President Anne Nsubuga",200000,100,"paid","+ 100k water for the road"],
-    ["Joshua & Rosette Kainja",500000,500,"pledged",""],
-    ["Maria Claire",100000,100,"paid",""],
-    ["Lady Florence Kesiime Mugisha",100000,100,"paid",""],
-    ["Lady Olivia Hasahya",200000,200,"paid",""],
-    ["Caroline Alice Laker Onekalit",100000,100,"paid",""],
-    ["Rtn Isaac Katewanga",100000,100,"paid",""],
-    ["Rtn Allan Kiwumulo",50000,50,"pledged",""]
+    ["Supporter 01",100000,100,"paid",""],
+    ["Supporter 02",1000000,1000,"paid",""],
+    ["Supporter 03",1000000,1000,"pledged",""],
+    ["Supporter 04",100000,100,"pledged",""],
+    ["Supporter 05",100000,100,"paid",""],
+    ["Supporter 06",20000,20,"paid",""],
+    ["Supporter 07",50000,50,"paid",""],
+    ["Supporter 08",50000,50,"paid","Includes an in-kind item"],
+    ["Supporter 09",100000,100,"promised","Not included in public progress"],
+    ["Supporter 10",20000,20,"paid",""],
+    ["Supporter 11",50000,50,"pledged",""],
+    ["Supporter 12",50000,50,"paid",""],
+    ["Supporter 13",50000,50,"paid",""],
+    ["Supporter 14",50000,50,"paid",""],
+    ["Supporter 15",100000,100,"paid",""],
+    ["Supporter 16",100000,100,"paid",""],
+    ["Supporter 17",100000,100,"pledged",""],
+    ["Supporter 18",50000,50,"pledged",""],
+    ["Supporter 19",100000,100,"pledged",""],
+    ["Supporter 20",100000,100,"pledged",""],
+    ["Supporter 21",100000,100,"pledged",""],
+    ["Supporter 22",100000,100,"pledged",""],
+    ["Supporter 23",100000,100,"pledged",""],
+    ["Supporter 24",50000,50,"paid",""],
+    ["Supporter 25",50000,50,"paid",""],
+    ["Supporter 26",200000,100,"paid","Includes non-step support"],
+    ["Supporter 27",500000,500,"pledged",""],
+    ["Supporter 28",100000,100,"paid",""],
+    ["Supporter 29",100000,100,"paid",""],
+    ["Supporter 30",200000,200,"paid",""],
+    ["Supporter 31",100000,100,"paid",""],
+    ["Supporter 32",100000,100,"paid",""],
+    ["Supporter 33",50000,50,"pledged",""]
   ];
 
 /* ── ROUTE WAYPOINTS ───────────────────────────────────────────────

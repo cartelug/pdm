@@ -189,7 +189,7 @@ header.solid .burger span,header.solid .burger span::before,header.solid .burger
 }
 .mnav a:last-of-type{border-bottom:0;}
 .mnav .btn{margin-top:var(--sp-m);}
-@media(max-width:940px){
+@media(max-width:1080px){
   .nav-links{display:none;}
   .burger{display:flex;}
 }

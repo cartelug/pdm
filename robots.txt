@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /pdm/admin/
+
+Sitemap: https://cartelug.github.io/pdm/sitemap.xml

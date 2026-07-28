@@ -16,24 +16,67 @@
   var WAYS=(window.ROUTE_WAYPOINTS||[]).slice();
   var LIVE=window.WALK_LIVE||{active:false};
 
+  /* ── accessible mobile navigation ── */
+  var burger=$('burger'), mnav=$('mnav'), lastFocus=null;
+  function navFocusables(){return mnav?Array.prototype.slice.call(mnav.querySelectorAll('a,button')):[];}
+  function closeNav(){
+    if(!mnav||!burger) return;
+    mnav.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+    burger.setAttribute('aria-label','Open menu');
+    mnav.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    if(lastFocus) lastFocus.focus();
+  }
+  if(burger&&mnav){
+    mnav.setAttribute('aria-hidden','true');
+    burger.addEventListener('click',function(){
+      if(mnav.classList.contains('open')){closeNav();return;}
+      lastFocus=document.activeElement;
+      mnav.classList.add('open');
+      burger.setAttribute('aria-expanded','true');
+      burger.setAttribute('aria-label','Close menu');
+      mnav.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+      var f=navFocusables(); if(f.length) f[0].focus();
+    });
+    mnav.addEventListener('click',function(e){if(e.target.tagName==='A') closeNav();});
+    document.addEventListener('keydown',function(e){
+      if(!mnav.classList.contains('open')) return;
+      if(e.key==='Escape'){closeNav();return;}
+      if(e.key==='Tab'){
+        var f=navFocusables(); if(!f.length) return;
+        var first=f[0],last=f[f.length-1];
+        if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+      }
+    });
+    window.addEventListener('resize',function(){if(window.innerWidth>900&&mnav.classList.contains('open')) closeNav();});
+  }
+
   function fmt(n){return Number(n).toLocaleString('en-US');}
   function ugx(n){return 'UGX '+fmt(n);}
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 
   /* ── totals ─────────────────────────────────────────────────── */
-  var T={amt:0,steps:0,paid:0,paidS:0,paidN:0,pled:0,pledS:0,pledN:0,n:ROLL.length};
+  function countsTowardProgress(r){ return r[3]==='paid'||r[3]==='pledged'; }
+  var T={amt:0,steps:0,paid:0,paidS:0,paidN:0,pled:0,pledS:0,pledN:0,n:0};
   ROLL.forEach(function(r){
-    T.amt+=r[1]; T.steps+=r[2];
-    if(r[3]==='paid'){T.paid+=r[1];T.paidS+=r[2];T.paidN++;}
-    else {T.pled+=r[1];T.pledS+=r[2];T.pledN++;}
+    if(r[3]==='paid'){
+      T.amt+=r[1]; T.steps+=r[2]; T.n++;
+      T.paid+=r[1]; T.paidS+=r[2]; T.paidN++;
+    } else if(r[3]==='pledged'){
+      T.amt+=r[1]; T.steps+=r[2]; T.n++;
+      T.pled+=r[1]; T.pledS+=r[2]; T.pledN++;
+    }
   });
   var LEFT=TOTAL_STEPS-T.steps;
   var PCT=T.steps/TOTAL_STEPS;
 
   /* ── 1 · STEP ATTRIBUTION ───────────────────────────────────────
      Sponsors are allocated sequentially along the road, so the gold
-     line on the route graphic IS the sponsored road and every sponsor
-     owns a real, locatable piece of it. */
+     line on the route graphic IS the sponsored road. Only received and
+     pledged entries receive a segment; promises do not count toward progress. */
   function kmOf(step){ return (step*M_PER_STEP)/1000; }
   function placeAt(km){
     if(!WAYS.length) return "";
@@ -46,6 +89,12 @@
   }
   var cursor=0;
   ROLL.forEach(function(r){
+    if(!countsTowardProgress(r)){
+      r._from=cursor; r._to=cursor;
+      r._kmFrom=kmOf(cursor); r._kmTo=kmOf(cursor);
+      r._place="not included in sponsored progress";
+      return;
+    }
     r._from=cursor; cursor+=r[2]; r._to=cursor;
     r._kmFrom=kmOf(r._from); r._kmTo=kmOf(r._to);
     r._place=placeAt(r._kmFrom);
@@ -151,7 +200,7 @@
     }
     if($('waPledge')){
       var seg=$('outSeg')?(' That claims '+segLabel(kmOf(T.steps),kmOf(T.steps+steps))+' of the road.'):'';
-      var msg='I am sponsoring '+fmt(steps)+' steps ('+ugx(amt)+') for Faith in Motion — the walk to complete St Joseph Rwembyo Catholic Church.'+seg+' Please record my pledge on the Roll of Honour.';
+      var msg='I would like to sponsor '+fmt(steps)+' steps ('+ugx(amt)+') for Faith in Motion — the walk to complete St Joseph Rwembyo Catholic Church.'+seg+' Please send the current approved transfer details and beneficiary name so I can verify them before sending.';
       if(window.__ref) msg+=' (Invited by: '+window.__ref+')';
       $('waPledge').href='https://wa.me/256772495733?text='+encodeURIComponent(msg);
     }
@@ -202,17 +251,20 @@
     function renderRoll(){
       var rows=expanded?ROLL:ROLL.slice(0,8);
       body.innerHTML=rows.map(function(r,i){
-        var when=recency(r[5]);
+        var counted=countsTowardProgress(r);
+        var when=counted?recency(r[5]):'';
+        var segment=counted?(segLabel(r._kmFrom,r._kmTo)+' · '+esc(r._place)):'not included in sponsored progress';
+        var stepText=counted?(fmt(r[2])+' steps'):'promise · not counted';
         return '<div class="lrow"><span class="i">'+String(i+1).padStart(2,'0')+'</span>'
           +'<span class="n">'+esc(r[0])
             +(r[4]?'<em>'+esc(r[4])+'</em>':'')
-            +'<i class="seg">'+segLabel(r._kmFrom,r._kmTo)+' · '+esc(r._place)+'</i>'
+            +'<i class="seg">'+segment+'</i>'
             +(when?'<i class="when">sponsored '+when+'</i>':'')
           +'</span>'
-          +'<span class="a">'+ugx(r[1])+'<i>'+fmt(r[2])+' steps</i></span>'
+          +'<span class="a">'+ugx(r[1])+'<i>'+stepText+'</i></span>'
           +'<span class="s"><span class="pill '+r[3]+'">'+r[3]+'</span></span></div>';
       }).join('');
-      if($('rollToggle')) $('rollToggle').textContent=expanded?'Show fewer':('Show all '+ROLL.length+' sponsors');
+      if($('rollToggle')) $('rollToggle').textContent=expanded?'Show fewer':('Show all '+ROLL.length+' entries');
     }
     if($('rollToggle')) $('rollToggle').addEventListener('click',function(){ expanded=!expanded; renderRoll(); });
     renderRoll();
@@ -221,7 +273,7 @@
   /* leading sponsors band */
   var lead=$('leadBand');
   if(lead){
-    var top=ROLL.slice().sort(function(a,b){return b[1]-a[1];}).slice(0,3);
+    var top=ROLL.filter(countsTowardProgress).sort(function(a,b){return b[1]-a[1];}).slice(0,3);
     lead.innerHTML=top.map(function(r,i){
       return '<div class="lead"><span class="r">'+(i+1)+'</span><span><b>'+esc(r[0])+'</b>'
         +'<span>'+fmt(r[2])+' steps · '+segLabel(r._kmFrom,r._kmTo)+'</span></span></div>';
@@ -247,7 +299,7 @@
   }
   if($('waFulfil')){
     $('waFulfil').href='https://wa.me/256772495733?text='+encodeURIComponent(
-      'I would like to complete the pledge I made to Faith in Motion. Please confirm the steps recorded against my name so I can send the balance.');
+      'I would like to complete a pledge to Faith in Motion. Please confirm the recorded steps and send the current approved transfer details and beneficiary name so I can verify them before sending.');
   }
 
   /* generic stat mounts */
@@ -284,7 +336,7 @@
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){showToast(label);},function(){showToast('Could not copy — please copy it by hand');});}
     else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showToast(label);}catch(e){showToast('Could not copy — please copy it by hand');}ta.remove();}
   }
-  if($('copyNo')) $('copyNo').addEventListener('click',function(){copy('0772495733','Number copied');});
+  if($('copyNo')) $('copyNo').addEventListener('click',function(){copy('0772495733','Enquiry number copied');});
   if($('copyLink')) $('copyLink').addEventListener('click',function(){copy(window.location.href,'Link copied');});
   if($('copyIban')) $('copyIban').addEventListener('click',function(){
     var el=$('intlRef'); copy(el?el.textContent.trim():'','Reference copied');

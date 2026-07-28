@@ -3,10 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contact — PCI Uganda</title>
-<meta name="description" content="Contact Pamodzi Community Initiative (PCI Uganda) — partnership enquiries, project proposals, media and general contact.">
-<meta property="og:title" content="Contact — PCI Uganda">
-<meta property="og:description" content="Partnership enquiries, project proposals, media and general contact.">
+<title>Contact — Pamodzi for Development</title>
+<meta name="description" content="Contact Pamodzi for Development about partnerships, project ideas, technical support, media or general enquiries.">
+<meta property="og:title" content="Contact — Pamodzi for Development">
+<meta property="og:description" content="Contact Pamodzi for Development about partnerships, project ideas, technical support, media or general enquiries.">
+<link rel="canonical" href="https://cartelug.github.io/pdm/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cartelug.github.io/pdm/contact.html">
+<meta property="og:image" content="https://cartelug.github.io/pdm/assets/og/share-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Together for Development — Uganda">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — Pamodzi for Development">
+<meta name="twitter:description" content="Contact Pamodzi for Development about partnerships, project ideas, technical support, media or general enquiries.">
+<meta name="twitter:image" content="https://cartelug.github.io/pdm/assets/og/share-card.jpg">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#0C241D">
 <link rel="icon" href="assets/brand/pci-mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,12 +32,13 @@
   <div class="wrap nav">
     <a class="brand" href="index.html">
       <img src="assets/brand/pci-mark.svg" alt="">
-      <span class="t"><b>Pamodzi</b><span>Community Initiative</span></span>
+      <span class="t"><b>Pamodzi</b><span>For Development</span></span>
     </a>
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="what-we-do.html">What we do</a>
+      <a href="projects.html">Projects</a>
       <a href="model.html">Our model</a>
       <a href="impact.html">Impact</a>
       <a href="partnerships.html">Partnerships</a>
@@ -35,16 +48,16 @@
   </div>
 </header>
 <div class="mnav" id="mnav"><div class="wrap">
-  <a href="index.html">Home</a><a href="about.html">About</a><a href="what-we-do.html">What we do</a>
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="what-we-do.html">What we do</a><a href="projects.html">Projects</a>
   <a href="model.html">Our model</a><a href="impact.html">Impact</a><a href="partnerships.html">Partnerships</a>
   <a href="faith-in-motion.html">Faith in Motion</a><a class="btn btn-gold" href="contact.html">Partner with us</a>
 </div></div>
 
 <div class="page-hero" id="top">
   <div class="wrap">
-    <div class="crumb"><a href="index.html">PCI Uganda</a> / Contact</div>
+    <div class="crumb"><a href="index.html">Pamodzi</a> / Contact</div>
     <h1>Let's build<br><em>something.</em></h1>
-    <p class="lede">Partner, investor, ministry, parish or community group — tell us what you have in mind and it routes to the right person.</p>
+    <p class="lede">Partner, public institution, parish or community group — tell us what you have in mind and it routes to the right person.</p>
   </div>
 </div>
 
@@ -54,12 +67,12 @@
   <div class="wrap">
     <div class="cards reveal" style="margin-top:0;">
       <a class="card" href="https://wa.me/256708735878" target="_blank" rel="noopener" style="text-decoration:none;">
-        <span class="n">FASTEST</span><h3>WhatsApp</h3>
-        <p>+256 708 735 878 — message directly, replies in working hours.</p>
+        <span class="n">CONTACT</span><h3>WhatsApp</h3>
+        <p>+256 708 735 878 — message the team directly.</p>
       </a>
       <a class="card" href="mailto:shyakaneeza@gmail.com" style="text-decoration:none;">
-        <span class="n">FORMAL</span><h3>Email</h3>
-        <p>shyakaneeza@gmail.com — for letters, documents and partnership proposals.</p>
+        <span class="n">CONTACT</span><h3>Email</h3>
+        <p>shyakaneeza@gmail.com — send a message or document.</p>
       </a>
       <a class="card" href="faith-in-motion.html" style="text-decoration:none;">
         <span class="n">GIVING</span><h3>Faith in Motion</h3>
@@ -76,45 +89,45 @@
       <h2 style="margin-top:20px;">Tell us where you fit.</h2>
       <p class="lede" style="margin-top:18px;">A sentence or two is plenty. This opens your email app with the message ready to send.</p>
 
-      <div class="form">
+      <form class="form" id="enquiryForm">
         <div class="frow">
-          <div><label for="iName">Your name</label><input id="iName" type="text" placeholder="Full name"></div>
-          <div><label for="iContact">Email or phone</label><input id="iContact" type="text" placeholder="How we reach you"></div>
+          <div><label for="iName">Your name</label><input id="iName" name="name" type="text" autocomplete="name" placeholder="Full name" required></div>
+          <div><label for="iContact">Email or phone</label><input id="iContact" name="contact" type="text" autocomplete="email" placeholder="How we reach you" required></div>
         </div>
         <div class="frow">
           <div><label for="iTopic">Area of interest</label>
-            <select id="iTopic">
+            <select id="iTopic" name="topic">
               <option>General enquiry</option>
               <option>Education</option>
               <option>Health</option>
               <option>Climate &amp; green development</option>
               <option>Financial inclusion &amp; enterprise</option>
               <option>Faith in Motion campaign</option>
-              <option>Founding capital framework</option>
+              <option>Organisational support</option>
             </select></div>
           <div><label for="iType">You are</label>
-            <select id="iType">
+            <select id="iType" name="enquirerType">
               <option>A government institution</option>
               <option>A development or financing partner</option>
               <option>A business or CSR programme</option>
-              <option>An investor or financial institution</option>
+              <option>A financial institution or funder</option>
               <option>A community organisation or group</option>
               <option>Proposing a project</option>
               <option>Press or media</option>
               <option>Something else</option>
             </select></div>
         </div>
-        <div><label for="iMsg">Your message</label><textarea id="iMsg" rows="4" placeholder="A sentence or two is plenty."></textarea></div>
-        <div><button class="btn btn-gold" id="send">Send enquiry</button></div>
-      </div>
+        <div><label for="iMsg">Your message</label><textarea id="iMsg" name="message" rows="4" placeholder="A sentence or two is plenty."></textarea></div>
+        <div><button class="btn btn-gold" id="send" type="submit">Send enquiry</button></div>
+      </form>
     </div>
     <div class="c-side reveal">
       <div class="figs" style="grid-template-columns:1fr;margin-top:0;">
-        <div class="fig"><b class="mono">Uganda</b><span>National focus, Kampala &amp; Kasese operations</span></div>
-        <div class="fig"><b class="mono">2022</b><span>Established</span></div>
+        <div class="fig"><b class="mono">Uganda</b><span>Community development focus</span></div>
+        <div class="fig"><b class="mono">Local</b><span>Priorities defined with communities</span></div>
       </div>
       <div class="notice" style="background:rgba(244,238,225,.07);border-left-color:var(--gold-2);color:var(--sage-2);">
-        <b style="color:var(--cream);">On contributions.</b> Funds for any PCI campaign go directly to the formally authorised beneficiary account. Only reconciled figures are published, and no fundraising outcome is guaranteed.
+        <b style="color:var(--cream);">On contributions.</b> Request the current approved transfer instructions and beneficiary name for the relevant campaign, verify both before sending, and never treat an enquiry contact as a payment channel.
       </div>
     </div>
   </div>
@@ -126,15 +139,15 @@
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <div class="fbrand"><img src="assets/brand/pci-mark.svg" alt=""><b>PCI Uganda</b></div>
-        <p style="max-width:34ch;color:var(--sage);">Pamodzi Community Initiative — together for development. An indigenous Ugandan development institution, established 2022.</p>
+        <div class="fbrand"><img src="assets/brand/pci-mark.svg" alt=""><b>Pamodzi for Development</b></div>
+        <p style="max-width:34ch;color:var(--sage);">Bringing communities and partners together around locally led development.</p>
       </div>
-      <div><h4>Organisation</h4><a href="about.html">About PCI</a><a href="model.html">Our model</a><a href="impact.html">Impact</a><a href="governance.html">Governance</a></div>
+      <div><h4>Organisation</h4><a href="about.html">About Pamodzi</a><a href="model.html">Our model</a><a href="projects.html">Projects</a><a href="impact.html">Impact</a><a href="governance.html">Governance</a></div>
       <div><h4>Our work</h4><a href="what-we-do.html#education">Education</a><a href="what-we-do.html#health">Health</a><a href="what-we-do.html#climate">Climate &amp; green</a><a href="what-we-do.html#inclusion">Financial inclusion</a></div>
       <div><h4>Engage</h4><a href="partnerships.html">Partnerships</a><a href="faith-in-motion.html">Faith in Motion</a><a href="updates.html">Updates</a><a href="contact.html">Contact</a></div>
     </div>
     <div class="fbot">
-      <span>© 2026 Pamodzi Community Initiative (PCI Uganda)</span>
+      <span>© 2026 Pamodzi for Development</span>
       <span>Figures reconciled before publication</span>
     </div>
   </div>

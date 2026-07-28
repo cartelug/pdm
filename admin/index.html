@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
 <title>Faith in Motion — Collections Console</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,10 +101,10 @@
       <div class="sub">Faith in Motion · St Joseph Rwembyo</div>
     </div>
     <div class="hstats">
-      <div class="s"><b id="hTotal">—</b><span>Total raised &amp; pledged</span></div>
+      <div class="s"><b id="hTotal">—</b><span>Received &amp; pledged</span></div>
       <div class="s"><b id="hPaid">—</b><span>Received</span></div>
       <div class="s"><b id="hSteps">—</b><span>Steps sponsored</span></div>
-      <div class="s"><b id="hCount">—</b><span>Sponsors</span></div>
+      <div class="s"><b id="hCount">—</b><span>Counted entries</span></div>
     </div>
   </div>
 </header>
@@ -120,14 +122,14 @@
       <div class="c"><div class="k">Received</div><div class="v" id="sPaid">—<small id="sPaidS"></small></div></div>
       <div class="c"><div class="k">Pledged</div><div class="v" id="sPled">—<small id="sPledS"></small></div></div>
       <div class="c"><div class="k">Total</div><div class="v" id="sTot">—<small id="sTotS"></small></div></div>
-      <div class="c"><div class="k">Toward goal</div><div class="v" id="sGoal">—<small id="sGoalS"></small></div></div>
+      <div class="c"><div class="k">Road sponsored</div><div class="v" id="sGoal">—<small id="sGoalS"></small></div></div>
     </div>
 
     <div class="card">
       <h3>Record a contribution</h3>
-      <p class="hint">Enter the amount in UGX — steps calculate automatically at UGX 1,000 per step.</p>
+      <p class="hint">Use an anonymised public label unless publication consent is recorded. Enter the amount in UGX; steps calculate automatically at UGX 1,000 per step.</p>
       <div class="row r-4">
-        <div><label class="f">Contributor name</label><input type="text" id="fName" placeholder="e.g. Rtn Jane Doe"></div>
+        <div><label class="f">Public supporter label</label><input type="text" id="fName" placeholder="e.g. Supporter 34"></div>
         <div><label class="f">Amount (UGX)</label><input type="number" id="fAmt" placeholder="100000" min="0" step="1000"></div>
         <div><label class="f">Status</label><select id="fStatus"><option value="paid">Paid</option><option value="pledged">Pledged</option><option value="promised">Promised</option></select></div>
         <div><label class="f">Steps (auto)</label><input type="number" id="fSteps" placeholder="100"></div>
@@ -160,10 +162,10 @@
   <div class="panel" id="p-links">
     <div class="card">
       <h3>Where the campaign site lives</h3>
-      <p class="hint">Paste your live site address. Every link and QR code below is built from it.</p>
+      <p class="hint">Paste the live site root. Every link and QR code below points to the sponsor form on <code>give.html</code>.</p>
       <div class="row r-2">
-        <div><label class="f">Campaign site URL</label><input type="text" id="siteUrl" value="https://faithinmotion.org" placeholder="https://your-domain.org"></div>
-        <div><label class="f">Ambassador / referrer tag (optional)</label><input type="text" id="refTag" placeholder="e.g. rtn-edith"></div>
+        <div><label class="f">Site root URL</label><input type="url" id="siteUrl" value="https://cartelug.github.io/pdm" placeholder="https://cartelug.github.io/pdm"></div>
+        <div><label class="f">Ambassador / referrer tag (optional)</label><input type="text" id="refTag" placeholder="e.g. community-team"></div>
       </div>
       <p class="hint" style="margin:0;">A referrer tag tracks who brought the sponsor in — it rides along in the pledge message so you know who to thank.</p>
     </div>
@@ -225,26 +227,26 @@
 <script>
 (function(){
   "use strict";
-  var STEP_UGX=1000, TOTAL_STEPS=466200, GOAL_UGX=410000000, ROUTE_KM=345;
+  var STEP_UGX=1000, TOTAL_STEPS=466200, ROUTE_KM=345;
 
   var SEED = [
-    ["Modest R",100000,100,"paid",""],["Joshua & Sylvia",1000000,1000,"paid",""],
-    ["MD Rtn Nuwabine J",1000000,1000,"pledged",""],["Dr Monica Etima",100000,100,"pledged",""],
-    ["Mr Garakumbe",100000,100,"paid","more to be added"],["Mugabe Charles",20000,20,"paid",""],
-    ["Dr Habomugisha",50000,50,"paid",""],["Rtn Smart",50000,50,"paid","+ Piano"],
-    ["Dr MD Kanyesigye",100000,100,"promised","to add more"],["Ms Fortunate",20000,20,"paid",""],
-    ["Mubatsi J",50000,50,"pledged",""],["Rtn Dr Rusoke",50000,50,"paid",""],
-    ["Eng Rtn Darius",50000,50,"paid",""],["Rtn HCP Paul",50000,50,"paid",""],
-    ["Rtn Edith",100000,100,"paid",""],["PAG Muhumuza",100000,100,"paid",""],
-    ["Rtn Harriet",100000,100,"pledged",""],["Rtn Simon Kagwa",50000,50,"pledged",""],
-    ["Rtn Prof Kwesiga",100000,100,"pledged",""],["Rtn Dr Kerchan",100000,100,"pledged",""],
-    ["Rtn Budget",100000,100,"pledged",""],["Rtn Justus",100000,100,"pledged",""],
-    ["IP Anne",100000,100,"pledged",""],["Jimmy Baluku Odyek",50000,50,"paid",""],
-    ["Bwambale Michael",50000,50,"paid",""],["President Anne Nsubuga",200000,100,"paid","+ 100k water for the road"],
-    ["Joshua & Rosette Kainja",500000,500,"pledged",""],["Maria Claire",100000,100,"paid",""],
-    ["Lady Florence Kesiime Mugisha",100000,100,"paid",""],["Lady Olivia Hasahya",200000,200,"paid",""],
-    ["Caroline Alice Laker Onekalit",100000,100,"paid",""],["Rtn Isaac Katewanga",100000,100,"paid",""],
-    ["Rtn Allan Kiwumulo",50000,50,"pledged",""]
+    ["Supporter 01",100000,100,"paid",""],["Supporter 02",1000000,1000,"paid",""],
+    ["Supporter 03",1000000,1000,"pledged",""],["Supporter 04",100000,100,"pledged",""],
+    ["Supporter 05",100000,100,"paid",""],["Supporter 06",20000,20,"paid",""],
+    ["Supporter 07",50000,50,"paid",""],["Supporter 08",50000,50,"paid","Includes an in-kind item"],
+    ["Supporter 09",100000,100,"promised","Not included in public progress"],["Supporter 10",20000,20,"paid",""],
+    ["Supporter 11",50000,50,"pledged",""],["Supporter 12",50000,50,"paid",""],
+    ["Supporter 13",50000,50,"paid",""],["Supporter 14",50000,50,"paid",""],
+    ["Supporter 15",100000,100,"paid",""],["Supporter 16",100000,100,"paid",""],
+    ["Supporter 17",100000,100,"pledged",""],["Supporter 18",50000,50,"pledged",""],
+    ["Supporter 19",100000,100,"pledged",""],["Supporter 20",100000,100,"pledged",""],
+    ["Supporter 21",100000,100,"pledged",""],["Supporter 22",100000,100,"pledged",""],
+    ["Supporter 23",100000,100,"pledged",""],["Supporter 24",50000,50,"paid",""],
+    ["Supporter 25",50000,50,"paid",""],["Supporter 26",200000,100,"paid","Includes non-step support"],
+    ["Supporter 27",500000,500,"pledged",""],["Supporter 28",100000,100,"paid",""],
+    ["Supporter 29",100000,100,"paid",""],["Supporter 30",200000,200,"paid",""],
+    ["Supporter 31",100000,100,"paid",""],["Supporter 32",100000,100,"paid",""],
+    ["Supporter 33",50000,50,"pledged",""]
   ];
 
   var roll = SEED.map(function(r){ return r.slice(); });
@@ -262,10 +264,17 @@
   }
 
   function totals(){
-    var t={amt:0,steps:0,paid:0,paidSteps:0,pled:0,pledSteps:0,n:roll.length};
+    var t={amt:0,steps:0,paid:0,paidSteps:0,pled:0,pledSteps:0,prom:0,promSteps:0,promN:0,n:0};
     roll.forEach(function(r){
-      t.amt+=r[1]; t.steps+=r[2];
-      if(r[3]==='paid'){t.paid+=r[1];t.paidSteps+=r[2];} else {t.pled+=r[1];t.pledSteps+=r[2];}
+      if(r[3]==='paid'){
+        t.amt+=r[1]; t.steps+=r[2]; t.n++;
+        t.paid+=r[1]; t.paidSteps+=r[2];
+      } else if(r[3]==='pledged'){
+        t.amt+=r[1]; t.steps+=r[2]; t.n++;
+        t.pled+=r[1]; t.pledSteps+=r[2];
+      } else {
+        t.prom+=r[1]; t.promSteps+=r[2]; t.promN++;
+      }
     });
     return t;
   }
@@ -277,9 +286,9 @@
     $('sPaid').firstChild.nodeValue=ugx(t.paid); $('sPaidS').textContent=fmt(t.paidSteps)+' steps';
     $('sPled').firstChild.nodeValue=ugx(t.pled); $('sPledS').textContent=fmt(t.pledSteps)+' steps';
     $('sTot').firstChild.nodeValue=ugx(t.amt);  $('sTotS').textContent=fmt(t.steps)+' steps';
-    var pct=(t.amt/GOAL_UGX*100);
+    var pct=(t.steps/TOTAL_STEPS*100);
     $('sGoal').firstChild.nodeValue=pct.toFixed(2)+'%';
-    $('sGoalS').textContent='of '+ugx(GOAL_UGX);
+    $('sGoalS').textContent='of '+fmt(TOTAL_STEPS)+' steps';
   }
 
   function renderTable(){
@@ -316,13 +325,15 @@
       + 'Report date: '+d.toDateString()+'\n\n'
       + 'RECEIVED         '+ugx(t.paid)+'  ('+fmt(t.paidSteps)+' steps)\n'
       + 'PLEDGED          '+ugx(t.pled)+'  ('+fmt(t.pledSteps)+' steps)\n'
-      + 'TOTAL            '+ugx(t.amt)+'  ('+fmt(t.steps)+' steps)\n\n'
-      + 'Sponsors on the roll: '+fmt(t.n)+'\n'
-      + 'Distance funded: '+km.toFixed(2)+' km of '+ROUTE_KM+' km\n'
+      + 'RECEIVED + PLEDGED '+ugx(t.amt)+'  ('+fmt(t.steps)+' steps)\n'
+      + 'PROMISED          '+ugx(t.prom)+'  ('+fmt(t.promSteps)+' steps; excluded)\n\n'
+      + 'Counted entries: '+fmt(t.n)+'\n'
+      + 'Promises awaiting status change: '+fmt(t.promN)+'\n'
+      + 'Distance sponsored: '+km.toFixed(2)+' km of '+ROUTE_KM+' km\n'
       + 'Steps still needing a sponsor: '+fmt(TOTAL_STEPS-t.steps)+'\n'
-      + 'Progress toward '+ugx(GOAL_UGX)+': '+(t.amt/GOAL_UGX*100).toFixed(2)+'%\n\n'
-      + 'All contributions are paid directly to the church construction account.\n'
-      + 'Only reconciled figures are published on the campaign site.';
+      + 'Road progress: '+(t.steps/TOTAL_STEPS*100).toFixed(2)+'%\n\n'
+      + 'Transfer instructions and the beneficiary are verified separately before payment.\n'
+      + 'Public labels must be anonymised unless publication consent is recorded.';
     $('reportOut').value = rep;
   }
 
@@ -381,8 +392,12 @@
   // ---- links & QR ----
   var TIERS=[20,50,100,200,500,1000];
   function baseUrl(){ return ($('siteUrl').value||'').trim().replace(/\/+$/,''); }
+  function giveUrl(){
+    var base=baseUrl();
+    return /\/give\.html$/i.test(base) ? base : base+'/give.html';
+  }
   function sponsorUrl(steps){
-    var u=baseUrl()+'/?steps='+steps;
+    var u=giveUrl()+'?steps='+steps;
     var ref=($('refTag').value||'').trim();
     if(ref) u+='&ref='+encodeURIComponent(ref);
     return u;
@@ -401,7 +416,7 @@
     });
     var open=document.createElement('div');
     open.style.cssText='padding:12px 0;';
-    var ou=baseUrl()+'/#sponsor';
+    var ou=giveUrl()+'#sponsor';
     open.innerHTML='<div><b style="font-family:Bricolage Grotesque,sans-serif;font-size:16px;">Any amount</b>'
       +' <span style="color:var(--stone);font-size:13px;">· sponsor chooses</span></div>'
       +'<div class="linkbox"><input type="text" readonly value="'+ou+'"><button class="btn btn-o btn-sm" data-copy="'+encodeURIComponent(ou)+'">Copy</button></div>';
@@ -410,7 +425,7 @@
     // QR codes
     var g=$('qrGrid'); g.innerHTML='';
     [100,500,0].forEach(function(s){
-      var url = s ? sponsorUrl(s) : baseUrl()+'/#sponsor';
+      var url = s ? sponsorUrl(s) : giveUrl()+'#sponsor';
       var c=document.createElement('div'); c.className='qrcard';
       var holder=document.createElement('div'); holder.className='qr';
       c.appendChild(holder);
@@ -424,14 +439,14 @@
 
     // messages
     var ml=$('msgList'); ml.innerHTML='';
-    var u100=sponsorUrl(100), uAny=baseUrl()+'/#sponsor';
+    var u100=sponsorUrl(100), uAny=giveUrl()+'#sponsor';
     var msgs=[
       ['WhatsApp — to a friend',
-       'Our brother Shyaka is walking 345 km from Kampala to Kasese to finish building St Joseph Rwembyo Catholic Church. That is 466,200 steps. You can sponsor a step for UGX 1,000.\n\nSponsor 100 steps (UGX 100,000): '+u100+'\nOr choose your own: '+uAny],
+       'Faith in Motion is a 345 km walk from Kampala to Kasese to support the completion of St Joseph Rwembyo Catholic Church. That is 466,200 steps. You can sponsor a step for UGX 1,000.\n\nSponsor 100 steps (UGX 100,000): '+u100+'\nOr choose your own: '+uAny],
       ['WhatsApp — to a group',
-       'FAITH IN MOTION — 2 August 2026\n\n345 km on foot. 466,200 steps. One church to finish.\n\nEvery UGX 1,000 sponsors one step and carries him closer to Rwembyo. Every sponsor is named on the Roll of Honour.\n\nSponsor here: '+uAny+'\nMobile Money: 0772 495 733 (Sylvia Kaawe, Chair Construction)'],
+       'FAITH IN MOTION — 2 August 2026\n\n345 km on foot. 466,200 steps. One church to finish.\n\nEvery UGX 1,000 sponsors one step and carries him closer to Rwembyo. Public supporter labels are anonymised.\n\nChoose your steps and request the current approved transfer details here: '+uAny],
       ['For a corporate or parish letter',
-       'St Joseph Rwembyo Catholic Church is being completed at Kiburara, Kisinga, Kasese. To mobilise support, a 345 km walk from Kampala to Kasese takes place on 2 August 2026 — 466,200 steps, each sponsorable at UGX 1,000.\n\nContributions go directly to the church construction account, and every contribution is published on a reconciled public roll.\n\nTo sponsor: '+uAny]
+       'St Joseph Rwembyo Catholic Church is being completed at Kiburara, Kisinga, Kasese. To mobilise support, a 345 km walk from Kampala to Kasese is planned for 2 August 2026 — 466,200 steps, each sponsorable at UGX 1,000.\n\nReceived and pledged entries count toward public progress; promises remain separate. Public supporter labels are anonymised. Contributors request and verify the current approved transfer details before sending.\n\nTo sponsor: '+uAny]
     ];
     msgs.forEach(function(m){
       var d=document.createElement('div'); d.style.cssText='padding:12px 0;border-bottom:1px solid #f0ece2;';
