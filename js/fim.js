@@ -17,13 +17,13 @@
   (function(){
     var icon=document.querySelector('link[rel~="icon"]');
     if(icon){
-      icon.setAttribute('href','assets/brand/pamodzi/pamodzi-logo-source.png');
+      icon.setAttribute('href','assets/brand/pamodzi/pamodzi-logo-transparent.png');
       icon.setAttribute('type','image/png');
     }
     var loader=document.createElement('div');
     loader.className='site-loader'; loader.setAttribute('role','status');
     loader.setAttribute('aria-label','Loading Faith in Motion');
-    loader.innerHTML='<div class="inner"><img src="assets/brand/pamodzi/pamodzi-logo-source.png" alt="Pamodzi for Development"><span>Faith in Motion</span></div>';
+    loader.innerHTML='<div class="inner"><img src="assets/brand/pamodzi/pamodzi-logo-transparent.png" alt="Pamodzi for Development"><span>Faith in Motion</span></div>';
     document.body.insertBefore(loader,document.body.firstChild);
     var closed=false;
     function close(){

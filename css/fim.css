@@ -68,7 +68,7 @@ header.solid{background:rgba(255,255,255,.94); backdrop-filter:blur(10px); borde
 .brand{display:flex; align-items:center; gap:11px; text-decoration:none;}
 .brand img{
   width:48px; height:36px; flex:none; object-fit:contain; display:block;
-  background:transparent; border-radius:2px; mix-blend-mode:multiply;
+  background:transparent; border-radius:2px;
 }
 .brand .t{line-height:1;}
 .brand .t b{display:block; font-family:'Bricolage Grotesque',sans-serif; font-size:15px; letter-spacing:-0.01em; color:#fff; transition:color .3s;}
@@ -156,7 +156,7 @@ section.blk{padding:100px 0; position:relative;}
 .site-loader{position:fixed;inset:0;z-index:300;display:grid;place-items:center;background:#fff;color:var(--deep);transition:opacity .5s cubic-bezier(.2,.8,.3,1),visibility .5s cubic-bezier(.2,.8,.3,1);}
 .site-loader .inner{display:grid;justify-items:center;gap:15px;text-align:center;}
 .site-loader img{
-  width:min(166px,42vw);height:auto;display:block;background:transparent;border-radius:3px;mix-blend-mode:multiply;
+  width:min(166px,42vw);height:auto;display:block;background:transparent;border-radius:3px;
   animation:fim-loader .7s cubic-bezier(.2,.8,.3,1) both;
 }
 .site-loader span{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#666;}
@@ -321,7 +321,7 @@ footer{background:var(--night); color:#fff; padding:60px 0 34px;}
 .fgrid{display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:34px;}
 @media(max-width:860px){ .fgrid{grid-template-columns:1fr; gap:26px;} }
 .fbrand{display:flex; align-items:center; gap:12px; margin-bottom:16px;}
-.fbrand img{width:64px;height:48px;object-fit:contain;background:transparent;border-radius:2px;mix-blend-mode:multiply;}
+.fbrand img{width:64px;height:48px;object-fit:contain;background:transparent;border-radius:2px;}
 .fbrand b{font-family:'Bricolage Grotesque',sans-serif; color:#fff; font-size:18px;}
 footer h4{font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.17em; text-transform:uppercase; color:#F3D7D3; margin:0 0 14px;}
 footer a{color:#F3D7D3; text-decoration:none; display:block; font-size:14.5px; margin-bottom:9px;}

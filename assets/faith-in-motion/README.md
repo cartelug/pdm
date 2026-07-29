@@ -16,7 +16,7 @@ These are the supplied original campaign images for the Faith in Motion pages. T
 Reusable brand files currently available to the site remain in `../brand/`:
 
 - `rotary.png` — Rotary mark
-- `pamodzi/pamodzi-logo-source.png` — exact approved Pamodzi for Development logo; use unchanged
+- `pamodzi/pamodzi-logo-transparent.png` — approved transparent Pamodzi for Development runtime logo
 - `the97-white.png` — builder mark
 
 There is not yet a standalone Walking Rotarian logo source file. The mark visible in the supplied poster is embedded in the poster artwork and should not be cropped for a preloader or navigation identity. Add the original SVG, PNG, or vector export here once supplied.

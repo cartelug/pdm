@@ -136,7 +136,7 @@ header{
 header.solid{background:rgba(253,250,243,.92);backdrop-filter:blur(14px);border-bottom-color:var(--line);}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-s);width:100%;}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none;}
-.brand img{width:52px;height:40px;object-fit:contain;background:transparent;border-radius:2px;mix-blend-mode:multiply;}
+.brand img{width:52px;height:40px;object-fit:contain;background:transparent;border-radius:2px;}
 /* header sits over a dark hero on every page: light by default, dark once solid */
 .brand .t b{
   display:block;font-family:'Fraunces',serif;font-variation-settings:'SOFT' 20,'opsz' 40;
@@ -364,7 +364,7 @@ footer h4{font-size:var(--t--2);letter-spacing:.16em;text-transform:uppercase;co
 footer a{display:block;color:var(--sage-2);text-decoration:none;padding:5px 0;transition:color var(--dur-2);}
 footer a:hover{color:var(--gold-2);}
 .fbrand{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
-.fbrand img{width:64px;height:48px;object-fit:contain;background:transparent;border-radius:2px;mix-blend-mode:multiply;}
+.fbrand img{width:64px;height:48px;object-fit:contain;background:transparent;border-radius:2px;}
 .fbrand b{font-family:'Fraunces',serif;font-variation-settings:'SOFT' 20,'opsz' 40;font-size:16px;color:var(--cream);font-weight:600;}
 .fbot{
   display:flex;justify-content:space-between;gap:var(--sp-s);flex-wrap:wrap;
