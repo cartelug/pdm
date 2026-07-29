@@ -9,16 +9,20 @@
 <link rel="icon" type="image/png" href="assets/brand/pamodzi/pamodzi-logo-transparent.png">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box;}
-  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
-    background:#08172E;color:#fff;font-family:'Instrument Sans',system-ui,sans-serif;padding:28px;text-align:center;}
-  .k{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#F5A81C;}
-  h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-0.03em;
-    font-size:clamp(32px,7vw,60px);margin:20px 0 0;line-height:1.02;}
-  p{color:#A9BAD6;max-width:44ch;margin:18px auto 30px;font-size:17px;}
-  a{display:inline-flex;align-items:center;gap:8px;background:#F5A81C;color:#08172E;text-decoration:none;
-    font-weight:700;font-size:15.5px;padding:15px 24px;border-radius:2px;box-shadow:0 4px 0 #C9820F;margin:0 6px 10px;}
-  a.g{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.34);box-shadow:none;}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;padding:28px;text-align:center;
+    background:linear-gradient(145deg,#8f1f19,#c52b22 58%,#e04438);color:#fff;font-family:'Instrument Sans',system-ui,sans-serif}
+  body::before{content:"";position:fixed;inset:0;opacity:.12;background-image:
+    linear-gradient(rgba(255,255,255,.8) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.8) 1px,transparent 1px);background-size:58px 58px}
+  body>div{position:relative;z-index:1;max-width:720px}
+  .k{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#ffd6d1}
+  h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-.045em;
+    font-size:clamp(48px,10vw,92px);margin:22px 0 0;line-height:.95}
+  p{color:#ffe4e0;max-width:42ch;margin:22px auto 32px;font-size:18px}
+  a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;background:#fff;color:#191817;text-decoration:none;
+    font-weight:750;font-size:15px;padding:13px 22px;border:1px solid #fff;border-radius:999px;margin:0 5px 10px}
+  a.g{background:transparent;color:#fff}
 </style>
 </head>
 <body>

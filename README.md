@@ -12,10 +12,10 @@ The site has no framework, build step, database, or server runtime.
 - Project pages: `apartments.html`, `community.html`, and the Faith in Motion campaign pages.
 - Campaign data: `js/roll-data.js` drives the public progress, tallies, route attribution, and Roll of Honour.
 - Updates data: `js/updates-data.js` drives the updates feed.
-- Shared presentation: `css/`, `js/`, and `assets/`.
+- Shared presentation: `css/base.css` supplies the site-wide tokens, header, navigation, buttons, grids, forms, footer and responsive rules. `css/pci.css`, `css/pdm.css` and `css/fim.css` contain only their page-family components.
 - Maintenance console: `admin/index.html`.
 
-Public contributor labels are published only when supplied or approved for publication; private contact and payment details never appear. A `promised` entry is displayed separately and does not count toward received-and-pledged totals or sponsored-road progress.
+Public contributor labels are published only when supplied or approved for publication. Private personal details are not added to the ledger; only the committee-supplied campaign payment details are public. A `promised` entry is displayed separately and does not count toward received-and-pledged totals or sponsored-road progress.
 
 ## Publish
 
@@ -39,11 +39,11 @@ The maintenance console is a browser-side tool. It is marked `noindex`, is not l
 
 ## Contribution safety
 
-The public site does not publish a payment account. Contributors are directed to request the current approved transfer instructions and beneficiary name, verify both with the Construction Committee, and only then send funds. WhatsApp is presented as an enquiry channel, not a payment channel.
+The campaign pages publish the payment details supplied by the Construction Committee. Contributors are still directed to verify the beneficiary name before sending and retain their transaction reference for reconciliation. WhatsApp remains an enquiry and confirmation channel.
 
 ## Photography
 
-Campaign pages include illustrated fallbacks. Optional photographs can be added to `assets/` and assigned in each page’s `window.FIM_ASSETS` object:
+Campaign pages include neutral illustrated fallbacks. The walker and road slots use the supplied Faith in Motion photography by default. Additional photographs can be assigned in each page’s `window.FIM_ASSETS` object:
 
 ```js
 window.FIM_ASSETS = {

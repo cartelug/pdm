@@ -391,7 +391,12 @@
   }
 
   /* ── photographs ────────────────────────────────────────────── */
-  var ASSETS=window.FIM_ASSETS||{};
+  var ASSETS={
+    walker:"assets/faith-in-motion/walking-rotarian-sunset-video-frame.jpg",
+    road:"assets/faith-in-motion/walking-rotarian-river-crossing.jpg"
+  };
+  var suppliedAssets=window.FIM_ASSETS||{};
+  Object.keys(suppliedAssets).forEach(function(k){ if(suppliedAssets[k]) ASSETS[k]=suppliedAssets[k]; });
   var CAPTIONS={walker:"On the road to Rwembyo",church:"St Joseph Rwembyo",road:"The road ahead",parish:"The parish community",build:"Construction in progress"};
   Object.keys(ASSETS).forEach(function(k){
     var src=ASSETS[k]; if(!src) return;
