@@ -39,33 +39,6 @@ footer .fgrid{grid-template-columns:1.5fr 1fr 1fr}
 .blk:nth-of-type(6n+5)::before{background-image:url('../assets/faith-in-motion/walking-rotarian-sunset-video-frame.jpg');background-position:center 48%}
 .blk:nth-of-type(6n)::before{background-image:url('../assets/faith-in-motion/mpara-biguli-day-8.jpg');background-position:center 36%}
 
-/* Loader and progress */
-.scroll-progress{
-  position:fixed;
-  inset:var(--header-h) 0 auto;
-  z-index:110;
-  height:3px;
-  background:var(--red);
-  pointer-events:none;
-  transform:scaleX(0);
-  transform-origin:left;
-}
-.site-loader{
-  position:fixed;
-  inset:0;
-  z-index:300;
-  display:grid;
-  place-items:center;
-  background:#fff;
-  color:var(--ink);
-  transition:opacity .38s ease,visibility .38s;
-}
-.site-loader .inner{display:grid;justify-items:center;gap:14px;text-align:center}
-.site-loader img{width:min(150px,40vw);height:auto;animation:fim-loader .55s ease both}
-.site-loader span{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
-.site-loader.done{opacity:0;visibility:hidden}
-@keyframes fim-loader{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
-
 /* Campaign home hero */
 .hero{
   position:relative;

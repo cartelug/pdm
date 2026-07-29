@@ -13,6 +13,7 @@ The site has no framework, build step, database, or server runtime.
 - Campaign data: `js/roll-data.js` drives the public progress, tallies, route attribution, and Roll of Honour.
 - Updates data: `js/updates-data.js` drives the updates feed.
 - Shared presentation: `css/base.css` supplies the site-wide tokens, header, navigation, buttons, grids, forms, footer and responsive rules. `css/pci.css`, `css/pdm.css` and `css/fim.css` contain only their page-family components.
+- Shared behavior: `js/core.js` is the single owner of the approved-brand loader, accessible mobile navigation, header state and page progress. Page-family scripts contain only their own forms, feeds, campaign data and route instruments.
 - Shared motion: `css/motion.css` and `js/site-motion.js` provide the progressive hero sequence, grouped scroll reveals, image loading transitions, restrained background parallax, responsive navigation choreography and internal-page transitions.
 - Maintenance console: `admin/index.html`.
 
@@ -31,12 +32,13 @@ The `.nojekyll` file keeps the static source unchanged during publication. `site
 ## Update the campaign register
 
 1. Open `/pdm/admin/`.
-2. Add or edit entries in the Pledges tab.
-3. Open the Publish tab and copy the generated data block.
-4. Replace `window.ROLL_DATA` in `js/roll-data.js`.
-5. Review the public labels, amounts, step counts, statuses, and consent before committing.
+2. Add or edit entries in the **Pledges** tab.
+3. Add, edit, remove or reorder story cards in **Journey updates**.
+4. Open **Publish** and copy the generated sponsor and journey blocks.
+5. Replace `window.ROLL_DATA` in `js/roll-data.js` and `window.FIM_UPDATES` in `js/fim-content.js`.
+6. Review names, amounts, statuses, consent, image paths and factual alternative text before committing.
 
-The maintenance console is a browser-side tool. It is marked `noindex`, is not linked from public pages, and does not persist changes to GitHub by itself.
+The backup download now includes both the contribution register and journey collection. The maintenance console is a browser-side tool. It is marked `noindex`, is not linked from public pages, and does not persist changes to GitHub by itself.
 
 ## Motion and accessibility
 

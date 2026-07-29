@@ -90,6 +90,17 @@
   .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
   .empty{padding:26px; text-align:center; color:var(--stone); font-size:14px;}
   .warn{background:#fff8e8; border:1px solid #f0dcae; border-radius:10px; padding:12px 14px; font-size:13px; color:#6d5100; margin-bottom:16px;}
+  .journey-list{display:grid;gap:10px}
+  .journey-item{display:grid;grid-template-columns:86px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+  .journey-thumb{width:86px;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:#f4efe6}
+  .journey-copy b{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:16px}
+  .journey-copy span{display:block;margin-top:3px;color:var(--stone);font-size:12px}
+  .journey-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  @media(max-width:760px){
+    .journey-item{grid-template-columns:70px minmax(0,1fr)}
+    .journey-thumb{width:70px}
+    .journey-actions{grid-column:1/-1;justify-content:flex-start}
+  }
 </style>
 </head>
 <body>
@@ -112,6 +123,7 @@
 <div class="wrap">
   <div class="tabs">
     <button class="tab on" data-p="p-pledges">Pledges</button>
+    <button class="tab" data-p="p-journey">Journey updates</button>
     <button class="tab" data-p="p-links">Links &amp; QR</button>
     <button class="tab" data-p="p-publish">Publish</button>
   </div>
@@ -129,13 +141,13 @@
       <h3>Record a contribution</h3>
       <p class="hint">Use the contributor label supplied for publication. Do not add phone numbers or private payment details. Enter the amount in UGX; steps calculate automatically at UGX 1,000 per step.</p>
       <div class="row r-4">
-        <div><label class="f">Public supporter label</label><input type="text" id="fName" placeholder="e.g. Modest R"></div>
-        <div><label class="f">Amount (UGX)</label><input type="number" id="fAmt" placeholder="100000" min="0" step="1000"></div>
-        <div><label class="f">Status</label><select id="fStatus"><option value="paid">Paid</option><option value="pledged">Pledged</option><option value="promised">Promised</option></select></div>
-        <div><label class="f">Steps (auto)</label><input type="number" id="fSteps" placeholder="100"></div>
+        <div><label class="f" for="fName">Public supporter label</label><input type="text" id="fName" placeholder="e.g. Modest R"></div>
+        <div><label class="f" for="fAmt">Amount (UGX)</label><input type="number" id="fAmt" inputmode="numeric" placeholder="100000" min="0" step="1000"></div>
+        <div><label class="f" for="fStatus">Status</label><select id="fStatus"><option value="paid">Paid</option><option value="pledged">Pledged</option><option value="promised">Promised</option></select></div>
+        <div><label class="f" for="fSteps">Steps (auto)</label><input type="number" id="fSteps" inputmode="numeric" placeholder="100"></div>
       </div>
       <div class="row r-2">
-        <div><label class="f">Note (optional)</label><input type="text" id="fNote" placeholder="e.g. + water for the road"></div>
+        <div><label class="f" for="fNote">Note (optional)</label><input type="text" id="fNote" placeholder="e.g. + water for the road"></div>
         <div style="display:flex; align-items:flex-end; gap:8px;">
           <button class="btn btn-b" id="btnAdd">Add contribution</button>
           <button class="btn btn-o" id="btnCancel" style="display:none;">Cancel edit</button>
@@ -158,14 +170,45 @@
     </div>
   </div>
 
+  <!-- JOURNEY UPDATES -->
+  <div class="panel" id="p-journey">
+    <div class="warn"><b>One story collection.</b> Add the newest update first. Use only confirmed distances, places and dates, and keep the image filename inside <b>assets/faith-in-motion/</b>.</div>
+
+    <div class="card">
+      <h3>Add a journey update</h3>
+      <p class="hint">Upload the web-ready photograph to the campaign assets folder, then record its path and public story here. Alternative text should describe what is visible in the photograph.</p>
+      <div class="row r-2">
+        <div><label class="f" for="jLabel">Short label</label><input type="text" id="jLabel" placeholder="e.g. Day 9"></div>
+        <div><label class="f" for="jTitle">Story title</label><input type="text" id="jTitle" placeholder="e.g. Reaching Fort Portal"></div>
+      </div>
+      <div><label class="f" for="jDetail">Story detail</label><textarea id="jDetail" rows="3" placeholder="A short, confirmed public update."></textarea></div>
+      <div class="row r-2">
+        <div><label class="f" for="jMeta">Meta line</label><input type="text" id="jMeta" placeholder="e.g. 30.58 km · Fort Portal"></div>
+        <div><label class="f" for="jImage">Image path</label><input type="text" id="jImage" placeholder="assets/faith-in-motion/photo-name.jpg"></div>
+      </div>
+      <div><label class="f" for="jAlt">Alternative text</label><input type="text" id="jAlt" placeholder="Describe the person, place and visible action."></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
+        <button class="btn btn-b" id="jAdd">Add as newest update</button>
+        <button class="btn btn-o" id="jCancel" style="display:none;">Cancel edit</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Published order</h3>
+      <p class="hint">The first item is the lead story. Use the arrows to change the order.</p>
+      <div class="journey-list" id="journeyList"></div>
+      <div class="empty" id="journeyEmpty" style="display:none;">No journey updates yet.</div>
+    </div>
+  </div>
+
   <!-- LINKS & QR -->
   <div class="panel" id="p-links">
     <div class="card">
       <h3>Where the campaign site lives</h3>
       <p class="hint">Paste the live site root. Every link and QR code below points to the sponsor form on <code>give.html</code>.</p>
       <div class="row r-2">
-        <div><label class="f">Site root URL</label><input type="url" id="siteUrl" value="https://cartelug.github.io/pdm" placeholder="https://cartelug.github.io/pdm"></div>
-        <div><label class="f">Ambassador / referrer tag (optional)</label><input type="text" id="refTag" placeholder="e.g. community-team"></div>
+        <div><label class="f" for="siteUrl">Site root URL</label><input type="url" id="siteUrl" value="https://cartelug.github.io/pdm" placeholder="https://cartelug.github.io/pdm"></div>
+        <div><label class="f" for="refTag">Ambassador / referrer tag (optional)</label><input type="text" id="refTag" placeholder="e.g. community-team"></div>
       </div>
       <p class="hint" style="margin:0;">A referrer tag tracks who brought the sponsor in — it rides along in the pledge message so you know who to thank.</p>
     </div>
@@ -204,17 +247,24 @@
     </div>
 
     <div class="card">
-      <h3>2 · Keep a backup</h3>
+      <h3>2 · Copy the journey collection</h3>
+      <p class="hint">Open <b>js/fim-content.js</b> and replace its <code>window.FIM_UPDATES = [ … ];</code> block with this collection.</p>
+      <textarea id="journeyOut" rows="14" readonly></textarea>
+      <div style="margin-top:10px;"><button class="btn btn-g" id="copyJourney">Copy the journey code</button></div>
+    </div>
+
+    <div class="card">
+      <h3>3 · Keep a backup</h3>
       <p class="hint">Download a backup file after every update session, and load it back in to carry on where you left off.</p>
       <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
         <button class="btn btn-b" id="dlJson">Download backup</button>
         <label class="btn btn-o" style="cursor:pointer;">Load a backup<input type="file" id="upJson" accept="application/json" style="display:none;"></label>
-        <button class="btn btn-danger" id="resetAll">Reset to the original 33</button>
+        <button class="btn btn-danger" id="resetAll">Reset to published data</button>
       </div>
     </div>
 
     <div class="card">
-      <h3>3 · Weekly reconciliation report</h3>
+      <h3>4 · Weekly reconciliation report</h3>
       <p class="hint">A short summary to send to the construction committee. Copy it straight into WhatsApp or email.</p>
       <textarea id="reportOut" rows="12" readonly></textarea>
       <div style="margin-top:10px;"><button class="btn btn-g" id="copyReport">Copy the report</button></div>
@@ -225,15 +275,19 @@
 <div class="toast" id="toast">Copied</div>
 
 <script src="../js/roll-data.js"></script>
+<script src="../js/fim-content.js"></script>
 <script>
 (function(){
   "use strict";
   var STEP_UGX=1000, TOTAL_STEPS=466200, ROUTE_KM=345;
 
   var SEED = (window.ROLL_DATA||[]).map(function(r){ return r.slice(); });
+  var JOURNEY_SEED = (window.FIM_UPDATES||[]).map(function(item){ return Object.assign({},item); });
 
   var roll = SEED.map(function(r){ return r.slice(); });
+  var journey = JOURNEY_SEED.map(function(item){ return Object.assign({},item); });
   var editIdx = -1;
+  var journeyEditIdx = -1;
 
   function fmt(n){ return Number(n).toLocaleString('en-US'); }
   function ugx(n){ return 'UGX '+fmt(n); }
@@ -294,11 +348,32 @@
   }
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 
+  function renderJourney(){
+    var mount=$('journeyList');
+    mount.innerHTML='';
+    journey.forEach(function(item,index){
+      var row=document.createElement('article');
+      row.className='journey-item';
+      row.innerHTML='<img class="journey-thumb" src="../'+esc(item.image||'')+'" alt="">'
+        +'<div class="journey-copy"><b>'+esc(item.title||'Untitled update')+'</b>'
+        +'<span>'+esc(item.label||'Journey update')+(item.meta?' · '+esc(item.meta):'')+'</span>'
+        +'<span>'+esc(item.image||'No image path')+'</span></div>'
+        +'<div class="journey-actions">'
+        +'<button class="btn btn-o btn-sm" data-jup="'+index+'" aria-label="Move update earlier"><svg aria-hidden="true" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></button>'
+        +'<button class="btn btn-o btn-sm" data-jdown="'+index+'" aria-label="Move update later"><svg aria-hidden="true" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>'
+        +'<button class="btn btn-o btn-sm" data-jedit="'+index+'">Edit</button>'
+        +'<button class="btn btn-danger btn-sm" data-jdel="'+index+'">Remove</button></div>';
+      mount.appendChild(row);
+    });
+    $('journeyEmpty').style.display=journey.length?'none':'block';
+  }
+
   function renderPublish(){
     var lines = roll.map(function(r){
       return '    ["'+String(r[0]).replace(/"/g,'\\"')+'",'+r[1]+','+r[2]+',"'+r[3]+'","'+String(r[4]||'').replace(/"/g,'\\"')+'"]';
     }).join(',\n');
     $('rollOut').value = 'window.ROLL_DATA = [\n'+lines+'\n];';
+    $('journeyOut').value = 'window.FIM_UPDATES = '+JSON.stringify(journey,null,2)+';';
 
     var t=totals();
     var km=(t.steps*(ROUTE_KM*1000/TOTAL_STEPS))/1000;
@@ -320,7 +395,7 @@
     $('reportOut').value = rep;
   }
 
-  function renderAll(){ renderTotals(); renderTable(); renderPublish(); }
+  function renderAll(){ renderTotals(); renderTable(); renderJourney(); renderPublish(); }
 
   // ---- form ----
   $('fAmt').addEventListener('input',function(){
@@ -361,6 +436,86 @@
     }
   });
   $('search').addEventListener('input',renderTable);
+
+  // ---- journey updates ----
+  function clearJourneyForm(){
+    ['jLabel','jTitle','jDetail','jMeta','jImage','jAlt'].forEach(function(id){$(id).value='';});
+    journeyEditIdx=-1;
+    $('jAdd').textContent='Add as newest update';
+    $('jCancel').style.display='none';
+  }
+  $('jAdd').addEventListener('click',function(){
+    var item={
+      label:$('jLabel').value.trim()||'Journey update',
+      title:$('jTitle').value.trim(),
+      detail:$('jDetail').value.trim(),
+      meta:$('jMeta').value.trim(),
+      image:$('jImage').value.trim(),
+      alt:$('jAlt').value.trim()
+    };
+    if(!item.title){showToast('Add a story title');$('jTitle').focus();return;}
+    if(!item.image){showToast('Add the campaign image path');$('jImage').focus();return;}
+    if(item.image.indexOf('assets/faith-in-motion/')!==0){
+      showToast('Use an assets/faith-in-motion/ image path');
+      $('jImage').focus();
+      return;
+    }
+    if(!item.alt){showToast('Describe what is visible in the photograph');$('jAlt').focus();return;}
+
+    if(journeyEditIdx>-1){
+      journey[journeyEditIdx]=item;
+      showToast('Journey update saved');
+    } else {
+      journey.unshift(item);
+      showToast('Journey update added first');
+    }
+    clearJourneyForm();
+    renderAll();
+  });
+  $('jCancel').addEventListener('click',clearJourneyForm);
+  $('journeyList').addEventListener('click',function(e){
+    var button=e.target.closest('button');
+    if(!button) return;
+    var index;
+    if(button.dataset.jedit!==undefined){
+      index=+button.dataset.jedit;
+      var item=journey[index];
+      $('jLabel').value=item.label||'';
+      $('jTitle').value=item.title||'';
+      $('jDetail').value=item.detail||'';
+      $('jMeta').value=item.meta||'';
+      $('jImage').value=item.image||'';
+      $('jAlt').value=item.alt||'';
+      journeyEditIdx=index;
+      $('jAdd').textContent='Save journey update';
+      $('jCancel').style.display='inline-flex';
+      $('jTitle').focus();
+    } else if(button.dataset.jdel!==undefined){
+      index=+button.dataset.jdel;
+      if(confirm('Remove "'+(journey[index].title||'this update')+'" from the collection?')){
+        journey.splice(index,1);
+        clearJourneyForm();
+        renderAll();
+        showToast('Journey update removed');
+      }
+    } else if(button.dataset.jup!==undefined){
+      index=+button.dataset.jup;
+      if(index>0){
+        var earlier=journey[index-1];
+        journey[index-1]=journey[index];
+        journey[index]=earlier;
+        renderAll();
+      }
+    } else if(button.dataset.jdown!==undefined){
+      index=+button.dataset.jdown;
+      if(index<journey.length-1){
+        var later=journey[index+1];
+        journey[index+1]=journey[index];
+        journey[index]=later;
+        renderAll();
+      }
+    }
+  });
 
   // ---- tabs ----
   Array.prototype.forEach.call(document.querySelectorAll('.tab'),function(t){
@@ -449,6 +604,7 @@
 
   // ---- publish actions ----
   $('copyRoll').addEventListener('click',function(){ copy($('rollOut').value,'Sponsor list copied'); });
+  $('copyJourney').addEventListener('click',function(){ copy($('journeyOut').value,'Journey collection copied'); });
   $('copyReport').addEventListener('click',function(){ copy($('reportOut').value,'Report copied'); });
   function download(name,content,type){
     var b=new Blob([content],{type:type||'text/plain'});
@@ -462,22 +618,31 @@
     download('faith-in-motion-roll.csv',csv,'text/csv');
   });
   $('dlJson').addEventListener('click',function(){
-    download('faith-in-motion-backup.json',JSON.stringify({saved:new Date().toISOString(),roll:roll},null,2),'application/json');
+    download('faith-in-motion-backup.json',JSON.stringify({saved:new Date().toISOString(),roll:roll,journey:journey},null,2),'application/json');
   });
   $('upJson').addEventListener('change',function(e){
     var f=e.target.files[0]; if(!f) return;
     var fr=new FileReader();
     fr.onload=function(){
       try{ var d=JSON.parse(fr.result);
-        if(d && Array.isArray(d.roll)){ roll=d.roll.map(function(r){return r.slice();}); renderAll(); showToast('Backup loaded'); }
+        if(d && Array.isArray(d.roll)){
+          roll=d.roll.map(function(r){return r.slice();});
+          if(Array.isArray(d.journey)) journey=d.journey.map(function(item){return Object.assign({},item);});
+          renderAll();
+          showToast('Backup loaded');
+        }
         else showToast('That file has no roll in it');
       }catch(err){ showToast('That file could not be read'); }
     };
     fr.readAsText(f); e.target.value='';
   });
   $('resetAll').addEventListener('click',function(){
-    if(confirm('Reset the roll back to the original 33 contributors? Anything added since will be lost.')){
-      roll=SEED.map(function(r){return r.slice();}); renderAll(); showToast('Reset');
+    if(confirm('Reset contributions and journey updates to the published versions? Anything added in this session will be lost.')){
+      roll=SEED.map(function(r){return r.slice();});
+      journey=JOURNEY_SEED.map(function(item){return Object.assign({},item);});
+      clearJourneyForm();
+      renderAll();
+      showToast('Reset');
     }
   });
 

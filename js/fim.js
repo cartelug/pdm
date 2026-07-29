@@ -1,9 +1,9 @@
-/* FAITH IN MOTION — shared page script.
+/* Faith in Motion — page-specific campaign data and interactions.
    Reads window.ROLL_DATA (js/roll-data.js). Every feature checks for its
    elements first, so any page can include this file and use only what it has.
 
    Everything below is DERIVED from the roll. No total, distance, percentage
-   or segment is ever hard-coded. */
+   or segment is ever hard-coded. Shared site behavior lives in core.js. */
 (function(){
   "use strict";
   var STEP_UGX=1000, TOTAL_STEPS=466200, ROUTE_KM=345;
@@ -13,68 +13,9 @@
   if(mq.addEventListener) mq.addEventListener('change',function(e){REDUCE=e.matches;});
   var $=function(id){return document.getElementById(id);};
 
-  /* Pamodzi opening — the untouched approved master is the only brand asset used. */
-  (function(){
-    var icon=document.querySelector('link[rel~="icon"]');
-    if(icon){
-      icon.setAttribute('href','assets/brand/pamodzi/pamodzi-logo-transparent.png');
-      icon.setAttribute('type','image/png');
-    }
-    var loader=document.createElement('div');
-    loader.className='site-loader'; loader.setAttribute('role','status');
-    loader.setAttribute('aria-label','Loading Faith in Motion');
-    loader.innerHTML='<div class="inner"><img src="assets/brand/pamodzi/pamodzi-logo-transparent.png" alt="Pamodzi for Development"><span>Faith in Motion</span></div>';
-    document.body.insertBefore(loader,document.body.firstChild);
-    var closed=false;
-    function close(){
-      if(closed) return; closed=true; loader.classList.add('done');
-      window.setTimeout(function(){if(loader.parentNode)loader.parentNode.removeChild(loader);},REDUCE?0:520);
-    }
-    if(document.readyState==='complete') window.setTimeout(close,REDUCE?0:220);
-    else window.addEventListener('load',function(){window.setTimeout(close,REDUCE?0:220);},{once:true});
-    window.setTimeout(close,REDUCE?0:800);
-  })();
   var ROLL=(window.ROLL_DATA||[]).slice();
   var WAYS=(window.ROUTE_WAYPOINTS||[]).slice();
   var LIVE=window.WALK_LIVE||{active:false};
-
-  /* ── accessible mobile navigation ── */
-  var burger=$('burger'), mnav=$('mnav'), lastFocus=null;
-  function navFocusables(){return mnav?Array.prototype.slice.call(mnav.querySelectorAll('a,button')):[];}
-  function closeNav(){
-    if(!mnav||!burger) return;
-    mnav.classList.remove('open');
-    burger.setAttribute('aria-expanded','false');
-    burger.setAttribute('aria-label','Open menu');
-    mnav.setAttribute('aria-hidden','true');
-    document.body.style.overflow='';
-    if(lastFocus) lastFocus.focus();
-  }
-  if(burger&&mnav){
-    mnav.setAttribute('aria-hidden','true');
-    burger.addEventListener('click',function(){
-      if(mnav.classList.contains('open')){closeNav();return;}
-      lastFocus=document.activeElement;
-      mnav.classList.add('open');
-      burger.setAttribute('aria-expanded','true');
-      burger.setAttribute('aria-label','Close menu');
-      mnav.setAttribute('aria-hidden','false');
-      document.body.style.overflow='hidden';
-      var f=navFocusables(); if(f.length) f[0].focus();
-    });
-    mnav.addEventListener('click',function(e){if(e.target.tagName==='A') closeNav();});
-    document.addEventListener('keydown',function(e){
-      if(!mnav.classList.contains('open')) return;
-      if(e.key==='Escape'){closeNav();return;}
-      if(e.key==='Tab'){
-        var f=navFocusables(); if(!f.length) return;
-        var first=f[0],last=f[f.length-1];
-        if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
-        else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
-      }
-    });
-    window.addEventListener('resize',function(){if(window.innerWidth>900&&mnav.classList.contains('open')) closeNav();});
-  }
 
   function fmt(n){return Number(n).toLocaleString('en-US');}
   function ugx(n){return 'UGX '+fmt(n);}
@@ -426,55 +367,49 @@
     }).join('');
   }
 
-  /* ── header, rail, reveals (cached reads, rAF-throttled) ────── */
-  var progress=document.createElement('div');
-  progress.className='scroll-progress'; progress.setAttribute('aria-hidden','true');
-  document.body.appendChild(progress);
-  var root=document.documentElement, hdr=$('hdr'), rail=$('rail'), railFill=$('railFill'), railBead=$('railBead'), railKm=$('railKm');
-  var hero=$('top'), heroH=320, docH=1, railTravel=0, ticking=false;
-  function measure(){
+  /* Faith in Motion route rail. Shared header/progress/reveals are handled once in core. */
+  var rail=$('rail'), railFill=$('railFill'), railBead=$('railBead'), railKm=$('railKm');
+  var hero=$('top'), heroH=320, docH=1, railTravel=0, railTicking=false;
+  function measureRail(){
     heroH=hero?hero.offsetHeight:320;
     docH=Math.max(document.documentElement.scrollHeight-window.innerHeight,1);
     var track=rail?rail.querySelector('.track'):null;
     railTravel=track?Math.max(track.getBoundingClientRect().height-11,0):0;
   }
-  function paint(){
+  function paintRail(){
+    if(!rail){railTicking=false;return;}
     var y=window.pageYOffset||document.documentElement.scrollTop;
-    if(hdr){ y>heroH*0.6?hdr.classList.add('solid'):hdr.classList.remove('solid'); }
-    if(rail){
-      y>heroH*0.72?rail.classList.add('show'):rail.classList.remove('show');
-      var p=Math.min(Math.max(y/docH,0),1);
-      if(railFill) railFill.style.transform='scaleY('+p+')';
-      if(railBead) railBead.style.transform='translateY('+(p*railTravel)+'px)';
-      if(railKm) railKm.textContent=Math.round(p*ROUTE_KM)+' km';
-    }
-    if(!REDUCE){
-      var progressPct=Math.min(Math.max(y/docH,0),1), mobile=window.innerWidth<=900;
-      progress.style.transform='scaleX('+progressPct+')';
-      root.style.setProperty('--scroll-parallax',(-Math.min(y*(mobile?0.025:0.075),mobile?20:70))+'px');
-    }
-    ticking=false;
+    y>heroH*0.72?rail.classList.add('show'):rail.classList.remove('show');
+    var p=Math.min(Math.max(y/docH,0),1);
+    if(railFill) railFill.style.transform='scaleY('+p+')';
+    if(railBead) railBead.style.transform='translateY('+(p*railTravel)+'px)';
+    if(railKm) railKm.textContent=Math.round(p*ROUTE_KM)+' km';
+    railTicking=false;
   }
-  function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(paint); } }
-  window.addEventListener('scroll',onScroll,{passive:true});
-  window.addEventListener('resize',function(){measure();onScroll();});
-  window.addEventListener('load',function(){measure();paint();});
-  measure(); paint();
+  function requestRailPaint(){
+    if(railTicking) return;
+    railTicking=true;
+    requestAnimationFrame(paintRail);
+  }
+  if(rail){
+    window.addEventListener('scroll',requestRailPaint,{passive:true});
+    window.addEventListener('resize',function(){measureRail();requestRailPaint();},{passive:true});
+    window.addEventListener('load',function(){measureRail();paintRail();},{once:true});
+    measureRail();
+    paintRail();
+  }
 
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){
-      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
-    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-    var rs=$('road');
-    if(rs){
-      var ro=new IntersectionObserver(function(es){
-        es.forEach(function(e){ if(e.isIntersecting){ runRoad(); ro.disconnect(); } });
-      },{threshold:0.25});
-      ro.observe(rs);
-    } else { runRoad(); }
+  var road=$('road');
+  if(road&&'IntersectionObserver' in window){
+    var roadObserver=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting) return;
+        runRoad();
+        roadObserver.disconnect();
+      });
+    },{threshold:0.25});
+    roadObserver.observe(road);
   } else {
-    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
     runRoad();
   }
 
