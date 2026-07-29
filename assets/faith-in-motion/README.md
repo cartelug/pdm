@@ -16,7 +16,17 @@ These are the supplied original campaign images for the Faith in Motion pages. T
 Reusable brand files currently available to the site remain in `../brand/`:
 
 - `rotary.png` — Rotary mark
-- `pci-mark.svg` — Pamodzi for Development mark
+- `pamodzi/pamodzi-logo-source.png` — exact approved Pamodzi for Development logo; use unchanged
 - `the97-white.png` — builder mark
 
 There is not yet a standalone Walking Rotarian logo source file. The mark visible in the supplied poster is embedded in the poster artwork and should not be cropped for a preloader or navigation identity. Add the original SVG, PNG, or vector export here once supplied.
+
+## Publishing a journey update
+
+The Faith in Motion homepage collection is controlled by `../../js/fim-content.js`.
+
+1. Add the new image to this folder with a descriptive lowercase filename.
+2. Add one content object to the top of `window.FIM_UPDATES`.
+3. Include only confirmed locations, dates and distances.
+4. Write factual alternative text describing what is visible.
+5. Keep the newest entry first; it becomes the lead story.

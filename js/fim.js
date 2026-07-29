@@ -13,14 +13,17 @@
   if(mq.addEventListener) mq.addEventListener('change',function(e){REDUCE=e.matches;});
   var $=function(id){return document.getElementById(id);};
 
-  /* â”€â”€ Pamodzi opening: the campaign remains Rotary-led, with a brief organiser mark â”€â”€ */
+  /* Pamodzi opening — the untouched approved master is the only brand asset used. */
   (function(){
     var icon=document.querySelector('link[rel~="icon"]');
-    if(icon) icon.setAttribute('href','assets/brand/pamodzi/v2/pamodzi-favicon.svg');
+    if(icon){
+      icon.setAttribute('href','assets/brand/pamodzi/pamodzi-logo-source.png');
+      icon.setAttribute('type','image/png');
+    }
     var loader=document.createElement('div');
     loader.className='site-loader'; loader.setAttribute('role','status');
     loader.setAttribute('aria-label','Loading Faith in Motion');
-    loader.innerHTML='<div class="inner"><img src="assets/brand/pamodzi/v2/pamodzi-symbol-light.svg" alt=""><span>Faith in Motion</span></div>';
+    loader.innerHTML='<div class="inner"><img src="assets/brand/pamodzi/pamodzi-logo-source.png" alt="Pamodzi for Development"><span>Faith in Motion</span></div>';
     document.body.insertBefore(loader,document.body.firstChild);
     var closed=false;
     function close(){
@@ -78,24 +81,30 @@
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 
   /* ── totals ─────────────────────────────────────────────────── */
-  function countsTowardProgress(r){ return r[3]==='paid'||r[3]==='pledged'; }
-  var T={amt:0,steps:0,paid:0,paidS:0,paidN:0,pled:0,pledS:0,pledN:0,n:0};
+  function countsTowardProgress(r){ return r[3]==='paid'; }
+  var T={
+    amt:0,steps:0,n:0,
+    paid:0,paidS:0,paidN:0,
+    pled:0,pledS:0,pledN:0,
+    committedAmt:0,committedSteps:0,committedN:0
+  };
   ROLL.forEach(function(r){
     if(r[3]==='paid'){
       T.amt+=r[1]; T.steps+=r[2]; T.n++;
       T.paid+=r[1]; T.paidS+=r[2]; T.paidN++;
+      T.committedAmt+=r[1]; T.committedSteps+=r[2]; T.committedN++;
     } else if(r[3]==='pledged'){
-      T.amt+=r[1]; T.steps+=r[2]; T.n++;
       T.pled+=r[1]; T.pledS+=r[2]; T.pledN++;
+      T.committedAmt+=r[1]; T.committedSteps+=r[2]; T.committedN++;
     }
   });
-  var LEFT=TOTAL_STEPS-T.steps;
-  var PCT=T.steps/TOTAL_STEPS;
+  var LEFT=Math.max(TOTAL_STEPS-T.steps,0);
+  var PCT=Math.min(T.steps/TOTAL_STEPS,1);
 
   /* ── 1 · STEP ATTRIBUTION ───────────────────────────────────────
      Sponsors are allocated sequentially along the road, so the gold
-     line on the route graphic IS the sponsored road. Only received and
-     pledged entries receive a segment; promises do not count toward progress. */
+     line on the route graphic IS the funded road. Only verified received
+     entries receive a segment; pledges and promises remain separate. */
   function kmOf(step){ return (step*M_PER_STEP)/1000; }
   function placeAt(km){
     if(!WAYS.length) return "";
@@ -209,7 +218,7 @@
     $('outAmt').textContent=ugx(amt);
     var m=steps*M_PER_STEP;
     if($('outDist')) $('outDist').textContent = m>=1000 ? (m/1000).toFixed(2)+' kilometres' : Math.round(m)+' metres';
-    if($('outBar')) $('outBar').style.width=Math.min((steps/2000)*100,100)+'%';
+    if($('outBar')) $('outBar').style.width=Math.min((steps/1000)*100,100)+'%';
 
     /* 1 · show the exact segment these steps would claim next */
     if($('outSeg')){
@@ -233,7 +242,12 @@
   if(cIn){
     cIn.addEventListener('input',function(){
       var v=parseInt(cIn.value,10);
-      if(v>0){ tiers.forEach(function(x){x.classList.remove('on');}); steps=v; refresh(); }
+      if(v>0){
+        tiers.forEach(function(x){x.classList.remove('on');});
+        steps=Math.min(Math.max(v,1),1000);
+        if(v>1000) cIn.value=1000;
+        refresh();
+      }
     });
   }
   (function(){
@@ -241,10 +255,10 @@
     var q=parseInt(qs.get('steps'),10), qr=qs.get('ref');
     if(qr) window.__ref=qr.slice(0,40);
     if(q>0 && tiers.length){
-      steps=q; var hit=false;
+      steps=Math.min(Math.max(q,1),1000); var hit=false;
       tiers.forEach(function(x){ x.classList.remove('on');
-        if(parseInt(x.getAttribute('data-s'),10)===q){x.classList.add('on');hit=true;} });
-      if(!hit && cIn) cIn.value=q;
+        if(parseInt(x.getAttribute('data-s'),10)===steps){x.classList.add('on');hit=true;} });
+      if(!hit && cIn) cIn.value=steps;
       setTimeout(function(){ var el=$('sponsor'); if(el) el.scrollIntoView({behavior:REDUCE?'auto':'smooth',block:'start'}); },420);
     }
   })();
@@ -272,8 +286,10 @@
       body.innerHTML=rows.map(function(r,i){
         var counted=countsTowardProgress(r);
         var when=counted?recency(r[5]):'';
-        var segment=counted?(segLabel(r._kmFrom,r._kmTo)+' · '+esc(r._place)):'not included in sponsored progress';
-        var stepText=counted?(fmt(r[2])+' steps'):'promise · not counted';
+        var segment=counted?(segLabel(r._kmFrom,r._kmTo)+' · '+esc(r._place))
+          :(r[3]==='pledged'?'pledged · awaiting verified receipt':'promise · not included in funded progress');
+        var stepText=counted?(fmt(r[2])+' funded steps')
+          :(r[3]==='pledged'?'pledged · not funded yet':'promise · not counted');
         return '<div class="lrow"><span class="i">'+String(i+1).padStart(2,'0')+'</span>'
           +'<span class="n">'+esc(r[0])
             +(r[4]?'<em>'+esc(r[4])+'</em>':'')
@@ -303,11 +319,12 @@
   if($('tPaid')){
     $('tPaid').textContent=ugx(T.paid); if($('tPaidC')) $('tPaidC').textContent=fmt(T.paidS)+' steps · '+T.paidN+' sponsors';
     $('tPled').textContent=ugx(T.pled); if($('tPledC')) $('tPledC').textContent=fmt(T.pledS)+' steps · '+T.pledN+' sponsors';
-    $('tTot').textContent=ugx(T.amt);   if($('tTotC')) $('tTotC').textContent=fmt(T.steps)+' steps · '+T.n+' sponsors';
+    $('tTot').textContent=ugx(T.committedAmt);
+    if($('tTotC')) $('tTotC').textContent=fmt(T.committedSteps)+' steps · '+T.committedN+' supporters';
   }
   var pf=$('pfBar');
   if(pf){
-    var share=T.amt?(T.paid/T.amt):0;
+    var share=T.committedAmt?(T.paid/T.committedAmt):0;
     if(!REDUCE){ pf.style.transition='transform 1.2s cubic-bezier(.22,1,.36,1)'; }
     pf.style.transformOrigin='left';
     pf.style.transform='scaleX('+(REDUCE?share:0)+')';
@@ -326,6 +343,7 @@
     var m=Math.round(T.steps*M_PER_STEP);
     var map={amt:ugx(T.amt),steps:fmt(T.steps),left:fmt(LEFT),n:fmt(T.n),
              paid:ugx(T.paid),pled:ugx(T.pled),pct:(PCT*100).toFixed(2)+'%',
+             committed:ugx(T.committedAmt),committedsteps:fmt(T.committedSteps),
              km:(m/1000).toFixed(2)+' km',
              next:nextPct?(fmt(nextSteps)+' steps'):'—',
              nextpct:nextPct?pctLabel(nextPct):'—'};
@@ -388,6 +406,20 @@
     };
     img.src=src;
   });
+
+  /* Journey collection — edit js/fim-content.js, not this renderer. */
+  var updatesMount=$('journeyUpdates');
+  var UPDATES=(window.FIM_UPDATES||[]).slice();
+  if(updatesMount&&UPDATES.length){
+    updatesMount.innerHTML=UPDATES.map(function(u,i){
+      return '<article class="journey-card reveal'+(i===0?' lead':'')+'">'
+        +'<div class="journey-photo"><img src="'+esc(u.image)+'" alt="'+esc(u.alt||'')+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async"></div>'
+        +'<div class="journey-copy"><span class="journey-label">'+esc(u.label||'Journey update')+'</span>'
+        +'<h3>'+esc(u.title||'')+'</h3>'
+        +'<p>'+esc(u.detail||'')+'</p>'
+        +'<span class="journey-meta">'+esc(u.meta||'')+'</span></div></article>';
+    }).join('');
+  }
 
   /* ── header, rail, reveals (cached reads, rAF-throttled) ────── */
   var progress=document.createElement('div');

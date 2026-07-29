@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="One man is walking 345 km from Kampala to Kasese to complete St Joseph Rwembyo Catholic Church. 466,200 steps. Sponsor one for UGX 1,000.">
 <meta name="twitter:image" content="https://cartelug.github.io/pdm/assets/og/share-card.jpg">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="icon" href="assets/brand/pci-mark.svg">
+<link rel="icon" type="image/png" href="assets/brand/pamodzi/pamodzi-logo-source.png">
 <meta name="theme-color" content="#08172E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +31,7 @@
 <header id="hdr">
   <div class="wrap nav">
     <a class="brand" href="faith-in-motion.html">
-      <img src="assets/brand/rotary.png" alt="Rotary International">
+      <img src="assets/brand/pamodzi/pamodzi-logo-source.png" alt="Pamodzi for Development">
       <span class="t"><b>Faith in Motion</b><span>Kampala → Rwembyo</span></span>
     </a>
     <nav class="nav-links">
@@ -174,8 +174,8 @@
       <div class="hero-meta">
         <div class="m"><b class="mono">345<span class="u">km</span></b><span>On foot</span></div>
         <div class="m"><b class="mono" id="hSteps">466,200</b><span>Steps in the road</span></div>
-        <div class="m"><b class="mono" id="hRaised">—</b><span>Received &amp; pledged</span></div>
-        <div class="m"><b class="mono" id="hSponsors">—</b><span>Sponsors so far</span></div>
+        <div class="m"><b class="mono" id="hRaised">—</b><span>Verified received</span></div>
+        <div class="m"><b class="mono" id="hSponsors">—</b><span>Verified supporters</span></div>
       </div>
     </div>
   </div>
@@ -187,7 +187,7 @@
   <div class="wrap in">
     <div class="g"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" stroke="#F5A81C" stroke-width="1.7"/><path d="M8.5 12 L11 14.5 L15.5 9.5" stroke="#F5A81C" stroke-width="1.7"/></svg><span>Every shilling goes <b>straight to the church construction account</b></span></div>
     <div class="g"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" stroke="#F5A81C" stroke-width="1.7"/><path d="M8.5 12 L11 14.5 L15.5 9.5" stroke="#F5A81C" stroke-width="1.7"/></svg><span>The campaign team <b>never holds a donation</b></span></div>
-    <div class="g"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" stroke="#F5A81C" stroke-width="1.7"/><path d="M8.5 12 L11 14.5 L15.5 9.5" stroke="#F5A81C" stroke-width="1.7"/></svg><span>Only <b>verified figures</b> appear on this page</span></div>
+    <div class="g"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" stroke="#F5A81C" stroke-width="1.7"/><path d="M8.5 12 L11 14.5 L15.5 9.5" stroke="#F5A81C" stroke-width="1.7"/></svg><span>Only <b>verified received funds</b> move the gold line</span></div>
   </div>
 </section>
 <!-- JOURNEY RAIL -->
@@ -200,6 +200,64 @@
   <span class="cap">Rwembyo</span>
 </div>
 <main>
+
+<!-- SPONSOR 1–1,000 STEPS -->
+<section class="blk sponsor-home" id="sponsor">
+  <div class="wrap">
+    <div class="sponsor-intro reveal">
+      <div>
+        <span class="survey gold">Sponsor the journey</span>
+        <h2 class="sec">Choose one step. Or one thousand.</h2>
+      </div>
+      <p>Every whole step represents UGX 1,000 and approximately 74 centimetres of the road. Choose your part of the journey, then request the current approved contribution details.</p>
+    </div>
+
+    <div class="inst sponsor-home-grid">
+      <div class="panel reveal">
+        <span class="survey on-dark">Select 1–1,000 steps</span>
+        <div class="tiers tiers-eight" id="tiers">
+          <button class="tier" type="button" data-s="1"><b>1</b><span>step</span></button>
+          <button class="tier" type="button" data-s="10"><b>10</b><span>steps</span></button>
+          <button class="tier" type="button" data-s="25"><b>25</b><span>steps</span></button>
+          <button class="tier" type="button" data-s="50"><b>50</b><span>steps</span></button>
+          <button class="tier on" type="button" data-s="100"><b>100</b><span>steps</span></button>
+          <button class="tier" type="button" data-s="250"><b>250</b><span>steps</span></button>
+          <button class="tier" type="button" data-s="500"><b>500</b><span>steps</span></button>
+          <button class="tier" type="button" data-s="1000"><b>1,000</b><span>steps</span></button>
+        </div>
+        <div class="customrow">
+          <label for="cSteps">Custom</label>
+          <input id="cSteps" type="number" min="1" max="1000" step="1" inputmode="numeric" placeholder="1–1,000" aria-describedby="stepRange">
+        </div>
+        <p class="range-help" id="stepRange">For more than 1,000 steps, use the <a href="partnerships.html">team and partnership route</a>.</p>
+
+        <div class="readout">
+          <div class="amt mono" id="outAmt">UGX 100,000</div>
+          <p class="sub">Carries the walk <b id="outDist">74 metres</b> toward Rwembyo.</p>
+          <div class="metrebar" aria-hidden="true"><i id="outBar"></i></div>
+        </div>
+        <div class="segbox">
+          <div class="k">The next funded stretch</div>
+          <div class="v" id="outSeg">—</div>
+          <div class="p" id="outPlace">—</div>
+        </div>
+        <a class="btn btn-wa" id="waPledge" href="https://wa.me/256772495733" target="_blank" rel="noopener">Request approved contribution details</a>
+      </div>
+
+      <div class="sponsor-promise reveal">
+        <span class="survey">Clear from pledge to receipt</span>
+        <h3>Your pledge is not called money received.</h3>
+        <p>Choosing steps starts an enquiry. The campaign’s funded progress changes only after the contribution is received and reconciled.</p>
+        <dl>
+          <div><dt>1 step</dt><dd>UGX 1,000</dd></div>
+          <div><dt>100 steps</dt><dd>UGX 100,000</dd></div>
+          <div><dt>1,000 steps</dt><dd>UGX 1,000,000</dd></div>
+        </dl>
+        <a class="text-link" href="accountability.html">See how figures are verified →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ══════════ THE ROAD ══════════ -->
 <section class="blk road-sec" id="road">
@@ -254,13 +312,28 @@
     </div>
   </div>
 </section>
+
+<!-- JOURNEY COLLECTION -->
+<section class="blk journey-sec" id="journey">
+  <div class="wrap">
+    <div class="journey-head reveal">
+      <div>
+        <span class="survey">Faith in motion · field notes</span>
+        <h2 class="sec">The journey, as it happened.</h2>
+      </div>
+      <p>Route records and campaign photographs from the Walking Rotarian’s journey. New entries are added through one editorial collection so the story remains easy to maintain.</p>
+    </div>
+    <div class="journey-grid" id="journeyUpdates" aria-live="polite"></div>
+  </div>
+</section>
+
 <!-- ══════════ ROLL ══════════ -->
 <section class="blk" id="roll">
   <div class="wrap">
     <div class="reveal">
       <span class="survey">Roll of honour</span>
       <h2 class="sec">The people already carrying him.</h2>
-      <p class="sec-sub">Received, pledged and promised entries appear with anonymised public labels. Promises remain separate from campaign progress.</p>
+      <p class="sec-sub">Received, pledged and promised entries appear with anonymised public labels. Only verified received contributions fund the public road progress.</p>
     </div>
 
     <div class="ledger reveal">
@@ -274,7 +347,7 @@
     <div class="tallies reveal">
       <div class="tally"><div class="k">Received</div><div class="v" id="tPaid">—</div><div class="c" id="tPaidC"></div></div>
       <div class="tally"><div class="k">Pledged</div><div class="v" id="tPled">—</div><div class="c" id="tPledC"></div></div>
-      <div class="tally hi"><div class="k">Received &amp; pledged</div><div class="v" id="tTot">—</div><div class="c" id="tTotC"></div></div>
+      <div class="tally hi"><div class="k">Total committed</div><div class="v" id="tTot">—</div><div class="c" id="tTotC"></div></div>
     </div>
   </div>
 </section>
@@ -287,7 +360,7 @@
     </div>
     <div class="trust reveal">
       <div class="tcard"><div class="n">01</div><h3>Request current details</h3><p>Transfer instructions and the beneficiary name are provided on request through the campaign enquiry contact.</p></div>
-      <div class="tcard"><div class="n">02</div><h3>Only counted statuses</h3><p>Received and pledged entries count toward public progress. Promises remain separate until their status changes.</p></div>
+      <div class="tcard"><div class="n">02</div><h3>Received means received</h3><p>Pledges remain visible as commitments, but only reconciled received contributions move the funded road progress.</p></div>
       <div class="tcard"><div class="n">03</div><h3>Verify before sending</h3><p>Use the WhatsApp contact to request the current approved transfer details and beneficiary name. Treat it as an enquiry channel, not a payment channel.</p></div>
     </div>
   </div>
@@ -312,7 +385,7 @@
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <div class="fbrand"><img src="assets/brand/rotary.png" alt="Rotary International"><b>Faith in Motion</b></div>
+        <div class="fbrand"><img src="assets/brand/pamodzi/pamodzi-logo-source.png" alt="Pamodzi for Development"><b>Faith in Motion</b></div>
         <p style="font-size:14.5px; max-width:36ch; color:#8FA3C4;">A 345 km walk for the completion of St Joseph Rwembyo Catholic Church — Kiburara, Kisinga, Kasese District, Uganda.</p>
       </div>
       <div>
@@ -334,6 +407,7 @@
 
 <div class="toast" id="toast">Copied</div>
 <script src="js/roll-data.js"></script>
+<script src="js/fim-content.js"></script>
 <script>window.FIM_ASSETS={walker:"",church:"",road:"",parish:"",build:""};</script>
 <script src="js/fim.js"></script>
 </body>

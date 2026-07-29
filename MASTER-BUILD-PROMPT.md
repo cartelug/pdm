@@ -23,7 +23,7 @@ A man is walking **345 km on foot from Kampala to Kasese**, arriving **Sunday 2 
 **Engagement:** USD 1,000 fixed, three phases (40/30/30), 60-day delivery with 60 days of support.
 
 **Church completion goal:** UGX 410,000,000.
-**Campaign raised to date:** UGX 5,040,000 across 33 sponsors (4,940 steps) — UGX 2,590,000 received, UGX 2,450,000 pledged.
+**Campaign ledger at the latest repository reconciliation:** UGX 2,590,000 received (2,490 funded steps), UGX 2,350,000 pledged separately, and UGX 4,940,000 total committed across 32 received-or-pledged entries. One additional promise is excluded from funded progress.
 
 ---
 
