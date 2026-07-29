@@ -12,6 +12,25 @@
   var REDUCE=mq.matches;
   if(mq.addEventListener) mq.addEventListener('change',function(e){REDUCE=e.matches;});
   var $=function(id){return document.getElementById(id);};
+
+  /* â”€â”€ Pamodzi opening: the campaign remains Rotary-led, with a brief organiser mark â”€â”€ */
+  (function(){
+    var icon=document.querySelector('link[rel~="icon"]');
+    if(icon) icon.setAttribute('href','assets/brand/pamodzi/v2/pamodzi-favicon.svg');
+    var loader=document.createElement('div');
+    loader.className='site-loader'; loader.setAttribute('role','status');
+    loader.setAttribute('aria-label','Loading Faith in Motion');
+    loader.innerHTML='<div class="inner"><img src="assets/brand/pamodzi/v2/pamodzi-symbol-light.svg" alt=""><span>Faith in Motion</span></div>';
+    document.body.insertBefore(loader,document.body.firstChild);
+    var closed=false;
+    function close(){
+      if(closed) return; closed=true; loader.classList.add('done');
+      window.setTimeout(function(){if(loader.parentNode)loader.parentNode.removeChild(loader);},REDUCE?0:520);
+    }
+    if(document.readyState==='complete') window.setTimeout(close,REDUCE?0:220);
+    else window.addEventListener('load',function(){window.setTimeout(close,REDUCE?0:220);},{once:true});
+    window.setTimeout(close,REDUCE?0:800);
+  })();
   var ROLL=(window.ROLL_DATA||[]).slice();
   var WAYS=(window.ROUTE_WAYPOINTS||[]).slice();
   var LIVE=window.WALK_LIVE||{active:false};
@@ -371,11 +390,16 @@
   });
 
   /* ── header, rail, reveals (cached reads, rAF-throttled) ────── */
-  var hdr=$('hdr'), rail=$('rail'), railFill=$('railFill'), railBead=$('railBead'), railKm=$('railKm');
-  var hero=$('top'), heroH=320, docH=1, ticking=false;
+  var progress=document.createElement('div');
+  progress.className='scroll-progress'; progress.setAttribute('aria-hidden','true');
+  document.body.appendChild(progress);
+  var root=document.documentElement, hdr=$('hdr'), rail=$('rail'), railFill=$('railFill'), railBead=$('railBead'), railKm=$('railKm');
+  var hero=$('top'), heroH=320, docH=1, railTravel=0, ticking=false;
   function measure(){
     heroH=hero?hero.offsetHeight:320;
     docH=Math.max(document.documentElement.scrollHeight-window.innerHeight,1);
+    var track=rail?rail.querySelector('.track'):null;
+    railTravel=track?Math.max(track.getBoundingClientRect().height-11,0):0;
   }
   function paint(){
     var y=window.pageYOffset||document.documentElement.scrollTop;
@@ -383,9 +407,14 @@
     if(rail){
       y>heroH*0.72?rail.classList.add('show'):rail.classList.remove('show');
       var p=Math.min(Math.max(y/docH,0),1);
-      if(railFill) railFill.style.height=(p*100)+'%';
-      if(railBead) railBead.style.top=(p*100)+'%';
+      if(railFill) railFill.style.transform='scaleY('+p+')';
+      if(railBead) railBead.style.transform='translateY('+(p*railTravel)+'px)';
       if(railKm) railKm.textContent=Math.round(p*ROUTE_KM)+' km';
+    }
+    if(!REDUCE){
+      var progressPct=Math.min(Math.max(y/docH,0),1), mobile=window.innerWidth<=900;
+      progress.style.transform='scaleX('+progressPct+')';
+      root.style.setProperty('--scroll-parallax',(-Math.min(y*(mobile?0.025:0.075),mobile?20:70))+'px');
     }
     ticking=false;
   }

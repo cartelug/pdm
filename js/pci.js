@@ -6,6 +6,25 @@
   var REDUCE=mq.matches;
   if(mq.addEventListener) mq.addEventListener('change',function(e){REDUCE=e.matches;});
 
+  /* ---------- branded opening: short, cancellable and never required for content ---------- */
+  (function(){
+    var icon=document.querySelector('link[rel~="icon"]');
+    if(icon) icon.setAttribute('href','assets/brand/pamodzi/v2/pamodzi-favicon.svg');
+    var loader=document.createElement('div');
+    loader.className='site-loader'; loader.setAttribute('role','status');
+    loader.setAttribute('aria-label','Loading Pamodzi for Development');
+    loader.innerHTML='<div class="inner"><img src="assets/brand/pamodzi/v2/pamodzi-symbol-primary.svg" alt=""><span>Pamodzi for Development</span></div>';
+    document.body.insertBefore(loader,document.body.firstChild);
+    var closed=false;
+    function close(){
+      if(closed) return; closed=true; loader.classList.add('done');
+      window.setTimeout(function(){if(loader.parentNode)loader.parentNode.removeChild(loader);},REDUCE?0:520);
+    }
+    if(document.readyState==='complete') window.setTimeout(close,REDUCE?0:220);
+    else window.addEventListener('load',function(){window.setTimeout(close,REDUCE?0:220);},{once:true});
+    window.setTimeout(close,REDUCE?0:800);
+  })();
+
   /* ---------- toast ---------- */
   var toast=$('toast');
   function showToast(t){
@@ -56,14 +75,24 @@
   }
 
   /* ---------- header state (cached reads, rAF-throttled) ---------- */
-  var hdr=$('hdr'), threshold=180, ticking=false;
+  var progress=document.createElement('div');
+  progress.className='scroll-progress'; progress.setAttribute('aria-hidden','true');
+  document.body.appendChild(progress);
+  var root=document.documentElement, hdr=$('hdr'), threshold=180, maxScroll=1, ticking=false;
   function measure(){
     var hero=document.querySelector('.hero,.page-hero');
     threshold=hero?hero.offsetHeight*0.55:180;
+    maxScroll=Math.max(document.documentElement.scrollHeight-window.innerHeight,1);
   }
   function paint(){
     var y=window.pageYOffset||document.documentElement.scrollTop;
     if(hdr){ y>threshold?hdr.classList.add('solid'):hdr.classList.remove('solid'); }
+    if(!REDUCE){
+      var mobile=window.innerWidth<=900, travel=Math.min(y*(mobile?0.028:0.09),mobile?22:82);
+      progress.style.transform='scaleX('+Math.min(Math.max(y/maxScroll,0),1)+')';
+      root.style.setProperty('--scroll-parallax',(-travel)+'px');
+      root.style.setProperty('--scroll-parallax-sm',(-travel*.35)+'px');
+    }
     ticking=false;
   }
   function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(paint); } }

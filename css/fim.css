@@ -17,6 +17,7 @@
   --paid:#2C7A4B; --pledged:#A96F0C; --promised:#2F5AA8;
   --wrap:1140px;
   --rail:74px;
+  --scroll-parallax:0px;
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth; -webkit-text-size-adjust:100%;}
@@ -96,7 +97,7 @@ header.solid .nav-links a:not(.btn){color:var(--ink);}
 /* ============ HERO ============ */
 .hero{position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; background:var(--night);}
 .sky{position:absolute; inset:0; z-index:0;}
-.sky svg{width:100%; height:100%; display:block;}
+.sky svg{width:100%; height:100%; display:block;transform:translate3d(0,var(--scroll-parallax),0) scale(1.04);will-change:transform;}
 .grain{position:absolute; inset:0; z-index:2; opacity:.16; pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");}
 .hero-in{position:relative; z-index:3; padding:120px 0 46px; width:100%;}
@@ -131,8 +132,8 @@ header.solid .nav-links a:not(.btn){color:var(--ink);}
 }
 .rail.show{opacity:1;}
 .rail .track{position:relative; width:2px; height:min(56vh,420px); background:var(--line-2); border-radius:2px;}
-.rail .fill{position:absolute; left:0; top:0; width:100%; background:var(--murram); border-radius:2px; height:0;}
-.rail .bead{position:absolute; left:50%; width:11px; height:11px; margin-left:-5.5px; border-radius:50%; background:var(--gold); border:2.5px solid var(--paper); top:0; box-shadow:0 0 0 1px var(--line-2);}
+.rail .fill{position:absolute; left:0; top:0; width:100%; height:100%; background:var(--murram); border-radius:2px; transform:scaleY(0); transform-origin:top; will-change:transform;}
+.rail .bead{position:absolute; left:50%; width:11px; height:11px; margin-left:-5.5px; border-radius:50%; background:var(--gold); border:2.5px solid var(--paper); top:0; box-shadow:0 0 0 1px var(--line-2); will-change:transform;}
 .rail .km{
   position:absolute; left:50%; transform:translateX(-50%); top:0; margin-top:-38px;
   font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700; color:var(--deep);
@@ -146,6 +147,15 @@ main{position:relative; z-index:5;}
 section.blk{padding:100px 0; position:relative;}
 .reveal{opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.2,.8,.3,1), transform .7s cubic-bezier(.2,.8,.3,1);}
 .reveal.in{opacity:1; transform:none;}
+
+/* Campaign navigation signals: transform-only and intentionally restrained on mobile. */
+.scroll-progress{position:fixed;top:66px;left:0;z-index:105;width:100%;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;will-change:transform;pointer-events:none;}
+.site-loader{position:fixed;inset:0;z-index:300;display:grid;place-items:center;background:var(--night);color:#fff;transition:opacity .5s cubic-bezier(.2,.8,.3,1),visibility .5s cubic-bezier(.2,.8,.3,1);}
+.site-loader .inner{display:grid;justify-items:center;gap:15px;text-align:center;}
+.site-loader img{width:72px;height:72px;animation:fim-loader .7s cubic-bezier(.2,.8,.3,1) both;}
+.site-loader span{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8FA3C4;}
+.site-loader.done{opacity:0;visibility:hidden;}
+@keyframes fim-loader{from{opacity:0;transform:translateY(14px) scale(.9)}to{opacity:1;transform:none}}
 h2.sec{font-size:clamp(30px,5.2vw,58px); color:var(--deep); max-width:16ch; margin-top:16px; text-wrap:balance;}
 .sec-sub{margin-top:18px; color:#3A4763; max-width:56ch; font-size:17px;}
 
@@ -312,6 +322,7 @@ footer a:hover{color:var(--gold);}
   *{animation:none!important; transition:none!important; scroll-behavior:auto!important;}
   .reveal{opacity:1!important; transform:none!important;}
   .mnav{transition:none!important;}
+  .scroll-progress{display:none;}
 }
 
 /* ============ SUBPAGE HERO ============ */
