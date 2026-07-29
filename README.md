@@ -13,6 +13,7 @@ The site has no framework, build step, database, or server runtime.
 - Campaign data: `js/roll-data.js` drives the public progress, tallies, route attribution, and Roll of Honour.
 - Updates data: `js/updates-data.js` drives the updates feed.
 - Shared presentation: `css/base.css` supplies the site-wide tokens, header, navigation, buttons, grids, forms, footer and responsive rules. `css/pci.css`, `css/pdm.css` and `css/fim.css` contain only their page-family components.
+- Shared motion: `css/motion.css` and `js/site-motion.js` provide the progressive hero sequence, grouped scroll reveals, image loading transitions, restrained background parallax, responsive navigation choreography and internal-page transitions.
 - Maintenance console: `admin/index.html`.
 
 Public contributor labels are published only when supplied or approved for publication. Private personal details are not added to the ledger; only the committee-supplied campaign payment details are public. A `promised` entry is displayed separately and does not count toward received-and-pledged totals or sponsored-road progress.
@@ -36,6 +37,10 @@ The `.nojekyll` file keeps the static source unchanged during publication. `site
 5. Review the public labels, amounts, step counts, statuses, and consent before committing.
 
 The maintenance console is a browser-side tool. It is marked `noindex`, is not linked from public pages, and does not persist changes to GitHub by itself.
+
+## Motion and accessibility
+
+Motion is progressively enhanced with compositor-friendly transforms and opacity. It is disabled when a visitor requests reduced motion. The mobile experience removes background travel and magnetic pointer effects, keeps touch targets unchanged and preserves the existing keyboard-accessible navigation.
 
 ## Contribution safety
 
