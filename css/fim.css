@@ -4,7 +4,7 @@
 h1,h2,h3,.disp{
   margin:0;
   color:var(--ink);
-  font-family:'Bricolage Grotesque','Instrument Sans',sans-serif;
+  font-family:'Bricolage Grotesque','Manrope',sans-serif;
   font-weight:780;
   letter-spacing:-.04em;
   line-height:.99;
@@ -30,6 +30,14 @@ h3{font-size:clamp(22px,2.5vw,31px);line-height:1.08}
 .has-live .hero,.has-live .page-hero{margin-top:calc(var(--header-h) + 52px)}
 .has-live .mnav{inset:calc(var(--header-h) + 52px) 0 0}
 footer .fgrid{grid-template-columns:1.5fr 1fr 1fr}
+
+/* Journey photography gives every campaign chapter a distinct sense of place. */
+.blk:nth-of-type(6n+1)::before{background-image:url('../assets/faith-in-motion/walking-rotarian-river-crossing.jpg');background-position:center 36%}
+.blk:nth-of-type(6n+2)::before{background-image:url('../assets/faith-in-motion/kasese-milestone-345km.jpg');background-position:center 42%}
+.blk:nth-of-type(6n+3)::before{background-image:url('../assets/faith-in-motion/walking-rotarian-riverside-35km.jpg');background-position:center 34%}
+.blk:nth-of-type(6n+4)::before{background-image:url('../assets/faith-in-motion/faith-in-motion-345km-poster.jpg');background-position:center 28%}
+.blk:nth-of-type(6n+5)::before{background-image:url('../assets/faith-in-motion/walking-rotarian-sunset-video-frame.jpg');background-position:center 48%}
+.blk:nth-of-type(6n)::before{background-image:url('../assets/faith-in-motion/mpara-biguli-day-8.jpg');background-position:center 36%}
 
 /* Loader and progress */
 .scroll-progress{
@@ -103,7 +111,9 @@ footer .fgrid{grid-template-columns:1.5fr 1fr 1fr}
 
 .trustline{
   padding:20px 0;
-  background:var(--red);
+  background:
+    linear-gradient(90deg,rgba(22,13,12,.91),rgba(143,31,25,.72) 60%,rgba(197,43,34,.44)),
+    url('../assets/faith-in-motion/walking-rotarian-river-crossing.jpg') center 36%/cover no-repeat;
   color:#fff;
 }
 .trustline .in{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
@@ -117,7 +127,9 @@ footer .fgrid{grid-template-columns:1.5fr 1fr 1fr}
   margin-top:var(--header-h);
   padding:clamp(76px,10vw,118px) 0 clamp(66px,8vw,98px);
   overflow:hidden;
-  background:var(--red);
+  background:
+    linear-gradient(90deg,rgba(22,13,12,.91),rgba(143,31,25,.72) 60%,rgba(197,43,34,.44)),
+    url('../assets/faith-in-motion/walking-rotarian-river-crossing.jpg') center 36%/cover no-repeat;
   color:#fff;
 }
 .page-hero::before{

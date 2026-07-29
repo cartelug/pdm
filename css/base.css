@@ -20,7 +20,7 @@
   --radius-sm:10px;
   --wrap:1180px;
   --measure:68ch;
-  --header-h:76px;
+  --header-h:96px;
 
   /* Compatibility aliases used by existing page markup. */
   --forest-900:var(--ink);
@@ -67,7 +67,7 @@ body{
   overflow-x:hidden;
   background:var(--paper);
   color:var(--ink);
-  font-family:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
   font-size:17px;
   line-height:1.62;
   -webkit-font-smoothing:antialiased;
@@ -82,8 +82,24 @@ p{max-width:var(--measure);text-wrap:pretty}
 button,input,select,textarea{font:inherit}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
 .wrap{width:min(calc(100% - 48px),var(--wrap));margin-inline:auto}
-.blk{position:relative;padding-block:clamp(76px,9vw,124px)}
+.blk{position:relative;isolation:isolate;overflow:hidden;padding-block:clamp(76px,9vw,124px)}
 .blk.tight{padding-block:clamp(54px,7vw,88px)}
+.blk::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:url('../assets/hero/pamodzi-family-hero-desktop.jpg') center/cover no-repeat;
+  opacity:.055;
+  filter:saturate(.75) contrast(.92);
+}
+.blk:nth-of-type(even)::before{
+  background-image:url('../assets/hero/pamodzi-family-hero-mobile.jpg');
+  background-position:74% 42%;
+}
+.blk.on-dark::before,.blk.on-forest::before{opacity:.12;filter:saturate(.8) contrast(1.05)}
+.blk>.wrap{position:relative;z-index:1}
 .rule{height:1px;border:0;background:var(--line)}
 main{position:relative;z-index:2}
 
@@ -107,21 +123,44 @@ header{
   height:var(--header-h);
   display:flex;
   align-items:center;
-  background:rgba(255,255,255,.96);
-  border-bottom:1px solid var(--line);
-  backdrop-filter:blur(18px);
-  box-shadow:0 6px 28px rgba(38,20,17,.035);
+  padding:12px 0;
+  background:linear-gradient(180deg,rgba(255,255,255,.76),rgba(255,255,255,0));
+  pointer-events:none;
 }
-.nav{display:flex;align-items:center;justify-content:space-between;gap:28px;width:100%}
-.brand,.mk{display:flex;align-items:center;gap:12px;flex:none;text-decoration:none}
-.brand img,.mk .g img{width:54px;height:41px;object-fit:contain}
-.mk .g{display:grid;place-items:center;width:54px;height:41px;flex:none}
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  width:100%;
+  min-height:72px;
+  padding:8px 10px 8px 16px;
+  border:1px solid rgba(222,205,199,.82);
+  border-radius:20px;
+  background:rgba(255,255,255,.92);
+  box-shadow:0 18px 54px rgba(57,28,23,.12),0 2px 8px rgba(57,28,23,.05);
+  backdrop-filter:blur(22px) saturate(1.35);
+  pointer-events:auto;
+  transition:min-height .22s ease,box-shadow .22s ease,background .22s ease;
+}
+header.solid .nav{min-height:66px;background:rgba(255,255,255,.97);box-shadow:0 14px 42px rgba(57,28,23,.15)}
+.brand,.mk{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex:none;
+  padding-right:18px;
+  border-right:1px solid var(--line);
+  text-decoration:none;
+}
+.brand img,.mk .g img{width:66px;height:50px;object-fit:contain}
+.mk .g{display:grid;place-items:center;width:66px;height:50px;flex:none}
 .brand .t,.mk .t{line-height:1}
 .brand .t b,.mk .t b{
   display:block;
   color:var(--ink)!important;
-  font-family:'Instrument Sans',sans-serif;
-  font-size:15px;
+  font-family:'Manrope',sans-serif;
+  font-size:15.5px;
   font-weight:800;
   letter-spacing:-.015em;
 }
@@ -134,12 +173,12 @@ header{
   letter-spacing:.15em;
   text-transform:uppercase;
 }
-.nav-links{display:flex;align-items:center;justify-content:flex-end;gap:clamp(14px,2vw,27px)}
+.nav-links{display:flex;align-items:center;justify-content:flex-end;gap:clamp(13px,1.7vw,23px)}
 .nav-links a:not(.btn){
   position:relative;
   color:var(--ink)!important;
-  font-size:14px;
-  font-weight:650;
+  font-size:13.5px;
+  font-weight:700;
   text-decoration:none;
   white-space:nowrap;
 }
@@ -148,7 +187,7 @@ header{
   position:absolute;
   left:0;
   right:0;
-  bottom:-9px;
+  bottom:-8px;
   height:2px;
   background:var(--red);
   transform:scaleX(0);
@@ -156,7 +195,7 @@ header{
   transition:transform .2s ease;
 }
 .nav-links a:not(.btn):hover::after,.nav-links a.act::after{transform:scaleX(1)}
-.nav .btn{padding:11px 17px;font-size:13.5px}
+.nav .btn{min-height:44px;padding:11px 17px;font-size:13px}
 
 .burger{
   display:none;
@@ -268,6 +307,8 @@ header{
   text-transform:uppercase;
 }
 .crumb a{color:#fff;text-decoration:none}
+.crumb a::before{content:"←";display:inline-block;margin-right:8px;transition:transform .18s ease}
+.crumb a:hover::before{transform:translateX(-3px)}
 .crumb b{color:#ffd0cb}
 .lede{font-size:clamp(18px,2.1vw,23px);line-height:1.48;max-width:54ch;text-wrap:pretty}
 
@@ -415,10 +456,15 @@ footer p{color:var(--muted)!important}
   .split.flip> :first-child,.split.flip> :last-child{order:initial}
 }
 @media(max-width:760px){
-  :root{--header-h:68px}
+  :root{--header-h:80px}
   body{font-size:16px}
   .wrap{width:min(calc(100% - 32px),var(--wrap))}
-  .brand img,.mk .g img{width:47px;height:35px}
+  header{padding:8px 0}
+  .nav{min-height:64px;padding:6px 8px 6px 11px;border-radius:17px}
+  header.solid .nav{min-height:60px}
+  .brand,.mk{gap:10px;padding-right:11px}
+  .brand img,.mk .g img{width:52px;height:40px}
+  .mk .g{width:52px;height:40px}
   .brand .t b,.mk .t b{font-size:14px}
   .brand .t span,.mk .t span{font-size:8px}
   .blk{padding-block:68px}

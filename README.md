@@ -43,6 +43,13 @@ The campaign pages publish the payment details supplied by the Construction Comm
 
 ## Photography
 
+The institutional homepage uses two purpose-built responsive hero assets:
+
+- `assets/hero/pamodzi-family-hero-desktop.jpg` for wide screens and interior-page mastheads
+- `assets/hero/pamodzi-family-hero-mobile.jpg` for the mobile-safe homepage crop
+
+All content sections carry a deliberately softened photographic layer. Faith in Motion sections rotate through the supplied journey archive so the campaign remains grounded in the real walk.
+
 Campaign pages include neutral illustrated fallbacks. The walker and road slots use the supplied Faith in Motion photography by default. Additional photographs can be assigned in each page’s `window.FIM_ASSETS` object:
 
 ```js
