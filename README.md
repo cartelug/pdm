@@ -15,7 +15,7 @@ The site has no framework, build step, database, or server runtime.
 - Shared presentation: `css/`, `js/`, and `assets/`.
 - Maintenance console: `admin/index.html`.
 
-All public contributor labels are anonymised. A `promised` entry is displayed separately and does not count toward received-and-pledged totals or sponsored-road progress.
+Public contributor labels are published only when supplied or approved for publication; private contact and payment details never appear. A `promised` entry is displayed separately and does not count toward received-and-pledged totals or sponsored-road progress.
 
 ## Publish
 

@@ -103,8 +103,8 @@
     <div class="hstats">
       <div class="s"><b id="hTotal">—</b><span>Total committed</span></div>
       <div class="s"><b id="hPaid">—</b><span>Received</span></div>
-      <div class="s"><b id="hSteps">—</b><span>Steps sponsored</span></div>
-      <div class="s"><b id="hCount">—</b><span>Counted entries</span></div>
+      <div class="s"><b id="hSteps">—</b><span>Funded steps</span></div>
+      <div class="s"><b id="hCount">—</b><span>Received + pledged</span></div>
     </div>
   </div>
 </header>
@@ -127,9 +127,9 @@
 
     <div class="card">
       <h3>Record a contribution</h3>
-      <p class="hint">Use an anonymised public label unless publication consent is recorded. Enter the amount in UGX; steps calculate automatically at UGX 1,000 per step.</p>
+      <p class="hint">Use the contributor label supplied for publication. Do not add phone numbers or private payment details. Enter the amount in UGX; steps calculate automatically at UGX 1,000 per step.</p>
       <div class="row r-4">
-        <div><label class="f">Public supporter label</label><input type="text" id="fName" placeholder="e.g. Supporter 34"></div>
+        <div><label class="f">Public supporter label</label><input type="text" id="fName" placeholder="e.g. Modest R"></div>
         <div><label class="f">Amount (UGX)</label><input type="number" id="fAmt" placeholder="100000" min="0" step="1000"></div>
         <div><label class="f">Status</label><select id="fStatus"><option value="paid">Paid</option><option value="pledged">Pledged</option><option value="promised">Promised</option></select></div>
         <div><label class="f">Steps (auto)</label><input type="number" id="fSteps" placeholder="100"></div>
@@ -224,30 +224,13 @@
 
 <div class="toast" id="toast">Copied</div>
 
+<script src="../js/roll-data.js"></script>
 <script>
 (function(){
   "use strict";
   var STEP_UGX=1000, TOTAL_STEPS=466200, ROUTE_KM=345;
 
-  var SEED = [
-    ["Supporter 01",100000,100,"paid",""],["Supporter 02",1000000,1000,"paid",""],
-    ["Supporter 03",1000000,1000,"pledged",""],["Supporter 04",100000,100,"pledged",""],
-    ["Supporter 05",100000,100,"paid",""],["Supporter 06",20000,20,"paid",""],
-    ["Supporter 07",50000,50,"paid",""],["Supporter 08",50000,50,"paid","Includes an in-kind item"],
-    ["Supporter 09",100000,100,"promised","Not included in public progress"],["Supporter 10",20000,20,"paid",""],
-    ["Supporter 11",50000,50,"pledged",""],["Supporter 12",50000,50,"paid",""],
-    ["Supporter 13",50000,50,"paid",""],["Supporter 14",50000,50,"paid",""],
-    ["Supporter 15",100000,100,"paid",""],["Supporter 16",100000,100,"paid",""],
-    ["Supporter 17",100000,100,"pledged",""],["Supporter 18",50000,50,"pledged",""],
-    ["Supporter 19",100000,100,"pledged",""],["Supporter 20",100000,100,"pledged",""],
-    ["Supporter 21",100000,100,"pledged",""],["Supporter 22",100000,100,"pledged",""],
-    ["Supporter 23",100000,100,"pledged",""],["Supporter 24",50000,50,"paid",""],
-    ["Supporter 25",50000,50,"paid",""],["Supporter 26",200000,100,"paid","Includes non-step support"],
-    ["Supporter 27",500000,500,"pledged",""],["Supporter 28",100000,100,"paid",""],
-    ["Supporter 29",100000,100,"paid",""],["Supporter 30",200000,200,"paid",""],
-    ["Supporter 31",100000,100,"paid",""],["Supporter 32",100000,100,"paid",""],
-    ["Supporter 33",50000,50,"pledged",""]
-  ];
+  var SEED = (window.ROLL_DATA||[]).map(function(r){ return r.slice(); });
 
   var roll = SEED.map(function(r){ return r.slice(); });
   var editIdx = -1;
@@ -270,7 +253,7 @@
         t.amt+=r[1]; t.steps+=r[2]; t.n++;
         t.paid+=r[1]; t.paidSteps+=r[2];
       } else if(r[3]==='pledged'){
-        t.amt+=r[1]; t.steps+=r[2]; t.n++;
+        t.amt+=r[1]; t.n++;
         t.pled+=r[1]; t.pledSteps+=r[2];
       } else {
         t.prom+=r[1]; t.promSteps+=r[2]; t.promN++;
@@ -285,7 +268,7 @@
     $('hSteps').textContent=fmt(t.steps); $('hCount').textContent=fmt(t.n);
     $('sPaid').firstChild.nodeValue=ugx(t.paid); $('sPaidS').textContent=fmt(t.paidSteps)+' steps';
     $('sPled').firstChild.nodeValue=ugx(t.pled); $('sPledS').textContent=fmt(t.pledSteps)+' steps';
-    $('sTot').firstChild.nodeValue=ugx(t.amt);  $('sTotS').textContent=fmt(t.steps)+' steps';
+    $('sTot').firstChild.nodeValue=ugx(t.amt);  $('sTotS').textContent=fmt(t.paidSteps+t.pledSteps)+' steps';
     var pct=(t.steps/TOTAL_STEPS*100);
     $('sGoal').firstChild.nodeValue=pct.toFixed(2)+'%';
     $('sGoalS').textContent='of '+fmt(TOTAL_STEPS)+' steps';
@@ -333,7 +316,7 @@
       + 'Steps still needing a sponsor: '+fmt(TOTAL_STEPS-t.steps)+'\n'
       + 'Road progress: '+(t.steps/TOTAL_STEPS*100).toFixed(2)+'%\n\n'
       + 'Transfer instructions and the beneficiary are verified separately before payment.\n'
-      + 'Public labels must be anonymised unless publication consent is recorded.';
+      + 'Public labels must be supplied for publication; never include phone numbers or private payment details.';
     $('reportOut').value = rep;
   }
 
@@ -444,9 +427,9 @@
       ['WhatsApp — to a friend',
        'Faith in Motion is a 345 km walk from Kampala to Kasese to support the completion of St Joseph Rwembyo Catholic Church. That is 466,200 steps. You can sponsor a step for UGX 1,000.\n\nSponsor 100 steps (UGX 100,000): '+u100+'\nOr choose your own: '+uAny],
       ['WhatsApp — to a group',
-       'FAITH IN MOTION — 2 August 2026\n\n345 km on foot. 466,200 steps. One church to finish.\n\nEvery UGX 1,000 sponsors one step and carries him closer to Rwembyo. Public supporter labels are anonymised.\n\nChoose your steps and request the current approved transfer details here: '+uAny],
+       'FAITH IN MOTION — 2 August 2026\n\n345 km on foot. 466,200 steps. One church to finish.\n\nEvery UGX 1,000 sponsors one step and carries him closer to Rwembyo. Public supporter labels are supplied for publication.\n\nChoose your steps and use the approved payment details here: '+uAny],
       ['For a corporate or parish letter',
-       'St Joseph Rwembyo Catholic Church is being completed at Kiburara, Kisinga, Kasese. To mobilise support, a 345 km walk from Kampala to Kasese is planned for 2 August 2026 — 466,200 steps, each sponsorable at UGX 1,000.\n\nReceived, pledged and promised entries are reported separately. Only verified received contributions fund public progress. Public supporter labels are anonymised. Contributors request and verify the current approved transfer details before sending.\n\nTo sponsor: '+uAny]
+       'St Joseph Rwembyo Catholic Church is being completed at Kiburara, Kisinga, Kasese. To mobilise support, a 345 km walk from Kampala to Kasese is planned for 2 August 2026 — 466,200 steps, each sponsorable at UGX 1,000.\n\nReceived, pledged and promised entries are reported separately. Only verified received contributions fund public progress. Public supporter labels are supplied for publication. Contributors verify the beneficiary and keep their payment reference.\n\nTo sponsor: '+uAny]
     ];
     msgs.forEach(function(m){
       var d=document.createElement('div'); d.style.cssText='padding:12px 0;border-bottom:1px solid #f0ece2;';

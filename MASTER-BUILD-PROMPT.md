@@ -23,7 +23,7 @@ A man is walking **345 km on foot from Kampala to Kasese**, arriving **Sunday 2 
 **Engagement:** USD 1,000 fixed, three phases (40/30/30), 60-day delivery with 60 days of support.
 
 **Church completion goal:** UGX 410,000,000.
-**Campaign ledger at the latest repository reconciliation:** UGX 2,590,000 received (2,490 funded steps), UGX 2,350,000 pledged separately, and UGX 4,940,000 total committed across 32 received-or-pledged entries. One additional promise is excluded from funded progress.
+**Campaign ledger at the latest repository reconciliation:** UGX 3,460,000 received (3,360 funded steps), UGX 2,500,000 pledged separately, and UGX 5,960,000 total committed across 40 received-or-pledged entries. One additional promise is excluded from funded progress.
 
 ---
 
@@ -75,7 +75,7 @@ Build in this order. Each must be **finished and verified** before the next.
 Single self-contained HTML file, no build step, deployable to any static host.
 
 - **Design system:** Rotary royal blue `#0F3D8C`, deep navy `#0B1E3E`, Rotary gold `#F4A81D`, murram clay `#B5462F`, warm paper `#FBF9F4`. Display face **Bricolage Grotesque**, body **Instrument Sans**. Do not use a cream-and-serif or dark-mode-neon look.
-- **Signature element:** an SVG **road from Kampala to Rwembyo** where sponsored steps draw a gold line forward and move a walker marker along it. The unfunded road ahead is the emotional appeal — do not hide how far is left.
+- **Signature element:** an SVG **road from Kampala to Rwembyo** where sponsored steps draw a red line forward and move a walker marker along it. The unfunded road ahead is the emotional appeal — do not hide how far is left.
 - **Sections:** hero with live counters → route → sponsor engine → the walk → the church → Roll of Honour → trust → share → footer.
 - **Sponsor engine:** step tiers (20/50/100/500) plus a custom field; live UGX total; "carries him *X* metres" feedback; copy-the-MoMo-number button; one-tap WhatsApp pledge with a pre-filled message.
 - **Deep links:** `?steps=100` preselects that amount and scrolls to the sponsor section; `?ref=name` tags the referrer into the pledge message.
