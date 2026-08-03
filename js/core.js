@@ -36,8 +36,8 @@
     loader.className = "site-loader";
     loader.setAttribute("role", "status");
     loader.setAttribute("aria-live", "polite");
-    loader.setAttribute("aria-label", "Loading Pamodzi for Development");
-    loader.innerHTML = '<div class="inner"><img src="assets/brand/pamodzi/pamodzi-logo-transparent.png" alt=""><span>Pamodzi for Development</span></div>';
+    loader.setAttribute("aria-label", "Loading PCI Uganda");
+    loader.innerHTML = '<div class="inner"><img src="assets/brand/pamodzi/pamodzi-logo-transparent.png" alt=""><span>PCI Uganda</span></div>';
     document.body.insertBefore(loader, document.body.firstChild);
 
     var closed = false;
