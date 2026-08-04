@@ -1,4 +1,4 @@
-/* PCI Uganda — page-specific interactions.
+/* Pamodzi for Development — page-specific interactions.
    Shared brand, navigation, header, progress and motion live in core.js/site-motion.js. */
 (function () {
   "use strict";
@@ -41,7 +41,7 @@
       + "\n\n" + (message || "(no message)");
 
     window.location.href = "mailto:shyakaneeza@gmail.com?subject="
-      + encodeURIComponent("PCI Uganda enquiry — " + topic)
+      + encodeURIComponent("Pamodzi enquiry — " + topic)
       + "&body=" + encodeURIComponent(body);
     showToast("Opening your email app…");
   }
