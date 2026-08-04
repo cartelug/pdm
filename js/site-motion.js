@@ -241,7 +241,7 @@
 
   function addPressFeedback() {
     document.addEventListener("pointerdown", function (event) {
-      var target = event.target.closest(".btn, .burger, .tier");
+      var target = event.target.closest(".btn, .burger, .tier, .mnav a");
       if (target) target.classList.add("is-pressed");
     });
     ["pointerup", "pointercancel", "pointerleave"].forEach(function (type) {
