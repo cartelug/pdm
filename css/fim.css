@@ -246,12 +246,14 @@ footer .fgrid{grid-template-columns:1.5fr 1fr 1fr}
   justify-content:center;
   box-shadow:none;
 }
-.sponsor-promise h3{max-width:12ch;margin-top:20px;font-size:clamp(32px,4.4vw,52px)}
-.sponsor-promise>p{margin:18px 0 0;color:var(--muted)}
+.sponsor-promise h3{max-width:12ch;margin-top:20px;color:#fff;font-size:clamp(32px,4.4vw,52px)}
+.sponsor-promise>p{margin:18px 0 0;color:#d7cbc7}
 .sponsor-promise dl{margin:28px 0 0}
-.sponsor-promise dl div{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid var(--line)}
-.sponsor-promise dt{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px}
-.sponsor-promise dd{margin:0;color:var(--red);font-family:'JetBrains Mono',monospace;font-weight:800}
+.sponsor-promise dl div{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.sponsor-promise dt{color:#cfc4c0;font-family:'JetBrains Mono',monospace;font-size:11px}
+.sponsor-promise dd{margin:0;color:#ff8d83;font-family:'JetBrains Mono',monospace;font-weight:800}
+.sponsor-promise .text-link{color:#ff8d83}
+.sponsor-promise>.survey{color:#ffb0a9}
 .text-link{display:inline-block;margin-top:24px;color:var(--red);font-weight:800;text-decoration:none}
 
 /* Progress road */
