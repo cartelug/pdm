@@ -218,24 +218,28 @@ header.is-hidden ~ .scroll-progress{top:0}
 .journey-card:hover .journey-photo img{transform:scale(1.028)}
 
 .mnav{
-  clip-path:inset(0 0 100% 0);
+  clip-path:circle(0% at var(--mnav-ox,92%) var(--mnav-oy,6%));
   transition:
-    opacity 280ms ease,
-    transform 380ms var(--ease-premium),
-    visibility 280ms,
-    clip-path 480ms var(--ease-premium);
+    clip-path 640ms var(--ease-premium),
+    visibility 640ms;
 }
-.mnav.open{clip-path:inset(0 0 0 0)}
-.mnav a{opacity:0;transform:translate3d(0,14px,0);transition:opacity 300ms ease,transform 420ms var(--ease-premium),color 180ms ease}
-.mnav.open a{opacity:1;transform:none}
-.mnav.open a:nth-child(2){transition-delay:35ms}
-.mnav.open a:nth-child(3){transition-delay:70ms}
-.mnav.open a:nth-child(4){transition-delay:105ms}
-.mnav.open a:nth-child(5){transition-delay:140ms}
-.mnav.open a:nth-child(6){transition-delay:175ms}
-.mnav.open a:nth-child(7){transition-delay:210ms}
-.mnav.open a:nth-child(8){transition-delay:245ms}
-.mnav.open a:nth-child(9){transition-delay:280ms}
+.mnav.open{clip-path:circle(150% at var(--mnav-ox,92%) var(--mnav-oy,6%))}
+.mnav::after{animation:mnavDrift 10s var(--ease-soft) infinite alternate}
+@keyframes mnavDrift{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  100%{transform:translate3d(4%,-5%,0) scale(1.12)}
+}
+@keyframes mnavItemIn{
+  from{opacity:0;transform:translate3d(0,24px,0) rotateX(-12deg)}
+  to{opacity:1;transform:none}
+}
+.mnav .wrap{perspective:900px}
+.mnav a:not(.btn){opacity:0;transform-origin:left bottom}
+.mnav.open a:not(.btn){animation:mnavItemIn 580ms var(--ease-snap) both;animation-delay:calc(var(--i,0) * 55ms)}
+.mnav a:not(.btn){transition:color 180ms ease,padding-left 220ms var(--ease-premium)}
+.mnav a:not(.btn).is-pressed{padding-left:14px;color:#ff8d83}
+.mnav .btn{opacity:0}
+.mnav.open .btn{animation:mnavItemIn 520ms var(--ease-premium) both;animation-delay:calc(var(--i,0) * 55ms)}
 
 .page-wipe{
   position:fixed;
@@ -295,7 +299,7 @@ body.is-leaving header,body.is-leaving main,body.is-leaving .hero,body.is-leavin
   html{scroll-behavior:auto}
   header,.nav,.brand img,.mk .g img,.btn,.btn::before,.blk::before,
   .hero-media img,.sky,.reveal,.motion-item,.motion-surface,.motion-glow,
-  .journey-photo img,[data-slot] img,.mnav,.mnav a,.page-wipe{
+  .journey-photo img,[data-slot] img,.mnav,.mnav::before,.mnav::after,.mnav a,.page-wipe{
     animation:none!important;
     transition:none!important;
     transform:none!important;
@@ -304,7 +308,8 @@ body.is-leaving header,body.is-leaving main,body.is-leaving .hero,body.is-leavin
   .motion-enabled .hero .wrap > *,
   .motion-enabled .hero-in .wrap > *,
   .motion-enabled .page-hero .wrap > *,
-  .reveal,.motion-group > .motion-item,.journey-photo img,[data-slot] img{
+  .reveal,.motion-group > .motion-item,.journey-photo img,[data-slot] img,
+  .mnav a,.mnav .btn{
     opacity:1!important;
   }
   .page-wipe{display:none}
