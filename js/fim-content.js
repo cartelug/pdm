@@ -8,13 +8,14 @@
 
    Do not invent a date, distance or location. Leave a field blank when it
    has not been confirmed. The first item is displayed as the lead story. */
+var fimAssetBase = new URL("../assets/", document.currentScript && document.currentScript.src ? document.currentScript.src : window.location.href).href;
 window.FIM_UPDATES = [
   {
     label: "Campaign milestone",
     title: "More than half the distance covered.",
     detail: "The journey continues toward Rwembyo, carrying the appeal to complete St Joseph Rwembyo Catholic Church.",
     meta: "345 km journey · Faith in Motion",
-    image: "assets/faith-in-motion/faith-in-motion-345km-poster.jpg",
+    image: fimAssetBase + "faith-in-motion/faith-in-motion-345km-poster.jpg",
     alt: "Faith in Motion campaign poster announcing that more than half of the 345 kilometre journey has been covered."
   },
   {
@@ -22,7 +23,7 @@ window.FIM_UPDATES = [
     title: "The road reaches Kasese.",
     detail: "A recorded milestone from the route, with the Walking Rotarian marking the Kasese stage of the journey.",
     meta: "Route record · Kasese",
-    image: "assets/faith-in-motion/kasese-milestone-345km.jpg",
+    image: fimAssetBase + "faith-in-motion/kasese-milestone-345km.jpg",
     alt: "The Walking Rotarian smiling and raising his fist beneath a Kasese road sign."
   },
   {
@@ -30,7 +31,7 @@ window.FIM_UPDATES = [
     title: "Mpara to Biguli.",
     detail: "A 26.49 kilometre day recorded on the Faith in Motion trek.",
     meta: "26.49 km · Mpara–Biguli",
-    image: "assets/faith-in-motion/mpara-biguli-day-8.jpg",
+    image: fimAssetBase + "faith-in-motion/mpara-biguli-day-8.jpg",
     alt: "The Walking Rotarian resting outdoors beside an activity record showing 26.49 kilometres."
   },
   {
@@ -38,7 +39,7 @@ window.FIM_UPDATES = [
     title: "Crossing the river country.",
     detail: "A 35.69 kilometre route record beside flowing water and green riverbank vegetation.",
     meta: "35.69 km · Journey record",
-    image: "assets/faith-in-motion/walking-rotarian-riverside-35km.jpg",
+    image: fimAssetBase + "faith-in-motion/walking-rotarian-riverside-35km.jpg",
     alt: "The Walking Rotarian standing beside a river with an activity record showing 35.69 kilometres."
   },
   {
@@ -46,7 +47,7 @@ window.FIM_UPDATES = [
     title: "Faith carried through every landscape.",
     detail: "A self-portrait from a bridge above a rocky riverbed along the route.",
     meta: "On the road · Western Uganda",
-    image: "assets/faith-in-motion/walking-rotarian-river-crossing.jpg",
+    image: fimAssetBase + "faith-in-motion/walking-rotarian-river-crossing.jpg",
     alt: "The Walking Rotarian smiling on a bridge above a wide rocky riverbed."
   },
   {
@@ -54,7 +55,7 @@ window.FIM_UPDATES = [
     title: "Walking into sunset.",
     detail: "An evening frame from the continuing journey toward Rwembyo.",
     meta: "Journey record · Faith in Motion",
-    image: "assets/faith-in-motion/walking-rotarian-sunset-video-frame.jpg",
+    image: fimAssetBase + "faith-in-motion/walking-rotarian-sunset-video-frame.jpg",
     alt: "Video frame of the Walking Rotarian smiling on a road at sunset."
   }
 ];

@@ -478,3 +478,21 @@ footer .fgrid{grid-template-columns:1.5fr 1fr 1fr}
   footer .fgrid{grid-template-columns:1fr}
   footer .fgrid> :first-child{grid-column:auto}
 }
+
+/* V3 campaign treatment: documentary photography, a focused action and a
+   clean transparency rail rather than decorative surfaces. */
+.trustline{background:var(--ink)}
+.trustline .g{padding-right:22px;border-right:1px solid rgba(255,255,255,.16)}
+.trustline .g:last-child{border-right:0}
+@media(min-width:781px){
+  .sky{background:url('../assets/faith-in-motion/walking-rotarian-sunset-video-frame.jpg') center/cover no-repeat}
+  .hero-in{width:min(100%,680px);margin-right:auto;padding:clamp(90px,10vw,136px) clamp(32px,5vw,76px) 48px max(24px,calc((100vw - var(--wrap))/2));background:linear-gradient(90deg,rgba(25,24,23,.98),rgba(25,24,23,.92) 76%,rgba(25,24,23,0))}
+  .hero h1{max-width:9ch;font-size:clamp(58px,6.3vw,98px)}
+  .hero-meta{max-width:570px;border-radius:0}
+  .hero-meta .m{background:rgba(19,15,14,.84)}
+}
+.road-fig{border-radius:0;box-shadow:none}
+.journey-card{border-radius:0}
+@media(max-width:780px){
+  .trustline .g{padding:0;border-right:0}
+}

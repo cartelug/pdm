@@ -13,6 +13,7 @@
   var ticking = false;
   var heroThreshold = 180;
   var scrollRange = 1;
+  var assetBase = new URL("../assets/", document.currentScript && document.currentScript.src ? document.currentScript.src : window.location.href).href;
 
   window.PamodziCore = {
     version: "2.0.0",
@@ -26,7 +27,7 @@
   function prepareBrand() {
     var icon = document.querySelector('link[rel~="icon"]');
     if (icon) {
-      icon.setAttribute("href", "assets/brand/pamodzi/pamodzi-logo-transparent.png");
+      icon.setAttribute("href", assetBase + "brand/pamodzi/pamodzi-logo-transparent.png");
       icon.setAttribute("type", "image/png");
     }
 
@@ -36,8 +37,8 @@
     loader.className = "site-loader";
     loader.setAttribute("role", "status");
     loader.setAttribute("aria-live", "polite");
-    loader.setAttribute("aria-label", "Loading PCI Uganda");
-    loader.innerHTML = '<div class="inner"><img src="assets/brand/pamodzi/pamodzi-logo-transparent.png" alt=""><span>PCI Uganda</span></div>';
+    loader.setAttribute("aria-label", "Loading Pamodzi for Development");
+    loader.innerHTML = '<div class="inner"><img src="' + assetBase + 'brand/pamodzi/pamodzi-logo-transparent.png" alt=""><span>Pamodzi for Development</span></div>';
     document.body.insertBefore(loader, document.body.firstChild);
 
     var closed = false;

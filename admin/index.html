@@ -158,7 +158,7 @@
     <div class="card">
       <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px;">
         <h3 style="margin:0;">Roll of Honour</h3>
-        <input type="text" id="search" placeholder="Search a name…" style="max-width:240px;">
+        <input type="text" id="search" placeholder="Search a nameâ€¦" style="max-width:240px;">
       </div>
       <div style="overflow-x:auto;">
         <table>
@@ -184,7 +184,7 @@
       <div><label class="f" for="jDetail">Story detail</label><textarea id="jDetail" rows="3" placeholder="A short, confirmed public update."></textarea></div>
       <div class="row r-2">
         <div><label class="f" for="jMeta">Meta line</label><input type="text" id="jMeta" placeholder="e.g. 30.58 km · Fort Portal"></div>
-        <div><label class="f" for="jImage">Image path</label><input type="text" id="jImage" placeholder="assets/faith-in-motion/photo-name.jpg"></div>
+        <div><label class="f" for="jImage">Image path</label><input type="text" id="jImage" placeholder="../assets/faith-in-motion/photo-name.jpg"></div>
       </div>
       <div><label class="f" for="jAlt">Alternative text</label><input type="text" id="jAlt" placeholder="Describe the person, place and visible action."></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
@@ -205,7 +205,7 @@
   <div class="panel" id="p-links">
     <div class="card">
       <h3>Where the campaign site lives</h3>
-      <p class="hint">Paste the live site root. Every link and QR code below points to the sponsor form on <code>give.html</code>.</p>
+      <p class="hint">Paste the live site root. Every link and QR code below points to the sponsor form on <code>../give/</code>.</p>
       <div class="row r-2">
         <div><label class="f" for="siteUrl">Site root URL</label><input type="url" id="siteUrl" value="https://cartelug.github.io/pdm" placeholder="https://cartelug.github.io/pdm"></div>
         <div><label class="f" for="refTag">Ambassador / referrer tag (optional)</label><input type="text" id="refTag" placeholder="e.g. community-team"></div>
@@ -238,7 +238,7 @@
 
     <div class="card">
       <h3>1 · Copy the updated sponsor list</h3>
-      <p class="hint">Open <b>js/roll-data.js</b> and replace its <code>window.ROLL_DATA = [ … ];</code> block with this. Every page — totals, the road, the ledger — updates from that one file.</p>
+      <p class="hint">Open <b>js/roll-data.js</b> and replace its <code>window.ROLL_DATA = [ â€¦ ];</code> block with this. Every page — totals, the road, the ledger — updates from that one file.</p>
       <textarea id="rollOut" rows="14" readonly></textarea>
       <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
         <button class="btn btn-g" id="copyRoll">Copy the code block</button>
@@ -248,7 +248,7 @@
 
     <div class="card">
       <h3>2 · Copy the journey collection</h3>
-      <p class="hint">Open <b>js/fim-content.js</b> and replace its <code>window.FIM_UPDATES = [ … ];</code> block with this collection.</p>
+      <p class="hint">Open <b>js/fim-content.js</b> and replace its <code>window.FIM_UPDATES = [ â€¦ ];</code> block with this collection.</p>
       <textarea id="journeyOut" rows="14" readonly></textarea>
       <div style="margin-top:10px;"><button class="btn btn-g" id="copyJourney">Copy the journey code</button></div>
     </div>
@@ -274,8 +274,8 @@
 
 <div class="toast" id="toast">Copied</div>
 
-<script src="../js/roll-data.js"></script>
-<script src="../js/fim-content.js"></script>
+<script src="../js/roll-data.js?v=3"></script>
+<script src="../js/fim-content.js?v=3"></script>
 <script>
 (function(){
   "use strict";
@@ -455,7 +455,7 @@
     };
     if(!item.title){showToast('Add a story title');$('jTitle').focus();return;}
     if(!item.image){showToast('Add the campaign image path');$('jImage').focus();return;}
-    if(item.image.indexOf('assets/faith-in-motion/')!==0){
+    if(item.image.indexOf('../assets/faith-in-motion/')!==0){
       showToast('Use an assets/faith-in-motion/ image path');
       $('jImage').focus();
       return;
@@ -532,7 +532,7 @@
   function baseUrl(){ return ($('siteUrl').value||'').trim().replace(/\/+$/,''); }
   function giveUrl(){
     var base=baseUrl();
-    return /\/give\.html$/i.test(base) ? base : base+'/give.html';
+    return /\/give\.html$/i.test(base) ? base : base+'/../give/';
   }
   function sponsorUrl(steps){
     var u=giveUrl()+'?steps='+steps;

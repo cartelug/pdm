@@ -22,9 +22,7 @@ jobs:
 
       - name: Prepare only the live PDM website
         run: |
-          mkdir -p deploy
-          cp -R admin assets css js deploy/
-          cp ./*.html deploy/
+          rsync -a --delete --exclude '.git' --exclude 'deploy' ./ deploy/
 
       - name: Upload to pamodzici.com
         uses: appleboy/scp-action@v1

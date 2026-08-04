@@ -47,7 +47,7 @@
       + "\n\n" + (message || "(no message)");
 
     window.location.href = "mailto:shyakaneeza@gmail.com?subject="
-      + encodeURIComponent("PCI Uganda enquiry — " + project)
+      + encodeURIComponent("Pamodzi enquiry — " + project)
       + "&body=" + encodeURIComponent(body);
     showToast("Opening your email app…");
   }
