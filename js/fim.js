@@ -10,8 +10,10 @@
   var M_PER_STEP=(ROUTE_KM*1000)/TOTAL_STEPS;          /* 0.74003 m — 74 cm */
   var mq=window.matchMedia('(prefers-reduced-motion:reduce)');
   var REDUCE=mq.matches;
+  var assetBase=new URL('../assets/',document.currentScript&&document.currentScript.src?document.currentScript.src:window.location.href).href;
   if(mq.addEventListener) mq.addEventListener('change',function(e){REDUCE=e.matches;});
   var $=function(id){return document.getElementById(id);};
+  function assetUrl(src){ return /^assets\//.test(src||'') ? assetBase+src.slice(7) : src; }
 
   var ROLL=(window.ROLL_DATA||[]).slice();
   var WAYS=(window.ROUTE_WAYPOINTS||[]).slice();
@@ -301,7 +303,7 @@
       +(LIVE.note?'<span class="note">'+esc(LIVE.note)+'</span>':'')
       +'<span class="tr"><i style="width:'+(pctWalked*100).toFixed(1)+'%"></i></span>'
       +(LIVE.updated?'<span class="upd">confirmed '+esc(LIVE.updated)+'</span>':'')
-      +'<a class="btn btn-gold" href="give.html">Sponsor a step →</a>'
+      +'<a class="btn btn-gold" href="../give/">Sponsor a step →</a>'
       +'</div>';
     band.classList.add('on');
     document.body.classList.add('has-live');
@@ -333,14 +335,14 @@
 
   /* ── photographs ────────────────────────────────────────────── */
   var ASSETS={
-    walker:"assets/faith-in-motion/walking-rotarian-sunset-video-frame.jpg",
-    road:"assets/faith-in-motion/walking-rotarian-river-crossing.jpg"
+    walker:assetBase+"faith-in-motion/walking-rotarian-sunset-video-frame.jpg",
+    road:assetBase+"faith-in-motion/walking-rotarian-river-crossing.jpg"
   };
   var suppliedAssets=window.FIM_ASSETS||{};
   Object.keys(suppliedAssets).forEach(function(k){ if(suppliedAssets[k]) ASSETS[k]=suppliedAssets[k]; });
   var CAPTIONS={walker:"On the road to Rwembyo",church:"St Joseph Rwembyo",road:"The road ahead",parish:"The parish community",build:"Construction in progress"};
   Object.keys(ASSETS).forEach(function(k){
-    var src=ASSETS[k]; if(!src) return;
+    var src=assetUrl(ASSETS[k]); if(!src) return;
     var el=document.querySelector('[data-slot="'+k+'"]'); if(!el) return;
     var img=new Image();
     img.alt=CAPTIONS[k]||""; img.loading="lazy"; img.decoding="async";
@@ -359,7 +361,7 @@
   if(updatesMount&&UPDATES.length){
     updatesMount.innerHTML=UPDATES.map(function(u,i){
       return '<article class="journey-card reveal'+(i===0?' lead':'')+'">'
-        +'<div class="journey-photo"><img src="'+esc(u.image)+'" alt="'+esc(u.alt||'')+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async"></div>'
+        +'<div class="journey-photo"><img src="'+esc(assetUrl(u.image))+'" alt="'+esc(u.alt||'')+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async"></div>'
         +'<div class="journey-copy"><span class="journey-label">'+esc(u.label||'Journey update')+'</span>'
         +'<h3>'+esc(u.title||'')+'</h3>'
         +'<p>'+esc(u.detail||'')+'</p>'

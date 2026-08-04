@@ -18,7 +18,7 @@
   --shadow-sm:0 12px 32px rgba(58,29,25,.08);
   --radius:16px;
   --radius-sm:10px;
-  --wrap:1180px;
+  --wrap:1240px;
   --measure:68ch;
   --header-h:96px;
 
@@ -111,6 +111,7 @@ button,.btn,.burger,.tier{touch-action:manipulation}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
 .wrap{width:min(calc(100% - 48px),var(--wrap));margin-inline:auto}
 .blk{position:relative;isolation:isolate;overflow:hidden;padding-block:clamp(76px,9vw,124px)}
+.blk+.blk{border-top:1px solid rgba(234,223,219,.72)}
 .blk.tight{padding-block:clamp(54px,7vw,88px)}
 .blk::before{
   content:"";
@@ -164,7 +165,7 @@ header{
   min-height:72px;
   padding:8px 10px 8px 16px;
   border:1px solid rgba(222,205,199,.82);
-  border-radius:20px;
+  border-radius:18px;
   background:rgba(255,255,255,.92);
   box-shadow:0 18px 54px rgba(57,28,23,.12),0 2px 8px rgba(57,28,23,.05);
   backdrop-filter:blur(22px) saturate(1.35);
@@ -286,7 +287,7 @@ header.solid .nav{min-height:66px;background:rgba(255,255,255,.97);box-shadow:0 
   gap:9px;
   padding:13px 22px;
   border:1px solid transparent;
-  border-radius:999px;
+  border-radius:5px;
   cursor:pointer;
   font-weight:750;
   font-size:15px;
