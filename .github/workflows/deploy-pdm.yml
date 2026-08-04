@@ -1,0 +1,40 @@
+name: Deploy PDM to cPanel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pamodzici-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get website files
+        uses: actions/checkout@v4
+
+      - name: Prepare only the live PDM website
+        run: |
+          mkdir -p deploy
+          cp -R admin assets css js deploy/
+          cp ./*.html deploy/
+
+      - name: Upload to pamodzici.com
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.CPANEL_HOST }}
+          username: ${{ secrets.CPANEL_USERNAME }}
+          key: ${{ secrets.CPANEL_SSH_KEY }}
+          passphrase: ${{ secrets.CPANEL_SSH_PASSPHRASE }}
+          port: ${{ secrets.CPANEL_PORT }}
+          source: "deploy/*"
+          target: ${{ secrets.CPANEL_TARGET }}
+          strip_components: 1
+          overwrite: true
