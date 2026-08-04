@@ -65,7 +65,7 @@ em,.it{font-style:italic}
   overflow:hidden;
   background:rgba(255,255,255,.20);
 }
-.hero-meta .m{min-height:105px;padding:22px;background:rgba(125,14,9,.32);backdrop-filter:blur(8px)}
+.hero-meta .m{min-height:105px;padding:22px;background:linear-gradient(160deg,rgba(224,68,56,.28),rgba(125,14,9,.36));backdrop-filter:blur(10px)}
 .hero-meta b{display:block;color:#fff;font-size:20px;line-height:1.1}
 .hero-meta span{display:block;margin-top:9px;color:rgba(255,255,255,.72);font-size:12px}
 
@@ -95,7 +95,7 @@ em,.it{font-style:italic}
   position:absolute;
   inset:auto 0 0;
   height:5px;
-  background:var(--red);
+  background:linear-gradient(90deg,var(--red-2),var(--red) 50%,var(--red-dark));
 }
 .page-hero .wrap{position:relative;z-index:1}
 .page-hero h1{max-width:13ch;margin-top:22px;color:#fff;font-size:clamp(48px,7.2vw,88px)}
@@ -133,7 +133,7 @@ em,.it{font-style:italic}
   position:absolute;
   inset:auto 0 0;
   height:4px;
-  background:var(--red);
+  background:linear-gradient(90deg,var(--red-2),var(--red) 50%,var(--red-dark));
   transform:scaleX(.28);
   transform-origin:left;
   transition:transform .22s ease;

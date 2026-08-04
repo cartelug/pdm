@@ -100,7 +100,7 @@
   function prepareMagneticActions() {
     if (!finePointer.matches || reduced) return;
 
-    var magnets = all(".nav .btn, .hero .cta-row .btn:first-child").slice(0, 2);
+    var magnets = all(".nav .btn, .hero .cta-row .btn, .page-hero .cta-row .btn").slice(0, 4);
     magnets.forEach(function (button) {
       button.classList.add("is-magnetic");
 
