@@ -75,7 +75,7 @@ footer .fgrid{grid-template-columns:1.5fr 1fr 1fr}
   background:var(--paper-2);
 }
 .tlx::after{content:"";position:absolute;inset:auto 0 0;height:4px;background:var(--line-2)}
-.tlx.gold::after{background:var(--red)}
+.tlx.gold::after{background:linear-gradient(90deg,var(--red-2),var(--red-dark))}
 .tlx.ahead{background:var(--ink);color:#fff}
 .tlx.ahead::after{background:#ff8d83}
 .tlx .d{color:var(--red);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}

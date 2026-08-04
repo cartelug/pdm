@@ -198,9 +198,9 @@ header.is-hidden ~ .scroll-progress{top:0}
 .motion-surface > :not(.motion-glow){position:relative;z-index:1}
 
 .pillar:hover,.card:hover,.prof:hover,.tlx:hover,.journey-card:hover,.tcard:hover,.gc:hover{
-  transform:translate3d(0,-6px,0);
-  border-color:rgba(197,43,34,.28);
-  box-shadow:0 28px 70px rgba(58,29,25,.14);
+  transform:translate3d(0,-7px,0) scale(1.006);
+  border-color:rgba(197,43,34,.30);
+  box-shadow:var(--shadow-lg);
 }
 .fig:hover{transform:translate3d(0,-3px,0);border-color:rgba(197,43,34,.24)}
 .hero-meta .m{
