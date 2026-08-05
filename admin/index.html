@@ -239,7 +239,7 @@
 
     <div class="card">
       <h3>Download a branded PDF</h3>
-      <p class="hint">A neat, print-ready report of the Roll of Honour as it stands right now in this console — carrying the Pamodzi, Walking Rotarian and Rotary marks. Good for the construction committee, a parish handout, or your own records. It downloads straight to this device; nothing is uploaded anywhere.</p>
+      <p class="hint">A neat, print-ready report of the Roll of Honour as it stands right now in this console — carrying the Pamodzi, Walking Rotarian and Rotary marks, with the MTN and Centenary Bank marks beside the approved payment details. Good for the construction committee, a parish handout, or your own records. It downloads straight to this device; nothing is uploaded anywhere.</p>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
         <button class="btn btn-b" id="dlPdf">Download branded PDF</button>
       </div>
@@ -283,8 +283,8 @@
 
 <div class="toast" id="toast">Copied</div>
 
-<script src="../js/roll-data.js?v=8"></script>
-<script src="../js/fim-content.js?v=8"></script>
+<script src="../js/roll-data.js?v=9"></script>
+<script src="../js/fim-content.js?v=9"></script>
 <script>
 (function(){
   "use strict";
@@ -623,7 +623,7 @@
       img.src=src;
     });
   }
-  function buildPdf(pciImg,walkerImg,rotaryImg){
+  function buildPdf(pciImg,walkerImg,rotaryImg,mtnImg,bankImg){
     var JsPDF=window.jspdf.jsPDF;
     var doc=new JsPDF({unit:'pt',format:'a4',compress:true});
     var W=595.28,H=841.89,M=44,CW=W-2*M;
@@ -695,8 +695,13 @@
     color('red','setTextColor'); doc.setFont('helvetica','bold'); doc.setFontSize(9);
     doc.text('APPROVED PAYMENT DETAILS',M+14,y+18);
     color('ink','setTextColor'); doc.setFont('helvetica','normal'); doc.setFontSize(10.5);
-    doc.text('Mobile Money: 0772 495 733 · Sylvia Kaawe, Chair Construction',M+14,y+36);
-    doc.text('Bank: Centenary Bank Kasese · Account 3205586406 · St Joseph Rwembyo Catholic Church',M+14,y+52);
+    var payIconCol=34, payTextX=M+14+payIconCol;
+    var mtnH=12, mtnW=mtnH*(mtnImg.naturalWidth/mtnImg.naturalHeight);
+    var bankH=12, bankW=bankH*(bankImg.naturalWidth/bankImg.naturalHeight);
+    doc.addImage(mtnImg,'JPEG',M+14,y+36-9,mtnW,mtnH);
+    doc.text('Mobile Money: 0772 495 733 · Sylvia Kaawe, Chair Construction',payTextX,y+36);
+    doc.addImage(bankImg,'JPEG',M+14,y+52-9,bankW,bankH);
+    doc.text('Bank: Centenary Bank Kasese · Account 3205586406 · St Joseph Rwembyo Catholic Church',payTextX,y+52);
     y+=64+22;
 
     color('muted','setTextColor'); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
@@ -755,8 +760,10 @@
     Promise.all([
       loadImg('../assets/brand/pamodzi/pamodzi-logo-transparent.png'),
       loadImg('../assets/brand/walking-rotarian/walking-rotarian-logo.jpeg'),
-      loadImg('../assets/brand/rotary/rotary-logo.png')
-    ]).then(function(imgs){ buildPdf(imgs[0],imgs[1],imgs[2]); })
+      loadImg('../assets/brand/rotary/rotary-logo.png'),
+      loadImg('../assets/brand/mtn/mtn-logo.jpg'),
+      loadImg('../assets/brand/centenary-bank/centenary-bank-logo.jpg')
+    ]).then(function(imgs){ buildPdf(imgs[0],imgs[1],imgs[2],imgs[3],imgs[4]); })
       .catch(function(){ showToast('Could not load the logos for the PDF'); });
   });
 
