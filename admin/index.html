@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@500;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="vendor/jspdf.umd.min.js"></script>
 <style>
   :root{
     --blue:#C52B22; --blue-deep:#191817; --gold:#E04438; --clay:#8F1F19;
@@ -237,6 +238,14 @@
     <div class="warn"><b>How updating works.</b> The whole site reads its sponsor list from one file: <b>js/roll-data.js</b>. Update the roll here, copy the block below, and paste it into that file. Every page — home, the walk, the roll, the road progress — recalculates itself.</div>
 
     <div class="card">
+      <h3>Download a branded PDF</h3>
+      <p class="hint">A neat, print-ready report of the Roll of Honour as it stands right now in this console — carrying the Pamodzi, Walking Rotarian and Rotary marks. Good for the construction committee, a parish handout, or your own records. It downloads straight to this device; nothing is uploaded anywhere.</p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn btn-b" id="dlPdf">Download branded PDF</button>
+      </div>
+    </div>
+
+    <div class="card">
       <h3>1 · Copy the updated sponsor list</h3>
       <p class="hint">Open <b>js/roll-data.js</b> and replace its <code>window.ROLL_DATA = [ â€¦ ];</code> block with this. Every page — totals, the road, the ledger — updates from that one file.</p>
       <textarea id="rollOut" rows="14" readonly></textarea>
@@ -274,8 +283,8 @@
 
 <div class="toast" id="toast">Copied</div>
 
-<script src="../js/roll-data.js?v=7"></script>
-<script src="../js/fim-content.js?v=7"></script>
+<script src="../js/roll-data.js?v=8"></script>
+<script src="../js/fim-content.js?v=8"></script>
 <script>
 (function(){
   "use strict";
@@ -601,6 +610,155 @@
   });
   $('siteUrl').addEventListener('input',buildLinks);
   $('refTag').addEventListener('input',buildLinks);
+
+  // ---- branded PDF ----
+  var PDF_COLORS = { red:'#c52b22', ink:'#191817', muted:'#68625e', line:'#eadfdb',
+    paidBg:'#f8f5f3', redSoft:'#fbe9e6', paid:'#237349', pledged:'#a66700', promised:'#355aa7' };
+  function hex2rgb(h){ h=h.replace('#',''); return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)]; }
+  function loadImg(src){
+    return new Promise(function(resolve,reject){
+      var img=new Image();
+      img.onload=function(){ resolve(img); };
+      img.onerror=function(){ reject(new Error('Could not load '+src)); };
+      img.src=src;
+    });
+  }
+  function buildPdf(pciImg,walkerImg,rotaryImg){
+    var JsPDF=window.jspdf.jsPDF;
+    var doc=new JsPDF({unit:'pt',format:'a4',compress:true});
+    var W=595.28,H=841.89,M=44,CW=W-2*M;
+    var t=totals(), d=new Date();
+    var pageNum=1;
+
+    function color(name,fn){ var c=hex2rgb(PDF_COLORS[name]); doc[fn](c[0],c[1],c[2]); }
+    function footer(){
+      color('muted','setTextColor'); doc.setFont('helvetica','normal'); doc.setFontSize(8);
+      doc.text('Faith in Motion — St Joseph Rwembyo Catholic Church, Kiburara, Kisinga, Kasese',M,H-26);
+      doc.text('Page '+pageNum,W-M,H-26,{align:'right'});
+      doc.setDrawColor(234,223,219); doc.setLineWidth(0.75); doc.line(M,H-36,W-M,H-36);
+    }
+    function placeLogo(img,x,maxH,bandTop,bandH){
+      var h=maxH, w=h*(img.naturalWidth/img.naturalHeight);
+      doc.addImage(img,x,bandTop+(bandH-h)/2,w,h);
+      return x+w;
+    }
+
+    // ---- Cover page ----
+    var bandTop=38, bandH=52;
+    var x=M;
+    x=placeLogo(pciImg,x,40,bandTop,bandH)+26;
+    x=placeLogo(walkerImg,x,40,bandTop,bandH)+26;
+    placeLogo(rotaryImg,x,30,bandTop,bandH);
+
+    var ruleY=bandTop+bandH+12;
+    color('red','setDrawColor'); doc.setLineWidth(2); doc.line(M,ruleY,W-M,ruleY);
+
+    var y=ruleY+30;
+    color('red','setTextColor'); doc.setFont('helvetica','bold'); doc.setFontSize(10.5);
+    doc.text('FAITH IN MOTION · COLLECTIONS REPORT',M,y);
+
+    y+=26;
+    color('ink','setTextColor'); doc.setFont('helvetica','bold'); doc.setFontSize(21);
+    var titleLines=doc.splitTextToSize('Contribution to fundraise for completion of St Joseph Rwembyo Catholic Church, Kiburara — Kisinga — Kasese',CW);
+    doc.text(titleLines,M,y);
+    y+=titleLines.length*25+8;
+
+    color('muted','setTextColor'); doc.setFont('helvetica','normal'); doc.setFontSize(11);
+    doc.text('Walk day: Sunday 2 August 2026',M,y);
+    y+=17;
+    var walkLines=doc.splitTextToSize('Rtn Shyaka is walking 345 km from Kampala to Kasese for this cause — 466,200 steps in total. Each step is sponsored at UGX 1,000.',CW);
+    doc.text(walkLines,M,y);
+    y+=walkLines.length*14+26;
+
+    var tiles=[
+      ['Received',ugx(t.paid),fmt(t.paidSteps)+' steps'],
+      ['Pledged',ugx(t.pled),fmt(t.pledSteps)+' steps'],
+      ['Received + pledged',ugx(t.amt),fmt(t.steps)+' steps'],
+      ['Road funded',(t.steps/TOTAL_STEPS*100).toFixed(2)+'%','of '+fmt(TOTAL_STEPS)+' steps']
+    ];
+    var tw=(CW-3*12)/4, th=64;
+    tiles.forEach(function(tile,i){
+      var tx=M+i*(tw+12);
+      doc.setDrawColor(234,223,219); color('paidBg','setFillColor');
+      doc.roundedRect(tx,y,tw,th,6,6,'FD');
+      color('muted','setTextColor'); doc.setFont('helvetica','bold'); doc.setFontSize(8);
+      doc.text(tile[0].toUpperCase(),tx+10,y+18);
+      color('ink','setTextColor'); doc.setFont('helvetica','bold'); doc.setFontSize(14.5);
+      doc.text(tile[1],tx+10,y+38);
+      color('muted','setTextColor'); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+      doc.text(tile[2],tx+10,y+52);
+    });
+    y+=th+26;
+
+    doc.setDrawColor(240,213,207); color('redSoft','setFillColor');
+    doc.roundedRect(M,y,CW,64,6,6,'FD');
+    color('red','setTextColor'); doc.setFont('helvetica','bold'); doc.setFontSize(9);
+    doc.text('APPROVED PAYMENT DETAILS',M+14,y+18);
+    color('ink','setTextColor'); doc.setFont('helvetica','normal'); doc.setFontSize(10.5);
+    doc.text('Mobile Money: 0772 495 733 · Sylvia Kaawe, Chair Construction',M+14,y+36);
+    doc.text('Bank: Centenary Bank Kasese · Account 3205586406 · St Joseph Rwembyo Catholic Church',M+14,y+52);
+    y+=64+22;
+
+    color('muted','setTextColor'); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+    doc.text('Report generated '+d.toDateString()+' at '+d.toLocaleTimeString()+'. Received and pledged entries fund public road progress; promised entries are shown separately and excluded until confirmed.',M,y,{maxWidth:CW});
+
+    footer();
+
+    // ---- Roll of Honour ----
+    doc.addPage(); pageNum++;
+    var colContrib=M+30, colAmt=M+270, colSteps=M+368, colStatus=M+436;
+    function tableHeader(){
+      color('ink','setTextColor'); doc.setFont('helvetica','bold'); doc.setFontSize(15);
+      doc.text('Roll of Honour',M,46);
+      color('muted','setTextColor'); doc.setFont('helvetica','normal'); doc.setFontSize(9);
+      doc.text(fmt(roll.length)+' recorded contributions',M,60);
+      var hy=84;
+      doc.setFillColor(25,24,23); doc.rect(M,hy-13,CW,20,'F');
+      doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor(255,255,255);
+      doc.text('#',M+4,hy);
+      doc.text('CONTRIBUTOR',colContrib,hy);
+      doc.text('AMOUNT',colAmt+90,hy,{align:'right'});
+      doc.text('STEPS',colSteps+60,hy,{align:'right'});
+      doc.text('STATUS',colStatus,hy);
+      return hy+18;
+    }
+    var rowY=tableHeader();
+    roll.forEach(function(r,i){
+      var noteLines = r[4] ? doc.splitTextToSize(String(r[4]),200) : [];
+      var rowH = 18 + (noteLines.length ? noteLines.length*9+6 : 4);
+      if(rowY+rowH > H-56){ footer(); doc.addPage(); pageNum++; rowY=tableHeader(); }
+      if(i%2===0){ color('paidBg','setFillColor'); doc.rect(M,rowY-11,CW,rowH,'F'); }
+      doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor(150,140,132);
+      doc.text(String(i+1).padStart(2,'0'),M+4,rowY);
+      color('ink','setTextColor'); doc.setFont('helvetica','bold'); doc.setFontSize(9.5);
+      doc.text(String(r[0]),colContrib,rowY,{maxWidth:200});
+      doc.setFont('helvetica','normal'); doc.setFontSize(9.5);
+      doc.text(ugx(r[1]),colAmt+90,rowY,{align:'right'});
+      doc.text(fmt(r[2]),colSteps+60,rowY,{align:'right'});
+      var statusColor = r[3]==='paid'?'paid':(r[3]==='pledged'?'pledged':'promised');
+      color(statusColor,'setTextColor'); doc.setFont('helvetica','bold'); doc.setFontSize(8);
+      doc.text(String(r[3]).toUpperCase(),colStatus,rowY);
+      if(noteLines.length){
+        color('muted','setTextColor'); doc.setFont('helvetica','italic'); doc.setFontSize(7.8);
+        doc.text(noteLines,colContrib,rowY+10.5);
+      }
+      rowY+=rowH;
+    });
+    footer();
+
+    doc.save('faith-in-motion-roll-of-honour-'+d.toISOString().slice(0,10)+'.pdf');
+    showToast('PDF downloaded');
+  }
+  $('dlPdf').addEventListener('click',function(){
+    if(!(window.jspdf && window.jspdf.jsPDF)){ showToast('PDF tool did not load — check your connection'); return; }
+    showToast('Building PDF…');
+    Promise.all([
+      loadImg('../assets/brand/pamodzi/pamodzi-logo-transparent.png'),
+      loadImg('../assets/brand/walking-rotarian/walking-rotarian-logo.jpeg'),
+      loadImg('../assets/brand/rotary/rotary-logo.png')
+    ]).then(function(imgs){ buildPdf(imgs[0],imgs[1],imgs[2]); })
+      .catch(function(){ showToast('Could not load the logos for the PDF'); });
+  });
 
   // ---- publish actions ----
   $('copyRoll').addEventListener('click',function(){ copy($('rollOut').value,'Sponsor list copied'); });
