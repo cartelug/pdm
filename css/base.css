@@ -21,6 +21,8 @@
   --shadow-btn-hover:0 18px 38px -10px rgba(143,31,25,.46),0 4px 12px -3px rgba(143,31,25,.30);
   --radius:18px;
   --radius-sm:12px;
+  --accent-gold:#c1893f;
+  --accent-gold-soft:#f6ead3;
   --wrap:1240px;
   --measure:68ch;
   --header-h:96px;
@@ -77,6 +79,18 @@ body{
   text-rendering:optimizeLegibility;
 }
 body::before{display:none!important}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:400;
+  pointer-events:none;
+  opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:140px 140px;
+}
+@media(prefers-contrast:more){body::after{display:none}}
+@media(max-width:780px){body::after{position:absolute;height:100%}}
 ::selection{background:var(--red);color:#fff}
 :focus-visible{outline:3px solid var(--red);outline-offset:4px;border-radius:6px}
 img,svg{display:block;max-width:100%}

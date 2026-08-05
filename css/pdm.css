@@ -36,7 +36,7 @@ footer .fgrid{grid-template-columns:1.5fr 1fr 1fr}
 }
 .page-hero .bp2{background-size:280px 280px;opacity:.12}
 .page-hero .wrap{position:relative;z-index:2}
-.page-hero h1{max-width:13ch;margin-top:22px;color:#fff}
+.page-hero h1{max-width:13ch;margin-top:22px;color:#fff;text-shadow:0 12px 44px rgba(0,0,0,.22)}
 .page-hero .lede{margin-top:24px;color:rgba(255,255,255,.84)}
 
 .prof{
