@@ -435,6 +435,14 @@ header.solid .nav{min-height:66px;border-color:rgba(222,205,199,.92);background:
   color:#6c3c35;
 }
 .notice b{color:var(--ink)}
+.paylogo{
+  display:inline-block;
+  height:15px;
+  width:auto;
+  margin:0 6px -3px 0;
+  border-radius:3px;
+  vertical-align:baseline;
+}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .tag{
   display:inline-flex;
