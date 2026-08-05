@@ -32,13 +32,13 @@ The `.nojekyll` file keeps the static source unchanged during publication. `site
 ## Update the campaign register
 
 1. Open `/pdm/admin/`.
-2. Add or edit entries in the **Pledges** tab.
-3. Add, edit, remove or reorder story cards in **Journey updates**.
-4. Open **Publish** and copy the generated sponsor and journey blocks.
-5. Replace `window.ROLL_DATA` in `js/roll-data.js` and `window.FIM_UPDATES` in `js/fim-content.js`.
-6. Review names, amounts, statuses, consent, image paths and factual alternative text before committing.
+2. On the **Pledges** tab, enter the console password once ("Unlock live publishing"). From then on, every add, edit, status change or removal publishes to the live site automatically within seconds via `api/roll.php` — no commit, no push, nothing to paste anywhere.
+3. Add, edit, remove or reorder story cards in **Journey updates** — this part is unchanged: open **Publish**, copy the generated journey block, and replace `window.FIM_UPDATES` in `js/fim-content.js`.
+4. Review names, amounts, statuses, consent, image paths and factual alternative text before publishing.
 
-The backup download now includes both the contribution register and journey collection. The maintenance console is a browser-side tool. It is marked `noindex`, is not linked from public pages, and does not persist changes to GitHub by itself.
+`js/roll-data.js` is now only a fallback: campaign pages try the live register first and only fall back to this bundled file if that request fails for any reason. Refresh it occasionally from the Publish tab's "Optional · Update the bundled backup file" card so the fallback doesn't drift too far from reality — it is not required for a contribution to go live.
+
+The backup download still includes both the contribution register and journey collection, useful for an offline copy or to recover a session. The maintenance console is a browser-side tool, marked `noindex` and not linked from public pages. See `api/README.md` for how the live-publishing endpoint itself works and how to change its password.
 
 ## Motion and accessibility
 

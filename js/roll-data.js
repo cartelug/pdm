@@ -1,5 +1,11 @@
-/* FAITH IN MOTION — ROLL OF HONOUR
-   This one file drives every page: totals, the road, the ledger, step attribution.
+/* FAITH IN MOTION — ROLL OF HONOUR (fallback copy)
+   Contributions added through the admin console (/admin/, Pledges tab) now
+   publish live via api/roll.php and appear on every campaign page within
+   seconds — no edit to this file is needed for that. This file is the
+   fallback shown only if a page can't reach that live endpoint, and the
+   seed api/data/roll-seed.json bootstraps the live register the first time
+   it runs. Update it occasionally from the admin console's Publish tab so
+   the fallback doesn't drift too far from reality, but it is optional.
 
    Format per row:
      ["Public label", amountUGX, steps, "paid|pledged|promised", "public note", "YYYY-MM-DD"]

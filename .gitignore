@@ -2,3 +2,5 @@
 Thumbs.db
 *.log
 node_modules/
+api/data/roll-live.json
+api/data/*.tmp
