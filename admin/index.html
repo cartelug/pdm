@@ -299,8 +299,8 @@
 
 <div class="toast" id="toast">Copied</div>
 
-<script src="../js/roll-data.js?v=10"></script>
-<script src="../js/fim-content.js?v=10"></script>
+<script src="../js/roll-data.js?v=11"></script>
+<script src="../js/fim-content.js?v=11"></script>
 <script>
 (function(){
   "use strict";
@@ -779,9 +779,9 @@
     var payIconCol=34, payTextX=M+14+payIconCol;
     var mtnH=12, mtnW=mtnH*(mtnImg.naturalWidth/mtnImg.naturalHeight);
     var bankH=12, bankW=bankH*(bankImg.naturalWidth/bankImg.naturalHeight);
-    doc.addImage(mtnImg,'JPEG',M+14,y+36-9,mtnW,mtnH);
+    doc.addImage(mtnImg,'PNG',M+14,y+36-9,mtnW,mtnH);
     doc.text('Mobile Money: 0772 495 733 · Sylvia Kaawe, Chair Construction',payTextX,y+36);
-    doc.addImage(bankImg,'JPEG',M+14,y+52-9,bankW,bankH);
+    doc.addImage(bankImg,'PNG',M+14,y+52-9,bankW,bankH);
     doc.text('Bank: Centenary Bank Kasese · Account 3205586406 · St Joseph Rwembyo Catholic Church',payTextX,y+52);
     y+=64+22;
 
@@ -842,8 +842,8 @@
       loadImg('../assets/brand/pamodzi/pamodzi-logo-transparent.png'),
       loadImg('../assets/brand/walking-rotarian/walking-rotarian-logo.jpeg'),
       loadImg('../assets/brand/rotary/rotary-logo.png'),
-      loadImg('../assets/brand/mtn/mtn-logo.jpg'),
-      loadImg('../assets/brand/centenary-bank/centenary-bank-logo.jpg')
+      loadImg('../assets/brand/mtn/mtn-logo.png'),
+      loadImg('../assets/brand/centenary-bank/centenary-bank-logo.png')
     ]).then(function(imgs){ buildPdf(imgs[0],imgs[1],imgs[2],imgs[3],imgs[4]); })
       .catch(function(){ showToast('Could not load the logos for the PDF'); });
   });
