@@ -203,6 +203,28 @@ header.is-hidden ~ .scroll-progress{top:0}
   box-shadow:var(--shadow-lg);
 }
 .fig:hover{transform:translate3d(0,-3px,0);border-color:rgba(197,43,34,.24)}
+
+.card,.prof,.tlx,.journey-card,.tcard,.gc,.verb{position:relative}
+.card::before,.prof::before,.tlx::before,.journey-card::before,.tcard::before,.gc::before,.verb::before{
+  content:"";
+  position:absolute;
+  top:13px;
+  left:13px;
+  width:16px;
+  height:16px;
+  border-top:2px solid rgba(224,68,56,.85);
+  border-left:2px solid rgba(224,68,56,.85);
+  opacity:0;
+  transform:translate3d(-4px,-4px,0);
+  transition:opacity var(--motion-ui) ease,transform var(--motion-ui) var(--ease-premium);
+  pointer-events:none;
+  z-index:2;
+}
+.card:hover::before,.prof:hover::before,.tlx:hover::before,.journey-card:hover::before,.tcard:hover::before,.gc:hover::before,.verb:hover::before{
+  opacity:1;
+  transform:translate3d(0,0,0);
+}
+.journey-card.lead::before{border-color:rgba(255,141,131,.85)}
 .hero-meta .m{
   transition:background var(--motion-ui) ease,transform var(--motion-ui) var(--ease-premium);
 }

@@ -362,9 +362,9 @@ footer .fgrid{grid-template-columns:1.5fr 1fr 1fr}
 }
 .journey-card.lead{grid-column:1/-1;grid-template-columns:minmax(300px,.9fr) 1.1fr;min-height:470px;background:var(--ink)}
 .journey-photo{position:relative;overflow:hidden;background:var(--ink)}
-.journey-photo img{width:100%;height:100%;object-fit:cover;transition:transform .65s ease}
+.journey-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.93) contrast(1.04);transition:transform .65s ease,filter .65s ease}
 .journey-card.lead .journey-photo img{object-fit:contain}
-.journey-card:hover .journey-photo img{transform:scale(1.025)}
+.journey-card:hover .journey-photo img{transform:scale(1.025);filter:saturate(1) contrast(1.02)}
 .journey-copy{display:flex;flex-direction:column;justify-content:center;padding:24px}
 .journey-card.lead .journey-copy{padding:clamp(30px,5vw,56px)}
 .journey-label,.journey-meta{color:var(--red);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase}
