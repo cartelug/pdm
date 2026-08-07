@@ -299,8 +299,8 @@
 
 <div class="toast" id="toast">Copied</div>
 
-<script src="../js/roll-data.js?v=11"></script>
-<script src="../js/fim-content.js?v=11"></script>
+<script src="../js/roll-data.js?v=12"></script>
+<script src="../js/fim-content.js?v=12"></script>
 <script>
 (function(){
   "use strict";
@@ -670,11 +670,11 @@
     var u100=sponsorUrl(100), uAny=giveUrl()+'#sponsor';
     var msgs=[
       ['WhatsApp — to a friend',
-       'Faith in Motion is a 345 km walk from Kampala to Kasese to support the completion of St Joseph Rwembyo Catholic Church. That is 466,200 steps. You can sponsor a step for UGX 1,000.\n\nSponsor 100 steps (UGX 100,000): '+u100+'\nOr choose your own: '+uAny],
+       'Faith in Motion was a 400 km walk from Kampala to Kiburara to support the completion of St Joseph Rwembyo Catholic Church. That is 466,200 steps. The walk is complete; fundraising continues until we reach UGX 414,000,000. You can sponsor a step for UGX 1,000.\n\nSponsor 100 steps (UGX 100,000): '+u100+'\nOr choose your own: '+uAny],
       ['WhatsApp — to a group',
-       'FAITH IN MOTION — 2 August 2026\n\n345 km on foot. 466,200 steps. One church to finish.\n\nEvery UGX 1,000 sponsors one step and carries him closer to Rwembyo. Public supporter labels are supplied for publication.\n\nChoose your steps and use the approved payment details here: '+uAny],
+       'FAITH IN MOTION — walked 2 August 2026\n\n400 km on foot. 466,200 steps. One church to finish.\n\nThe walk is done — fundraising continues toward UGX 414,000,000. Every UGX 1,000 sponsors one step. Public supporter labels are supplied for publication.\n\nChoose your steps and use the approved payment details here: '+uAny],
       ['For a corporate or parish letter',
-       'St Joseph Rwembyo Catholic Church is being completed at Kiburara, Kisinga, Kasese. To mobilise support, a 345 km walk from Kampala to Kasese is planned for 2 August 2026 — 466,200 steps, each sponsorable at UGX 1,000.\n\nReceived, pledged and promised entries are reported separately. Only verified received contributions fund public progress. Public supporter labels are supplied for publication. Contributors verify the beneficiary and keep their payment reference.\n\nTo sponsor: '+uAny]
+       'St Joseph Rwembyo Catholic Church is being completed at Kiburara, Kisinga, Kasese. To mobilise support, a 400 km walk from Kampala to Kiburara was completed on 2 August 2026 — 466,200 steps, each sponsorable at UGX 1,000. Fundraising continues until the UGX 414,000,000 target is reached.\n\nReceived, pledged and promised entries are reported separately. Only verified received contributions fund public progress. Public supporter labels are supplied for publication. Contributors verify the beneficiary and keep their payment reference.\n\nTo sponsor: '+uAny]
     ];
     msgs.forEach(function(m){
       var d=document.createElement('div'); d.style.cssText='padding:12px 0;border-bottom:1px solid #f0ece2;';
@@ -745,9 +745,9 @@
     y+=titleLines.length*25+8;
 
     color('muted','setTextColor'); doc.setFont('helvetica','normal'); doc.setFontSize(11);
-    doc.text('Walk day: Sunday 2 August 2026',M,y);
+    doc.text('Walk day: Sunday 2 August 2026 — walk complete, fundraising continues toward UGX 414,000,000',M,y);
     y+=17;
-    var walkLines=doc.splitTextToSize('Rtn Shyaka is walking 345 km from Kampala to Kasese for this cause — 466,200 steps in total. Each step is sponsored at UGX 1,000.',CW);
+    var walkLines=doc.splitTextToSize('Rtn Shyaka walked 400 km from Kampala to Kiburara for this cause — 466,200 steps in total. Each step is sponsored at UGX 1,000.',CW);
     doc.text(walkLines,M,y);
     y+=walkLines.length*14+26;
 

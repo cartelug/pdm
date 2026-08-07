@@ -16,6 +16,7 @@
    Public labels below are the contributor labels supplied for publication by
    the campaign team. Do not add phone numbers or private payment details. */
 window.ROLL_DATA = [
+    ["Mbusa John Tumwesige n family",9500000,9500,"paid","In-kind gift: 100 versatile iron sheets"],
     ["Modest R",100000,100,"paid",""],
     ["Joshua n Sylvia",1000000,1000,"paid",""],
     ["MD Rtn Nuwabine Josephat",1000000,1000,"paid",""],
@@ -86,7 +87,8 @@ window.ROLL_DATA = [
     ["St Padri Pio Catechist Franciska",100000,100,"paid",""],
     ["Jaja Wilfred Kule",10000,10,"paid",""],
     ["Bil Josephine Onekalit",100000,100,"paid",""],
-    ["Isabella at Juba and Nairobi",149000,149,"paid",""]
+    ["Isabella at Juba and Nairobi",149000,149,"paid",""],
+    ["Lady Marion Nabifo",100000,100,"paid",""]
   ];
 
 /* ── ROUTE WAYPOINTS ───────────────────────────────────────────────
