@@ -16,7 +16,7 @@
    Public labels below are the contributor labels supplied for publication by
    the campaign team. Do not add phone numbers or private payment details. */
 window.ROLL_DATA = [
-    ["Mbusa John Tumwesige n family",9500000,9500,"paid","In-kind gift: 100 versatile iron sheets"],
+    ["Mbusa John Tumwesige n family",9500000,9500,"pledged","In-kind gift: 100 versatile iron sheets (to be received)"],
     ["Modest R",100000,100,"paid",""],
     ["Joshua n Sylvia",1000000,1000,"paid",""],
     ["MD Rtn Nuwabine Josephat",1000000,1000,"paid",""],
