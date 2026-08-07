@@ -32,13 +32,16 @@ h3{font-size:clamp(22px,2.5vw,31px);line-height:1.08}
 .has-live .mnav{inset:calc(var(--header-h) + 52px) 0 0}
 footer .fgrid{grid-template-columns:1.5fr 1fr 1fr}
 
-/* Journey photography gives every campaign chapter a distinct sense of place. */
+/* Journey photography gives every campaign chapter a distinct sense of place.
+   Kept to clean walk-day frames only — no fitness-app overlays or superseded
+   "345 km" copy baked into the image, since these run as faint page texture
+   and any legible stale figure would contradict the walk-complete copy. */
 .blk:nth-of-type(6n+1)::before{background-image:url('../assets/faith-in-motion/walking-rotarian-river-crossing.jpg');background-position:center 36%}
-.blk:nth-of-type(6n+2)::before{background-image:url('../assets/faith-in-motion/kasese-milestone-345km.jpg');background-position:center 42%}
+.blk:nth-of-type(6n+2)::before{background-image:url('../assets/faith-in-motion/walk-day-crowd-welcome.jpg');background-position:center 30%}
 .blk:nth-of-type(6n+3)::before{background-image:url('../assets/faith-in-motion/walking-rotarian-riverside-35km.jpg');background-position:center 34%}
-.blk:nth-of-type(6n+4)::before{background-image:url('../assets/faith-in-motion/faith-in-motion-345km-poster.jpg');background-position:center 28%}
-.blk:nth-of-type(6n+5)::before{background-image:url('../assets/faith-in-motion/walking-rotarian-sunset-video-frame.jpg');background-position:center 48%}
-.blk:nth-of-type(6n)::before{background-image:url('../assets/faith-in-motion/mpara-biguli-day-8.jpg');background-position:center 36%}
+.blk:nth-of-type(6n+4)::before{background-image:url('../assets/faith-in-motion/walk-day-procession-kiburara.jpg');background-position:center 32%}
+.blk:nth-of-type(6n+5)::before{background-image:url('../assets/faith-in-motion/walk-day-arrival-celebration.jpg');background-position:center 30%}
+.blk:nth-of-type(6n)::before{background-image:url('../assets/faith-in-motion/friends-of-st-joseph-rwembyo-poster.jpg');background-position:center 30%}
 
 /* Campaign home hero */
 .hero{
@@ -58,10 +61,8 @@ footer .fgrid{grid-template-columns:1.5fr 1fr 1fr}
   background:
     linear-gradient(90deg,rgba(24,12,11,.78) 0%,rgba(24,12,11,.46) 52%,rgba(143,31,25,.48) 100%),
     linear-gradient(0deg,rgba(143,31,25,.80),transparent 58%),
-    url('../assets/faith-in-motion/walking-rotarian-sunset-video-frame.jpg') center/cover no-repeat;
+    url('../assets/faith-in-motion/walk-day-procession-kiburara.jpg') center 28%/cover no-repeat;
 }
-.sky svg{width:100%;height:100%;opacity:.025}
-.grain{display:none}
 .hero-in{position:relative;z-index:2;width:100%;padding:clamp(76px,10vw,122px) 0 42px}
 .hero h1{max-width:11ch;color:#fff;text-shadow:0 12px 48px rgba(0,0,0,.24)}
 .hero h1 .em{display:inline;color:#ff5a4e;text-decoration:underline;text-decoration-thickness:.07em;text-underline-offset:.08em}
@@ -507,7 +508,7 @@ footer .fgrid{grid-template-columns:1.5fr 1fr 1fr}
 .trustline .g{padding-right:22px;border-right:1px solid rgba(255,255,255,.16)}
 .trustline .g:last-child{border-right:0}
 @media(min-width:781px){
-  .sky{background:url('../assets/faith-in-motion/walking-rotarian-sunset-video-frame.jpg') center/cover no-repeat}
+  .sky{background:url('../assets/faith-in-motion/walk-day-procession-kiburara.jpg') center 26%/cover no-repeat}
   .hero-in{width:min(100%,680px);margin-right:auto;padding:clamp(90px,10vw,136px) clamp(32px,5vw,76px) 48px max(24px,calc((100vw - var(--wrap))/2));background:linear-gradient(90deg,rgba(25,24,23,.98),rgba(25,24,23,.92) 76%,rgba(25,24,23,0))}
   .hero h1{max-width:9ch;font-size:clamp(58px,6.3vw,98px)}
   .hero-meta{max-width:570px;border-radius:0}
