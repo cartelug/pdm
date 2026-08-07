@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@500;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/base.css?v=13">
-<link rel="stylesheet" href="../css/fim.css?v=13">
-<link rel="stylesheet" href="../css/motion.css?v=13">
+<link rel="stylesheet" href="../css/base.css?v=14">
+<link rel="stylesheet" href="../css/fim.css?v=14">
+<link rel="stylesheet" href="../css/motion.css?v=14">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -60,110 +60,7 @@
   </div>
 </div>
 <section class="hero" id="top">
-  <div class="sky">
-    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-      <defs>
-        <linearGradient id="skyg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stop-color="#040B1A"/>
-          <stop offset="26%"  stop-color="#2A1513"/>
-          <stop offset="48%"  stop-color="#5C211C"/>
-          <stop offset="66%"  stop-color="#8D2D25"/>
-          <stop offset="79%"  stop-color="#A83A30"/>
-          <stop offset="89%"  stop-color="#C84A3D"/>
-          <stop offset="100%" stop-color="#E07B68"/>
-        </linearGradient>
-        <radialGradient id="sung" cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stop-color="#FFE7B0" stop-opacity="1"/>
-          <stop offset="30%"  stop-color="#FFC759" stop-opacity=".72"/>
-          <stop offset="65%"  stop-color="#BB2D22" stop-opacity=".26"/>
-          <stop offset="100%" stop-color="#BB2D22" stop-opacity="0"/>
-        </radialGradient>
-        <linearGradient id="ray" x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0" stop-color="#FFD68A" stop-opacity=".22"/>
-          <stop offset="1" stop-color="#FFD68A" stop-opacity="0"/>
-        </linearGradient>
-        <linearGradient id="m0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6B2A24"/><stop offset="1" stop-color="#4D1E1A"/></linearGradient>
-        <linearGradient id="m1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#54201B"/><stop offset="1" stop-color="#361613"/></linearGradient>
-        <linearGradient id="m2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#301512"/><stop offset="1" stop-color="#24100E"/></linearGradient>
-        <linearGradient id="m3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E0E0C"/><stop offset="1" stop-color="#120807"/></linearGradient>
-        <linearGradient id="roadg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#5C4030"/><stop offset="55%" stop-color="#8E4530"/><stop offset="1" stop-color="#B5462F"/>
-        </linearGradient>
-        <linearGradient id="hazeA" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#F0B478" stop-opacity=".34"/><stop offset="1" stop-color="#F0B478" stop-opacity="0"/>
-        </linearGradient>
-      </defs>
-
-      <rect width="1440" height="900" fill="url(#skyg)"/>
-
-      <g fill="#FFFFFF">
-        <circle cx="180" cy="88"  r="1.5" opacity=".75"/><circle cx="418" cy="52"  r="1"   opacity=".5"/>
-        <circle cx="702" cy="118" r="1.6" opacity=".8"/> <circle cx="978" cy="70"  r="1.1" opacity=".55"/>
-        <circle cx="1242" cy="128" r="1.4" opacity=".7"/><circle cx="322" cy="182" r="1"   opacity=".45"/>
-        <circle cx="1102" cy="204" r="1.1" opacity=".5"/><circle cx="560" cy="212" r="1.3" opacity=".6"/>
-        <circle cx="860" cy="40"  r="1"   opacity=".5"/> <circle cx="90"  cy="250" r="1"   opacity=".35"/>
-        <circle cx="1350" cy="70" r="1.2" opacity=".55"/><circle cx="640" cy="300" r="1"   opacity=".3"/>
-      </g>
-
-      <ellipse cx="1010" cy="620" rx="430" ry="200" fill="url(#sung)" opacity=".85"/>
-      <circle cx="1010" cy="612" r="250" fill="url(#sung)"/>
-      <g opacity=".5">
-        <polygon points="1010,600 940,300 980,290" fill="url(#ray)"/>
-        <polygon points="1010,600 1080,300 1040,292" fill="url(#ray)"/>
-        <polygon points="1010,600 1180,380 1150,362" fill="url(#ray)"/>
-        <polygon points="1010,600 850,382 878,364" fill="url(#ray)"/>
-      </g>
-      <circle cx="1010" cy="612" r="48" fill="#FFD68A" opacity=".96"/>
-
-      <path d="M0,566 L96,506 L168,548 L262,470 L340,520 L432,438 L520,506 L618,452 L700,512 L790,462 L880,522 L968,470 L1062,532 L1150,478 L1246,536 L1340,492 L1440,540 L1440,900 L0,900 Z" fill="url(#m0)" opacity=".55"/>
-      <rect x="0" y="540" width="1440" height="120" fill="url(#hazeA)"/>
-
-      <path d="M0,614 L120,556 L212,600 L330,520 L422,576 L522,486 L620,560 L722,514 L832,574 L942,528 L1052,588 L1162,532 L1282,584 L1382,544 L1440,578 L1440,900 L0,900 Z" fill="url(#m1)"/>
-      <rect x="0" y="600" width="1440" height="110" fill="url(#hazeA)" opacity=".7"/>
-
-      <path d="M0,684 L142,642 L262,690 L402,624 L542,680 L682,636 L822,688 L962,642 L1112,694 L1262,648 L1440,696 L1440,900 L0,900 Z" fill="url(#m2)"/>
-
-      <g opacity=".92">
-        <path d="M1183,676 l0,-30" stroke="#0C1B33" stroke-width="3"/>
-        <rect x="1170" y="676" width="26" height="26" fill="#0C1B33"/>
-        <path d="M1183,650 l13,26 l-26,0 z" fill="#0C1B33"/>
-        <path d="M1183,646 l0,-9 M1179,641 l8,0" stroke="#0C1B33" stroke-width="2.6" stroke-linecap="round"/>
-      </g>
-
-      <path d="M0,754 L180,724 L360,764 L560,718 L760,766 L980,726 L1200,770 L1440,732 L1440,900 L0,900 Z" fill="url(#m3)"/>
-
-      <path d="M638,754 L802,754 L1064,900 L376,900 Z" fill="url(#roadg)" opacity=".95"/>
-      <path d="M660,754 L680,754 L560,900 L500,900 Z" fill="#000" opacity=".08"/>
-      <path d="M772,754 L790,754 L960,900 L905,900 Z" fill="#FFF" opacity=".05"/>
-      <g stroke="#F7DEB4" stroke-linecap="round" opacity=".5">
-        <line x1="720" y1="768" x2="720" y2="781" stroke-width="2.4"/>
-        <line x1="720" y1="800" x2="720" y2="822" stroke-width="3.4"/>
-        <line x1="720" y1="846" x2="720" y2="878" stroke-width="4.8"/>
-      </g>
-
-      <g transform="translate(702,724) scale(1.7)" fill="#050F22">
-        <circle cx="0" cy="-16" r="3.4"/>
-        <path d="M-1.6,-12 L1.6,-12 L3.2,-3 L-3.2,-3 Z"/>
-        <path d="M-3,-3 L-5.6,7.2 L-3.3,7.9 L-0.6,-1 Z"/>
-        <path d="M2.6,-3 L5.8,6.8 L3.5,7.9 L0.4,-1 Z"/>
-        <path d="M-2.6,-11 L-6.2,-5.2 L-4.5,-4 L-1,-9 Z"/>
-        <path d="M2.6,-11 L6.2,-6 L4.5,-4.5 L1,-9 Z"/>
-      </g>
-      <ellipse cx="702" cy="740" rx="15" ry="3.6" fill="#3A1C12" opacity=".42"/>
-
-      <g fill="none" stroke="#0A1830" stroke-width="2" stroke-linecap="round" opacity=".5">
-        <path d="M232,236 q7,-7 14,0 q7,-7 14,0"/>
-        <path d="M300,196 q5.5,-5.5 11,0 q5.5,-5.5 11,0"/>
-        <path d="M268,286 q4.5,-4.5 9,0 q4.5,-4.5 9,0"/>
-      </g>
-
-      <g fill="#050F22" opacity=".95">
-        <path d="M0,878 q28,-26 56,-4 q22,-30 46,-8 q26,-22 52,2 L154,900 L0,900 Z"/>
-        <path d="M1440,872 q-30,-28 -60,-4 q-24,-30 -50,-6 q-26,-20 -52,4 L1278,900 L1440,900 Z"/>
-      </g>
-    </svg>
-  </div>
-  <div class="grain"></div>
+  <div class="sky"></div>
 
   <div class="hero-in">
     <div class="wrap">
@@ -205,7 +102,7 @@
 </div>
 <main id="main-content">
 
-<!-- SPONSOR 1â€“1,000 STEPS -->
+<!-- SPONSOR 1–1,000 STEPS -->
 <section class="blk sponsor-home" id="sponsor">
   <div class="wrap">
     <div class="sponsor-intro reveal">
@@ -218,7 +115,7 @@
 
     <div class="inst sponsor-home-grid">
       <div class="panel reveal">
-        <span class="survey on-dark">Select 1â€“1,000 steps</span>
+        <span class="survey on-dark">Select 1–1,000 steps</span>
         <div class="tiers tiers-eight" id="tiers">
           <button class="tier" type="button" data-s="1"><b>1</b><span>step</span></button>
           <button class="tier" type="button" data-s="10"><b>10</b><span>steps</span></button>
@@ -231,7 +128,7 @@
         </div>
         <div class="customrow">
           <label for="cSteps">Custom</label>
-          <input id="cSteps" type="number" min="1" max="1000" step="1" inputmode="numeric" placeholder="1â€“1,000" aria-describedby="stepRange">
+          <input id="cSteps" type="number" min="1" max="1000" step="1" inputmode="numeric" placeholder="1–1,000" aria-describedby="stepRange">
         </div>
         <p class="range-help" id="stepRange">For more than 1,000 steps, use the <a href="../partnerships/">team and partnership route</a>.</p>
 
@@ -348,7 +245,7 @@
 
     <div class="ledger reveal">
       <div class="ledger-head">
-        <span>â„–</span><span>Contributor</span><span class="r">Contribution</span><span class="r">Status</span>
+        <span>№</span><span>Contributor</span><span class="r">Contribution</span><span class="r">Status</span>
       </div>
       <div id="ledgerBody"></div>
       <div class="ledger-foot"><button class="btn btn-line" id="rollToggle">Show all sponsors</button></div>
@@ -416,12 +313,12 @@
 </footer>
 
 <div class="toast" id="toast">Copied</div>
-<script src="../js/roll-data.js?v=13"></script>
+<script src="../js/roll-data.js?v=14"></script>
 <script src="../api/roll.php"></script>
-<script src="../js/fim-content.js?v=13"></script>
+<script src="../js/fim-content.js?v=14"></script>
 <script>window.FIM_ASSETS={walker:"",church:"",road:"",parish:"",build:""};</script>
-<script src="../js/core.js?v=13"></script>
-<script src="../js/fim.js?v=13"></script>
-<script src="../js/site-motion.js?v=13"></script>
+<script src="../js/core.js?v=14"></script>
+<script src="../js/fim.js?v=14"></script>
+<script src="../js/site-motion.js?v=14"></script>
 </body>
 </html>
