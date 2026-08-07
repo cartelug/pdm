@@ -322,7 +322,7 @@
     var el=$('intlRef'); copy(el?el.textContent.trim():'','Reference copied');
   });
   /* share carries the unit trade — item 3 */
-  var shareMsg='Faith in Motion — 345 km on foot to finish St Joseph Rwembyo Catholic Church. '
+  var shareMsg='Faith in Motion — 400 km on foot to finish St Joseph Rwembyo Catholic Church. '
     +UNIT+'. Sponsor a step: ';
   if($('waShare')) $('waShare').href='https://wa.me/?text='+encodeURIComponent(shareMsg+window.location.href);
   if($('sysShare')){

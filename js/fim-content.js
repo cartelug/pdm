@@ -11,6 +11,38 @@
 var fimAssetBase = new URL("../assets/", document.currentScript && document.currentScript.src ? document.currentScript.src : window.location.href).href;
 window.FIM_UPDATES = [
   {
+    label: "Walk day",
+    title: "Arrival day in Kiburara.",
+    detail: "Shyaka reaches St Joseph Rwembyo Catholic Church, greeted by the community that walked the campaign with him from the very first step.",
+    meta: "2 August 2026 · Kiburara",
+    image: fimAssetBase + "faith-in-motion/walk-day-arrival-celebration.jpg",
+    alt: "Shyaka laughing with a group of women, one holding a St Joseph Rwembyo fundraiser flyer."
+  },
+  {
+    label: "Walk day",
+    title: "Kiburara turns out to receive him.",
+    detail: "A procession of drums, branches and song carries the walk into its final stretch.",
+    meta: "2 August 2026 · Kiburara",
+    image: fimAssetBase + "faith-in-motion/walk-day-procession-kiburara.jpg",
+    alt: "A festive procession with a marching band and community members holding branches, escorting the Walking Rotarian into Kiburara."
+  },
+  {
+    label: "Walk day",
+    title: "A crowd gathers for the finish.",
+    detail: "Neighbours, children and well-wishers line the road as the 400 km walk reaches its end.",
+    meta: "2 August 2026 · Kiburara",
+    image: fimAssetBase + "faith-in-motion/walk-day-crowd-welcome.jpg",
+    alt: "A large crowd gathered along the road, phones raised, as the Walking Rotarian arrives."
+  },
+  {
+    label: "Event poster",
+    title: "Friends of St Joseph Rwembyo.",
+    detail: "The fundraising event poster carried along the route — the appeal continues until the completion target is reached.",
+    meta: "Fundraising event · 2 August 2026",
+    image: fimAssetBase + "faith-in-motion/friends-of-st-joseph-rwembyo-poster.jpg",
+    alt: "Two people holding a large \"Friends of St Joseph Rwembyo Fundraising Event\" poster beside a road."
+  },
+  {
     label: "Campaign milestone",
     title: "More than half the distance covered.",
     detail: "The journey continues toward Rwembyo, carrying the appeal to complete St Joseph Rwembyo Catholic Church.",
