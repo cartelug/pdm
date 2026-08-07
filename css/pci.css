@@ -261,9 +261,25 @@ em,.it{font-style:italic}
     background:var(--paper);
     color:var(--ink);
   }
-  .hero::before,.hero::after{display:none}
+  .hero::after{display:none}
+  .hero::before{
+    opacity:.05;
+    background-image:
+      linear-gradient(rgba(25,24,23,.9) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(25,24,23,.9) 1px,transparent 1px);
+    background-size:46px 46px;
+    mask-image:linear-gradient(100deg,#000 0%,#000 42%,transparent 76%);
+  }
   .hero-media{position:relative;inset:auto;grid-column:2;grid-row:1;min-height:100%}
   .hero-media img{height:100%;min-height:690px;object-position:center;filter:saturate(.92) contrast(.98)}
+  .hero-media::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(90deg,rgba(255,255,255,.55),transparent 7%),
+      linear-gradient(0deg,rgba(20,12,11,.30),transparent 30%);
+  }
   .hero>.wrap{
     grid-column:1;
     grid-row:1;
@@ -276,8 +292,10 @@ em,.it{font-style:italic}
   .hero .lede{color:var(--ink-2)}
   .hero .btn-ghost{border-color:var(--line-2);color:var(--ink)!important}
   .hero .btn-ghost:hover{border-color:var(--red);background:var(--red-soft);color:var(--red-dark)!important}
-  .hero-meta{grid-template-columns:repeat(2,1fr);gap:0;margin-top:52px;border-color:var(--line);border-radius:0;background:var(--line)}
-  .hero-meta .m{min-height:82px;padding:17px;background:var(--paper)}
+  .hero-meta{grid-template-columns:repeat(2,1fr);gap:1px;margin-top:52px;border-color:var(--line);border-radius:0;background:var(--line);box-shadow:0 20px 44px -26px rgba(46,17,13,.28);counter-reset:hm}
+  .hero-meta .m{position:relative;min-height:88px;padding:18px 17px 17px;background:var(--paper);transition:background .2s ease}
+  .hero-meta .m::before{content:counter(hm,decimal-leading-zero);counter-increment:hm;display:block;margin-bottom:10px;color:var(--line-2);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em}
+  .hero-meta .m:hover{background:var(--red-soft)}
   .hero-meta b{color:var(--red);font-size:16px}
   .hero-meta span{margin-top:6px;color:var(--muted);font-size:10px}
 }
