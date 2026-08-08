@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /pdm/admin/
+Disallow: /admin/
 
-Sitemap: https://cartelug.github.io/pdm/sitemap.xml
+Sitemap: https://pamodzici.com/sitemap.xml
