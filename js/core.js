@@ -37,8 +37,8 @@
     loader.className = "site-loader";
     loader.setAttribute("role", "status");
     loader.setAttribute("aria-live", "polite");
-    loader.setAttribute("aria-label", "Loading Pamodzi for Development");
-    loader.innerHTML = '<div class="inner"><img src="' + assetBase + 'brand/pamodzi/pamodzi-logo-transparent.png" alt=""><span>Pamodzi for Development</span></div>';
+    loader.setAttribute("aria-label", "Loading Pamodzi Community Initiative");
+    loader.innerHTML = '<div class="inner"><img src="' + assetBase + 'brand/pamodzi/pamodzi-logo-transparent.png" alt=""><span>Pamodzi Community Initiative</span></div>';
     document.body.insertBefore(loader, document.body.firstChild);
 
     var closed = false;
