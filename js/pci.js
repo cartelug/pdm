@@ -1,4 +1,4 @@
-/* Pamodzi for Development — page-specific interactions.
+/* Pamodzi Community Initiative — page-specific interactions.
    Shared brand, navigation, header, progress and motion live in core.js/site-motion.js. */
 (function () {
   "use strict";
