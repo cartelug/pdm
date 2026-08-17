@@ -116,7 +116,7 @@
   <div class="wrap hbar">
     <div>
       <h1>Collections Console</h1>
-      <div class="sub">Faith in Motion · St Joseph Rwembyo</div>
+      <div class="sub">Faith in Motion · St Joseph Rwembyo · <a href="quick.html" style="color:#ffd6d1;">Simple add screen →</a></div>
     </div>
     <div class="hstats">
       <div class="s"><b id="hTotal">—</b><span>Total committed</span></div>
@@ -299,8 +299,8 @@
 
 <div class="toast" id="toast">Copied</div>
 
-<script src="../js/roll-data.js?v=17"></script>
-<script src="../js/fim-content.js?v=17"></script>
+<script src="../js/roll-data.js?v=18"></script>
+<script src="../js/fim-content.js?v=18"></script>
 <script>
 (function(){
   "use strict";
@@ -323,7 +323,7 @@
 
   // ---- live publishing: contributions POST straight to the website ----
   var LIVE_ENDPOINT='../api/roll.php';
-  var livePassword=sessionStorage.getItem('fimAdminPw')||'';
+  var livePassword=localStorage.getItem('fimAdminPw')||'';
   if(livePassword) $('livePw').value=livePassword;
 
   function setLiveStatus(state,msg){
@@ -360,7 +360,7 @@
       .then(function(r){ return r.json().then(function(body){ return {ok:r.ok,body:body}; }); })
       .then(function(res){
         if(res.ok && res.body && res.body.ok){
-          sessionStorage.setItem('fimAdminPw',livePassword);
+          localStorage.setItem('fimAdminPw',livePassword);
           setLiveStatus('ok','Published live · '+new Date(res.body.updated).toLocaleTimeString()+'.');
           showToast('Published live');
         } else {
@@ -377,7 +377,7 @@
   $('liveUnlock').addEventListener('click',function(){
     livePassword=$('livePw').value;
     if(!livePassword){ setLiveStatus('err','Enter the console password first.'); return; }
-    sessionStorage.setItem('fimAdminPw',livePassword);
+    localStorage.setItem('fimAdminPw',livePassword);
     publishLive();
   });
   $('livePw').addEventListener('keydown',function(e){
