@@ -21,7 +21,7 @@ window.ROLL_DATA = [
     ["Joshua n Sylvia",1000000,1000,"paid",""],
     ["MD Rtn Nuwabine Josephat",1000000,1000,"paid",""],
     ["Dr. Monica Etima",100000,100,"pledged",""],
-    ["Mr Garakumbe",100000,100,"paid",""],
+    ["Mr Garakumbe",100000,100,"paid","Given for Shyaka's walking water"],
     ["Mugabe Charles",20000,20,"paid",""],
     ["Dr Habomugisha",50000,50,"paid",""],
     ["Rtn Smart",50000,50,"paid","Includes piano support"],
@@ -33,11 +33,11 @@ window.ROLL_DATA = [
     ["Rtn HCP Paul",50000,50,"paid",""],
     ["Rtn Edith",100000,100,"paid",""],
     ["PAG Muhumuza",100000,100,"paid",""],
-    ["Rtn Harriet",100000,100,"pledged",""],
+    ["Rtn Harriet",100000,100,"paid",""],
     ["Rtn Simon Kagwa",50000,50,"pledged",""],
     ["Rtn Prof Kwesiga",100000,100,"pledged",""],
-    ["Rtn Dr Kerchan",100000,100,"pledged",""],
-    ["Rtn Budget",100000,100,"pledged",""],
+    ["Rtn Dr Kerchan",100000,100,"paid",""],
+    ["Rtn Budget",100000,100,"paid",""],
     ["Rtn Justus",100000,100,"pledged",""],
     ["Jimmy Baluku Odyek",50000,50,"paid",""],
     ["Bwambale Michael",50000,50,"paid",""],
@@ -88,7 +88,15 @@ window.ROLL_DATA = [
     ["Jaja Wilfred Kule",10000,10,"paid",""],
     ["Bil Josephine Onekalit",100000,100,"paid",""],
     ["Isabella at Juba and Nairobi",149000,149,"paid",""],
-    ["Lady Marion Nabifo",100000,100,"paid",""]
+    ["Lady Marion Nabifo",100000,100,"paid",""],
+    ["Mateso John and Mary Jane",100000,100,"paid",""],
+    ["Bil. Tendo Elizabeth",150000,150,"paid",""],
+    ["Richard Munoli",100000,100,"pledged",""],
+    ["Bil Catherine Onelalit",100000,100,"paid",""],
+    ["Dr Jackie Makaru",1000000,1000,"paid",""],
+    ["Rtn counsel Rebecca Nabirye",100000,100,"paid",""],
+    ["PP Pearl K Habomugisha",100000,100,"pledged",""],
+    ["PP Thereza Baganja",50000,50,"paid",""]
   ];
 
 /* ── ROUTE WAYPOINTS ───────────────────────────────────────────────
