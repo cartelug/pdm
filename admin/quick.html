@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Add a Contribution — Faith in Motion</title>
+<link rel="icon" type="image/png" href="../assets/brand/pamodzi/pamodzi-logo-transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700,800&family=Manrope:wght@500,600,700,800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#C52B22; --red-dark:#8F1F19; --ink:#191817; --stone:#68625E;
+    --paper:#FFFFFF; --paper-2:#F8F5F3; --line:#EADFDB;
+    --paid:#2E7D46; --paid-bg:#E2F0E6; --pledged:#B07400; --pledged-bg:#FBEECB; --promised:#3457A6; --promised-bg:#E6ECF9;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0; background:var(--paper-2); color:var(--ink); font-family:'Manrope',system-ui,sans-serif; font-size:19px; line-height:1.4;}
+  h1,h2,.disp{font-family:'Bricolage Grotesque',sans-serif; letter-spacing:-0.02em; margin:0;}
+  .wrap{max-width:640px; margin:0 auto; padding:0 18px 60px;}
+
+  header{background:var(--ink); color:#fff; padding:22px 18px; display:flex; align-items:center; gap:14px;}
+  header img{width:44px; height:44px; object-fit:contain; flex:none;}
+  header h1{font-size:22px; color:#fff;}
+  header .sub{font-size:13px; color:#d7cbc7; margin-top:2px;}
+
+  .card{background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px; margin-top:20px; box-shadow:0 2px 10px rgba(25,24,23,.04);}
+
+  /* Lock screen */
+  .lockwrap{display:flex; flex-direction:column; align-items:stretch; gap:14px;}
+  .biglabel{display:block; font-size:15px; font-weight:800; color:var(--stone); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;}
+  input[type=text],input[type=number],input[type=password]{
+    width:100%; font-family:inherit; font-size:24px; padding:18px 16px; border:2px solid var(--line);
+    border-radius:14px; background:#fff; color:var(--ink); outline:none; font-weight:700;
+  }
+  input:focus{border-color:var(--red);}
+  input::placeholder{color:#c8bfb7; font-weight:600;}
+
+  .bigbtn{
+    display:flex; align-items:center; justify-content:center; gap:10px; width:100%;
+    border:none; cursor:pointer; font-family:inherit; font-weight:800; font-size:22px;
+    padding:22px; border-radius:16px; color:#fff; background:var(--red);
+    box-shadow:0 8px 20px -6px rgba(197,43,34,.5); transition:transform .1s ease, background .15s ease;
+  }
+  .bigbtn:active{transform:translateY(2px); box-shadow:none;}
+  .bigbtn:hover{background:var(--red-dark);}
+  .bigbtn[disabled]{background:#cfc7c1; box-shadow:none; cursor:not-allowed;}
+  .bigbtn.ghost{background:#fff; color:var(--ink); border:2px solid var(--line); box-shadow:none;}
+  .bigbtn.ghost:hover{border-color:var(--red); color:var(--red);}
+
+  .msg{font-size:16px; padding:14px 16px; border-radius:12px; margin-top:14px; font-weight:700;}
+  .msg.err{background:#fdf1ef; color:var(--red-dark);}
+  .msg.ok{background:var(--paid-bg); color:var(--paid);}
+
+  /* Add form */
+  .field{margin-bottom:20px;}
+  .stepnote{margin-top:10px; font-size:17px; color:var(--stone); font-weight:700;}
+  .stepnote b{color:var(--red);}
+
+  .statuschoice{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;}
+  .schip{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+    border:2.5px solid var(--line); background:#fff; border-radius:14px; padding:16px 6px;
+    font-family:inherit; font-weight:800; font-size:16px; color:var(--stone); cursor:pointer;
+  }
+  .schip .ic{font-size:26px;}
+  .schip.sel[data-st=paid]{border-color:var(--paid); background:var(--paid-bg); color:var(--paid);}
+  .schip.sel[data-st=pledged]{border-color:var(--pledged); background:var(--pledged-bg); color:var(--pledged);}
+  .schip.sel[data-st=promised]{border-color:var(--promised); background:var(--promised-bg); color:var(--promised);}
+  @media(max-width:420px){ .statuschoice{grid-template-columns:1fr;} }
+
+  .notelink{background:none; border:none; color:var(--red); font-family:inherit; font-weight:700; font-size:16px; padding:8px 0; cursor:pointer;}
+  .noteinput{display:none; margin-top:8px;}
+  .noteinput.show{display:block;}
+  .noteinput input{font-size:17px; padding:14px 14px; font-weight:600;}
+
+  /* Success overlay */
+  .success{display:none; text-align:center; padding:8px 4px 4px;}
+  .success.show{display:block;}
+  .success .tick{font-size:64px; line-height:1;}
+  .success h2{font-size:26px; margin-top:8px;}
+  .success p{color:var(--stone); font-size:17px; margin-top:8px;}
+
+  /* Recent list */
+  .listhead{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px;}
+  .listhead h2{font-size:19px;}
+  #search{font-size:17px; padding:12px 14px; font-weight:600;}
+  .row-item{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:16px 4px; border-bottom:1px solid var(--line);}
+  .row-item:last-child{border-bottom:none;}
+  .row-nm{font-weight:800; font-size:18px; flex:1 1 auto; min-width:0;}
+  .row-nm small{display:block; font-weight:600; font-size:14px; color:var(--stone); margin-top:2px;}
+  .row-amt{font-weight:700; color:var(--stone); font-size:14px; white-space:nowrap; flex:none;}
+  @media(max-width:380px){
+    .row-item{flex-wrap:wrap;}
+    .row-amt{order:3; width:100%; margin-top:2px;}
+  }
+  .pill{
+    flex:none; font-family:inherit; font-weight:800; font-size:14px; letter-spacing:.02em;
+    padding:11px 16px; border-radius:999px; border:none; cursor:pointer; text-transform:uppercase;
+  }
+  .pill.paid{background:var(--paid-bg); color:var(--paid);}
+  .pill.pledged{background:var(--pledged-bg); color:var(--pledged);}
+  .pill.promised{background:var(--promised-bg); color:var(--promised);}
+  .empty{padding:24px 4px; text-align:center; color:var(--stone); font-size:16px;}
+
+  .footlink{display:block; text-align:center; margin-top:26px; color:var(--stone); font-size:15px; text-decoration:none; font-weight:700;}
+  .footlink:hover{color:var(--red);}
+
+  .toast{position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(20px); background:var(--ink); color:#fff;
+         padding:14px 22px; border-radius:999px; font-size:16px; font-weight:700; opacity:0; pointer-events:none; transition:.25s; z-index:99; text-align:center;}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="../assets/brand/pamodzi/pamodzi-logo-transparent.png" alt="">
+  <div>
+    <h1>Add a Contribution</h1>
+    <div class="sub">Faith in Motion · St Joseph Rwembyo</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- LOCK SCREEN -->
+  <div class="card lockwrap" id="lockCard">
+    <span class="biglabel" for="pw">Console password</span>
+    <input type="password" id="pw" placeholder="Type the password" autocomplete="off">
+    <button class="bigbtn" id="unlockBtn">Unlock</button>
+    <div class="msg err" id="lockMsg" style="display:none;"></div>
+  </div>
+
+  <!-- MAIN (hidden until unlocked) -->
+  <div id="mainArea" style="display:none;">
+
+    <div class="card">
+      <div class="success" id="successBox">
+        <div class="tick">✅</div>
+        <h2>Added — it's live now</h2>
+        <p id="successName"></p>
+        <button class="bigbtn" id="addAnotherBtn" style="margin-top:16px;">Add another person</button>
+      </div>
+
+      <div id="formBox">
+        <div class="field">
+          <span class="biglabel">Name</span>
+          <input type="text" id="fName" placeholder="e.g. Modest R" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <span class="biglabel">Amount (UGX)</span>
+          <input type="number" id="fAmt" inputmode="numeric" placeholder="e.g. 100000">
+          <div class="stepnote">= <b id="stepPreview">0</b> steps (worked out automatically)</div>
+        </div>
+
+        <div class="field">
+          <span class="biglabel">Status</span>
+          <div class="statuschoice" id="statusChoice">
+            <button type="button" class="schip sel" data-st="paid"><span class="ic">✅</span>Paid</button>
+            <button type="button" class="schip" data-st="pledged"><span class="ic">🅿️</span>Pledged</button>
+            <button type="button" class="schip" data-st="promised"><span class="ic">🤝</span>Promised</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <button type="button" class="notelink" id="noteToggle">+ Add a note (optional)</button>
+          <div class="noteinput" id="noteBox">
+            <input type="text" id="fNote" placeholder="e.g. for Shyaka's walking water">
+          </div>
+        </div>
+
+        <button class="bigbtn" id="addBtn">Add &amp; publish now</button>
+        <div class="msg err" id="formMsg" style="display:none;"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="listhead">
+        <h2>Recent contributors</h2>
+      </div>
+      <input type="text" id="search" placeholder="Search a name…">
+      <div id="listMount" style="margin-top:6px;"></div>
+      <div class="empty" id="listEmpty" style="display:none;">No match found.</div>
+    </div>
+
+    <a class="footlink" href="index.html">Open the full console (edit, PDF, journey updates) →</a>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/roll-data.js?v=18"></script>
+<script>
+(function(){
+  "use strict";
+  var STEP_UGX = 1000;
+  var LIVE_ENDPOINT = "../api/roll.php";
+  var PW_KEY = "fimAdminPw";
+
+  var $ = function(id){ return document.getElementById(id); };
+  var roll = (window.ROLL_DATA||[]).map(function(r){ return r.slice(); });
+  var chosenStatus = "paid";
+  var livePassword = localStorage.getItem(PW_KEY) || "";
+
+  function fmt(n){ return Number(n).toLocaleString("en-US"); }
+  function ugx(n){ return "UGX " + fmt(n); }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  function showToast(t){
+    var el = $("toast");
+    el.textContent = t;
+    el.classList.add("show");
+    setTimeout(function(){ el.classList.remove("show"); }, 2200);
+  }
+
+  // ---------- lock / unlock ----------
+  function tryEnter(){
+    if(!livePassword){ return; }
+    $("lockCard").style.display = "none";
+    $("mainArea").style.display = "block";
+    fetchLiveRoll();
+  }
+  tryEnter();
+
+  $("unlockBtn").addEventListener("click", function(){
+    var v = $("pw").value.trim();
+    if(!v){ $("lockMsg").style.display="block"; $("lockMsg").textContent="Type the password first."; return; }
+    livePassword = v;
+    localStorage.setItem(PW_KEY, livePassword);
+    tryEnter();
+  });
+  $("pw").addEventListener("keydown", function(e){ if(e.key==="Enter") $("unlockBtn").click(); });
+
+  // ---------- fetch current roll ----------
+  function fetchLiveRoll(){
+    fetch(LIVE_ENDPOINT + "?format=json", {cache:"no-store"})
+      .then(function(r){ if(!r.ok) throw new Error("bad status"); return r.json(); })
+      .then(function(data){
+        if(!data || !Array.isArray(data.roll)) throw new Error("bad shape");
+        roll = data.roll.map(function(r){ return r.slice(); });
+        renderList();
+      })
+      .catch(function(){
+        showToast("Could not load the live list — showing the saved copy.");
+        renderList();
+      });
+  }
+
+  // ---------- publish ----------
+  function publishLive(onDone){
+    fetch(LIVE_ENDPOINT, {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({password: livePassword, roll: roll})
+    })
+      .then(function(r){ return r.json().then(function(body){ return {ok:r.ok, body:body}; }); })
+      .then(function(res){
+        if(res.ok && res.body && res.body.ok){
+          onDone(true);
+        } else if(res.ok===false && res.body && /password/i.test(res.body.error||"")){
+          // wrong password — force re-entry
+          localStorage.removeItem(PW_KEY);
+          livePassword = "";
+          $("mainArea").style.display = "none";
+          $("lockCard").style.display = "flex";
+          $("lockMsg").style.display = "block";
+          $("lockMsg").textContent = "That password isn't right anymore — try again.";
+          onDone(false);
+        } else {
+          onDone(false, (res.body && res.body.error) || "Something went wrong.");
+        }
+      })
+      .catch(function(){ onDone(false, "No connection — check your internet and try again."); });
+  }
+
+  // ---------- add form ----------
+  $("fAmt").addEventListener("input", function(){
+    var v = parseInt($("fAmt").value, 10);
+    $("stepPreview").textContent = (v>0) ? fmt(Math.floor(v/STEP_UGX)) : "0";
+  });
+
+  $("statusChoice").addEventListener("click", function(e){
+    var b = e.target.closest(".schip"); if(!b) return;
+    document.querySelectorAll(".schip").forEach(function(x){ x.classList.remove("sel"); });
+    b.classList.add("sel");
+    chosenStatus = b.dataset.st;
+  });
+
+  $("noteToggle").addEventListener("click", function(){
+    $("noteBox").classList.toggle("show");
+  });
+
+  $("addBtn").addEventListener("click", function(){
+    var nm = $("fName").value.trim();
+    var amt = parseInt($("fAmt").value, 10);
+    var note = $("fNote").value.trim();
+    var msg = $("formMsg");
+    msg.style.display = "none";
+
+    if(!nm){ msg.textContent="Type the person's name."; msg.style.display="block"; return; }
+    if(!(amt>0)){ msg.textContent="Type an amount in UGX."; msg.style.display="block"; return; }
+
+    var steps = Math.floor(amt/STEP_UGX);
+    roll.push([nm, amt, steps, chosenStatus, note]);
+
+    $("addBtn").disabled = true;
+    $("addBtn").textContent = "Publishing…";
+
+    publishLive(function(ok, err){
+      $("addBtn").disabled = false;
+      $("addBtn").textContent = "Add & publish now";
+      if(ok){
+        $("successName").textContent = nm + " — " + ugx(amt) + " (" + fmt(steps) + " steps)";
+        $("formBox").style.display = "none";
+        $("successBox").classList.add("show");
+        renderList();
+      } else {
+        roll.pop();
+        msg.textContent = err || "Could not publish — nothing was saved. Try again.";
+        msg.style.display = "block";
+      }
+    });
+  });
+
+  $("addAnotherBtn").addEventListener("click", function(){
+    $("fName").value=""; $("fAmt").value=""; $("fNote").value="";
+    $("stepPreview").textContent="0";
+    document.querySelectorAll(".schip").forEach(function(x){ x.classList.remove("sel"); });
+    document.querySelector('.schip[data-st="paid"]').classList.add("sel");
+    chosenStatus="paid";
+    $("noteBox").classList.remove("show");
+    $("successBox").classList.remove("show");
+    $("formBox").style.display = "block";
+    $("fName").focus();
+  });
+
+  // ---------- recent list + tap-to-cycle status ----------
+  function renderList(){
+    var q = ($("search").value||"").toLowerCase();
+    var mount = $("listMount");
+    mount.innerHTML = "";
+
+    var indices = roll.map(function(_,i){ return i; });
+    if(q){
+      indices = indices.filter(function(i){ return roll[i][0].toLowerCase().indexOf(q) > -1; });
+    } else {
+      indices = indices.slice(-15).reverse();
+    }
+
+    indices.forEach(function(i){
+      var r = roll[i];
+      var row = document.createElement("div");
+      row.className = "row-item";
+      row.innerHTML =
+        '<div class="row-nm">' + esc(r[0]) + (r[4] ? "<small>"+esc(r[4])+"</small>" : "") + '</div>'
+        + '<div class="row-amt">' + ugx(r[1]) + '</div>'
+        + '<button class="pill ' + r[3] + '" data-cycle="' + i + '">' + r[3] + '</button>';
+      mount.appendChild(row);
+    });
+    $("listEmpty").style.display = indices.length ? "none" : "block";
+  }
+
+  $("listMount").addEventListener("click", function(e){
+    var b = e.target.closest("[data-cycle]"); if(!b) return;
+    var i = +b.dataset.cycle;
+    var order = ["paid","pledged","promised"];
+    var prev = roll[i][3];
+    roll[i][3] = order[(order.indexOf(prev)+1)%3];
+    b.disabled = true;
+    publishLive(function(ok, err){
+      b.disabled = false;
+      if(ok){ showToast(roll[i][0] + " → " + roll[i][3]); renderList(); }
+      else { roll[i][3] = prev; showToast(err || "Could not publish — try again."); renderList(); }
+    });
+  });
+
+  $("search").addEventListener("input", renderList);
+})();
+</script>
+</body>
+</html>
