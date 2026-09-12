@@ -15,7 +15,7 @@ window.FIM_UPDATES = [
     title: "Investing in God's Kingdom — a call to action.",
     detail: "A look back at the work before the walk, and a reminder that the appeal continues as the community works to roof St Joseph Rwembyo before Christmas 2026.",
     meta: "Faith in Motion · St Joseph Rwembyo",
-    videoUrl: "https://youtu.be/fGOhA0cotxc",
+    videoUrl: "https://youtu.be/fGOhAOcotxc?si=nXcE87wdP7Vv4xPO",
     poster: fimAssetBase + "faith-in-motion/investing-gods-kingdom-video.jpg",
     alt: "Investing in God's Kingdom — a call to action video"
   },
