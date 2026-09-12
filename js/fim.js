@@ -360,8 +360,12 @@
   var UPDATES=(window.FIM_UPDATES||[]).slice();
   if(updatesMount&&UPDATES.length){
     updatesMount.innerHTML=UPDATES.map(function(u,i){
+      var videoUrl=/^https:\/\/(?:www\.)?(?:youtube\.com|youtu\.be)\//.test(u.videoUrl||'')?u.videoUrl:'';
+      var media=videoUrl
+        ?'<div class="journey-photo journey-photo--video"><a class="journey-video-link" href="'+esc(videoUrl)+'" target="_blank" rel="noopener" aria-label="Watch '+esc(u.title||'the film')+' on YouTube"><img src="'+esc(assetUrl(u.poster))+'" alt="'+esc(u.alt||'')+'" loading="eager" decoding="async"><span class="journey-play" aria-hidden="true"><i>▶</i><b>Watch the film</b></span></a></div>'
+        :'<div class="journey-photo"><img src="'+esc(assetUrl(u.image))+'" alt="'+esc(u.alt||'')+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async"></div>';
       return '<article class="journey-card reveal'+(i===0?' lead':'')+'">'
-        +'<div class="journey-photo"><img src="'+esc(assetUrl(u.image))+'" alt="'+esc(u.alt||'')+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async"></div>'
+        +media
         +'<div class="journey-copy"><span class="journey-label">'+esc(u.label||'Journey update')+'</span>'
         +'<h3>'+esc(u.title||'')+'</h3>'
         +'<p>'+esc(u.detail||'')+'</p>'

@@ -35,13 +35,15 @@
         var mode = vocabulary[index % vocabulary.length];
         if (element.matches(".c-side, .split > :last-child")) mode = "right";
         if (element.matches(".c-main, .split > :first-child")) mode = "left";
-        if (element.matches(".pillars, .cards, .figs, .pathway, .tl, .journey-grid, .board")) mode = "rise";
+        if (element.matches(".pillars, .cards, .figs, .pathway, .tl, .board")) mode = "rise";
         element.setAttribute("data-motion", mode);
       }
       element.style.setProperty("--reveal-delay", Math.min((index % 4) * 55, 165) + "ms");
     });
 
-    var groups = all(".pillars, .cards, .figs, .pathway, .tl, .journey-grid, .trustline .in, .hero-meta");
+    /* Journey cards reveal independently. Treating the full editorial grid as
+       one motion group can leave long collections below the observer threshold. */
+    var groups = all(".pillars, .cards, .figs, .pathway, .tl, .trustline .in, .hero-meta");
     groups.forEach(function (group) {
       group.classList.add("motion-group");
       Array.prototype.forEach.call(group.children, function (child, index) {

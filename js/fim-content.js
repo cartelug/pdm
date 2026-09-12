@@ -11,6 +11,55 @@
 var fimAssetBase = new URL("../assets/", document.currentScript && document.currentScript.src ? document.currentScript.src : window.location.href).href;
 window.FIM_UPDATES = [
   {
+    label: "Construction appeal",
+    title: "Investing in God's Kingdom — a call to action.",
+    detail: "A look back at the work before the walk, and a reminder that the appeal continues as the community works to roof St Joseph Rwembyo before Christmas 2026.",
+    meta: "Faith in Motion · St Joseph Rwembyo",
+    videoUrl: "https://youtu.be/fGOhA0cotxc",
+    poster: fimAssetBase + "faith-in-motion/investing-gods-kingdom-video.jpg",
+    alt: "Investing in God's Kingdom — a call to action video"
+  },
+  {
+    label: "Church construction",
+    title: "The roof line begins to take shape.",
+    detail: "Timber is set above the completed brick walls as work moves into the next stage.",
+    meta: "Construction progress · St Joseph Rwembyo",
+    image: fimAssetBase + "faith-in-motion/church-build-roof-line.jpg",
+    alt: "A builder working on a timber roof frame above completed brick walls."
+  },
+  {
+    label: "Church construction",
+    title: "Building the timber frame.",
+    detail: "Workers fit the main timber structure across the open church building.",
+    meta: "Construction progress · St Joseph Rwembyo",
+    image: fimAssetBase + "faith-in-motion/church-build-timber-frame.jpg",
+    alt: "Two builders fitting a timber roof frame between tall brick walls."
+  },
+  {
+    label: "Church construction",
+    title: "The walls are standing.",
+    detail: "The brick structure and openings are ready to carry the next phase of the roof work.",
+    meta: "Construction progress · St Joseph Rwembyo",
+    image: fimAssetBase + "faith-in-motion/church-build-brick-walls.jpg",
+    alt: "A long brick church wall with open window spaces and building materials in front."
+  },
+  {
+    label: "Church construction",
+    title: "Preparing the site for the next stage.",
+    detail: "Materials and timber supports are organised around the church structure before roof installation continues.",
+    meta: "Construction progress · St Joseph Rwembyo",
+    image: fimAssetBase + "faith-in-motion/church-build-site-preparation.jpg",
+    alt: "A side view of the brick church building with timber supports and earth in front."
+  },
+  {
+    label: "Church construction",
+    title: "Shaping the main entry.",
+    detail: "The high entrance opening is supported in timber while the surrounding brickwork is completed.",
+    meta: "Construction progress · St Joseph Rwembyo",
+    image: fimAssetBase + "faith-in-motion/church-build-entry-structure.jpg",
+    alt: "A tall arched entry opening in a brick wall supported by timber posts."
+  },
+  {
     label: "Walk day",
     title: "Arrival day in Kiburara.",
     detail: "Shyaka reaches St Joseph Rwembyo Catholic Church, greeted by the community that walked the campaign with him from the very first step.",

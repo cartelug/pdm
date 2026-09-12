@@ -10,6 +10,12 @@ These are the supplied original campaign images for the Faith in Motion pages. T
 | `faith-in-motion-345km-poster.jpg` | Campaign proof / share-card section | Published Faith in Motion artwork; do not use as the main logo. |
 | `walking-rotarian-sunset-video-frame.jpg` | Optional atmospheric supporting image | Video screenshot; use only as a small supporting frame. |
 | `mpara-biguli-day-8.jpg` | Day 8 route update | Mpara–Biguli progress image and journey overlay. |
+| `investing-gods-kingdom-video.jpg` | Lead construction appeal | Supplied preview frame for the YouTube watch card. |
+| `church-build-roof-line.jpg` | Construction update | Builder working on the new timber roof line. |
+| `church-build-timber-frame.jpg` | Construction update | Workers fitting the timber frame between the brick walls. |
+| `church-build-brick-walls.jpg` | Construction update | Wide view of the completed brick walls. |
+| `church-build-site-preparation.jpg` | Construction update | Side view of the site and prepared materials. |
+| `church-build-entry-structure.jpg` | Construction update | Main entry opening supported by timber. |
 
 ## Brand inventory
 
