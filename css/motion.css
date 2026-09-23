@@ -146,7 +146,7 @@ header.is-hidden ~ .scroll-progress{top:0}
 .motion-ready .hero-in .wrap > .hero-meta{animation:pamodzi-enter 760ms 390ms var(--ease-premium) forwards}
 @keyframes pamodzi-enter{to{opacity:1;transform:translate3d(0,0,0)}}
 
-.reveal{
+.motion-enabled .reveal{
   --reveal-x:0px;
   --reveal-y:24px;
   opacity:0;
@@ -157,10 +157,10 @@ header.is-hidden ~ .scroll-progress{top:0}
     transform var(--motion-reveal) var(--ease-premium) var(--reveal-delay,0ms),
     filter 580ms ease var(--reveal-delay,0ms);
 }
-.reveal[data-motion="left"]{--reveal-x:-28px;--reveal-y:8px}
-.reveal[data-motion="right"]{--reveal-x:28px;--reveal-y:8px}
-.reveal[data-motion="scale"]{--reveal-y:10px;transform:translate3d(0,var(--reveal-y),0) scale(.965)}
-.reveal.in{opacity:1;filter:none;transform:translate3d(0,0,0) scale(1)}
+.motion-enabled .reveal[data-motion="left"]{--reveal-x:-28px;--reveal-y:8px}
+.motion-enabled .reveal[data-motion="right"]{--reveal-x:28px;--reveal-y:8px}
+.motion-enabled .reveal[data-motion="scale"]{--reveal-y:10px;transform:translate3d(0,var(--reveal-y),0) scale(.965)}
+.motion-enabled .reveal.in{opacity:1;filter:none;transform:translate3d(0,0,0) scale(1)}
 
 .motion-group > .motion-item{
   opacity:0;
