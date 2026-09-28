@@ -27,3 +27,12 @@ Paste the output into `FIM_ADMIN_PASSWORD_HASH` in `config.php`, commit, and pus
 - Confirm PHP is actually running: visiting `/api/roll.php` in a browser should show a line starting `window.ROLL_DATA = [...`, not raw PHP source and not a server error page. If it shows PHP source, `.php` files aren't being executed on that host and this whole approach needs a different backend.
 - Confirm the data folder is writable by the web server user — if `POST` requests keep failing with "Could not write the live register," it's almost always a file-permission issue on `api/data/`.
 - The admin console's "Live publishing" status line at the top of the Pledges tab reports exactly what happened on the last read or write — that's the first place to look.
+
+## Walk for Education — `campaign.php`
+
+Same pattern, same password, separate record.
+
+- `GET /api/campaign.php` returns `window.WFE_LIVE = {...};` — loaded on every Walk for Education page between `js/wfe-data.js` and `js/wfe.js`. If the request fails, the bundled record stands and every unverified section simply stays hidden.
+- `GET /api/campaign.php?format=json` feeds the console at `/admin/wfe.html`.
+- `POST /api/campaign.php` with `{"password": "...", "campaign": {...}}` accepts **only** these fields, each type- and length-checked: `status`, `statusLabel`, `campaignStartDate`, `campaignEndDate`, `routeStatus`, `distanceCoveredKm`, `routeStages`, `contributionUnitValue`, `contributionUnitLabel`, `paymentChannels`, `paymentVerificationNote`, `receivedTotal`, `pledgedTotal`, `lastReconciledAt`, `publicReportingState`, `updates`, `confirmedPartners`. Source-document facts (distance, goal, student numbers) cannot be overridden. Image paths must be `assets/…` or `https://…`.
+- The live record is `data/wfe-live.json` — never committed, never touched by a deploy.

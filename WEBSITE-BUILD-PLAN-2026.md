@@ -21,7 +21,9 @@ This consolidates the status of the four existing plan documents (`V2-ROADMAP.md
 | Self-hosted fonts / critical CSS | `PERFORMANCE-SEO-DISTRIBUTION-PLAN.md` §6 | **Not started.** Every page still loads three Google Font families from two third-party origins. |
 | Measurement / analytics | `PERFORMANCE-SEO-DISTRIBUTION-PLAN.md` §8 | **Not started.** `dataLayer.push` calls exist in both `js/fim.js`-family and `js/wfe.js`, but no analytics script is loaded anywhere, so none of it is captured yet. |
 | Service worker / offline resilience | `PERFORMANCE-SEO-DISTRIBUTION-PLAN.md` §7 | **Not started** — correctly deferred (that document explicitly recommends shipping this last). |
-| **Walk for Education campaign** | *(new since the above documents were written)* | **Launched as a pre-data shell.** Five pages, full design system, no backend, no live figures — see `WALK-FOR-EDUCATION-FINISH-PLAN.md` for the dedicated plan. |
+| **Walk for Education campaign** | *(new since the above documents were written)* | **v2 shipped — launch-ready.** Live publishing API + console, ready-when-verified components, ambassador `?ref=` attribution, WhatsApp fallbacks, dedicated share card, JSON-LD. Waiting only on four campaign facts — see `WALK-FOR-EDUCATION-FINISH-PLAN.md`. |
+
+**Update after the Walk for Education v2 release:** the WFE share card, structured data, enquiry fallback, `?ref=` attribution and admin console items below are now **done for Walk for Education**; they remain open for Faith in Motion and the institutional pages, where the same patterns can now be copied directly.
 
 **The one-line summary:** the site's *structure and craft foundation* are in good shape across both campaigns; the *layer that makes contributions actually happen and be measurable* — real form backends, per-page share images, analytics, structured data — is the largest open gap, and it is open on **both** Faith in Motion and Walk for Education, not just the new campaign.
 

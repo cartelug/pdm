@@ -23,8 +23,13 @@
     campaignStartDate: null,
     campaignEndDate: null,
     routeStatus: "High-level endpoints confirmed in the campaign source; detailed stages pending approval.",
+    /* Verified stages only: { name, country, km, date: "YYYY-MM-DD", reached: bool } */
+    routeStages: [],
+    distanceCoveredKm: null,
     contributionUnitValue: null,
+    contributionUnitLabel: "step",
     contributionUnitCurrency: "UGX",
+    /* Authorised channels only: { type: "mobile-money"|"bank", provider, number, accountName, branch?, currency?, referenceHint? } */
     paymentChannels: [],
     paymentVerificationNote: "Request the current approved contribution details and verify the beneficiary before sending funds.",
     receivedTotal: null,
@@ -45,6 +50,10 @@
         role: "Lead Rotary Partner"
       }
     ],
+    /* Written confirmation of participation AND public acknowledgement required. */
+    confirmedPartners: [],
+    /* Cleared field notes, newest first: { date, location?, stage?, title, body, source?, image?, imageAlt? } */
+    updates: [],
     capitalPriorities: [
       "Student hostels",
       "Lecture rooms, library & ICT",

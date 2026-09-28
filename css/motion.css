@@ -335,4 +335,5 @@ body.is-leaving header,body.is-leaving main,body.is-leaving .hero,body.is-leavin
     opacity:1!important;
   }
   .page-wipe{display:none}
+  .btn::before{display:none}
 }

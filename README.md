@@ -40,6 +40,16 @@ The `.nojekyll` file keeps the static source unchanged during publication. `site
 
 The backup download still includes both the contribution register and journey collection, useful for an offline copy or to recover a session. The maintenance console is a browser-side tool, marked `noindex` and not linked from public pages. See `api/README.md` for how the live-publishing endpoint itself works and how to change its password.
 
+## Walk for Education campaign
+
+Pages live under `walk-for-education/` and share `css/wfe.css` and `js/wfe.js`.
+
+- **Source facts** (1,100 km, UGX 25B goal, student numbers, named roles) live in `js/wfe-data.js` and change only by code edit.
+- **Verified live values** — dates, distance walked, route stages, step value, payment channels, reconciled totals, field notes and newly confirmed partners — are published from `/admin/wfe.html` (same password as the Faith in Motion console) through `api/campaign.php`. Nothing needs a commit.
+- Every section that shows one of those values stays hidden until it holds a verified value, so the site can never display a guessed number.
+- **Ambassador links:** any campaign link with `?ref=club-name` tags every enquiry, pledge message, share and analytics event from that visitor with the club or ambassador's name. `?steps=100` preselects an amount in the step calculator once a step value is published.
+- Share preview image: `assets/og/walk-for-education.jpg` (1200×630).
+
 ## Motion and accessibility
 
 Motion is progressively enhanced with compositor-friendly transforms and opacity. It is disabled when a visitor requests reduced motion. The mobile experience removes background travel and magnetic pointer effects, keeps touch targets unchanged and preserves the existing keyboard-accessible navigation.

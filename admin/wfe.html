@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Walk for Education — Campaign Console</title>
+<link rel="icon" type="image/png" href="../assets/brand/pamodzi/pamodzi-logo-transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@500;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#C52B22;--red-2:#E04438;--ink:#191817;--ink-2:#302E2C;--paper:#fff;--paper-2:#F8F5F3;--line:#EADFDB;--line-2:#D9C7C1;--stone:#68625E;--ok:#2E7D46;--warn:#B07400;--soft:#FBE9E6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper-2);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;font-size:15px;padding-bottom:110px}
+  h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.02em;margin:0}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  header{background:var(--ink);color:#fff;padding:20px 0}
+  .hbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand img{width:58px;height:44px;object-fit:contain;background:#fff;border-radius:10px;padding:4px}
+  header h1{font-size:21px}
+  header .sub{font-size:12px;color:#d7cbc7;letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+  header .sub a{color:#ffd6d1}
+  .live{display:flex;align-items:center;gap:8px;font:700 11px/1.3 'JetBrains Mono',monospace;letter-spacing:.04em;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);max-width:520px}
+  .live:before{content:"";width:8px;height:8px;border-radius:50%;background:#999;flex:none}
+  .live.ok:before{background:#8fe3a8}.live.err:before{background:#ff756b}.live.busy:before{background:#ffd27a}
+  .intro{margin:26px 0 8px;padding:18px 20px;border-radius:14px;background:#fff8e2;border:1px solid #ead7a0;color:#5d460f;font-size:14px;line-height:1.55}
+  .intro b{color:#3f2f08}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0}
+  .card>h2{font-size:19px}
+  .card>.hint{font-size:13px;color:var(--stone);margin:6px 0 18px;line-height:1.5}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 14px}
+  label.f{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:800;margin-bottom:5px}
+  input[type=text],input[type=number],input[type=date],input[type=password],select,textarea{width:100%;font-family:inherit;font-size:15px;padding:10px 12px;border:1.5px solid var(--line-2);border-radius:9px;background:#fff;color:var(--ink)}
+  input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,43,34,.25);border-color:var(--red)}
+  textarea{min-height:110px;resize:vertical;line-height:1.5}
+  .full{grid-column:1/-1}
+  .btn{appearance:none;border:1.5px solid var(--ink);background:var(--ink);color:#fff;font:800 14px/1 'Manrope',sans-serif;padding:12px 16px;border-radius:10px;cursor:pointer;min-height:44px}
+  .btn:hover{background:var(--red);border-color:var(--red)}
+  .btn.line{background:#fff;color:var(--ink)}
+  .btn.line:hover{background:var(--soft);color:var(--ink);border-color:var(--ink)}
+  .btn.red{background:var(--red);border-color:var(--red)}
+  .btn.red:hover{background:var(--red-2)}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.small{padding:8px 12px;min-height:36px;font-size:12.5px}
+  .row-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .item{border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:12px;background:var(--paper-2);position:relative}
+  .item .del{position:absolute;top:10px;right:10px}
+  .item h3{font-size:14px;margin:0 0 12px;color:var(--stone);font-family:'JetBrains Mono',monospace;letter-spacing:.04em;text-transform:uppercase}
+  .check{display:flex;gap:10px;align-items:flex-start;margin-top:16px;padding:12px 14px;border-radius:10px;background:var(--soft);font-size:13.5px;line-height:1.45}
+  .check input{margin-top:3px;width:18px;height:18px;accent-color:var(--red);flex:none}
+  .inline{display:flex;gap:8px;align-items:center;font-size:14px;font-weight:700}
+  .inline input{width:18px;height:18px;accent-color:var(--red)}
+  .empty{font-size:13px;color:var(--stone);margin-top:10px}
+  .preview{font-size:13.5px;line-height:1.6}
+  .preview li{margin-bottom:4px}
+  .preview .on{color:var(--ok);font-weight:800}
+  .preview .off{color:var(--stone)}
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(25,24,23,.97);color:#fff;padding:14px 0;box-shadow:0 -20px 40px -20px rgba(0,0,0,.5)}
+  .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .bar .msg{font-size:13px;color:#d7cbc7;max-width:520px}
+  .bar .btn.line{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+  .bar .btn.line:hover{background:rgba(255,255,255,.1)}
+  .pw{display:flex;gap:10px;flex-wrap:wrap}
+  .pw input{max-width:280px}
+  @media(max-width:640px){.bar .wrap{flex-direction:column;align-items:stretch}.bar .btn{width:100%}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap hbar">
+    <div class="brand">
+      <img src="../assets/brand/pamodzi/pamodzi-logo-transparent.png" alt="Pamodzi Community Initiative">
+      <div><h1>Walk for Education — Campaign Console</h1><div class="sub">Nairobi → Kagando · <a href="index.html">Faith in Motion console →</a></div></div>
+    </div>
+    <div class="live" id="liveStatus" role="status">Checking the live campaign record…</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="intro"><b>How this works.</b> Anything you leave empty stays hidden on the public site. The moment you publish a verified value — a date, a payment channel, a reconciled total, a field note — the matching section appears on every Walk for Education page within seconds. Source-document facts (1,100 km, UGX 25B, student numbers) are fixed in the code and cannot be changed here.</p>
+
+  <section class="card">
+    <h2>1 · Unlock live publishing</h2>
+    <p class="hint">Same password as the Faith in Motion console. It is remembered on this device only.</p>
+    <div class="pw">
+      <input type="password" id="pw" placeholder="Console password" autocomplete="off">
+      <button class="btn" type="button" id="savePw">Remember password</button>
+      <button class="btn line" type="button" id="forgetPw">Forget on this device</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>2 · Status &amp; dates</h2>
+    <p class="hint">Set dates only once they are confirmed for public coordination. A start date switches on the public countdown.</p>
+    <div class="grid">
+      <div><label class="f" for="status">Campaign status</label>
+        <select id="status" data-key="status">
+          <option value="">— keep bundled (preparing) —</option>
+          <option value="preparing">Preparing launch</option>
+          <option value="launched">Launched</option>
+          <option value="on-the-road">On the road</option>
+          <option value="completed">Walk completed</option>
+          <option value="paused">Paused</option>
+        </select></div>
+      <div><label class="f" for="statusLabel">Public status label</label><input type="text" id="statusLabel" data-key="statusLabel" maxlength="60" placeholder="e.g. Campaign launched"></div>
+      <div><label class="f" for="start">Start date</label><input type="date" id="start" data-key="campaignStartDate"></div>
+      <div><label class="f" for="end">Arrival / end date</label><input type="date" id="end" data-key="campaignEndDate"></div>
+      <div class="full"><label class="f" for="routeStatus">Route note (public)</label><input type="text" id="routeStatus" data-key="routeStatus" maxlength="300" placeholder="Leave empty to keep the current note"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>3 · Route &amp; progress</h2>
+    <p class="hint">Distance walked moves the marker along the public route line. Stages appear as a list, with reached stages marked.</p>
+    <div class="grid"><div><label class="f" for="covered">Distance walked (km)</label><input type="number" id="covered" data-key="distanceCoveredKm" data-num min="0" max="5000" step="0.1" placeholder="e.g. 142"></div></div>
+    <div id="stages"></div>
+    <div class="row-actions"><button class="btn line small" type="button" data-add="routeStages">+ Add stage</button></div>
+  </section>
+
+  <section class="card">
+    <h2>4 · Contributions</h2>
+    <p class="hint">A unit value switches on the public step calculator. A payment channel switches on the copy-number cards on Take Part and Accountability.</p>
+    <div class="grid">
+      <div><label class="f" for="unit">Value of one unit (UGX)</label><input type="number" id="unit" data-key="contributionUnitValue" data-num min="0" step="1" placeholder="e.g. 1000"></div>
+      <div><label class="f" for="unitLabel">Unit name</label><input type="text" id="unitLabel" data-key="contributionUnitLabel" maxlength="30" placeholder="step"></div>
+      <div class="full"><label class="f" for="verifyNote">Payment verification note (public)</label><input type="text" id="verifyNote" data-key="paymentVerificationNote" maxlength="400" placeholder="Leave empty to keep the current note"></div>
+    </div>
+    <div id="channels"></div>
+    <div class="row-actions"><button class="btn line small" type="button" data-add="paymentChannels">+ Add payment channel</button></div>
+    <label class="check"><input type="checkbox" id="okChannels"> <span>The channel details above were confirmed in writing by the authorised campaign signatory, and the registered name matches exactly.</span></label>
+  </section>
+
+  <section class="card">
+    <h2>5 · Reconciled reporting</h2>
+    <p class="hint">Only reconciled funds go in "Received". Pledges stay separate and are never added to the received total.</p>
+    <div class="grid">
+      <div><label class="f" for="received">Received · verified (UGX)</label><input type="number" id="received" data-key="receivedTotal" data-num min="0" step="1"></div>
+      <div><label class="f" for="pledged">Pledged · separate (UGX)</label><input type="number" id="pledged" data-key="pledgedTotal" data-num min="0" step="1"></div>
+      <div><label class="f" for="reconciled">Last reconciled on</label><input type="date" id="reconciled" data-key="lastReconciledAt"></div>
+      <div class="full"><label class="f" for="reportNote">Reporting note (public)</label><input type="text" id="reportNote" data-key="publicReportingState" maxlength="300" placeholder="Leave empty to keep the current note"></div>
+    </div>
+    <label class="check"><input type="checkbox" id="okFigures"> <span>These figures were confirmed by the finance verifier against the authorised account record.</span></label>
+  </section>
+
+  <section class="card">
+    <h2>6 · Field notes</h2>
+    <p class="hint">Newest first on the public Updates page; the latest also appears on the campaign page. Images: a path such as <code>assets/walk-for-education/photo.jpg</code> uploaded with the site, or an https link.</p>
+    <div id="updates"></div>
+    <div class="row-actions"><button class="btn line small" type="button" data-add="updates">+ Add field note</button></div>
+    <label class="check"><input type="checkbox" id="okUpdates"> <span>Each note has a checked date, location and source, and every photo has the required permissions.</span></label>
+  </section>
+
+  <section class="card">
+    <h2>7 · Confirmed partners</h2>
+    <p class="hint">Shown alongside the three source-document roles. Add an organisation only when participation and public acknowledgement are both confirmed in writing.</p>
+    <div id="partners"></div>
+    <div class="row-actions"><button class="btn line small" type="button" data-add="confirmedPartners">+ Add partner</button></div>
+    <label class="check"><input type="checkbox" id="okPartners"> <span>Written confirmation of participation and public acknowledgement is on file for every partner above.</span></label>
+  </section>
+
+  <section class="card">
+    <h2>8 · What will be public after you publish</h2>
+    <ul class="preview" id="preview"></ul>
+    <div class="row-actions">
+      <button class="btn line small" type="button" id="download">Download backup (.json)</button>
+      <label class="btn line small" for="import" style="display:inline-flex;align-items:center">Import backup</label>
+      <input type="file" id="import" accept="application/json" hidden>
+    </div>
+  </section>
+</main>
+
+<div class="bar">
+  <div class="wrap">
+    <span class="msg" id="barMsg">Changes stay on this screen until you publish.</span>
+    <div class="row-actions" style="margin:0">
+      <button class="btn line" type="button" id="reload">Reload live record</button>
+      <button class="btn red" type="button" id="publish">Publish live</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var ENDPOINT = "../api/campaign.php";
+  var PW_KEY = "fimAdminPw";
+  var state = {};
+  var LISTS = {
+    routeStages: { host: "stages", title: "Stage", fields: [["name", "Place name", "text", 80], ["country", "Country", "text", 40], ["km", "Km from Nairobi", "number"], ["date", "Date", "date"], ["reached", "Reached", "checkbox"]] },
+    paymentChannels: { host: "channels", title: "Channel", fields: [["type", "Type", "select", ["mobile-money", "bank"]], ["provider", "Provider / bank", "text", 60], ["number", "Number / account no.", "text", 40], ["accountName", "Registered name (exact)", "text", 100], ["branch", "Branch (bank)", "text", 80], ["currency", "Currency", "text", 8], ["referenceHint", "Reference instruction", "text", 160]] },
+    updates: { host: "updates", title: "Field note", fields: [["date", "Date", "date"], ["location", "Location", "text", 80], ["stage", "Route stage", "text", 80], ["title", "Title", "text", 140], ["body", "Text (blank line = new paragraph)", "textarea", 2000], ["source", "Source", "text", 140], ["image", "Image path or https link", "text", 300], ["imageAlt", "Image description (required with an image)", "text", 200]] },
+    confirmedPartners: { host: "partners", title: "Partner", fields: [["name", "Organisation", "text", 120], ["role", "Confirmed role", "text", 120]] }
+  };
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function status(kind, text) { var s = $("liveStatus"); s.className = "live " + kind; s.textContent = text; }
+  function bar(text) { $("barMsg").textContent = text; }
+  function password() { return $("pw").value || localStorage.getItem(PW_KEY) || ""; }
+
+  /* ---- simple fields ---- */
+  function readSimple() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-key]"), function (input) {
+      var key = input.getAttribute("data-key");
+      var value = input.value.trim();
+      if (value === "") { delete state[key]; return; }
+      state[key] = input.hasAttribute("data-num") ? Number(value) : value;
+    });
+  }
+  function writeSimple() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-key]"), function (input) {
+      var value = state[input.getAttribute("data-key")];
+      if (input.type === "date" && typeof value === "string") value = value.slice(0, 10);
+      input.value = value == null ? "" : value;
+    });
+  }
+
+  /* ---- repeating lists ---- */
+  function renderList(key) {
+    var spec = LISTS[key];
+    var host = $(spec.host);
+    host.textContent = "";
+    var items = state[key] || [];
+    if (!items.length) host.appendChild(el("p", "empty", "None yet — this section stays hidden on the public site."));
+    items.forEach(function (item, index) {
+      var box = el("div", "item");
+      box.appendChild(el("h3", null, spec.title + " " + (index + 1)));
+      var del = el("button", "btn line small del", "Remove");
+      del.type = "button";
+      del.addEventListener("click", function () { items.splice(index, 1); if (!items.length) delete state[key]; renderList(key); refresh(); });
+      box.appendChild(del);
+      var grid = el("div", "grid");
+      spec.fields.forEach(function (field) {
+        var name = field[0], label = field[1], type = field[2];
+        var wrap = el("div", type === "textarea" || name === "title" ? "full" : null);
+        var id = key + "-" + index + "-" + name;
+        var input;
+        if (type === "checkbox") {
+          var line = el("label", "inline");
+          input = el("input"); input.type = "checkbox"; input.id = id; input.checked = !!item[name];
+          line.appendChild(input); line.appendChild(document.createTextNode(label));
+          wrap.appendChild(line);
+          input.addEventListener("change", function () { item[name] = input.checked; refresh(); });
+        } else {
+          var lab = el("label", "f", label); lab.setAttribute("for", id); wrap.appendChild(lab);
+          if (type === "select") {
+            input = el("select");
+            field[3].forEach(function (opt) { var o = el("option", null, opt === "bank" ? "Bank" : "Mobile Money"); o.value = opt; input.appendChild(o); });
+          } else if (type === "textarea") {
+            input = el("textarea"); input.maxLength = field[3];
+          } else {
+            input = el("input"); input.type = type;
+            if (field[3]) input.maxLength = field[3];
+            if (type === "number") { input.min = "0"; input.step = "any"; }
+          }
+          input.id = id;
+          input.value = item[name] == null ? (type === "select" ? field[3][0] : "") : item[name];
+          if (type === "select" && item[name] == null) item[name] = field[3][0];
+          input.addEventListener("input", function () {
+            var v = input.value.trim();
+            if (v === "") delete item[name];
+            else item[name] = type === "number" ? Number(v) : v;
+            refresh();
+          });
+          wrap.appendChild(input);
+        }
+        grid.appendChild(wrap);
+      });
+      box.appendChild(grid);
+      host.appendChild(box);
+    });
+  }
+  function renderLists() { Object.keys(LISTS).forEach(renderList); }
+
+  /* ---- preview & checks ---- */
+  function fmt(n) { return new Intl.NumberFormat("en-UG").format(n); }
+  function refresh() {
+    readSimple();
+    var p = $("preview");
+    p.textContent = "";
+    function line(on, text) { var li = el("li", on ? "on" : "off", (on ? "✓ " : "— ") + text); p.appendChild(li); }
+    line(!!state.campaignStartDate, state.campaignStartDate ? "Countdown to " + state.campaignStartDate + (state.campaignEndDate ? " · arrival " + state.campaignEndDate : "") : "No dates — countdown hidden");
+    line(typeof state.distanceCoveredKm === "number", typeof state.distanceCoveredKm === "number" ? state.distanceCoveredKm + " km walked marker on the route" : "No route progress marker");
+    line(!!(state.routeStages && state.routeStages.length), (state.routeStages || []).length + " route stage(s)");
+    line(typeof state.contributionUnitValue === "number", typeof state.contributionUnitValue === "number" ? "Step calculator: UGX " + fmt(state.contributionUnitValue) + " per " + (state.contributionUnitLabel || "step") : "Step calculator hidden");
+    line(!!(state.paymentChannels && state.paymentChannels.length), (state.paymentChannels || []).length + " payment channel card(s)");
+    line(typeof state.receivedTotal === "number", typeof state.receivedTotal === "number" ? "Verified progress: UGX " + fmt(state.receivedTotal) + " received" + (typeof state.pledgedTotal === "number" ? " · UGX " + fmt(state.pledgedTotal) + " pledged (separate)" : "") : "Progress section hidden");
+    line(!!(state.updates && state.updates.length), (state.updates || []).length + " field note(s)");
+    line(!!(state.confirmedPartners && state.confirmedPartners.length), (state.confirmedPartners || []).length + " additional confirmed partner(s)");
+  }
+  function problems() {
+    var list = [];
+    var channels = state.paymentChannels || [];
+    if (channels.length && !$("okChannels").checked) list.push("tick the payment-channel confirmation");
+    channels.forEach(function (c, i) { if (!c.provider || !c.number || !c.accountName) list.push("complete provider, number and registered name for channel " + (i + 1)); });
+    if ((typeof state.receivedTotal === "number" || typeof state.pledgedTotal === "number") && !$("okFigures").checked) list.push("tick the finance-verifier confirmation");
+    if (typeof state.receivedTotal === "number" && !state.lastReconciledAt) list.push("add the date the figures were last reconciled");
+    var updates = state.updates || [];
+    if (updates.length && !$("okUpdates").checked) list.push("tick the field-note checks");
+    updates.forEach(function (u, i) {
+      if (!u.date || !u.title || !u.body) list.push("add a date, title and text to field note " + (i + 1));
+      if (u.image && !u.imageAlt) list.push("describe the image in field note " + (i + 1));
+    });
+    (state.routeStages || []).forEach(function (s, i) { if (!s.name) list.push("name route stage " + (i + 1)); });
+    var partners = state.confirmedPartners || [];
+    if (partners.length && !$("okPartners").checked) list.push("tick the partner confirmation");
+    partners.forEach(function (x, i) { if (!x.name || !x.role) list.push("complete partner " + (i + 1)); });
+    return list;
+  }
+  function payload() {
+    readSimple();
+    var out = JSON.parse(JSON.stringify(state));
+    Object.keys(LISTS).forEach(function (k) { if (out[k] && !out[k].length) delete out[k]; });
+    return out;
+  }
+
+  /* ---- live endpoint ---- */
+  function load() {
+    status("busy", "Loading the live campaign record…");
+    fetch(ENDPOINT + "?format=json", { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (data) {
+        state = (data && data.campaign && typeof data.campaign === "object" && !Array.isArray(data.campaign)) ? data.campaign : {};
+        writeSimple(); renderLists(); refresh();
+        status("ok", data.updated ? "Live record loaded · last published " + new Date(data.updated).toLocaleString() : "Live record loaded · nothing published yet");
+      })
+      .catch(function () {
+        state = state || {};
+        writeSimple(); renderLists(); refresh();
+        status("err", "Live endpoint unreachable here — you can still prepare changes and download a backup.");
+      });
+  }
+
+  function publish() {
+    var issues = problems();
+    if (issues.length) { bar("Before publishing: " + issues.join("; ") + "."); return; }
+    var pw = password();
+    if (!pw) { bar("Enter the console password in section 1 first."); $("pw").focus(); return; }
+    var btn = $("publish");
+    btn.disabled = true;
+    status("busy", "Publishing…");
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: pw, campaign: payload() }) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
+      .then(function (res) {
+        if (!res.ok || !res.body.ok) throw new Error((res.body && res.body.error) || "Publishing failed");
+        localStorage.setItem(PW_KEY, pw);
+        status("ok", "Published · " + new Date(res.body.updated).toLocaleString() + " — live on every campaign page now.");
+        bar("Published. Open the public pages to review what visitors see.");
+      })
+      .catch(function (error) {
+        status("err", error.message === "Wrong password" ? "Wrong password — nothing was published." : "Not published: " + error.message);
+        bar("Nothing changed on the live site. Your edits are still on this screen.");
+      })
+      .then(function () { btn.disabled = false; });
+  }
+
+  document.addEventListener("input", function (e) { if (e.target.hasAttribute && e.target.hasAttribute("data-key")) refresh(); });
+  document.addEventListener("change", function (e) { if (e.target.hasAttribute && e.target.hasAttribute("data-key")) refresh(); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-add]"), function (button) {
+    button.addEventListener("click", function () {
+      var key = button.getAttribute("data-add");
+      state[key] = state[key] || [];
+      if (key === "updates") state[key].unshift({ date: new Date().toISOString().slice(0, 10) });
+      else state[key].push({});
+      renderList(key); refresh();
+    });
+  });
+  $("savePw").addEventListener("click", function () { if ($("pw").value) { localStorage.setItem(PW_KEY, $("pw").value); bar("Password remembered on this device."); } });
+  $("forgetPw").addEventListener("click", function () { localStorage.removeItem(PW_KEY); $("pw").value = ""; bar("Password forgotten on this device."); });
+  $("publish").addEventListener("click", publish);
+  $("reload").addEventListener("click", load);
+  $("download").addEventListener("click", function () {
+    var blob = new Blob([JSON.stringify({ campaign: payload(), exported: new Date().toISOString() }, null, 2)], { type: "application/json" });
+    var a = el("a"); a.href = URL.createObjectURL(blob); a.download = "walk-for-education-" + new Date().toISOString().slice(0, 10) + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+  $("import").addEventListener("change", function () {
+    var file = this.files && this.files[0];
+    if (!file) return;
+    file.text().then(function (text) {
+      var data = JSON.parse(text);
+      state = data.campaign || {};
+      writeSimple(); renderLists(); refresh();
+      bar("Backup imported. Review it, then publish when ready.");
+    }).catch(function () { bar("That file isn't a valid campaign backup."); });
+  });
+  if (localStorage.getItem(PW_KEY)) $("pw").placeholder = "Password remembered on this device";
+  load();
+})();
+</script>
+</body>
+</html>
