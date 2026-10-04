@@ -5,3 +5,10 @@ node_modules/
 api/data/roll-live.json
 api/data/wfe-live.json
 api/data/*.tmp
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+pci-private/
+api/payments/config.local.php
+__pycache__/
+*.pyc

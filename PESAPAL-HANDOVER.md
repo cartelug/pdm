@@ -1,0 +1,117 @@
+# PCI payment preparation - implemented 4 October 2026
+
+The existing cPanel/PHP website remains the host. The Faith in Motion register
+(`api/roll.php`) and Walk for Education campaign record (`api/campaign.php`) are
+preserved. This module adds a separate verified payment ledger, not a migration
+of their historic collections.
+
+## Available pages
+
+- `/contribute/`: mobile contribution form and separate pledge flow.
+- `/contribute/payment/`: private, device-session payment status and printable receipt.
+- `/contribute/privacy/` and `/contribute/terms/`: contribution notices. PCI must
+  review the wording and final refund terms before live checkout is enabled.
+- `/admin/collections/`: sign-in, search, filters, payment checks, finance settlement,
+  pledge closing, complete CSV report, server backup and audit trail.
+- `/api/payments/index.php`: JSON API with server sessions, CSRF protection,
+  role checks, input validation, request throttling and idempotent submission.
+- `/api/payments/ipn.php`: accepts Pesapal notifications and verifies status with
+  Pesapal before changing the ledger. It never trusts an incoming paid flag.
+- `/api/payments/return.php`: provider callback; rechecks status and returns to
+  the supporter result page without disclosing private contact information.
+
+## Server requirements
+
+PHP 7.4+ (8.1+ recommended), PDO SQLite, cURL, an Apache/cPanel PHP runtime, HTTPS,
+and a writable private directory **outside** the domain document root. SQLite
+3.27+ is needed for the online backup operation. No Node service or new hosting
+subscription is required. Existing cPanel hosting still needs to be checked for
+these extensions and filesystem permissions.
+
+By default the module creates `pci-private` beside the website document root,
+with 0700 directory permissions and a 0600 database. Override its location with
+the `PCI_PRIVATE_DIR` server environment variable if the host requires another
+location. The module refuses a private directory inside the website root.
+The private directory must not be uploaded to GitHub or exposed through another
+domain, alias or file manager share.
+
+## Connect Pesapal when approved access is supplied
+
+1. Place the filled `api/payments/config.example.php` template at
+   `<private-directory>/config.php`, not in public_html. Configure the actual
+   site URL. Use the sandbox environment and sandbox credentials first.
+2. Configure named `admin_users` with password hashes and `admin`, `finance` or
+   `viewer` roles. Until that is done, username `admin` uses the existing campaign
+   console password; no new default password is introduced. Passwords remain in
+   server sessions only and are not stored by the new browser console.
+3. In the collections console, register the IPN endpoint. Its ID is stored in the
+   private database and is kept separate for sandbox and live.
+4. Set `policies_approved` after PCI approves the notices and final refund terms.
+   Set `checkout_enabled` for sandbox testing. Sandbox records never affect live
+   public totals. Test successful, failed, pending, interrupted and duplicate
+   callback scenarios with provider access; local mocks do not replace this.
+5. Switch to live credentials, register a live IPN, and authorise a controlled
+   production test by setting `live_approved` together with `checkout_enabled`.
+   Keep checkout disabled between tests until finance confirms real payment and
+   settlement and Joshua approves public launch.
+6. Reconcile the live transaction using its settlement reference and actual fee.
+   The ledger reports gross reconciled received funds, fees and net settlement
+   separately. Provider reversals remove the payment from received totals.
+
+Without private configuration, the environment is live but checkout stays
+closed. Real pledges can be recorded if the private database is available.
+Test/staging servers must use `environment = sandbox` so their pledges and
+payments are excluded from live totals.
+
+## Records and operating rules
+
+- Only `walk-for-education-2026` is enabled. Faith in Motion has a separate
+  beneficiary and is not routed to PCI's settlement account by this module.
+- Each attempt stores amount/currency, unique merchant reference, tracking ID,
+  campaign, contact, status, receipt, timestamps and settlement information.
+- Multiple clicks with the same request ID in a browser session reuse one record.
+  An ambiguous submission remains pending for review; it is not recreated after
+  a timeout. The finance console flags missing tracking IDs.
+- Status is checked against merchant reference, UGX currency and expected amount.
+  Repeated callbacks do not create duplicate receipts or double-count funds.
+- Receipt lookup needs an unguessable viewer token and returns no contact details.
+  Browser return parameters alone do not grant access to supporter information.
+- Receipt print/save uses the browser's PDF or printer facility. Automated email
+  delivery is **not configured**; it requires PCI's sending account/SMTP access.
+- Public digital collections show only finance-reconciled live gateway payments.
+  They are labelled separately from existing campaign collections. Never add a
+  historic manual total to this ledger without checking for overlap first.
+- Named access, formal refund terms, provider fees, settlement terms, database
+  retention and an off-host backup destination still need PCI decisions/access.
+
+## Maintenance and recovery
+
+Create an on-server SQLite snapshot from the console's backup button. For
+scheduled operations, configure cPanel cron (replace paths with actual ones):
+
+```sh
+# Every 10 minutes: recheck unresolved payments and recent successful payments.
+php /actual/public_html/api/payments/maintenance.php recheck
+# Daily: snapshot the database outside the web root.
+php /actual/public_html/api/payments/maintenance.php backup
+```
+
+Cron is not installed by a repository deploy. Copy snapshots to PCI-controlled
+off-host storage, monitor cron failures and set a retention policy. For recovery,
+temporarily close checkout, stop writers and cron, archive the current database
+and its WAL files, and restore a verified snapshot to `collections.sqlite` with
+0600 permissions. Recheck provider transactions after the snapshot time before
+reopening. The test suite exercises snapshot reopening and record parity.
+
+## Verification
+
+Run `php tests/payments/ledger.php` for gateway mocks, idempotency, mismatched
+amount/currency/reference rejection, repeated IPN state handling, refunds,
+settlement controls, private directory enforcement and backup recovery. Run the
+HTTP/browser checks against a local PHP server; they use isolated private
+storage and never contact Pesapal or send emails.
+
+No merchant approval, live Pesapal test or bank settlement is claimed by code
+completion alone. API access and PCI's controlled launch checks remain necessary.
+
+Official API reference: https://developer.pesapal.com/how-to-integrate/e-commerce/api-30-json/api-reference

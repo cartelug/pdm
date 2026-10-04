@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /api/
+Disallow: /contribute/payment/
+Disallow: /tests/
 
 Sitemap: https://pamodzici.com/sitemap.xml

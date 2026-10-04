@@ -1,12 +1,22 @@
 # Pamodzi for Development
 
-Static GitHub Pages site for **Pamodzi for Development** and the **Faith in Motion** campaign.
+Static pages with PHP campaign registers and collections services for **Pamodzi Community Initiative**, **Faith in Motion** and **Walk for Education**.
 
-Live site: https://cartelug.github.io/pdm/
+Live site: https://pamodzici.com/
+
+## Pesapal preparation (4 October 2026)
+
+The current deployment target is cPanel at https://pamodzici.com/ through the
+GitHub Actions workflow. The existing static presentation and PHP campaign
+registers remain intact. Payment preparation now includes `/contribute/`, a
+private SQLite ledger outside the document root, and `/admin/collections/`.
+Checkout is closed until Pesapal configuration and PCI approvals are complete.
+See `PESAPAL-HANDOVER.md` for configuration, testing and the remaining launch gates.
 
 ## Site structure
 
-The site has no framework, build step, database, or server runtime.
+The public pages have no framework or build step. Campaign updates use PHP; the
+new payment module uses a private SQLite ledger on the cPanel server.
 
 - Institutional pages: `index.html`, `about.html`, `what-we-do.html`, `model.html`, `impact.html`, `projects.html`, `partnerships.html`, `governance.html`, `contact.html`, and `updates.html`.
 - Project pages: `apartments.html`, `community.html`, and the Faith in Motion campaign pages.
@@ -21,7 +31,9 @@ Public contributor labels are published only when supplied or approved for publi
 
 ## Publish
 
-GitHub Pages is configured to deploy the repository root from `main`.
+The GitHub Actions workflow deploys website files from `main` to cPanel. It
+excludes tests, documentation and configuration examples, preserving server-only
+live registers and private payment data.
 
 ```bash
 git push origin main
