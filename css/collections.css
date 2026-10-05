@@ -1,5 +1,5 @@
 .collections-page{background:var(--paper-2)}
-.collections-header{position:static;background:#fff;border-bottom:1px solid var(--line);padding:22px 0}
+.collections-header{pointer-events:auto;position:static;background:#fff;border-bottom:1px solid var(--line);padding:22px 0}
 .collections-header .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px}
 .collections-header .brand img{width:68px;height:48px;object-fit:contain}
 .collections-header nav{display:flex;gap:24px;font-size:14px;font-weight:700}
