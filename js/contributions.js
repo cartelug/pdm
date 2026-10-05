@@ -50,6 +50,7 @@
         location.assign(root + 'contribute/payment/?reference=' + encodeURIComponent(r.contribution.reference));
       } catch (error) { message(error.message, true); submitting = false; update(); }
     });
+    update();
     try {
       var results = await Promise.all([call('status'), call('session')]); settings = results[0]; csrf = results[1].csrf;
       if (!settings.checkoutEnabled) {

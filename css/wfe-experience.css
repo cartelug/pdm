@@ -16,6 +16,7 @@
 .collection-step-control input{min-width:0;flex:1;width:0!important}.collection-summary{flex-wrap:wrap}
 .wfe-footer nav a{color:#d6ccbe}.wfe-footer nav a:hover{color:#fff}
 .collections-page .btn-ghost{border:1px solid var(--line-2);background:var(--paper-2);color:var(--ink)!important;box-shadow:none}.collections-page .btn-ghost:hover{background:var(--red-soft);border-color:var(--red)}
+.wfe-campaign h1{letter-spacing:-.045em}.wfe-campaign h2{letter-spacing:-.035em}.wfe-campaign h3{letter-spacing:-.02em}
 @media(max-width:760px){.wfe-campaign .wfe-nav-logo{width:180px}.wfe-nav-logo span{font-size:15px}.wfe-campaign .wfe-nav-logo img{width:46px;height:34px}}
 @media(max-width:760px){.wfe-step-copy h2 br{display:initial}.wfe-certificate-preview{aspect-ratio:auto}.wfe-cert-border{min-height:280px}.wfe-photo-credit{top:14px;bottom:auto}.wfe-counter input{width:52px}}
 @media(max-width:480px){.collections-header .wrap{gap:12px}.collections-header .brand{gap:8px;padding-right:0;border-right:0}.collections-header .brand img{width:44px;height:34px}.collections-header .brand .t span{font-size:7px;letter-spacing:.04em}.collections-header nav{font-size:11px}}
