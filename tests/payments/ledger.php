@@ -5,6 +5,7 @@ $temp=sys_get_temp_dir().'/pci-ledger-test-'.bin2hex(random_bytes(8));mkdir($tem
 putenv('PCI_PRIVATE_DIR='.$temp);putenv('PCI_ENVIRONMENT=live');putenv('PCI_CONSUMER_KEY=test-key');putenv('PCI_CONSUMER_SECRET=test-secret');putenv('PCI_POLICIES_APPROVED=true');putenv('PCI_LIVE_APPROVED=true');putenv('PCI_CHECKOUT_ENABLED=true');
 $_SERVER['DOCUMENT_ROOT']=dirname(__DIR__,2);$_SESSION=[];
 require dirname(__DIR__,2).'/api/lib/payments.php';
+require dirname(__DIR__,2).'/api/payments/certificate-pdf.php';
 $checks=0;
 function check(bool $condition,string $name): void { global $checks;if (!$condition) throw new RuntimeException('FAILED: '.$name);$checks++;echo "PASS $name\n"; }
 function rejects(callable $fn,string $name): void { try {$fn();}catch(Throwable $e){check(true,$name);return;}check(false,$name); }
@@ -21,10 +22,16 @@ try {
     check(!pci_checkout_ready(),'checkout closed before IPN registration');
     pci_register_ipn();check(pci_checkout_ready(),'checkout requires all configured gates');
     $row=pci_create($body,'owner-session');check($row['status']==='pending' && $row['tracking_id']!==null,'order starts pending with tracking ID');
+    check((int)$row['steps']===10 && (int)$row['step_unit']===5000,'contribution stores the fixed step-price snapshot');
+    check(pci_certificate($row)===null,'pending payment has no certificate');
     $again=pci_create($body,'owner-session');check($again['reference']===$row['reference'] && $calls===1,'duplicate request submits one gateway order');
     $changed=$body;$changed['amount']=70000;rejects(fn()=>pci_create($changed,'owner-session'),'same request cannot change amount');
     $bad=$body;$bad['campaign']='faith-in-motion';rejects(fn()=>pci_validate($bad),'different beneficiary cannot be pooled');
     $bad=$body;$bad['amount']=50000.5;rejects(fn()=>pci_validate($bad),'fractional UGX rejected');
+    $bad=$body;$bad['amount']=51000;rejects(fn()=>pci_validate($bad),'non-step contribution amounts rejected');
+    $bad=$body;$bad['steps']=9;rejects(fn()=>pci_validate($bad),'step count cannot disagree with payment amount');
+    $bad=$body;$bad['steps']=10.5;rejects(fn()=>pci_validate($bad),'fractional step counts rejected');
+    $small=$body;$small['steps']=1;$small['amount']=5000;check(pci_validate($small)['steps']===1,'single step is accepted at UGX 5,000');
     $bad=$body;$bad['consent']=false;rejects(fn()=>pci_validate($bad),'missing consent rejected');
     $bad=$body;$bad['email']='bad-address';rejects(fn()=>pci_validate($bad),'invalid contact rejected');
     rejects(fn()=>pci_reconcile($row['reference'],'SETTLE',0,'finance'),'pending payment cannot be reconciled');
@@ -34,7 +41,14 @@ try {
     $wrong=$reply;$wrong['merchant_reference']='OTHER';rejects(fn()=>pci_apply_status($row,$wrong),'merchant reference mismatch rejected');
     $wrong=$reply;$wrong['status_code']=99;rejects(fn()=>pci_apply_status($row,$wrong),'unknown status rejected');
     $paid=pci_verify($row);check($paid['status']==='successful' && $paid['receipt']!==null,'server verification issues receipt');
+    $certificate=pci_certificate($paid);check($certificate!==null && preg_match('/^WFE-[A-F0-9]{24}$/D',$certificate['code'])===1,'verified live payment receives an unguessable certificate code');
+    $pdf=pci_certificate_pdf($paid,$certificate);check(strpos($pdf,'%PDF-1.4')===0 && strpos($pdf,'UGX 50,000')!==false && strpos($pdf,'10 steps')!==false,'certificate PDF contains verified amount and steps');
+    check(strpos($pdf,$paid['email'])===false && strpos($pdf,'supporter@example.com')===false,'certificate PDF omits private contact details');
+    if (getenv('PCI_TEST_CERTIFICATE_PATH')) file_put_contents(getenv('PCI_TEST_CERTIFICATE_PATH'),$pdf);
     $duplicate=pci_verify($paid);check($duplicate['receipt']===$paid['receipt'],'repeated notification retains one receipt');
+    check(pci_certificate($duplicate)===$certificate && (int)pci_db()->query('SELECT count(*) FROM certificates')->fetchColumn()===1,'repeated successful callbacks preserve one certificate');
+    $testOnly=$paid;$testOnly['environment']='sandbox';check(pci_certificate($testOnly)===null,'successful sandbox payment cannot unlock a certificate');
+    $historic=$paid;$historic['steps']=0;$historic['step_unit']=0;check(pci_certificate($historic)===null,'historic payments without a step snapshot are not relabelled');
     check((int)pci_totals()['successful']===50000 && (int)pci_totals()['reconciled']===0,'successful funds remain outside public total until reconciled');
     rejects(fn()=>pci_reconcile($paid['reference'],'',0,'finance'),'settlement reference required');
     rejects(fn()=>pci_reconcile($paid['reference'],'SETTLE',50001,'finance'),'invalid fee rejected');
@@ -42,13 +56,17 @@ try {
     pci_reconcile($paid['reference'],'SETTLE-001',1000,'finance');check((int)pci_totals()['reconciled']===50000,'reconciliation never double counts');
     $responseCode=0;$late=pci_verify($paid);check($late['status']==='successful','stale pending callback cannot undo success');
     $responseCode=3;$reversed=pci_verify($paid);check($reversed['status']==='refunded' && (int)pci_totals()['reconciled']===0,'reversal removes received and settled totals');
+    check(pci_certificate($reversed)===null,'refunded payment certificate is inactive');
+    rejects(fn()=>pci_certificate_pdf($reversed,$certificate),'refunded payment cannot produce a certificate PDF');
     $responseCode=1;check(pci_verify($paid)['status']==='refunded','late completion cannot undo reversal');
     $pledge=$body;$pledge['kind']='pledge';$pledge['requestId']='test-pledge-request-001';$p=pci_create($pledge,'owner-session');check($p['status']==='pledged' && $p['tracking_id']===null && $calls===1,'pledge never submits to gateway');
+    check(pci_certificate($p)===null,'pledge does not issue a certificate');
     check((int)pci_totals()['pledged']===50000 && (int)pci_totals()['reconciled']===0,'pledges counted separately');
     rejects(fn()=>pci_reconcile($p['reference'],'SETTLE',0,'finance'),'pledge cannot become received through reconciliation');
     $db=pci_db();$db->exec("UPDATE contributions SET environment='sandbox' WHERE kind='pledge'");check((int)pci_totals()['pledged']===0,'sandbox excluded from public totals');
     check(!array_key_exists('email',pci_public_row($p)) && !array_key_exists('phone',pci_public_row($p)) && !array_key_exists('viewer_hash',pci_public_row($p)),'receipt lookup exposes no private contacts or secrets');
     $failed=$body;$failed['requestId']='test-failed-request-001';$f=pci_create($failed,'owner-session');$responseCode=2;check(pci_verify($f)['status']==='failed','failed outcome mapped correctly');
+    check(pci_certificate(pci_find($f['reference']))===null,'failed payment cannot unlock a certificate');
     $pending=$body;$pending['requestId']='test-pending-request-001';$n=pci_create($pending,'owner-session');$responseCode=0;check(pci_verify($n)['status']==='pending','invalid/unresolved provider status remains pending');
     $snapshot=pci_backup();$restored=new PDO('sqlite:'.$temp.'/backups/'.$snapshot);check($restored->query('SELECT count(*) FROM contributions')->fetchColumn()===$db->query('SELECT count(*) FROM contributions')->fetchColumn(),'backup reopens with matching records');
     check(is_file($temp.'/collections.sqlite') && !is_file($_SERVER['DOCUMENT_ROOT'].'/collections.sqlite'),'database stored outside website');

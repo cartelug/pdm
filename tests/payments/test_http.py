@@ -1,5 +1,5 @@
 """Exercise the actual PHP routes with isolated fixture accounts and storage."""
-import os, sys, json, time, socket, subprocess, tempfile, urllib.request, urllib.error, http.cookiejar
+import os, sys, json, time, socket, sqlite3, subprocess, tempfile, urllib.request, urllib.error, http.cookiejar
 from pathlib import Path
 
 root=Path(__file__).resolve().parents[2]
@@ -35,6 +35,7 @@ with tempfile.TemporaryDirectory(prefix='pci-http-test-') as private:
             try:urllib.request.urlopen(base+'/contribute/',timeout=.2);break
             except (OSError,urllib.error.URLError):time.sleep(.05)
         code,status,_=request('status');check(code==200 and not status['checkoutEnabled'] and status['pledgesEnabled'],'public checkout closed and pledges available')
+        check(status['stepUnit']==5000 and status['maximumSteps']==20000,'public API advertises the approved step price and bounds')
         code,session,headers=request('session');csrf=session['csrf'];check(code==200 and not session['signedIn'],'anonymous session does not sign in')
         check('HttpOnly' in headers.get('Set-Cookie','') and 'SameSite=Lax' in headers.get('Set-Cookie',''),'session cookie has HttpOnly and SameSite protections')
         body={'campaign':'walk-for-education-2026','amount':50000,'kind':'pledge','name':'=SUM(A1:A2)','phone':'+256700000000','email':'','referral':'fixture','consent':True,'requestId':'http-fixture-pledge-001'}
@@ -45,6 +46,11 @@ with tempfile.TemporaryDirectory(prefix='pci-http-test-') as private:
         code,again,_=request('create',body,csrf);check(code==200 and again['contribution']['reference']==ref,'HTTP duplicate request reuses one record')
         check(request('lookup',{'reference':ref,'token':'wrong-token'},csrf)[0]==401,'wrong receipt token blocked')
         code,look,_=request('lookup',{'reference':ref,'token':token},csrf);check(code==200 and 'name' not in look['contribution'],'private receipt returns no supporter contact data')
+        check(look['contribution']['steps']==10 and look['contribution']['certificate'] is None,'pledge carries steps without a certificate')
+        check(request('certificate',{'reference':ref,'token':token},csrf)[0]==409,'pledge certificate download is denied')
+        check(request('certificate',{'reference':ref,'token':'wrong'},csrf)[0]==401,'certificate download requires the private viewer token')
+        check(request('certificate',{'reference':ref,'token':token})[0]==401,'certificate download requires CSRF protection')
+        check(request('create',dict(body,steps=1,requestId='http-mismatch-steps-001'),csrf)[0]==422,'HTTP API rejects a step-count and amount mismatch')
         payment=dict(body,kind='payment',requestId='http-fixture-payment-001');check(request('create',payment,csrf)[0]==409,'payment API remains closed without Pesapal access')
         code,progress,_=request('progress');check(progress['received']==0 and progress['pledged']==0,'sandbox pledge excluded from public totals')
         check(request('login',{'username':'finance','password':'incorrect'},csrf)[0]==401,'wrong password blocked')
@@ -62,8 +68,23 @@ with tempfile.TemporaryDirectory(prefix='pci-http-test-') as private:
         request('logout',{},csrf);_,s,_=request('session');csrf=s['csrf'];_,login,_=request('login',{'username':'admin','password':'Fixture-Only-Password'},csrf);csrf=login['csrf']
         code,backup,_=request('backup',{},csrf);check(code==200 and Path(private,'backups',backup['backup']).is_file(),'administrator creates actual snapshot')
         code,data,_=request('dashboard',{},csrf);check(data['rows'][0]['status']=='closed' and len(data['audit'])>=4,'pledge changes and exports audited')
-        for path in ['/contribute/','/contribute/payment/','/contribute/privacy/','/contribute/terms/','/admin/collections/']:
+        for path in ['/walk-for-education/','/contribute/','/contribute/payment/','/contribute/verify/','/contribute/privacy/','/contribute/terms/','/admin/collections/']:
             check(urllib.request.urlopen(base+path).status==200,'page available: '+path)
+        # Isolated ledger fixture only. No provider call or production record is changed.
+        cert='WFE-'+'A'*24
+        with sqlite3.connect(Path(private,'collections.sqlite')) as fixture:
+            fixture.execute("UPDATE contributions SET environment='live',kind='payment',status='successful',tracking_id='fixture-tracking',receipt='fixture-receipt' WHERE reference=?",(ref,))
+            fixture.execute('INSERT INTO certificates(reference,code,issued_at) VALUES(?,?,?)',(ref,cert,'2026-10-05T10:00:00+00:00'))
+        code,verified,_=request('verify-certificate&code='+cert);check(code==200 and verified['valid'] and verified['steps']==10 and verified['amount']==50000,'public certificate verification confirms the recorded step payment')
+        check(not any(k in verified for k in ['name','email','phone','reference','tracking_id']),'public certificate verification discloses no supporter identity or payment identifiers')
+        check(request('verify-certificate&code=WFE-'+'B'*24)[0]==404,'unknown certificate code is not found')
+        check(request('verify-certificate&code=invalid')[0]==422,'malformed certificate code is rejected')
+        code,delayed,_=request('lookup',{'reference':ref,'token':token},csrf);check(code==200 and delayed['verificationDelayed'],'unavailable matching gateway marks the receipt check delayed')
+        check(request('certificate',{'reference':ref,'token':token},csrf)[0]==409,'cached failed verification cannot unlock certificate download')
+        with sqlite3.connect(Path(private,'collections.sqlite')) as fixture:fixture.execute("UPDATE contributions SET status='refunded' WHERE reference=?",(ref,))
+        code,inactive,_=request('verify-certificate&code='+cert);check(code==200 and not inactive['valid'] and inactive['status']=='inactive' and inactive['amount'] is None,'refunded certificate is publicly inactive without contribution details')
+        try:urllib.request.urlopen(base+'/api/payments/certificate-pdf.php');check(False,'PDF renderer inaccessible directly')
+        except urllib.error.HTTPError as e:check(e.code==404,'PDF renderer inaccessible directly')
         raw=urllib.request.urlopen(base+'/api/payments/maintenance.php');check(False,'CLI maintenance inaccessible over HTTP')
     except urllib.error.HTTPError as e:
         if e.code==404 and e.url.endswith('maintenance.php'):check(True,'CLI maintenance inaccessible over HTTP')

@@ -26,7 +26,7 @@
     /* Verified stages only: { name, country, km, date: "YYYY-MM-DD", reached: bool } */
     routeStages: [],
     distanceCoveredKm: null,
-    contributionUnitValue: null,
+    contributionUnitValue: 5000,
     contributionUnitLabel: "step",
     contributionUnitCurrency: "UGX",
     /* Authorised channels only: { type: "mobile-money"|"bank", provider, number, accountName, branch?, currency?, referenceHint? } */
@@ -66,6 +66,6 @@
       whatsappDisplay: "+256 708 735 878",
       whatsappUrl: "https://wa.me/256708735878"
     },
-    dataLastReviewed: "2026-09-22"
+    dataLastReviewed: "2026-10-05"
   });
 })();

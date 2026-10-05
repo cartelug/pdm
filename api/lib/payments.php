@@ -44,7 +44,16 @@ function pci_db(): PDO {
     );
     CREATE TABLE IF NOT EXISTS audit (id INTEGER PRIMARY KEY AUTOINCREMENT, reference TEXT, actor TEXT NOT NULL, event TEXT NOT NULL, detail TEXT NOT NULL, created_at TEXT NOT NULL);
     CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
-    CREATE TABLE IF NOT EXISTS limits (key TEXT PRIMARY KEY, count INTEGER NOT NULL, expires INTEGER NOT NULL);");
+    CREATE TABLE IF NOT EXISTS limits (key TEXT PRIMARY KEY, count INTEGER NOT NULL, expires INTEGER NOT NULL);
+    CREATE TABLE IF NOT EXISTS certificates (reference TEXT PRIMARY KEY REFERENCES contributions(reference), code TEXT UNIQUE NOT NULL, issued_at TEXT NOT NULL);");
+    /* Add a step snapshot without changing historic contribution records. */
+    $db->exec('BEGIN IMMEDIATE');
+    try {
+        $columns=array_column($db->query('PRAGMA table_info(contributions)')->fetchAll(),'name');
+        if (!in_array('steps',$columns,true)) $db->exec('ALTER TABLE contributions ADD COLUMN steps INTEGER NOT NULL DEFAULT 0');
+        if (!in_array('step_unit',$columns,true)) $db->exec('ALTER TABLE contributions ADD COLUMN step_unit INTEGER NOT NULL DEFAULT 0');
+        $db->exec('COMMIT');
+    } catch(Throwable $e) { if ($db->inTransaction()) $db->exec('ROLLBACK');throw $e; }
     @chmod(pci_config()['private_dir'] . '/collections.sqlite', 0600);
     return $db;
 }
@@ -99,7 +108,9 @@ function pci_register_ipn(string $actor='admin'): string {
 
 function pci_validate(array $body): array {
     $campaign=$body['campaign'] ?? '';if ($campaign !== 'walk-for-education-2026') throw new InvalidArgumentException('Choose an approved campaign');
-    $amount=$body['amount'] ?? null;if (!is_int($amount) || $amount<1000 || $amount>100000000) throw new InvalidArgumentException('Enter a whole UGX amount between 1,000 and 100,000,000');
+    $amount=$body['amount'] ?? null;if (!is_int($amount) || $amount<5000 || $amount>100000000 || $amount%5000!==0) throw new InvalidArgumentException('Choose whole steps at UGX 5,000 each, from 1 to 20,000 steps');
+    $steps=$body['steps'] ?? intdiv($amount,5000);
+    if (!is_int($steps) || $steps<1 || $steps>20000 || $steps*5000!==$amount) throw new InvalidArgumentException('The step count and contribution amount must match');
     $kind=$body['kind'] ?? 'payment';if (!in_array($kind,['payment','pledge'],true)) throw new InvalidArgumentException('Invalid contribution type');
     $text=static function($value,int $max): string { if (!is_string($value) || strlen($value)>$max || preg_match('/[\x00-\x1f\x7f]/',$value)) throw new InvalidArgumentException('Check your contact details');return trim($value); };
     $name=$text($body['name'] ?? '',120);$email=$text($body['email'] ?? '',180);$phone=$text($body['phone'] ?? '',30);$referral=$text($body['referral'] ?? '',60);
@@ -108,7 +119,7 @@ function pci_validate(array $body): array {
     if ($phone !== '' && !preg_match('/^\+?[0-9 ()-]{7,25}$/',$phone)) throw new InvalidArgumentException('Enter a valid phone number');
     if (($body['consent'] ?? false) !== true) throw new InvalidArgumentException('Please agree to the contribution privacy notice');
     if (!is_string($body['requestId'] ?? null) || !preg_match('/^[a-zA-Z0-9-]{16,80}$/',$body['requestId'])) throw new InvalidArgumentException('Invalid request reference');
-    return compact('campaign','amount','kind','name','email','phone','referral');
+    return compact('campaign','amount','steps','kind','name','email','phone','referral');
 }
 
 function pci_create(array $body,string $owner): array {
@@ -116,19 +127,20 @@ function pci_create(array $body,string $owner): array {
     $q=$db->prepare('SELECT * FROM contributions WHERE request_key=?');$q->execute([$key]);$prior=$q->fetch();
     if ($prior) {
         foreach (['campaign','amount','kind','name','email','phone','referral'] as $f) if ((string)$prior[$f] !== (string)$v[$f]) throw new InvalidArgumentException('This request was already used; start a new contribution');
+        if ((int)$prior['steps']>0 && (int)$prior['steps']!==$v['steps']) throw new InvalidArgumentException('This request was already used; start a new contribution');
         return $prior;
     }
     if ($v['kind']==='payment' && !pci_checkout_ready()) throw new LogicException('Online payments are not open yet. You can record a pledge or contact PCI.');
     $ref='PCI-'.gmdate('Ymd').'-'.strtoupper(bin2hex(random_bytes(6)));$view=bin2hex(random_bytes(32));$now=pci_now();
     $env=$c['environment'];$state=$v['kind']==='pledge'?'pledged':'pending';
-    $q=$db->prepare('INSERT INTO contributions(reference,request_key,campaign,amount,kind,name,email,phone,referral,environment,status,viewer_hash,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
-    $q->execute([$ref,$key,$v['campaign'],$v['amount'],$v['kind'],$v['name'],$v['email'],$v['phone'],$v['referral'],$env,$state,hash('sha256',$view),$now,$now]);
+    $q=$db->prepare('INSERT INTO contributions(reference,request_key,campaign,amount,kind,name,email,phone,referral,environment,status,viewer_hash,created_at,updated_at,steps,step_unit) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+    $q->execute([$ref,$key,$v['campaign'],$v['amount'],$v['kind'],$v['name'],$v['email'],$v['phone'],$v['referral'],$env,$state,hash('sha256',$view),$now,$now,$v['steps'],5000]);
     $_SESSION['pci_view'][$ref]=$view;
     pci_audit($ref,'supporter','created',$v['kind']);
     if ($v['kind']==='payment') {
         try {
             $r=pci_http('Transactions/SubmitOrderRequest',[
-                'id'=>$ref,'currency'=>'UGX','amount'=>$v['amount'],'description'=>'Walk for Education contribution',
+                'id'=>$ref,'currency'=>'UGX','amount'=>$v['amount'],'description'=>'Walk for Education: '.$v['steps'].' sponsored steps',
                 'callback_url'=>$c['site_url'].'/api/payments/return.php','cancellation_url'=>$c['site_url'].'/api/payments/return.php?cancelled=1&reference='.rawurlencode($ref),
                 'notification_id'=>pci_setting('ipn_'.$c['environment']),
                 'billing_address'=>['first_name'=>$v['name'],'email_address'=>$v['email'],'phone_number'=>$v['phone']]
@@ -159,6 +171,7 @@ function pci_apply_status(array $row,array $reply): array {
         $receipt=$current['receipt'];if ($state==='successful' && !$receipt) $receipt='R-'.$current['reference'];
         $q=$db->prepare('UPDATE contributions SET status=?,confirmation=?,method=?,receipt=?,updated_at=? WHERE reference=?');
         $q->execute([$state,substr((string)($reply['confirmation_code'] ?? ''),0,100),substr((string)($reply['payment_method'] ?? ''),0,50),$receipt,pci_now(),$row['reference']]);
+        if ($state==='successful') pci_issue_certificate(pci_find($row['reference']));
         if ($current['status']!==$state) pci_audit($row['reference'],'gateway','status_changed',$current['status'].' -> '.$state);
         $db->exec('COMMIT');
     } catch(Throwable $e) { if ($db->inTransaction()) $db->exec('ROLLBACK');throw $e; }
@@ -172,7 +185,24 @@ function pci_verify(array $row): array {
     return pci_apply_status($row,$r);
 }
 function pci_public_row(array $row): array {
-    return array_intersect_key($row,array_flip(['reference','campaign','amount','currency','kind','environment','status','receipt','method','created_at','updated_at','reconciled_at']));
+    $out=array_intersect_key($row,array_flip(['reference','campaign','amount','currency','kind','environment','status','receipt','method','steps','step_unit','created_at','updated_at','reconciled_at']));
+    $certificate=pci_certificate($row);$out['certificate']=$certificate?$certificate['code']:null;
+    return $out;
+}
+function pci_certificate_eligible(array $row): bool {
+    return $row['kind']==='payment' && $row['environment']==='live' && $row['status']==='successful'
+        && !empty($row['receipt']) && !empty($row['tracking_id']) && (int)($row['steps'] ?? 0)>0
+        && (int)($row['step_unit'] ?? 0)===5000 && (int)$row['steps']*5000===(int)$row['amount'];
+}
+function pci_issue_certificate(array $row): void {
+    if (!pci_certificate_eligible($row)) return;
+    $q=pci_db()->prepare('INSERT INTO certificates(reference,code,issued_at) VALUES(?,?,?) ON CONFLICT(reference) DO NOTHING');
+    $q->execute([$row['reference'],'WFE-'.strtoupper(bin2hex(random_bytes(12))),pci_now()]);
+    if ($q->rowCount()) pci_audit($row['reference'],'system','certificate_issued');
+}
+function pci_certificate(array $row): ?array {
+    if (!pci_certificate_eligible($row)) return null;
+    $q=pci_db()->prepare('SELECT code,issued_at FROM certificates WHERE reference=?');$q->execute([$row['reference']]);return $q->fetch() ?: null;
 }
 function pci_totals(): array {
     $q=pci_db()->query("SELECT COALESCE(SUM(CASE WHEN kind='payment' AND status='successful' THEN amount ELSE 0 END),0) successful,

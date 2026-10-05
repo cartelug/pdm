@@ -7,7 +7,7 @@
 
   var LIVE_KEYS = [
     "status", "statusLabel", "campaignStartDate", "campaignEndDate", "routeStatus",
-    "distanceCoveredKm", "routeStages", "contributionUnitValue", "contributionUnitLabel",
+    "distanceCoveredKm", "routeStages", "contributionUnitLabel",
     "paymentChannels", "paymentVerificationNote", "receivedTotal", "pledgedTotal",
     "lastReconciledAt", "publicReportingState", "updates", "confirmedPartners"
   ];
@@ -429,7 +429,7 @@
     all("[data-wfe-calculator]").forEach(function (host, hostIndex) {
       host.textContent = "";
       var tiers = [10, 50, 100, 500];
-      var amount = requested > 0 ? Math.min(requested, 1000000) : 50;
+      var amount = requested > 0 ? Math.min(requested, 20000) : 10;
 
       var group = el("div", "calc-tiers");
       group.setAttribute("role", "group");
@@ -453,12 +453,12 @@
       input.id = fieldId;
       input.type = "number";
       input.min = "1";
-      input.max = "1000000";
+      input.max = "20000";
       input.inputMode = "numeric";
       input.placeholder = "e.g. 250";
       input.addEventListener("input", function () {
         var value = parseInt(input.value, 10);
-        if (value > 0) set(Math.min(value, 1000000), false);
+        if (value > 0) set(Math.min(value, 20000), false);
       });
       custom.appendChild(customLabel);
       custom.appendChild(input);
@@ -473,12 +473,10 @@
       summary.appendChild(total);
       host.appendChild(summary);
 
-      var pledge = el("a", "btn btn-wfe calc-pledge", "Pledge on WhatsApp");
-      pledge.target = "_blank";
-      pledge.rel = "noopener";
-      pledge.addEventListener("click", function () { track("pledge_whatsapp_opened", { units: amount, value: amount * unit }); });
+      var pledge = el("a", "btn btn-wfe calc-pledge", "Continue with these steps");
+      pledge.addEventListener("click", function () { track("sponsor_steps_open", { units: amount, value: amount * unit }); });
       host.appendChild(pledge);
-      host.appendChild(el("p", "calc-note", "A pledge is recorded as promised until the payment is verified and reconciled."));
+      host.appendChild(el("p", "calc-note", "Record a pledge now, or pay when checkout opens. A certificate unlocks after a verified successful live payment."));
 
       if (requested > 0 && tiers.indexOf(amount) === -1) input.value = String(amount);
       set(amount, false);
@@ -490,10 +488,7 @@
         });
         caption.textContent = formatNumber(count) + " " + label + (count === 1 ? "" : "s") + " × " + formatUGX(unit);
         total.textContent = formatUGX(count * unit);
-        pledge.href = whatsappUrl(withRef([
-          "Hello, I would like to sponsor " + formatNumber(count) + " " + label + (count === 1 ? "" : "s") + " (" + formatUGX(count * unit) + ") for the Walk for Education 2026.",
-          "Please confirm the current approved payment details."
-        ]));
+        pledge.href = siteRoot + "contribute/?steps=" + count + (ref ? "&ref=" + encodeURIComponent(ref) : "");
         if (announce) track("sponsor_amount_selected", { units: count });
       }
     });

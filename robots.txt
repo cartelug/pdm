@@ -3,6 +3,7 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 Disallow: /contribute/payment/
+Disallow: /contribute/verify/
 Disallow: /tests/
 
 Sitemap: https://pamodzici.com/sitemap.xml

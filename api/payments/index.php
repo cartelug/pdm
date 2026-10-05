@@ -10,13 +10,22 @@ try {
     $action=$_GET['action'] ?? 'status';
     if (!is_string($action)) throw new InvalidArgumentException('Invalid action');
     $method=$_SERVER['REQUEST_METHOD'] ?? 'GET';
-    if (in_array($action,['status','progress','session'],true)) {
+    if (in_array($action,['status','progress','session','verify-certificate'],true)) {
         if ($method!=='GET') respond(['error'=>'Use GET'],405);
         if ($action==='status') {
             $c=pci_config();$storage=extension_loaded('pdo_sqlite');
             respond(['checkoutEnabled'=>$storage && pci_checkout_ready(),'pledgesEnabled'=>$storage,'environment'=>$c['environment'],
+                'stepUnit'=>5000,'maximumSteps'=>20000,
                 'campaigns'=>[['id'=>'walk-for-education-2026','name'=>'Walk for Education 2026','target'=>25000000000]],
                 'message'=>'Online payments open after PCI approval. Pledges are recorded separately from payments.']);
+        }
+        if ($action==='verify-certificate') {
+            pci_limit('verify-certificate',60,60);$code=$_GET['code'] ?? '';
+            if (!is_string($code) || !preg_match('/^WFE-[A-F0-9]{24}$/D',$code)) throw new InvalidArgumentException('Check the certificate number');
+            $q=pci_db()->prepare('SELECT c.*,p.code,p.issued_at FROM certificates p JOIN contributions c ON c.reference=p.reference WHERE p.code=?');$q->execute([$code]);$row=$q->fetch();
+            if (!$row) respond(['valid'=>false,'status'=>'not-found'],404);
+            /* Public checks confirm contribution details without disclosing supporter contact or name. */
+            $valid=pci_certificate_eligible($row);respond(['valid'=>$valid,'status'=>$valid?'verified':'inactive','code'=>$row['code'],'campaign'=>'Walk for Education 2026','steps'=>$valid?(int)$row['steps']:null,'amount'=>$valid?(int)$row['amount']:null,'issuedAt'=>$row['issued_at']]);
         }
         if ($action==='progress') {
             $t=pci_totals();respond(['campaign'=>'walk-for-education-2026','target'=>25000000000,'received'=>(int)$t['reconciled'],'pledged'=>(int)$t['pledged'],'lastReconciledAt'=>$t['lastReconciledAt'],'scope'=>'pesapal-ledger','includesLegacyCollections'=>false]);
@@ -33,13 +42,23 @@ try {
         if ($token==='') throw new DomainException('Open your original contribution session');
         respond(['contribution'=>pci_public_row($row),'token'=>$token,'redirectUrl'=>$row['redirect_url'],'needsReview'=>$row['kind']==='payment' && !$row['tracking_id']]);
     }
-    if ($action==='lookup') {
+    if ($action==='lookup' || $action==='certificate') {
         pci_limit('lookup',90,60);$row=pci_find((string)($body['reference'] ?? ''));
         if (!$row || !hash_equals($row['viewer_hash'],hash('sha256',(string)($body['token'] ?? '')))) throw new DomainException('This receipt link is not available in this session');
-        $delayed=false;
+        $delayed=!empty($_SESSION['pci_check_failed'][$row['reference']]);
         /* IPN is the primary updater. User refresh verifies at most once per 20 seconds per session. */
         if ($row['kind']==='payment' && $row['tracking_id'] && time()-(int)($_SESSION['pci_checked'][$row['reference']] ?? 0)>=20) {
-            $_SESSION['pci_checked'][$row['reference']]=time();try { $row=pci_verify($row); } catch(Throwable $e) { $delayed=true; }
+            $_SESSION['pci_checked'][$row['reference']]=time();
+            try { $row=pci_verify($row);$delayed=false;unset($_SESSION['pci_check_failed'][$row['reference']]); }
+            catch(Throwable $e) { $delayed=true;$_SESSION['pci_check_failed'][$row['reference']]=true; }
+        }
+        if ($action==='certificate') {
+            $certificate=pci_certificate($row);if (!$certificate) throw new LogicException('A certificate unlocks only after a verified successful live step payment');
+            /* Do not release a certificate when the current provider check is unavailable. */
+            if ($delayed) throw new LogicException('Payment verification is delayed. Please check again before downloading your certificate');
+            require __DIR__.'/certificate-pdf.php';
+            header('Content-Type: application/pdf');header('Content-Disposition: attachment; filename="'.$certificate['code'].'.pdf"');
+            echo pci_certificate_pdf($row,$certificate);exit;
         }
         respond(['contribution'=>pci_public_row($row),'verificationDelayed'=>$delayed]);
     }
@@ -77,7 +96,7 @@ try {
     if ($action==='export') {
         pci_require_role(['admin','finance']);pci_audit(null,$actor,'report_exported');
         header('Content-Type: text/csv; charset=utf-8');header('Content-Disposition: attachment; filename="pci-collections-'.gmdate('Ymd').'.csv"');
-        $f=fopen('php://output','w');$columns=['reference','campaign','name','email','phone','amount','currency','kind','environment','status','receipt','confirmation','method','referral','settlement_reference','fee','net','reconciled_at','created_at'];fputcsv($f,$columns);
+        $f=fopen('php://output','w');$columns=['reference','campaign','name','email','phone','amount','currency','steps','step_unit','kind','environment','status','receipt','confirmation','method','referral','settlement_reference','fee','net','reconciled_at','created_at'];fputcsv($f,$columns);
         foreach (pci_db()->query('SELECT * FROM contributions ORDER BY created_at DESC') as $row) {
             $values=[];foreach ($columns as $col) { $v=(string)($row[$col] ?? '');if (preg_match('/^[=+\-@\t\r]/',$v)) $v="'".$v;$values[]=$v; }fputcsv($f,$values);
         }fclose($f);exit;

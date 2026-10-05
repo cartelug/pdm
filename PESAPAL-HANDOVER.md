@@ -9,6 +9,7 @@ of their historic collections.
 
 - `/contribute/`: mobile contribution form and separate pledge flow.
 - `/contribute/payment/`: private, device-session payment status and printable receipt.
+- `/contribute/verify/`: public certificate-number verification without supporter names or contact details.
 - `/contribute/privacy/` and `/contribute/terms/`: contribution notices. PCI must
   review the wording and final refund terms before live checkout is enabled.
 - `/admin/collections/`: sign-in, search, filters, payment checks, finance settlement,
@@ -22,7 +23,7 @@ of their historic collections.
 
 ## Server requirements
 
-PHP 7.4+ (8.1+ recommended), PDO SQLite, cURL, an Apache/cPanel PHP runtime, HTTPS,
+PHP 7.4+ (8.1+ recommended), PDO SQLite, cURL, iconv, an Apache/cPanel PHP runtime, HTTPS,
 and a writable private directory **outside** the domain document root. SQLite
 3.27+ is needed for the online backup operation. No Node service or new hosting
 subscription is required. Existing cPanel hosting still needs to be checked for
@@ -69,6 +70,10 @@ payments are excluded from live totals.
   beneficiary and is not routed to PCI's settlement account by this module.
 - Each attempt stores amount/currency, unique merchant reference, tracking ID,
   campaign, contact, status, receipt, timestamps and settlement information.
+- From 5 October, one sponsored step is **UGX 5,000**. The server accepts
+  1–20,000 whole steps and rejects disagreement between the step count and amount.
+  New contributions store the step count and unit price. Historic rows retain
+  their original amounts and are not retrospectively labelled as sponsored steps.
 - Multiple clicks with the same request ID in a browser session reuse one record.
   An ambiguous submission remains pending for review; it is not recreated after
   a timeout. The finance console flags missing tracking IDs.
@@ -78,6 +83,15 @@ payments are excluded from live totals.
   Browser return parameters alone do not grant access to supporter information.
 - Receipt print/save uses the browser's PDF or printer facility. Automated email
   delivery is **not configured**; it requires PCI's sending account/SMTP access.
+- A verified successful **live** step payment receives one contribution
+  certificate and random certificate number, in the same transaction as the
+  verified status change. IPN, return and manual checks use the same issuance
+  logic. Repeated notifications retain the original certificate. Pledges,
+  sandbox, pending and failed payments do not receive a certificate; reversals
+  make it inactive. Private viewer-token and CSRF checks protect the PDF download.
+  A failed provider refresh keeps the download blocked until a successful check.
+  The public number check exposes only campaign, steps, amount and issue date.
+  Pending result pages check every 25 seconds for five minutes while visible.
 - Public digital collections show only finance-reconciled live gateway payments.
   They are labelled separately from existing campaign collections. Never add a
   historic manual total to this ledger without checking for overlap first.
