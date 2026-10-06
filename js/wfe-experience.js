@@ -91,9 +91,5 @@
     var url=new URL('walk-for-education/',root);if(ref)url.searchParams.set('ref',ref);var message=document.getElementById('wfeShareFeedback');
     try{if(navigator.share){await navigator.share({title:'Walk for Education',text:'Every step builds a future. UGX 5,000 per sponsored step.',url:url.href});}else if(navigator.clipboard){await navigator.clipboard.writeText(url.href);message.textContent='Campaign link copied. Thank you for sharing the mission.';}else message.textContent=url.href;}catch(e){if(e.name!=='AbortError')message.textContent=url.href;}
   });
-  var priority=document.querySelector('.wfe-enquiry-form [name="priority"]');
-  if(priority){var requestedPriority=new URLSearchParams(location.search).get('priority');if(Array.from(priority.options).some(function(o){return o.value===requestedPriority;}))priority.value=requestedPriority;}
-  var builder=document.querySelector('.wfe-enquiry-form [name="builder"]');
-  if(builder){var requestedBuilder=new URLSearchParams(location.search).get('builder');if(Array.from(builder.options).some(function(o){return o.value===requestedBuilder;}))builder.value=requestedBuilder;}
   document.querySelectorAll('[data-enquiry-route]').forEach(function(a){a.addEventListener('click',function(){var select=document.querySelector('.wfe-enquiry-form [name="route"]');if(select&&Array.from(select.options).some(function(o){return o.value===a.dataset.enquiryRoute;}))select.value=a.dataset.enquiryRoute;});});
 })();
