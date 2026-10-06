@@ -186,6 +186,7 @@
       case "distance": return formatNumber(campaign.distanceKm) + " km";
       case "distanceNumber": return formatNumber(campaign.distanceKm);
       case "target": return formatTarget(campaign.fiveYearTargetUgx);
+      case "targetLong": return campaign.fiveYearTargetUgx === 25000000000 ? "UGX 25 billion" : formatUGX(campaign.fiveYearTargetUgx);
       case "currentStudents": return formatNumber(campaign.currentStudents);
       case "studentProjection": return formatNumber(campaign.projectedStudentsMin) + "–" + formatNumber(campaign.projectedStudentsMax);
       case "startLocation": return campaign.startLocation;
@@ -697,6 +698,7 @@
         var route = form.querySelector("[name='route']");
         var organisation = form.querySelector("[name='organisation']");
         var message = form.querySelector("[name='message']");
+        var priority = form.querySelector("[name='priority']");
         var routeLabel = route ? route.value : "Campaign enquiry";
         var subject = "Walk for Education enquiry — " + routeLabel;
         var lines = [
@@ -704,6 +706,7 @@
           "Contact: " + contact.value.trim(),
           organisation && organisation.value.trim() ? "Organisation / club: " + organisation.value.trim() : "",
           "Participation route: " + routeLabel,
+          priority && priority.value ? "Education priority: " + priority.options[priority.selectedIndex].text : "",
           "",
           message && message.value.trim() ? message.value.trim() : "Please send me the current approved details."
         ].filter(function (line, index) { return line !== "" || index === 4; });

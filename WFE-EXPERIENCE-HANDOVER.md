@@ -1,11 +1,33 @@
-# Walk for Education experience - 5 October 2026
+# Walk for Education experience - 6 October 2026
+
+The 6 October revision rebuilds all five campaign pages and refines the
+contribution entry page around one cream, forest-green and PCI-red identity.
+The first screen names the university and neighbouring school, shows the step
+price and leads with the real campus photograph from the supplied proposal.
+Partner roles and supplied logos are prominent and consistent across pages.
+
+Participation opens the appropriate individual, Rotary or organisation panel.
+Partnership links can preselect an education priority; prepared enquiry emails
+include that priority and the chosen resource route. Enquiries are drafts, not
+automatic messages or payment records. Coordinator contact follows the supplied
+proposal and invitations: Rtn. CP Joshua Ainabyona, pci.uganda@gmail.com and
++256 772 150 281. The five-page PCI Payments, Collections and Social Launch
+Plan v3 was also reread for the payment and reporting requirements.
+
+All campaign pages now use the shared campaign record for facts, approved
+updates and confirmed partner acknowledgements. The payment service supplies
+checkout availability and reconciled digital totals. A valid step selection is
+remembered in the browser session and carried into the contribution form.
+The sticky shortcut hides beside active forms and becomes inert when hidden.
+
+See WFE-REDESIGN-PLAN.md for the redesign decisions and source constraints.
 
 The campaign page is rebuilt around choosing sponsored steps at UGX 5,000 each.
 The same selection carries to the contribution form, with the server checking
 that the submitted amount matches the whole step count. Checkout availability
 comes from the payment service; when it is closed, the page offers a pledge.
 
-The responsive design includes newly generated campaign illustrations,
+The responsive design includes labelled campaign illustrations,
 responsive WebP sizes, a real campus photograph, partner artwork, a step
 calculator, education priorities, a certificate preview, partnership links,
 accessible FAQs, campaign sharing and a persistent contribution shortcut.
@@ -46,6 +68,7 @@ minutes and stop on success. Automatic email delivery is not configured.
 
 ## Verification and remaining launch dependency
 
+The final suite passed 51 ledger, 46 HTTP/API and 75 browser checks (172 total).
 Local ledger and HTTP checks exercise exact step pricing, duplicate callbacks,
 refunds, certificate eligibility, private download authorization, public
 verification privacy and delayed-provider handling. Browser checks cover

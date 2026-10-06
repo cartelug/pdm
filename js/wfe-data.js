@@ -62,10 +62,10 @@
       "University expansion"
     ],
     contact: {
-      email: "shyakaneeza@gmail.com",
-      whatsappDisplay: "+256 708 735 878",
-      whatsappUrl: "https://wa.me/256708735878"
+      email: "pci.uganda@gmail.com",
+      whatsappDisplay: "+256 772 150 281",
+      whatsappUrl: "https://wa.me/256772150281"
     },
-    dataLastReviewed: "2026-10-05"
+    dataLastReviewed: "2026-10-06"
   });
 })();

@@ -32,11 +32,16 @@ function check(value, message) { if (!value) throw new Error(message); checks++;
     await page.fill('#campaignSteps', '7');
     for (const width of [320, 360, 390, 768, 1440]) {
       await page.setViewportSize({width, height: width > 1000 ? 1000 : 844});
+      if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)) {
+        console.log(await page.evaluate(() => ({scrollWidth:document.documentElement.scrollWidth,body:document.body.scrollWidth,client:innerWidth,elements:[...document.querySelectorAll('body *')].map(e=>({tag:e.tagName,id:e.id,cls:e.className,right:e.getBoundingClientRect().right,left:e.getBoundingClientRect().left,width:e.getBoundingClientRect().width,scroll:e.scrollWidth,client:e.clientWidth})).filter(e=>e.right>innerWidth+.05||e.left<-.05||e.scroll>e.client+1).slice(0,25)})));
+        await page.screenshot({path:path.join(shots,'campaign-overflow.png'),fullPage:true});
+      }
       check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'campaign layout fits ' + width + 'px');
       if (width === 390 || width === 1440) {
         for (const section of await page.locator('main section').all()) {await section.scrollIntoViewIfNeeded();await page.waitForTimeout(150);}
-        await page.evaluate(() => scrollTo({top:0,behavior:'instant'}));await page.waitForTimeout(400);
+        await page.evaluate(() => {document.activeElement.blur();scrollTo({top:0,behavior:'instant'});});await page.waitForTimeout(400);
         await page.screenshot({path:path.join(shots, width===390?'campaign-mobile.png':'campaign-desktop.png'),fullPage:true});
+        await page.screenshot({path:path.join(shots, width===390?'campaign-mobile-hero.png':'campaign-desktop-hero.png')});
       }
     }
     await page.setViewportSize({width:390,height:844});
@@ -44,6 +49,37 @@ function check(value, message) { if (!value) throw new Error(message); checks++;
     await page.keyboard.press('Escape');check(await page.locator('#wfeMenuButton').getAttribute('aria-expanded') === 'false', 'Escape closes the mobile campaign menu');
     await page.emulateMedia({reducedMotion:'reduce'});await page.reload();
     check(await page.locator('.wfe-reveal.waiting').count() === 0, 'reduced motion keeps campaign sections visible');
+    for (const slug of ['take-part', 'partners', 'accountability', 'updates']) {
+      await page.goto(base + '/walk-for-education/' + slug + '/');
+      await page.locator('.wfe2-nav').waitFor();
+      check(await page.locator('h1').count() === 1, slug + ' has one clear page heading');
+      check((await page.locator('.wfe2-footer-contact a[data-wfe-email]').getAttribute('href')) === 'mailto:pci.uganda@gmail.com', slug + ' uses the coordinator contact from the supplied proposal');
+      for (const width of [320, 390, 768, 1440]) {
+        await page.setViewportSize({width, height: width > 1000 ? 1000 : 844});
+        check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), slug + ' layout fits ' + width + 'px');
+        if (width === 390 || width === 1440) await page.screenshot({path:path.join(shots, slug + (width === 390 ? '-mobile.png' : '-desktop.png')),fullPage:true});
+      }
+    }
+    await page.setViewportSize({width:390,height:844});
+    await page.goto(base + '/walk-for-education/take-part/#rotary');
+    check(await page.locator('#tab-rotary').getAttribute('aria-selected') === 'true' && await page.locator('#panel-rotary').isVisible(), 'club link opens the Rotary participation panel');
+    await page.locator('#tab-rotary').focus();await page.keyboard.press('ArrowRight');
+    check(await page.locator('#tab-organisation').getAttribute('aria-selected') === 'true', 'participation tabs support keyboard arrow navigation');
+    await page.goto(base + '/walk-for-education/partners/?priority=school#request-pack');
+    check(await page.locator('[name="priority"]').inputValue() === 'school', 'education priority link prefills the partnership request');
+    await page.locator('.wfe-enquiry-form button[type="submit"]').click();
+    check(await page.locator('[name="name"]').getAttribute('aria-invalid') === 'true', 'partnership enquiry explains missing name');
+    await page.fill('[name="name"]','Local QA Supporter');await page.fill('[name="contact"]','invalid');
+    await page.locator('.wfe-enquiry-form button[type="submit"]').click();
+    check(await page.locator('[name="contact"]').getAttribute('aria-invalid') === 'true', 'partnership enquiry validates contact before preparing an email');
+    await page.route('**/api/campaign.php',route=>route.fulfill({contentType:'application/javascript',body:'window.WFE_LIVE={updates:[{date:"2026-10-06",location:"Local QA",title:"Approved fixture field note",body:"A local fixture, not a published campaign event."}]};'}));
+    await page.goto(base + '/walk-for-education/');
+    await page.locator('[data-wfe-latest-update]').filter({hasText:'Approved fixture field note'}).waitFor();
+    check(await page.locator('.wfe2-latest').isVisible(), 'main campaign shows approved field updates from the shared campaign record');
+    await page.unroute('**/api/campaign.php');
+    await page.goto(base + '/walk-for-education/');
+    await page.locator('#campaignCheckoutStatus').filter({hasText:'Pledge your steps'}).waitFor();
+    check(await page.locator('.wfe2-latest').isHidden(), 'empty field update feed stays unpublished');
     await page.fill('#campaignSteps', '7');
     await page.locator('#campaignContribute').click();await page.waitForURL('**/contribute/?steps=7&ref=qa-club');
     await page.locator('#submitContribution:not([disabled])').waitFor();
