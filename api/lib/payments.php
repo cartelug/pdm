@@ -108,9 +108,9 @@ function pci_register_ipn(string $actor='admin'): string {
 
 function pci_validate(array $body): array {
     $campaign=$body['campaign'] ?? '';if ($campaign !== 'walk-for-education-2026') throw new InvalidArgumentException('Choose an approved campaign');
-    $amount=$body['amount'] ?? null;if (!is_int($amount) || $amount<5000 || $amount>100000000 || $amount%5000!==0) throw new InvalidArgumentException('Choose whole steps at UGX 5,000 each, from 1 to 20,000 steps');
+    $amount=$body['amount'] ?? null;if (!is_int($amount) || $amount<25000 || $amount>100000000 || $amount%5000!==0) throw new InvalidArgumentException('Choose 5 to 20,000 whole steps at UGX 5,000 each. The minimum contribution is UGX 25,000');
     $steps=$body['steps'] ?? intdiv($amount,5000);
-    if (!is_int($steps) || $steps<1 || $steps>20000 || $steps*5000!==$amount) throw new InvalidArgumentException('The step count and contribution amount must match');
+    if (!is_int($steps) || $steps<5 || $steps>20000 || $steps*5000!==$amount) throw new InvalidArgumentException('Choose at least 5 steps and a matching contribution amount');
     $kind=$body['kind'] ?? 'payment';if (!in_array($kind,['payment','pledge'],true)) throw new InvalidArgumentException('Invalid contribution type');
     $text=static function($value,int $max): string { if (!is_string($value) || strlen($value)>$max || preg_match('/[\x00-\x1f\x7f]/',$value)) throw new InvalidArgumentException('Check your contact details');return trim($value); };
     $name=$text($body['name'] ?? '',120);$email=$text($body['email'] ?? '',180);$phone=$text($body['phone'] ?? '',30);$referral=$text($body['referral'] ?? '',60);

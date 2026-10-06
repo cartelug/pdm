@@ -1,14 +1,25 @@
 # Walk for Education experience - 6 October 2026
 
-The 6 October revision rebuilds all five campaign pages and refines the
-contribution entry page around one cream, forest-green and PCI-red identity.
-The first screen names the university and neighbouring school, shows the step
-price and leads with the real campus photograph from the supplied proposal.
-Partner roles and supplied logos are prominent and consistent across pages.
+The latest 6 October revision uses navy blue, gold, white and PCI red, with the
+main website’s existing PCI logo throughout the campaign. The user’s new
+campaign poster supplies the Walking Rotarian portrait and Builder + Steps
+partnership levels. The portrait and campus photo are enhanced for display and
+served in responsive WebP sizes. The original campus photograph remains linked.
+
+The campaign begins with the education purpose and a contribution selector.
+Options appear in descending order: 100, 50, 20, 10 and 5 steps, plus custom.
+The suggested amount is 50 steps / UGX 250,000. Minimum: 5 steps / UGX 25,000.
+The campaign, checkout and server enforce the same bounds. Existing records and
+paid certificate eligibility are preserved. Legacy one-step entry links display
+the minimum amount before any submission.
+
+The contribution form uses a compact selected-amount summary and opens directly
+to details when steps have already been chosen. “Change amount” reopens the
+controls. Closed online payment remains disabled and pledge mode is selected.
 
 Participation opens the appropriate individual, Rotary or organisation panel.
 Partnership links can preselect an education priority; prepared enquiry emails
-include that priority and the chosen resource route. Enquiries are drafts, not
+include that priority, the chosen resource route and any selected Builder level. Enquiries are drafts, not
 automatic messages or payment records. Coordinator contact follows the supplied
 proposal and invitations: Rtn. CP Joshua Ainabyona, pci.uganda@gmail.com and
 +256 772 150 281. The five-page PCI Payments, Collections and Social Launch
@@ -50,6 +61,10 @@ No date countdown, unverified donation total or fabricated testimonial is used.
 - Generated images are visibly labelled as campaign illustrations. Their
   people and scenes are not presented as documentary campaign photographs.
 - Source dates conflict, so detailed stages and dates await confirmation.
+- The new poster supplies Builder + Steps levels: Platinum UGX 100M, Gold
+  UGX 80M, Diamond UGX 60M, Silver UGX 40M and Bronze UGX 20M. Additional
+  steps, terms and recognition are discussed with the campaign team.
+- See WFE-IMAGE-ASSETS.md for source and enhancement prompts.
 
 ## Verified contribution certificates
 
@@ -68,7 +83,7 @@ minutes and stop on success. Automatic email delivery is not configured.
 
 ## Verification and remaining launch dependency
 
-The final suite passed 51 ledger, 46 HTTP/API and 75 browser checks (172 total).
+The final suite passed 56 ledger, 49 HTTP/API and 89 browser checks (194 total).
 Local ledger and HTTP checks exercise exact step pricing, duplicate callbacks,
 refunds, certificate eligibility, private download authorization, public
 verification privacy and delayed-provider handling. Browser checks cover

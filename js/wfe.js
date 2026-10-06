@@ -425,12 +425,12 @@
     if (typeof unit !== "number" || unit <= 0) return;
     var label = campaign.contributionUnitLabel || "step";
     var requested = 0;
-    try { requested = parseInt(new URLSearchParams(window.location.search).get("steps"), 10) || 0; } catch (error) { requested = 0; }
+    try { requested = Number(new URLSearchParams(window.location.search).get("steps")) || 0; } catch (error) { requested = 0; }
 
     all("[data-wfe-calculator]").forEach(function (host, hostIndex) {
       host.textContent = "";
-      var tiers = [10, 50, 100, 500];
-      var amount = requested > 0 ? Math.min(requested, 20000) : 10;
+      var tiers = [100, 50, 20, 10, 5];
+      var amount = Number.isInteger(requested) && requested>=1 && requested<=20000 ? Math.max(5,requested) : 50;
 
       var group = el("div", "calc-tiers");
       group.setAttribute("role", "group");
@@ -453,13 +453,15 @@
       var input = el("input");
       input.id = fieldId;
       input.type = "number";
-      input.min = "1";
+      input.min = "5";
       input.max = "20000";
       input.inputMode = "numeric";
       input.placeholder = "e.g. 250";
       input.addEventListener("input", function () {
-        var value = parseInt(input.value, 10);
-        if (value > 0) set(Math.min(value, 20000), false);
+        var value = Number(input.value),valid=Number.isInteger(value)&&value>=5&&value<=20000;
+        input.setCustomValidity(valid?'':'Choose 5 to 20,000 whole steps.');
+        if (valid) {set(value, false);pledge.removeAttribute('aria-disabled');}
+        else pledge.setAttribute('aria-disabled','true');
       });
       custom.appendChild(customLabel);
       custom.appendChild(input);
@@ -475,7 +477,7 @@
       host.appendChild(summary);
 
       var pledge = el("a", "btn btn-wfe calc-pledge", "Continue with these steps");
-      pledge.addEventListener("click", function () { track("sponsor_steps_open", { units: amount, value: amount * unit }); });
+      pledge.addEventListener("click", function (event) {if(pledge.getAttribute('aria-disabled')==='true'){event.preventDefault();input.reportValidity();return;}track("sponsor_steps_open", { units: amount, value: amount * unit }); });
       host.appendChild(pledge);
       host.appendChild(el("p", "calc-note", "Record a pledge now, or pay when checkout opens. A certificate unlocks after a verified successful live payment."));
 
@@ -483,6 +485,7 @@
       set(amount, false);
 
       function set(count, announce) {
+        input.setCustomValidity('');pledge.removeAttribute('aria-disabled');
         amount = count;
         buttons.forEach(function (item) {
           item.node.setAttribute("aria-pressed", item.count === count ? "true" : "false");
@@ -699,6 +702,7 @@
         var organisation = form.querySelector("[name='organisation']");
         var message = form.querySelector("[name='message']");
         var priority = form.querySelector("[name='priority']");
+        var builder = form.querySelector("[name='builder']");
         var routeLabel = route ? route.value : "Campaign enquiry";
         var subject = "Walk for Education enquiry — " + routeLabel;
         var lines = [
@@ -707,6 +711,7 @@
           organisation && organisation.value.trim() ? "Organisation / club: " + organisation.value.trim() : "",
           "Participation route: " + routeLabel,
           priority && priority.value ? "Education priority: " + priority.options[priority.selectedIndex].text : "",
+          builder && builder.value ? "Builder level: " + builder.options[builder.selectedIndex].text : "",
           "",
           message && message.value.trim() ? message.value.trim() : "Please send me the current approved details."
         ].filter(function (line, index) { return line !== "" || index === 4; });

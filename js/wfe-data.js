@@ -27,6 +27,8 @@
     routeStages: [],
     distanceCoveredKm: null,
     contributionUnitValue: 5000,
+    minimumContributionSteps: 5,
+    suggestedContributionSteps: 50,
     contributionUnitLabel: "step",
     contributionUnitCurrency: "UGX",
     /* Authorised channels only: { type: "mobile-money"|"bank", provider, number, accountName, branch?, currency?, referenceHint? } */

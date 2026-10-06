@@ -19,21 +19,35 @@
   function amount() { return Number(document.getElementById('amount').value); }
   function update() {
     var stepField = document.getElementById('stepCount');
+    var stepValue=Number(stepField.value), validSteps=Number.isInteger(stepValue) && stepValue>=5 && stepValue<=20000;
+    stepField.setAttribute('aria-invalid',String(!validSteps));
+    var stepError=document.getElementById('stepValidation');if(stepError){stepError.hidden=validSteps;stepError.textContent=validSteps?'':'Choose 5 to 20,000 whole steps. The minimum is UGX 25,000.';}
     if (stepField) document.getElementById('amount').value = Number.isInteger(Number(stepField.value)) ? Number(stepField.value)*5000 : 0;
     document.getElementById('summaryAmount').textContent = money(amount() || 0);
     if (document.getElementById('summarySteps')) document.getElementById('summarySteps').textContent = (Number(stepField.value)||0) + (Number(stepField.value)===1?' step':' steps');
     var isPledge = kind() === 'pledge';
     document.getElementById('summaryType').textContent = isPledge ? 'Your intended pledge' : 'Your contribution';
     document.getElementById('submitContribution').textContent = isPledge ? 'Record my pledge' : 'Continue to secure payment';
-    document.getElementById('submitContribution').disabled = submitting || !settings || (isPledge ? !settings.pledgesEnabled : !settings.checkoutEnabled);
+    document.getElementById('submitContribution').disabled = submitting || !validSteps || !settings || (isPledge ? !settings.pledgesEnabled : !settings.checkoutEnabled);
     document.getElementById('kindHint').textContent = isPledge ? 'A pledge records your intention to support. No money is collected.' : 'You will choose a payment method inside Pesapal checkout.';
     document.querySelectorAll('[data-amount]').forEach(function (b) { b.setAttribute('aria-pressed', String(Number(b.dataset.amount) === amount())); });
+    document.querySelectorAll('[data-checkout-adjust]').forEach(function(b){b.disabled=Number(b.dataset.checkoutAdjust)<0 ? stepValue<=5 : stepValue>=20000;});
+    var selectedLabel=document.getElementById('selectedStepsLabel'),selectedAmount=document.getElementById('selectedStepsAmount');
+    if(selectedLabel)selectedLabel.textContent=validSteps?stepValue+' sponsored steps':'Choose your steps';
+    if(selectedAmount)selectedAmount.textContent=validSteps?money(amount()):'—';
   }
   async function initForm() {
     var form = document.getElementById('contributionForm');
     var steps = document.getElementById('stepCount'), selected = Number(new URLSearchParams(location.search).get('steps'));
-    if (steps && Number.isInteger(selected) && selected>=1 && selected<=20000) steps.value=selected;
-    document.querySelectorAll('[data-checkout-adjust]').forEach(function(b){b.addEventListener('click',function(){steps.value=Math.max(1,Math.min(20000,(Number(steps.value)||1)+Number(b.dataset.checkoutAdjust)));requestId=newRequestId();update();});});
+    if (steps && Number.isInteger(selected) && selected>=1 && selected<=20000) steps.value=Math.max(5,selected);
+    var choicePanel=document.getElementById('checkoutChoicePanel'),choiceToggle=document.getElementById('changeContribution');
+    if(choicePanel && choiceToggle){
+      var preselected=Number.isInteger(selected) && selected>=1 && selected<=20000;
+      choicePanel.hidden=preselected;choiceToggle.setAttribute('aria-expanded',String(!preselected));choiceToggle.textContent=preselected?'Change amount':'Done choosing';
+      choiceToggle.addEventListener('click',function(){if(!choicePanel.hidden && !steps.checkValidity()){steps.reportValidity();return;}choicePanel.hidden=!choicePanel.hidden;choiceToggle.setAttribute('aria-expanded',String(!choicePanel.hidden));choiceToggle.textContent=choicePanel.hidden?'Change amount':'Done choosing';if(!choicePanel.hidden)steps.focus();});
+    }
+    var custom=document.getElementById('checkoutCustom');if(custom)custom.addEventListener('click',function(){steps.focus();steps.select();});
+    document.querySelectorAll('[data-checkout-adjust]').forEach(function(b){b.addEventListener('click',function(){steps.value=Math.max(5,Math.min(20000,(Number(steps.value)||5)+Number(b.dataset.checkoutAdjust)));requestId=newRequestId();update();});});
     document.querySelectorAll('[data-kind]').forEach(function (b) { b.addEventListener('click', function () { document.querySelectorAll('[data-kind]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); requestId = newRequestId(); message('', false); update(); }); });
     document.querySelectorAll('[data-amount]').forEach(function (b) { b.addEventListener('click', function () { if(steps) steps.value=Number(b.dataset.amount)/5000; document.getElementById('amount').value = b.dataset.amount; requestId = newRequestId(); update(); }); });
     form.addEventListener('input', function () { if (!submitting) requestId = newRequestId(); update(); });
@@ -55,6 +69,7 @@
       var results = await Promise.all([call('status'), call('session')]); settings = results[0]; csrf = results[1].csrf;
       if (!settings.checkoutEnabled) {
         document.querySelectorAll('[data-kind]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.kind === 'pledge')); });
+        var unavailable=document.querySelector('[data-kind="payment"]');unavailable.disabled=true;unavailable.textContent='Online payment · soon';
         document.getElementById('checkoutNotice').textContent = 'Online payments are being prepared. You can record a pledge now or contact the campaign team. A pledge is not a payment.';
       } else if (settings.environment === 'sandbox') document.getElementById('checkoutNotice').textContent = 'TEST CHECKOUT — this is the Pesapal sandbox. Test payments do not count toward campaign collections.';
       else document.getElementById('checkoutNotice').hidden = true;

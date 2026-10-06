@@ -31,7 +31,11 @@ try {
     $bad=$body;$bad['amount']=51000;rejects(fn()=>pci_validate($bad),'non-step contribution amounts rejected');
     $bad=$body;$bad['steps']=9;rejects(fn()=>pci_validate($bad),'step count cannot disagree with payment amount');
     $bad=$body;$bad['steps']=10.5;rejects(fn()=>pci_validate($bad),'fractional step counts rejected');
-    $small=$body;$small['steps']=1;$small['amount']=5000;check(pci_validate($small)['steps']===1,'single step is accepted at UGX 5,000');
+    $small=$body;$small['steps']=5;$small['amount']=25000;check(pci_validate($small)['steps']===5,'five steps are accepted at the UGX 25,000 minimum');
+    $small['steps']=4;$small['amount']=20000;rejects(fn()=>pci_validate($small),'payment below five steps is rejected');
+    $small['kind']='pledge';rejects(fn()=>pci_validate($small),'pledge below five steps is rejected');
+    unset($small['steps']);rejects(fn()=>pci_validate($small),'omitting steps cannot bypass the minimum');
+    $maximum=$body;$maximum['steps']=20000;$maximum['amount']=100000000;check(pci_validate($maximum)['steps']===20000,'maximum whole-step contribution remains accepted');
     $bad=$body;$bad['consent']=false;rejects(fn()=>pci_validate($bad),'missing consent rejected');
     $bad=$body;$bad['email']='bad-address';rejects(fn()=>pci_validate($bad),'invalid contact rejected');
     rejects(fn()=>pci_reconcile($row['reference'],'SETTLE',0,'finance'),'pending payment cannot be reconciled');
@@ -49,6 +53,7 @@ try {
     check(pci_certificate($duplicate)===$certificate && (int)pci_db()->query('SELECT count(*) FROM certificates')->fetchColumn()===1,'repeated successful callbacks preserve one certificate');
     $testOnly=$paid;$testOnly['environment']='sandbox';check(pci_certificate($testOnly)===null,'successful sandbox payment cannot unlock a certificate');
     $historic=$paid;$historic['steps']=0;$historic['step_unit']=0;check(pci_certificate($historic)===null,'historic payments without a step snapshot are not relabelled');
+    $earlier=$paid;$earlier['steps']=1;$earlier['amount']=5000;check(pci_certificate_eligible($earlier),'a previously paid one-step record retains certificate eligibility after the minimum changes');
     check((int)pci_totals()['successful']===50000 && (int)pci_totals()['reconciled']===0,'successful funds remain outside public total until reconciled');
     rejects(fn()=>pci_reconcile($paid['reference'],'',0,'finance'),'settlement reference required');
     rejects(fn()=>pci_reconcile($paid['reference'],'SETTLE',50001,'finance'),'invalid fee rejected');

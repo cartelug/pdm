@@ -1,6 +1,6 @@
 # Walk for Education — campaign experience revision
 
-6 October 2026. The objective is a clearer, credible contribution journey across
+6 October 2026. The latest revision follows the new campaign artwork and the user’s explicit five-step minimum. The objective is a clearer contribution journey across
 the campaign overview, participation, partnerships, accountability, updates and
 contribution form.
 
@@ -20,17 +20,14 @@ ledger, certificates and Faith in Motion records are preserved.
 ## Decisions that shape the rebuild
 
 1. Explain education before the walk. The first screen names both education
-   beneficiaries and shows the symbolic step price. The supplied campus photo
-   leads the story; existing generated artwork remains labelled illustration.
+   beneficiaries and shows the symbolic step price. The Walking Rotarian portrait leads the story alongside the contribution selector. The campus image is enhanced from the supplied photograph with an original-photo link; existing generated artwork remains labelled illustration.
 2. Give each supporter a useful route. Individuals choose steps. Rotary clubs
    open the club participation panel. Businesses discuss resources and capital
    priorities, with priority links prefilling the request.
-3. Apply one design across all five campaign pages. Cream, forest green, PCI
-   red and restrained gold connect the institutional sources with the existing
-   brand. Shared navigation, typography, partner roles and coordinator contacts
+3. Apply one design across all five campaign pages. Navy blue, warm gold, white and PCI red follow the new campaign artwork. The existing main-site PCI logo is used in every campaign header and footer. Shared navigation, typography, partner roles and coordinator contacts
    make the supporting pages part of the same experience.
-4. Show the amount before asking for details. The calculator supports 1–20,000
-   whole steps at UGX 5,000 each, carries the selection into the form and
+4. Show the amount before asking for details. The calculator supports 5–20,000
+   whole steps at UGX 5,000 each, displays 100 / 50 / 20 / 10 / 5 in descending order, suggests 50 steps, carries the selection into the form and
    remembers the valid selection within the browser session.
 5. Explain payment availability early. Service status sets the hero notice,
    calculator action and accountability notice. A pledge collects no money.
@@ -49,6 +46,15 @@ ledger, certificates and Faith in Motion records are preserved.
    collapsible navigation, keyboard-operated participation tabs, reduced-motion
    support and contribution shortcuts that hide beside active forms.
 
+## New artwork and easier contribution flow
+
+- Source: `WhatsApp Image 2026-10-05 at 16.29.53.jpeg`, supplied with this revision.
+- A transparent enhanced portrait of the Walking Rotarian and an enhanced campus image are provided as responsive WebP assets. Their origins are labelled; the original campus photo remains accessible.
+- The selector is on the first screen. Higher contributions appear first, with a clearly stated five-step minimum. A custom amount is always available.
+- Visitors arriving with selected steps see their amount and can proceed to contact details. “Change amount” reopens the amount controls.
+- Both pledge and payment creation enforce at least five steps on the server. Existing records and certificate eligibility remain intact. Legacy one-step entry links show five steps and UGX 25,000 before submission.
+- Builder + Steps partnerships reproduce the supplied levels: Platinum UGX 100M, Gold UGX 80M, Diamond UGX 60M, Silver UGX 40M and Bronze UGX 20M, plus steps to be agreed with the campaign team. The selected level appears in the reviewable enquiry draft. These are partnership discussions, not immediate payment promises.
+
 ## Facts and constraints
 
 - Approximate journey: 1,100 km, Nairobi to UCU–Kagando, Kasese, Uganda.
@@ -66,7 +72,7 @@ ledger, certificates and Faith in Motion records are preserved.
 
 ## Validation and launch
 
-Completed: 51 ledger checks, 46 HTTP/API checks and 75 browser checks.
+Completed: 56 ledger checks, 49 HTTP/API checks and 89 browser checks (194 total).
 All five campaign pages and the contribution form were checked at phone,
 tablet and desktop sizes, including 320, 390, 768 and 1440px. The checks
 exercise calculator bounds, selected amounts, referral continuity, navigation,

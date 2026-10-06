@@ -15,7 +15,7 @@ try {
         if ($action==='status') {
             $c=pci_config();$storage=extension_loaded('pdo_sqlite');
             respond(['checkoutEnabled'=>$storage && pci_checkout_ready(),'pledgesEnabled'=>$storage,'environment'=>$c['environment'],
-                'stepUnit'=>5000,'maximumSteps'=>20000,
+                'stepUnit'=>5000,'minimumSteps'=>5,'maximumSteps'=>20000,
                 'campaigns'=>[['id'=>'walk-for-education-2026','name'=>'Walk for Education 2026','target'=>25000000000]],
                 'message'=>'Online payments open after PCI approval. Pledges are recorded separately from payments.']);
         }

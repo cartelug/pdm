@@ -9,14 +9,14 @@
     if (ref) sessionStorage.setItem('wfe_ref',ref);
     if (input) {
       var requested = new URLSearchParams(location.search).get('steps') || sessionStorage.getItem('wfe_steps');
-      if (requested && Number.isInteger(Number(requested)) && Number(requested)>=1 && Number(requested)<=20000) input.value=requested;
+      if (requested && Number.isInteger(Number(requested)) && Number(requested)>=1 && Number(requested)<=20000) input.value=Math.max(5,Number(requested));
     }
   } catch (e) { /* Attribution and remembering a choice are optional. */ }
   function update() {
     if (!input || !link) return;
-    var steps = Number(input.value), valid = Number.isInteger(steps) && steps >= 1 && steps <= 20000;
+    var steps = Number(input.value), valid = Number.isInteger(steps) && steps >= 5 && steps <= 20000;
     var error = document.getElementById('campaignValidation');
-    error.hidden = valid;error.textContent = valid ? '' : 'Choose a whole number from 1 to 20,000 steps.';
+    error.hidden = valid;error.textContent = valid ? '' : 'Choose 5 to 20,000 whole steps. Minimum contribution: UGX 25,000.';
     input.setAttribute('aria-invalid',String(!valid));
     if (!valid) {link.setAttribute('aria-disabled','true');document.getElementById('campaignTotal').textContent='—';document.getElementById('campaignStepSummary').textContent='Choose valid steps';return;}
     link.removeAttribute('aria-disabled');
@@ -24,14 +24,15 @@
     document.getElementById('campaignStepSummary').textContent = steps + (steps === 1 ? ' step' : ' steps');
     document.getElementById('campaignAction').textContent = (checkout === false && pledges ? 'Pledge ' : checkout === true ? 'Contribute ' : 'Continue with ') + steps + (steps === 1 ? ' step' : ' steps');
     document.querySelectorAll('[data-step-option]').forEach(function(b) {b.setAttribute('aria-pressed',String(Number(b.dataset.stepOption)===steps));});
-    document.querySelectorAll('[data-step-adjust]').forEach(function(b){b.disabled=Number(b.dataset.stepAdjust)<0 ? steps===1 : steps===20000;});
+    document.querySelectorAll('[data-step-adjust]').forEach(function(b){b.disabled=Number(b.dataset.stepAdjust)<0 ? steps===5 : steps===20000;});
     var next = new URL('contribute/',root);next.searchParams.set('steps',steps);if(ref)next.searchParams.set('ref',ref);link.href=next.href;
     try {sessionStorage.setItem('wfe_steps',String(steps));} catch(e) { /* optional */ }
   }
   if (input && link) {
     input.addEventListener('input',update);
     document.querySelectorAll('[data-step-option]').forEach(function(b){b.addEventListener('click',function(){input.value=b.dataset.stepOption;update();});});
-    document.querySelectorAll('[data-step-adjust]').forEach(function(b){b.addEventListener('click',function(){input.value=Math.max(1,Math.min(20000,(Number.isInteger(Number(input.value))?Number(input.value):1)+Number(b.dataset.stepAdjust)));update();});});
+    document.querySelectorAll('[data-step-adjust]').forEach(function(b){b.addEventListener('click',function(){input.value=Math.max(5,Math.min(20000,(Number.isInteger(Number(input.value))?Number(input.value):5)+Number(b.dataset.stepAdjust)));update();});});
+    var custom=document.getElementById('campaignCustom');if(custom)custom.addEventListener('click',function(){input.focus();input.select();});
     link.addEventListener('click',function(e){if(link.getAttribute('aria-disabled')==='true'){e.preventDefault();input.focus();}});
     update();
   }
@@ -92,5 +93,7 @@
   });
   var priority=document.querySelector('.wfe-enquiry-form [name="priority"]');
   if(priority){var requestedPriority=new URLSearchParams(location.search).get('priority');if(Array.from(priority.options).some(function(o){return o.value===requestedPriority;}))priority.value=requestedPriority;}
+  var builder=document.querySelector('.wfe-enquiry-form [name="builder"]');
+  if(builder){var requestedBuilder=new URLSearchParams(location.search).get('builder');if(Array.from(builder.options).some(function(o){return o.value===requestedBuilder;}))builder.value=requestedBuilder;}
   document.querySelectorAll('[data-enquiry-route]').forEach(function(a){a.addEventListener('click',function(){var select=document.querySelector('.wfe-enquiry-form [name="route"]');if(select&&Array.from(select.options).some(function(o){return o.value===a.dataset.enquiryRoute;}))select.value=a.dataset.enquiryRoute;});});
 })();

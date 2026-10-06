@@ -35,7 +35,7 @@ with tempfile.TemporaryDirectory(prefix='pci-http-test-') as private:
             try:urllib.request.urlopen(base+'/contribute/',timeout=.2);break
             except (OSError,urllib.error.URLError):time.sleep(.05)
         code,status,_=request('status');check(code==200 and not status['checkoutEnabled'] and status['pledgesEnabled'],'public checkout closed and pledges available')
-        check(status['stepUnit']==5000 and status['maximumSteps']==20000,'public API advertises the approved step price and bounds')
+        check(status['stepUnit']==5000 and status['minimumSteps']==5 and status['maximumSteps']==20000,'public API advertises the approved step price and five-step minimum')
         code,session,headers=request('session');csrf=session['csrf'];check(code==200 and not session['signedIn'],'anonymous session does not sign in')
         check('HttpOnly' in headers.get('Set-Cookie','') and 'SameSite=Lax' in headers.get('Set-Cookie',''),'session cookie has HttpOnly and SameSite protections')
         body={'campaign':'walk-for-education-2026','amount':50000,'kind':'pledge','name':'=SUM(A1:A2)','phone':'+256700000000','email':'','referral':'fixture','consent':True,'requestId':'http-fixture-pledge-001'}
@@ -51,6 +51,9 @@ with tempfile.TemporaryDirectory(prefix='pci-http-test-') as private:
         check(request('certificate',{'reference':ref,'token':'wrong'},csrf)[0]==401,'certificate download requires the private viewer token')
         check(request('certificate',{'reference':ref,'token':token})[0]==401,'certificate download requires CSRF protection')
         check(request('create',dict(body,steps=1,requestId='http-mismatch-steps-001'),csrf)[0]==422,'HTTP API rejects a step-count and amount mismatch')
+        check(request('create',dict(body,steps=4,amount=20000,requestId='http-below-minimum-001'),csrf)[0]==422,'HTTP pledge rejects four steps even when the amount matches')
+        check(request('create',dict(body,kind='payment',steps=4,amount=20000,requestId='http-below-minimum-002'),csrf)[0]==422,'HTTP payment rejects four steps before provider submission')
+        check(request('create',dict(body,amount=5000,requestId='http-below-minimum-003'),csrf)[0]==422,'legacy request without a step count cannot bypass the minimum')
         payment=dict(body,kind='payment',requestId='http-fixture-payment-001');check(request('create',payment,csrf)[0]==409,'payment API remains closed without Pesapal access')
         code,progress,_=request('progress');check(progress['received']==0 and progress['pledged']==0,'sandbox pledge excluded from public totals')
         check(request('login',{'username':'finance','password':'incorrect'},csrf)[0]==401,'wrong password blocked')
