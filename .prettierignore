@@ -1,0 +1,5 @@
+node_modules/
+admin/vendor/
+# Written by the admin console (downloaded backup / pasted journey blocks) — keep as generated.
+js/roll-data.js
+js/fim-content.js

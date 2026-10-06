@@ -18,7 +18,9 @@
     if (!toast) return;
     toast.textContent = message;
     toast.classList.add("show");
-    window.setTimeout(function () { toast.classList.remove("show"); }, 2100);
+    window.setTimeout(function () {
+      toast.classList.remove("show");
+    }, 2100);
   }
 
   var enquiryForm = byId("enquiryForm");
@@ -40,15 +42,23 @@
     var project = byId("iProject") ? byId("iProject").value : "General";
     var type = byId("iType") ? byId("iType").value : "Enquiry";
     var message = byId("iMsg") ? byId("iMsg").value.trim() : "";
-    var body = "Name: " + name
-      + "\nContact: " + contact
-      + "\nProject: " + project
-      + "\nReason: " + type
-      + "\n\n" + (message || "(no message)");
+    var body =
+      "Name: " +
+      name +
+      "\nContact: " +
+      contact +
+      "\nProject: " +
+      project +
+      "\nReason: " +
+      type +
+      "\n\n" +
+      (message || "(no message)");
 
-    window.location.href = "mailto:shyakaneeza@gmail.com?subject="
-      + encodeURIComponent("Pamodzi enquiry — " + project)
-      + "&body=" + encodeURIComponent(body);
+    window.location.href =
+      "mailto:shyakaneeza@gmail.com?subject=" +
+      encodeURIComponent("Pamodzi enquiry — " + project) +
+      "&body=" +
+      encodeURIComponent(body);
     showToast("Opening your email app…");
   }
 
@@ -63,12 +73,26 @@
         ? '<a class="more" href="' + escapeHtml(update[4]) + '">Open <span aria-hidden="true">→</span></a>'
         : "";
       var tone = update[1] === "mile" ? "gold" : update[1] === "ahead" ? "ahead" : "";
-      return '<article class="tlx ' + tone + '">'
-        + '<div class="d">' + escapeHtml(update[0])
-        + '<span class="tag ' + escapeHtml(update[1]) + '">' + escapeHtml(labels[update[1]] || "") + "</span></div>"
-        + "<h3>" + escapeHtml(update[2]) + "</h3>"
-        + "<p>" + escapeHtml(update[3]) + "</p>"
-        + link + "</article>";
+      return (
+        '<article class="tlx ' +
+        tone +
+        '">' +
+        '<div class="d">' +
+        escapeHtml(update[0]) +
+        '<span class="tag ' +
+        escapeHtml(update[1]) +
+        '">' +
+        escapeHtml(labels[update[1]] || "") +
+        "</span></div>" +
+        "<h3>" +
+        escapeHtml(update[2]) +
+        "</h3>" +
+        "<p>" +
+        escapeHtml(update[3]) +
+        "</p>" +
+        link +
+        "</article>"
+      );
     }).join("");
   }
 })();

@@ -1,0 +1,894 @@
+/* ==========================================================================
+   Contributions — checkout & result pages
+   --------------------------------------------------------------------------
+   Loaded after css/base.css and css/collections.css by /contribute/ (the
+   step checkout) and /contribute/payment/ (the payment result). Collections
+   pages without a campaign theme (privacy, terms, verify, admin) use only
+   collections.css.
+
+   Contents
+     01  Shared checkout pieces
+     02  Step checkout — theme
+     03  Step checkout — heading & progress
+     04  Step checkout — form
+     05  Step checkout — guidance & FAQ
+   ========================================================================== */
+
+/* ==========================================================================
+   01. Shared checkout pieces
+   Buttons, certificate download and header adjustments used by /contribute/ and /contribute/payment/.
+   ========================================================================== */
+
+.wfe-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: var(--red);
+  color: #fff;
+  border: 1px solid var(--red);
+  border-radius: 8px;
+  min-height: 54px;
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 800;
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
+
+.wfe-btn:hover {
+  background: #9c2721;
+  transform: translateY(-2px);
+}
+
+.step-checkout-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 30px;
+}
+
+.step-checkout-heading > p {
+  max-width: 32ch;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.collection-step-caption {
+  font-size: 13px;
+  color: var(--red-dark);
+  font-weight: 800;
+}
+
+.collection-step-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.collection-step-control button {
+  width: 48px;
+  height: 49px;
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+  background: var(--paper-2);
+  font-size: 22px;
+  color: var(--ink);
+  flex: none;
+}
+
+.collection-step-control input {
+  text-align: center;
+  font-weight: 800;
+  min-width: 0;
+  flex: 1;
+  width: 0 !important;
+}
+
+.step-checkout-aside img {
+  border-radius: 10px;
+  margin-bottom: 24px;
+  width: 100%;
+  height: auto;
+}
+
+.certificate-download {
+  background: var(--red-soft);
+  padding: 22px;
+  border-radius: 12px;
+  margin-top: 25px;
+  border: 1px solid #e4c6b2;
+}
+
+.certificate-download h2 {
+  font-size: 24px;
+}
+
+.certificate-download p {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 12px 0;
+}
+
+.certificate-download .wfe-btn {
+  width: 100%;
+}
+
+.certificate-download small {
+  font-size: 11px;
+  display: block;
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+.collection-summary {
+  flex-wrap: wrap;
+}
+
+.collections-page .btn-ghost {
+  border: 1px solid var(--line-2);
+  background: var(--paper-2);
+  color: var(--ink) !important;
+  box-shadow: none;
+}
+
+.collections-page .btn-ghost:hover {
+  background: var(--red-soft);
+  border-color: var(--red);
+}
+
+@media (max-width: 760px) {
+  .step-checkout-heading {
+    display: block;
+  }
+
+  .step-checkout-heading > p {
+    max-width: 46ch;
+  }
+}
+
+@media (max-width: 480px) {
+  .collections-header .wrap {
+    gap: 12px;
+  }
+
+  .collections-header .brand {
+    gap: 8px;
+    padding-right: 0;
+    border-right: 0;
+  }
+
+  .collections-header .brand img {
+    width: 44px;
+    height: 34px;
+  }
+
+  .collections-header .brand .t span {
+    font-size: 7px;
+    letter-spacing: 0.04em;
+  }
+
+  .collections-header nav {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 360px) {
+  .wfe-btn {
+    padding: 12px 18px;
+  }
+}
+
+/* ==========================================================================
+   02. Step checkout — theme
+   Blue and gold campaign palette for /contribute/ (body.wfe-contribute) and its header.
+   ========================================================================== */
+
+.wfe-contribute {
+  --ink: #142e51;
+  --ink-2: #14396b;
+  --paper: #f4f7fc;
+  --paper-2: #f4f7fc;
+  --muted: #63748c;
+  --red: #c72a23;
+  --red-dark: #a8201b;
+  --red-soft: #eaf1fb;
+  --line: #dbe3ef;
+  --line-2: #cdd9ea;
+
+  background: #f4f7fc;
+  color: #142e51;
+}
+
+.wfe-contribute .collections-header .brand {
+  border: 0;
+}
+
+.wfe-contribute .collections-header nav {
+  font-size: 12px;
+}
+
+.wfe-contribute .collections-header nav a {
+  color: #14396b;
+}
+
+.wfe-contribute .collections-header {
+  background: #fff;
+  padding: 14px 0;
+}
+
+.wfe-contribute .collections-header .brand img {
+  height: 52px;
+  width: 69px;
+}
+
+.wfe-contribute .collection-kicker {
+  color: #14396b;
+  line-height: 1.7;
+  font-size: 10px;
+}
+
+.wfe-contribute .collection-notice {
+  background: #edf3fb;
+  border-color: #cdd9ea;
+  color: #334e72;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 16px 20px;
+}
+
+.wfe-contribute .collection-grid {
+  margin-top: 28px;
+  gap: 28px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.85fr);
+}
+
+.wfe-contribute .collection-card {
+  background: #fff;
+  box-shadow: none;
+  border-color: #dce5f1;
+  border-radius: 13px;
+  padding: 29px;
+}
+
+.wfe-contribute .collection-card.dark {
+  color: #fff;
+  position: sticky;
+  top: 24px;
+  background: #102f5e;
+  border-color: #102f5e;
+  border-radius: 13px;
+  padding: 25px;
+}
+
+.wfe-contribute .collection-card h2 {
+  font-size: 25px;
+  letter-spacing: -0.035em;
+  line-height: 1.25;
+}
+
+.wfe-contribute .collection-card input:not([type="checkbox"]) {
+  min-height: 50px;
+  border-color: #cdd9ea;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.wfe-contribute .collection-card > h2 {
+  font-size: 23px;
+}
+
+.wfe-contribute .collections-main {
+  max-width: 1160px;
+  padding-top: 35px;
+}
+
+.wfe-contribute > .skip-link {
+  top: -100px;
+  transform: none !important;
+}
+
+.wfe-contribute > .skip-link:focus {
+  top: 10px;
+}
+
+@media (max-width: 900px) {
+  .wfe-contribute .collection-grid {
+    gap: 20px;
+  }
+
+  .wfe-contribute .collection-card {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 760px) {
+  .wfe-contribute .collections-header nav a:first-child {
+    display: block;
+  }
+
+  .wfe-contribute .collections-header nav a:last-child {
+    display: none;
+  }
+
+  .wfe-contribute .collections-header .wrap {
+    padding-inline: 18px;
+  }
+
+  .wfe-contribute .collections-header .brand img {
+    width: 62px;
+    height: 47px;
+  }
+
+  .wfe-contribute .collection-notice {
+    font-size: 10px;
+    padding: 13px 15px;
+  }
+
+  .wfe-contribute .collection-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .wfe-contribute .collection-card {
+    padding: 24px 21px;
+  }
+
+  .wfe-contribute .collection-card.dark {
+    position: static;
+    padding: 25px;
+  }
+
+  .wfe-contribute .collections-main {
+    padding: 28px 18px 45px;
+  }
+}
+
+@media (max-width: 360px) {
+  .wfe-contribute .collection-card {
+    padding: 22px 17px;
+  }
+}
+
+/* ==========================================================================
+   03. Step checkout — heading & progress
+   ========================================================================== */
+
+.wfe-contribute .step-checkout-heading h1 {
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  font-size: clamp(37px, 4.2vw, 56px);
+}
+
+.wfe-contribute .step-checkout-heading > p {
+  font-size: 13px;
+  line-height: 1.8;
+  max-width: 36ch;
+}
+
+.wfe-contribute .step-checkout-heading {
+  align-items: end;
+  gap: 30px;
+}
+
+.wfe-contribute .collection-progress-steps {
+  display: flex;
+  gap: 30px;
+  margin: 23px 0 28px;
+  font-size: 11px;
+  color: #63748c;
+}
+
+.wfe-contribute .collection-progress-steps > span {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+
+.wfe-contribute .collection-progress-steps b {
+  font-size: 9px;
+  width: 23px;
+  height: 23px;
+  border: 1px solid #cdd9ea;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #14396b;
+}
+
+.wfe-contribute .collection-progress-steps > span:first-child b {
+  background: #e5eefb;
+  border-color: #b8cdec;
+  color: #163e74;
+}
+
+@media (max-width: 760px) {
+  .wfe-contribute .step-checkout-heading > p {
+    max-width: 45ch;
+    font-size: 11px;
+    line-height: 1.8;
+    margin-top: 14px;
+  }
+
+  .wfe-contribute .step-checkout-heading h1 {
+    font-size: 39px;
+    max-width: 14ch;
+  }
+
+  .wfe-contribute .collection-progress-steps {
+    justify-content: space-between;
+    margin: 23px 0;
+    font-size: 9px;
+    gap: 8px;
+  }
+
+  .wfe-contribute .collection-progress-steps > span {
+    gap: 6px;
+  }
+
+  .wfe-contribute .collection-progress-steps b {
+    width: 21px;
+    height: 21px;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .wfe-contribute .step-checkout-heading h1 {
+    font-size: 35px;
+  }
+
+  .wfe-contribute .collection-progress-steps {
+    font-size: 8px;
+    gap: 6px;
+  }
+}
+
+/* ==========================================================================
+   04. Step checkout — form
+   Contribution type tabs, step options, fields, summary and submit.
+   ========================================================================== */
+
+.wfe-contribute .collection-form-heading {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  border-top: 1px solid #dce5f1;
+  margin-bottom: 18px;
+  margin-top: 24px;
+  padding-top: 23px;
+}
+
+.wfe-contribute .collection-form-heading > span {
+  font-size: 10px;
+  font-weight: 800;
+  color: #14396b;
+}
+
+.wfe-contribute .collection-form-heading h2 {
+  margin: 0;
+  font-size: 23px;
+}
+
+.wfe-contribute .collection-tabs {
+  border-radius: 5px;
+  background: #edf2fa;
+  padding: 5px;
+  margin: 15px 0 10px;
+}
+
+.wfe-contribute .collection-tabs button {
+  border-radius: 3px;
+  min-height: 44px;
+  font-size: 12px;
+}
+
+.wfe-contribute .collection-tabs button[aria-pressed="true"] {
+  color: #fff;
+  box-shadow: none;
+  background: #133c70;
+}
+
+.wfe-contribute .collection-tabs button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wfe-contribute .amount-options {
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.wfe-contribute .amount-options button {
+  min-height: 75px;
+  font-size: 17px;
+  line-height: 1.8;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.wfe-contribute .amount-options button small {
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.wfe-contribute .amount-options button[aria-pressed="true"] {
+  background: #eaf1fb;
+  border: 2px solid #14396b;
+  color: #14396b;
+}
+
+.wfe-contribute .collection-field {
+  margin: 22px 0;
+}
+
+.wfe-contribute .collection-field small {
+  line-height: 1.65;
+  margin-top: 8px;
+  font-size: 10px;
+}
+
+.wfe-contribute .collection-field label {
+  font-size: 10px;
+  letter-spacing: 0.03em;
+}
+
+.wfe-contribute .collection-step-control {
+  gap: 8px;
+}
+
+.wfe-contribute .collection-step-control button {
+  border-radius: 4px;
+  height: 50px;
+  border-color: #cdd9ea;
+  background: #eff3f9;
+}
+
+.wfe-contribute .collection-contact-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.wfe-contribute .collection-contact-pair .collection-field {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.wfe-contribute .collection-check {
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 24px 0;
+}
+
+.wfe-contribute .collection-check input {
+  width: 19px;
+  height: 19px;
+  accent-color: #14396b;
+}
+
+.wfe-contribute .collection-check a {
+  color: #14396b;
+  text-decoration: underline;
+}
+
+.wfe-contribute .collection-summary {
+  padding-top: 22px;
+  margin-top: 24px;
+  gap: 20px;
+}
+
+.wfe-contribute .collection-summary strong {
+  font-family: "Bricolage Grotesque", Arial, sans-serif;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.wfe-contribute .collection-step-caption {
+  color: #14396b;
+  font-size: 11px;
+}
+
+.wfe-contribute .collection-submit {
+  background: #c72a23;
+  color: #fff;
+  box-shadow: none;
+  margin-top: 23px;
+  border-radius: 8px;
+  min-height: 56px;
+  font-size: 13px;
+}
+
+.wfe-contribute .collection-submit:hover:not(:disabled) {
+  background: #a8201b;
+  transform: none;
+}
+
+.wfe-contribute .collection-submit:disabled {
+  opacity: 0.45;
+}
+
+.wfe-contribute input:focus-visible,
+.wfe-contribute button:focus-visible,
+.wfe-contribute a:focus-visible {
+  outline: 3px solid #cb9534;
+  outline-offset: 4px;
+}
+
+.wfe-contribute #kindHint {
+  font-size: 11px !important;
+  margin: 8px 0 19px;
+  color: #687a93 !important;
+}
+
+.wfe-contribute .checkout-selection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 17px;
+  border: 1px solid #d7e2f2;
+  background: #f1f5fc;
+  border-radius: 9px;
+  padding: 20px;
+  margin-top: 17px;
+}
+
+.wfe-contribute .checkout-selection > div {
+  min-width: 0;
+}
+
+.wfe-contribute .checkout-selection span {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  color: #607796;
+  display: block;
+}
+
+.wfe-contribute .checkout-selection strong {
+  font-family: "Bricolage Grotesque", sans-serif;
+  display: block;
+  font-size: 34px;
+  letter-spacing: -0.045em;
+  line-height: 1.25;
+  margin-top: 8px;
+  white-space: nowrap;
+}
+
+.wfe-contribute .checkout-selection small {
+  font-size: 10px;
+  color: #4c6585;
+  display: block;
+  margin-top: 5px;
+}
+
+.wfe-contribute .checkout-selection button {
+  background: #fff;
+  border: 1px solid #c8d7eb;
+  border-radius: 6px;
+  min-height: 41px;
+  padding: 10px 13px;
+  color: #214675;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .wfe-contribute .collection-contact-pair {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .wfe-contribute .checkout-selection {
+    padding: 17px;
+    gap: 12px;
+  }
+
+  .wfe-contribute .checkout-selection strong {
+    font-size: 29px;
+  }
+
+  .wfe-contribute .checkout-selection button {
+    font-size: 9px;
+    padding: 9px 11px;
+  }
+}
+
+@media (max-width: 760px) {
+  .wfe-contribute .collection-tabs button {
+    font-size: 10px;
+  }
+
+  .wfe-contribute .amount-options small {
+    font-size: 10px;
+  }
+
+  .wfe-contribute .amount-options {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .wfe-contribute .amount-options button {
+    font-size: 13px;
+    min-height: 69px;
+  }
+
+  .wfe-contribute .amount-options button small {
+    font-size: 8px;
+  }
+
+  .wfe-contribute .collection-contact-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .wfe-contribute .collection-check {
+    font-size: 10px;
+  }
+
+  .wfe-contribute .collection-summary > div {
+    font-size: 11px;
+  }
+
+  .wfe-contribute .collection-summary strong {
+    font-size: 28px;
+  }
+
+  .wfe-contribute .checkout-selection {
+    padding: 17px;
+    gap: 10px;
+  }
+
+  .wfe-contribute .checkout-selection strong {
+    font-size: 28px;
+  }
+
+  .wfe-contribute .checkout-selection button {
+    font-size: 9px;
+    padding: 9px 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .wfe-contribute .amount-options button {
+    font-size: 12px;
+  }
+
+  .wfe-contribute .collection-summary strong {
+    font-size: 25px;
+  }
+
+  .wfe-contribute .checkout-selection {
+    padding: 15px 12px;
+    gap: 8px;
+  }
+
+  .wfe-contribute .checkout-selection strong {
+    font-size: 24px;
+  }
+
+  .wfe-contribute .checkout-selection button {
+    font-size: 8px;
+    padding: 8px;
+  }
+}
+
+/* ==========================================================================
+   05. Step checkout — guidance & FAQ
+   The dark "how it works" aside, support notes, FAQ and footer.
+   ========================================================================== */
+
+.wfe-contribute .step-checkout-aside > figure {
+  margin: 0 0 25px;
+}
+
+.wfe-contribute .step-checkout-aside > figure img {
+  width: 100%;
+  object-fit: cover;
+  margin: 0;
+  aspect-ratio: 1.6;
+  border-radius: 7px;
+}
+
+.wfe-contribute .step-checkout-aside figcaption {
+  font-size: 9px;
+  color: #bed0e9;
+  margin-top: 10px;
+}
+
+.wfe-contribute .step-checkout-aside .collection-kicker {
+  color: #f4c648;
+}
+
+.wfe-contribute .step-checkout-aside h2 {
+  color: #fff;
+  font-size: 29px;
+  line-height: 1.12;
+}
+
+.wfe-contribute .step-checkout-aside > p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #cad9ed;
+  margin-top: 18px;
+}
+
+.wfe-contribute .collection-steps li {
+  font-size: 12px;
+  line-height: 1.8;
+  gap: 12px;
+  grid-template-columns: 25px 1fr;
+  margin: 16px 0;
+}
+
+.wfe-contribute .collection-steps li::before {
+  font-size: 10px;
+  color: #f4c648;
+}
+
+.wfe-contribute .collection-steps span {
+  color: #c1d2e9;
+  font-size: 11px;
+}
+
+.wfe-contribute .collection-steps {
+  margin: 20px 0;
+}
+
+.wfe-contribute .collection-steps strong {
+  font-size: 12px;
+}
+
+.wfe-contribute .collection-support {
+  font-size: 11px;
+  line-height: 2;
+  padding-top: 22px;
+}
+
+.wfe-contribute .collection-support a {
+  color: #f4d168;
+  text-decoration: underline;
+}
+
+.wfe-contribute .collection-faq {
+  margin-top: 42px;
+  max-width: 100%;
+}
+
+.wfe-contribute .collection-faq details {
+  font-size: 13px;
+  padding: 22px 0;
+}
+
+.wfe-contribute .collection-faq details p {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.wfe-contribute .collection-faq summary {
+  color: #1c3c68;
+}
+
+.wfe-contribute .collection-footer {
+  border: 0;
+  color: #cbd9eb;
+  font-size: 10px;
+  padding: 28px 22px;
+  background: #0c2549;
+}
+
+.wfe-contribute .collection-footer a {
+  color: #cbd9eb;
+}
+
+@media (max-width: 760px) {
+  .wfe-contribute .collection-support {
+    font-size: 12px;
+  }
+
+  .wfe-contribute .collection-faq summary {
+    font-size: 13px;
+  }
+}

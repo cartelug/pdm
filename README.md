@@ -23,7 +23,8 @@ new payment module uses a private SQLite ledger on the cPanel server.
 - Campaign data: `js/roll-data.js` drives the public progress, tallies, route attribution, and Roll of Honour.
 - Updates data: `js/updates-data.js` drives the updates feed.
 - Shared presentation: `css/base.css` supplies the site-wide tokens, header, navigation, buttons, grids, forms, footer and responsive rules. `css/pci.css`, `css/pdm.css` and `css/fim.css` contain only their page-family components.
-- Shared behavior: `js/core.js` is the single owner of the approved-brand loader, accessible mobile navigation, header state and page progress. Page-family scripts contain only their own forms, feeds, campaign data and route instruments.
+- Shared behavior: `js/core.js` owns accessible mobile navigation, header state and page progress on the institutional and Faith in Motion pages. Page-family scripts contain only their own forms, feeds, campaign data and route instruments.
+- Global preloader: `css/preloader.css` and `js/preloader.js` drive the branded loading screen on every public page (see **Front-end architecture** below).
 - Shared motion: `css/motion.css` and `js/site-motion.js` provide the progressive hero sequence, grouped scroll reveals, image loading transitions, restrained background parallax, responsive navigation choreography and internal-page transitions.
 - Maintenance console: `admin/index.html`.
 
@@ -54,13 +55,43 @@ The backup download still includes both the contribution register and journey co
 
 ## Walk for Education campaign
 
-Pages live under `walk-for-education/` and share `css/wfe.css` and `js/wfe.js`.
+Pages live under `walk-for-education/` and share one stylesheet, `css/wfe.css`, and these scripts (in load order): `js/wfe-shell.js` (menu, step chooser, checkout availability, reveals, sticky shortcut, sharing), `js/wfe-data.js` (source facts), `api/campaign.php` (live record) and `js/wfe.js` (rendering and enquiries). The partnerships page adds `js/wfe-partners.js`. The contribution pages use `css/contribute.css` and `js/contributions.js`.
 
 - **Source facts** (1,100 km, UGX 25B goal, student numbers, named roles) live in `js/wfe-data.js` and change only by code edit.
 - **Verified live values** — dates, distance walked, route stages, step value, payment channels, reconciled totals, field notes and newly confirmed partners — are published from `/admin/wfe.html` (same password as the Faith in Motion console) through `api/campaign.php`. Nothing needs a commit.
 - Every section that shows one of those values stays hidden until it holds a verified value, so the site can never display a guessed number.
 - **Ambassador links:** any campaign link with `?ref=club-name` tags every enquiry, pledge message, share and analytics event from that visitor with the club or ambassador's name. `?steps=100` preselects an amount in the step calculator once a step value is published.
 - Share preview image: `assets/og/walk-for-education.jpg` (1200×630).
+
+## Front-end architecture
+
+There is still no build step: every page links its CSS and JS directly. A small set of dev tools keeps that source consistent.
+
+| Page family | Stylesheets (in order) | Scripts (in order) |
+| --- | --- | --- |
+| Institutional (`/`, `/about/` …) | `preloader` · `base` · `pci` · `motion` | `preloader` · `core` · `pci` · `site-motion` |
+| Projects (`/apartments/` …) | `preloader` · `base` · `pdm` · `motion` | `preloader` · `core` · `pdm` · `site-motion` |
+| Faith in Motion | `preloader` · `base` · `fim` · `motion` | `preloader` · `roll-data` · `core` · `fim` · `site-motion` |
+| Walk for Education | `preloader` · `wfe` | `preloader` · `wfe-shell` · `wfe-data` · `campaign.php` · `wfe` |
+| Contributions | `preloader` · `base` · `collections` · `contribute` | `preloader` · `contributions` |
+
+**Preloader.** Every public page opens `<body>` with the `.site-loader` markup and loads `css/preloader.css` plus `js/preloader.js` (synchronously) in `<head>`, before any other stylesheet. The script turns the screen on only when JavaScript runs, reveals the approved logo once it has decoded, and dismisses it after the page loads: at least 0.9 s on the first view of a session, 0.35 s afterwards, never longer than 2.8 s, and instantly with reduced motion. A CSS failsafe hides it after 6 s in any case. Scripts can wait for it with `window.PamodziPreloader.whenDone(fn)` or the `pamodzi:preloaded` event; the hero sequence and campaign scroll reveals start there. Campaign and contribution pages use `data-variant="wfe"`.
+
+New public page? Copy the `<head>` preloader lines and the `.site-loader` block from a sibling page; `npm run check:pages` fails until both are present.
+
+**Stylesheets** open with a contents list, use design tokens from `:root`, and keep each component's responsive rules directly after it (widest breakpoint first). Campaign class namespaces: `.wfe-*` shell, `.wfe2-*` shared sections, `.v3-*` campaign home, `.wfp-*` partnerships page. Media queries stay in `min-width`/`max-width` form for older iOS Safari.
+
+**Commands** (Node 22; run `npm install` once):
+
+```bash
+npm run lint          # ESLint, Stylelint, Prettier check, page structure, asset hashes
+npm run format        # Prettier for css/, js/, scripts/ and tests/
+npm run assets        # stamp every CSS/JS reference with ?v=<content hash>
+npm run css:compact   # merge duplicate CSS rules where the cascade provably allows it
+npm run test:browser  # Playwright journeys (needs PHP and Chromium; see tests/)
+```
+
+Run `npm run assets` after editing anything in `css/` or `js/`: references carry a hash of the file's contents, so browsers fetch a file again exactly when it changes. `js/roll-data.js` and `js/fim-content.js` are refreshed from the admin console and are excluded from formatting; a stale hash on those only warns. The **Front-end quality** workflow runs `npm run lint` on every pull request and push to `main`. Deployment excludes all tooling files.
 
 ## Motion and accessibility
 

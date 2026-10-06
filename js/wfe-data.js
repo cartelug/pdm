@@ -33,24 +33,25 @@
     contributionUnitCurrency: "UGX",
     /* Authorised channels only: { type: "mobile-money"|"bank", provider, number, accountName, branch?, currency?, referenceHint? } */
     paymentChannels: [],
-    paymentVerificationNote: "Request the current approved contribution details and verify the beneficiary before sending funds.",
+    paymentVerificationNote:
+      "Request the current approved contribution details and verify the beneficiary before sending funds.",
     receivedTotal: null,
     pledgedTotal: null,
     lastReconciledAt: null,
     publicReportingState: "Reporting begins after the authorised reconciliation process is active.",
     coordinator: {
       name: "Pamodzi Community Initiative Uganda",
-      role: "Lead Campaign Convener / Overall Coordinator"
+      role: "Lead Campaign Convener / Overall Coordinator",
     },
     partners: [
       {
         name: "Diocese of South Rwenzori",
-        role: "Institutional Partner"
+        role: "Institutional Partner",
       },
       {
         name: "Rotary Club of Akright City",
-        role: "Lead Rotary Partner"
-      }
+        role: "Lead Rotary Partner",
+      },
     ],
     /* Written confirmation of participation AND public acknowledgement required. */
     confirmedPartners: [],
@@ -61,13 +62,13 @@
       "Lecture rooms, library & ICT",
       "Faculty, staff & campus infrastructure",
       "Kagando Nursery & Primary School",
-      "University expansion"
+      "University expansion",
     ],
     contact: {
       email: "pci.uganda@gmail.com",
       whatsappDisplay: "+256 772 150 281",
-      whatsappUrl: "https://wa.me/256772150281"
+      whatsappUrl: "https://wa.me/256772150281",
     },
-    dataLastReviewed: "2026-10-06"
+    dataLastReviewed: "2026-10-06",
   });
 })();

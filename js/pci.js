@@ -12,7 +12,9 @@
     if (!toast) return;
     toast.textContent = message;
     toast.classList.add("show");
-    window.setTimeout(function () { toast.classList.remove("show"); }, 2000);
+    window.setTimeout(function () {
+      toast.classList.remove("show");
+    }, 2000);
   }
 
   var enquiryForm = byId("enquiryForm");
@@ -34,15 +36,23 @@
     var topic = byId("iTopic") ? byId("iTopic").value : "General";
     var type = byId("iType") ? byId("iType").value : "Enquiry";
     var message = byId("iMsg") ? byId("iMsg").value.trim() : "";
-    var body = "Name: " + name
-      + "\nContact: " + contact
-      + "\nInterest: " + topic
-      + "\nReason: " + type
-      + "\n\n" + (message || "(no message)");
+    var body =
+      "Name: " +
+      name +
+      "\nContact: " +
+      contact +
+      "\nInterest: " +
+      topic +
+      "\nReason: " +
+      type +
+      "\n\n" +
+      (message || "(no message)");
 
-    window.location.href = "mailto:shyakaneeza@gmail.com?subject="
-      + encodeURIComponent("Pamodzi enquiry — " + topic)
-      + "&body=" + encodeURIComponent(body);
+    window.location.href =
+      "mailto:shyakaneeza@gmail.com?subject=" +
+      encodeURIComponent("Pamodzi enquiry — " + topic) +
+      "&body=" +
+      encodeURIComponent(body);
     showToast("Opening your email app…");
   }
 

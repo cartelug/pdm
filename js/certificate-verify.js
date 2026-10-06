@@ -1,1 +1,46 @@
-(function(){'use strict';var code=document.getElementById('certificateCode'),form=document.getElementById('certificateVerification'),message=document.getElementById('verificationMessage'),details=document.getElementById('verifiedCertificate');var supplied=new URLSearchParams(location.search).get('code');if(supplied)code.value=supplied.slice(0,28).toUpperCase();async function verify(){details.hidden=true;if(!form.reportValidity())return;message.textContent='Checking certificate…';var button=form.querySelector('button');button.disabled=true;try{var response=await fetch('../../api/payments/index.php?action=verify-certificate&code='+encodeURIComponent(code.value.toUpperCase()),{cache:'no-store'}),data=await response.json();if(!response.ok)throw new Error(data.error||'This certificate number was not found.');if(!data.valid){message.textContent='This certificate is inactive. Its payment is no longer verified as successful.';return;}message.textContent='Verified contribution certificate issued by Pamodzi Community Initiative Uganda.';document.getElementById('verifiedSteps').textContent=data.steps+(data.steps===1?' step':' steps');document.getElementById('verifiedAmount').textContent='UGX '+new Intl.NumberFormat('en-UG').format(data.amount);document.getElementById('verifiedDate').textContent=new Date(data.issuedAt).toLocaleDateString('en-GB');details.hidden=false;}catch(e){message.textContent=e.message;}finally{button.disabled=false;}}form.addEventListener('submit',function(e){e.preventDefault();verify();});if(supplied)verify();})();
+/* Contributions — public certificate verification (/contribute/verify/).
+   Looks up a certificate number through api/payments (?action=verify-certificate). The response never
+   includes the supporter's identity. */
+(function () {
+  "use strict";
+  var code = document.getElementById("certificateCode"),
+    form = document.getElementById("certificateVerification"),
+    message = document.getElementById("verificationMessage"),
+    details = document.getElementById("verifiedCertificate");
+  var supplied = new URLSearchParams(location.search).get("code");
+  if (supplied) code.value = supplied.slice(0, 28).toUpperCase();
+  async function verify() {
+    details.hidden = true;
+    if (!form.reportValidity()) return;
+    message.textContent = "Checking certificate…";
+    var button = form.querySelector("button");
+    button.disabled = true;
+    try {
+      var response = await fetch(
+          "../../api/payments/index.php?action=verify-certificate&code=" + encodeURIComponent(code.value.toUpperCase()),
+          { cache: "no-store" },
+        ),
+        data = await response.json();
+      if (!response.ok) throw new Error(data.error || "This certificate number was not found.");
+      if (!data.valid) {
+        message.textContent = "This certificate is inactive. Its payment is no longer verified as successful.";
+        return;
+      }
+      message.textContent = "Verified contribution certificate issued by Pamodzi Community Initiative Uganda.";
+      document.getElementById("verifiedSteps").textContent = data.steps + (data.steps === 1 ? " step" : " steps");
+      document.getElementById("verifiedAmount").textContent =
+        "UGX " + new Intl.NumberFormat("en-UG").format(data.amount);
+      document.getElementById("verifiedDate").textContent = new Date(data.issuedAt).toLocaleDateString("en-GB");
+      details.hidden = false;
+    } catch (e) {
+      message.textContent = e.message;
+    } finally {
+      button.disabled = false;
+    }
+  }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    verify();
+  });
+  if (supplied) verify();
+})();

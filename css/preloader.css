@@ -1,0 +1,191 @@
+/* ==========================================================================
+   Pamodzi — global preloader
+   --------------------------------------------------------------------------
+   One branded loading screen shared by every public page. The markup sits at
+   the top of <body>; js/preloader.js (loaded in <head>) adds `has-preloader`
+   to <html> so the screen only appears when a script is present to dismiss
+   it. A CSS failsafe hides it even if that script later fails.
+
+   Brand: the approved runtime logo is shown unaltered on a quiet surface; only
+   its container animates (assets/brand/pamodzi/README.md).
+
+   Variants: data-variant="wfe" on .site-loader for Walk for Education pages.
+   ========================================================================== */
+
+.site-loader {
+  --loader-surface: #fff;
+  --loader-ink: #191817;
+  --loader-muted: #68625e;
+  --loader-accent: #c52b22;
+  --loader-accent-2: #e04438;
+  --loader-track: #f1e7e4;
+  --loader-exit: 520ms;
+
+  display: none;
+}
+
+.site-loader[data-variant="wfe"] {
+  --loader-ink: #102443;
+  --loader-muted: #56657b;
+  --loader-accent: #143866;
+  --loader-accent-2: #f4c648;
+  --loader-track: #e6ecf4;
+}
+
+.has-preloader .site-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  place-items: center;
+  background: var(--loader-surface);
+  color: var(--loader-ink);
+  transition:
+    opacity var(--loader-exit) cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0s linear var(--loader-exit);
+
+  /* Failsafe: never hold the page longer than this, even without JavaScript. */
+  animation: site-loader-failsafe 1ms linear 6s forwards;
+}
+
+.site-loader__inner {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  width: min(280px, 72vw);
+  text-align: center;
+  transition: transform var(--loader-exit) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-loader__mark {
+  display: grid;
+  place-items: center;
+  width: min(150px, 40vw);
+  aspect-ratio: 1273 / 965;
+  animation: site-loader-breathe 2.4s ease-in-out infinite;
+}
+
+.site-loader__mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 420ms ease,
+    transform 520ms cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.site-loader__mark.is-ready img {
+  opacity: 1;
+  transform: none;
+}
+
+.site-loader__name {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--loader-muted);
+}
+
+.site-loader__bar {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--loader-track);
+}
+
+.site-loader__bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--loader-accent), var(--loader-accent-2));
+  transform: scaleX(0.08);
+  transform-origin: left center;
+  animation: site-loader-progress 2.6s cubic-bezier(0.1, 0.6, 0.2, 1) forwards;
+}
+
+/* ---------- exit ---------- */
+
+.site-loader.is-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.site-loader.is-done .site-loader__inner {
+  transform: translateY(-10px) scale(0.98);
+}
+
+.site-loader.is-done .site-loader__bar::before {
+  transform: scaleX(1);
+  animation: none;
+  transition: transform 240ms ease-out;
+}
+
+/* ---------- keyframes ---------- */
+
+@keyframes site-loader-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes site-loader-progress {
+  0% {
+    transform: scaleX(0.08);
+  }
+
+  60% {
+    transform: scaleX(0.72);
+  }
+
+  100% {
+    transform: scaleX(0.9);
+  }
+}
+
+@keyframes site-loader-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .site-loader {
+    --loader-exit: 1ms;
+  }
+
+  .site-loader__mark,
+  .site-loader__bar::before {
+    animation: none;
+  }
+
+  .site-loader__mark img,
+  .site-loader__inner {
+    transition: none;
+  }
+
+  .site-loader__bar::before {
+    transform: scaleX(0.6);
+  }
+}

@@ -1,9 +1,8 @@
 /* Pamodzi core
-   One shared foundation for brand loading, navigation, header state and page progress. */
+   One shared foundation for brand metadata, navigation, header state and page progress. */
 (function () {
   "use strict";
 
-  var root = document.documentElement;
   var reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   var reduced = reduceQuery.matches;
   var header = document.getElementById("hdr");
@@ -13,11 +12,16 @@
   var ticking = false;
   var heroThreshold = 180;
   var scrollRange = 1;
-  var assetBase = new URL("../assets/", document.currentScript && document.currentScript.src ? document.currentScript.src : window.location.href).href;
+  var assetBase = new URL(
+    "../assets/",
+    document.currentScript && document.currentScript.src ? document.currentScript.src : window.location.href,
+  ).href;
 
   window.PamodziCore = {
     version: "2.0.0",
-    reducedMotion: function () { return reduced; }
+    reducedMotion: function () {
+      return reduced;
+    },
   };
 
   function all(selector, context) {
@@ -30,35 +34,6 @@
       icon.setAttribute("href", assetBase + "brand/pamodzi/pamodzi-logo-transparent.png");
       icon.setAttribute("type", "image/png");
     }
-
-    if (document.querySelector(".site-loader")) return;
-
-    var loader = document.createElement("div");
-    loader.className = "site-loader";
-    loader.setAttribute("role", "status");
-    loader.setAttribute("aria-live", "polite");
-    loader.setAttribute("aria-label", "Loading Pamodzi Community Initiative");
-    loader.innerHTML = '<div class="inner"><img src="' + assetBase + 'brand/pamodzi/pamodzi-logo-transparent.png" alt=""><span>Pamodzi Community Initiative</span></div>';
-    document.body.insertBefore(loader, document.body.firstChild);
-
-    var closed = false;
-    function closeLoader() {
-      if (closed) return;
-      closed = true;
-      loader.classList.add("done");
-      window.setTimeout(function () {
-        if (loader.parentNode) loader.parentNode.removeChild(loader);
-      }, reduced ? 0 : 520);
-    }
-
-    if (document.readyState === "complete") {
-      window.setTimeout(closeLoader, reduced ? 0 : 220);
-    } else {
-      window.addEventListener("load", function () {
-        window.setTimeout(closeLoader, reduced ? 0 : 220);
-      }, { once: true });
-    }
-    window.setTimeout(closeLoader, reduced ? 0 : 900);
   }
 
   function navFocusables() {
@@ -81,8 +56,8 @@
   function setNavOrigin() {
     if (!mobileNav || !burger) return;
     var rect = burger.getBoundingClientRect();
-    var ox = ((rect.left + rect.width / 2) / Math.max(window.innerWidth, 1) * 100).toFixed(1) + "%";
-    var oy = ((rect.top + rect.height / 2) / Math.max(window.innerHeight, 1) * 100).toFixed(1) + "%";
+    var ox = (((rect.left + rect.width / 2) / Math.max(window.innerWidth, 1)) * 100).toFixed(1) + "%";
+    var oy = (((rect.top + rect.height / 2) / Math.max(window.innerHeight, 1)) * 100).toFixed(1) + "%";
     mobileNav.style.setProperty("--mnav-ox", ox);
     mobileNav.style.setProperty("--mnav-oy", oy);
   }
@@ -102,8 +77,11 @@
     all("a", mobileNav).forEach(function (link) {
       if (link.classList.contains("btn")) return;
       var linkPath;
-      try { linkPath = new URL(link.href, window.location.href).pathname.replace(/index\.html$/, ""); }
-      catch (error) { return; }
+      try {
+        linkPath = new URL(link.href, window.location.href).pathname.replace(/index\.html$/, "");
+      } catch (error) {
+        return;
+      }
       link.classList.toggle("act", linkPath === here);
     });
   }
@@ -159,11 +137,15 @@
       }
     });
 
-    window.addEventListener("resize", function () {
-      if (window.innerWidth > 1080 && mobileNav.classList.contains("open")) {
-        closeNav({ restoreFocus: false });
-      }
-    }, { passive: true });
+    window.addEventListener(
+      "resize",
+      function () {
+        if (window.innerWidth > 1080 && mobileNav.classList.contains("open")) {
+          closeNav({ restoreFocus: false });
+        }
+      },
+      { passive: true },
+    );
   }
 
   function ensureProgress() {
@@ -204,14 +186,22 @@
     measurePage();
     paintPage();
     window.addEventListener("scroll", requestPaint, { passive: true });
-    window.addEventListener("resize", function () {
-      measurePage();
-      requestPaint();
-    }, { passive: true });
-    window.addEventListener("load", function () {
-      measurePage();
-      paintPage();
-    }, { once: true });
+    window.addEventListener(
+      "resize",
+      function () {
+        measurePage();
+        requestPaint();
+      },
+      { passive: true },
+    );
+    window.addEventListener(
+      "load",
+      function () {
+        measurePage();
+        paintPage();
+      },
+      { once: true },
+    );
   }
 
   function ready() {

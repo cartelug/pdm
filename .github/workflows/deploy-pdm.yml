@@ -22,7 +22,10 @@ jobs:
 
       - name: Prepare only the live PDM website
         run: |
-          rsync -a --delete --exclude '.git' --exclude '.github' --exclude 'deploy' --exclude 'tests' --exclude '*.md' --exclude 'api/payments/config.example.php' ./ deploy/
+          rsync -a --delete --exclude '.git' --exclude '.github' --exclude 'deploy' --exclude 'tests' --exclude '*.md' --exclude 'api/payments/config.example.php' \
+            --exclude 'node_modules' --exclude 'scripts' --exclude 'package.json' --exclude 'package-lock.json' \
+            --exclude 'eslint.config.mjs' --exclude 'stylelint.config.mjs' --exclude '.prettierrc.json' --exclude '.prettierignore' --exclude '.editorconfig' \
+            ./ deploy/
 
       - name: Upload to pamodzici.com
         uses: appleboy/scp-action@v1

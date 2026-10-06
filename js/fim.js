@@ -4,422 +4,721 @@
 
    Everything below is DERIVED from the roll. No total, distance, percentage
    or segment is ever hard-coded. Shared site behavior lives in core.js. */
-(function(){
+(function () {
   "use strict";
-  var STEP_UGX=1000, TOTAL_STEPS=466200, ROUTE_KM=345;
-  var M_PER_STEP=(ROUTE_KM*1000)/TOTAL_STEPS;          /* 0.74003 m — 74 cm */
-  var mq=window.matchMedia('(prefers-reduced-motion:reduce)');
-  var REDUCE=mq.matches;
-  var assetBase=new URL('../assets/',document.currentScript&&document.currentScript.src?document.currentScript.src:window.location.href).href;
-  if(mq.addEventListener) mq.addEventListener('change',function(e){REDUCE=e.matches;});
-  var $=function(id){return document.getElementById(id);};
-  function assetUrl(src){ return /^assets\//.test(src||'') ? assetBase+src.slice(7) : src; }
+  var STEP_UGX = 1000,
+    TOTAL_STEPS = 466200,
+    ROUTE_KM = 345;
+  var M_PER_STEP = (ROUTE_KM * 1000) / TOTAL_STEPS; /* 0.74003 m — 74 cm */
+  var mq = window.matchMedia("(prefers-reduced-motion:reduce)");
+  var REDUCE = mq.matches;
+  var assetBase = new URL(
+    "../assets/",
+    document.currentScript && document.currentScript.src ? document.currentScript.src : window.location.href,
+  ).href;
+  if (mq.addEventListener)
+    mq.addEventListener("change", function (e) {
+      REDUCE = e.matches;
+    });
+  var $ = function (id) {
+    return document.getElementById(id);
+  };
+  function assetUrl(src) {
+    return /^assets\//.test(src || "") ? assetBase + src.slice(7) : src;
+  }
 
-  var ROLL=(window.ROLL_DATA||[]).slice();
-  var WAYS=(window.ROUTE_WAYPOINTS||[]).slice();
-  var LIVE=window.WALK_LIVE||{active:false};
+  var ROLL = (window.ROLL_DATA || []).slice();
+  var WAYS = (window.ROUTE_WAYPOINTS || []).slice();
+  var LIVE = window.WALK_LIVE || { active: false };
 
-  function fmt(n){return Number(n).toLocaleString('en-US');}
-  function ugx(n){return 'UGX '+fmt(n);}
-  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function fmt(n) {
+    return Number(n).toLocaleString("en-US");
+  }
+  function ugx(n) {
+    return "UGX " + fmt(n);
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
 
   /* ── totals ─────────────────────────────────────────────────── */
-  function countsTowardProgress(r){ return r[3]==='paid'; }
-  var T={
-    amt:0,steps:0,n:0,
-    paid:0,paidS:0,paidN:0,
-    pled:0,pledS:0,pledN:0,
-    committedAmt:0,committedSteps:0,committedN:0
+  function countsTowardProgress(r) {
+    return r[3] === "paid";
+  }
+  var T = {
+    amt: 0,
+    steps: 0,
+    n: 0,
+    paid: 0,
+    paidS: 0,
+    paidN: 0,
+    pled: 0,
+    pledS: 0,
+    pledN: 0,
+    committedAmt: 0,
+    committedSteps: 0,
+    committedN: 0,
   };
-  ROLL.forEach(function(r){
-    if(r[3]==='paid'){
-      T.amt+=r[1]; T.steps+=r[2]; T.n++;
-      T.paid+=r[1]; T.paidS+=r[2]; T.paidN++;
-      T.committedAmt+=r[1]; T.committedSteps+=r[2]; T.committedN++;
-    } else if(r[3]==='pledged'){
-      T.pled+=r[1]; T.pledS+=r[2]; T.pledN++;
-      T.committedAmt+=r[1]; T.committedSteps+=r[2]; T.committedN++;
+  ROLL.forEach(function (r) {
+    if (r[3] === "paid") {
+      T.amt += r[1];
+      T.steps += r[2];
+      T.n++;
+      T.paid += r[1];
+      T.paidS += r[2];
+      T.paidN++;
+      T.committedAmt += r[1];
+      T.committedSteps += r[2];
+      T.committedN++;
+    } else if (r[3] === "pledged") {
+      T.pled += r[1];
+      T.pledS += r[2];
+      T.pledN++;
+      T.committedAmt += r[1];
+      T.committedSteps += r[2];
+      T.committedN++;
     }
   });
-  var LEFT=Math.max(TOTAL_STEPS-T.steps,0);
-  var PCT=Math.min(T.steps/TOTAL_STEPS,1);
+  var LEFT = Math.max(TOTAL_STEPS - T.steps, 0);
+  var PCT = Math.min(T.steps / TOTAL_STEPS, 1);
 
   /* ── 1 · STEP ATTRIBUTION ───────────────────────────────────────
      Sponsors are allocated sequentially along the road, so the gold
      line on the route graphic IS the funded road. Only verified received
      entries receive a segment; pledges and promises remain separate. */
-  function kmOf(step){ return (step*M_PER_STEP)/1000; }
-  function placeAt(km){
-    if(!WAYS.length) return "";
-    var best=WAYS[0];
-    for(var i=0;i<WAYS.length;i++){ if(WAYS[i][0]<=km) best=WAYS[i]; }
-    var next=null;
-    for(var j=0;j<WAYS.length;j++){ if(WAYS[j][0]>km){ next=WAYS[j]; break; } }
-    if(next && (next[0]-km) < (km-best[0])) return "approaching "+next[1];
-    return "past "+best[1];
+  function kmOf(step) {
+    return (step * M_PER_STEP) / 1000;
   }
-  var cursor=0;
-  ROLL.forEach(function(r){
-    if(!countsTowardProgress(r)){
-      r._from=cursor; r._to=cursor;
-      r._kmFrom=kmOf(cursor); r._kmTo=kmOf(cursor);
-      r._place="not included in sponsored progress";
+  function placeAt(km) {
+    if (!WAYS.length) return "";
+    var best = WAYS[0];
+    for (var i = 0; i < WAYS.length; i++) {
+      if (WAYS[i][0] <= km) best = WAYS[i];
+    }
+    var next = null;
+    for (var j = 0; j < WAYS.length; j++) {
+      if (WAYS[j][0] > km) {
+        next = WAYS[j];
+        break;
+      }
+    }
+    if (next && next[0] - km < km - best[0]) return "approaching " + next[1];
+    return "past " + best[1];
+  }
+  var cursor = 0;
+  ROLL.forEach(function (r) {
+    if (!countsTowardProgress(r)) {
+      r._from = cursor;
+      r._to = cursor;
+      r._kmFrom = kmOf(cursor);
+      r._kmTo = kmOf(cursor);
+      r._place = "not included in sponsored progress";
       return;
     }
-    r._from=cursor; cursor+=r[2]; r._to=cursor;
-    r._kmFrom=kmOf(r._from); r._kmTo=kmOf(r._to);
-    r._place=placeAt(r._kmFrom);
+    r._from = cursor;
+    cursor += r[2];
+    r._to = cursor;
+    r._kmFrom = kmOf(r._from);
+    r._kmTo = kmOf(r._to);
+    r._place = placeAt(r._kmFrom);
   });
-  function segLabel(kmFrom,kmTo){
-    return 'km '+kmFrom.toFixed(3)+' – '+kmTo.toFixed(3);
+  function segLabel(kmFrom, kmTo) {
+    return "km " + kmFrom.toFixed(3) + " – " + kmTo.toFixed(3);
   }
 
   /* ── 3 · THE UNIT TRADE ─────────────────────────────────────────
      One sentence, injected anywhere [data-unit] appears. */
-  var CM=Math.round(M_PER_STEP*100);
-  var UNIT='UGX '+fmt(STEP_UGX)+' = one step = '+CM+' centimetres of road';
-  Array.prototype.forEach.call(document.querySelectorAll('[data-unit]'),function(el){
-    el.textContent=UNIT;
+  var CM = Math.round(M_PER_STEP * 100);
+  var UNIT = "UGX " + fmt(STEP_UGX) + " = one step = " + CM + " centimetres of road";
+  Array.prototype.forEach.call(document.querySelectorAll("[data-unit]"), function (el) {
+    el.textContent = UNIT;
   });
 
   /* ── 4 · MILESTONES ─────────────────────────────────────────────
      25/50/75/100 are pinned on the graphic. The *next* threshold is
      chosen from a finer ladder, because a near target converts. */
-  var LADDER=[0.01,0.025,0.05,0.10,0.25,0.50,0.75,1.00];
-  var nextPct=null;
-  for(var li=0;li<LADDER.length;li++){ if(LADDER[li]>PCT){ nextPct=LADDER[li]; break; } }
-  var nextSteps=nextPct?Math.ceil(TOTAL_STEPS*nextPct)-T.steps:0;
-  function pctLabel(p){ return (p*100)%1===0 ? (p*100)+'%' : (p*100).toFixed(1)+'%'; }
-  if($('msNext')&&nextPct){
-    $('msNext').textContent=fmt(nextSteps)+' steps to the '+pctLabel(nextPct)+' marker';
+  var LADDER = [0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 0.75, 1.0];
+  var nextPct = null;
+  for (var li = 0; li < LADDER.length; li++) {
+    if (LADDER[li] > PCT) {
+      nextPct = LADDER[li];
+      break;
+    }
   }
-  if($('msPct')) $('msPct').textContent=(PCT*100).toFixed(2)+'%';
+  var nextSteps = nextPct ? Math.ceil(TOTAL_STEPS * nextPct) - T.steps : 0;
+  function pctLabel(p) {
+    return (p * 100) % 1 === 0 ? p * 100 + "%" : (p * 100).toFixed(1) + "%";
+  }
+  if ($("msNext") && nextPct) {
+    $("msNext").textContent = fmt(nextSteps) + " steps to the " + pctLabel(nextPct) + " marker";
+  }
+  if ($("msPct")) $("msPct").textContent = (PCT * 100).toFixed(2) + "%";
 
   /* ── count-up ───────────────────────────────────────────────── */
-  function countTo(el,to,dur,pre,suf){
-    if(!el) return;
-    if(REDUCE){ el.textContent=(pre||'')+fmt(to)+(suf||''); return; }
-    var t0=null;
-    function tick(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1); var e=1-Math.pow(1-p,3);
-      el.textContent=(pre||'')+fmt(Math.round(to*e))+(suf||''); if(p<1)requestAnimationFrame(tick); }
+  function countTo(el, to, dur, pre, suf) {
+    if (!el) return;
+    if (REDUCE) {
+      el.textContent = (pre || "") + fmt(to) + (suf || "");
+      return;
+    }
+    var t0 = null;
+    function tick(ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = (pre || "") + fmt(Math.round(to * e)) + (suf || "");
+      if (p < 1) requestAnimationFrame(tick);
+    }
     requestAnimationFrame(tick);
   }
 
-  var heroRan=false;
-  function runHero(){
-    if(heroRan||!$('hRaised')) return; heroRan=true;
-    countTo($('hSteps'),TOTAL_STEPS,1200);
-    countTo($('hRaised'),T.amt,1500,'UGX ');
-    countTo($('hSponsors'),T.n,900);
+  var heroRan = false;
+  function runHero() {
+    if (heroRan || !$("hRaised")) return;
+    heroRan = true;
+    countTo($("hSteps"), TOTAL_STEPS, 1200);
+    countTo($("hRaised"), T.amt, 1500, "UGX ");
+    countTo($("hSponsors"), T.n, 900);
   }
 
   /* ── road figure + milestone pins ───────────────────────────── */
-  var roadRan=false;
-  function runRoad(){
-    if(roadRan) return;
-    var fill=$('rFill'), walker=$('rWalker'), path=$('rPath');
-    countTo($('roadCount'),T.steps,1500);
-    countTo($('gapSteps'),LEFT,1500);
-    if(!fill||!fill.getTotalLength){ roadRan=true; return; }
-    roadRan=true;
-    var L=fill.getTotalLength();
+  var roadRan = false;
+  function runRoad() {
+    if (roadRan) return;
+    var fill = $("rFill"),
+      walker = $("rWalker"),
+      path = $("rPath");
+    countTo($("roadCount"), T.steps, 1500);
+    countTo($("gapSteps"), LEFT, 1500);
+    if (!fill || !fill.getTotalLength) {
+      roadRan = true;
+      return;
+    }
+    roadRan = true;
+    var L = fill.getTotalLength();
 
     /* place 25/50/75 pins along the real path geometry */
-    var pinLayer=$('rPins');
-    if(pinLayer&&path&&path.getPointAtLength){
-      var PL=path.getTotalLength();
-      [0.25,0.5,0.75].forEach(function(p){
-        var pt=path.getPointAtLength(PL*p);
-        var g=document.createElementNS('http://www.w3.org/2000/svg','g');
-        g.setAttribute('transform','translate('+pt.x+','+pt.y+')');
-        g.setAttribute('class','pin');
-        g.innerHTML='<line x1="0" y1="-9" x2="0" y2="9" stroke="#8B7C63" stroke-width="2"/>'
-          +'<text x="0" y="-15" text-anchor="middle" font-family="JetBrains Mono, monospace"'
-          +' font-size="11" fill="#8B7C63">'+(p*100)+'%</text>';
+    var pinLayer = $("rPins");
+    if (pinLayer && path && path.getPointAtLength) {
+      var PL = path.getTotalLength();
+      [0.25, 0.5, 0.75].forEach(function (p) {
+        var pt = path.getPointAtLength(PL * p);
+        var g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        g.setAttribute("transform", "translate(" + pt.x + "," + pt.y + ")");
+        g.setAttribute("class", "pin");
+        g.innerHTML =
+          '<line x1="0" y1="-9" x2="0" y2="9" stroke="#8B7C63" stroke-width="2"/>' +
+          '<text x="0" y="-15" text-anchor="middle" font-family="JetBrains Mono, monospace"' +
+          ' font-size="11" fill="#8B7C63">' +
+          p * 100 +
+          "%</text>";
         pinLayer.appendChild(g);
       });
     }
 
-    var frac=Math.max(PCT,0.014);
-    fill.style.strokeDasharray=L;
-    function place(f){ if(!walker) return; var pt=fill.getPointAtLength(L*f); walker.setAttribute('transform','translate('+pt.x+','+pt.y+')'); }
-    if(REDUCE){ fill.style.strokeDashoffset=L-(L*frac); place(frac); return; }
-    fill.style.strokeDashoffset=L;
-    var t0=null;
-    function tk(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/1700,1); var e=1-Math.pow(1-p,3);
-      fill.style.strokeDashoffset=L-(L*frac*e); place(frac*e); if(p<1)requestAnimationFrame(tk); }
+    var frac = Math.max(PCT, 0.014);
+    fill.style.strokeDasharray = L;
+    function place(f) {
+      if (!walker) return;
+      var pt = fill.getPointAtLength(L * f);
+      walker.setAttribute("transform", "translate(" + pt.x + "," + pt.y + ")");
+    }
+    if (REDUCE) {
+      fill.style.strokeDashoffset = L - L * frac;
+      place(frac);
+      return;
+    }
+    fill.style.strokeDashoffset = L;
+    var t0 = null;
+    function tk(ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / 1700, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      fill.style.strokeDashoffset = L - L * frac * e;
+      place(frac * e);
+      if (p < 1) requestAnimationFrame(tk);
+    }
     requestAnimationFrame(tk);
   }
 
   /* ── sponsor instrument ─────────────────────────────────────── */
-  var steps=100;
-  var tiers=Array.prototype.slice.call(document.querySelectorAll('.tier'));
-  var cIn=$('cSteps');
-  function refresh(){
-    if(!$('outAmt')) return;
-    var amt=steps*STEP_UGX;
-    $('outAmt').textContent=ugx(amt);
-    var m=steps*M_PER_STEP;
-    if($('outDist')) $('outDist').textContent = m>=1000 ? (m/1000).toFixed(2)+' kilometres' : Math.round(m)+' metres';
-    if($('outBar')) $('outBar').style.width=Math.min((steps/1000)*100,100)+'%';
+  var steps = 100;
+  var tiers = Array.prototype.slice.call(document.querySelectorAll(".tier"));
+  var cIn = $("cSteps");
+  function refresh() {
+    if (!$("outAmt")) return;
+    var amt = steps * STEP_UGX;
+    $("outAmt").textContent = ugx(amt);
+    var m = steps * M_PER_STEP;
+    if ($("outDist"))
+      $("outDist").textContent = m >= 1000 ? (m / 1000).toFixed(2) + " kilometres" : Math.round(m) + " metres";
+    if ($("outBar")) $("outBar").style.width = Math.min((steps / 1000) * 100, 100) + "%";
 
     /* 1 · show the exact segment these steps would claim next */
-    if($('outSeg')){
-      var from=kmOf(T.steps), to=kmOf(T.steps+steps);
-      $('outSeg').textContent=segLabel(from,to);
-      if($('outPlace')) $('outPlace').textContent=placeAt(from);
+    if ($("outSeg")) {
+      var from = kmOf(T.steps),
+        to = kmOf(T.steps + steps);
+      $("outSeg").textContent = segLabel(from, to);
+      if ($("outPlace")) $("outPlace").textContent = placeAt(from);
     }
-    if($('waPledge')){
-      var seg=$('outSeg')?(' That claims '+segLabel(kmOf(T.steps),kmOf(T.steps+steps))+' of the road.'):'';
-      var msg='I would like to sponsor '+fmt(steps)+' steps ('+ugx(amt)+') for Faith in Motion — the walk to complete St Joseph Rwembyo Catholic Church.'+seg+' Please send the current approved transfer details and beneficiary name so I can verify them before sending.';
-      if(window.__ref) msg+=' (Invited by: '+window.__ref+')';
-      $('waPledge').href='https://wa.me/256772495733?text='+encodeURIComponent(msg);
+    if ($("waPledge")) {
+      var seg = $("outSeg") ? " That claims " + segLabel(kmOf(T.steps), kmOf(T.steps + steps)) + " of the road." : "";
+      var msg =
+        "I would like to sponsor " +
+        fmt(steps) +
+        " steps (" +
+        ugx(amt) +
+        ") for Faith in Motion — the walk to complete St Joseph Rwembyo Catholic Church." +
+        seg +
+        " Please send the current approved transfer details and beneficiary name so I can verify them before sending.";
+      if (window.__ref) msg += " (Invited by: " + window.__ref + ")";
+      $("waPledge").href = "https://wa.me/256772495733?text=" + encodeURIComponent(msg);
     }
   }
-  if(tiers.length){
-    tiers.forEach(function(t){ t.addEventListener('click',function(){
-      tiers.forEach(function(x){x.classList.remove('on');}); t.classList.add('on');
-      steps=parseInt(t.getAttribute('data-s'),10); if(cIn) cIn.value=''; refresh();
-    });});
+  if (tiers.length) {
+    tiers.forEach(function (t) {
+      t.addEventListener("click", function () {
+        tiers.forEach(function (x) {
+          x.classList.remove("on");
+        });
+        t.classList.add("on");
+        steps = parseInt(t.getAttribute("data-s"), 10);
+        if (cIn) cIn.value = "";
+        refresh();
+      });
+    });
   }
-  if(cIn){
-    cIn.addEventListener('input',function(){
-      var v=parseInt(cIn.value,10);
-      if(v>0){
-        tiers.forEach(function(x){x.classList.remove('on');});
-        steps=Math.min(Math.max(v,1),1000);
-        if(v>1000) cIn.value=1000;
+  if (cIn) {
+    cIn.addEventListener("input", function () {
+      var v = parseInt(cIn.value, 10);
+      if (v > 0) {
+        tiers.forEach(function (x) {
+          x.classList.remove("on");
+        });
+        steps = Math.min(Math.max(v, 1), 1000);
+        if (v > 1000) cIn.value = 1000;
         refresh();
       }
     });
   }
-  (function(){
-    var qs=new URLSearchParams(window.location.search);
-    var q=parseInt(qs.get('steps'),10), qr=qs.get('ref');
-    if(qr) window.__ref=qr.slice(0,40);
-    if(q>0 && tiers.length){
-      steps=Math.min(Math.max(q,1),1000); var hit=false;
-      tiers.forEach(function(x){ x.classList.remove('on');
-        if(parseInt(x.getAttribute('data-s'),10)===steps){x.classList.add('on');hit=true;} });
-      if(!hit && cIn) cIn.value=steps;
-      setTimeout(function(){ var el=$('sponsor'); if(el) el.scrollIntoView({behavior:REDUCE?'auto':'smooth',block:'start'}); },420);
+  (function () {
+    var qs = new URLSearchParams(window.location.search);
+    var q = parseInt(qs.get("steps"), 10),
+      qr = qs.get("ref");
+    if (qr) window.__ref = qr.slice(0, 40);
+    if (q > 0 && tiers.length) {
+      steps = Math.min(Math.max(q, 1), 1000);
+      var hit = false;
+      tiers.forEach(function (x) {
+        x.classList.remove("on");
+        if (parseInt(x.getAttribute("data-s"), 10) === steps) {
+          x.classList.add("on");
+          hit = true;
+        }
+      });
+      if (!hit && cIn) cIn.value = steps;
+      setTimeout(function () {
+        var el = $("sponsor");
+        if (el) el.scrollIntoView({ behavior: REDUCE ? "auto" : "smooth", block: "start" });
+      }, 420);
     }
   })();
   refresh();
 
   /* ── 6 · ROLL OF HONOUR, live ───────────────────────────────── */
-  function recency(iso){
-    if(!iso) return '';
-    var t=Date.parse(iso+'T12:00:00Z'); if(isNaN(t)) return '';
-    var days=Math.floor((Date.now()-t)/86400000);
-    if(days<0) return '';
-    if(days===0) return 'today';
-    if(days===1) return 'yesterday';
-    if(days<7) return days+' days ago';
-    if(days<14) return 'last week';
-    if(days<61) return Math.floor(days/7)+' weeks ago';
-    return Math.floor(days/30)+' months ago';
+  function recency(iso) {
+    if (!iso) return "";
+    var t = Date.parse(iso + "T12:00:00Z");
+    if (isNaN(t)) return "";
+    var days = Math.floor((Date.now() - t) / 86400000);
+    if (days < 0) return "";
+    if (days === 0) return "today";
+    if (days === 1) return "yesterday";
+    if (days < 7) return days + " days ago";
+    if (days < 14) return "last week";
+    if (days < 61) return Math.floor(days / 7) + " weeks ago";
+    return Math.floor(days / 30) + " months ago";
   }
-  var body=$('ledgerBody');
-  if(body){
-    var full = body.hasAttribute('data-full');
-    var expanded=full;
-    function renderRoll(){
-      var rows=expanded?ROLL:ROLL.slice(0,8);
-      body.innerHTML=rows.map(function(r,i){
-        var counted=countsTowardProgress(r);
-        var when=counted?recency(r[5]):'';
-        var segment=counted?(segLabel(r._kmFrom,r._kmTo)+' · '+esc(r._place))
-          :(r[3]==='pledged'?'pledged · awaiting verified receipt':'promise · not included in funded progress');
-        var stepText=counted?(fmt(r[2])+' funded steps')
-          :(r[3]==='pledged'?'pledged · not funded yet':'promise · not counted');
-        return '<div class="lrow"><span class="i">'+String(i+1).padStart(2,'0')+'</span>'
-          +'<span class="n">'+esc(r[0])
-            +(r[4]?'<em>'+esc(r[4])+'</em>':'')
-            +'<i class="seg">'+segment+'</i>'
-            +(when?'<i class="when">sponsored '+when+'</i>':'')
-          +'</span>'
-          +'<span class="a">'+ugx(r[1])+'<i>'+stepText+'</i></span>'
-          +'<span class="s"><span class="pill '+r[3]+'">'+r[3]+'</span></span></div>';
-      }).join('');
-      if($('rollToggle')) $('rollToggle').textContent=expanded?'Show fewer':('Show all '+ROLL.length+' entries');
+  var body = $("ledgerBody");
+  if (body) {
+    var full = body.hasAttribute("data-full");
+    var expanded = full;
+    function renderRoll() {
+      var rows = expanded ? ROLL : ROLL.slice(0, 8);
+      body.innerHTML = rows
+        .map(function (r, i) {
+          var counted = countsTowardProgress(r);
+          var when = counted ? recency(r[5]) : "";
+          var segment = counted
+            ? segLabel(r._kmFrom, r._kmTo) + " · " + esc(r._place)
+            : r[3] === "pledged"
+              ? "pledged · awaiting verified receipt"
+              : "promise · not included in funded progress";
+          var stepText = counted
+            ? fmt(r[2]) + " funded steps"
+            : r[3] === "pledged"
+              ? "pledged · not funded yet"
+              : "promise · not counted";
+          return (
+            '<div class="lrow"><span class="i">' +
+            String(i + 1).padStart(2, "0") +
+            "</span>" +
+            '<span class="n">' +
+            esc(r[0]) +
+            (r[4] ? "<em>" + esc(r[4]) + "</em>" : "") +
+            '<i class="seg">' +
+            segment +
+            "</i>" +
+            (when ? '<i class="when">sponsored ' + when + "</i>" : "") +
+            "</span>" +
+            '<span class="a">' +
+            ugx(r[1]) +
+            "<i>" +
+            stepText +
+            "</i></span>" +
+            '<span class="s"><span class="pill ' +
+            r[3] +
+            '">' +
+            r[3] +
+            "</span></span></div>"
+          );
+        })
+        .join("");
+      if ($("rollToggle"))
+        $("rollToggle").textContent = expanded ? "Show fewer" : "Show all " + ROLL.length + " entries";
     }
-    if($('rollToggle')) $('rollToggle').addEventListener('click',function(){ expanded=!expanded; renderRoll(); });
+    if ($("rollToggle"))
+      $("rollToggle").addEventListener("click", function () {
+        expanded = !expanded;
+        renderRoll();
+      });
     renderRoll();
   }
 
   /* leading sponsors band */
-  var lead=$('leadBand');
-  if(lead){
-    var top=ROLL.filter(countsTowardProgress).sort(function(a,b){return b[1]-a[1];}).slice(0,3);
-    lead.innerHTML=top.map(function(r,i){
-      return '<div class="lead"><span class="r">'+(i+1)+'</span><span><b>'+esc(r[0])+'</b>'
-        +'<span>'+fmt(r[2])+' steps · '+segLabel(r._kmFrom,r._kmTo)+'</span></span></div>';
-    }).join('');
+  var lead = $("leadBand");
+  if (lead) {
+    var top = ROLL.filter(countsTowardProgress)
+      .sort(function (a, b) {
+        return b[1] - a[1];
+      })
+      .slice(0, 3);
+    lead.innerHTML = top
+      .map(function (r, i) {
+        return (
+          '<div class="lead"><span class="r">' +
+          (i + 1) +
+          "</span><span><b>" +
+          esc(r[0]) +
+          "</b>" +
+          "<span>" +
+          fmt(r[2]) +
+          " steps · " +
+          segLabel(r._kmFrom, r._kmTo) +
+          "</span></span></div>"
+        );
+      })
+      .join("");
   }
 
   /* ── 7 · PLEDGED vs FULFILLED ───────────────────────────────── */
-  if($('tPaid')){
-    $('tPaid').textContent=ugx(T.paid); if($('tPaidC')) $('tPaidC').textContent=fmt(T.paidS)+' steps · '+T.paidN+' sponsors';
-    $('tPled').textContent=ugx(T.pled); if($('tPledC')) $('tPledC').textContent=fmt(T.pledS)+' steps · '+T.pledN+' sponsors';
-    $('tTot').textContent=ugx(T.committedAmt);
-    if($('tTotC')) $('tTotC').textContent=fmt(T.committedSteps)+' steps · '+T.committedN+' supporters';
+  if ($("tPaid")) {
+    $("tPaid").textContent = ugx(T.paid);
+    if ($("tPaidC")) $("tPaidC").textContent = fmt(T.paidS) + " steps · " + T.paidN + " sponsors";
+    $("tPled").textContent = ugx(T.pled);
+    if ($("tPledC")) $("tPledC").textContent = fmt(T.pledS) + " steps · " + T.pledN + " sponsors";
+    $("tTot").textContent = ugx(T.committedAmt);
+    if ($("tTotC")) $("tTotC").textContent = fmt(T.committedSteps) + " steps · " + T.committedN + " supporters";
   }
-  var pf=$('pfBar');
-  if(pf){
-    var share=T.committedAmt?(T.paid/T.committedAmt):0;
-    if(!REDUCE){ pf.style.transition='transform 1.2s cubic-bezier(.22,1,.36,1)'; }
-    pf.style.transformOrigin='left';
-    pf.style.transform='scaleX('+(REDUCE?share:0)+')';
-    if(!REDUCE) setTimeout(function(){ pf.style.transform='scaleX('+share+')'; },320);
-    if($('pfPaid')) $('pfPaid').textContent=ugx(T.paid);
-    if($('pfPled')) $('pfPled').textContent=ugx(T.pled);
-    if($('pfPct'))  $('pfPct').textContent=Math.round(share*100)+'% fulfilled';
+  var pf = $("pfBar");
+  if (pf) {
+    var share = T.committedAmt ? T.paid / T.committedAmt : 0;
+    if (!REDUCE) {
+      pf.style.transition = "transform 1.2s cubic-bezier(.22,1,.36,1)";
+    }
+    pf.style.transformOrigin = "left";
+    pf.style.transform = "scaleX(" + (REDUCE ? share : 0) + ")";
+    if (!REDUCE)
+      setTimeout(function () {
+        pf.style.transform = "scaleX(" + share + ")";
+      }, 320);
+    if ($("pfPaid")) $("pfPaid").textContent = ugx(T.paid);
+    if ($("pfPled")) $("pfPled").textContent = ugx(T.pled);
+    if ($("pfPct")) $("pfPct").textContent = Math.round(share * 100) + "% fulfilled";
   }
-  if($('waFulfil')){
-    $('waFulfil').href='https://wa.me/256772495733?text='+encodeURIComponent(
-      'I would like to complete a pledge to Faith in Motion. Please confirm the recorded steps and send the current approved transfer details and beneficiary name so I can verify them before sending.');
+  if ($("waFulfil")) {
+    $("waFulfil").href =
+      "https://wa.me/256772495733?text=" +
+      encodeURIComponent(
+        "I would like to complete a pledge to Faith in Motion. Please confirm the recorded steps and send the current approved transfer details and beneficiary name so I can verify them before sending.",
+      );
   }
 
   /* generic stat mounts */
-  Array.prototype.forEach.call(document.querySelectorAll('[data-t]'),function(el){
-    var m=Math.round(T.steps*M_PER_STEP);
-    var map={amt:ugx(T.amt),steps:fmt(T.steps),left:fmt(LEFT),n:fmt(T.n),
-             paid:ugx(T.paid),pled:ugx(T.pled),pct:(PCT*100).toFixed(2)+'%',
-             committed:ugx(T.committedAmt),committedsteps:fmt(T.committedSteps),
-             km:(m/1000).toFixed(2)+' km',
-             next:nextPct?(fmt(nextSteps)+' steps'):'—',
-             nextpct:nextPct?pctLabel(nextPct):'—'};
-    if(map[el.getAttribute('data-t')]!==undefined) el.textContent=map[el.getAttribute('data-t')];
+  Array.prototype.forEach.call(document.querySelectorAll("[data-t]"), function (el) {
+    var m = Math.round(T.steps * M_PER_STEP);
+    var map = {
+      amt: ugx(T.amt),
+      steps: fmt(T.steps),
+      left: fmt(LEFT),
+      n: fmt(T.n),
+      paid: ugx(T.paid),
+      pled: ugx(T.pled),
+      pct: (PCT * 100).toFixed(2) + "%",
+      committed: ugx(T.committedAmt),
+      committedsteps: fmt(T.committedSteps),
+      km: (m / 1000).toFixed(2) + " km",
+      next: nextPct ? fmt(nextSteps) + " steps" : "—",
+      nextpct: nextPct ? pctLabel(nextPct) : "—",
+    };
+    if (map[el.getAttribute("data-t")] !== undefined) el.textContent = map[el.getAttribute("data-t")];
   });
 
   /* ── 9 · WALK-DAY LIVE MODE ─────────────────────────────────── */
-  var band=$('liveBand');
-  if(band&&LIVE&&LIVE.active){
-    var pctWalked=Math.min(Math.max((LIVE.km||0)/ROUTE_KM,0),1);
-    band.innerHTML='<div class="wrap liveIn">'
-      +'<span class="dot"></span>'
-      +'<b>Walking now · km '+esc(String(LIVE.km))+' of '+ROUTE_KM+'</b>'
-      +(LIVE.note?'<span class="note">'+esc(LIVE.note)+'</span>':'')
-      +'<span class="tr"><i style="width:'+(pctWalked*100).toFixed(1)+'%"></i></span>'
-      +(LIVE.updated?'<span class="upd">confirmed '+esc(LIVE.updated)+'</span>':'')
-      +'<a class="btn btn-gold" href="../give/">Sponsor a step →</a>'
-      +'</div>';
-    band.classList.add('on');
-    document.body.classList.add('has-live');
+  var band = $("liveBand");
+  if (band && LIVE && LIVE.active) {
+    var pctWalked = Math.min(Math.max((LIVE.km || 0) / ROUTE_KM, 0), 1);
+    band.innerHTML =
+      '<div class="wrap liveIn">' +
+      '<span class="dot"></span>' +
+      "<b>Walking now · km " +
+      esc(String(LIVE.km)) +
+      " of " +
+      ROUTE_KM +
+      "</b>" +
+      (LIVE.note ? '<span class="note">' + esc(LIVE.note) + "</span>" : "") +
+      '<span class="tr"><i style="width:' +
+      (pctWalked * 100).toFixed(1) +
+      '%"></i></span>' +
+      (LIVE.updated ? '<span class="upd">confirmed ' + esc(LIVE.updated) + "</span>" : "") +
+      '<a class="btn btn-gold" href="../give/">Sponsor a step →</a>' +
+      "</div>";
+    band.classList.add("on");
+    document.body.classList.add("has-live");
   }
 
   /* ── copy & share ───────────────────────────────────────────── */
-  var toast=$('toast');
-  function showToast(t){ if(!toast) return; toast.textContent=t; toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');},1800); }
-  function copy(txt,label){
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){showToast(label);},function(){showToast('Could not copy — please copy it by hand');});}
-    else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showToast(label);}catch(e){showToast('Could not copy — please copy it by hand');}ta.remove();}
+  var toast = $("toast");
+  function showToast(t) {
+    if (!toast) return;
+    toast.textContent = t;
+    toast.classList.add("show");
+    setTimeout(function () {
+      toast.classList.remove("show");
+    }, 1800);
   }
-  if($('copyNo')) $('copyNo').addEventListener('click',function(){copy('0772495733','Enquiry number copied');});
-  if($('copyLink')) $('copyLink').addEventListener('click',function(){copy(window.location.href,'Link copied');});
-  if($('copyIban')) $('copyIban').addEventListener('click',function(){
-    var el=$('intlRef'); copy(el?el.textContent.trim():'','Reference copied');
-  });
+  function copy(txt, label) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(
+        function () {
+          showToast(label);
+        },
+        function () {
+          showToast("Could not copy — please copy it by hand");
+        },
+      );
+    } else {
+      var ta = document.createElement("textarea");
+      ta.value = txt;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showToast(label);
+      } catch (e) {
+        showToast("Could not copy — please copy it by hand");
+      }
+      ta.remove();
+    }
+  }
+  if ($("copyNo"))
+    $("copyNo").addEventListener("click", function () {
+      copy("0772495733", "Enquiry number copied");
+    });
+  if ($("copyLink"))
+    $("copyLink").addEventListener("click", function () {
+      copy(window.location.href, "Link copied");
+    });
+  if ($("copyIban"))
+    $("copyIban").addEventListener("click", function () {
+      var el = $("intlRef");
+      copy(el ? el.textContent.trim() : "", "Reference copied");
+    });
   /* share carries the unit trade — item 3 */
-  var shareMsg='Faith in Motion — 400 km on foot to finish St Joseph Rwembyo Catholic Church. '
-    +UNIT+'. Sponsor a step: ';
-  if($('waShare')) $('waShare').href='https://wa.me/?text='+encodeURIComponent(shareMsg+window.location.href);
-  if($('sysShare')){
-    $('sysShare').addEventListener('click',function(e){
-      if(navigator.share){ e.preventDefault();
-        navigator.share({title:'Faith in Motion',text:shareMsg,url:window.location.href}).catch(function(){});
+  var shareMsg =
+    "Faith in Motion — 400 km on foot to finish St Joseph Rwembyo Catholic Church. " + UNIT + ". Sponsor a step: ";
+  if ($("waShare")) $("waShare").href = "https://wa.me/?text=" + encodeURIComponent(shareMsg + window.location.href);
+  if ($("sysShare")) {
+    $("sysShare").addEventListener("click", function (e) {
+      if (navigator.share) {
+        e.preventDefault();
+        navigator.share({ title: "Faith in Motion", text: shareMsg, url: window.location.href }).catch(function () {});
       }
     });
   }
 
   /* ── photographs ────────────────────────────────────────────── */
-  var ASSETS={
-    walker:assetBase+"faith-in-motion/walking-rotarian-sunset-video-frame.jpg",
-    road:assetBase+"faith-in-motion/walking-rotarian-river-crossing.jpg"
+  var ASSETS = {
+    walker: assetBase + "faith-in-motion/walking-rotarian-sunset-video-frame.jpg",
+    road: assetBase + "faith-in-motion/walking-rotarian-river-crossing.jpg",
   };
-  var suppliedAssets=window.FIM_ASSETS||{};
-  Object.keys(suppliedAssets).forEach(function(k){ if(suppliedAssets[k]) ASSETS[k]=suppliedAssets[k]; });
-  var CAPTIONS={walker:"On the road to Rwembyo",church:"St Joseph Rwembyo",road:"The road ahead",parish:"The parish community",build:"Construction in progress"};
-  Object.keys(ASSETS).forEach(function(k){
-    var src=assetUrl(ASSETS[k]); if(!src) return;
-    var el=document.querySelector('[data-slot="'+k+'"]'); if(!el) return;
-    var img=new Image();
-    img.alt=CAPTIONS[k]||""; img.loading="lazy"; img.decoding="async";
-    img.onload=function(){
-      el.classList.remove('pending');
-      el.insertBefore(img,el.firstChild);
-      var fb=el.querySelector('.fallback'); if(fb) fb.style.display='none';
-      var cap=el.querySelector('.cap'); if(cap) cap.textContent=CAPTIONS[k]||"";
+  var suppliedAssets = window.FIM_ASSETS || {};
+  Object.keys(suppliedAssets).forEach(function (k) {
+    if (suppliedAssets[k]) ASSETS[k] = suppliedAssets[k];
+  });
+  var CAPTIONS = {
+    walker: "On the road to Rwembyo",
+    church: "St Joseph Rwembyo",
+    road: "The road ahead",
+    parish: "The parish community",
+    build: "Construction in progress",
+  };
+  Object.keys(ASSETS).forEach(function (k) {
+    var src = assetUrl(ASSETS[k]);
+    if (!src) return;
+    var el = document.querySelector('[data-slot="' + k + '"]');
+    if (!el) return;
+    var img = new Image();
+    img.alt = CAPTIONS[k] || "";
+    img.loading = "lazy";
+    img.decoding = "async";
+    img.onload = function () {
+      el.classList.remove("pending");
+      el.insertBefore(img, el.firstChild);
+      var fb = el.querySelector(".fallback");
+      if (fb) fb.style.display = "none";
+      var cap = el.querySelector(".cap");
+      if (cap) cap.textContent = CAPTIONS[k] || "";
     };
-    img.src=src;
+    img.src = src;
   });
 
   /* Journey collection — edit js/fim-content.js, not this renderer. */
-  var updatesMount=$('journeyUpdates');
-  var UPDATES=(window.FIM_UPDATES||[]).slice();
-  if(updatesMount&&UPDATES.length){
-    updatesMount.innerHTML=UPDATES.map(function(u,i){
-      var videoUrl=/^https:\/\/(?:www\.)?(?:youtube\.com|youtu\.be)\//.test(u.videoUrl||'')?u.videoUrl:'';
-      var media=videoUrl
-        ?'<div class="journey-photo journey-photo--video"><a class="journey-video-link" href="'+esc(videoUrl)+'" target="_blank" rel="noopener" aria-label="Watch '+esc(u.title||'the film')+' on YouTube"><img src="'+esc(assetUrl(u.poster))+'" alt="'+esc(u.alt||'')+'" loading="eager" decoding="async"><span class="journey-play" aria-hidden="true"><i>▶</i><b>Watch the film</b></span></a></div>'
-        :'<div class="journey-photo"><img src="'+esc(assetUrl(u.image))+'" alt="'+esc(u.alt||'')+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async"></div>';
-      return '<article class="journey-card reveal'+(i===0?' lead':'')+'">'
-        +media
-        +'<div class="journey-copy"><span class="journey-label">'+esc(u.label||'Journey update')+'</span>'
-        +'<h3>'+esc(u.title||'')+'</h3>'
-        +'<p>'+esc(u.detail||'')+'</p>'
-        +'<span class="journey-meta">'+esc(u.meta||'')+'</span></div></article>';
-    }).join('');
+  var updatesMount = $("journeyUpdates");
+  var UPDATES = (window.FIM_UPDATES || []).slice();
+  if (updatesMount && UPDATES.length) {
+    updatesMount.innerHTML = UPDATES.map(function (u, i) {
+      var videoUrl = /^https:\/\/(?:www\.)?(?:youtube\.com|youtu\.be)\//.test(u.videoUrl || "") ? u.videoUrl : "";
+      var media = videoUrl
+        ? '<div class="journey-photo journey-photo--video"><a class="journey-video-link" href="' +
+          esc(videoUrl) +
+          '" target="_blank" rel="noopener" aria-label="Watch ' +
+          esc(u.title || "the film") +
+          ' on YouTube"><img src="' +
+          esc(assetUrl(u.poster)) +
+          '" alt="' +
+          esc(u.alt || "") +
+          '" loading="eager" decoding="async"><span class="journey-play" aria-hidden="true"><i>▶</i><b>Watch the film</b></span></a></div>'
+        : '<div class="journey-photo"><img src="' +
+          esc(assetUrl(u.image)) +
+          '" alt="' +
+          esc(u.alt || "") +
+          '" loading="' +
+          (i === 0 ? "eager" : "lazy") +
+          '" decoding="async"></div>';
+      return (
+        '<article class="journey-card reveal' +
+        (i === 0 ? " lead" : "") +
+        '">' +
+        media +
+        '<div class="journey-copy"><span class="journey-label">' +
+        esc(u.label || "Journey update") +
+        "</span>" +
+        "<h3>" +
+        esc(u.title || "") +
+        "</h3>" +
+        "<p>" +
+        esc(u.detail || "") +
+        "</p>" +
+        '<span class="journey-meta">' +
+        esc(u.meta || "") +
+        "</span></div></article>"
+      );
+    }).join("");
   }
 
   /* Faith in Motion route rail. Shared header/progress/reveals are handled once in core. */
-  var rail=$('rail'), railFill=$('railFill'), railBead=$('railBead'), railKm=$('railKm');
-  var hero=$('top'), heroH=320, docH=1, railTravel=0, railTicking=false;
-  function measureRail(){
-    heroH=hero?hero.offsetHeight:320;
-    docH=Math.max(document.documentElement.scrollHeight-window.innerHeight,1);
-    var track=rail?rail.querySelector('.track'):null;
-    railTravel=track?Math.max(track.getBoundingClientRect().height-11,0):0;
+  var rail = $("rail"),
+    railFill = $("railFill"),
+    railBead = $("railBead"),
+    railKm = $("railKm");
+  var hero = $("top"),
+    heroH = 320,
+    docH = 1,
+    railTravel = 0,
+    railTicking = false;
+  function measureRail() {
+    heroH = hero ? hero.offsetHeight : 320;
+    docH = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+    var track = rail ? rail.querySelector(".track") : null;
+    railTravel = track ? Math.max(track.getBoundingClientRect().height - 11, 0) : 0;
   }
-  function paintRail(){
-    if(!rail){railTicking=false;return;}
-    var y=window.pageYOffset||document.documentElement.scrollTop;
-    y>heroH*0.72?rail.classList.add('show'):rail.classList.remove('show');
-    var p=Math.min(Math.max(y/docH,0),1);
-    if(railFill) railFill.style.transform='scaleY('+p+')';
-    if(railBead) railBead.style.transform='translateY('+(p*railTravel)+'px)';
-    if(railKm) railKm.textContent=Math.round(p*ROUTE_KM)+' km';
-    railTicking=false;
+  function paintRail() {
+    if (!rail) {
+      railTicking = false;
+      return;
+    }
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    y > heroH * 0.72 ? rail.classList.add("show") : rail.classList.remove("show");
+    var p = Math.min(Math.max(y / docH, 0), 1);
+    if (railFill) railFill.style.transform = "scaleY(" + p + ")";
+    if (railBead) railBead.style.transform = "translateY(" + p * railTravel + "px)";
+    if (railKm) railKm.textContent = Math.round(p * ROUTE_KM) + " km";
+    railTicking = false;
   }
-  function requestRailPaint(){
-    if(railTicking) return;
-    railTicking=true;
+  function requestRailPaint() {
+    if (railTicking) return;
+    railTicking = true;
     requestAnimationFrame(paintRail);
   }
-  if(rail){
-    window.addEventListener('scroll',requestRailPaint,{passive:true});
-    window.addEventListener('resize',function(){measureRail();requestRailPaint();},{passive:true});
-    window.addEventListener('load',function(){measureRail();paintRail();},{once:true});
+  if (rail) {
+    window.addEventListener("scroll", requestRailPaint, { passive: true });
+    window.addEventListener(
+      "resize",
+      function () {
+        measureRail();
+        requestRailPaint();
+      },
+      { passive: true },
+    );
+    window.addEventListener(
+      "load",
+      function () {
+        measureRail();
+        paintRail();
+      },
+      { once: true },
+    );
     measureRail();
     paintRail();
   }
 
-  var road=$('road');
-  if(road&&'IntersectionObserver' in window){
-    var roadObserver=new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(!entry.isIntersecting) return;
-        runRoad();
-        roadObserver.disconnect();
-      });
-    },{threshold:0.25});
+  var road = $("road");
+  if (road && "IntersectionObserver" in window) {
+    var roadObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          runRoad();
+          roadObserver.disconnect();
+        });
+      },
+      { threshold: 0.25 },
+    );
     roadObserver.observe(road);
   } else {
     runRoad();
   }
 
-  if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(function(){setTimeout(runHero,80);}); }
-  window.addEventListener('load',function(){setTimeout(runHero,140);});
-  setTimeout(runHero,800);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () {
+      setTimeout(runHero, 80);
+    });
+  }
+  window.addEventListener("load", function () {
+    setTimeout(runHero, 140);
+  });
+  setTimeout(runHero, 800);
 })();

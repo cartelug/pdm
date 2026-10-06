@@ -6,10 +6,22 @@
   "use strict";
 
   var LIVE_KEYS = [
-    "status", "statusLabel", "campaignStartDate", "campaignEndDate", "routeStatus",
-    "distanceCoveredKm", "routeStages", "contributionUnitLabel",
-    "paymentChannels", "paymentVerificationNote", "receivedTotal", "pledgedTotal",
-    "lastReconciledAt", "publicReportingState", "updates", "confirmedPartners"
+    "status",
+    "statusLabel",
+    "campaignStartDate",
+    "campaignEndDate",
+    "routeStatus",
+    "distanceCoveredKm",
+    "routeStages",
+    "contributionUnitLabel",
+    "paymentChannels",
+    "paymentVerificationNote",
+    "receivedTotal",
+    "pledgedTotal",
+    "lastReconciledAt",
+    "publicReportingState",
+    "updates",
+    "confirmedPartners",
   ];
   var ARRAY_KEYS = ["routeStages", "paymentChannels", "updates", "confirmedPartners"];
   var CAMPAIGN_URL = "https://pamodzici.com/walk-for-education/";
@@ -75,7 +87,11 @@
   function formatDate(iso, short) {
     var date = typeof iso === "string" && iso.length > 10 ? new Date(iso) : parseDay(iso);
     if (!date || isNaN(date.getTime())) return "";
-    return new Intl.DateTimeFormat("en-GB", { day: "numeric", month: short ? "short" : "long", year: "numeric" }).format(date);
+    return new Intl.DateTimeFormat("en-GB", {
+      day: "numeric",
+      month: short ? "short" : "long",
+      year: "numeric",
+    }).format(date);
   }
 
   function daysUntil(iso) {
@@ -87,13 +103,28 @@
   }
 
   function captureRef() {
-    var value = null;
-    try { value = new URLSearchParams(window.location.search).get("ref"); } catch (error) { value = null; }
+    var value;
+    try {
+      value = new URLSearchParams(window.location.search).get("ref");
+    } catch (error) {
+      value = null;
+    }
     if (value) {
-      value = value.trim().slice(0, 40).replace(/[^\w\- .']/g, "");
-      try { window.sessionStorage.setItem("wfe_ref", value); } catch (error) { /* storage unavailable */ }
+      value = value
+        .trim()
+        .slice(0, 40)
+        .replace(/[^\w\- .']/g, "");
+      try {
+        window.sessionStorage.setItem("wfe_ref", value);
+      } catch (error) {
+        /* storage unavailable */
+      }
     } else {
-      try { value = window.sessionStorage.getItem("wfe_ref"); } catch (error) { value = null; }
+      try {
+        value = window.sessionStorage.getItem("wfe_ref");
+      } catch (error) {
+        value = null;
+      }
     }
     return value || null;
   }
@@ -114,7 +145,9 @@
 
   function track(name, detail) {
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push(Object.assign({ event: name, campaign_id: campaign.campaignId, ref: ref || undefined }, detail || {}));
+    window.dataLayer.push(
+      Object.assign({ event: name, campaign_id: campaign.campaignId, ref: ref || undefined }, detail || {}),
+    );
   }
 
   function showToast(message) {
@@ -123,7 +156,9 @@
     toast.textContent = message;
     toast.classList.add("show");
     window.clearTimeout(showToast.timer);
-    showToast.timer = window.setTimeout(function () { toast.classList.remove("show"); }, 2800);
+    showToast.timer = window.setTimeout(function () {
+      toast.classList.remove("show");
+    }, 2800);
   }
 
   function copyText(text, message) {
@@ -135,12 +170,18 @@
       area.style.opacity = "0";
       document.body.appendChild(area);
       area.select();
-      try { document.execCommand("copy"); } catch (error) { /* nothing else to try */ }
+      try {
+        document.execCommand("copy");
+      } catch (error) {
+        /* nothing else to try */
+      }
       document.body.removeChild(area);
       showToast(message);
     }
     if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(function () { showToast(message); }, fallback);
+      navigator.clipboard.writeText(text).then(function () {
+        showToast(message);
+      }, fallback);
     } else {
       fallback();
     }
@@ -160,19 +201,25 @@
   function assetUrl(path) {
     if (typeof path !== "string" || !path) return "";
     if (/^https:\/\//.test(path)) return path;
-    if (/^assets\/[\w\/\-.]+$/.test(path)) return siteRoot + path;
+    if (/^assets\/[\w/\-.]+$/.test(path)) return siteRoot + path;
     return "";
   }
 
   function whenVisible(node, callback) {
-    if (reduceQuery.matches || !("IntersectionObserver" in window)) { callback(); return; }
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
-        callback();
-      });
-    }, { threshold: 0.35 });
+    if (reduceQuery.matches || !("IntersectionObserver" in window)) {
+      callback();
+      return;
+    }
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+          callback();
+        });
+      },
+      { threshold: 0.35 },
+    );
     observer.observe(node);
   }
 
@@ -181,24 +228,42 @@
   function fieldValue(key) {
     var channels = campaign.paymentChannels || [];
     switch (key) {
-      case "name": return campaign.name;
-      case "statusLabel": return campaign.statusLabel;
-      case "distance": return formatNumber(campaign.distanceKm) + " km";
-      case "distanceNumber": return formatNumber(campaign.distanceKm);
-      case "target": return formatTarget(campaign.fiveYearTargetUgx);
-      case "targetLong": return campaign.fiveYearTargetUgx === 25000000000 ? "UGX 25 billion" : formatUGX(campaign.fiveYearTargetUgx);
-      case "currentStudents": return formatNumber(campaign.currentStudents);
-      case "studentProjection": return formatNumber(campaign.projectedStudentsMin) + "–" + formatNumber(campaign.projectedStudentsMax);
-      case "startLocation": return campaign.startLocation;
-      case "endLocation": return campaign.endLocation;
-      case "routeStatus": return campaign.routeStatus;
-      case "paymentVerificationNote": return campaign.paymentVerificationNote;
-      case "reportingState": return campaign.publicReportingState;
-      case "reviewedDate": return campaign.dataLastReviewed ? formatDate(campaign.dataLastReviewed) : "Pending";
-      case "whatsapp": return campaign.contact && campaign.contact.whatsappDisplay;
-      case "email": return campaign.contact && campaign.contact.email;
-      case "startDate": return has(campaign.campaignStartDate) ? formatDate(campaign.campaignStartDate) : "Pending confirmation";
-      case "distanceCovered": return typeof campaign.distanceCoveredKm === "number" ? formatNumber(campaign.distanceCoveredKm) + " km" : "";
+      case "name":
+        return campaign.name;
+      case "statusLabel":
+        return campaign.statusLabel;
+      case "distance":
+        return formatNumber(campaign.distanceKm) + " km";
+      case "distanceNumber":
+        return formatNumber(campaign.distanceKm);
+      case "target":
+        return formatTarget(campaign.fiveYearTargetUgx);
+      case "targetLong":
+        return campaign.fiveYearTargetUgx === 25000000000 ? "UGX 25 billion" : formatUGX(campaign.fiveYearTargetUgx);
+      case "currentStudents":
+        return formatNumber(campaign.currentStudents);
+      case "studentProjection":
+        return formatNumber(campaign.projectedStudentsMin) + "–" + formatNumber(campaign.projectedStudentsMax);
+      case "startLocation":
+        return campaign.startLocation;
+      case "endLocation":
+        return campaign.endLocation;
+      case "routeStatus":
+        return campaign.routeStatus;
+      case "paymentVerificationNote":
+        return campaign.paymentVerificationNote;
+      case "reportingState":
+        return campaign.publicReportingState;
+      case "reviewedDate":
+        return campaign.dataLastReviewed ? formatDate(campaign.dataLastReviewed) : "Pending";
+      case "whatsapp":
+        return campaign.contact && campaign.contact.whatsappDisplay;
+      case "email":
+        return campaign.contact && campaign.contact.email;
+      case "startDate":
+        return has(campaign.campaignStartDate) ? formatDate(campaign.campaignStartDate) : "Pending confirmation";
+      case "distanceCovered":
+        return typeof campaign.distanceCoveredKm === "number" ? formatNumber(campaign.distanceCoveredKm) + " km" : "";
       case "unitValue":
         return typeof campaign.contributionUnitValue === "number"
           ? formatUGX(campaign.contributionUnitValue) + " per " + (campaign.contributionUnitLabel || "step")
@@ -209,17 +274,24 @@
           : "";
       case "paymentChannelsSummary":
         return channels.length
-          ? channels.map(function (c) { return c.provider + " · " + c.accountName; }).join("; ")
+          ? channels
+              .map(function (c) {
+                return c.provider + " · " + c.accountName;
+              })
+              .join("; ")
           : "Withheld until current beneficiary and account details are approved for publication.";
       case "receivedSummary":
         return typeof campaign.receivedTotal === "number"
-          ? formatUGX(campaign.receivedTotal) + " received" + (campaign.lastReconciledAt ? " · reconciled " + formatDate(campaign.lastReconciledAt) : "")
+          ? formatUGX(campaign.receivedTotal) +
+              " received" +
+              (campaign.lastReconciledAt ? " · reconciled " + formatDate(campaign.lastReconciledAt) : "")
           : campaign.publicReportingState;
       case "pledgedSummary":
         return typeof campaign.pledgedTotal === "number"
           ? formatUGX(campaign.pledgedTotal) + " pledged — shown separately, not counted as received"
           : "Shown separately once reporting begins.";
-      default: return "";
+      default:
+        return "";
     }
   }
 
@@ -234,7 +306,8 @@
     });
 
     all("[data-wfe-whatsapp]").forEach(function (link) {
-      var text = link.getAttribute("data-wfe-whatsapp-text") ||
+      var text =
+        link.getAttribute("data-wfe-whatsapp-text") ||
         "Hello, I would like the current approved contribution details for the Walk for Education 2026.";
       link.href = whatsappUrl(withRef([text]));
       link.target = "_blank";
@@ -270,7 +343,9 @@
     else if (toStart === 0) text = "First steps today";
     else if (toEnd !== null && toEnd < 0) text = "Walk completed · " + formatDate(campaign.campaignEndDate, true);
     else text = "On the road · day " + (1 - toStart);
-    all("[data-wfe-countdown]").forEach(function (node) { node.textContent = text; });
+    all("[data-wfe-countdown]").forEach(function (node) {
+      node.textContent = text;
+    });
   }
 
   /* ---------- odometer ---------- */
@@ -294,7 +369,9 @@
       }
     });
     node.appendChild(visual);
-    whenVisible(node, function () { visual.classList.add("run"); });
+    whenVisible(node, function () {
+      visual.classList.add("run");
+    });
   }
 
   /* ---------- progress ---------- */
@@ -309,13 +386,19 @@
         var item = el("div", "progress-fig");
         item.appendChild(el("span", "lbl", label));
         var value = el("b");
-        if (animate) odometer(value, text); else value.textContent = text;
+        if (animate) odometer(value, text);
+        else value.textContent = text;
         item.appendChild(value);
         if (note) item.appendChild(el("span", "note", note));
         figures.appendChild(item);
       }
 
-      figure("Received · verified", formatUGX(campaign.receivedTotal), "Reconciled against the authorised account", true);
+      figure(
+        "Received · verified",
+        formatUGX(campaign.receivedTotal),
+        "Reconciled against the authorised account",
+        true,
+      );
       if (typeof campaign.pledgedTotal === "number") {
         figure("Pledged · separate", formatUGX(campaign.pledgedTotal), "Promised, not yet received", true);
       }
@@ -326,7 +409,9 @@
       if (typeof target === "number" && target > 0) {
         var share = Math.min(campaign.receivedTotal / target, 1);
         var percent = share * 100;
-        var label = (percent > 0 && percent < 0.1 ? "<0.1" : percent.toFixed(percent < 10 ? 1 : 0)) + "% of the five-year goal received";
+        var label =
+          (percent > 0 && percent < 0.1 ? "<0.1" : percent.toFixed(percent < 10 ? 1 : 0)) +
+          "% of the five-year goal received";
         var track = el("div", "progress-track");
         track.setAttribute("role", "img");
         track.setAttribute("aria-label", label);
@@ -335,7 +420,9 @@
         track.appendChild(fill);
         host.appendChild(track);
         host.appendChild(el("p", "progress-pct", label));
-        whenVisible(track, function () { track.classList.add("run"); });
+        whenVisible(track, function () {
+          track.classList.add("run");
+        });
       }
 
       var note = campaign.lastReconciledAt ? "Last reconciled " + formatDate(campaign.lastReconciledAt) + ". " : "";
@@ -352,14 +439,18 @@
       all("[data-wfe-route-line]").forEach(function (line) {
         line.style.setProperty("--route-progress", share.toFixed(4));
         line.classList.add("has-progress");
-        whenVisible(line, function () { line.classList.add("run"); });
+        whenVisible(line, function () {
+          line.classList.add("run");
+        });
       });
     }
 
     var stages = Array.isArray(campaign.routeStages) ? campaign.routeStages : [];
     if (!stages.length) return;
     var nextIndex = -1;
-    stages.forEach(function (stage, index) { if (nextIndex === -1 && !stage.reached) nextIndex = index; });
+    stages.forEach(function (stage, index) {
+      if (nextIndex === -1 && !stage.reached) nextIndex = index;
+    });
 
     all("[data-wfe-stages]").forEach(function (host) {
       host.textContent = "";
@@ -370,11 +461,18 @@
         item.appendChild(el("span", "stage-dot"));
         var text = el("div", "stage-text");
         text.appendChild(el("b", null, stage.name));
-        var meta = [stage.country, typeof stage.km === "number" ? "km " + formatNumber(stage.km) : "", stage.date ? formatDate(stage.date, true) : ""]
-          .filter(Boolean).join(" · ");
+        var meta = [
+          stage.country,
+          typeof stage.km === "number" ? "km " + formatNumber(stage.km) : "",
+          stage.date ? formatDate(stage.date, true) : "",
+        ]
+          .filter(Boolean)
+          .join(" · ");
         if (meta) text.appendChild(el("span", null, meta));
         item.appendChild(text);
-        item.appendChild(el("span", "stage-state", state === "reached" ? "Reached" : state === "next" ? "Next" : "Planned"));
+        item.appendChild(
+          el("span", "stage-state", state === "reached" ? "Reached" : state === "next" ? "Next" : "Planned"),
+        );
         list.appendChild(item);
       });
       host.appendChild(list);
@@ -399,7 +497,10 @@
         copy.type = "button";
         copy.setAttribute("aria-label", "Copy " + channel.provider + " number");
         copy.addEventListener("click", function () {
-          copyText(String(channel.number).replace(/\s+/g, ""), "Number copied — confirm the registered name before sending");
+          copyText(
+            String(channel.number).replace(/\s+/g, ""),
+            "Number copied — confirm the registered name before sending",
+          );
           confirmButton(copy, "Copied ✓");
           track("payment_number_copied", { provider: channel.provider });
         });
@@ -407,14 +508,26 @@
         card.appendChild(row);
 
         var meta = el("dl", "channel-meta");
-        [["Registered name", channel.accountName], ["Branch", channel.branch], ["Currency", channel.currency], ["Reference", channel.referenceHint]]
-          .forEach(function (pair) {
-            if (!pair[1]) return;
-            meta.appendChild(el("dt", null, pair[0]));
-            meta.appendChild(el("dd", null, pair[1]));
-          });
+        [
+          ["Registered name", channel.accountName],
+          ["Branch", channel.branch],
+          ["Currency", channel.currency],
+          ["Reference", channel.referenceHint],
+        ].forEach(function (pair) {
+          if (!pair[1]) return;
+          meta.appendChild(el("dt", null, pair[0]));
+          meta.appendChild(el("dd", null, pair[1]));
+        });
         card.appendChild(meta);
-        card.appendChild(el("p", "channel-check", "Before sending, confirm the registered name reads exactly “" + channel.accountName + "”, then keep your transaction reference."));
+        card.appendChild(
+          el(
+            "p",
+            "channel-check",
+            "Before sending, confirm the registered name reads exactly “" +
+              channel.accountName +
+              "”, then keep your transaction reference.",
+          ),
+        );
         host.appendChild(card);
       });
     });
@@ -425,12 +538,16 @@
     if (typeof unit !== "number" || unit <= 0) return;
     var label = campaign.contributionUnitLabel || "step";
     var requested = 0;
-    try { requested = Number(new URLSearchParams(window.location.search).get("steps")) || 0; } catch (error) { requested = 0; }
+    try {
+      requested = Number(new URLSearchParams(window.location.search).get("steps")) || 0;
+    } catch (error) {
+      requested = 0;
+    }
 
     all("[data-wfe-calculator]").forEach(function (host, hostIndex) {
       host.textContent = "";
       var tiers = [100, 50, 20, 10, 5];
-      var amount = Number.isInteger(requested) && requested>=1 && requested<=20000 ? Math.max(5,requested) : 50;
+      var amount = Number.isInteger(requested) && requested >= 1 && requested <= 20000 ? Math.max(5, requested) : 50;
 
       var group = el("div", "calc-tiers");
       group.setAttribute("role", "group");
@@ -440,7 +557,10 @@
         button.type = "button";
         button.appendChild(el("b", null, formatNumber(count)));
         button.appendChild(el("span", null, formatUGX(count * unit)));
-        button.addEventListener("click", function () { set(count, true); input.value = ""; });
+        button.addEventListener("click", function () {
+          set(count, true);
+          input.value = "";
+        });
         group.appendChild(button);
         return { count: count, node: button };
       });
@@ -458,10 +578,13 @@
       input.inputMode = "numeric";
       input.placeholder = "e.g. 250";
       input.addEventListener("input", function () {
-        var value = Number(input.value),valid=Number.isInteger(value)&&value>=5&&value<=20000;
-        input.setCustomValidity(valid?'':'Choose 5 to 20,000 whole steps.');
-        if (valid) {set(value, false);pledge.removeAttribute('aria-disabled');}
-        else pledge.setAttribute('aria-disabled','true');
+        var value = Number(input.value),
+          valid = Number.isInteger(value) && value >= 5 && value <= 20000;
+        input.setCustomValidity(valid ? "" : "Choose 5 to 20,000 whole steps.");
+        if (valid) {
+          set(value, false);
+          pledge.removeAttribute("aria-disabled");
+        } else pledge.setAttribute("aria-disabled", "true");
       });
       custom.appendChild(customLabel);
       custom.appendChild(input);
@@ -477,15 +600,29 @@
       host.appendChild(summary);
 
       var pledge = el("a", "btn btn-wfe calc-pledge", "Continue with these steps");
-      pledge.addEventListener("click", function (event) {if(pledge.getAttribute('aria-disabled')==='true'){event.preventDefault();input.reportValidity();return;}track("sponsor_steps_open", { units: amount, value: amount * unit }); });
+      pledge.addEventListener("click", function (event) {
+        if (pledge.getAttribute("aria-disabled") === "true") {
+          event.preventDefault();
+          input.reportValidity();
+          return;
+        }
+        track("sponsor_steps_open", { units: amount, value: amount * unit });
+      });
       host.appendChild(pledge);
-      host.appendChild(el("p", "calc-note", "Record a pledge now, or pay when checkout opens. A certificate unlocks after a verified successful live payment."));
+      host.appendChild(
+        el(
+          "p",
+          "calc-note",
+          "Record a pledge now, or pay when checkout opens. A certificate unlocks after a verified successful live payment.",
+        ),
+      );
 
       if (requested > 0 && tiers.indexOf(amount) === -1) input.value = String(amount);
       set(amount, false);
 
       function set(count, announce) {
-        input.setCustomValidity('');pledge.removeAttribute('aria-disabled');
+        input.setCustomValidity("");
+        pledge.removeAttribute("aria-disabled");
         amount = count;
         buttons.forEach(function (item) {
           item.node.setAttribute("aria-pressed", item.count === count ? "true" : "false");
@@ -529,9 +666,11 @@
       figure.appendChild(image);
       body.appendChild(figure);
     }
-    String(update.body).split(/\n{2,}/).forEach(function (paragraph) {
-      body.appendChild(el("p", null, paragraph));
-    });
+    String(update.body)
+      .split(/\n{2,}/)
+      .forEach(function (paragraph) {
+        body.appendChild(el("p", null, paragraph));
+      });
     if (update.source && !compact) body.appendChild(el("p", "field-source", "Source: " + update.source));
     article.appendChild(body);
     return article;
@@ -542,7 +681,9 @@
     if (!updates.length) return;
     all("[data-wfe-updates]").forEach(function (host) {
       host.textContent = "";
-      updates.forEach(function (update) { host.appendChild(buildUpdate(update, false)); });
+      updates.forEach(function (update) {
+        host.appendChild(buildUpdate(update, false));
+      });
     });
     all("[data-wfe-latest-update]").forEach(function (host) {
       host.textContent = "";
@@ -575,11 +716,19 @@
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
       location: [
-        { "@type": "Place", name: "Nairobi", address: { "@type": "PostalAddress", addressLocality: "Nairobi", addressCountry: "KE" } },
-        { "@type": "Place", name: "UCU–Kagando University College", address: { "@type": "PostalAddress", addressLocality: "Kagando, Kasese", addressCountry: "UG" } }
+        {
+          "@type": "Place",
+          name: "Nairobi",
+          address: { "@type": "PostalAddress", addressLocality: "Nairobi", addressCountry: "KE" },
+        },
+        {
+          "@type": "Place",
+          name: "UCU–Kagando University College",
+          address: { "@type": "PostalAddress", addressLocality: "Kagando, Kasese", addressCountry: "UG" },
+        },
       ],
       organizer: { "@type": "NGO", name: "Pamodzi Community Initiative Uganda", url: "https://pamodzici.com/" },
-      url: CAMPAIGN_URL
+      url: CAMPAIGN_URL,
     };
     if (has(campaign.campaignEndDate)) event.endDate = campaign.campaignEndDate;
     var script = el("script");
@@ -642,12 +791,16 @@
     });
 
     var requested = window.location.hash.replace("#", "");
-    var valid = tabs.some(function (tab) { return tab.getAttribute("data-audience-tab") === requested; });
+    var valid = tabs.some(function (tab) {
+      return tab.getAttribute("data-audience-tab") === requested;
+    });
     activate(valid ? requested : tabs[0].getAttribute("data-audience-tab"), false, false);
     window.addEventListener("resize", moveIndicator, { passive: true });
     window.addEventListener("load", moveIndicator, { once: true });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveIndicator);
-    window.requestAnimationFrame(function () { list.classList.add("indicator-ready"); });
+    window.requestAnimationFrame(function () {
+      list.classList.add("indicator-ready");
+    });
   }
 
   /* ---------- enquiries ---------- */
@@ -686,12 +839,18 @@
         var contact = form.querySelector("[name='contact']");
         var firstInvalid = null;
 
-        if (!name.value.trim()) { fieldError(name, "Add your name so the team knows who to reply to."); firstInvalid = name; }
-        else fieldError(name, "");
+        if (!name.value.trim()) {
+          fieldError(name, "Add your name so the team knows who to reply to.");
+          firstInvalid = name;
+        } else fieldError(name, "");
 
-        if (!contact.value.trim()) { fieldError(contact, "Add an email address or phone number."); firstInvalid = firstInvalid || contact; }
-        else if (!validContact(contact.value.trim())) { fieldError(contact, "That doesn't look like an email address or phone number yet."); firstInvalid = firstInvalid || contact; }
-        else fieldError(contact, "");
+        if (!contact.value.trim()) {
+          fieldError(contact, "Add an email address or phone number.");
+          firstInvalid = firstInvalid || contact;
+        } else if (!validContact(contact.value.trim())) {
+          fieldError(contact, "That doesn't look like an email address or phone number yet.");
+          firstInvalid = firstInvalid || contact;
+        } else fieldError(contact, "");
 
         if (firstInvalid) {
           firstInvalid.focus();
@@ -713,11 +872,19 @@
           priority && priority.value ? "Education priority: " + priority.options[priority.selectedIndex].text : "",
           builder && builder.value ? "Builder level: " + builder.options[builder.selectedIndex].text : "",
           "",
-          message && message.value.trim() ? message.value.trim() : "Please send me the current approved details."
-        ].filter(function (line, index) { return line !== "" || index === 4; });
+          message && message.value.trim() ? message.value.trim() : "Please send me the current approved details.",
+        ].filter(function (line, index) {
+          return line !== "" || index === 4;
+        });
         var body = withRef(lines);
 
-        window.location.href = "mailto:" + campaign.contact.email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+        window.location.href =
+          "mailto:" +
+          campaign.contact.email +
+          "?subject=" +
+          encodeURIComponent(subject) +
+          "&body=" +
+          encodeURIComponent(body);
         showDone(form, subject, body);
         track("enquiry_prepared", { route: routeLabel });
       });
@@ -739,12 +906,20 @@
       panel.appendChild(el("span", "done-mark", "✓"));
       var copyBlock = el("div");
       copyBlock.appendChild(el("h3", null, "Your message is ready."));
-      copyBlock.appendChild(el("p", null, "Your email app should have opened with everything filled in. Nothing opened? Send the same message on WhatsApp, or copy it."));
+      copyBlock.appendChild(
+        el(
+          "p",
+          null,
+          "Your email app should have opened with everything filled in. Nothing opened? Send the same message on WhatsApp, or copy it.",
+        ),
+      );
       var actions = el("div", "done-actions");
       var wa = el("a", "btn btn-wfe", "Send on WhatsApp");
       wa.target = "_blank";
       wa.rel = "noopener";
-      wa.addEventListener("click", function () { track("enquiry_whatsapp_fallback"); });
+      wa.addEventListener("click", function () {
+        track("enquiry_whatsapp_fallback");
+      });
       var copy = el("button", "btn btn-wfe-line", "Copy message");
       copy.type = "button";
       actions.appendChild(wa);
@@ -792,7 +967,9 @@
       link.href = "https://wa.me/?text=" + encodeURIComponent(text + "\n" + campaignUrl());
       link.target = "_blank";
       link.rel = "noopener";
-      link.addEventListener("click", function () { track("campaign_share", { method: "whatsapp" }); });
+      link.addEventListener("click", function () {
+        track("campaign_share", { method: "whatsapp" });
+      });
     });
 
     all("[data-copy-link]").forEach(function (button) {

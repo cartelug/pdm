@@ -1,0 +1,27 @@
+{
+  "name": "pamodzi-website",
+  "private": true,
+  "description": "Front-end quality tooling for pamodzici.com. The site itself has no build step; these tools only check and format the source.",
+  "scripts": {
+    "lint": "npm run lint:js && npm run lint:css && npm run format:check && npm run check:pages && npm run check:assets",
+    "lint:js": "eslint .",
+    "lint:css": "stylelint \"css/**/*.css\"",
+    "format": "prettier --write \"css/**/*.css\" \"js/**/*.js\" \"scripts/**/*.mjs\" \"tests/**/*.cjs\"",
+    "format:check": "prettier --check \"css/**/*.css\" \"js/**/*.js\" \"scripts/**/*.mjs\" \"tests/**/*.cjs\"",
+    "css:compact": "node scripts/css-compact.mjs css/*.css",
+    "assets": "node scripts/assets.mjs",
+    "check:assets": "node scripts/assets.mjs --check",
+    "check:pages": "node scripts/pages.mjs",
+    "test:browser": "node tests/payments/browser.cjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.12.0",
+    "globals": "^17.13.0",
+    "postcss": "^8.5.29",
+    "prettier": "^3.9.9",
+    "specificity": "^1.0.0",
+    "stylelint": "^17.16.0",
+    "stylelint-config-standard": "^40.0.0"
+  }
+}

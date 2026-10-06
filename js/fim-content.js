@@ -8,7 +8,8 @@
 
    Do not invent a date, distance or location. Leave a field blank when it
    has not been confirmed. The first item is displayed as the lead story. */
-var fimAssetBase = new URL("../assets/", document.currentScript && document.currentScript.src ? document.currentScript.src : window.location.href).href;
+/* global fimAssetBase -- exposed globally: every journey entry below (and blocks pasted from the console) builds on it. */
+window.fimAssetBase = new URL("../assets/", document.currentScript && document.currentScript.src ? document.currentScript.src : window.location.href).href;
 window.FIM_UPDATES = [
   {
     label: "Construction appeal",

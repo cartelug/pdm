@@ -12,12 +12,12 @@
   var selects = {
     builder: form.querySelector("[name='builder']"),
     priority: form.querySelector("[name='priority']"),
-    route: form.querySelector("[name='route']")
+    route: form.querySelector("[name='route']"),
   };
   var cards = {
     builder: Array.prototype.slice.call(document.querySelectorAll("[data-wfp-builder]")),
     priority: Array.prototype.slice.call(document.querySelectorAll("[data-wfp-priority]")),
-    route: Array.prototype.slice.call(document.querySelectorAll("[data-wfp-route]"))
+    route: Array.prototype.slice.call(document.querySelectorAll("[data-wfp-route]")),
   };
   var labels = { route: "Route", priority: "Priority", builder: "Level" };
   var target = document.getElementById("request-pack");
@@ -27,9 +27,12 @@
   var routeChosen = false;
 
   function hasOption(select, value) {
-    return !!select && Array.prototype.some.call(select.options, function (option) {
-      return option.value === value;
-    });
+    return (
+      !!select &&
+      Array.prototype.some.call(select.options, function (option) {
+        return option.value === value;
+      })
+    );
   }
 
   function choose(kind, value) {
@@ -68,7 +71,10 @@
       var remove = document.createElement("button");
       remove.type = "button";
       remove.textContent = "×";
-      remove.setAttribute("aria-label", "Remove " + labels[kind].toLowerCase() + " " + select.options[select.selectedIndex].text);
+      remove.setAttribute(
+        "aria-label",
+        "Remove " + labels[kind].toLowerCase() + " " + select.options[select.selectedIndex].text,
+      );
       remove.addEventListener("click", function () {
         select.value = "";
         render();

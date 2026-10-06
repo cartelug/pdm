@@ -53,30 +53,44 @@
     });
 
     if (reduced || !("IntersectionObserver" in window)) {
-      reveals.forEach(function (element) { element.classList.add("in"); });
-      groups.forEach(function (group) { group.classList.add("motion-in"); });
+      reveals.forEach(function (element) {
+        element.classList.add("in");
+      });
+      groups.forEach(function (group) {
+        group.classList.add("motion-in");
+      });
       return;
     }
 
-    var revealObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("in");
-        revealObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.11, rootMargin: "0px 0px -7% 0px" });
+    var revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("in");
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.11, rootMargin: "0px 0px -7% 0px" },
+    );
 
-    reveals.forEach(function (element) { revealObserver.observe(element); });
+    reveals.forEach(function (element) {
+      revealObserver.observe(element);
+    });
 
-    var groupObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("motion-in");
-        groupObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.09, rootMargin: "0px 0px -5% 0px" });
+    var groupObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("motion-in");
+          groupObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.09, rootMargin: "0px 0px -5% 0px" },
+    );
 
-    groups.forEach(function (group) { groupObserver.observe(group); });
+    groups.forEach(function (group) {
+      groupObserver.observe(group);
+    });
   }
 
   function prepareSurfaceLight() {
@@ -93,8 +107,8 @@
 
       surface.addEventListener("pointermove", function (event) {
         var rect = surface.getBoundingClientRect();
-        surface.style.setProperty("--pointer-x", ((event.clientX - rect.left) / rect.width * 100).toFixed(1) + "%");
-        surface.style.setProperty("--pointer-y", ((event.clientY - rect.top) / rect.height * 100).toFixed(1) + "%");
+        surface.style.setProperty("--pointer-x", (((event.clientX - rect.left) / rect.width) * 100).toFixed(1) + "%");
+        surface.style.setProperty("--pointer-y", (((event.clientY - rect.top) / rect.height) * 100).toFixed(1) + "%");
       });
     });
   }
@@ -125,7 +139,9 @@
     function prepare(image) {
       if (image.classList.contains("motion-image-bound")) return;
       image.classList.add("motion-image-bound");
-      function loaded() { image.classList.add("motion-image-ready"); }
+      function loaded() {
+        image.classList.add("motion-image-ready");
+      }
       if (image.complete) loaded();
       else image.addEventListener("load", loaded, { once: true });
     }
@@ -138,7 +154,8 @@
           Array.prototype.forEach.call(record.addedNodes, function (node) {
             if (node.nodeType !== 1) return;
             if (node.matches && node.matches(".journey-photo img, [data-slot] img, .hero-media img")) prepare(node);
-            if (node.querySelectorAll) all(".journey-photo img, [data-slot] img, .hero-media img", node).forEach(prepare);
+            if (node.querySelectorAll)
+              all(".journey-photo img, [data-slot] img, .hero-media img", node).forEach(prepare);
           });
         });
       });
@@ -153,15 +170,20 @@
       return;
     }
 
-    var sectionObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        var index = activeSections.indexOf(entry.target);
-        if (entry.isIntersecting && index === -1) activeSections.push(entry.target);
-        if (!entry.isIntersecting && index !== -1) activeSections.splice(index, 1);
-      });
-    }, { rootMargin: "25% 0px 25% 0px" });
+    var sectionObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          var index = activeSections.indexOf(entry.target);
+          if (entry.isIntersecting && index === -1) activeSections.push(entry.target);
+          if (!entry.isIntersecting && index !== -1) activeSections.splice(index, 1);
+        });
+      },
+      { rootMargin: "25% 0px 25% 0px" },
+    );
 
-    sections.forEach(function (section) { sectionObserver.observe(section); });
+    sections.forEach(function (section) {
+      sectionObserver.observe(section);
+    });
   }
 
   function updateMotion() {
@@ -223,21 +245,38 @@
     });
 
     document.addEventListener("click", function (event) {
-      if (reduced || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (
+        reduced ||
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      )
+        return;
       var link = event.target.closest("a[href]");
-      if (!link || link.target === "_blank" || link.hasAttribute("download") || link.hasAttribute("data-no-transition")) return;
+      if (!link || link.target === "_blank" || link.hasAttribute("download") || link.hasAttribute("data-no-transition"))
+        return;
 
       var raw = link.getAttribute("href");
       if (!raw || raw.charAt(0) === "#" || /^(mailto:|tel:|javascript:)/i.test(raw)) return;
 
       var target;
-      try { target = new URL(link.href, window.location.href); } catch (error) { return; }
+      try {
+        target = new URL(link.href, window.location.href);
+      } catch (error) {
+        return;
+      }
       if (target.origin !== window.location.origin) return;
-      if (target.pathname === window.location.pathname && target.search === window.location.search && target.hash) return;
+      if (target.pathname === window.location.pathname && target.search === window.location.search && target.hash)
+        return;
 
       event.preventDefault();
       document.body.classList.add("is-leaving");
-      window.setTimeout(function () { window.location.href = target.href; }, 340);
+      window.setTimeout(function () {
+        window.location.href = target.href;
+      }, 340);
     });
   }
 
@@ -248,7 +287,9 @@
     });
     ["pointerup", "pointercancel", "pointerleave"].forEach(function (type) {
       document.addEventListener(type, function () {
-        all(".is-pressed").forEach(function (target) { target.classList.remove("is-pressed"); });
+        all(".is-pressed").forEach(function (target) {
+          target.classList.remove("is-pressed");
+        });
       });
     });
   }
@@ -264,24 +305,40 @@
 
     window.addEventListener("scroll", requestMotionFrame, { passive: true });
     window.addEventListener("resize", requestMotionFrame, { passive: true });
-    reduceQuery.addEventListener && reduceQuery.addEventListener("change", function (event) {
-      reduced = event.matches;
-      if (reduced && header) header.classList.remove("is-hidden");
-    });
+    reduceQuery.addEventListener &&
+      reduceQuery.addEventListener("change", function (event) {
+        reduced = event.matches;
+        if (reduced && header) header.classList.remove("is-hidden");
+      });
 
     requestMotionFrame();
 
-    function startOpeningSequence() {
-      var delay = document.querySelector(".site-loader") ? 320 : 70;
+    // The hero sequence starts as the global preloader (js/preloader.js) exits.
+    function startOpeningSequence(delay) {
       window.setTimeout(function () {
         window.requestAnimationFrame(function () {
-          window.requestAnimationFrame(function () { root.classList.add("motion-ready"); });
+          window.requestAnimationFrame(function () {
+            root.classList.add("motion-ready");
+          });
         });
       }, delay);
     }
 
-    if (document.readyState === "complete") startOpeningSequence();
-    else window.addEventListener("load", startOpeningSequence, { once: true });
+    if (window.PamodziPreloader) {
+      window.PamodziPreloader.whenDone(function () {
+        startOpeningSequence(140);
+      });
+    } else if (document.readyState === "complete") {
+      startOpeningSequence(70);
+    } else {
+      window.addEventListener(
+        "load",
+        function () {
+          startOpeningSequence(70);
+        },
+        { once: true },
+      );
+    }
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ready, { once: true });
