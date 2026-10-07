@@ -17,8 +17,61 @@
       ? crypto.randomUUID()
       : "PCI-" + Date.now() + "-" + Math.random().toString(36).slice(2) + "-request";
   }
-  function money(v) {
-    return "UGX " + new Intl.NumberFormat("en-UG").format(v);
+  /* The visitor's country sets the currency and the price of a step (js/step-pricing.js). Without that script
+     the form behaves as before: Uganda, UGX 5,000 per step. */
+  var pricing = window.StepPricing || null;
+  function here() {
+    return pricing ? pricing.current() : { code: "UG", currency: "UGX", step: 5000, label: "UGX" };
+  }
+  function money(v, currency) {
+    var code = currency || here().currency;
+    return pricing ? pricing.format(v, code) : code + " " + new Intl.NumberFormat("en-UG").format(v);
+  }
+  function pressKind(name) {
+    document.querySelectorAll("[data-kind]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.kind === name));
+    });
+  }
+  /* Online payment needs checkout to be open AND the gateway to take this country's currency. */
+  function payable() {
+    return (
+      !!settings && settings.checkoutEnabled && (settings.paymentCurrencies || ["UGX"]).indexOf(here().currency) !== -1
+    );
+  }
+  var forcedPledge = false;
+  function applyAvailability() {
+    if (!settings) return;
+    var tab = document.querySelector('[data-kind="payment"]');
+    var notice = document.getElementById("checkoutNotice");
+    var now = here();
+    if (!payable()) {
+      if (kind() === "payment") {
+        forcedPledge = true;
+        pressKind("pledge");
+      }
+      tab.disabled = true;
+      tab.textContent = settings.checkoutEnabled
+        ? "Online payment in " + now.label + " · soon"
+        : "Online payment · soon";
+      notice.hidden = false;
+      notice.textContent = settings.checkoutEnabled
+        ? "Online payment in " +
+          now.label +
+          " is not open yet. You can record a pledge now and the team will send you payment details. A pledge is not a payment."
+        : "Online payments are being prepared. You can record a pledge now or contact the campaign team. A pledge is not a payment.";
+    } else {
+      tab.disabled = false;
+      tab.textContent = "Pay for my steps";
+      if (forcedPledge) {
+        forcedPledge = false;
+        pressKind("payment");
+      }
+      notice.hidden = settings.environment !== "sandbox";
+      if (settings.environment === "sandbox")
+        notice.textContent =
+          "TEST CHECKOUT — this is the Pesapal sandbox. Test payments do not count toward campaign collections.";
+    }
+    update();
   }
   async function call(action, data) {
     var options =
@@ -52,17 +105,20 @@
   }
   function update() {
     var stepField = document.getElementById("stepCount");
+    var unit = here().step;
     var stepValue = Number(stepField.value),
       validSteps = Number.isInteger(stepValue) && stepValue >= 5 && stepValue <= 20000;
     stepField.setAttribute("aria-invalid", String(!validSteps));
     var stepError = document.getElementById("stepValidation");
     if (stepError) {
       stepError.hidden = validSteps;
-      stepError.textContent = validSteps ? "" : "Choose 5 to 20,000 whole steps. The minimum is UGX 25,000.";
+      stepError.textContent = validSteps
+        ? ""
+        : "Choose 5 to 20,000 whole steps. The minimum is " + money(5 * unit) + ".";
     }
     if (stepField)
       document.getElementById("amount").value = Number.isInteger(Number(stepField.value))
-        ? Number(stepField.value) * 5000
+        ? Number(stepField.value) * unit
         : 0;
     document.getElementById("summaryAmount").textContent = money(amount() || 0);
     if (document.getElementById("summarySteps"))
@@ -74,12 +130,12 @@
       ? "Record my pledge"
       : "Continue to secure payment";
     document.getElementById("submitContribution").disabled =
-      submitting || !validSteps || !settings || (isPledge ? !settings.pledgesEnabled : !settings.checkoutEnabled);
+      submitting || !validSteps || !settings || (isPledge ? !settings.pledgesEnabled : !payable());
     document.getElementById("kindHint").textContent = isPledge
       ? "A pledge records your intention to support. No money is collected."
       : "You will choose a payment method inside Pesapal checkout.";
-    document.querySelectorAll("[data-amount]").forEach(function (b) {
-      b.setAttribute("aria-pressed", String(Number(b.dataset.amount) === amount()));
+    document.querySelectorAll("[data-steps]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(Number(b.dataset.steps) === stepValue));
     });
     document.querySelectorAll("[data-checkout-adjust]").forEach(function (b) {
       b.disabled = Number(b.dataset.checkoutAdjust) < 0 ? stepValue <= 5 : stepValue >= 20000;
@@ -135,14 +191,35 @@
         update();
       });
     });
-    document.querySelectorAll("[data-amount]").forEach(function (b) {
+    document.querySelectorAll("[data-steps]").forEach(function (b) {
       b.addEventListener("click", function () {
-        if (steps) steps.value = Number(b.dataset.amount) / 5000;
-        document.getElementById("amount").value = b.dataset.amount;
+        if (steps) steps.value = Number(b.dataset.steps);
         requestId = newRequestId();
         update();
       });
     });
+    /* The first question: where are you giving from? Currency, step price and payment availability follow. */
+    var countrySelect = document.getElementById("country");
+    if (pricing) {
+      pricing.bind(document);
+      document.addEventListener("steppricing:change", function () {
+        if (countrySelect) countrySelect.value = here().code;
+        pricing.bind(document);
+        requestId = newRequestId();
+        applyAvailability();
+        update();
+      });
+      if (countrySelect)
+        countrySelect.addEventListener("change", function () {
+          pricing.select(countrySelect.value);
+        });
+      pricing.ready.then(function () {
+        if (countrySelect) pricing.fillSelect(countrySelect);
+        pricing.bind(document);
+        applyAvailability();
+        update();
+      });
+    }
     form.addEventListener("input", function () {
       if (!submitting) requestId = newRequestId();
       update();
@@ -151,7 +228,7 @@
       event.preventDefault();
       if (submitting || !form.reportValidity()) return;
       if (!Number.isInteger(amount())) {
-        message("Please enter a whole UGX amount.", true);
+        message("Please enter a whole amount.", true);
         return;
       }
       try {
@@ -169,6 +246,8 @@
         var r = await call("create", {
           campaign: document.getElementById("campaign").value,
           kind: kind(),
+          country: here().code,
+          currency: here().currency,
           amount: amount(),
           steps: Number(steps.value),
           name: document.getElementById("supporterName").value.trim(),
@@ -195,19 +274,7 @@
       var results = await Promise.all([call("status"), call("session")]);
       settings = results[0];
       csrf = results[1].csrf;
-      if (!settings.checkoutEnabled) {
-        document.querySelectorAll("[data-kind]").forEach(function (b) {
-          b.setAttribute("aria-pressed", String(b.dataset.kind === "pledge"));
-        });
-        var unavailable = document.querySelector('[data-kind="payment"]');
-        unavailable.disabled = true;
-        unavailable.textContent = "Online payment · soon";
-        document.getElementById("checkoutNotice").textContent =
-          "Online payments are being prepared. You can record a pledge now or contact the campaign team. A pledge is not a payment.";
-      } else if (settings.environment === "sandbox")
-        document.getElementById("checkoutNotice").textContent =
-          "TEST CHECKOUT — this is the Pesapal sandbox. Test payments do not count toward campaign collections.";
-      else document.getElementById("checkoutNotice").hidden = true;
+      applyAvailability();
       if (!settings.pledgesEnabled)
         message("The contribution service is being prepared. Please contact the campaign team.", true);
     } catch (error) {
@@ -301,7 +368,7 @@
         lastState = row.status;
         document.getElementById("receiptState").textContent = row.status;
         document.getElementById("receiptState").className = "receipt-state " + row.status;
-        document.getElementById("receiptAmount").textContent = money(row.amount);
+        document.getElementById("receiptAmount").textContent = money(row.amount, row.currency);
         document.getElementById("receiptReference").textContent = row.reference;
         document.getElementById("receiptNumber").textContent = row.receipt || "Issued after verified payment";
         document.getElementById("receiptDate").textContent = new Date(row.created_at).toLocaleString("en-GB");
@@ -315,10 +382,7 @@
         if (document.getElementById("receiptSteps"))
           document.getElementById("receiptSteps").textContent =
             row.steps > 0
-              ? row.steps +
-                (row.steps === 1 ? " step" : " steps") +
-                " × UGX " +
-                new Intl.NumberFormat("en-UG").format(row.step_unit)
+              ? row.steps + (row.steps === 1 ? " step" : " steps") + " × " + money(row.step_unit, row.currency)
               : "Not recorded as sponsored steps";
         if (certificatePanel) {
           certificateCode = row.certificate || "";

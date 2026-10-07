@@ -93,7 +93,7 @@ function check(value, message) {
       "custom campaign steps compute the correct price",
     );
     check(
-      (await page.locator("#campaignContribute").getAttribute("href")).includes("steps=7&ref=qa-club"),
+      (await page.locator("#campaignContribute").getAttribute("href")).includes("steps=7&country=UG&ref=qa-club"),
       "campaign carries steps and referral into checkout",
     );
     await page.fill("#campaignSteps", "1.5");
@@ -239,7 +239,7 @@ function check(value, message) {
     check(await page.locator(".wfe2-latest").isHidden(), "empty field update feed stays unpublished");
     await page.fill("#campaignSteps", "7");
     await page.locator("#campaignContribute").click();
-    await page.waitForURL("**/contribute/?steps=7&ref=qa-club");
+    await page.waitForURL("**/contribute/?steps=7&country=UG&ref=qa-club");
     await page.locator("#submitContribution:not([disabled])").waitFor();
     check(
       (await page.locator("#stepCount").inputValue()) === "7" &&
@@ -258,7 +258,7 @@ function check(value, message) {
     check(await page.locator("#campaignSteps").isVisible(), "checkout header navigation returns to the campaign");
     await page.fill("#campaignSteps", "7");
     await page.click("#campaignContribute");
-    await page.waitForURL("**/contribute/?steps=7&ref=qa-club");
+    await page.waitForURL("**/contribute/?steps=7&country=UG&ref=qa-club");
     await page.locator("#submitContribution:not([disabled])").waitFor();
     await page.locator("#submitContribution:not([disabled])").waitFor();
     check(
@@ -279,7 +279,7 @@ function check(value, message) {
         (await page.locator('[data-checkout-adjust="-1"]').isDisabled()),
       "checkout accepts five steps and stops decrementing",
     );
-    await page.click('[data-amount="100000"]');
+    await page.click('[data-steps="20"]');
     check(
       (await page.locator("#summaryAmount").textContent()).replace(/[\s,]/g, "") === "UGX100000",
       "suggested amount updates summary",
@@ -454,6 +454,123 @@ function check(value, message) {
         await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
         "certificate verification page fits mobile",
       );
+    }
+    /* Country question: the country sets the currency and the price of a step (Kenya: KSh 200). */
+    {
+      const nairobi = await browser.newContext({
+        viewport: { width: 1280, height: 900 },
+        timezoneId: "Africa/Nairobi",
+        locale: "en-US",
+      });
+      const visitor = await nairobi.newPage();
+      visitor.on("pageerror", (e) => errors.push(e.message));
+      await visitor.goto(base + "/walk-for-education/");
+      await visitor.waitForFunction(() => !document.querySelector(".site-loader"));
+      await visitor.waitForFunction(() => document.getElementById("campaignCountry").value === "KE");
+      const text = (selector) => visitor.locator(selector).first().innerText();
+      check(
+        (await visitor
+          .locator("#campaignCountry")
+          .evaluate((el) => el === el.closest(".v3-give-card").querySelector("select"))) &&
+          (await visitor.locator("#campaignCountry").inputValue()) === "KE",
+        "campaign asks for the country first and detects Kenya from the visitor's time zone",
+      );
+      check(
+        (await text(".v3-give-heading b")) === "1 step = KSh 200" && (await text("#campaignTotal")) === "KSh 10,000",
+        "Kenya: one step is KSh 200 and fifty steps are KSh 10,000",
+      );
+      check(
+        (await visitor.locator("[data-step-option] strong").allInnerTexts())
+          .map((t) => t.replace(/\s+/g, " "))
+          .join("|") === "KSh 20,000|KSh 10,000|KSh 4,000|KSh 2,000|KSh 1,000",
+        "every amount option is shown in KSh",
+      );
+      check(
+        (await visitor.locator("#campaignContribute").getAttribute("href")).includes("steps=50&country=KE"),
+        "the checkout link carries the chosen country",
+      );
+      check(
+        (await visitor.locator(".wfe-sticky-contribute small").textContent()).includes("KSh 1,000"),
+        "the sticky bar shows the minimum in KSh",
+      );
+      await visitor.fill("#campaignSteps", "4");
+      check((await text("#campaignValidation")).includes("KSh 1,000"), "the five-step minimum is explained in KSh");
+      await visitor.fill("#campaignSteps", "50");
+      await visitor.selectOption("#campaignCountry", "TZ");
+      check(
+        (await text("#campaignTotal")) === "TSh 200,000" && (await text(".v3-give-heading b")) === "1 step = TSh 4,000",
+        "changing the country to Tanzania changes the currency at once",
+      );
+      await visitor.selectOption("#campaignCountry", "US");
+      check((await text("#campaignTotal")) === "US$100", "United States: fifty steps are US$100");
+      await visitor.selectOption("#campaignCountry", "UG");
+      check((await text("#campaignTotal")) === "UGX 250,000", "Uganda stays UGX 5,000 per step");
+      await visitor.selectOption("#campaignCountry", "KE");
+
+      await visitor.goto(base + "/contribute/?steps=50&country=KE");
+      await visitor.waitForFunction(() => !document.querySelector(".site-loader"));
+      await visitor.waitForFunction(() => document.getElementById("summaryAmount").textContent === "KSh 10,000");
+      check(
+        (await visitor.locator("#country").inputValue()) === "KE" &&
+          (await visitor.locator(".collection-kicker").first().textContent()).includes("KSh 200 per step"),
+        "the contribution form opens on the chosen country and price",
+      );
+      await visitor.fill("#supporterName", "Kenya Browser Supporter");
+      await visitor.fill("#phone", "+254700000000");
+      await visitor.check("#consent");
+      await visitor.click("#submitContribution");
+      await visitor.waitForURL("**/contribute/payment/?reference=*");
+      await visitor.locator("#receiptContent:not([hidden])").waitFor();
+      check(
+        (await text("#receiptAmount")) === "KSh 10,000" && (await text("#receiptSteps")) === "50 steps × KSh 200",
+        "a Kenyan pledge is recorded and shown in KSh at 200 per step",
+      );
+
+      /* Checkout open for UGX only: Kenyans are steered to a pledge, Ugandans can still pay online. */
+      await visitor.route("**/api/payments/index.php?action=status", (route) =>
+        route.fulfill({
+          json: {
+            checkoutEnabled: true,
+            pledgesEnabled: true,
+            environment: "live",
+            stepUnit: 5000,
+            stepCurrency: "UGX",
+            paymentCurrencies: ["UGX"],
+            minimumSteps: 5,
+            maximumSteps: 20000,
+          },
+        }),
+      );
+      await visitor.goto(base + "/contribute/?steps=50&country=KE");
+      await visitor.waitForFunction(() => !document.querySelector(".site-loader"));
+      await visitor.waitForFunction(() => document.querySelector('[data-kind="payment"]').disabled);
+      check(
+        (await visitor.locator('[data-kind="pledge"]').getAttribute("aria-pressed")) === "true" &&
+          (await text("#submitContribution")) === "Record my pledge" &&
+          (await text('[data-kind="payment"]')).includes("KSh"),
+        "while online payment is open only for UGX, a Kenyan is steered to a pledge",
+      );
+      await visitor.selectOption("#country", "UG");
+      await visitor.waitForFunction(() => !document.querySelector('[data-kind="payment"]').disabled);
+      check(
+        (await visitor.locator('[data-kind="payment"]').getAttribute("aria-pressed")) === "true" &&
+          (await text("#submitContribution")) === "Continue to secure payment",
+        "a Ugandan can still pay online, and switching country restores the payment option",
+      );
+      await visitor.unroute("**/api/payments/index.php?action=status");
+
+      await visitor.route("**/api/payments/index.php?action=verify-certificate&code=*", (route) =>
+        route.fulfill({
+          json: { valid: true, steps: 50, amount: 10000, currency: "KES", issuedAt: "2026-10-05T10:00:00+00:00" },
+        }),
+      );
+      await visitor.goto(base + "/contribute/verify/?code=WFE-" + "A".repeat(24));
+      await visitor.locator("#verifiedCertificate:not([hidden])").waitFor();
+      check(
+        (await text("#verifiedAmount")) === "KSh 10,000",
+        "the public certificate check shows the contribution in its own currency",
+      );
+      await nairobi.close();
     }
     /* Global preloader: every page family shows it and removes it after loading; it never covers the page
        when JavaScript is unavailable. A fresh context keeps these independent of the fixtures above. */

@@ -13,8 +13,9 @@
   function id(name) {
     return document.getElementById(name);
   }
-  function money(n) {
-    return "UGX " + new Intl.NumberFormat("en-UG").format(n || 0);
+  /* Amounts are in the currency of the payment (UGX unless the row says otherwise). */
+  function money(n, currency) {
+    return (currency || "UGX") + " " + new Intl.NumberFormat("en-UG").format(n || 0);
   }
   function note(text, error) {
     id("consoleMessage").textContent = text;
@@ -81,15 +82,15 @@
       var person = node("td", r.name);
       person.append(node("small", [r.phone, r.email].filter(Boolean).join(" · ")));
       tr.append(person);
-      var value = node("td", money(r.amount));
-      value.append(node("small", r.kind));
+      var value = node("td", money(r.amount, r.currency));
+      value.append(node("small", [r.kind, r.country].filter(Boolean).join(" · ")));
       tr.append(value);
       var state = node("td", r.status);
       if (r.receipt) state.append(node("small", r.receipt));
       tr.append(state);
       var finance = node("td", r.reconciled_at ? "Reconciled" : "Not reconciled");
       if (r.settlement_reference)
-        finance.append(node("small", r.settlement_reference), node("small", "Net " + money(r.net)));
+        finance.append(node("small", r.settlement_reference), node("small", "Net " + money(r.net, r.currency)));
       tr.append(finance);
       var controls = document.createElement("td");
       if (role !== "viewer") {
@@ -106,7 +107,7 @@
               id("settlementReference").value = r.settlement_reference || "";
               id("settlementFee").value = r.fee || 0;
               id("settlementFee").max = r.amount;
-              id("settlementInfo").textContent = r.reference + " · " + money(r.amount);
+              id("settlementInfo").textContent = r.reference + " · " + money(r.amount, r.currency);
               id("settlementError").textContent = "";
               id("settlementDialog").showModal();
             }),
@@ -143,6 +144,30 @@
     id("totalReconciled").textContent = money(r.totals.reconciled);
     id("totalPledged").textContent = money(r.totals.pledged);
     id("totalNet").textContent = money(r.totals.net);
+    /* The four tiles are UGX; payments in other currencies count as their steps at the campaign step value.
+       The exact amounts actually paid and settled are listed per currency here. */
+    var byCurrency = (r.totals.byCurrency || []).filter(function (c) {
+      return c.successful || c.pledged || c.reconciled;
+    });
+    var breakdown = id("currencyBreakdown");
+    breakdown.hidden = !byCurrency.some(function (c) {
+      return c.currency !== "UGX";
+    });
+    breakdown.textContent = byCurrency
+      .map(function (c) {
+        return (
+          c.currency +
+          ": verified " +
+          money(c.successful, c.currency) +
+          " · reconciled " +
+          money(c.reconciled, c.currency) +
+          " · pledged " +
+          money(c.pledged, c.currency) +
+          " · net " +
+          money(c.net, c.currency)
+        );
+      })
+      .join("\n");
     id("accountLabel").textContent = "Signed in · " + role;
     id("exportCsv").hidden = role === "viewer";
     id("backupLedger").hidden = role !== "admin";

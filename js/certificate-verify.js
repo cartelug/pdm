@@ -28,8 +28,10 @@
       }
       message.textContent = "Verified contribution certificate issued by Pamodzi Community Initiative Uganda.";
       document.getElementById("verifiedSteps").textContent = data.steps + (data.steps === 1 ? " step" : " steps");
-      document.getElementById("verifiedAmount").textContent =
-        "UGX " + new Intl.NumberFormat("en-UG").format(data.amount);
+      var currency = data.currency || "UGX";
+      document.getElementById("verifiedAmount").textContent = window.StepPricing
+        ? window.StepPricing.format(data.amount, currency)
+        : currency + " " + new Intl.NumberFormat("en-UG").format(data.amount);
       document.getElementById("verifiedDate").textContent = new Date(data.issuedAt).toLocaleDateString("en-GB");
       details.hidden = false;
     } catch (e) {

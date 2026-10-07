@@ -2,7 +2,7 @@
 declare(strict_types=1);
 if (PHP_SAPI!=='cli') { http_response_code(404);exit; }
 $temp=sys_get_temp_dir().'/pci-ledger-test-'.bin2hex(random_bytes(8));mkdir($temp,0700);
-putenv('PCI_PRIVATE_DIR='.$temp);putenv('PCI_ENVIRONMENT=live');putenv('PCI_CONSUMER_KEY=test-key');putenv('PCI_CONSUMER_SECRET=test-secret');putenv('PCI_POLICIES_APPROVED=true');putenv('PCI_LIVE_APPROVED=true');putenv('PCI_CHECKOUT_ENABLED=true');
+putenv('PCI_PRIVATE_DIR='.$temp);putenv('PCI_ENVIRONMENT=live');putenv('PCI_CONSUMER_KEY=test-key');putenv('PCI_CONSUMER_SECRET=test-secret');putenv('PCI_POLICIES_APPROVED=true');putenv('PCI_LIVE_APPROVED=true');putenv('PCI_CHECKOUT_ENABLED=true');putenv('PCI_PAYMENT_CURRENCIES=UGX,KES');
 $_SERVER['DOCUMENT_ROOT']=dirname(__DIR__,2);$_SESSION=[];
 require dirname(__DIR__,2).'/api/lib/payments.php';
 require dirname(__DIR__,2).'/api/payments/certificate-pdf.php';
@@ -13,10 +13,11 @@ $calls=0;$responseCode=1;
 $GLOBALS['pci_test_transport']=function($path,$body,$token) use (&$calls,&$responseCode) {
     if ($path==='Auth/RequestToken') return ['token'=>'test-token','status'=>200];
     if ($path==='URLSetup/RegisterIPN') return ['ipn_id'=>'12345678-1234-1234-1234-123456789abc','status'=>200];
-    if ($path==='Transactions/SubmitOrderRequest') { $calls++;return ['merchant_reference'=>$body['id'],'order_tracking_id'=>sprintf('%08x-1234-1234-1234-123456789abc',$calls),'redirect_url'=>'https://pay.pesapal.com/checkout/test','status'=>200]; }
+    if ($path==='Transactions/SubmitOrderRequest') { $calls++;$GLOBALS['pci_last_order']=$body;return ['merchant_reference'=>$body['id'],'order_tracking_id'=>sprintf('%08x-1234-1234-1234-123456789abc',$calls),'redirect_url'=>'https://pay.pesapal.com/checkout/test','status'=>200]; }
     $tracking=substr($path,strpos($path,'=')+1);$q=pci_db()->prepare('SELECT * FROM contributions WHERE tracking_id=?');$q->execute([$tracking]);$row=$q->fetch();
-    return ['merchant_reference'=>$row['reference'],'amount'=>$row['amount'],'currency'=>'UGX','status_code'=>$responseCode,'confirmation_code'=>'CONFIRMED-TEST','payment_method'=>'MTN','status'=>200];
+    return ['merchant_reference'=>$row['reference'],'amount'=>$row['amount'],'currency'=>$row['currency'],'status_code'=>$responseCode,'confirmation_code'=>'CONFIRMED-TEST','payment_method'=>'MTN','status'=>200];
 };
+$gateway=$GLOBALS['pci_test_transport'];
 $body=['campaign'=>'walk-for-education-2026','amount'=>50000,'kind'=>'payment','name'=>'Test Supporter','email'=>'supporter@example.com','phone'=>'','referral'=>'test-club','consent'=>true,'requestId'=>'test-payment-request-001'];
 try {
     check(!pci_checkout_ready(),'checkout closed before IPN registration');
@@ -77,6 +78,39 @@ try {
     check(is_file($temp.'/collections.sqlite') && !is_file($_SERVER['DOCUMENT_ROOT'].'/collections.sqlite'),'database stored outside website');
     $GLOBALS['pci_test_transport']=function(){throw new RuntimeException('Timeout');};$ambiguous=$body;$ambiguous['requestId']='test-timeout-request-001';$a=pci_create($ambiguous,'owner-session');check($a['status']==='pending' && $a['tracking_id']===null,'ambiguous submission preserved for review');
     check(pci_create($ambiguous,'owner-session')['reference']===$a['reference'],'retry of ambiguous request does not create second attempt');
+    $GLOBALS['pci_test_transport']=$gateway; /* the timeout fixture above replaced it */
+    /* Country step prices: Kenya is KES 200 per step, Uganda UGX 5,000, and every request is priced by its country. */
+    $prices=pci_pricing();
+    check(count($prices)>150 && $prices['KE']['currency']==='KES' && $prices['KE']['step']===200 && $prices['UG']['currency']==='UGX' && $prices['UG']['step']===5000,'price table: Kenya KES 200, Uganda UGX 5,000, every country priced');
+    foreach ($prices as $code=>$price) if (!is_int($price['step']) || $price['step']<1 || !preg_match('/^[A-Z]{3}$/D',$price['currency'])) check(false,'every country has a whole-number price in a three-letter currency ('.$code.')');
+    check(true,'every country has a whole-number price in a three-letter currency');
+    $ke=['campaign'=>'walk-for-education-2026','country'=>'KE','kind'=>'payment','steps'=>50,'amount'=>10000,'name'=>'Kenyan Supporter','email'=>'kenya@example.com','phone'=>'','referral'=>'','consent'=>true,'requestId'=>'test-kenya-payment-001'];
+    $v=pci_validate($ke);check($v['currency']==='KES' && $v['unit']===200 && $v['steps']===50 && $v['country']==='KE','a Kenyan contribution is priced per step in KES');
+    $bad=$ke;$bad['amount']=250000;rejects(fn()=>pci_validate($bad),'a Ugandan-priced amount is rejected for Kenya');
+    $bad=$ke;$bad['steps']=4;$bad['amount']=800;rejects(fn()=>pci_validate($bad),'four steps are rejected in KES');
+    $bad=$ke;unset($bad['steps']);$bad['amount']=900;rejects(fn()=>pci_validate($bad),'omitting steps cannot bypass the KES minimum');
+    $bad=$ke;$bad['country']='ZZ';rejects(fn()=>pci_validate($bad),'an unknown country is rejected');
+    $bad=$ke;$bad['country']='ke';rejects(fn()=>pci_validate($bad),'country codes must be exact');
+    $bad=$ke;$bad['currency']='UGX';rejects(fn()=>pci_validate($bad),'a currency that does not match the country is rejected');
+    $edge=$ke;$edge['steps']=5;$edge['amount']=1000;check(pci_validate($edge)['amount']===1000,'five steps are accepted at KES 1,000');
+    $edge['steps']=20000;$edge['amount']=4000000;check(pci_validate($edge)['steps']===20000,'20,000 steps are accepted at KES 4,000,000');
+    $edge['amount']=4000200;rejects(fn()=>pci_validate($edge),'more than 20,000 steps are rejected in KES');
+    $legacy=$ke;unset($legacy['country']);$legacy['amount']=250000;check(pci_validate($legacy)['currency']==='UGX' && pci_validate($legacy)['country']==='UG','requests without a country keep the Ugandan price');
+    $kRow=pci_create($ke,'owner-session');
+    check($kRow['currency']==='KES' && $kRow['country']==='KE' && (int)$kRow['amount']===10000 && (int)$kRow['step_unit']===200 && $kRow['status']==='pending','Kenyan payment stores KES, country and the step price');
+    check(($GLOBALS['pci_last_order']['currency'] ?? '')==='KES' && (int)$GLOBALS['pci_last_order']['amount']===10000,'the gateway order is created in KES');
+    $moved=$ke;$moved['country']='UG';$moved['amount']=250000;rejects(fn()=>pci_create($moved,'owner-session'),'a request cannot switch country after it was used');
+    $responseCode=1;$kPaid=pci_verify($kRow);check($kPaid['status']==='successful' && $kPaid['currency']==='KES','a KES payment is verified against a KES provider reply');
+    $wrongCurrency=['merchant_reference'=>$kRow['reference'],'amount'=>10000,'currency'=>'UGX','status_code'=>1];rejects(fn()=>pci_apply_status($kRow,$wrongCurrency),'a provider reply in a different currency is rejected');
+    check(pci_certificate($kPaid)!==null,'a verified KES payment unlocks a certificate');
+    $tamper=$kPaid;$tamper['step_unit']=5000;check(!pci_certificate_eligible($tamper),'a step price that does not multiply to the amount is not certified');
+    $pdf=pci_certificate_pdf($kPaid,pci_certificate($kPaid));check(str_contains($pdf,'KES 10,000') && str_contains($pdf,'KES 200 per sponsored step') && !str_contains($pdf,'UGX 5,000'),'the certificate names the contribution in KES');
+    $before=pci_totals();pci_reconcile($kPaid['reference'],'SETTLE-KES-001',100,'finance');$after=pci_totals();
+    check((int)$after['reconciled']-(int)$before['reconciled']===250000,'campaign totals count a KES payment as its steps at the UGX 5,000 campaign step value');
+    $kes=array_values(array_filter($after['byCurrency'],fn($r)=>$r['currency']==='KES'))[0] ?? [];check((int)($kes['reconciled'] ?? 0)===10000 && (int)($kes['fees'] ?? -1)===100 && (int)$after['fees']===(int)$before['fees'],'exact KES amounts are kept per currency and never mixed into UGX fees');
+    $tz=$ke;$tz['country']='TZ';$tz['amount']=200000;$tz['requestId']='test-tanzania-payment-001';rejects(fn()=>pci_create($tz,'owner-session'),'online payment in a currency the gateway cannot take yet is refused');
+    $tzPledge=$tz;$tzPledge['kind']='pledge';$tzPledge['requestId']='test-tanzania-pledge-001';$before=(int)pci_totals()['pledged'];$tp=pci_create($tzPledge,'owner-session');
+    check($tp['status']==='pledged' && $tp['currency']==='TZS' && (int)$tp['step_unit']===4000 && (int)pci_totals()['pledged']-$before===250000,'a pledge in TZS is recorded in TZS and counted at the campaign step value');
     echo "\n$checks checks passed. No live payments were sent.\n";
 } finally {
     /* Isolated fixtures only; never operate on a server ledger. */

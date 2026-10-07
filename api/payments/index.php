@@ -15,7 +15,7 @@ try {
         if ($action==='status') {
             $c=pci_config();$storage=extension_loaded('pdo_sqlite');
             respond(['checkoutEnabled'=>$storage && pci_checkout_ready(),'pledgesEnabled'=>$storage,'environment'=>$c['environment'],
-                'stepUnit'=>5000,'minimumSteps'=>5,'maximumSteps'=>20000,
+                'stepUnit'=>5000,'stepCurrency'=>'UGX','paymentCurrencies'=>$c['payment_currencies'],'minimumSteps'=>5,'maximumSteps'=>20000,
                 'campaigns'=>[['id'=>'walk-for-education-2026','name'=>'Walk for Education 2026','target'=>25000000000]],
                 'message'=>'Online payments open after PCI approval. Pledges are recorded separately from payments.']);
         }
@@ -25,10 +25,10 @@ try {
             $q=pci_db()->prepare('SELECT c.*,p.code,p.issued_at FROM certificates p JOIN contributions c ON c.reference=p.reference WHERE p.code=?');$q->execute([$code]);$row=$q->fetch();
             if (!$row) respond(['valid'=>false,'status'=>'not-found'],404);
             /* Public checks confirm contribution details without disclosing supporter contact or name. */
-            $valid=pci_certificate_eligible($row);respond(['valid'=>$valid,'status'=>$valid?'verified':'inactive','code'=>$row['code'],'campaign'=>'Walk for Education 2026','steps'=>$valid?(int)$row['steps']:null,'amount'=>$valid?(int)$row['amount']:null,'issuedAt'=>$row['issued_at']]);
+            $valid=pci_certificate_eligible($row);respond(['valid'=>$valid,'status'=>$valid?'verified':'inactive','code'=>$row['code'],'campaign'=>'Walk for Education 2026','steps'=>$valid?(int)$row['steps']:null,'amount'=>$valid?(int)$row['amount']:null,'currency'=>$valid?$row['currency']:null,'issuedAt'=>$row['issued_at']]);
         }
         if ($action==='progress') {
-            $t=pci_totals();respond(['campaign'=>'walk-for-education-2026','target'=>25000000000,'received'=>(int)$t['reconciled'],'pledged'=>(int)$t['pledged'],'lastReconciledAt'=>$t['lastReconciledAt'],'scope'=>'pesapal-ledger','includesLegacyCollections'=>false]);
+            $t=pci_totals();respond(['campaign'=>'walk-for-education-2026','target'=>25000000000,'received'=>(int)$t['reconciled'],'pledged'=>(int)$t['pledged'],'lastReconciledAt'=>$t['lastReconciledAt'],'currency'=>'UGX','basis'=>'ugx-at-campaign-step-value','scope'=>'pesapal-ledger','includesLegacyCollections'=>false]);
         }
         pci_session();respond(['csrf'=>$_SESSION['pci_csrf'],'signedIn'=>!empty($_SESSION['pci_admin']) && time()-(int)($_SESSION['pci_active'] ?? 0)<=1800,'username'=>$_SESSION['pci_admin'] ?? null,'role'=>$_SESSION['pci_role'] ?? null]);
     }
@@ -85,7 +85,7 @@ try {
         pci_verify($row);pci_audit($row['reference'],$actor,'manual_status_check');respond(['ok'=>true]);
     }
     if ($action==='reconcile') {
-        pci_require_role(['admin','finance']);$fee=$body['fee'] ?? null;if (!is_int($fee)) throw new InvalidArgumentException('Fee must be a whole UGX amount');
+        pci_require_role(['admin','finance']);$fee=$body['fee'] ?? null;if (!is_int($fee)) throw new InvalidArgumentException('Fee must be a whole amount in the currency of the payment');
         pci_reconcile((string)($body['reference'] ?? ''),(string)($body['settlementReference'] ?? ''),$fee,$actor);respond(['ok'=>true]);
     }
     if ($action==='close-pledge') {
@@ -96,7 +96,7 @@ try {
     if ($action==='export') {
         pci_require_role(['admin','finance']);pci_audit(null,$actor,'report_exported');
         header('Content-Type: text/csv; charset=utf-8');header('Content-Disposition: attachment; filename="pci-collections-'.gmdate('Ymd').'.csv"');
-        $f=fopen('php://output','w');$columns=['reference','campaign','name','email','phone','amount','currency','steps','step_unit','kind','environment','status','receipt','confirmation','method','referral','settlement_reference','fee','net','reconciled_at','created_at'];fputcsv($f,$columns);
+        $f=fopen('php://output','w');$columns=['reference','campaign','name','email','phone','amount','currency','country','steps','step_unit','kind','environment','status','receipt','confirmation','method','referral','settlement_reference','fee','net','reconciled_at','created_at'];fputcsv($f,$columns);
         foreach (pci_db()->query('SELECT * FROM contributions ORDER BY created_at DESC') as $row) {
             $values=[];foreach ($columns as $col) { $v=(string)($row[$col] ?? '');if (preg_match('/^[=+\-@\t\r]/',$v)) $v="'".$v;$values[]=$v; }fputcsv($f,$values);
         }fclose($f);exit;

@@ -37,11 +37,11 @@ function pci_certificate_pdf(array $row,array $certificate): string {
     foreach($chunks as $chunk) $size=min($size,max(12,(int)floor(680/max(1,$measure($chunk,'F3',1)))));
     $y=326;foreach($chunks as $chunk) { $line=iconv('Windows-1252','UTF-8',$chunk);$center($line,$y,$size,'F3','0.74 0.19 0.16');$y-=30; }
     $y=min(270,$y-10);
-    $steps=number_format((int)$row['steps']);$amount='UGX '.number_format((int)$row['amount']);
+    $steps=number_format((int)$row['steps']);$amount=preg_replace('/[^A-Z]/','',(string)$row['currency']).' '.number_format((int)$row['amount']);
     $center('For sponsoring '.$steps.((int)$row['steps']===1?' step':' steps').' through a verified contribution of '.$amount.'.',$y,13,'F2');
     $center('Supporting UCU-Kagando University College and Kagando Nursery & Primary School.',$y-26,11);
     $center('Buy a step. Build a future.',$y-64,20,'F3','0.58 0.40 0.20');
-    $center('Nairobi to Kagando  |  Approximately 1,100 km  |  UGX 5,000 per sponsored step',$y-90,10,'F1','0.45 0.40 0.35');
+    $center('Nairobi to Kagando  |  Approximately 1,100 km  |  '.preg_replace('/[^A-Z]/','',(string)$row['currency']).' '.number_format((int)$row['step_unit']).' per sponsored step',$y-90,10,'F1','0.45 0.40 0.35');
     $content.="0.86 0.79 0.65 RG .6 w 80 118 m 762 118 l S\n";
     $text('Issued digitally by Pamodzi Community Initiative Uganda',80,98,10,'F2');
     $text('Issued: '.gmdate('d M Y',strtotime($certificate['issued_at'])),80,80,9);

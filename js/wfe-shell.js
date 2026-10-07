@@ -6,7 +6,8 @@
 
    Owns the behaviour every campaign page shares:
      1. Ambassador attribution (?ref=) carried into contribution links
-     2. Step chooser on the campaign home (UGX 5,000 per step, 5–20,000 steps)
+     2. Step chooser on the campaign home: the visitor's country sets the currency and the price of a
+        step (js/step-pricing.js; Uganda UGX 5,000, Kenya KSh 200 …), 5–20,000 steps
      3. Checkout availability and reconciled digital totals from the payment service
      4. Mobile menu
      5. Scroll reveals (started as the global preloader exits)
@@ -17,7 +18,6 @@
   "use strict";
 
   var SITE_ROOT = new URL("../", document.currentScript.src);
-  var STEP_PRICE_UGX = 5000;
   var MIN_STEPS = 5;
   var MAX_STEPS = 20000;
 
@@ -29,6 +29,14 @@
   };
   var formatUGX = function (amount) {
     return "UGX " + new Intl.NumberFormat("en-UG").format(amount);
+  };
+  // Without the shared pricing script the page behaves exactly as before: Uganda, UGX 5,000 per step.
+  var pricing = window.StepPricing || null;
+  var price = function () {
+    return pricing ? pricing.current() : { code: "UG", currency: "UGX", step: 5000, label: "UGX" };
+  };
+  var formatMoney = function (amount) {
+    return pricing ? pricing.format(amount, price().currency) : formatUGX(amount);
   };
   var stepsLabel = function (steps) {
     return steps + (steps === 1 ? " step" : " steps");
@@ -70,6 +78,32 @@
 
   var checkoutOpen = null; // true / false once the payment service answers
   var pledgesOpen = null;
+  var paymentCurrencies = ["UGX"]; // currencies the payment gateway can take; others are pledges
+
+  function payableHere() {
+    return checkoutOpen === true && paymentCurrencies.indexOf(price().currency) !== -1;
+  }
+
+  /* The explanatory line under the button depends on the service state and on the chosen currency. */
+  var serviceState = null;
+  function renderStatus() {
+    var status = byId("campaignCheckoutStatus");
+    if (!status || !serviceState) return;
+    var label = price().label;
+    if (serviceState.checkoutOpen && !payableHere())
+      status.textContent =
+        "Online payment in " +
+        label +
+        " is not open yet. Pledge your steps now: no money is collected and the team will send you payment details.";
+    else if (serviceState.checkoutOpen)
+      status.textContent = serviceState.sandbox
+        ? "Test checkout only. Sandbox payments do not receive a contribution certificate."
+        : "Secure payment through Pesapal. Your receipt and certificate unlock after verification.";
+    else if (serviceState.pledgesOpen)
+      status.textContent =
+        "Online payments are being prepared. Pledge your steps now; no money is collected. Certificates follow verified payment.";
+    else status.textContent = "The contribution service is being prepared. Contact the campaign team for assistance.";
+  }
 
   function renderChooser() {
     if (!stepInput || !contributeLink) return;
@@ -77,9 +111,12 @@
     var steps = Number(stepInput.value);
     var valid = Number.isInteger(steps) && steps >= MIN_STEPS && steps <= MAX_STEPS;
     var error = byId("campaignValidation");
+    var here = price();
 
     error.hidden = valid;
-    error.textContent = valid ? "" : "Choose 5 to 20,000 whole steps. Minimum contribution: UGX 25,000.";
+    error.textContent = valid
+      ? ""
+      : "Choose 5 to 20,000 whole steps. Minimum contribution: " + formatMoney(MIN_STEPS * here.step) + ".";
     stepInput.setAttribute("aria-invalid", String(!valid));
 
     if (!valid) {
@@ -90,11 +127,14 @@
     }
 
     contributeLink.removeAttribute("aria-disabled");
-    byId("campaignTotal").textContent = formatUGX(steps * STEP_PRICE_UGX);
+    byId("campaignTotal").textContent = formatMoney(steps * here.step);
     byId("campaignStepSummary").textContent = stepsLabel(steps);
 
-    var verb =
-      checkoutOpen === false && pledgesOpen ? "Pledge " : checkoutOpen === true ? "Contribute " : "Continue with ";
+    var verb = payableHere()
+      ? "Contribute "
+      : (checkoutOpen === false || checkoutOpen === true) && pledgesOpen
+        ? "Pledge "
+        : "Continue with ";
     byId("campaignAction").textContent = verb + stepsLabel(steps);
 
     all("[data-step-option]").forEach(function (button) {
@@ -106,6 +146,7 @@
 
     var next = new URL("contribute/", SITE_ROOT);
     next.searchParams.set("steps", steps);
+    next.searchParams.set("country", here.code);
     if (ref) next.searchParams.set("ref", ref);
     contributeLink.href = next.href;
 
@@ -152,6 +193,29 @@
     renderChooser();
   }
 
+  /* The first question: where is the visitor giving from? It sets the currency and the price of a step. */
+  var countrySelect = byId("campaignCountry");
+  if (pricing) {
+    document.addEventListener("steppricing:change", function () {
+      if (countrySelect) countrySelect.value = price().code;
+      pricing.bind(document);
+      renderChooser();
+      renderStatus();
+    });
+    if (countrySelect) {
+      countrySelect.addEventListener("change", function () {
+        pricing.select(countrySelect.value);
+      });
+    }
+    pricing.bind(document);
+    pricing.ready.then(function () {
+      if (countrySelect) pricing.fillSelect(countrySelect);
+      pricing.bind(document);
+      renderChooser();
+      renderStatus();
+    });
+  }
+
   /* ---------- 3. Payment service: availability and reconciled totals ---------- */
 
   function getJSON(action) {
@@ -173,6 +237,8 @@
     .then(function (data) {
       checkoutOpen = data.checkoutEnabled === true;
       pledgesOpen = data.pledgesEnabled === true;
+      if (Array.isArray(data.paymentCurrencies) && data.paymentCurrencies.length)
+        paymentCurrencies = data.paymentCurrencies;
       var sandbox = data.environment === "sandbox";
 
       setBriefs(
@@ -185,16 +251,8 @@
             : "Contribution assistance is available from the campaign team",
       );
 
-      var status = byId("campaignCheckoutStatus");
-      if (status) {
-        status.textContent = checkoutOpen
-          ? sandbox
-            ? "Test checkout only. Sandbox payments do not receive a contribution certificate."
-            : "Secure payment through Pesapal. Your receipt and certificate unlock after verification."
-          : pledgesOpen
-            ? "Online payments are being prepared. Pledge your steps now; no money is collected. Certificates follow verified payment."
-            : "The contribution service is being prepared. Contact the campaign team for assistance.";
-      }
+      serviceState = { checkoutOpen: checkoutOpen, pledgesOpen: pledgesOpen, sandbox: sandbox };
+      renderStatus();
       renderChooser();
     })
     .catch(function () {
@@ -369,7 +427,7 @@
       var shared = navigator.share
         ? navigator.share({
             title: "Walk for Education",
-            text: "Every step builds a future. UGX 5,000 per sponsored step.",
+            text: "Every step builds a future. " + formatMoney(price().step) + " per sponsored step.",
             url: url.href,
           })
         : navigator.clipboard
