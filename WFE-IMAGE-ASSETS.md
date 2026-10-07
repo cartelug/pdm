@@ -7,14 +7,17 @@ not regenerated.
 
 ## Walking Rotarian
 
-Source: `WhatsApp Image 2026-10-05 at 16.29.53.jpeg`, uploaded by the user.
-Assets: `assets/walk-for-education/walking-rotarian-portrait-600.webp` and
-`assets/walk-for-education/walking-rotarian-portrait-1000.webp`.
-Visible caption: “Portrait adapted from campaign artwork”.
+Source: a photograph of Rtn. Shyaka Mbanda supplied by the user on 7 October
+2026 (a phone screenshot). Only the black screenshot bands above and below the
+photograph were cropped; the photograph itself is not retouched, cut out or
+regenerated.
+Assets: `assets/walk-for-education/walking-rotarian-photo.jpg` (the cropped
+source, 710 × 974), `walking-rotarian-photo-480.webp` and
+`walking-rotarian-photo-710.webp` (served). The campaign hero shows it inside
+the arch frame; no "adapted" caption is needed because it is a real photograph.
 
-Prompt:
-
-> Use case: background-extraction / identity-preserve. Asset type: high-resolution portrait cutout for the Walk for Education website. Edit target: the uploaded campaign poster. Extract ONLY the adult walking man on the left, Rtn. Shyaka Mbanda, from this poster. Preserve his exact facial identity, age, dark skin tone, beard, headwrap, hair, expression, natural body size, white Rotary shirt, backpack, necklace, hand and walking staff. Remove every poster headline, logo strip, WhatsApp icon, card, background, landscape, other person and graphic. Transparent background. Keep the same three-quarter waist-up portrait crop as visible in the poster, with a clean straight lower crop. Restore/upscale fine photographic detail faithfully and naturally, with smooth skin texture and clean hair/backpack edges; avoid artificial sharpening, plastic skin, changing identity or stylisation. Do not invent additional limbs or poses. Keep the Rotary emblem on his shirt faithful to the reference. High-resolution portrait composition, subject fills the canvas without clipping the head, portrait aspect ratio. No added text or watermark.
+The earlier AI-extracted portrait (`walking-rotarian-portrait-*.webp`, adapted
+from the campaign poster) has been retired.
 
 ## Campus
 

@@ -258,9 +258,11 @@ em,
   transition: transform 0.22s ease;
 }
 
-.pillar:hover::after,
-.card:hover::after {
-  transform: scaleX(1);
+@media (hover: hover) {
+  .pillar:hover::after,
+  .card:hover::after {
+    transform: scaleX(1);
+  }
 }
 
 .pillar .n,
@@ -608,10 +610,12 @@ em,
     color: var(--ink) !important;
   }
 
-  .hero .btn-ghost:hover {
-    border-color: var(--red);
-    background: var(--red-soft);
-    color: var(--red-dark) !important;
+  @media (hover: hover) {
+    .hero .btn-ghost:hover {
+      border-color: var(--red);
+      background: var(--red-soft);
+      color: var(--red-dark) !important;
+    }
   }
 
   .hero-meta {
@@ -676,8 +680,10 @@ em,
   border-right: 0;
 }
 
-.pillar:hover {
-  background: var(--paper);
+@media (hover: hover) {
+  .pillar:hover {
+    background: var(--paper);
+  }
 }
 
 .pillar .n {

@@ -12,6 +12,7 @@
      03  Step checkout — heading & progress
      04  Step checkout — form
      05  Step checkout — guidance & FAQ
+     06  Touch screens
    ========================================================================== */
 
 /* ==========================================================================
@@ -37,9 +38,11 @@
     background 0.2s;
 }
 
-.wfe-btn:hover {
-  background: #9c2721;
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .wfe-btn:hover {
+    background: #9c2721;
+    transform: translateY(-2px);
+  }
 }
 
 .step-checkout-heading {
@@ -133,9 +136,11 @@
   box-shadow: none;
 }
 
-.collections-page .btn-ghost:hover {
-  background: var(--red-soft);
-  border-color: var(--red);
+@media (hover: hover) {
+  .collections-page .btn-ghost:hover {
+    background: var(--red-soft);
+    border-color: var(--red);
+  }
 }
 
 @media (max-width: 760px) {
@@ -600,9 +605,11 @@
   font-size: 13px;
 }
 
-.wfe-contribute .collection-submit:hover:not(:disabled) {
-  background: #a8201b;
-  transform: none;
+@media (hover: hover) {
+  .wfe-contribute .collection-submit:hover:not(:disabled) {
+    background: #a8201b;
+    transform: none;
+  }
 }
 
 .wfe-contribute .collection-submit:disabled {
@@ -890,5 +897,18 @@
 
   .wfe-contribute .collection-faq summary {
     font-size: 13px;
+  }
+}
+
+/* ==========================================================================
+   06. Touch screens
+   iOS Safari zooms the whole page into any field with text under 16px.
+   ========================================================================== */
+
+@media (pointer: coarse) {
+  .wfe-contribute
+    .collection-card
+    :is(input:not([type="checkbox"], [type="radio"]), select, textarea) {
+    font-size: 16px;
   }
 }

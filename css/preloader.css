@@ -19,7 +19,7 @@
   --loader-accent: #c52b22;
   --loader-accent-2: #e04438;
   --loader-track: #f1e7e4;
-  --loader-exit: 520ms;
+  --loader-exit: 420ms; /* keep in step with EXIT_MS in js/preloader.js */
 
   display: none;
 }

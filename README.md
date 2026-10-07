@@ -75,11 +75,11 @@ There is still no build step: every page links its CSS and JS directly. A small 
 | Walk for Education | `preloader` · `wfe` | `preloader` · `wfe-shell` · `wfe-data` · `campaign.php` · `wfe` |
 | Contributions | `preloader` · `base` · `collections` · `contribute` | `preloader` · `contributions` |
 
-**Preloader.** Every public page opens `<body>` with the `.site-loader` markup and loads `css/preloader.css` plus `js/preloader.js` (synchronously) in `<head>`, before any other stylesheet. The script turns the screen on only when JavaScript runs, reveals the approved logo once it has decoded, and dismisses it after the page loads: at least 0.9 s on the first view of a session, 0.35 s afterwards, never longer than 2.8 s, and instantly with reduced motion. A CSS failsafe hides it after 6 s in any case. Scripts can wait for it with `window.PamodziPreloader.whenDone(fn)` or the `pamodzi:preloaded` event; the hero sequence and campaign scroll reveals start there. Campaign and contribution pages use `data-variant="wfe"`.
+**Preloader.** Every public page opens `<body>` with the `.site-loader` markup and loads `css/preloader.css` plus `js/preloader.js` (synchronously) in `<head>`, before any other stylesheet. The script turns the screen on only when JavaScript runs, reveals the approved logo once it has decoded, and dismisses it after the page loads: at least 0.9 s on the first view of a session, on later pages only as long as they take to load, never longer than 2.8 s, and instantly with reduced motion. A CSS failsafe hides it after 6 s in any case. Scripts can wait for it with `window.PamodziPreloader.whenDone(fn)` or the `pamodzi:preloaded` event; the hero sequence and campaign scroll reveals start there. Campaign and contribution pages use `data-variant="wfe"`.
 
 New public page? Copy the `<head>` preloader lines and the `.site-loader` block from a sibling page; `npm run check:pages` fails until both are present.
 
-**Stylesheets** open with a contents list, use design tokens from `:root`, and keep each component's responsive rules directly after it (widest breakpoint first). Campaign class namespaces: `.wfe-*` shell, `.wfe2-*` shared sections, `.v3-*` campaign home, `.wfp-*` partnerships page. Media queries stay in `min-width`/`max-width` form for older iOS Safari.
+**Stylesheets** open with a contents list, use design tokens from `:root`, and keep each component's responsive rules directly after it (widest breakpoint first). Campaign class namespaces: `.wfe-*` shell, `.wfe2-*` shared sections, `.v3-*` campaign home, `.wfp-*` partnerships page. Media queries stay in `min-width`/`max-width` form for older iOS Safari. Hover styles live inside `@media (hover: hover)` so they never stick after a tap on a phone (`npm run css:hover` wraps new ones; the lint fails on any left outside); touch screens get `:active` feedback instead, and form fields stay at 16px on touch screens so iOS Safari does not zoom into them.
 
 **Commands** (Node 22; run `npm install` once):
 
@@ -88,6 +88,7 @@ npm run lint          # ESLint, Stylelint, Prettier check, page structure, asset
 npm run format        # Prettier for css/, js/, scripts/ and tests/
 npm run assets        # stamp every CSS/JS reference with ?v=<content hash>
 npm run css:compact   # merge duplicate CSS rules where the cascade provably allows it
+npm run css:hover     # move new :hover rules inside @media (hover: hover)
 npm run test:browser  # Playwright journeys (needs PHP and Chromium; see tests/)
 ```
 

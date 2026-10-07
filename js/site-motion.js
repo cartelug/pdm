@@ -272,11 +272,9 @@
       if (target.pathname === window.location.pathname && target.search === window.location.search && target.hash)
         return;
 
-      event.preventDefault();
+      // The page dims and the wipe starts while the browser is already fetching the next page:
+      // navigation is never held back for the animation.
       document.body.classList.add("is-leaving");
-      window.setTimeout(function () {
-        window.location.href = target.href;
-      }, 340);
     });
   }
 

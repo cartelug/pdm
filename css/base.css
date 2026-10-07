@@ -428,9 +428,14 @@ header.solid .nav {
   transition: transform 0.2s ease;
 }
 
-.nav-links a:not(.btn):hover::after,
 .nav-links a.act::after {
   transform: scaleX(1);
+}
+
+@media (hover: hover) {
+  .nav-links a:not(.btn):hover::after {
+    transform: scaleX(1);
+  }
 }
 
 .nav .btn {
@@ -641,8 +646,10 @@ header.solid .nav {
     color 0.18s ease;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .btn:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .btn:active {
@@ -657,11 +664,13 @@ header.solid .nav {
   box-shadow: var(--shadow-btn);
 }
 
-.btn-gold:hover,
-.btn-cy:hover,
-.btn-wa:hover {
-  background: linear-gradient(155deg, var(--red) 0%, var(--red-dark) 100%);
-  box-shadow: var(--shadow-btn-hover);
+@media (hover: hover) {
+  .btn-gold:hover,
+  .btn-cy:hover,
+  .btn-wa:hover {
+    background: linear-gradient(155deg, var(--red) 0%, var(--red-dark) 100%);
+    box-shadow: var(--shadow-btn-hover);
+  }
 }
 
 .btn-ink {
@@ -670,9 +679,11 @@ header.solid .nav {
   box-shadow: 0 10px 24px -8px rgb(25 24 23 / 45%);
 }
 
-.btn-ink:hover {
-  background: linear-gradient(155deg, var(--red-2), var(--red-dark));
-  box-shadow: var(--shadow-btn-hover);
+@media (hover: hover) {
+  .btn-ink:hover {
+    background: linear-gradient(155deg, var(--red-2), var(--red-dark));
+    box-shadow: var(--shadow-btn-hover);
+  }
 }
 
 .btn-line {
@@ -681,10 +692,12 @@ header.solid .nav {
   color: var(--ink) !important;
 }
 
-.btn-line:hover {
-  border-color: var(--red);
-  color: var(--red) !important;
-  box-shadow: 0 10px 24px -12px rgb(197 43 34 / 28%);
+@media (hover: hover) {
+  .btn-line:hover {
+    border-color: var(--red);
+    color: var(--red) !important;
+    box-shadow: 0 10px 24px -12px rgb(197 43 34 / 28%);
+  }
 }
 
 .btn-ghost {
@@ -693,9 +706,11 @@ header.solid .nav {
   color: #fff !important;
 }
 
-.btn-ghost:hover {
-  border-color: #fff;
-  background: rgb(255 255 255 / 12%);
+@media (hover: hover) {
+  .btn-ghost:hover {
+    border-color: #fff;
+    background: rgb(255 255 255 / 12%);
+  }
 }
 
 .btn-cream,
@@ -704,10 +719,12 @@ header.solid .nav {
   color: var(--ink) !important;
 }
 
-.btn-cream:hover,
-.btn-w:hover {
-  background: var(--red-soft);
-  color: var(--red-dark) !important;
+@media (hover: hover) {
+  .btn-cream:hover,
+  .btn-w:hover {
+    background: var(--red-soft);
+    color: var(--red-dark) !important;
+  }
 }
 
 .cta-row {
@@ -769,8 +786,10 @@ header.solid .nav {
   transition: transform 0.18s ease;
 }
 
-.crumb a:hover::before {
-  transform: translateX(-3px);
+@media (hover: hover) {
+  .crumb a:hover::before {
+    transform: translateX(-3px);
+  }
 }
 
 .crumb b {
@@ -987,9 +1006,11 @@ footer a {
     transform 0.18s ease;
 }
 
-footer a:hover {
-  color: var(--red);
-  transform: translateX(3px);
+@media (hover: hover) {
+  footer a:hover {
+    color: var(--red);
+    transform: translateX(3px);
+  }
 }
 
 footer p {
@@ -1206,5 +1227,14 @@ footer p {
   .reveal {
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+/* Touch screens: hover styles only apply where a pointer can hover (scripts/css-hover.mjs),
+   so taps get their own instant feedback instead. */
+@media (hover: none) {
+  :is(a, button, summary, [role="tab"]):active {
+    opacity: 0.72;
+    transition: none;
   }
 }

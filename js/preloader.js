@@ -18,10 +18,10 @@
   "use strict";
 
   var root = document.documentElement;
-  var MIN_FIRST_VISIT_MS = 900;
-  var MIN_REPEAT_VISIT_MS = 350;
+  var MIN_FIRST_VISIT_MS = 900; // the brand moment, once per session
+  var MIN_REPEAT_VISIT_MS = 0; // later pages: only as long as they actually take to load
   var MAX_WAIT_MS = 2800;
-  var EXIT_MS = 520;
+  var EXIT_MS = 420;
   var SESSION_KEY = "pamodzi:preloader-seen";
 
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;

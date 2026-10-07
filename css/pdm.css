@@ -231,8 +231,10 @@ footer .fgrid {
   border-bottom: 0;
 }
 
-.brow:hover {
-  background: var(--red-soft);
+@media (hover: hover) {
+  .brow:hover {
+    background: var(--red-soft);
+  }
 }
 
 .brow .no {

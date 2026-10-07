@@ -29,6 +29,7 @@
      12  Page — partnerships
      13  Page — accountability
      14  Page — updates
+     15  Touch screens
    ========================================================================== */
 
 /* ==========================================================================
@@ -291,9 +292,14 @@ summary:focus-visible {
   color: #d0ded5;
 }
 
-.wfe2-forest .wfe-link,
-.wfe2-forest .wfe-link:hover {
+.wfe2-forest .wfe-link {
   color: #fff;
+}
+
+@media (hover: hover) {
+  .wfe2-forest .wfe-link:hover {
+    color: #fff;
+  }
 }
 
 .wfe2-forest em {
@@ -465,9 +471,11 @@ summary:focus-visible {
   box-shadow: none;
 }
 
-.wfe-btn:hover {
-  background: var(--wfe-red-dark);
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .wfe-btn:hover {
+    background: var(--wfe-red-dark);
+    transform: translateY(-2px);
+  }
 }
 
 .wfe-btn > span:last-child {
@@ -479,8 +487,10 @@ summary:focus-visible {
   color: var(--wfe-navy);
 }
 
-.wfe-btn.light:hover {
-  background: #eee9dc;
+@media (hover: hover) {
+  .wfe-btn.light:hover {
+    background: #eee9dc;
+  }
 }
 
 .wfe-btn[aria-disabled="true"] {
@@ -500,8 +510,10 @@ summary:focus-visible {
   line-height: 1.5;
 }
 
-.wfe-link:hover {
-  color: var(--wfe-red);
+@media (hover: hover) {
+  .wfe-link:hover {
+    color: var(--wfe-red);
+  }
 }
 
 /* ==========================================================================
@@ -552,8 +564,10 @@ summary:focus-visible {
   background: var(--wfe-red);
 }
 
-.wfe2-nav-links > a:not(.wfe-btn):hover {
-  color: #c92b25;
+@media (hover: hover) {
+  .wfe2-nav-links > a:not(.wfe-btn):hover {
+    color: #c92b25;
+  }
 }
 
 .wfe2-nav-links .wfe-btn {
@@ -1374,9 +1388,11 @@ summary:focus-visible {
   line-height: 1.5;
 }
 
-.wfe2-footer a:hover {
-  color: #fff;
-  text-decoration: underline;
+@media (hover: hover) {
+  .wfe2-footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
 }
 
 .wfe2-footer-contact > span {
@@ -1641,6 +1657,11 @@ summary:focus-visible {
     width: auto;
     padding: 12px 14px;
     border-radius: 10px;
+    transform: translateY(160px); /* pinned by left/right here, so no desktop centring shift */
+  }
+
+  .wfe-sticky-contribute.is-visible {
+    transform: none;
   }
 
   .wfe-sticky-contribute strong {
@@ -1650,7 +1671,7 @@ summary:focus-visible {
 
   .wfe-sticky-contribute small {
     max-width: 21ch;
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .wfe-sticky-contribute .wfe-btn {
@@ -1658,16 +1679,6 @@ summary:focus-visible {
     min-height: 43px;
     padding: 9px 14px;
     gap: 10px;
-  }
-}
-
-@media (max-width: 370px) {
-  .wfe-sticky-contribute strong {
-    font-size: 10px;
-  }
-
-  .wfe-sticky-contribute small {
-    font-size: 8px;
   }
 }
 
@@ -1978,8 +1989,10 @@ summary:focus-visible {
   transition: transform 0.2s;
 }
 
-.v3-story-link:hover span {
-  transform: translateY(3px);
+@media (hover: hover) {
+  .v3-story-link:hover span {
+    transform: translateY(3px);
+  }
 }
 
 .v3-walker-name {
@@ -2018,28 +2031,15 @@ summary:focus-visible {
   min-width: 0;
 }
 
-.v3-walker img {
+/* The supplied photograph fills the arch; the arch sets its size at every breakpoint. */
+.v3-portrait-halo img {
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120%;
-  max-width: none;
-  height: 420px;
-  object-fit: contain;
-  object-position: bottom;
-  filter: drop-shadow(0 15px 22px #04172b22);
-  z-index: 1;
-}
-
-.v3-walker figcaption {
-  position: absolute;
-  bottom: -21px;
-  font-size: 8px;
-  color: #90aad0;
-  white-space: nowrap;
-  left: 50%;
-  transform: translateX(-50%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 14%;
+  border-radius: inherit;
 }
 
 .v3-portrait-halo {
@@ -2207,10 +2207,12 @@ summary:focus-visible {
   color: #61718b;
 }
 
-.v3-step-options button:hover {
-  border-color: #1e467d;
-  background: #f3f6fb;
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .v3-step-options button:hover {
+    border-color: #1e467d;
+    background: #f3f6fb;
+    transform: translateY(-2px);
+  }
 }
 
 .v3-step-options button[aria-pressed="true"] {
@@ -2519,8 +2521,10 @@ summary:focus-visible {
   transition: transform 0.2s;
 }
 
-.v3-priorities > a:hover b {
-  transform: translate(4px, -4px);
+@media (hover: hover) {
+  .v3-priorities > a:hover b {
+    transform: translate(4px, -4px);
+  }
 }
 
 .v3-journey {
@@ -2784,9 +2788,11 @@ summary:focus-visible {
   color: #b16d42;
 }
 
-.v3-builder:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 15px 35px #1034640c;
+@media (hover: hover) {
+  .v3-builder:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px #1034640c;
+  }
 }
 
 .v3-builder-foot {
@@ -2946,12 +2952,16 @@ summary:focus-visible {
   color: #f4c648;
 }
 
-.v3-paths > a:hover {
-  background: #e8eef8;
+@media (hover: hover) {
+  .v3-paths > a:hover {
+    background: #e8eef8;
+  }
 }
 
-.v3-paths > a:last-child:hover {
-  background: #102e58;
+@media (hover: hover) {
+  .v3-paths > a:last-child:hover {
+    background: #102e58;
+  }
 }
 
 @media (min-width: 1441px) {
@@ -2965,10 +2975,6 @@ summary:focus-visible {
 
   .v3-story-bottom {
     gap: 20px;
-  }
-
-  .v3-walker img {
-    height: 448px;
   }
 }
 
@@ -2990,11 +2996,6 @@ summary:focus-visible {
 
   .v3-hero-copy > p {
     font-size: 13px;
-  }
-
-  .v3-walker img {
-    height: 365px;
-    width: 135%;
   }
 
   .v3-walker-name b {
@@ -3116,12 +3117,6 @@ summary:focus-visible {
     height: 240px;
   }
 
-  .v3-walker img {
-    height: 300px;
-    width: 155%;
-    left: 49%;
-  }
-
   .v3-walker-name {
     padding-top: 100px;
     padding-bottom: 20px;
@@ -3134,10 +3129,6 @@ summary:focus-visible {
 
   .v3-walker-name b {
     font-size: 14px;
-  }
-
-  .v3-walker figcaption {
-    font-size: 6px;
   }
 
   .v3-give-card {
@@ -3408,17 +3399,6 @@ summary:focus-visible {
     height: 220px;
     right: 2%;
     bottom: 0;
-  }
-
-  .v3-walker img {
-    height: 250px;
-    width: 160%;
-    left: 48%;
-  }
-
-  .v3-walker figcaption {
-    font-size: 6px;
-    bottom: -17px;
   }
 
   .v3-portrait-halo {
@@ -3842,10 +3822,6 @@ summary:focus-visible {
     height: 210px;
   }
 
-  .v3-walker img {
-    height: 236px;
-  }
-
   .v3-walker-name small {
     font-size: 7px;
   }
@@ -3939,10 +3915,6 @@ summary:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .v3-walker img {
-    transform: translateX(-50%);
-  }
-
   .v3-builder:hover,
   .v3-step-options button:hover {
     transform: none;
@@ -4199,8 +4171,10 @@ summary:focus-visible {
   color: #8592a6;
 }
 
-.wfp .wfp-form :is(input, select, textarea):hover {
-  border-color: #a9bad2;
+@media (hover: hover) {
+  .wfp .wfp-form :is(input, select, textarea):hover {
+    border-color: #a9bad2;
+  }
 }
 
 .wfp .wfp-form :is(input, select, textarea):focus {
@@ -4327,8 +4301,10 @@ summary:focus-visible {
   line-height: 1;
 }
 
-.wfp-btn:hover {
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .wfp-btn:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .wfp-btn:active {
@@ -4340,8 +4316,10 @@ summary:focus-visible {
   color: var(--wfp-ink);
 }
 
-.wfp-btn-gold:hover {
-  background: #ffd65e;
+@media (hover: hover) {
+  .wfp-btn-gold:hover {
+    background: #ffd65e;
+  }
 }
 
 .wfp-btn-ghost {
@@ -4349,9 +4327,11 @@ summary:focus-visible {
   color: #fff;
 }
 
-.wfp-btn-ghost:hover {
-  border-color: #fff;
-  background: #ffffff12;
+@media (hover: hover) {
+  .wfp-btn-ghost:hover {
+    border-color: #fff;
+    background: #ffffff12;
+  }
 }
 
 .wfp-btn-red {
@@ -4359,8 +4339,10 @@ summary:focus-visible {
   color: #fff;
 }
 
-.wfp-btn-red:hover {
-  background: var(--wfp-red-dark);
+@media (hover: hover) {
+  .wfp-btn-red:hover {
+    background: var(--wfp-red-dark);
+  }
 }
 
 .wfp-btn-light {
@@ -4368,8 +4350,10 @@ summary:focus-visible {
   color: var(--wfp-navy);
 }
 
-.wfp-btn-light:hover {
-  background: #eef3fa;
+@media (hover: hover) {
+  .wfp-btn-light:hover {
+    background: #eef3fa;
+  }
 }
 
 .wfp-hero {
@@ -4493,8 +4477,10 @@ summary:focus-visible {
   text-underline-offset: 4px;
 }
 
-.wfp-breadcrumb a:hover {
-  text-decoration-color: var(--wfp-gold);
+@media (hover: hover) {
+  .wfp-breadcrumb a:hover {
+    text-decoration-color: var(--wfp-gold);
+  }
 }
 
 .wfp-lead {
@@ -4682,9 +4668,11 @@ summary:focus-visible {
   letter-spacing: 0.04em;
 }
 
-.wfp-level:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--wfp-shadow);
+@media (hover: hover) {
+  .wfp-level:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--wfp-shadow);
+  }
 }
 
 .wfp-level[aria-current="true"] {
@@ -4747,15 +4735,19 @@ summary:focus-visible {
   padding-top: 24px;
 }
 
-.wfp-route:hover {
-  transform: translateY(-4px);
-  border-color: #b8c7dc;
-  box-shadow: var(--wfp-shadow);
+@media (hover: hover) {
+  .wfp-route:hover {
+    transform: translateY(-4px);
+    border-color: #b8c7dc;
+    box-shadow: var(--wfp-shadow);
+  }
 }
 
-.wfp-route:hover .wfp-link span,
-.wfp-priority:hover .wfp-link span {
-  transform: translate(2px, -2px);
+@media (hover: hover) {
+  .wfp-route:hover .wfp-link span,
+  .wfp-priority:hover .wfp-link span {
+    transform: translate(2px, -2px);
+  }
 }
 
 .wfp-route[aria-current="true"] {
@@ -4820,9 +4812,11 @@ summary:focus-visible {
   white-space: nowrap;
 }
 
-.wfp-priority:hover {
-  background: var(--wfp-tint);
-  padding-left: 14px;
+@media (hover: hover) {
+  .wfp-priority:hover {
+    background: var(--wfp-tint);
+    padding-left: 14px;
+  }
 }
 
 .wfp-priority[aria-current="true"] {
@@ -5059,8 +5053,10 @@ summary:focus-visible {
   cursor: pointer;
 }
 
-.wfp-chips button:hover {
-  background: #dbe4f1;
+@media (hover: hover) {
+  .wfp-chips button:hover {
+    background: #dbe4f1;
+  }
 }
 
 .wfp-field {
@@ -5106,9 +5102,11 @@ summary:focus-visible {
     background-color 0.2s ease;
 }
 
-.wfp-contact-links a:hover {
-  border-color: var(--wfp-gold);
-  background: #ffffff0d;
+@media (hover: hover) {
+  .wfp-contact-links a:hover {
+    border-color: var(--wfp-gold);
+    background: #ffffff0d;
+  }
 }
 
 .wfp-contact-links a span {
@@ -5376,14 +5374,6 @@ summary:focus-visible {
 
   .wfp-level strong {
     font-size: 34px;
-  }
-}
-
-@media (hover: none) {
-  .wfp-level:hover,
-  .wfp-route:hover,
-  .wfp-btn:hover {
-    transform: none;
   }
 }
 
@@ -5745,5 +5735,26 @@ summary:focus-visible {
 
   .field-body > p {
     font-size: 13px;
+  }
+}
+
+/* ==========================================================================
+   15. Touch screens
+   Phones and tablets: no hover states (see scripts/css-hover.mjs), so taps get
+   their own instant feedback, and form text stays at 16px because iOS Safari
+   zooms the whole page into any field with smaller text.
+   ========================================================================== */
+
+@media (hover: none) {
+  .wfe-campaign :is(a, button, summary, [role="tab"]):active {
+    opacity: 0.72;
+    transition: none;
+  }
+}
+
+@media (pointer: coarse) {
+  .wfe-campaign .wfe-form :is(input, select, textarea),
+  .wfe-campaign .v3-custom-control input {
+    font-size: 16px;
   }
 }

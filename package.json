@@ -3,16 +3,18 @@
   "private": true,
   "description": "Front-end quality tooling for pamodzici.com. The site itself has no build step; these tools only check and format the source.",
   "scripts": {
-    "lint": "npm run lint:js && npm run lint:css && npm run format:check && npm run check:pages && npm run check:assets",
+    "lint": "npm run lint:js && npm run lint:css && npm run format:check && npm run check:hover && npm run check:pages && npm run check:assets",
     "lint:js": "eslint .",
     "lint:css": "stylelint \"css/**/*.css\"",
     "format": "prettier --write \"css/**/*.css\" \"js/**/*.js\" \"scripts/**/*.mjs\" \"tests/**/*.cjs\"",
     "format:check": "prettier --check \"css/**/*.css\" \"js/**/*.js\" \"scripts/**/*.mjs\" \"tests/**/*.cjs\"",
     "css:compact": "node scripts/css-compact.mjs css/*.css",
+    "css:hover": "node scripts/css-hover.mjs css/*.css",
     "assets": "node scripts/assets.mjs",
     "check:assets": "node scripts/assets.mjs --check",
     "check:pages": "node scripts/pages.mjs",
-    "test:browser": "node tests/payments/browser.cjs"
+    "test:browser": "node tests/payments/browser.cjs",
+    "check:hover": "node scripts/css-hover.mjs --check css/*.css"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
