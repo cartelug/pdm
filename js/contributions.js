@@ -394,6 +394,8 @@
           );
           document.getElementById("certificateNumber").textContent = certificateCode;
         }
+        var communityInvite = document.getElementById("pledgeCommunityInvite");
+        if (communityInvite) communityInvite.hidden = !(row.kind === "pledge" && row.status === "pledged");
         document.getElementById("receiptContent").hidden = false;
         document.getElementById("printReceipt").hidden = row.status !== "successful";
         document.getElementById("receiptHeading").textContent =

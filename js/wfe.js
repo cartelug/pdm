@@ -315,7 +315,7 @@
     });
 
     var paymentState = document.querySelector("[data-payment-state]");
-    if (paymentState && has(campaign.paymentChannels)) {
+    if (paymentState && has(campaign.approvedDirectChannels || campaign.paymentChannels)) {
       paymentState.textContent = "Current approved channels available";
       paymentState.classList.add("verified");
     }
@@ -323,10 +323,12 @@
 
   function applyVisibility() {
     all("[data-wfe-show-if]").forEach(function (node) {
-      node.hidden = !has(campaign[node.getAttribute("data-wfe-show-if")]);
+      var key = node.getAttribute("data-wfe-show-if");
+      node.hidden = key === "updates" ? !sortedUpdates().length : !has(campaign[key]);
     });
     all("[data-wfe-hide-if]").forEach(function (node) {
-      node.hidden = has(campaign[node.getAttribute("data-wfe-hide-if")]);
+      var key = node.getAttribute("data-wfe-hide-if");
+      node.hidden = key === "updates" ? !!sortedUpdates().length : has(campaign[key]);
     });
   }
 
@@ -482,7 +484,8 @@
   /* ---------- payment channels & calculator ---------- */
 
   function renderPaymentChannels() {
-    var channels = Array.isArray(campaign.paymentChannels) ? campaign.paymentChannels : [];
+    var approved = campaign.approvedDirectChannels || campaign.paymentChannels;
+    var channels = Array.isArray(approved) ? approved : [];
     if (!channels.length) return;
     all("[data-wfe-payment-channels]").forEach(function (host) {
       host.textContent = "";
@@ -638,9 +641,12 @@
   /* ---------- updates & partners ---------- */
 
   function sortedUpdates() {
-    return (Array.isArray(campaign.updates) ? campaign.updates.slice() : []).sort(function (a, b) {
+    var fieldNotes = Array.isArray(campaign.updates) ? campaign.updates : [];
+    var briefings = Array.isArray(campaign.campaignBriefings) ? campaign.campaignBriefings : [];
+    function newestFirst(a, b) {
       return String(b.date).localeCompare(String(a.date));
-    });
+    }
+    return fieldNotes.slice().sort(newestFirst).concat(briefings.slice().sort(newestFirst));
   }
 
   function buildUpdate(update, compact) {
@@ -666,7 +672,7 @@
       figure.appendChild(image);
       body.appendChild(figure);
     }
-    String(update.body)
+    String(compact ? update.excerpt || update.body.split(/\n{2,}/)[0] : update.body)
       .split(/\n{2,}/)
       .forEach(function (paragraph) {
         body.appendChild(el("p", null, paragraph));
@@ -687,7 +693,9 @@
     });
     all("[data-wfe-latest-update]").forEach(function (host) {
       host.textContent = "";
-      host.appendChild(buildUpdate(updates[0], true));
+      updates.slice(0, 3).forEach(function (update) {
+        host.appendChild(buildUpdate(update, true));
+      });
     });
   }
 

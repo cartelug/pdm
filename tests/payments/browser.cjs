@@ -42,9 +42,10 @@ function check(value, message) {
     browser = await playwright.launch({
       executablePath,
       headless: true,
-      args: packedChromium ? packedChromium.args : ["--no-sandbox"],
+      // Separate browser processes keep timezone emulation isolated between visitor contexts.
+      args: packedChromium ? packedChromium.args.filter((arg) => arg !== "--single-process") : ["--no-sandbox"],
     });
-    const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+    const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, timezoneId: "Africa/Kampala" });
     const page = await context.newPage();
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
@@ -236,7 +237,15 @@ function check(value, message) {
     await page.unroute("**/api/campaign.php");
     await page.goto(base + "/walk-for-education/");
     await page.locator("#campaignCheckoutStatus").filter({ hasText: "Pledge your steps" }).waitFor();
-    check(await page.locator(".wfe2-latest").isHidden(), "empty field update feed stays unpublished");
+    check(
+      await page.locator(".wfe2-latest").isVisible(),
+      "campaign mission briefings remain available before walk field notes arrive",
+    );
+    check(
+      (await page.locator("[data-wfe-latest-update] article").count()) === 3 &&
+        !(await page.locator("[data-wfe-latest-update]").innerText()).includes("Approved fixture field note"),
+      "the live homepage shows three mission briefings without inventing or retaining fixture activities",
+    );
     await page.fill("#campaignSteps", "7");
     await page.locator("#campaignContribute").click();
     await page.waitForURL("**/contribute/?steps=7&country=UG&ref=qa-club");
@@ -316,6 +325,7 @@ function check(value, message) {
     await page.click("#submitContribution");
     await page.waitForURL("**/contribute/payment/?reference=*");
     await page.locator("#receiptContent:not([hidden])").waitFor();
+    const pledgeResultUrl = page.url();
     check(
       (await page.locator("#receiptState").innerText()) === "PLEDGED" ||
         (await page.locator("#receiptState").innerText()) === "pledged",
@@ -324,6 +334,16 @@ function check(value, message) {
     check((await page.locator("#receiptAmount").innerText()) === "UGX 75,000", "result retains selected amount");
     check(await page.locator("#printReceipt").isHidden(), "pledge does not produce paid receipt");
     check(await page.locator("#certificatePanel").isHidden(), "pledge does not unlock a certificate");
+    check(
+      await page.locator("#pledgeCommunityInvite").isVisible(),
+      "recorded pledge offers the campaign community invitation",
+    );
+    check(
+      (await page.locator("#joinCampaignGroup").getAttribute("href")) ===
+        "https://chat.whatsapp.com/D4gV4yL5q4HA6DqCYjvEwE?mode=gi_t",
+      "pledge invitation uses the supplied WhatsApp group link",
+    );
+    check(page.url().includes("/contribute/payment/"), "joining WhatsApp requires a separate supporter action");
     check(
       (await page.locator("#receiptSteps").innerText()) === "15 steps × UGX 5,000",
       "result retains sponsored step count and unit price",
@@ -526,7 +546,7 @@ function check(value, message) {
         "a Kenyan pledge is recorded and shown in KSh at 200 per step",
       );
 
-      /* Checkout open for UGX only: Kenyans are steered to a pledge, Ugandans can still pay online. */
+      /* Checkout open for UGX only: Kenya stays on pledges; Uganda can explicitly choose online payment. */
       await visitor.route("**/api/payments/index.php?action=status", (route) =>
         route.fulfill({
           json: {
@@ -553,9 +573,15 @@ function check(value, message) {
       await visitor.selectOption("#country", "UG");
       await visitor.waitForFunction(() => !document.querySelector('[data-kind="payment"]').disabled);
       check(
+        (await visitor.locator('[data-kind="pledge"]').getAttribute("aria-pressed")) === "true" &&
+          (await text("#submitContribution")) === "Record my pledge",
+        "switching to a payable country preserves the supporter's selected pledge",
+      );
+      await visitor.click('[data-kind="payment"]');
+      check(
         (await visitor.locator('[data-kind="payment"]').getAttribute("aria-pressed")) === "true" &&
           (await text("#submitContribution")) === "Continue to secure payment",
-        "a Ugandan can still pay online, and switching country restores the payment option",
+        "a Ugandan can choose online payment when the service is enabled",
       );
       await visitor.unroute("**/api/payments/index.php?action=status");
 
@@ -578,6 +604,12 @@ function check(value, message) {
       const fresh = await browser.newContext({ viewport: { width: 1280, height: 800 } });
       const view = await fresh.newPage();
       view.on("pageerror", (e) => errors.push(e.message));
+      await view.goto(pledgeResultUrl);
+      check(
+        await view.locator("#pledgeCommunityInvite").isHidden(),
+        "a fresh visitor is not shown a private pledge community invitation",
+      );
+      check(await view.locator("#receiptContent").isHidden(), "a fresh visitor cannot see the private pledge record");
       for (const url of [
         "/",
         "/faith-in-motion/",

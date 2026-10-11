@@ -1,0 +1,348 @@
+/* Campaign launch: original marks, editorial artwork and a clear pledge journey. */
+.launch-hero-story {
+  gap: 16px;
+  padding-top: 0;
+}
+
+.launch-campaign-mark {
+  width: min(320px, 90%);
+  padding: 8px 16px;
+  background: #fff;
+  border-radius: 6px;
+}
+
+.launch-campaign-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.launch-hero-story h1 {
+  margin: 0;
+  font-size: clamp(48px, 5.1vw, 72px);
+}
+
+.launch-hero-story h1 em {
+  color: #63d8f3;
+}
+
+.launch-hero-intro {
+  max-width: 58ch;
+  color: #d7e4f6;
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.launch-hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+
+.launch-hero-actions .wfe-link {
+  color: #d7e4f6;
+  font-size: 12px;
+}
+
+.launch-hero-art {
+  margin: 8px 0 0;
+  background: #f5ead9;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.launch-hero-art > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.launch-hero-art figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 18px;
+  color: #182d49;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.launch-hero-art figcaption small {
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.launch-hero-story .v3-story-link {
+  margin-top: 0;
+}
+
+.launch-challenge {
+  color: #fff;
+  background: #071d39;
+}
+
+.launch-feature-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 60px;
+}
+
+.launch-feature-art {
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #ffffff1c;
+}
+
+.launch-feature-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.launch-feature-art figcaption {
+  padding: 15px 20px;
+  color: #cdddef;
+  font-size: 11px;
+}
+
+.launch-feature-copy .wfe-eyebrow,
+.launch-feature-copy h2 em {
+  color: #63d8f3;
+}
+
+.launch-feature-copy h2 {
+  color: #fff;
+  font-size: clamp(38px, 4vw, 57px);
+}
+
+.launch-feature-copy > p {
+  color: #cdddef;
+}
+
+.launch-invitation-steps {
+  display: grid;
+  gap: 18px;
+  list-style: none;
+  margin: 27px 0;
+  padding: 0;
+}
+
+.launch-invitation-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  color: #cdddef;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.launch-invitation-steps li > b {
+  color: #63d8f3;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+.launch-invitation-steps strong {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+}
+
+.launch-pledge-note {
+  display: block;
+  margin-top: 16px;
+  max-width: 48ch;
+  color: #cdddef;
+  line-height: 1.7;
+  font-size: 11px;
+}
+
+.launch-briefings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 22px 0;
+}
+
+.launch-briefings .field-note {
+  display: block;
+  padding: 25px;
+  background: #ffffff08;
+  border: 1px solid #ffffff24;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.launch-briefings .field-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #bad5ec;
+  margin-bottom: 16px;
+  font-size: 10px;
+}
+
+.launch-briefings .field-body h3 {
+  color: #fff;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.launch-briefings .field-body p {
+  color: #cdddef;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.launch-channel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.launch-channel-note {
+  max-width: 85ch;
+  margin-top: 24px;
+  color: #526078;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.launch-updates-notice {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  color: #34435a;
+  line-height: 1.8;
+  font-size: 13px;
+}
+
+.campaign-socials {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 25px;
+  padding: 0 0 26px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid #ffffff24;
+  color: inherit;
+  font-size: 12px;
+}
+
+.campaign-socials > span {
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.campaign-socials a {
+  color: inherit;
+  padding: 7px 0;
+}
+
+.collection-footer .campaign-socials {
+  flex-basis: 100%;
+  justify-content: center;
+  margin: 8px 0 0;
+  padding: 14px 0 0;
+  border-top: 1px solid #d3d9e3;
+  border-bottom: 0;
+}
+
+.pledge-community {
+  margin-top: 30px;
+  padding: 28px;
+  background: #eff8f4;
+  border: 1px solid #bedccc;
+  border-radius: 12px;
+}
+
+.pledge-community[hidden] {
+  display: none;
+}
+
+.pledge-community h2 {
+  margin: 12px 0;
+  font-size: 26px;
+  line-height: 1.25;
+  color: #16382b;
+}
+
+.pledge-community > p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.pledge-community > small {
+  display: block;
+  margin-top: 15px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.pledge-invite-friends {
+  display: inline-block;
+  margin-top: 17px;
+  color: #244b3b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+@media (max-width: 950px) {
+  .launch-hero-story {
+    gap: 15px;
+  }
+
+  .launch-hero-art {
+    max-width: 760px;
+  }
+}
+
+@media (max-width: 850px) {
+  .launch-feature-grid,
+  .launch-briefings {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .launch-feature-copy h2 br:last-child {
+    display: none;
+  }
+
+  .launch-briefings .field-note {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .launch-hero-story h1 {
+    font-size: clamp(41px, 10.5vw, 57px);
+  }
+
+  .launch-hero-story > .wfe-eyebrow {
+    font-size: 8px;
+    line-height: 1.8;
+  }
+
+  .launch-hero-art figcaption {
+    flex-direction: column;
+    gap: 3px;
+    padding: 12px 15px;
+  }
+
+  .launch-channel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wfe2-partner-grid,
+  .wfp-coalition-list {
+    grid-template-columns: 1fr;
+  }
+
+  .pledge-community {
+    padding: 22px 18px;
+  }
+}
