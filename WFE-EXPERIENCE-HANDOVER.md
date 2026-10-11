@@ -14,8 +14,18 @@ paid certificate eligibility are preserved. Legacy one-step entry links display
 the minimum amount before any submission.
 
 The contribution form uses a compact selected-amount summary and opens directly
-to details when steps have already been chosen. “Change amount” reopens the
-controls. Closed online payment remains disabled and pledge mode is selected.
+to details when steps have already been chosen. “Change steps” reopens the
+controls. The pledge form asks for a name and WhatsApp number; unavailable
+online payment choices are hidden.
+
+The 11 October 2026 pledge update saves the pledge through the existing ledger
+before opening the coordinator's WhatsApp (`+256 772 150 281`) with a short
+message containing the name, recorded steps, amount and pledge reference.
+The supporter taps Send in WhatsApp. Viewer tokens never enter the message.
+The form retains a saved confirmation and manual WhatsApp link if navigation
+does not open the app. The private pledge record also offers the message and
+the existing optional campaign group invitation. Failed saves do not redirect;
+pledges remain separate from payments and do not unlock paid certificates.
 
 Participation opens the appropriate individual, Rotary or organisation panel.
 Partnership links can preselect an education priority; prepared enquiry emails

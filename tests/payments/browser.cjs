@@ -14,6 +14,27 @@ function check(value, message) {
   checks++;
   console.log("PASS " + message);
 }
+async function submitPledgeViaWhatsapp(page, base) {
+  await page.route("https://wa.me/**", (route) =>
+    route.fulfill({ contentType: "text/html", body: "<title>Local WhatsApp handoff fixture</title>" }),
+  );
+  const saved = page.waitForResponse(
+    (response) =>
+      response.url().endsWith("api/payments/index.php?action=create") && response.request().method() === "POST",
+  );
+  await page.click("#submitContribution");
+  const result = await (await saved).json();
+  await page.waitForURL("https://wa.me/**");
+  const whatsapp = new URL(page.url());
+  const message = whatsapp.searchParams.get("text");
+  check(
+    whatsapp.pathname === "/256772150281" && message.includes(result.contribution.reference),
+    "saved pledge opens the campaign WhatsApp with its recorded reference",
+  );
+  check(!whatsapp.href.includes(result.token), "WhatsApp handoff excludes the private viewer token");
+  await page.goto(base + "/contribute/payment/?reference=" + encodeURIComponent(result.contribution.reference));
+  return message;
+}
 (async () => {
   const privateDir = fs.mkdtempSync(path.join(os.tmpdir(), "pci-browser-"));
   const php = process.env.PCI_TEST_PHP || "php",
@@ -322,8 +343,8 @@ function check(value, message) {
     await page.fill("#supporterName", "Browser QA Supporter");
     await page.fill("#phone", "+256700000000");
     await page.check("#consent");
-    await page.click("#submitContribution");
-    await page.waitForURL("**/contribute/payment/?reference=*");
+    const ugPledgeMessage = await submitPledgeViaWhatsapp(page, base);
+    check(ugPledgeMessage.includes("15 steps (UGX 75,000)"), "WhatsApp message retains the Ugandan pledge amount");
     await page.locator("#receiptContent:not([hidden])").waitFor();
     const pledgeResultUrl = page.url();
     check(
@@ -334,6 +355,10 @@ function check(value, message) {
     check((await page.locator("#receiptAmount").innerText()) === "UGX 75,000", "result retains selected amount");
     check(await page.locator("#printReceipt").isHidden(), "pledge does not produce paid receipt");
     check(await page.locator("#certificatePanel").isHidden(), "pledge does not unlock a certificate");
+    check(
+      await page.locator("#pledgeWhatsappPanel").isVisible(),
+      "private pledge record offers a WhatsApp message fallback",
+    );
     check(
       await page.locator("#pledgeCommunityInvite").isVisible(),
       "recorded pledge offers the campaign community invitation",
@@ -538,8 +563,8 @@ function check(value, message) {
       await visitor.fill("#supporterName", "Kenya Browser Supporter");
       await visitor.fill("#phone", "+254700000000");
       await visitor.check("#consent");
-      await visitor.click("#submitContribution");
-      await visitor.waitForURL("**/contribute/payment/?reference=*");
+      const kePledgeMessage = await submitPledgeViaWhatsapp(visitor, base);
+      check(kePledgeMessage.includes("50 steps (KSh 10,000)"), "WhatsApp message retains the Kenyan pledge amount");
       await visitor.locator("#receiptContent:not([hidden])").waitFor();
       check(
         (await text("#receiptAmount")) === "KSh 10,000" && (await text("#receiptSteps")) === "50 steps × KSh 200",
@@ -566,7 +591,7 @@ function check(value, message) {
       await visitor.waitForFunction(() => document.querySelector('[data-kind="payment"]').disabled);
       check(
         (await visitor.locator('[data-kind="pledge"]').getAttribute("aria-pressed")) === "true" &&
-          (await text("#submitContribution")) === "Record my pledge" &&
+          (await text("#submitContribution")) === "Save pledge & open WhatsApp" &&
           (await text('[data-kind="payment"]')).includes("KSh"),
         "while online payment is open only for UGX, a Kenyan is steered to a pledge",
       );
@@ -574,7 +599,7 @@ function check(value, message) {
       await visitor.waitForFunction(() => !document.querySelector('[data-kind="payment"]').disabled);
       check(
         (await visitor.locator('[data-kind="pledge"]').getAttribute("aria-pressed")) === "true" &&
-          (await text("#submitContribution")) === "Record my pledge",
+          (await text("#submitContribution")) === "Save pledge & open WhatsApp",
         "switching to a payable country preserves the supporter's selected pledge",
       );
       await visitor.click('[data-kind="payment"]');

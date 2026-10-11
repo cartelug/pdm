@@ -27,6 +27,40 @@
     var code = currency || here().currency;
     return pricing ? pricing.format(v, code) : code + " " + new Intl.NumberFormat("en-UG").format(v);
   }
+  function pledgeMessage(row, name) {
+    return (
+      "Hello" +
+      (name ? ", my name is " + name : "") +
+      ".\nI pledge " +
+      row.steps +
+      " steps (" +
+      money(row.amount, row.currency) +
+      ") for Walk for Education.\nReference: " +
+      row.reference +
+      ".\nPlease guide me on contributing."
+    );
+  }
+  function pledgeWhatsapp(text) {
+    var contact = window.WFE_CAMPAIGN && window.WFE_CAMPAIGN.contact;
+    var destination = (contact && contact.whatsappUrl) || "https://wa.me/256772150281";
+    return destination + "?text=" + encodeURIComponent(text);
+  }
+  function savedPledge(row, name) {
+    var text = pledgeMessage(row, name);
+    sessionStorage.setItem("pci-pledge-message-" + row.reference, text);
+    var panel = document.getElementById("pledgeSavedPanel");
+    document.getElementById("contributionForm").hidden = true;
+    document.getElementById("checkoutNotice").hidden = true;
+    document.getElementById("pledgeSavedSummary").textContent =
+      row.steps + " steps · " + money(row.amount, row.currency);
+    document.getElementById("pledgeSavedReference").textContent = row.reference;
+    document.getElementById("openPledgeWhatsapp").href = pledgeWhatsapp(text);
+    document.getElementById("viewPledgeRecord").href =
+      root + "contribute/payment/?reference=" + encodeURIComponent(row.reference);
+    panel.hidden = false;
+    panel.focus();
+    return pledgeWhatsapp(text);
+  }
   function pressKind(name) {
     document.querySelectorAll("[data-kind]").forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.dataset.kind === name));
@@ -43,6 +77,8 @@
     if (!settings) return;
     var tab = document.querySelector('[data-kind="payment"]');
     var notice = document.getElementById("checkoutNotice");
+    document.getElementById("contributionKinds").hidden = !payable();
+    document.getElementById("kindHint").hidden = !payable();
     var now = here();
     if (!payable()) {
       if (kind() === "payment") {
@@ -57,8 +93,8 @@
       notice.textContent = settings.checkoutEnabled
         ? "Online payment in " +
           now.label +
-          " is not open yet. You can record a pledge now and the team will send you payment details. A pledge is not a payment."
-        : "Online payments are being prepared. You can record a pledge now or contact the campaign team. A pledge is not a payment.";
+          " is not open yet. Save your pledge, then continue on WhatsApp. No payment is taken."
+        : "Your pledge is saved first. WhatsApp then opens with your message. No payment is taken.";
     } else {
       tab.disabled = false;
       tab.textContent = "Pay for my steps";
@@ -127,7 +163,9 @@
     var isPledge = kind() === "pledge";
     document.getElementById("summaryType").textContent = isPledge ? "Your intended pledge" : "Your contribution";
     document.getElementById("submitContribution").textContent = isPledge
-      ? "Record my pledge"
+      ? submitting
+        ? "Saving your pledge…"
+        : "Save pledge & open WhatsApp"
       : "Continue to secure payment";
     document.getElementById("submitContribution").disabled =
       submitting || !validSteps || !settings || (isPledge ? !settings.pledgesEnabled : !payable());
@@ -156,7 +194,7 @@
       var preselected = Number.isInteger(selected) && selected >= 1 && selected <= 20000;
       choicePanel.hidden = preselected;
       choiceToggle.setAttribute("aria-expanded", String(!preselected));
-      choiceToggle.textContent = preselected ? "Change amount" : "Done choosing";
+      choiceToggle.textContent = preselected ? "Change steps" : "Done choosing";
       choiceToggle.addEventListener("click", function () {
         if (!choicePanel.hidden && !steps.checkValidity()) {
           steps.reportValidity();
@@ -164,7 +202,7 @@
         }
         choicePanel.hidden = !choicePanel.hidden;
         choiceToggle.setAttribute("aria-expanded", String(!choicePanel.hidden));
-        choiceToggle.textContent = choicePanel.hidden ? "Change amount" : "Done choosing";
+        choiceToggle.textContent = choicePanel.hidden ? "Change steps" : "Done choosing";
         if (!choicePanel.hidden) steps.focus();
       });
     }
@@ -240,9 +278,10 @@
       }
       submitting = true;
       update();
-      message("Preparing your " + (kind() === "pledge" ? "pledge" : "payment") + "…", false);
+      message(kind() === "pledge" ? "Saving your pledge before opening WhatsApp…" : "Preparing your payment…", false);
       try {
         var referral = new URLSearchParams(location.search).get("ref") || sessionStorage.getItem("wfe_ref") || "";
+        var supporterName = document.getElementById("supporterName").value.trim();
         var r = await call("create", {
           campaign: document.getElementById("campaign").value,
           kind: kind(),
@@ -250,7 +289,7 @@
           currency: here().currency,
           amount: amount(),
           steps: Number(steps.value),
-          name: document.getElementById("supporterName").value.trim(),
+          name: supporterName,
           email: document.getElementById("email").value.trim(),
           phone: document.getElementById("phone").value.trim(),
           referral: referral.slice(0, 60),
@@ -258,6 +297,11 @@
           requestId: requestId,
         });
         sessionStorage.setItem("pci-view-" + r.contribution.reference, r.token);
+        if (r.contribution.kind === "pledge" && r.contribution.status === "pledged") {
+          var whatsapp = savedPledge(r.contribution, supporterName);
+          location.assign(whatsapp);
+          return;
+        }
         if (r.redirectUrl) {
           location.assign(r.redirectUrl);
           return;
@@ -349,7 +393,8 @@
         certificateButton.disabled = false;
       });
     var messages = {
-      pledged: "Your pledge is recorded. No payment has been taken. The campaign team can follow up with you.",
+      pledged:
+        "Your pledge is saved. Send the message on WhatsApp so the campaign team can guide you. No payment has been taken.",
       successful: "Your payment has been verified. Thank you for supporting the campaign.",
       pending:
         "Your payment is awaiting verification. This page checks automatically for five minutes. Please check its status before starting another payment.",
@@ -396,10 +441,20 @@
         }
         var communityInvite = document.getElementById("pledgeCommunityInvite");
         if (communityInvite) communityInvite.hidden = !(row.kind === "pledge" && row.status === "pledged");
+        var handoff = document.getElementById("pledgeWhatsappPanel");
+        if (handoff) {
+          handoff.hidden = !(row.kind === "pledge" && row.status === "pledged");
+          if (!handoff.hidden) {
+            var text = sessionStorage.getItem("pci-pledge-message-" + row.reference) || pledgeMessage(row, "");
+            document.getElementById("sendPledgeWhatsapp").href = pledgeWhatsapp(text);
+            document.getElementById("pledgeWhatsappMessage").textContent = text;
+          }
+        }
         document.getElementById("receiptContent").hidden = false;
         document.getElementById("printReceipt").hidden = row.status !== "successful";
         document.getElementById("receiptHeading").textContent =
-          row.kind === "pledge" ? "Your pledge record" : "Your contribution";
+          row.kind === "pledge" ? "Your pledge is saved." : "Your contribution";
+        refresh.textContent = row.kind === "pledge" ? "Refresh pledge record" : "Check payment status";
         message(
           (row.environment === "sandbox" && row.status === "successful"
             ? "Test payment verified. Sandbox payments do not receive a contribution certificate."
