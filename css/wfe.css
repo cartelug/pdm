@@ -1076,8 +1076,10 @@ summary:focus-visible {
 }
 
 .wfe2-partner-grid img.wfe2-crest {
-  width: 54px;
-  height: 65px;
+  width: 80px;
+  height: 80px;
+  object-position: center;
+  mix-blend-mode: normal;
 }
 
 .wfe2-partner-grid b {
@@ -1257,7 +1259,7 @@ summary:focus-visible {
 
   .wfe2-partner-grid img.wfe2-crest {
     width: 85px;
-    height: 52px;
+    height: 80px;
   }
 
   .wfe2-partner-grid b {
@@ -4585,6 +4587,12 @@ summary:focus-visible {
   height: 52px;
   object-fit: contain;
   mix-blend-mode: multiply;
+}
+
+.wfp-coalition-list img.wfe2-crest {
+  width: 80px;
+  height: 80px;
+  mix-blend-mode: normal;
 }
 
 .wfp-coalition-list b {

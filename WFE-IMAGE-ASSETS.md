@@ -5,6 +5,19 @@ WebP files for the website. The original upload and campus photograph were not
 overwritten. The official PCI logo uses the existing main-site asset and was
 not regenerated.
 
+## Diocese of South Rwenzori crest — corrected 11 October 2026
+
+Asset: `assets/walk-for-education/south-rwenzori.png`.
+Source: the diocese's official website, <https://southrwenzorid.org/>, which
+uses <https://southrwenzorid.org/wp-content/uploads/2021/10/logoSquare.png>
+as its site icon (WordPress media item 5, "Logo Square").
+
+The 270 × 270 transparent PNG is copied byte-for-byte from that official
+source. It replaces the 148 × 148 proposal extract that clipped the pointed
+top and bottom of the crest. No regeneration, tracing, retouching or cropping
+was applied. The homepage, accountability page and partners page use the same
+asset with a content-hash query and contain sizing to preserve the full crest.
+
 ## Walking Rotarian
 
 Source: a photograph of Rtn. Shyaka Mbanda supplied by the user on 7 October
