@@ -29,6 +29,8 @@
   var scriptSrc = (document.currentScript && document.currentScript.src) || "";
   var siteRoot = scriptSrc ? scriptSrc.replace(/js\/wfe\.js(\?.*)?$/, "") : "/";
   var campaign = Object.assign({}, window.WFE_CAMPAIGN || {}, sanitizeLive(window.WFE_LIVE));
+  var contacts = window.PCICampaignContacts;
+  if (contacts) campaign.contact = Object.assign({}, campaign.contact || {}, contacts.primary);
   var reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   var ref = captureRef();
 
@@ -134,8 +136,9 @@
   }
 
   function whatsappUrl(text) {
-    var base = (campaign.contact && campaign.contact.whatsappUrl) || "https://wa.me/256708735878";
-    return base + "?text=" + encodeURIComponent(text);
+    if (contacts) return contacts.whatsappUrl(text);
+    var base = campaign.contact && campaign.contact.whatsappUrl;
+    return base ? base + "?text=" + encodeURIComponent(text) : "";
   }
 
   function withRef(lines) {
@@ -166,24 +169,34 @@
       var area = el("textarea");
       area.value = text;
       area.setAttribute("readonly", "");
-      area.style.position = "fixed";
-      area.style.opacity = "0";
+      area.setAttribute("aria-label", "Message to copy manually");
+      area.rows = 5;
+      area.className = "manual-copy-message";
       document.body.appendChild(area);
+      area.focus();
       area.select();
+      var copied = false;
       try {
-        document.execCommand("copy");
+        copied = document.execCommand("copy");
       } catch (error) {
-        /* nothing else to try */
+        /* Keep the visible message selected for the device's manual copy command. */
       }
-      document.body.removeChild(area);
-      showToast(message);
+      if (copied) {
+        area.remove();
+        showToast(message);
+      } else {
+        area.scrollIntoView({ block: "center" });
+        showToast("Automatic copying is unavailable. Copy the selected message using your device’s copy command.");
+      }
+      return copied;
     }
     if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(function () {
+      return navigator.clipboard.writeText(text).then(function () {
         showToast(message);
+        return true;
       }, fallback);
     } else {
-      fallback();
+      return Promise.resolve(fallback());
     }
   }
 
@@ -503,8 +516,9 @@
           copyText(
             String(channel.number).replace(/\s+/g, ""),
             "Number copied — confirm the registered name before sending",
-          );
-          confirmButton(copy, "Copied ✓");
+          ).then(function (copied) {
+            if (copied) confirmButton(copy, "Copied ✓");
+          });
           track("payment_number_copied", { provider: channel.provider });
         });
         row.appendChild(copy);
@@ -936,8 +950,9 @@
       panel.appendChild(copyBlock);
       form.parentNode.insertBefore(panel, form.nextSibling);
       copy.addEventListener("click", function () {
-        copyText(panel.getAttribute("data-message") || "", "Message copied");
-        confirmButton(copy, "Copied ✓");
+        copyText(panel.getAttribute("data-message") || "", "Message copied").then(function (copied) {
+          if (copied) confirmButton(copy, "Copied ✓");
+        });
       });
     }
     panel.setAttribute("data-message", subject + "\n\n" + body);
@@ -982,14 +997,16 @@
 
     all("[data-copy-link]").forEach(function (button) {
       button.addEventListener("click", function () {
-        copyText(campaignUrl(), "Campaign link copied");
-        confirmButton(button, "Link copied ✓");
+        copyText(campaignUrl(), "Campaign link copied").then(function (copied) {
+          if (copied) confirmButton(button, "Link copied ✓");
+        });
         track("campaign_share", { method: "copy" });
       });
     });
   }
 
   function ready() {
+    if (contacts) contacts.bind(document);
     renderCampaignFields();
     applyVisibility();
     renderCountdown();

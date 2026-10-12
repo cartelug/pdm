@@ -14,10 +14,31 @@
    Rules already inside a hover, reduced-motion or print query are left alone.
    ========================================================================== */
 import fs from "node:fs";
+import path from "node:path";
 import postcss from "postcss";
 
 const check = process.argv.includes("--check");
-const files = process.argv.slice(2).filter((arg) => arg !== "--check");
+// Windows command shells pass the wildcard literally, unlike the Linux CI shell.
+const files = process.argv
+  .slice(2)
+  .filter((arg) => arg !== "--check")
+  .flatMap((file) => {
+    if (!file.includes("*")) return [file];
+    const directory = path.dirname(file);
+    const pattern = new RegExp(
+      "^" +
+        path
+          .basename(file)
+          .split("*")
+          .map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+          .join(".*") +
+        "$",
+    );
+    return fs
+      .readdirSync(directory)
+      .filter((name) => pattern.test(name))
+      .map((name) => path.join(directory, name));
+  });
 const HOVER = /:hover\b/;
 const GUARDED = /\bhover\s*:|prefers-reduced-motion|\bprint\b/;
 

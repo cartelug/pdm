@@ -84,6 +84,7 @@ with tempfile.TemporaryDirectory(prefix='pci-http-test-') as private:
         with sqlite3.connect(Path(private,'collections.sqlite')) as fixture:
             fixture.execute("UPDATE contributions SET environment='live',kind='payment',status='successful',tracking_id='fixture-tracking',receipt='fixture-receipt' WHERE reference=?",(ref,))
             fixture.execute('INSERT INTO certificates(reference,code,issued_at) VALUES(?,?,?)',(ref,cert,'2026-10-05T10:00:00+00:00'))
+        fixture.close()
         code,verified,_=request('verify-certificate&code='+cert);check(code==200 and verified['valid'] and verified['steps']==10 and verified['amount']==50000,'public certificate verification confirms the recorded step payment')
         check(not any(k in verified for k in ['name','email','phone','reference','tracking_id']),'public certificate verification discloses no supporter identity or payment identifiers')
         check(request('verify-certificate&code=WFE-'+'B'*24)[0]==404,'unknown certificate code is not found')
@@ -91,6 +92,7 @@ with tempfile.TemporaryDirectory(prefix='pci-http-test-') as private:
         code,delayed,_=request('lookup',{'reference':ref,'token':token},csrf);check(code==200 and delayed['verificationDelayed'],'unavailable matching gateway marks the receipt check delayed')
         check(request('certificate',{'reference':ref,'token':token},csrf)[0]==409,'cached failed verification cannot unlock certificate download')
         with sqlite3.connect(Path(private,'collections.sqlite')) as fixture:fixture.execute("UPDATE contributions SET status='refunded' WHERE reference=?",(ref,))
+        fixture.close()
         code,inactive,_=request('verify-certificate&code='+cert);check(code==200 and not inactive['valid'] and inactive['status']=='inactive' and inactive['amount'] is None,'refunded certificate is publicly inactive without contribution details')
         try:urllib.request.urlopen(base+'/api/payments/certificate-pdf.php');check(False,'PDF renderer inaccessible directly')
         except urllib.error.HTTPError as e:check(e.code==404,'PDF renderer inaccessible directly')
