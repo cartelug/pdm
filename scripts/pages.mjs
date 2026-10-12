@@ -13,8 +13,9 @@
    ========================================================================== */
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SKIP = new Set([".git", "node_modules", "tests", "deploy", "admin", "api", "assets", "scripts", "css", "js"]);
 
 function publicPages(dir) {
@@ -30,7 +31,7 @@ const problems = [];
 const pages = publicPages(ROOT);
 
 for (const file of pages) {
-  const where = path.relative(ROOT, file);
+  const where = path.relative(ROOT, file).split(path.sep).join("/");
   const html = fs.readFileSync(file, "utf8");
   const head = html.slice(0, html.indexOf("</head>"));
   const fail = (message) => problems.push(`${where}: ${message}`);

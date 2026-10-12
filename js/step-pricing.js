@@ -8,7 +8,8 @@
    assets/data/step-prices.json, the same file the payment API reads. This
    module loads it, works out the visitor's likely country, remembers their
    choice for the session and formats amounts. If the file cannot be loaded,
-   Uganda (UGX 5,000) stays available, so a failure never blocks giving.
+   published Uganda/Kenya prices stay available for pledges, with a visible
+   fallback notice. An unavailable international country is never replaced by Uganda.
 
      StepPricing.ready                    Promise, resolves when the table is available
      StepPricing.current()                { code, name, currency, step, label }
@@ -38,9 +39,12 @@
     defaultCountry: "UG",
     minimumSteps: 5,
     maximumSteps: 20000,
-    featured: ["UG"],
-    currencies: { UGX: "UGX" },
-    countries: [{ code: "UG", name: "Uganda", currency: "UGX", step: 5000 }],
+    featured: ["UG", "KE"],
+    currencies: { UGX: "UGX", KES: "KSh" },
+    countries: [
+      { code: "UG", name: "Uganda", currency: "UGX", step: 5000 },
+      { code: "KE", name: "Kenya", currency: "KES", step: 200 },
+    ],
   };
 
   /* Time zone → country, for the countries most visitors come from. A time zone says where a phone is
@@ -133,6 +137,8 @@
   var byCode = index(FALLBACK);
   var selected = null;
   var chosen = false; // true once the visitor (or a link) picked a country, so detection never overrides it
+  var loaded = false;
+  var fresh = false;
   var number = new Intl.NumberFormat("en-US");
 
   function index(table) {
@@ -156,8 +162,13 @@
         );
       }) &&
       table.countries.some(function (c) {
-        return c.code === "UG";
-      })
+        return c.code === "UG" && c.currency === "UGX" && c.step === 5000;
+      }) &&
+      table.countries.some(function (c) {
+        return c.code === "KE" && c.currency === "KES" && c.step === 200;
+      }) &&
+      table.minimumSteps === 5 &&
+      table.maximumSteps === 20000
     );
   }
 
@@ -192,13 +203,31 @@
   }
 
   function entry(code) {
-    var country = byCode[code] || byCode[data.defaultCountry] || data.countries[0];
+    var country = byCode[code];
+    if (!country)
+      return {
+        code: code,
+        name: "Selected country",
+        currency: "",
+        step: 0,
+        label: "",
+        ready: loaded,
+        available: false,
+        fresh: fresh,
+        approved: false,
+      };
     return {
       code: country.code,
       name: country.name,
       currency: country.currency,
       step: country.step,
       label: label(country.currency),
+      ready: loaded,
+      available: true,
+      fresh: fresh,
+      approved:
+        country.priceStatus === "published" ||
+        (!country.priceStatus && (country.code === "UG" || country.code === "KE")),
     };
   }
 
@@ -222,9 +251,9 @@
 
   function resolveInitial() {
     var fromUrl = (new URLSearchParams(window.location.search).get("country") || "").toUpperCase();
-    if (byCode[fromUrl]) return fromUrl;
+    if (byCode[fromUrl] || (!fresh && /^[A-Z]{2}$/.test(fromUrl))) return fromUrl;
     var remembered = read(STORAGE_COUNTRY);
-    if (remembered && byCode[remembered]) return remembered;
+    if (remembered && (byCode[remembered] || (!fresh && /^[A-Z]{2}$/.test(remembered)))) return remembered;
     return detect();
   }
 
@@ -241,11 +270,19 @@
   }
 
   function select(code) {
-    var next = byCode[code] ? code : data.defaultCountry;
+    var next = String(code || "").toUpperCase();
+    if (!byCode[next]) return;
     var changed = next !== selected;
     chosen = true;
     selected = next;
     write(STORAGE_COUNTRY, selected);
+    try {
+      var url = new URL(window.location.href);
+      url.searchParams.set("country", selected);
+      window.history.replaceState(window.history.state, "", url.href);
+    } catch (error) {
+      /* A country choice still works when history updates are unavailable. */
+    }
     bind(document);
     if (changed) announce();
   }
@@ -263,24 +300,55 @@
     var now = current();
     (scope || document).querySelectorAll("[data-sp]").forEach(function (node) {
       var kind = node.getAttribute("data-sp");
-      if (kind === "unit") node.textContent = format(now.step, now.currency);
+      if (kind === "policy")
+        node.textContent = now.approved
+          ? "Your country sets the currency. A pledge is not a payment."
+          : "Indicative pledge amount only. PCI will confirm the amount in your currency; no payment is taken.";
+      else if (!now.available) node.textContent = "—";
+      else if (kind === "unit") node.textContent = format(now.step, now.currency);
       else if (kind === "min") node.textContent = format(now.step * data.minimumSteps, now.currency);
       else if (kind === "code") node.textContent = now.currency;
       else if (kind === "label") node.textContent = now.label;
     });
     (scope || document).querySelectorAll("[data-sp-amount]").forEach(function (node) {
-      node.textContent = number.format(now.step * Number(node.getAttribute("data-sp-amount")));
+      node.textContent = now.available ? number.format(now.step * Number(node.getAttribute("data-sp-amount"))) : "—";
     });
     (scope || document).querySelectorAll("[data-sp-steps]").forEach(function (node) {
-      node.textContent = format(now.step * Number(node.getAttribute("data-sp-steps")), now.currency);
+      node.textContent = now.available
+        ? format(now.step * Number(node.getAttribute("data-sp-steps")), now.currency)
+        : "—";
+    });
+    (scope || document).querySelectorAll("[data-country-featured]").forEach(function (button) {
+      var code = button.getAttribute("data-country-featured");
+      var active = code === "INT" ? now.code !== "UG" && now.code !== "KE" : now.code === code;
+      button.setAttribute("aria-pressed", String(active));
+      button.disabled = !loaded || (code === "INT" ? !byCode.US : !byCode[code]);
+    });
+    (scope || document).querySelectorAll("[data-pricing-status]").forEach(function (node) {
+      node.textContent = !loaded
+        ? "Loading country prices…"
+        : !now.available
+          ? "Country prices could not load. Reload to try again, or contact PCI for assistance."
+          : !fresh
+            ? "Using saved or published pledge prices. The server checks your amount when you save."
+            : "";
+      node.hidden = loaded && now.available && fresh;
     });
   }
 
   /** Fill a <select> with the campaign region first, then every country A–Z. */
-  function fillSelect(selectEl) {
+  function fillSelect(selectEl, query) {
     selectEl.textContent = "";
+    var search = String(query || "")
+      .trim()
+      .toLowerCase();
+    var matches = function (country) {
+      return (
+        !search || (country.name + " " + country.code + " " + country.currency).toLowerCase().indexOf(search) !== -1
+      );
+    };
     var featured = (data.featured || []).filter(function (code) {
-      return byCode[code];
+      return byCode[code] && matches(byCode[code]);
     });
     function option(country) {
       var o = document.createElement("option");
@@ -300,13 +368,61 @@
     rest.label = "All countries";
     data.countries
       .filter(function (country) {
-        return featured.indexOf(country.code) === -1;
+        return featured.indexOf(country.code) === -1 && matches(country);
       })
       .forEach(function (country) {
         rest.appendChild(option(country));
       });
     selectEl.appendChild(rest);
     selectEl.value = current().code;
+    if (!selectEl.value) {
+      var placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = search ? "Choose a search result" : "Choose your country";
+      placeholder.disabled = true;
+      placeholder.selected = true;
+      selectEl.insertBefore(placeholder, selectEl.firstChild);
+    }
+  }
+
+  function setupControls() {
+    document.querySelectorAll("[data-country-featured]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var code = button.getAttribute("data-country-featured");
+        if (code === "INT") code = current().code !== "UG" && current().code !== "KE" ? current().code : "US";
+        document.querySelectorAll("[data-country-search]").forEach(function (input) {
+          input.value = "";
+        });
+        document.querySelectorAll("[data-country-panel] select").forEach(function (selectEl) {
+          fillSelect(selectEl);
+        });
+        select(code);
+        document.querySelectorAll("details[data-country-panel]").forEach(function (panel) {
+          panel.open = button.getAttribute("data-country-featured") === "INT";
+          if (panel.open) {
+            var search = panel.querySelector("[data-country-search]");
+            if (search) search.focus();
+          }
+        });
+        document.querySelectorAll("[data-country-panel] select").forEach(function (selectEl) {
+          selectEl.value = current().code;
+        });
+      });
+    });
+    document.querySelectorAll("[data-country-search]").forEach(function (input) {
+      input.addEventListener("keydown", function (event) {
+        if (event.key !== "Enter") return;
+        event.preventDefault();
+        var panel = input.closest("[data-country-panel]");
+        var selectEl = panel && panel.querySelector("select");
+        if (selectEl) selectEl.focus();
+      });
+      input.addEventListener("input", function () {
+        var panel = input.closest("[data-country-panel]");
+        var selectEl = panel && panel.querySelector("select");
+        if (selectEl) fillSelect(selectEl, input.value);
+      });
+    });
   }
 
   // Use the table from earlier on this visit straight away, so later pages never flash the wrong currency.
@@ -317,28 +433,43 @@
     /* fetch below */
   }
 
-  var ready = fetch(root + "assets/data/step-prices.json", { credentials: "same-origin" })
+  var controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+  var timeout = controller
+    ? window.setTimeout(function () {
+        controller.abort();
+      }, 8000)
+    : null;
+  var ready = fetch(root + "assets/data/step-prices.json", {
+    credentials: "same-origin",
+    signal: controller ? controller.signal : undefined,
+  })
     .then(function (response) {
       if (!response.ok) throw new Error("HTTP " + response.status);
       return response.json();
     })
     .then(function (table) {
       if (!usable(table)) throw new Error("Invalid price table");
-      var changed = JSON.stringify(table) !== JSON.stringify(data);
       adopt(table);
+      fresh = true;
       write(STORAGE_TABLE, JSON.stringify(table));
       // detection ran against the small fallback table if this load was the first; run it again on the full one
-      var before = selected;
       if (!byCode[selected] || !chosen) selected = resolveInitial();
-      if (selected !== before) changed = true;
-      if (changed) {
-        bind(document);
-        announce();
-      }
       return data;
     })
     .catch(function () {
-      return data; // the Uganda fallback or the cached table stays in force
+      return data; // The published UG/KE fallback or cached preview stays in force; PHP checks every pledge.
+    })
+    .then(function () {
+      if (timeout) window.clearTimeout(timeout);
+      loaded = true;
+      document.querySelectorAll("details[data-country-panel]").forEach(function (panel) {
+        panel.open = current().code !== "UG" && current().code !== "KE";
+      });
+      bind(document);
+      announce();
+      // Change listeners render both summaries synchronously before revealing any financial values.
+      document.documentElement.classList.remove("pricing-pending");
+      return data;
     });
 
   window.StepPricing = {
@@ -359,4 +490,6 @@
       return !!byCode[code];
     },
   };
+  setupControls();
+  bind(document);
 })();

@@ -14,8 +14,9 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SKIP = new Set([".git", "node_modules", "tests", "deploy"]);
 const REFERENCE = /(\b(?:href|src)=")((?:\/|\.\.\/|\.\/)*(?:css|js)\/[\w.-]+\.(?:css|js))(\?v=[^"]*)?(")/g;
 const check = process.argv.includes("--check");
@@ -56,7 +57,7 @@ for (const page of htmlFiles(ROOT)) {
     const expected = `?v=${hashOf(target)}`;
     if (version !== expected) {
       const note = `${where}: ${url}${version || ""} should be ${url}${expected}`;
-      if (CONSOLE_DATA.has(path.relative(ROOT, target))) warnings.push(note);
+      if (CONSOLE_DATA.has(path.relative(ROOT, target).split(path.sep).join("/"))) warnings.push(note);
       else problems.push(note);
       rewritten++;
     }

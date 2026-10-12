@@ -1,0 +1,640 @@
+/* Country-led pledge choices. Shared by the campaign preview and pledge form. */
+.pricing-pending [data-sp]:not([data-sp="policy"]),
+.pricing-pending [data-sp-steps],
+.pricing-pending [data-sp-amount],
+.pricing-pending #campaignTotal,
+.pricing-pending #selectedStepsAmount,
+.pricing-pending #summaryAmount,
+.pledge-pending #campaignTotal,
+.pledge-pending #campaignStepSummary,
+.pledge-pending #selectedStepsAmount,
+.pledge-pending #selectedStepsLabel,
+.pledge-pending #summaryAmount,
+.pledge-pending #summarySteps {
+  visibility: hidden;
+}
+
+.pledge-country {
+  margin: 24px 0 0;
+  color: #142e51;
+}
+
+.pledge-country h3 {
+  font:
+    800 13px/1.5 Manrope,
+    sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 10px;
+}
+
+.pledge-country-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.15fr;
+  gap: 8px;
+}
+
+.pledge-country-options button {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  min-height: 98px;
+  padding: 12px 10px;
+  border: 1px solid #cdd9ea;
+  border-radius: 9px;
+  color: #142e51;
+  background: #fff;
+  font-family: Manrope, sans-serif;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.18s,
+    background 0.18s;
+}
+
+.pledge-country-options button[aria-pressed="true"] {
+  background: #eaf1fb;
+  border: 2px solid #14396b;
+  padding: 11px 9px;
+  box-shadow: inset 0 -3px #f4c648;
+}
+
+.pledge-country-code {
+  color: #63748c;
+  font:
+    700 10px/1.3 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.pledge-country-options strong {
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+.pledge-country-options small {
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #526784;
+  margin-top: 2px;
+}
+
+.pledge-rate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-top: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid #dbe3ef;
+}
+
+.pledge-rate > span {
+  font-size: 11px;
+  color: #526784;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pledge-rate b {
+  padding: 3px 5px;
+  border-radius: 4px;
+  background: #f5ead9;
+  color: #142e51;
+  font:
+    700 10px/1.3 "JetBrains Mono",
+    monospace;
+}
+
+.pledge-rate > strong {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.pledge-pricing-status {
+  margin: 8px 0 0;
+  color: #526784;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.pledge-pricing-status:empty {
+  display: none;
+}
+
+.pledge-country-panel {
+  margin-top: 14px;
+  padding: 0 14px;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  background: #f4f7fc;
+}
+
+.pledge-country-panel summary {
+  min-height: 44px;
+  padding: 12px 0;
+  font-size: 11px;
+  line-height: 1.7;
+  font-weight: 700;
+  cursor: pointer;
+  list-style-position: inside;
+}
+
+.pledge-country-panel[open] {
+  padding-bottom: 14px;
+}
+
+.pledge-country-panel label,
+.pledge-message-label {
+  display: block;
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: #344e70;
+}
+
+.pledge-country-panel label:not(:first-child) {
+  margin-top: 12px;
+}
+
+.pledge-country-panel :is(input, select) {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 11px 12px;
+  border: 1px solid #cdd9ea;
+  border-radius: 6px;
+  font:
+    500 16px/1.4 Manrope,
+    sans-serif;
+  color: #142e51;
+  background: #fff;
+}
+
+.pledge-section-label {
+  margin: 22px 0 0;
+  color: #142e51;
+  font:
+    800 13px/1.5 Manrope,
+    sans-serif;
+}
+
+.pledge-price-policy {
+  font-size: 11px;
+  color: #526784;
+  line-height: 1.7;
+  margin: 14px 0;
+}
+
+.pledge-help {
+  border-top: 1px solid #dbe3ef;
+  margin-top: 20px;
+  padding-top: 7px;
+  color: #142e51;
+  font-size: 12px;
+}
+
+.pledge-help summary {
+  min-height: 44px;
+  padding: 12px 0;
+  font-weight: 800;
+  cursor: pointer;
+  list-style-position: inside;
+}
+
+.pledge-help > div {
+  padding-bottom: 8px;
+}
+
+.pledge-help p {
+  line-height: 1.7;
+  margin: 0 0 8px;
+  color: #526784;
+}
+
+.pledge-help a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  width: fit-content;
+  max-width: 100%;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+  color: #14396b;
+}
+
+.pledge-trust-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0 12px;
+  color: #526784;
+  margin: 4px 0;
+  font-size: 11px;
+}
+
+.pledge-trust-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #14396b;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.wfe-campaign .v3-give-card {
+  grid-area: pledge;
+  border: 1px solid #dbe3ef;
+}
+
+.wfe-campaign .v3-hero-grid {
+  grid-template-areas: "story pledge" "art pledge";
+  grid-template-rows: auto 1fr;
+  align-items: start;
+  row-gap: 24px;
+}
+
+.wfe-campaign .launch-hero-story {
+  grid-area: story;
+}
+
+.launch-hero-media {
+  grid-area: art;
+  min-width: 0;
+}
+
+.launch-hero-media .launch-hero-art {
+  margin: 0;
+}
+
+.launch-hero-media .v3-story-link {
+  margin-top: 16px;
+}
+
+.wfe-campaign .v3-step-options {
+  margin-top: 12px;
+}
+
+.wfe-campaign .v3-give-total {
+  flex-wrap: wrap;
+}
+
+.wfe-campaign .v3-give-heading p {
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.wfe-campaign .v3-payment-note {
+  font-size: 11px;
+}
+
+.wfe-campaign .v3-custom-control input {
+  font-size: 16px;
+}
+
+.wfe-campaign .v3-team-link {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.wfe-contribute .collections-main {
+  padding-top: 28px;
+}
+
+.wfe-contribute .step-checkout-heading h1 {
+  margin: 7px 0 8px;
+  font-size: clamp(36px, 4.5vw, 56px);
+}
+
+.wfe-contribute .step-checkout-heading > p {
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 42ch;
+  margin: 0 0 8px;
+}
+
+.wfe-contribute .collection-progress-steps {
+  margin: 17px 0 18px;
+}
+
+.wfe-contribute .collection-grid {
+  margin-top: 16px;
+}
+
+.wfe-contribute .pledge-form-title {
+  font-size: 21px;
+  padding-bottom: 15px;
+  margin: 0;
+  border-bottom: 1px solid #dbe3ef;
+}
+
+.wfe-contribute .pledge-country {
+  margin-top: 18px;
+}
+
+.wfe-contribute .pledge-country-panel input {
+  min-height: 46px;
+}
+
+.wfe-contribute .collection-field label {
+  font-size: 12px;
+  letter-spacing: normal;
+}
+
+.wfe-contribute .collection-field small {
+  font-size: 11px;
+}
+
+.wfe-contribute .collection-card :is(input:not([type="checkbox"]), select, textarea) {
+  font-size: 16px;
+}
+
+.wfe-contribute .checkout-selection {
+  padding: 16px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.wfe-contribute .checkout-selection strong {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.wfe-contribute .checkout-selection button {
+  min-height: 44px;
+  font-size: 11px;
+}
+
+.wfe-contribute .amount-options {
+  margin-top: 14px;
+}
+
+.wfe-contribute .amount-options button {
+  position: relative;
+  padding: 18px 6px 12px;
+  line-height: 1.7;
+}
+
+.wfe-contribute .amount-options button small {
+  font-size: 11px;
+}
+
+.pledge-recommended {
+  display: block;
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 5px;
+  border-radius: 3px;
+  background: #f4c648;
+  color: #142e51;
+  font-size: 8px;
+  line-height: 1.5;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.wfe-contribute .collection-check {
+  min-height: 44px;
+  font-size: 12px;
+}
+
+.wfe-contribute .collection-check input {
+  margin-top: 3px;
+  width: 22px;
+  height: 22px;
+}
+
+.wfe-contribute .collection-summary {
+  padding: 18px;
+  border: 1px solid #cdd9ea;
+  border-radius: 9px;
+  background: #f4f7fc;
+  align-items: center;
+}
+
+.wfe-contribute .collection-summary strong {
+  font-size: clamp(25px, 3vw, 32px);
+  overflow-wrap: anywhere;
+}
+
+.wfe-contribute .collection-notice {
+  margin: 12px 0;
+  padding: 12px 14px;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.wfe-contribute .collection-submit {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.wfe-contribute .pledge-price-policy-submit {
+  margin-bottom: 6px;
+}
+
+.pledge-recorded-note {
+  padding: 11px 13px;
+  border-radius: 6px;
+  background: #eaf1fb;
+  color: #14396b;
+  font-weight: 700;
+}
+
+.pledge-message-label {
+  margin-top: 22px;
+}
+
+.pledge-saved textarea {
+  width: 100%;
+  min-height: 140px;
+  resize: vertical;
+  padding: 12px;
+  border: 1px solid #cdd9ea;
+  border-radius: 6px;
+  color: #142e51;
+  background: #f4f7fc;
+  font:
+    400 16px/1.6 Manrope,
+    sans-serif;
+}
+
+.pledge-copy-button {
+  min-height: 48px;
+  margin-top: 10px;
+  padding: 10px 16px;
+  border: 1px solid #14396b;
+  border-radius: 6px;
+  background: #fff;
+  color: #14396b;
+  font:
+    800 12px/1.5 Manrope,
+    sans-serif;
+  cursor: pointer;
+}
+
+.pledge-country :is(button, input, select, summary):focus-visible,
+.pledge-help :is(summary, a):focus-visible,
+.pledge-copy-button:focus-visible {
+  outline: 3px solid #cb9534;
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .pledge-country-options button:hover {
+    border-color: #14396b;
+    background: #f4f7fc;
+  }
+
+  .pledge-copy-button:hover {
+    background: #eaf1fb;
+  }
+}
+
+@media (max-width: 760px) {
+  .wfe-campaign .v3-hero-grid {
+    grid-template-areas: "story" "pledge" "art";
+    grid-template-rows: auto;
+    row-gap: 28px;
+  }
+
+  .wfe-contribute .collections-header {
+    padding: 10px 0;
+  }
+
+  .wfe-contribute .collections-header nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .wfe-contribute .collections-main {
+    padding-top: 18px;
+  }
+
+  .wfe-contribute .collection-kicker {
+    font-size: 8px;
+    letter-spacing: 0.09em;
+    margin-bottom: 4px;
+  }
+
+  .wfe-contribute .step-checkout-heading h1 {
+    font-size: clamp(30px, 8.5vw, 39px);
+    max-width: none;
+    margin: 6px 0 9px;
+  }
+
+  .wfe-contribute .step-checkout-heading > p {
+    font-size: 12px;
+    line-height: 1.7;
+    margin-top: 0;
+    max-width: 48ch;
+  }
+
+  .wfe-contribute .collection-progress-steps {
+    margin: 14px 0;
+    gap: 8px;
+    font-size: 9px;
+  }
+
+  .wfe-contribute .collection-grid {
+    margin-top: 16px;
+  }
+
+  .wfe-contribute .pledge-form-card {
+    padding: 20px 17px;
+  }
+
+  .wfe-contribute .pledge-form-title {
+    font-size: 18px;
+    padding-bottom: 12px;
+  }
+
+  .wfe-contribute .pledge-country {
+    margin-top: 14px;
+  }
+
+  .pledge-country-options {
+    gap: 6px;
+  }
+
+  .pledge-country-options button {
+    min-height: 89px;
+    padding: 10px 8px;
+  }
+
+  .pledge-country-options button[aria-pressed="true"] {
+    padding: 9px 7px;
+  }
+
+  .pledge-country-options strong {
+    font-size: 12px;
+  }
+
+  .pledge-country-options small {
+    font-size: 9px;
+  }
+
+  .pledge-rate {
+    margin-top: 10px;
+    padding: 11px 0;
+  }
+
+  .pledge-country-panel {
+    padding-inline: 12px;
+  }
+
+  .wfe-contribute .amount-options {
+    gap: 10px 7px;
+  }
+
+  .wfe-contribute .amount-options button {
+    min-height: 76px;
+    font-size: 14px;
+  }
+
+  .wfe-contribute .amount-options button small {
+    font-size: 10px;
+  }
+
+  .wfe-contribute .collection-summary {
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .wfe-campaign .v3-give-card {
+    padding: 24px 20px;
+  }
+
+  .wfe-campaign .wfe-sticky-contribute {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .pledge-country-options button:last-child strong {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pledge-country-options button {
+    transition: none;
+  }
+}

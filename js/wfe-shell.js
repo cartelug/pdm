@@ -30,11 +30,24 @@
   var formatUGX = function (amount) {
     return "UGX " + new Intl.NumberFormat("en-UG").format(amount);
   };
-  // Without the shared pricing script the page behaves exactly as before: Uganda, UGX 5,000 per step.
+  // Never substitute Uganda when the shared script itself is unavailable.
   var pricing = window.StepPricing || null;
   var price = function () {
-    return pricing ? pricing.current() : { code: "UG", currency: "UGX", step: 5000, label: "UGX" };
+    return pricing ? pricing.current() : { code: "", currency: "", step: 0, label: "", ready: false, available: false };
   };
+  if (!pricing) {
+    all('[data-sp]:not([data-sp="policy"]), [data-sp-steps], [data-sp-amount]').forEach(function (node) {
+      node.textContent = "—";
+    });
+    all("[data-country-featured]").forEach(function (button) {
+      button.disabled = true;
+    });
+    all("[data-pricing-status]").forEach(function (node) {
+      node.hidden = false;
+      node.textContent = "Country prices could not load. Reload to try again, or contact PCI for assistance.";
+    });
+    document.documentElement.classList.remove("pricing-pending");
+  }
   var formatMoney = function (amount) {
     return pricing ? pricing.format(amount, price().currency) : formatUGX(amount);
   };
@@ -48,28 +61,42 @@
   var ref = "";
   var stepInput = byId("campaignSteps");
   var contributeLink = byId("campaignContribute");
+  var pledgePath = new URL("contribute/", SITE_ROOT);
+  var contributeLinks = Array.from(all("a[href]")).filter(function (link) {
+    var url = new URL(link.href);
+    return url.origin === pledgePath.origin && url.pathname === pledgePath.pathname;
+  });
 
+  ref = (params.get("ref") || "")
+    .trim()
+    .slice(0, 40)
+    .replace(/[^\w\- .']/g, "");
+  var requested = params.get("steps");
   try {
-    ref = (params.get("ref") || sessionStorage.getItem("wfe_ref") || "")
+    ref = (ref || sessionStorage.getItem("wfe_ref") || "")
       .trim()
       .slice(0, 40)
       .replace(/[^\w\- .']/g, "");
     if (ref) sessionStorage.setItem("wfe_ref", ref);
 
-    if (stepInput) {
-      var requested = params.get("steps") || sessionStorage.getItem("wfe_steps");
-      var requestedSteps = Number(requested);
-      if (requested && Number.isInteger(requestedSteps) && requestedSteps >= 1 && requestedSteps <= MAX_STEPS) {
-        stepInput.value = Math.max(MIN_STEPS, requestedSteps);
-      }
-    }
+    if (!requested) requested = sessionStorage.getItem("wfe_steps");
   } catch (error) {
     /* Attribution and remembering a choice are optional. */
   }
+  var requestedSteps = Number(requested);
+  if (
+    stepInput &&
+    requested &&
+    Number.isInteger(requestedSteps) &&
+    requestedSteps >= MIN_STEPS &&
+    requestedSteps <= MAX_STEPS
+  )
+    stepInput.value = requestedSteps;
 
-  all("[data-pci-contribute]").forEach(function (link) {
-    if (!ref) return;
+  contributeLinks.forEach(function (link) {
     var url = new URL(link.href);
+    link.dataset.pledgeSteps = url.searchParams.get("steps") || "";
+    if (!ref) return;
     url.searchParams.set("ref", ref);
     link.href = url.href;
   });
@@ -81,7 +108,7 @@
   var paymentCurrencies = ["UGX"]; // currencies the payment gateway can take; others are pledges
 
   function payableHere() {
-    return checkoutOpen === true && paymentCurrencies.indexOf(price().currency) !== -1;
+    return checkoutOpen === true && price().approved !== false && paymentCurrencies.indexOf(price().currency) !== -1;
   }
 
   /* The explanatory line under the button depends on the service state and on the chosen currency. */
@@ -89,6 +116,10 @@
   function renderStatus() {
     var status = byId("campaignCheckoutStatus");
     if (!status || !serviceState) return;
+    if (!pricing) {
+      status.textContent = "Country pricing is unavailable. Reload to try again, or contact the campaign team.";
+      return;
+    }
     var label = price().label;
     if (serviceState.checkoutOpen && !payableHere())
       status.textContent =
@@ -106,29 +137,41 @@
   }
 
   function renderChooser() {
-    if (!stepInput || !contributeLink) return;
+    if (!stepInput || !contributeLink) {
+      if (price().ready !== false && price().available !== false)
+        updatePledgeLinks(validRememberedSteps(), price().code);
+      return;
+    }
 
     var steps = Number(stepInput.value);
     var valid = Number.isInteger(steps) && steps >= MIN_STEPS && steps <= MAX_STEPS;
     var error = byId("campaignValidation");
     var here = price();
+    var priceReady = here.ready !== false && here.available !== false;
 
     error.hidden = valid;
     error.textContent = valid
       ? ""
-      : "Choose 5 to 20,000 whole steps. Minimum contribution: " + formatMoney(MIN_STEPS * here.step) + ".";
+      : "Choose 5 to 20,000 whole steps." +
+        (priceReady ? " Minimum contribution: " + formatMoney(MIN_STEPS * here.step) + "." : "");
     stepInput.setAttribute("aria-invalid", String(!valid));
 
-    if (!valid) {
+    if (!valid || !priceReady) {
       contributeLink.setAttribute("aria-disabled", "true");
       byId("campaignTotal").textContent = "—";
-      byId("campaignStepSummary").textContent = "Choose valid steps";
+      byId("campaignStepSummary").textContent = !priceReady
+        ? here.ready === false
+          ? "Loading country prices…"
+          : "Choose a country to continue"
+        : "Choose valid steps";
+      document.documentElement.classList.remove("pledge-pending");
       return;
     }
 
     contributeLink.removeAttribute("aria-disabled");
     byId("campaignTotal").textContent = formatMoney(steps * here.step);
     byId("campaignStepSummary").textContent = stepsLabel(steps);
+    document.documentElement.classList.remove("pledge-pending");
 
     var verb = payableHere()
       ? "Contribute "
@@ -149,12 +192,38 @@
     next.searchParams.set("country", here.code);
     if (ref) next.searchParams.set("ref", ref);
     contributeLink.href = next.href;
+    updatePledgeLinks(steps, here.code);
 
     try {
       sessionStorage.setItem("wfe_steps", String(steps));
     } catch (error) {
       /* optional */
     }
+    try {
+      var currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.set("steps", steps);
+      currentUrl.searchParams.set("country", here.code);
+      window.history.replaceState(window.history.state, "", currentUrl.href);
+    } catch (error) {
+      /* Deep links and in-page choices work without history access. */
+    }
+  }
+
+  function validRememberedSteps() {
+    return Number.isInteger(requestedSteps) && requestedSteps >= MIN_STEPS && requestedSteps <= MAX_STEPS
+      ? requestedSteps
+      : 50;
+  }
+
+  function updatePledgeLinks(steps, country) {
+    contributeLinks.forEach(function (link) {
+      if (link === contributeLink) return;
+      var url = new URL(link.href);
+      url.searchParams.set("country", country);
+      url.searchParams.set("steps", link.dataset.pledgeSteps || steps);
+      if (ref) url.searchParams.set("ref", ref);
+      link.href = url.href;
+    });
   }
 
   if (stepInput && contributeLink) {
@@ -422,12 +491,23 @@
     shareButton.addEventListener("click", function () {
       var url = new URL("walk-for-education/", SITE_ROOT);
       if (ref) url.searchParams.set("ref", ref);
+      if (price().available !== false) url.searchParams.set("country", price().code);
+      if (
+        stepInput &&
+        Number.isInteger(Number(stepInput.value)) &&
+        Number(stepInput.value) >= MIN_STEPS &&
+        Number(stepInput.value) <= MAX_STEPS
+      )
+        url.searchParams.set("steps", stepInput.value);
       var feedback = byId("wfeShareFeedback");
 
       var shared = navigator.share
         ? navigator.share({
             title: "Walk for Education",
-            text: "Every step builds a future. " + formatMoney(price().step) + " per sponsored step.",
+            text:
+              price().approved === false
+                ? "Every step builds a future. Choose your steps; PCI will confirm your contribution amount."
+                : "Every step builds a future. " + formatMoney(price().step) + " per sponsored step.",
             url: url.href,
           })
         : navigator.clipboard

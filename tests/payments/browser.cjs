@@ -14,24 +14,41 @@ function check(value, message) {
   checks++;
   console.log("PASS " + message);
 }
-async function submitPledgeViaWhatsapp(page, base) {
-  await page.route("https://wa.me/**", (route) =>
-    route.fulfill({ contentType: "text/html", body: "<title>Local WhatsApp handoff fixture</title>" }),
-  );
+async function savePledge(page, base) {
   const saved = page.waitForResponse(
     (response) =>
       response.url().endsWith("api/payments/index.php?action=create") && response.request().method() === "POST",
   );
   await page.click("#submitContribution");
   const result = await (await saved).json();
-  await page.waitForURL("https://wa.me/**");
-  const whatsapp = new URL(page.url());
+  await page.locator("#pledgeSavedPanel:not([hidden])").waitFor();
+  check(page.url().startsWith(base + "/contribute/?"), "saving a pledge keeps the supporter on the saved confirmation");
+  const whatsapp = new URL(await page.locator("#openPledgeWhatsapp").getAttribute("href"));
   const message = whatsapp.searchParams.get("text");
   check(
     whatsapp.pathname === "/256772150281" && message.includes(result.contribution.reference),
-    "saved pledge opens the campaign WhatsApp with its recorded reference",
+    "saved pledge prepares the campaign WhatsApp with its recorded reference",
   );
   check(!whatsapp.href.includes(result.token), "WhatsApp handoff excludes the private viewer token");
+  check(!page.url().includes(result.token), "saved confirmation URL excludes the private viewer token");
+  check(
+    (await page.locator("#pledgeSavedMessage").inputValue()) === message &&
+      (await page.locator("#pledgeSavedMessage").getAttribute("readonly")) !== null,
+    "saved pledge keeps the exact prepared message available for manual copying",
+  );
+  return { result, message };
+}
+async function submitPledgeViaWhatsapp(page, base) {
+  const { result, message } = await savePledge(page, base);
+  await page.route("https://wa.me/**", (route) =>
+    route.fulfill({ contentType: "text/html", body: "<title>Local WhatsApp handoff fixture</title>" }),
+  );
+  await page.click("#openPledgeWhatsapp");
+  await page.waitForURL("https://wa.me/**");
+  check(
+    page.url().includes(encodeURIComponent(result.contribution.reference)),
+    "WhatsApp opens only after the explicit supporter action",
+  );
   await page.goto(base + "/contribute/payment/?reference=" + encodeURIComponent(result.contribution.reference));
   return message;
 }
@@ -284,7 +301,7 @@ async function submitPledgeViaWhatsapp(page, base) {
     await page.screenshot({ path: path.join(shots, "contribute-selected-mobile.png"), fullPage: true });
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.locator("header.collections-header nav a").filter({ hasText: "The campaign" }).click();
-    await page.waitForURL("**/walk-for-education/");
+    await page.waitForURL((url) => url.pathname === "/walk-for-education/");
     check(await page.locator("#campaignSteps").isVisible(), "checkout header navigation returns to the campaign");
     await page.fill("#campaignSteps", "7");
     await page.click("#campaignContribute");
@@ -319,6 +336,30 @@ async function submitPledgeViaWhatsapp(page, base) {
       (await page.locator("#summaryAmount").textContent()).replace(/[\s,]/g, "") === "UGX75000",
       "custom steps update checkout amount",
     );
+    let invalidSubmissions = 0;
+    const observeInvalid = (request) => {
+      if (request.url().endsWith("?action=create")) invalidSubmissions++;
+    };
+    page.on("request", observeInvalid);
+    for (const value of ["", "0", "-5", "4", "1.5", "20001"]) {
+      await page.fill("#stepCount", value);
+      check(
+        (await page.locator("#summaryAmount").innerText()) === "—" &&
+          (await page.locator("#selectedStepsAmount").innerText()) === "—" &&
+          (await page.locator("#stepCount").getAttribute("aria-invalid")) === "true" &&
+          (await page.locator("#submitContribution").isDisabled()),
+        "invalid steps " + JSON.stringify(value) + " clear both amounts and block submission",
+      );
+      await page
+        .locator("#contributionForm")
+        .evaluate((form) => form.dispatchEvent(new Event("submit", { cancelable: true })));
+    }
+    check(
+      invalidSubmissions === 0,
+      "invalid whole-step values never reach the create API, including a direct submit event",
+    );
+    page.off("request", observeInvalid);
+    await page.fill("#stepCount", "15");
     await page.screenshot({ path: path.join(shots, "contribute-desktop.png"), fullPage: true });
     for (const width of [320, 360, 390, 768]) {
       await page.setViewportSize({ width, height: 844 });
@@ -413,11 +454,12 @@ async function submitPledgeViaWhatsapp(page, base) {
     await page.locator("#loginPanel:not([hidden])").waitFor();
     check(await page.locator("#dashboard").isHidden(), "sign-out hides private dashboard");
     await page.goto(base + "/contribute/?steps=1");
-    await page.locator("#submitContribution:not([disabled])").waitFor();
+    await page.waitForLoadState("networkidle");
     check(
-      (await page.locator("#stepCount").inputValue()) === "5" &&
-        (await page.locator("#selectedStepsAmount").innerText()) === "UGX 25,000",
-      "old one-step links display the new five-step minimum before any submission",
+      (await page.locator("#stepCount").inputValue()) === "1" &&
+        (await page.locator("#selectedStepsAmount").innerText()) === "—" &&
+        (await page.locator("#submitContribution").isDisabled()),
+      "old one-step links ask the supporter to choose valid steps without silently changing the pledge",
     );
     check(
       await page.locator(".skip-link").evaluate((e) => e.getBoundingClientRect().bottom < 0),
@@ -521,7 +563,7 @@ async function submitPledgeViaWhatsapp(page, base) {
         "campaign asks for the country first and detects Kenya from the visitor's time zone",
       );
       check(
-        (await text(".v3-give-heading b")) === "1 step = KSh 200" && (await text("#campaignTotal")) === "KSh 10,000",
+        (await text('[data-sp="unit"]')) === "KSh 200" && (await text("#campaignTotal")) === "KSh 10,000",
         "Kenya: one step is KSh 200 and fifty steps are KSh 10,000",
       );
       check(
@@ -541,9 +583,10 @@ async function submitPledgeViaWhatsapp(page, base) {
       await visitor.fill("#campaignSteps", "4");
       check((await text("#campaignValidation")).includes("KSh 1,000"), "the five-step minimum is explained in KSh");
       await visitor.fill("#campaignSteps", "50");
+      await visitor.locator("[data-country-panel] summary").click();
       await visitor.selectOption("#campaignCountry", "TZ");
       check(
-        (await text("#campaignTotal")) === "TSh 200,000" && (await text(".v3-give-heading b")) === "1 step = TSh 4,000",
+        (await text("#campaignTotal")) === "TSh 200,000" && (await text('[data-sp="unit"]')) === "TSh 4,000",
         "changing the country to Tanzania changes the currency at once",
       );
       await visitor.selectOption("#campaignCountry", "US");
@@ -557,7 +600,7 @@ async function submitPledgeViaWhatsapp(page, base) {
       await visitor.waitForFunction(() => document.getElementById("summaryAmount").textContent === "KSh 10,000");
       check(
         (await visitor.locator("#country").inputValue()) === "KE" &&
-          (await visitor.locator(".collection-kicker").first().textContent()).includes("KSh 200 per step"),
+          (await visitor.locator('[data-sp="unit"]').first().textContent()) === "KSh 200",
         "the contribution form opens on the chosen country and price",
       );
       await visitor.fill("#supporterName", "Kenya Browser Supporter");
@@ -591,15 +634,15 @@ async function submitPledgeViaWhatsapp(page, base) {
       await visitor.waitForFunction(() => document.querySelector('[data-kind="payment"]').disabled);
       check(
         (await visitor.locator('[data-kind="pledge"]').getAttribute("aria-pressed")) === "true" &&
-          (await text("#submitContribution")) === "Save pledge & open WhatsApp" &&
+          (await text("#submitContribution")) === "Save my pledge" &&
           (await text('[data-kind="payment"]')).includes("KSh"),
         "while online payment is open only for UGX, a Kenyan is steered to a pledge",
       );
-      await visitor.selectOption("#country", "UG");
+      await visitor.click('[data-country-featured="UG"]');
       await visitor.waitForFunction(() => !document.querySelector('[data-kind="payment"]').disabled);
       check(
         (await visitor.locator('[data-kind="pledge"]').getAttribute("aria-pressed")) === "true" &&
-          (await text("#submitContribution")) === "Save pledge & open WhatsApp",
+          (await text("#submitContribution")) === "Save my pledge",
         "switching to a payable country preserves the supporter's selected pledge",
       );
       await visitor.click('[data-kind="payment"]');
@@ -622,6 +665,301 @@ async function submitPledgeViaWhatsapp(page, base) {
         "the public certificate check shows the contribution in its own currency",
       );
       await nairobi.close();
+    }
+    /* Country-first controls, deep links and small-screen presentation. */
+    {
+      const countries = await browser.newContext({
+        viewport: { width: 375, height: 844 },
+        timezoneId: "Africa/Kampala",
+        reducedMotion: "reduce",
+      });
+      const view = await countries.newPage();
+      view.on("pageerror", (e) => errors.push(e.message));
+      await view.goto(base + "/walk-for-education/?country=KE&steps=20&ref=country-fixture");
+      await view.waitForLoadState("networkidle");
+      check(
+        (await view.locator("#campaignCountry option:not([disabled])").count()) === 199,
+        "all 199 countries remain available before filtering",
+      );
+      check(
+        (await view.locator("#campaignCountry").inputValue()) === "KE" &&
+          (await view.locator("#campaignSteps").inputValue()) === "20" &&
+          (await view.locator("#campaignTotal").innerText()) === "KSh 4,000" &&
+          (await view.locator('[data-country-featured="KE"]').getAttribute("aria-pressed")) === "true",
+        "an explicit Kenya deep link overrides Kampala detection and sets steps, currency and country control",
+      );
+      check(
+        await view.locator("a[href]").evaluateAll((links) => {
+          const pledges = links.filter((link) => {
+            const url = new URL(link.href);
+            return url.origin === location.origin && /\/contribute\/$/.test(url.pathname);
+          });
+          return pledges.length > 0 && pledges.every((link) => new URL(link.href).searchParams.get("country") === "KE");
+        }),
+        "every campaign pledge link carries the selected Kenyan country",
+      );
+      await view.click('[data-country-featured="UG"]');
+      check(
+        (await view.locator("#campaignTotal").innerText()) === "UGX 100,000",
+        "the Uganda country button reprices the same steps immediately",
+      );
+      await view.click('[data-country-featured="INT"]');
+      check(
+        (await view.locator("#campaignCountry").inputValue()) === "US" &&
+          (await view.locator('[data-sp="policy"]').first().innerText()).includes("Indicative pledge amount"),
+        "International exposes indicative pricing and a concrete country selection",
+      );
+      await view.fill("#campaignCountrySearch", "Tanzania");
+      check(
+        (await view.locator("#campaignCountry option:not([disabled])").allTextContents()).join("|") === "Tanzania",
+        "country search filters the native country selector",
+      );
+      await view.selectOption("#campaignCountry", "TZ");
+      check(
+        (await view.locator("#campaignTotal").innerText()) === "TSh 80,000",
+        "the searched country sets its own indicative amount",
+      );
+      await view.goto(base + "/walk-for-education/");
+      await view.waitForLoadState("networkidle");
+      check(
+        (await view.locator("#campaignCountry").inputValue()) === "TZ" &&
+          (await view.locator("#campaignSteps").inputValue()) === "20",
+        "country and valid steps survive same-session page navigation",
+      );
+      await view.goto(base + "/walk-for-education/?country=KE&steps=50");
+      await view.waitForLoadState("networkidle");
+      for (const width of [320, 360, 375, 390, 768, 1024, 1440, 1920]) {
+        await view.setViewportSize({ width, height: width >= 1024 ? 1000 : 844 });
+        check(
+          await view.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+          "Kenya campaign fits " + width + "px",
+        );
+        if (width === 375 || width === 1440) {
+          for (const section of await view.locator("main section").all()) await section.scrollIntoViewIfNeeded();
+          await view.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
+          await view.screenshot({ path: path.join(shots, "kenya-campaign-" + width + ".png"), fullPage: true });
+          await view.screenshot({ path: path.join(shots, "kenya-campaign-" + width + "-hero.png") });
+        }
+      }
+      await view.goto(base + "/contribute/?country=KE&steps=50");
+      await view.locator("#submitContribution:not([disabled])").waitFor();
+      await view.click("#changeContribution");
+      await view.click('[data-steps="5"]');
+      await view.click('[data-steps="50"]');
+      await view.reload();
+      await view.locator("#submitContribution:not([disabled])").waitFor();
+      check(
+        (await view.locator("#stepCount").inputValue()) === "50" &&
+          (await view.locator("#summaryAmount").innerText()) === "KSh 10,000",
+        "refresh keeps the latest preset rather than an older deep-link amount",
+      );
+      await view.click("#changeContribution");
+      for (const width of [320, 360, 375, 390, 768, 1024, 1440, 1920]) {
+        await view.setViewportSize({ width, height: width >= 1024 ? 1000 : 844 });
+        check(
+          await view.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+          "Kenya pledge form fits " + width + "px",
+        );
+        if (width === 375 || width === 1440) {
+          await view.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
+          await view.screenshot({ path: path.join(shots, "kenya-contribute-" + width + ".png"), fullPage: true });
+        }
+      }
+      await view.click('[data-country-featured="INT"]');
+      await view.fill("#supporterName", "Search Enter Fixture");
+      await view.fill("#phone", "+254700000000");
+      await view.check("#consent");
+      let searchSubmissions = 0;
+      view.on("request", (request) => {
+        if (request.url().endsWith("?action=create")) searchSubmissions++;
+      });
+      await view.fill("#pledgeCountrySearch", "Kenya");
+      await view.locator("#pledgeCountrySearch").press("Enter");
+      await view.waitForTimeout(200);
+      check(
+        searchSubmissions === 0 && (await view.locator("#contributionForm").isVisible()),
+        "pressing Enter in country search cannot submit the pledge for the previously selected country",
+      );
+      await countries.close();
+    }
+    /* Optional browser storage and clipboard failures must preserve a saved pledge. */
+    {
+      const restricted = await browser.newContext({
+        viewport: { width: 375, height: 844 },
+        timezoneId: "Africa/Kampala",
+      });
+      await restricted.addInitScript(() => {
+        Storage.prototype.getItem =
+          Storage.prototype.setItem =
+          Storage.prototype.removeItem =
+            function () {
+              throw new DOMException("Storage denied", "SecurityError");
+            };
+        Object.defineProperty(navigator, "share", { value: undefined, configurable: true });
+        Object.defineProperty(navigator, "clipboard", {
+          value: { writeText: () => Promise.reject(new DOMException("Clipboard denied", "NotAllowedError")) },
+          configurable: true,
+        });
+      });
+      const view = await restricted.newPage();
+      view.on("pageerror", (e) => errors.push(e.message));
+      await view.goto(base + "/walk-for-education/?country=KE&steps=7&ref=denied-storage");
+      await view
+        .locator("#campaignContribute")
+        .filter({ hasNot: view.locator('[aria-disabled="true"]') })
+        .waitFor();
+      await view.waitForLoadState("networkidle");
+      check(
+        (await view.locator("#campaignTotal").innerText()) === "KSh 1,400",
+        "country and step deep links work when session storage is denied",
+      );
+      const fiveLink = view.locator('a[href*="mode=pledge"]');
+      const fiveUrl = new URL(await fiveLink.getAttribute("href"));
+      check(
+        fiveUrl.searchParams.get("country") === "KE" &&
+          fiveUrl.searchParams.get("steps") === "5" &&
+          fiveUrl.searchParams.get("ref") === "denied-storage",
+        "the five-step invitation preserves Kenya and referral while keeping its explicit five steps with storage denied",
+      );
+      await fiveLink.click();
+      await view.locator("#submitContribution:not([disabled])").waitFor();
+      check(
+        (await view.locator("#summaryAmount").innerText()) === "KSh 1,000",
+        "the five-step invitation opens a Kenyan pledge at KSh 1,000",
+      );
+      await view.goto(base + "/walk-for-education/?country=KE&steps=7&ref=denied-storage");
+      await view.waitForLoadState("networkidle");
+      await view.click("#wfeShare");
+      await view.waitForFunction(() => document.querySelector("#wfeShareFeedback").textContent.includes("country=KE"));
+      check(
+        (await view.locator("#wfeShareFeedback").innerText()).includes("steps=7"),
+        "denied clipboard leaves a shareable country-and-steps URL",
+      );
+      await view.click("#campaignContribute");
+      await view.locator("#submitContribution:not([disabled])").waitFor();
+      check(
+        (await view.locator("#stepCount").inputValue()) === "7" &&
+          new URL(view.url()).searchParams.get("ref") === "denied-storage",
+        "checkout keeps steps and referral without optional browser storage",
+      );
+      await view.fill("#supporterName", "Storage Denied Fixture");
+      await view.fill("#phone", "+254700000000");
+      await view.check("#consent");
+      const { result, message } = await savePledge(view, base);
+      await view.click("#copyPledgeMessage");
+      await view.waitForFunction(() => document.querySelector("#pledgeCopyStatus").textContent.includes("selected"));
+      check(
+        (await view
+          .locator("#pledgeSavedMessage")
+          .evaluate((area) => area.selectionStart === 0 && area.selectionEnd === area.value.length)) &&
+          !(await view.locator("#pledgeCopyStatus").innerText()).includes("message copied"),
+        "denied clipboard selects the entire pledge message and reports the manual copy fallback honestly",
+      );
+      await view.screenshot({ path: path.join(shots, "kenya-saved-pledge-375.png"), fullPage: true });
+      await view.reload();
+      await view.locator("#pledgeSavedPanel:not([hidden])").waitFor();
+      check(
+        (await view.locator("#pledgeSavedMessage").inputValue()) === message,
+        "same-tab reload preserves the saved pledge confirmation with storage denied",
+      );
+      await view.click("#viewPledgeRecord");
+      await view.locator("#receiptContent:not([hidden])").waitFor();
+      check(
+        (await view.locator("#receiptAmount").innerText()) === "KSh 1,400" && !view.url().includes(result.token),
+        "the private pledge record opens from same-origin history state without putting its secret in the URL",
+      );
+      await view.goBack();
+      await view.locator("#pledgeSavedPanel:not([hidden])").waitFor();
+      check(
+        (await view.locator("#pledgeSavedReference").innerText()) === result.contribution.reference,
+        "returning from a private record restores the saved confirmation with storage denied",
+      );
+      await restricted.close();
+    }
+    /* Delayed pricing hides initial money values until the correct country is ready. */
+    {
+      const loading = await browser.newContext();
+      let releasePrice;
+      const priceGate = new Promise((resolve) => {
+        releasePrice = resolve;
+      });
+      await loading.route("**/assets/data/step-prices.json", async (route) => {
+        await priceGate;
+        await route.fulfill({
+          contentType: "application/json",
+          body: fs.readFileSync(path.join(root, "assets/data/step-prices.json")),
+        });
+      });
+      const view = await loading.newPage();
+      view.on("pageerror", (e) => errors.push(e.message));
+      await view.goto(base + "/contribute/?country=KE&steps=50", { waitUntil: "domcontentloaded" });
+      check(
+        (await view.locator("#submitContribution").isDisabled()) &&
+          (await view.evaluate(
+            () =>
+              !window.StepPricing.current().ready &&
+              [...document.querySelectorAll('[data-sp="unit"], #summaryAmount, #selectedStepsAmount')].every(
+                (node) => getComputedStyle(node).visibility === "hidden",
+              ),
+          )),
+        "while country pricing loads, monetary values stay hidden and saving stays disabled",
+      );
+      releasePrice();
+      await view.locator("#submitContribution:not([disabled])").waitFor();
+      check(
+        (await view.locator("#summaryAmount").innerText()) === "KSh 10,000",
+        "ready country pricing reveals the correct Kenyan amount",
+      );
+      await loading.close();
+    }
+    /* A failed pricing script must not guess a country or leave stale Ugandan totals. */
+    {
+      const missing = await browser.newContext();
+      await missing.route("**/js/step-pricing.js*", (route) => route.abort("failed"));
+      const view = await missing.newPage();
+      view.on("pageerror", (e) => errors.push(e.message));
+      for (const slug of ["walk-for-education", "contribute"]) {
+        await view.goto(base + "/" + slug + "/?country=KE&steps=50");
+        await view.waitForLoadState("networkidle");
+        check(
+          new URL(view.url()).searchParams.get("country") === "KE" &&
+            (await view.locator('[data-sp="unit"]').first().innerText()) === "—" &&
+            (await view.locator("[data-pricing-status]").innerText()).includes("could not load") &&
+            (await view.locator('[data-country-featured="KE"]').isDisabled()),
+          slug + " preserves the Kenyan deep link and explains a missing pricing script without quoting Uganda",
+        );
+        check(
+          slug === "contribute"
+            ? (await view.locator("#summaryAmount").innerText()) === "—" &&
+                (await view.locator("#submitContribution").isDisabled())
+            : (await view.locator("#campaignTotal").innerText()) === "—" &&
+                (await view.locator("#campaignContribute").getAttribute("aria-disabled")) === "true",
+          slug + " clears stale totals and disables continuation when the pricing script is missing",
+        );
+      }
+      await missing.close();
+    }
+    /* An unavailable international price never silently becomes a Ugandan pledge. */
+    {
+      const failed = await browser.newContext();
+      await failed.route("**/assets/data/step-prices.json", (route) => route.abort("failed"));
+      const view = await failed.newPage();
+      view.on("pageerror", (e) => errors.push(e.message));
+      await view.goto(base + "/contribute/?country=US&steps=50");
+      await view.waitForLoadState("networkidle");
+      check(
+        (await view.locator("#summaryAmount").innerText()) === "—" &&
+          (await view.locator("#submitContribution").isDisabled()) &&
+          (await view.locator("[data-pricing-status]").innerText()).includes("could not load"),
+        "failed international price loading clears the amount, explains the problem and blocks submission",
+      );
+      await view.goto(base + "/contribute/?country=KE&steps=50");
+      await view.locator("#submitContribution:not([disabled])").waitFor();
+      check(
+        (await view.locator("#summaryAmount").innerText()) === "KSh 10,000",
+        "published Kenyan fallback remains correct when the price-table request fails",
+      );
+      await failed.close();
     }
     /* Global preloader: every page family shows it and removes it after loading; it never covers the page
        when JavaScript is unavailable. A fresh context keeps these independent of the fixtures above. */

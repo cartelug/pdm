@@ -1,7 +1,22 @@
 <?php
 declare(strict_types=1);
 if (PHP_SAPI!=='cli') { http_response_code(404);exit; }
-$temp=sys_get_temp_dir().'/pci-ledger-test-'.bin2hex(random_bytes(8));mkdir($temp,0700);
+/* Run the fixture in a child process so SQLite closes before cleanup on Windows. */
+$temp=getenv('PCI_LEDGER_TEST_DIR');
+if (!$temp) {
+    $temp=sys_get_temp_dir().'/pci-ledger-test-'.bin2hex(random_bytes(8));mkdir($temp,0700);
+    putenv('PCI_LEDGER_TEST_DIR='.$temp);
+    $command=[PHP_BINARY];if (php_ini_loaded_file()) {$command[]='-c';$command[]=php_ini_loaded_file();}$command[]=__FILE__;
+    try {
+        $worker=proc_open($command,[0=>STDIN,1=>STDOUT,2=>STDERR],$pipes);
+        if (!is_resource($worker)) throw new RuntimeException('Unable to start isolated ledger test');
+        $exit=proc_close($worker);
+    } finally {
+        foreach (glob($temp.'/backups/*') ?: [] as $file) unlink($file);if(is_dir($temp.'/backups'))rmdir($temp.'/backups');
+        foreach (glob($temp.'/*') ?: [] as $file) if (is_file($file)) unlink($file);rmdir($temp);
+    }
+    exit($exit);
+}
 putenv('PCI_PRIVATE_DIR='.$temp);putenv('PCI_ENVIRONMENT=live');putenv('PCI_CONSUMER_KEY=test-key');putenv('PCI_CONSUMER_SECRET=test-secret');putenv('PCI_POLICIES_APPROVED=true');putenv('PCI_LIVE_APPROVED=true');putenv('PCI_CHECKOUT_ENABLED=true');putenv('PCI_PAYMENT_CURRENCIES=UGX,KES');
 $_SERVER['DOCUMENT_ROOT']=dirname(__DIR__,2);$_SESSION=[];
 require dirname(__DIR__,2).'/api/lib/payments.php';
@@ -113,7 +128,5 @@ try {
     check($tp['status']==='pledged' && $tp['currency']==='TZS' && (int)$tp['step_unit']===4000 && (int)pci_totals()['pledged']-$before===250000,'a pledge in TZS is recorded in TZS and counted at the campaign step value');
     echo "\n$checks checks passed. No live payments were sent.\n";
 } finally {
-    /* Isolated fixtures only; never operate on a server ledger. */
-    foreach (glob($temp.'/backups/*') ?: [] as $file) unlink($file);if(is_dir($temp.'/backups'))rmdir($temp.'/backups');
-    foreach (glob($temp.'/*') ?: [] as $file) if (is_file($file)) unlink($file);rmdir($temp);
+    /* The parent removes these isolated fixtures after this process closes SQLite. */
 }
