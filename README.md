@@ -1,6 +1,8 @@
 # Pamodzi for Development
 
-Static pages with PHP campaign registers and collections services for **Pamodzi Community Initiative**, **Faith in Motion** and **Walk for Education**.
+Astro 5 and TypeScript author the institutional V3 pages. `npm run build` exports real static documents into the repository root and existing page folders. **Root `index.html` is the deployable homepage**, and cPanel continues serving the existing PHP campaign registers, payments and certificates.
+
+Walk for Education, contribution pages and their legacy dependencies remain byte-identical to the recorded baseline. Faith in Motion receives a separate visual stylesheet without ledger changes. See `V3-IMPLEMENTATION.md` for components, validation, staging gates and rollback.
 
 Live site: https://pamodzici.com/
 
@@ -15,8 +17,7 @@ See `PESAPAL-HANDOVER.md` for configuration, testing and the remaining launch ga
 
 ## Site structure
 
-The public pages have no framework or build step. Campaign updates use PHP; the
-new payment module uses a private SQLite ledger on the cPanel server.
+Institutional source lives in `src/`; build output is committed at the existing public paths. Campaign updates use PHP, and the payment module uses a private SQLite ledger on the cPanel server. The following legacy architecture notes describe preserved campaign services and the pre-V3 baseline.
 
 - Institutional pages: `index.html`, `about.html`, `what-we-do.html`, `model.html`, `impact.html`, `projects.html`, `partnerships.html`, `governance.html`, `contact.html`, and `updates.html`.
 - Project pages: `apartments.html`, `community.html`, and the Faith in Motion campaign pages.
@@ -91,7 +92,7 @@ message was sent or a payment received. See `PCI-PLEDGE-V2-RELEASE.md` for relea
 
 ## Front-end architecture
 
-There is still no build step: every page links its CSS and JS directly. A small set of dev tools keeps that source consistent.
+The preserved campaigns link their CSS and JS directly. Institutional V3 uses the isolated Astro authoring layer described above.
 
 | Page family | Stylesheets (in order) | Scripts (in order) |
 | --- | --- | --- |

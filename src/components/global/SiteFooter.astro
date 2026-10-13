@@ -1,0 +1,84 @@
+---
+import { navigation, programmes } from "../../config/navigation";
+import { site, href, asset } from "../../config/site";
+interface Props {
+  path: string;
+}
+const { path } = Astro.props;
+---
+
+<footer class="pci-footer">
+  <div class="pci-container">
+    <div class="pci-footer__invitation">
+      <span class="pci-eyebrow">Together for development</span>
+      <h2>
+        Let’s build what lasts.
+        <br />
+        <em>Together.</em>
+      </h2>
+      <div class="pci-actions">
+        <a class="pci-button pci-button--gold" href={href(path, "/contact/#enquiry")}>
+          Partner With Pamodzi <span aria-hidden="true">→</span>
+        </a>
+        <a class="pci-text-link" href={href(path, "/contact/")}>
+          Get In Touch ↗
+        </a>
+      </div>
+    </div>
+    <div class="pci-footer__grid">
+      <div>
+        <a class="pci-brand" href={href(path, "/")}>
+          <span class="pci-brand__mark">
+            <img
+              src={asset(path, "assets/brand/pamodzi/pamodzi-logo-transparent.png")}
+              width="1273"
+              height="965"
+              alt=""
+            />
+          </span>
+          <span>
+            Pamodzi<small>Community Initiative</small>
+          </span>
+        </a>
+        <p>Bringing communities and partners together around locally led development.</p>
+      </div>
+      <nav aria-label="Organisation">
+        <h3 class="pci-eyebrow">Organisation</h3>
+        {navigation
+          .filter((n) => n.group === "explore" && n.route !== "/")
+          .map((n) => (
+            <a href={href(path, n.route)}>{n.label}</a>
+          ))}
+      </nav>
+      <nav aria-label="Programmes">
+        <h3 class="pci-eyebrow">Programmes</h3>
+        {programmes.map((p) => (
+          <a href={href(path, "/what-we-do/#" + p.id)}>{p.title}</a>
+        ))}
+      </nav>
+      <nav aria-label="Engage and accountability">
+        <h3 class="pci-eyebrow">Engage</h3>
+        {navigation
+          .filter((n) => n.group !== "explore")
+          .map((n) => (
+            <a href={href(path, n.route)}>{n.label}</a>
+          ))}
+      </nav>
+    </div>
+    <div class="pci-footer__socials">
+      {site.socials.map((s) => (
+        <a href={s.href} target="_blank" rel="noopener noreferrer">
+          {s.label} ↗
+        </a>
+      ))}
+    </div>
+    <p class="pci-footer__wordmark" aria-hidden="true">
+      Pamodzi.
+    </p>
+    <div class="pci-footer__bottom">
+      <span>© {new Date().getUTCFullYear()} Pamodzi Community Initiative</span>
+      <span>Figures reconciled before publication</span>
+      <span>Designed by THE 97 · 97 Design</span>
+    </div>
+  </div>
+</footer>

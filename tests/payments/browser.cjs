@@ -961,8 +961,8 @@ async function submitPledgeViaWhatsapp(page, base) {
       );
       await failed.close();
     }
-    /* Global preloader: every page family shows it and removes it after loading; it never covers the page
-       when JavaScript is unavailable. A fresh context keeps these independent of the fixtures above. */
+    /* The protected legacy campaigns retain their preloader. The isolated institutional shell is
+       immediately readable without one. A fresh context keeps these independent of payment fixtures. */
     {
       const fresh = await browser.newContext({ viewport: { width: 1280, height: 800 } });
       const view = await fresh.newPage();
@@ -982,6 +982,13 @@ async function submitPledgeViaWhatsapp(page, base) {
         "/404.html",
       ]) {
         await view.goto(base + url);
+        if (await view.locator("body[data-pci-v3]").count()) {
+          check(
+            (await view.locator(".site-loader").count()) === 0 && (await view.locator("h1").isVisible()),
+            url + " exposes institutional content without a blocking preloader",
+          );
+          continue;
+        }
         await view.waitForFunction(() => !document.querySelector(".site-loader"), null, { timeout: 6000 });
         check(
           await view.evaluate(
@@ -997,8 +1004,13 @@ async function submitPledgeViaWhatsapp(page, base) {
       const still = await noScript.newPage();
       await still.goto(base + "/about/");
       check(
+        (await still.locator(".site-loader").count()) === 0 && (await still.locator("h1").isVisible()),
+        "institutional content is readable without JavaScript",
+      );
+      await still.goto(base + "/walk-for-education/");
+      check(
         (await still.locator(".site-loader").evaluate((el) => getComputedStyle(el).display)) === "none",
-        "without JavaScript the preloader never covers the page",
+        "without JavaScript the protected campaign preloader never covers the page",
       );
       await noScript.close();
     }

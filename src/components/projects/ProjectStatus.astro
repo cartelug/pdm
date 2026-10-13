@@ -1,0 +1,9 @@
+---
+import type { CollectionEntry } from "astro:content";
+interface Props {
+  status: CollectionEntry<"projects">["data"]["status"];
+}
+const { status } = Astro.props;
+---
+
+<span class="pci-status">{status}</span>

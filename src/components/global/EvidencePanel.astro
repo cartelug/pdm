@@ -1,0 +1,20 @@
+---
+interface Props {
+  claim: string;
+  sourceLabel: string;
+  sourceHref: string;
+  date?: string;
+  verified?: boolean;
+}
+const { claim, sourceLabel, sourceHref, date, verified = false } = Astro.props;
+---
+
+{verified && (
+  <aside class="pci-evidence">
+    <p>{claim}</p>
+    <p class="pci-evidence__source">
+      <a href={sourceHref}>{sourceLabel} ↗</a>
+      {date && <time datetime={date}> · {date}</time>}
+    </p>
+  </aside>
+)}

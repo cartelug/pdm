@@ -1,0 +1,81 @@
+---
+import SiteHeader from "../components/global/SiteHeader.astro";
+import SiteFooter from "../components/global/SiteFooter.astro";
+import { site, asset } from "../config/site";
+import "../styles/fonts.css";
+import "../styles/global.css";
+interface Props {
+  path: string;
+  title: string;
+  description: string;
+  home?: boolean;
+  noindex?: boolean;
+}
+const { path, title, description, home = false, noindex = false } = Astro.props;
+const canonical = site.url + path;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — Pamodzi Community Initiative</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title + " — Pamodzi Community Initiative"} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={site.url + "/assets/og/share-card.jpg"} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#0C0B09" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <link rel="icon" type="image/png" href={asset(path, "assets/brand/pamodzi/pamodzi-logo-transparent.png")} />
+    {home && (
+      <link
+        rel="preload"
+        as="image"
+        href={asset(path, "assets/institutional-v3/hero-wide-1680.webp")}
+        imagesrcset="assets/institutional-v3/hero-wide-840.webp 840w, assets/institutional-v3/hero-wide-1280.webp 1280w, assets/institutional-v3/hero-wide-1680.webp 1680w"
+        imagesizes="100vw"
+        media="(min-width: 721px)"
+      />
+    )}
+    {home && (
+      <link
+        rel="preload"
+        as="image"
+        href={asset(path, "assets/institutional-v3/hero-portrait-840.webp")}
+        imagesrcset="assets/institutional-v3/hero-portrait-420.webp 420w, assets/institutional-v3/hero-portrait-840.webp 840w"
+        imagesizes="100vw"
+        media="(max-width: 720px)"
+      />
+    )}
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: site.name,
+        url: site.url,
+        logo: site.url + "/assets/brand/pamodzi/pamodzi-logo-transparent.png",
+        sameAs: site.socials.map((s) => s.href),
+      })}
+    />
+  </head>
+  <body class:list={["pci-v3", { "pci-home": home }]} data-pci-v3>
+    <a class="pci-skip-link" href="#main-content">
+      Skip to main content
+    </a>
+    <SiteHeader {path} {home} />
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter {path} />
+    <script>
+      import "../scripts/page-lifecycle";
+    </script>
+  </body>
+</html>

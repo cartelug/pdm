@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+import { href } from "../../config/site";
+interface Props {
+  path: string;
+  limit?: number;
+}
+const { path, limit = 3 } = Astro.props;
+const entries = (await getCollection("updates", (u) => u.data.publication === "approved"))
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .slice(0, limit);
+---
+
+{entries.length ? (
+  <div class="pci-evidence-grid">
+    {entries.map((entry) => (
+      <article class="pci-evidence">
+        <span class="pci-eyebrow">
+          {entry.data.category} · {entry.data.date}
+        </span>
+        <h3 style="margin-top:18px">
+          <a href={href(path, "/updates/" + entry.id + "/")}>{entry.data.title} ↗</a>
+        </h3>
+        <p>{entry.data.summary}</p>
+      </article>
+    ))}
+  </div>
+) : (
+  <div class="pci-empty-state">
+    <h3>Institutional stories are awaiting publication review.</h3>
+    <p>
+      For current campaign progress and contribution guidance, visit the dedicated campaign records. Dates, figures and
+      permissions are checked before new institutional stories appear here.
+    </p>
+    <div class="pci-actions">
+      <a class="pci-text-link" href={href(path, "/walk/")}>
+        Faith in Motion Journey ↗
+      </a>
+      <a class="pci-text-link" href={href(path, "/walk-for-education/updates/")}>
+        Education Campaign Updates ↗
+      </a>
+    </div>
+  </div>
+)}

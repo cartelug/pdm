@@ -1,0 +1,124 @@
+// Real-browser staging checks. Run by CI; no production forms or payments are submitted.
+const assert = require("node:assert/strict");
+const http = require("node:http");
+const fs = require("node:fs");
+const path = require("node:path");
+const { chromium } = require("playwright");
+const root = path.resolve(__dirname, "../..");
+const types = {
+  ".html": "text/html",
+  ".css": "text/css",
+  ".js": "text/javascript",
+  ".webp": "image/webp",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".woff2": "font/woff2",
+};
+const server = http.createServer((req, res) => {
+  let file = path.resolve(root, "." + decodeURIComponent(new URL(req.url, "http://localhost").pathname));
+  if (file !== root && !file.startsWith(root + path.sep)) {
+    res.writeHead(403).end();
+    return;
+  }
+  if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, "index.html");
+  if (!fs.existsSync(file)) {
+    res.writeHead(404).end();
+    return;
+  }
+  res.writeHead(200, { "Content-Type": types[path.extname(file)] || "application/octet-stream" });
+  fs.createReadStream(file).pipe(res);
+});
+(async () => {
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  const base = "http://127.0.0.1:" + server.address().port;
+  const browser = await chromium.launch({ headless: true });
+  try {
+    const page = await browser.newPage();
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    for (const width of [320, 360, 375, 390, 430, 768, 1024, 1280, 1440, 1920]) {
+      await page.setViewportSize({ width, height: 850 });
+      for (const route of ["/", "/about/", "/what-we-do/", "/projects/", "/contact/", "/model/", "/apartments/"]) {
+        await page.goto(base + route);
+        await page.evaluate(() => document.fonts.ready);
+        assert.equal(
+          await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+          true,
+          route + " fits " + width,
+        );
+        assert.equal(await page.locator("h1").isVisible(), true);
+      }
+    }
+    await page.setViewportSize({ width: 390, height: 640 });
+    await page.goto(base + "/");
+    await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
+    const accessibility = await page.evaluate(() =>
+      window.axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"] } }),
+    );
+    assert.deepEqual(
+      accessibility.violations.filter((v) => ["critical", "serious"].includes(v.impact)).map((v) => v.id),
+      [],
+      "Homepage accessibility: " +
+        JSON.stringify(
+          accessibility.violations.map((v) => ({
+            id: v.id,
+            nodes: v.nodes.map((n) => ({ target: n.target, summary: n.failureSummary })),
+          })),
+        ),
+    );
+    const trigger = page.locator("[data-menu-open]");
+    await trigger.click();
+    assert.equal(await page.locator("dialog").evaluate((el) => el.open), true);
+    assert.equal(await page.locator("main").evaluate((el) => el.inert), true);
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(260);
+    assert.equal(await trigger.getAttribute("aria-expanded"), "false");
+    assert.equal(await trigger.evaluate((el) => el === document.activeElement), true);
+    await trigger.click();
+    await page.locator("dialog").getByRole("link", { name: "About Pamodzi" }).click();
+    await page.waitForURL("**/about/index.html");
+    assert.equal(await page.evaluate(() => document.body.style.position), "");
+    await page.goBack();
+    assert.equal(await page.locator("dialog").evaluate((el) => el.open), false);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.locator("[data-menu-open]").click();
+    await page.locator("[data-menu-close]").click();
+    assert.equal(await page.locator("dialog").evaluate((el) => el.open), false);
+    await page.goto(base + "/projects/");
+    await page.getByRole("button", { name: "Under review", exact: true }).click();
+    assert.equal(await page.locator("[data-project-status]:visible").count(), 1);
+    assert.match(await page.locator("[data-project-status]:visible").innerText(), /Kasese Apartment/);
+    await page.goto(base + "/contact/");
+    assert.equal(await page.locator("#enquiry").isVisible(), true, "Enhanced enquiry form stays visible");
+    await page.locator("#enquiryName").fill("Fixture Person");
+    await page.locator("#enquiryEmail").fill("fixture@example.invalid");
+    await page.locator("#enquiryMessage").fill("This tests the email draft fallback without sending any message.");
+    await page.getByRole("button", { name: "Send Enquiry" }).click();
+    await page.waitForFunction(() =>
+      document.querySelector("[data-enquiry-status]").textContent.includes("email draft"),
+    );
+    assert.equal(await page.locator("#enquiryName").inputValue(), "Fixture Person");
+    assert.match(await page.locator("[data-enquiry-fallback]").getAttribute("href"), /^mailto:/);
+    const nojs = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 320, height: 640 } });
+    const plain = await nojs.newPage();
+    await plain.goto(base + "/");
+    await plain.locator("summary").click();
+    assert.equal(
+      await plain.locator("[data-nav-fallback]").getByRole("link", { name: "Walk for Education" }).isVisible(),
+      true,
+    );
+    assert.equal(await plain.getByRole("link", { name: "Explore Our Work" }).isVisible(), true);
+    await nojs.close();
+    assert.deepEqual(errors, []);
+    console.log(
+      "Institutional browser checks passed: responsive routes, modal lifecycle, reduced motion, filters and no-JS navigation.",
+    );
+  } finally {
+    await browser.close();
+    server.close();
+  }
+})().catch((error) => {
+  console.error(error);
+  server.close();
+  process.exitCode = 1;
+});

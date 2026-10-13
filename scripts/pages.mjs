@@ -16,7 +16,23 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const SKIP = new Set([".git", "node_modules", "tests", "deploy", "admin", "api", "assets", "scripts", "css", "js"]);
+const SKIP = new Set([
+  ".git",
+  ".astro",
+  "build-v3",
+  "public-v3",
+  "src",
+  "_astro",
+  "node_modules",
+  "tests",
+  "deploy",
+  "admin",
+  "api",
+  "assets",
+  "scripts",
+  "css",
+  "js",
+]);
 
 function publicPages(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
@@ -40,6 +56,16 @@ for (const file of pages) {
   if (!/<meta name="viewport"/.test(head)) fail("missing viewport meta");
   if (!/<title>[^<]+<\/title>/.test(head)) fail("missing <title>");
 
+  // The isolated V3 shell intentionally has no blocking preloader. Legacy campaign rules stay intact.
+  if (/<body[^>]*\bdata-pci-v3\b/.test(html)) {
+    if (!/<main[^>]*id="main-content"/.test(html)) fail("missing V3 main landmark");
+    if (!/<dialog[^>]*id="pciNavigation"/.test(html)) fail("missing accessible navigation dialog");
+    if (!/aria-controls="pciNavigation"/.test(html)) fail("missing menu control association");
+    if (/css\/(base|preloader)\.css|js\/(core|site-motion)\.js/.test(html))
+      fail("V3 must not load legacy shell effects");
+    continue;
+  }
+
   const firstStylesheet = head.search(/<link[^>]+rel="stylesheet"|<link href="https:\/\/fonts/);
   const preloaderCss = head.search(/<link rel="stylesheet" href="[^"]*css\/preloader\.css(\?v=[^"]*)?">/);
   const preloaderJs = head.search(/<script src="[^"]*js\/preloader\.js(\?v=[^"]*)?"><\/script>/);
@@ -61,4 +87,4 @@ if (problems.length) {
   console.error(problems.join("\n"));
   process.exit(1);
 }
-console.log(`${pages.length} public pages: preloader, language, viewport and title all present.`);
+console.log(`${pages.length} public pages: family-appropriate shell, language, viewport and title all present.`);

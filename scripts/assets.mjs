@@ -17,7 +17,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const SKIP = new Set([".git", "node_modules", "tests", "deploy"]);
+const SKIP = new Set([".git", ".astro", "build-v3", "public-v3", "src", "_astro", "node_modules", "tests", "deploy"]);
 const REFERENCE = /(\b(?:href|src)=")((?:\/|\.\.\/|\.\/)*(?:css|js)\/[\w.-]+\.(?:css|js))(\?v=[^"]*)?(")/g;
 const check = process.argv.includes("--check");
 // Content files refreshed from the admin console, often without these tools: a stale hash on them is

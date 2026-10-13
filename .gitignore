@@ -12,3 +12,7 @@ pci-private/
 api/payments/config.local.php
 __pycache__/
 *.pyc
+
+.astro/
+build-v3/
+public-v3/
