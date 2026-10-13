@@ -179,6 +179,16 @@
     color: var(--pci-accent-on-dark);
   }
 
+  .pci-muted .pci-eyebrow,
+  .pci-muted .pci-programme__number,
+  .pci-page-hero .pci-eyebrow,
+  .pci-content .on-cream .eyebrow,
+  .pci-content .on-cream .n,
+  .pci-content .on-cream .mk,
+  .pci-content .on-cream .no {
+    color: var(--pci-text-secondary);
+  }
+
   .pci-eyebrow + h1,
   .pci-eyebrow + h2,
   .pci-content .eyebrow + h2 {
@@ -264,7 +274,7 @@
   .pci-header--home {
     position: absolute;
     width: 100%;
-    background: transparent;
+    background: rgb(12 11 9 / 68%);
   }
 
   .pci-header--home.is-scrolled {

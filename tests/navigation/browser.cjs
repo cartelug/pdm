@@ -58,7 +58,13 @@ const server = http.createServer((req, res) => {
     assert.deepEqual(
       accessibility.violations.filter((v) => ["critical", "serious"].includes(v.impact)).map((v) => v.id),
       [],
-      "Homepage accessibility",
+      "Homepage accessibility: " +
+        JSON.stringify(
+          accessibility.violations.map((v) => ({
+            id: v.id,
+            nodes: v.nodes.map((n) => ({ target: n.target, summary: n.failureSummary })),
+          })),
+        ),
     );
     const trigger = page.locator("[data-menu-open]");
     await trigger.click();
