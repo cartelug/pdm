@@ -1,5 +1,15 @@
 {
   "printWidth": 120,
   "trailingComma": "all",
-  "overrides": [{ "files": "*.css", "options": { "printWidth": 100 } }]
+  "overrides": [
+    {
+      "files": "*.css",
+      "options": {
+        "printWidth": 100
+      }
+    }
+  ],
+  "plugins": [
+    "prettier-plugin-astro"
+  ]
 }

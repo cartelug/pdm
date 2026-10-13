@@ -1,0 +1,101 @@
+---
+import { navigation } from "../../config/navigation";
+import { asset, href } from "../../config/site";
+interface Props {
+  path: string;
+  home?: boolean;
+}
+const { path, home = false } = Astro.props;
+const primary = navigation.filter((n) => n.group === "explore");
+---
+
+<header class:list={["pci-header", { "pci-header--home": home }]} data-site-header>
+  <div class="pci-container pci-header__inner">
+    <a class="pci-brand" href={href(path, "/")} aria-label="Pamodzi Community Initiative home">
+      <span class="pci-brand__mark">
+        <img src={asset(path, "assets/brand/pamodzi/pamodzi-logo-transparent.png")} width="1273" height="965" alt="" />
+      </span>
+      <span>
+        Pamodzi<small>Community Initiative</small>
+      </span>
+    </a>
+    <nav class="pci-desktop-nav" aria-label="Primary navigation">
+      {navigation
+        .filter((n) => n.desktop)
+        .map((n) => (
+          <a href={href(path, n.route)} aria-current={path === n.route ? "page" : undefined}>
+            {n.label.replace("Pamodzi", "").replace("Our ", "").trim()}
+          </a>
+        ))}
+    </nav>
+    <a class="pci-header__cta" href={href(path, "/contact/#enquiry")}>
+      Partner With Us <span aria-hidden="true">↗</span>
+    </a>
+    <button
+      class="pci-menu-toggle"
+      type="button"
+      aria-controls="pciNavigation"
+      aria-expanded="false"
+      aria-label="Open navigation"
+      data-menu-open
+      hidden
+    >
+      Menu <span aria-hidden="true">＋</span>
+    </button>
+  </div>
+  <details class="pci-fallback-nav" data-nav-fallback>
+    <summary>Explore the website</summary>
+    <nav class="pci-nojs-nav" aria-label="All pages">
+      {navigation.map((n) => (
+        <a href={href(path, n.route)}>{n.label}</a>
+      ))}
+    </nav>
+  </details>
+</header>
+<dialog class="pci-menu" id="pciNavigation" aria-labelledby="pciMenuTitle" data-menu>
+  <div class="pci-menu__top">
+    <a class="pci-menu__identity" href={href(path, "/")}>
+      Pamodzi <span>Community Initiative</span>
+    </a>
+    <button class="pci-menu__close" type="button" aria-label="Close navigation" data-menu-close>
+      Close <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="pci-menu__body">
+    <h2 class="pci-eyebrow" id="pciMenuTitle">
+      Explore Pamodzi
+    </h2>
+    <nav aria-label="Mobile primary navigation">
+      <ol class="pci-menu__links">
+        {primary.map((n, i) => (
+          <li>
+            <a href={href(path, n.route)} aria-current={path === n.route ? "page" : undefined}>
+              <span class="pci-menu__index">{String(i + 1).padStart(2, "0")}</span>
+              <span>{n.label}</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+    <div class="pci-menu__utilities">
+      {(["institutional", "engage"] as const).map((group) => (
+        <nav aria-label={group === "engage" ? "Engage" : "Institutional information"}>
+          <h3 class="pci-eyebrow">{group}</h3>
+          {navigation
+            .filter((n) => n.group === group)
+            .map((n) => (
+              <a href={href(path, n.route)} data-protected={n.protected || undefined}>
+                {n.label}
+                <span aria-hidden="true">↗</span>
+              </a>
+            ))}
+        </nav>
+      ))}
+    </div>
+    <a class="pci-button pci-button--gold" href={href(path, "/contact/#enquiry")}>
+      Partner With Pamodzi <span aria-hidden="true">→</span>
+    </a>
+    <p class="pci-menu__note">People. Partnerships. Lasting change.</p>
+  </div>
+</dialog>

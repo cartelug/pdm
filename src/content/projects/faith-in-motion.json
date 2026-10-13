@@ -1,0 +1,16 @@
+{
+  "title": "Faith in Motion",
+  "route": "/faith-in-motion/",
+  "status": "Live campaign",
+  "category": "Walking for Impact",
+  "location": "Kasese, Uganda",
+  "summary": "Supporting completion of St Joseph Catholic Church at Rwembyo, Kisinga, Kasese District.",
+  "image": "assets/institutional-v3/faith-1000.webp",
+  "imageAlt": "Supplied photograph of the Faith in Motion walk arriving at Kiburara",
+  "imageNote": "Supplied Faith in Motion journey photograph",
+  "walkStatus": "400 km journey completed",
+  "owner": "Pamodzi Community Initiative",
+  "source": "projects/index.html and campaign home at baseline commit",
+  "publication": "existing-public",
+  "reviewedAt": null
+}

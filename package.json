@@ -5,9 +5,9 @@
   "scripts": {
     "lint": "npm run lint:js && npm run lint:css && npm run format:check && npm run check:hover && npm run check:prices && npm run check:pages && npm run check:assets",
     "lint:js": "eslint .",
-    "lint:css": "stylelint \"css/**/*.css\"",
+    "lint:css": "stylelint \"css/**/*.css\" \"src/styles/**/*.css\"",
     "format": "prettier --write \"css/**/*.css\" \"js/**/*.js\" \"scripts/**/*.mjs\" \"tests/**/*.cjs\"",
-    "format:check": "prettier --check \"css/**/*.css\" \"js/**/*.js\" \"scripts/**/*.mjs\" \"tests/**/*.cjs\"",
+    "format:check": "prettier --check \"css/**/*.css\" \"js/**/*.js\" \"scripts/**/*.mjs\" \"tests/**/*.cjs\" \"src/**/*.{astro,ts,css,json,md}\"",
     "css:compact": "node scripts/css-compact.mjs css/*.css",
     "css:hover": "node scripts/css-hover.mjs css/*.css",
     "prices": "node scripts/step-prices.mjs",
@@ -16,16 +16,36 @@
     "check:pages": "node scripts/pages.mjs",
     "test:browser": "node tests/payments/browser.cjs",
     "check:hover": "node scripts/css-hover.mjs --check css/*.css",
-    "check:prices": "node scripts/step-prices.mjs --check"
+    "check:prices": "node scripts/step-prices.mjs --check",
+    "build": "astro build && node scripts/export-v3.mjs && node scripts/assets.mjs",
+    "check:types": "astro check",
+    "check:protected": "node scripts/check-protected.mjs",
+    "check:v3": "node --test tests/pages/v3.test.cjs tests/navigation/menu.test.cjs",
+    "validate": "npm run check:types && npm run build && npm run lint && npm run check:protected && npm run check:v3",
+    "format:source": "prettier --write \"src/**/*.{astro,ts,css,json,md}\""
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "@eslint/js": "^10.0.1",
+    "@types/node": "^22.20.5",
+    "axe-core": "^4.14.0",
     "eslint": "^10.12.0",
     "globals": "^17.13.0",
+    "jsdom": "^30.1.2",
+    "playwright": "^1.64.0",
     "postcss": "^8.5.29",
     "prettier": "^3.9.9",
+    "prettier-plugin-astro": "^1.1.1",
     "specificity": "^1.0.0",
     "stylelint": "^17.16.0",
-    "stylelint-config-standard": "^40.0.0"
+    "stylelint-config-standard": "^40.0.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource-variable/montserrat": "^5.3.0",
+    "astro": "^5.18.2",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.26"
   }
 }

@@ -2,7 +2,7 @@ import js from "@eslint/js";
 import globals from "globals";
 
 export default [
-  { ignores: ["node_modules/**", "admin/vendor/**", "**/*.min.js", "api/**"] },
+  { ignores: ["node_modules/**", "admin/vendor/**", "**/*.min.js", "api/**", "_astro/**", "build-v3/**", ".astro/**"] },
   js.configs.recommended,
   {
     files: ["js/**/*.js"],
@@ -23,5 +23,8 @@ export default [
     languageOptions: { ecmaVersion: 2023, globals: { ...globals.node } },
   },
   // Playwright evaluates parts of these files inside the page, so browser globals are valid there too.
-  { files: ["tests/**/*.cjs"], languageOptions: { sourceType: "commonjs", globals: { ...globals.node, ...globals.browser } } },
+  {
+    files: ["tests/**/*.cjs"],
+    languageOptions: { sourceType: "commonjs", globals: { ...globals.node, ...globals.browser } },
+  },
 ];

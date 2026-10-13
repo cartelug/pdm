@@ -1,0 +1,10 @@
+{
+  "title": "Updates",
+  "heading": "The record,<br><em>as it happens.</em>",
+  "description": "Read Pamodzi Community Initiative project and campaign updates, with public figures presented by their verified status.",
+  "html": "\n\n<section class=\"blk\">\n  <div class=\"wrap\">\n    <div class=\"reveal\">\n      <span class=\"eyebrow\">Feed</span>\n      <h2>Newest first.</h2>\n    </div>\n    <div class=\"miles reveal\" id=\"updatesList\"></div>\n    <div class=\"notice reveal\"><b>How this feed works.</b> Entries are added after their source information has been checked. Where an update includes figures, received funds and outstanding commitments are described separately.</div>\n  </div>\n</section>\n\n",
+  "owner": "Pamodzi Community Initiative",
+  "source": "updates/index.html at 15e13113ca838bfec2b193d6a52f6cedca7f61bb",
+  "publication": "existing-public",
+  "reviewedAt": null
+}

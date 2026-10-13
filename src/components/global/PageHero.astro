@@ -1,0 +1,29 @@
+---
+import { href } from "../../config/site";
+interface Props {
+  path: string;
+  label: string;
+  heading: string;
+  description: string;
+}
+const { path, label, heading, description } = Astro.props;
+---
+
+<section class="pci-page-hero">
+  <div class="pci-container">
+    <nav class="pci-breadcrumb" aria-label="Breadcrumb">
+      <a href={href(path, "/")}>Pamodzi</a>
+      <span aria-hidden="true">/</span>
+      {["/apartments/", "/community/"].includes(path) && (
+        <>
+          <a href={href(path, "/projects/")}>Projects</a>
+          <span aria-hidden="true">/</span>
+        </>
+      )}
+      <span aria-current="page">{label}</span>
+    </nav>
+    <span class="pci-eyebrow">{label}</span>
+    <h1 set:html={heading} />
+    <p class="pci-lead">{description}</p>
+  </div>
+</section>

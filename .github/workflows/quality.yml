@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   lint:
-    name: Lint, format and page checks
+    name: Build, navigation and protected campaign checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,6 +23,26 @@ jobs:
       - name: Install tooling
         run: npm ci
 
-      # ESLint, Stylelint, Prettier, preloader/page structure and asset content hashes.
       - name: Check
-        run: npm run lint
+        run: npm run validate
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_sqlite, sqlite3
+          coverage: none
+
+      - name: Campaign ledger and HTTP fixtures
+        run: |
+          php tests/payments/ledger.php
+          python3 tests/payments/test_http.py
+          python3 tests/enquiry/test_http.py
+
+      - name: Install test browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Campaign browser regression
+        run: npm run test:browser
+
+      - name: Institutional browser regression
+        run: node tests/navigation/browser.cjs

@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/InstitutionalLayout.astro";
+---
+
+<Layout
+  path="/design-system/"
+  title="Design System Review"
+  description="Pamodzi V3 typography, colour and component review."
+  noindex
+>
+  <section class="pci-section">
+    <div class="pci-container">
+      <span class="pci-eyebrow">V3 / Foundation review</span>
+      <h1>
+        People. Partnerships.
+        <br />
+        <em>Lasting change.</em>
+      </h1>
+      <p class="pci-lead" style="margin-top:30px">
+        Fraunces Variable for editorial display. Montserrat Variable for reading and interfaces.
+      </p>
+      <div class="pci-actions">
+        <a class="pci-button pci-button--gold" href="../contact/index.html">
+          Primary action →
+        </a>
+        <a class="pci-text-link" href="../projects/index.html">
+          Secondary action ↗
+        </a>
+      </div>
+      <div class="pci-evidence-grid">
+        {[
+          ["Warm Ink", "#0C0B09"],
+          ["Editorial Paper", "#F4F1EA"],
+          ["Bone", "#E9E3D6"],
+          ["Gold", "#C9A569"],
+          ["Deep Gold", "#8A672A"],
+          ["Light Gold", "#D8BE84"],
+        ].map(([name, colour]) => (
+          <article class="pci-evidence">
+            <div style={"height:100px;background:" + colour + ";border:1px solid #8a672a"}></div>
+            <h3 style="margin-top:18px">{name}</h3>
+            <p>{colour}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

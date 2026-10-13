@@ -1,0 +1,127 @@
+/* Faith in Motion presentation only. Ledger scripts and all financial hooks are unchanged. */
+@font-face {
+  font-family: "Fraunces Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../assets/institutional-v3/fonts/fraunces-latin-wght-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Montserrat Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../assets/institutional-v3/fonts/montserrat-latin-wght-normal.woff2") format("woff2");
+}
+
+.pci-fim-v3 {
+  --paper: #f4f1ea;
+  --paper-2: #e9e3d6;
+  --cream: #f4f1ea;
+  --ink: #0c0b09;
+  --ink-2: #25221b;
+  --muted: #5b554a;
+  --line: #d7cebe;
+  --line-2: #c9a569;
+  --accent-gold: #c9a569;
+  --radius: 2px;
+  --radius-sm: 2px;
+  --wrap: 1480px;
+
+  font-family: "Montserrat Variable", Arial, sans-serif;
+}
+
+.pci-fim-v3 h1,
+.pci-fim-v3 h2,
+.pci-fim-v3 h3,
+.pci-fim-v3 .disp,
+.pci-fim-v3 .sec {
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-weight: 450;
+  letter-spacing: -0.035em;
+}
+
+.pci-fim-v3 .page-hero h1 {
+  max-width: 18ch;
+}
+
+.pci-fim-v3 .blk {
+  padding-block: clamp(64px, 8vw, 130px);
+}
+
+.pci-fim-v3 .wrap {
+  max-width: 1480px;
+  padding-inline: clamp(20px, 5.5vw, 128px);
+}
+
+.pci-fim-v3 .btn {
+  border-radius: 0;
+  min-height: 48px;
+  box-shadow: none;
+}
+
+.pci-fim-v3 .brand img {
+  padding: 4px;
+  background: #f4f1ea;
+  object-fit: contain;
+}
+
+.pci-fim-v3 .hero h1 {
+  font-size: clamp(3rem, 7.2vw, 7.5rem);
+  line-height: 1.04;
+}
+
+.pci-fim-v3 .hero .lede {
+  max-width: 55ch;
+}
+
+.pci-fim-v3 .mnav {
+  background: #0c0b09;
+}
+
+.pci-fim-v3 .mnav .wrap > a:not(.btn) {
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: clamp(1.9rem, 5vw, 3rem);
+}
+
+.pci-fim-v3 .tcard,
+.pci-fim-v3 .paybox,
+.pci-fim-v3 .sponsor-engine,
+.pci-fim-v3 .journey-card {
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+.pci-fim-v3 .rtable-wrap {
+  overflow-x: auto;
+}
+
+.pci-fim-v3 input,
+.pci-fim-v3 select,
+.pci-fim-v3 textarea {
+  font-size: 16px;
+}
+
+.pci-fim-v3 :focus-visible {
+  outline: 3px solid #8a672a;
+  outline-offset: 4px;
+}
+
+@media (max-width: 760px) {
+  .pci-fim-v3 .hero h1 {
+    font-size: clamp(2.8rem, 10vw, 4.2rem);
+  }
+
+  .pci-fim-v3 .hero-meta {
+    gap: 20px;
+  }
+
+  .pci-fim-v3 .blk {
+    padding-block: 60px;
+  }
+
+  .pci-fim-v3 .mnav .wrap > a:not(.btn) {
+    min-height: 48px;
+  }
+}

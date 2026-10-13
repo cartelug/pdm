@@ -1,0 +1,81 @@
+---
+import { asset, site } from "../../config/site";
+interface Props {
+  path: string;
+}
+const { path } = Astro.props;
+---
+
+<form class="pci-form" id="enquiry" action={asset(path, "api/enquiry.php")} method="post" data-enquiry>
+  <div class="pci-form__row">
+    <div>
+      <label for="enquiryName">Your name</label>
+      <input id="enquiryName" name="name" autocomplete="name" maxlength="120" required />
+    </div>
+    <div>
+      <label for="enquiryEmail">Email</label>
+      <input id="enquiryEmail" type="email" name="email" autocomplete="email" maxlength="200" required />
+    </div>
+  </div>
+  <div class="pci-form__row">
+    <div>
+      <label for="enquiryOrganisation">
+        Organisation <span>(optional)</span>
+      </label>
+      <input id="enquiryOrganisation" name="organisation" autocomplete="organization" maxlength="160" />
+    </div>
+    <div>
+      <label for="enquiryPhone">
+        Phone <span>(optional)</span>
+      </label>
+      <input id="enquiryPhone" type="tel" name="phone" autocomplete="tel" maxlength="60" />
+    </div>
+  </div>
+  <div>
+    <label for="enquiryTopic">Area of interest</label>
+    <select id="enquiryTopic" name="topic" required>
+      <option value="General enquiry">General enquiry</option>
+      <option>Programme collaboration</option>
+      <option>Institutional partnership</option>
+      <option>Technical support</option>
+      <option>Community project proposal</option>
+      <option>Media enquiry</option>
+      <option>Governance verification</option>
+      <option>Faith in Motion</option>
+      <option>Walk for Education</option>
+    </select>
+  </div>
+  <div>
+    <label for="enquiryMessage">Your message</label>
+    <textarea id="enquiryMessage" name="message" rows="6" minlength="10" maxlength="5000" required></textarea>
+  </div>
+  <div class="pci-form__trap" aria-hidden="true">
+    <label for="enquiryWebsite">Leave this field empty</label>
+    <input id="enquiryWebsite" name="website" tabindex="-1" autocomplete="off" />
+  </div>
+  <input type="hidden" name="started" value="" data-form-started />
+  <p class="pci-form__privacy">
+    We use these details to respond to your enquiry. They are not published or included in analytics. This form does not
+    collect contributions or authorise a partnership.
+  </p>
+  <div>
+    <button class="pci-button pci-button--gold" type="submit">
+      Send Enquiry <span aria-hidden="true">→</span>
+    </button>
+  </div>
+  <p class="pci-form__status" role="status" aria-live="polite" data-enquiry-status></p>
+  <p class="pci-form__privacy">
+    Prefer your email app?{" "}
+    <a href={"mailto:" + site.email} data-enquiry-fallback>
+      Open an email draft ↗
+    </a>
+  </p>
+  <noscript>
+    <p>
+      Submit the form to the server, or <a href={"mailto:" + site.email}>email Pamodzi directly</a>.
+    </p>
+  </noscript>
+</form>
+<script>
+  import "../../scripts/enquiry";
+</script>

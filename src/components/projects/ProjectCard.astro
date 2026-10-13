@@ -1,0 +1,49 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { asset, href } from "../../config/site";
+import ProjectStatus from "./ProjectStatus.astro";
+interface Props {
+  project: CollectionEntry<"projects">;
+  path: string;
+}
+const { project, path } = Astro.props;
+const p = project.data;
+---
+
+<article
+  class:list={["pci-project", { "pci-project--concept": !p.image }]}
+  data-project-status={p.status}
+  data-project-category={p.category}
+>
+  <a class="pci-project__media" href={href(path, p.route)} tabindex="-1" aria-hidden="true">
+    {p.image ? (
+      <img src={asset(path, p.image)} alt="" width="1000" height="700" loading="lazy" decoding="async" />
+    ) : (
+      <div class="pci-project__typography">
+        <span>{p.status}</span>
+        <strong>{p.title}</strong>
+        <span>{p.location}</span>
+      </div>
+    )}
+  </a>
+  {p.imageNote && <p class="pci-project__caption">{p.imageNote}</p>}
+  <div class="pci-project__meta">
+    <span>
+      {p.category} · {p.location}
+    </span>
+    <ProjectStatus status={p.status} />
+  </div>
+  <h3>
+    <a href={href(path, p.route)}>
+      {p.title}
+      <span aria-hidden="true">↗</span>
+    </a>
+  </h3>
+  <p>{p.summary}</p>
+  {(p.walkStatus || p.pledgeStatus) && (
+    <p class="pci-project__state">
+      {p.walkStatus}
+      {p.pledgeStatus && " · " + p.pledgeStatus}
+    </p>
+  )}
+</article>

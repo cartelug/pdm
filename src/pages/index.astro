@@ -1,0 +1,313 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/InstitutionalLayout.astro";
+import UpdatesFeed from "../components/global/UpdatesFeed.astro";
+import ModelPreview from "../components/home/ModelPreview.astro";
+import ProjectCard from "../components/projects/ProjectCard.astro";
+import { programmes } from "../config/navigation";
+const records = await getCollection("projects", (p) => p.data.publication !== "draft");
+const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((id) =>
+  records.find((p) => p.id === id)!,
+);
+---
+
+<Layout
+  path="/"
+  title="Together for Development"
+  description="Pamodzi brings communities and partners together around locally defined development priorities in Uganda."
+  home
+>
+  <section class="pci-hero" id="top">
+    <picture class="pci-hero__image" aria-hidden="true">
+      <source
+        media="(max-width: 720px)"
+        srcset="assets/institutional-v3/hero-portrait-420.webp 420w, assets/institutional-v3/hero-portrait-840.webp 840w"
+        sizes="100vw"
+      />
+      <img
+        src="assets/institutional-v3/hero-wide-1680.webp"
+        srcset="assets/institutional-v3/hero-wide-840.webp 840w, assets/institutional-v3/hero-wide-1280.webp 1280w, assets/institutional-v3/hero-wide-1680.webp 1680w"
+        sizes="100vw"
+        width="1680"
+        height="945"
+        alt=""
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
+    <div class="pci-container">
+      <div class="pci-hero__copy">
+        <span class="pci-eyebrow">Uganda · community-led development</span>
+        <h1>
+          Communities that invest in their <em>own future.</em>
+        </h1>
+        <p>
+          Pamodzi Community Initiative brings people and partners together around priorities communities define for
+          themselves — mobilising local resources and practical expertise across four strategic pillars.
+        </p>
+        <div class="pci-actions">
+          <a class="pci-button pci-button--gold" href="projects/index.html">
+            Explore Our Work <span aria-hidden="true">→</span>
+          </a>
+          <a class="pci-text-link" href="model/index.html">
+            Discover Our Model ↗
+          </a>
+        </div>
+        <a class="pci-scroll" href="#who-we-are">
+          Discover Pamodzi <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <div class="pci-container pci-orientation" aria-label="Pamodzi at a glance">
+    <p>
+      <b>Uganda</b>Community-led development
+    </p>
+    <p>
+      <b>Four</b>Strategic pillars
+    </p>
+    <p>
+      <b>Local</b>Community-defined priorities
+    </p>
+    <p>
+      <b>Shared</b>Resources and expertise
+    </p>
+  </div>
+  <section class="pci-section" id="who-we-are">
+    <div class="pci-container pci-split">
+      <div>
+        <span class="pci-eyebrow">02 / Who we are</span>
+        <h2>
+          Not a donor.
+          <br />
+          <em>A convener.</em>
+        </h2>
+      </div>
+      <div>
+        <p class="pci-statement">
+          Sustainable development is strongest when communities help shape, resource and steward their own future.
+        </p>
+        <p style="margin-top:28px">
+          We start with the resources and relationships a community already has — savings groups, cooperatives,
+          professionals, businesses, diaspora and local leadership — then organise them around a clear, locally chosen
+          priority.
+        </p>
+        <div class="pci-tags">
+          <span>Convene</span>
+          <span>Mobilise</span>
+          <span>Sustain</span>
+        </div>
+        <a class="pci-text-link" href="about/index.html">
+          Meet Pamodzi ↗
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="pci-section pci-muted">
+    <div class="pci-container">
+      <div class="pci-section-heading">
+        <div>
+          <span class="pci-eyebrow">03 / What we do</span>
+          <h2>
+            Four pillars.
+            <br />
+            <em>One shared method.</em>
+          </h2>
+        </div>
+        <p class="pci-lead">Mobilise the community. Build the partnership. Invest together. Keep the asset working.</p>
+      </div>
+      <div>
+        {programmes.map((p, i) => (
+          <a class="pci-programme" href={"what-we-do/index.html#" + p.id}>
+            <span class="pci-programme__number">{String(i + 1).padStart(2, "0")}</span>
+            <h3>{p.title}</h3>
+            <p>{p.summary}</p>
+            <span class="pci-programme__arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <ModelPreview path="/" />
+  <section class="pci-section">
+    <div class="pci-container">
+      <div class="pci-section-heading">
+        <div>
+          <span class="pci-eyebrow">05 / Projects & priorities</span>
+          <h2>
+            Different priorities.
+            <br />
+            <em>A common purpose.</em>
+          </h2>
+        </div>
+        <p class="pci-lead">
+          Explore live campaigns, work under review and community programme areas. Each follows its own approved
+          pathway.
+        </p>
+      </div>
+      <div class="pci-project-grid pci-project-grid--featured">
+        {projects.map((project) => (
+          <ProjectCard {project} path="/" />
+        ))}
+      </div>
+      <div class="pci-actions">
+        <a class="pci-text-link" href="projects/index.html">
+          Explore All Projects ↗
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="pci-section pci-muted">
+    <div class="pci-container">
+      <div class="pci-section-heading">
+        <div>
+          <span class="pci-eyebrow">06 / Work in practice</span>
+          <h2>
+            Local priorities.
+            <br />
+            <em>Practical action.</em>
+          </h2>
+        </div>
+        <p class="pci-lead">
+          Member-led mutual support, community initiatives and partnerships across livelihoods, education, health and
+          local infrastructure.
+        </p>
+      </div>
+      <div class="pci-evidence-grid">
+        {[
+          ["Mutual support", "Members responding to practical household, education, medical and livelihood needs."],
+          ["Enterprise & livelihoods", "Community savings, financial literacy, skills and locally led opportunity."],
+          [
+            "Community infrastructure",
+            "Defined education, faith and community priorities with project-specific responsibilities.",
+          ],
+          [
+            "Health & wellbeing",
+            "Community participation and collaboration with qualified professionals and public bodies.",
+          ],
+        ].map(([title, copy]) => (
+          <article class="pci-evidence">
+            <h3>{title}</h3>
+            <p>{copy}</p>
+          </article>
+        ))}
+      </div>
+      <div class="pci-actions">
+        <a class="pci-text-link" href="impact/index.html">
+          Explore Our Impact ↗
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="pci-section pci-dark">
+    <div class="pci-container">
+      <div class="pci-section-heading">
+        <div>
+          <span class="pci-eyebrow">07 / Walking for Impact</span>
+          <h2>
+            Every journey.
+            <br />
+            <em>Its own purpose.</em>
+          </h2>
+        </div>
+        <p class="pci-lead">
+          Distinct campaigns, each with its own beneficiary, contribution route and reconciliation record.
+        </p>
+      </div>
+      <div class="pci-campaign-grid">
+        <article class="pci-campaign-panel">
+          <span class="pci-status">Journey completed · fundraising continues</span>
+          <h3>Faith in Motion</h3>
+          <p>
+            A completed 400 km journey supporting the completion of St Joseph Catholic Church at Rwembyo, Kisinga,
+            Kasese District.
+          </p>
+          <a class="pci-text-link" href="faith-in-motion/index.html">
+            Explore Faith in Motion ↗
+          </a>
+        </article>
+        <article class="pci-campaign-panel">
+          <span class="pci-status">Pledges open · walk dates unconfirmed</span>
+          <h3>Walk for Education</h3>
+          <p>
+            A planned Nairobi-to-Kagando journey supporting UCU–Kagando University College and the neighbouring nursery
+            and primary school.
+          </p>
+          <a class="pci-text-link" href="walk-for-education/index.html" data-protected>
+            Explore Walk for Education ↗
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="pci-section">
+    <div class="pci-container pci-split">
+      <div>
+        <span class="pci-eyebrow">08 / Partnerships</span>
+        <h2 class="pci-large-statement">
+          Progress is built <em>together.</em>
+        </h2>
+      </div>
+      <div>
+        <p class="pci-statement">
+          Communities, institutions, businesses and technical partners each have a meaningful role.
+        </p>
+        <p style="margin-top:28px">
+          Bring expertise, networks, practical resources or programme support to a defined community priority. Scope,
+          responsibilities and reporting are agreed directly.
+        </p>
+        <div class="pci-tags">
+          <span>Community</span>
+          <span>Institutional</span>
+          <span>Technical</span>
+        </div>
+        <a class="pci-text-link" href="partnerships/index.html">
+          Explore Partnerships ↗
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="pci-section pci-muted">
+    <div class="pci-container">
+      <div class="pci-section-heading">
+        <div>
+          <span class="pci-eyebrow">09 / Selected updates</span>
+          <h2>
+            The work.
+            <br />
+            <em>On the record.</em>
+          </h2>
+        </div>
+        <p class="pci-lead">
+          Milestones and project reports are published after their sources, figures and permissions have been checked.
+        </p>
+      </div>
+      <UpdatesFeed path="/" />
+    </div>
+  </section>
+  <section class="pci-section">
+    <div class="pci-container">
+      <span class="pci-eyebrow">10 / Governance & trust</span>
+      <h2 style="max-width:20ch">
+        Trust is built through <em>clear responsibility.</em>
+      </h2>
+      <ul class="pci-trust-points">
+        <li>
+          <b>Beneficiary first.</b>Approved beneficiaries and contribution pathways must be identified.
+        </li>
+        <li>
+          <b>Verification before publication.</b>Received funds and pledges remain distinct.
+        </li>
+        <li>
+          <b>Accountability throughout.</b>Project scope, responsibilities and public information follow documented
+          approval.
+        </li>
+      </ul>
+      <a class="pci-text-link" href="governance/index.html">
+        Read Our Governance Framework ↗
+      </a>
+    </div>
+  </section>
+</Layout>
