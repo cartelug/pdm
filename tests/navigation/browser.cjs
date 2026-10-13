@@ -82,6 +82,17 @@ const server = http.createServer((req, res) => {
     await page.getByRole("button", { name: "Under review", exact: true }).click();
     assert.equal(await page.locator("[data-project-status]:visible").count(), 1);
     assert.match(await page.locator("[data-project-status]:visible").innerText(), /Kasese Apartment/);
+    await page.goto(base + "/contact/");
+    assert.equal(await page.locator("#enquiry").isVisible(), true, "Enhanced enquiry form stays visible");
+    await page.locator("#enquiryName").fill("Fixture Person");
+    await page.locator("#enquiryEmail").fill("fixture@example.invalid");
+    await page.locator("#enquiryMessage").fill("This tests the email draft fallback without sending any message.");
+    await page.getByRole("button", { name: "Send Enquiry" }).click();
+    await page.waitForFunction(() =>
+      document.querySelector("[data-enquiry-status]").textContent.includes("email draft"),
+    );
+    assert.equal(await page.locator("#enquiryName").inputValue(), "Fixture Person");
+    assert.match(await page.locator("[data-enquiry-fallback]").getAttribute("href"), /^mailto:/);
     const nojs = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 320, height: 640 } });
     const plain = await nojs.newPage();
     await plain.goto(base + "/");

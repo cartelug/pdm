@@ -29,7 +29,13 @@ const projectRecord = projects.find((project) => project.id === page.id);
 let content = p.html;
 if (projectRecord) content = content.replace(/(<b>)UNDER REVIEW(<\/b>)/g, "$1" + projectRecord.data.status + "$2");
 if (page.id === "model") content = content.replace(/<section class="blk on-dark">[\s\S]*?<\/section>/, "");
-content = content.replace(/class="form"/g, 'class="pci-form"').replace(/class="frow"/g, 'class="pci-form__row"');
+content = content
+  .replace(/class="form"/g, 'class="pci-form"')
+  .replace(/class="frow"/g, 'class="pci-form__row"')
+  .replace(
+    /<form id="enquiryForm">/g,
+    '<form class="pci-form" id="enquiryForm" action="mailto:shyakaneeza@gmail.com" method="post" enctype="text/plain">',
+  );
 ---
 
 <Layout {path} title={p.title} description={p.description}>

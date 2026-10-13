@@ -70,12 +70,17 @@ const { path } = Astro.props;
       Open an email draft ↗
     </a>
   </p>
-  <noscript>
-    <p>
-      Submit the form to the server, or <a href={"mailto:" + site.email}>email Pamodzi directly</a>.
-    </p>
-  </noscript>
 </form>
+<noscript>
+  <style is:inline>
+    #enquiry {
+      display: none;
+    }
+  </style>
+  <p>
+    Please <a href={"mailto:" + site.email}>email Pamodzi directly</a> or use the contact options on this page.
+  </p>
+</noscript>
 <script>
   import "../../scripts/enquiry";
 </script>

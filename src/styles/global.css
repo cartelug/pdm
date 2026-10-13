@@ -1185,9 +1185,7 @@
   }
 
   .pci-content .inq-in {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 36px;
+    max-width: 66ch;
   }
 
   .pci-content .dlist .mk2 {
@@ -1270,6 +1268,12 @@
     gap: 22px;
   }
 
+  .pci-form,
+  .pci-form__row > div,
+  .pci-contact-grid > * {
+    min-width: 0;
+  }
+
   .pci-form label {
     display: block;
     font-size: 0.78rem;
@@ -1280,6 +1284,7 @@
   .pci-form select,
   .pci-form textarea {
     width: 100%;
+    min-width: 0;
     padding: 14px;
     border: 1px solid var(--pci-border-subtle);
     background: transparent;
