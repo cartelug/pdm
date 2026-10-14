@@ -4,9 +4,9 @@ import Icon from "../global/Icon.astro";
 const artwork = ["education", "health", "climate", "inclusion"];
 ---
 
-<section class="pci-section" id="our-pillars" aria-labelledby="pillars-heading">
+<section class="pci-section pci-pillars-section" id="our-pillars" aria-labelledby="pillars-heading">
   <div class="pci-container">
-    <div class="pci-section-head" data-reveal>
+    <div class="pci-section-heading">
       <div>
         <span class="pci-eyebrow">01 / Our four pillars</span>
         <h2 id="pillars-heading">
@@ -21,7 +21,7 @@ const artwork = ["education", "health", "climate", "inclusion"];
     </div>
     <div class="pci-pillars" data-reveal-group>
       {programmes.map((p, i) => (
-        <a class="pci-pillar" href={"what-we-do/index.html#" + p.id} data-pillar={artwork[i]}>
+        <a class="pci-pillar" href={"what-we-do/index.html#" + p.id}>
           <div class="pci-pillar__art" aria-hidden="true">
             <img
               src={"assets/crimson/pillar-" + artwork[i] + "-480.webp"}
@@ -32,15 +32,13 @@ const artwork = ["education", "health", "climate", "inclusion"];
               decoding="async"
             />
           </div>
-          <div class="pci-pillar__body">
-            <span class="pci-pillar__index" aria-hidden="true">
-              0{i + 1}
-            </span>
+          <div class="pci-pillar__heading">
             <h3>{p.title}</h3>
-            <p>{p.summary}</p>
-          </div>
-          <span class="pci-pillar__go" aria-hidden="true">
             <Icon />
+          </div>
+          <p>{p.summary}</p>
+          <span class="pci-pillar__index" aria-hidden="true">
+            0{i + 1}
           </span>
         </a>
       ))}

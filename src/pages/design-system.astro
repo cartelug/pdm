@@ -1,124 +1,47 @@
 ---
 import Icon from "../components/global/Icon.astro";
-import PillarIcon from "../components/global/PillarIcon.astro";
 import Layout from "../layouts/InstitutionalLayout.astro";
-const swatches = [
-  ["Ink", "#1B0A0E", "Text, dark surfaces"],
-  ["Paper", "#FAF6F1", "Page ground"],
-  ["Bone", "#F2EBE3", "Alternate sections"],
-  ["Rose", "#FBE7E4", "Notices, soft emphasis"],
-  ["Crimson", "#B71935", "Brand, primary action"],
-  ["Crimson deep", "#8C1228", "Hover, pressed"],
-  ["Blush", "#F3C9C8", "Accent on dark"],
-  ["Night", "#220A10", "Dark surfaces"],
-  ["Sun", "#E6AD3E", "Highlights, status"],
-  ["Forest", "#2F5D46", "Climate, programme areas"],
-];
 ---
 
 <Layout
   path="/design-system/"
   title="Design System Review"
-  description="Pamodzi editorial typography, colour and component review."
+  description="Pamodzi crimson typography, colour and component review."
   noindex
 >
   <section class="pci-section">
     <div class="pci-container">
-      <span class="pci-eyebrow">Editorial system / Foundation review</span>
-      <h1 style="margin-top:24px">
+      <span class="pci-eyebrow">Crimson / Foundation review</span>
+      <h1>
         People. Partnerships.
         <br />
         <em>Lasting change.</em>
       </h1>
       <p class="pci-lead" style="margin-top:30px">
-        Instrument Serif for display. Hanken Grotesk for reading and interfaces. Geist Mono for labels and figures.
+        Sora Variable for display. Manrope Variable for reading and interfaces.
       </p>
       <div class="pci-actions">
-        <a class="pci-button" href="../contact/index.html">
+        <a class="pci-button pci-button--gold" href="../contact/index.html">
           Primary action <Icon name="arrow" />
         </a>
-        <a class="pci-button pci-button--ink" href="../contact/index.html">
-          Ink action <Icon name="arrow" />
-        </a>
-        <a class="pci-button pci-button--line" href="../contact/index.html">
-          Outline action <Icon name="arrow" />
-        </a>
         <a class="pci-text-link" href="../projects/index.html">
-          Text action <Icon name="external" />
+          Secondary action <Icon name="external" />
         </a>
       </div>
-    </div>
-  </section>
-  <section class="pci-section pci-section--bone">
-    <div class="pci-container">
-      <div class="pci-section-head">
-        <div>
-          <span class="pci-eyebrow">Type scale</span>
-          <h2>
-            Display set in <em>Instrument Serif.</em>
-          </h2>
-        </div>
-        <p class="pci-lead">Body copy is Hanken Grotesk at 17px with a 1.68 line height. Labels use Geist Mono.</p>
-      </div>
-      <div class="pci-cards">
-        <article class="pci-card">
-          <span class="pci-card__label">Heading 3 / Serif</span>
-          <h3>Locally led, accountable and lasting.</h3>
-          <p>Card titles, row titles and campaign names use the serif at heading-three scale.</p>
-        </article>
-        <article class="pci-card">
-          <span class="pci-card__label">Statement / Serif</span>
-          <p class="pci-statement">Communities shape, resource and steward their own future.</p>
-        </article>
-        <article class="pci-card">
-          <span class="pci-card__label">Figures / Serif</span>
-          <div class="pci-fig" style="border:0;padding:0">
-            <b>55</b>
-            <span>Figures are set large and captioned plainly.</span>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-  <section class="pci-section">
-    <div class="pci-container">
-      <div class="pci-section-head">
-        <div>
-          <span class="pci-eyebrow">Colour</span>
-          <h2>
-            Warm paper, burgundy ink, <em>one crimson.</em>
-          </h2>
-        </div>
-      </div>
-      <div class="pci-swatches">
-        {swatches.map(([name, colour, use]) => (
-          <article class="pci-swatch">
-            <div class="pci-swatch__chip" style={"background:" + colour}></div>
-            <h4>{name}</h4>
-            <p>
-              {colour} · {use}
-            </p>
+      <div class="pci-evidence-grid">
+        {[
+          ["Burgundy Ink", "#26090F"],
+          ["Warm Paper", "#FBF8F5"],
+          ["Soft Blush", "#F3EBE8"],
+          ["Crimson", "#B71935"],
+          ["Deep Crimson", "#9B1630"],
+          ["Light Blush", "#F3C9C8"],
+        ].map(([name, colour]) => (
+          <article class="pci-evidence">
+            <div style={"height:100px;background:" + colour + ";border:1px solid #9b1630"}></div>
+            <h3 style="margin-top:18px">{name}</h3>
+            <p>{colour}</p>
           </article>
-        ))}
-      </div>
-    </div>
-  </section>
-  <section class="pci-section pci-section--night">
-    <div class="pci-container">
-      <div class="pci-section-head">
-        <div>
-          <span class="pci-eyebrow">Programme icons</span>
-          <h2>
-            One line weight, <em>four pillars.</em>
-          </h2>
-        </div>
-      </div>
-      <div class="pci-icon-set">
-        {(["education", "health", "climate", "inclusion"] as const).map((name) => (
-          <div>
-            <PillarIcon {name} />
-            <span>{name}</span>
-          </div>
         ))}
       </div>
     </div>

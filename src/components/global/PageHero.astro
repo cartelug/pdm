@@ -10,12 +10,7 @@ const { path, label, heading, description } = Astro.props;
 ---
 
 <section class="pci-page-hero">
-  <div class="pci-page-hero__art" aria-hidden="true">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <div class="pci-container pci-page-hero__inner">
+  <div class="pci-container">
     <nav class="pci-breadcrumb" aria-label="Breadcrumb">
       <a href={href(path, "/")}>Pamodzi</a>
       <span aria-hidden="true">/</span>
@@ -27,11 +22,8 @@ const { path, label, heading, description } = Astro.props;
       )}
       <span aria-current="page">{label}</span>
     </nav>
-    <div class="pci-page-hero__copy">
-      <span class="pci-eyebrow">{label}</span>
-      <h1 set:html={heading} />
-      <p class="pci-lead">{description}</p>
-      <slot />
-    </div>
+    <span class="pci-eyebrow">{label}</span>
+    <h1 set:html={heading} />
+    <p class="pci-lead">{description}</p>
   </div>
 </section>

@@ -10,7 +10,7 @@ const review = {
 export const collections = {
   pages: defineCollection({
     loader: glob({ pattern: "*.json", base: "./src/content/pages" }),
-    schema: z.object({ title: z.string(), heading: z.string(), description: z.string(), ...review }),
+    schema: z.object({ title: z.string(), heading: z.string(), description: z.string(), html: z.string(), ...review }),
   }),
   projects: defineCollection({
     loader: glob({ pattern: "*.json", base: "./src/content/projects" }),

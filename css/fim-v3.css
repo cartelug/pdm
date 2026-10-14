@@ -1,358 +1,96 @@
-/* Faith in Motion presentation only. Ledger scripts and all financial hooks are unchanged.
-   Brings the campaign pages into the Pamodzi editorial system: Instrument Serif for display,
-   Hanken Grotesk for reading and Geist Mono for labels, self-hosted from assets/fonts. The legacy
-   family names are aliased to those files, so the shared foundation needs no edits and no page
-   calls an external font service. */
+/* Faith in Motion presentation only. Ledger scripts and all financial hooks are unchanged. */
 @font-face {
-  font-family: "Bricolage Grotesque";
+  font-family: "Sora Variable";
   font-style: normal;
   font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2");
+  font-weight: 100 800;
+  src: url("../assets/crimson/fonts/sora-latin-wght-normal.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Bricolage Grotesque";
-  font-style: italic;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "DM Serif Display";
+  font-family: "Manrope Variable";
   font-style: normal;
   font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "DM Serif Display";
-  font-style: italic;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: Manrope;
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "JetBrains Mono";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/geist-mono-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 800;
+  src: url("../assets/crimson/fonts/manrope-latin-wght-normal.woff2") format("woff2");
 }
 
 .pci-fim-v3 {
-  --paper: #faf6f1;
-  --paper-2: #f2ebe3;
-  --cream: #faf6f1;
-  --ink: #1b0a0e;
-  --ink-2: #3d272c;
-  --muted: #66565a;
-  --line: #e6dacb;
-  --line-2: #cdbcab;
-  --red: #b71935;
-  --red-2: #d02a47;
-  --red-dark: #8c1228;
-  --red-soft: #fbe7e4;
+  --paper: #fbf8f5;
+  --paper-2: #f3ebe8;
+  --cream: #fbf8f5;
+  --ink: #26090f;
+  --ink-2: #43131f;
+  --muted: #66565b;
+  --line: #e4d4d7;
+  --line-2: #b71935;
   --accent-gold: #b71935;
-  --radius: 20px;
-  --radius-sm: 12px;
-  --wrap: 1360px;
-  --header-h: 80px;
-  --shadow: 0 2px 4px rgb(27 10 14 / 6%), 0 30px 70px rgb(27 10 14 / 16%);
-  --shadow-sm: 0 1px 2px rgb(27 10 14 / 6%), 0 10px 28px rgb(27 10 14 / 8%);
-  --shadow-lg: 0 2px 4px rgb(27 10 14 / 6%), 0 40px 90px rgb(27 10 14 / 22%);
-  --shadow-btn: none;
-  --shadow-btn-hover: none;
+  --radius: 2px;
+  --radius-sm: 2px;
+  --wrap: 1480px;
 
-  font-family: Manrope, "Hanken Grotesk Variable", system-ui, sans-serif;
-  font-size: 17px;
-  line-height: 1.68;
-  background: var(--paper);
+  font-family: "Manrope Variable", Arial, sans-serif;
 }
 
-/* Display type */
 .pci-fim-v3 h1,
 .pci-fim-v3 h2,
 .pci-fim-v3 h3,
 .pci-fim-v3 .disp,
 .pci-fim-v3 .sec {
-  font-family: "Bricolage Grotesque", "Instrument Serif", Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.015em;
-  line-height: 0.98;
-}
-
-.pci-fim-v3 h1 {
-  font-size: clamp(3.4rem, 1.2rem + 8vw, 8.4rem);
-  line-height: 0.92;
-  letter-spacing: -0.022em;
-}
-
-.pci-fim-v3 h2,
-.pci-fim-v3 .sec {
-  font-size: clamp(2.5rem, 1.4rem + 3.8vw, 5rem);
-  max-width: 20ch;
-}
-
-.pci-fim-v3 h3 {
-  font-size: clamp(1.6rem, 1.2rem + 1.1vw, 2.2rem);
-  line-height: 1.06;
+  font-family: "Sora Variable", Arial, sans-serif;
+  font-weight: 550;
+  letter-spacing: -0.035em;
 }
 
 .pci-fim-v3 .page-hero h1 {
-  max-width: 16ch;
-  font-size: clamp(3.2rem, 1rem + 6.4vw, 7rem);
-}
-
-.pci-fim-v3 .page-hero {
-  background:
-    linear-gradient(90deg, rgb(34 10 16 / 94%), rgb(34 10 16 / 80%) 60%, rgb(140 18 40 / 58%)),
-    url("../assets/faith-in-motion/walking-rotarian-river-crossing.jpg") center 36% / cover
-      no-repeat;
-}
-
-.pci-fim-v3 .page-hero::before {
-  display: none;
-}
-
-.pci-fim-v3 .hero h1 {
-  max-width: 15ch;
-  font-size: clamp(3.4rem, 1rem + 7vw, 7.8rem);
-  line-height: 0.9;
-  text-shadow: none;
-}
-
-.pci-fim-v3 .hero h1 .em {
-  color: var(--blush, #f3c9c8);
-  font-style: italic;
-  text-decoration: none;
-}
-
-.pci-fim-v3 .hero .lede,
-.pci-fim-v3 .lede {
-  max-width: 55ch;
-  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
-  line-height: 1.55;
-}
-
-.pci-fim-v3 .sec-sub {
-  font-size: 1.08rem;
+  max-width: 18ch;
 }
 
 .pci-fim-v3 .blk {
-  padding-block: clamp(72px, 8vw, 140px);
+  padding-block: clamp(64px, 8vw, 130px);
 }
 
 .pci-fim-v3 .wrap {
-  max-width: calc(var(--wrap) + 2 * clamp(20px, 3.6vw, 60px));
-  padding-inline: clamp(20px, 3.6vw, 60px);
+  max-width: 1480px;
+  padding-inline: clamp(20px, 5.5vw, 128px);
 }
 
-/* Labels */
-.pci-fim-v3 .survey,
-.pci-fim-v3 .eyebrow {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.13em;
-}
-
-/* Header: a quiet full-width paper bar, matching the main site */
-.pci-fim-v3 header {
-  height: var(--header-h);
-  padding: 0;
-  border-bottom: 1px solid var(--line);
-  background: rgb(250 246 241 / 90%);
-  -webkit-backdrop-filter: saturate(1.4) blur(16px);
-  backdrop-filter: saturate(1.4) blur(16px);
-  pointer-events: auto;
-}
-
-.pci-fim-v3 .nav,
-.pci-fim-v3 header.solid .nav {
-  min-height: var(--header-h);
-  padding: 0 clamp(20px, 3.6vw, 60px);
-  border: 0;
+.pci-fim-v3 .btn {
   border-radius: 0;
-  background: none;
+  min-height: 48px;
   box-shadow: none;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-}
-
-.pci-fim-v3 .brand {
-  padding-right: 20px;
-  border-right: 0;
 }
 
 .pci-fim-v3 .brand img {
-  width: 56px;
-  height: 42px;
   padding: 0;
   background: transparent;
   object-fit: contain;
 }
 
-.pci-fim-v3 .brand .t b {
-  font-family: "Bricolage Grotesque", "Instrument Serif", Georgia, serif;
-  font-size: 1.7rem;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 0.9;
+.pci-fim-v3 .hero h1 {
+  font-size: clamp(3rem, 7.2vw, 7.5rem);
+  line-height: 1.04;
 }
 
-.pci-fim-v3 .brand .t span {
-  margin-top: 6px;
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
+.pci-fim-v3 .hero .lede {
+  max-width: 55ch;
 }
 
-.pci-fim-v3 .nav-links a:not(.btn) {
-  font-size: 0.95rem;
-  font-weight: 560;
-  color: var(--ink-2) !important;
-}
-
-.pci-fim-v3 .nav-links a:not(.btn).act {
-  color: var(--ink) !important;
-}
-
-.pci-fim-v3 .nav .btn {
-  min-height: 48px;
-  padding: 0 24px;
-  font-size: 0.95rem;
-}
-
-.pci-fim-v3 .burger {
-  width: auto;
-  min-width: 46px;
-  height: 46px;
-  border-color: var(--line-2);
-  background: transparent;
-}
-
-/* Buttons */
-.pci-fim-v3 .btn {
-  min-height: 54px;
-  padding: 0 28px;
-  border-radius: 999px;
-  font-size: 1rem;
-  font-weight: 620;
-  letter-spacing: -0.005em;
-  box-shadow: none;
-}
-
-.pci-fim-v3 .btn-gold,
-.pci-fim-v3 .btn-cy,
-.pci-fim-v3 .btn-wa {
-  background: var(--red);
-  box-shadow: none;
-}
-
-.pci-fim-v3 .btn-ink {
-  background: var(--ink);
-  box-shadow: none;
-}
-
-.pci-fim-v3 .btn-line {
-  border-color: var(--line-2);
-  background: transparent;
-}
-
-.pci-fim-v3 .btn-ghost {
-  border-color: rgb(255 255 255 / 55%);
-  background: transparent;
-  color: #fff;
-}
-
-@media (hover: hover) {
-  .pci-fim-v3 .btn-gold:hover,
-  .pci-fim-v3 .btn-cy:hover,
-  .pci-fim-v3 .btn-wa:hover {
-    background: var(--red-dark);
-    box-shadow: none;
-  }
-
-  .pci-fim-v3 .btn-ink:hover {
-    background: var(--red);
-    box-shadow: none;
-  }
-
-  .pci-fim-v3 .btn-line:hover {
-    border-color: var(--ink);
-    background: var(--ink);
-    color: var(--paper) !important;
-    box-shadow: none;
-  }
-
-  .pci-fim-v3 .btn-ghost:hover {
-    background: #fff;
-    color: var(--ink);
-  }
-}
-
-/* Mobile navigation */
 .pci-fim-v3 .mnav {
-  background: radial-gradient(closest-side at 90% 90%, rgb(183 25 53 / 50%), transparent), #220a10;
+  background: #26090f;
 }
 
 .pci-fim-v3 .mnav .wrap > a:not(.btn) {
-  font-family: "DM Serif Display", "Instrument Serif", Georgia, serif;
-  font-size: clamp(2rem, 1.2rem + 4vw, 3.2rem);
+  font-family: "Sora Variable", Arial, sans-serif;
+  font-size: clamp(1.9rem, 5vw, 3rem);
 }
 
-.pci-fim-v3 .mnav a.act,
-.pci-fim-v3 .mnav a.act::before {
-  color: #f3c9c8;
-}
-
-/* Hero */
-.pci-fim-v3 .sky {
-  background:
-    linear-gradient(
-      90deg,
-      rgb(34 10 16 / 88%) 0%,
-      rgb(34 10 16 / 55%) 55%,
-      rgb(140 18 40 / 45%) 100%
-    ),
-    linear-gradient(0deg, rgb(34 10 16 / 82%), transparent 55%),
-    url("../assets/faith-in-motion/walk-day-procession-kiburara.jpg") center 28% / cover no-repeat;
-}
-
-.pci-fim-v3 .hero-meta {
-  border-radius: var(--radius);
-}
-
-.pci-fim-v3 .hero-meta .m {
-  background: rgb(34 10 16 / 55%);
-}
-
-/* Surfaces */
 .pci-fim-v3 .tcard,
 .pci-fim-v3 .paybox,
 .pci-fim-v3 .sponsor-engine,
-.pci-fim-v3 .journey-card,
-.pci-fim-v3 .panel,
-.pci-fim-v3 .figcard,
-.pci-fim-v3 .ledger {
-  border-radius: var(--radius);
+.pci-fim-v3 .journey-card {
+  border-radius: 2px;
   box-shadow: none;
-}
-
-.pci-fim-v3 .sponsor-engine,
-.pci-fim-v3 .panel {
-  background: #220a10;
 }
 
 .pci-fim-v3 .rtable-wrap {
@@ -370,32 +108,9 @@
   outline-offset: 4px;
 }
 
-/* Footer */
-.pci-fim-v3 footer {
-  background: #220a10;
-}
-
-.pci-fim-v3 footer h2 {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-}
-
-.pci-fim-v3 .fbrand b {
-  font-family: "Bricolage Grotesque", "Instrument Serif", Georgia, serif;
-  font-size: 1.9rem;
-  font-weight: 400;
-}
-
 @media (max-width: 760px) {
-  .pci-fim-v3 {
-    --header-h: 68px;
-  }
-
   .pci-fim-v3 .hero h1 {
-    font-size: clamp(3.2rem, 1rem + 12vw, 4.8rem);
+    font-size: clamp(2.8rem, 10vw, 4.2rem);
   }
 
   .pci-fim-v3 .hero-meta {
@@ -404,14 +119,6 @@
 
   .pci-fim-v3 .blk {
     padding-block: 60px;
-  }
-
-  .pci-fim-v3 .brand {
-    padding-right: 8px;
-  }
-
-  .pci-fim-v3 .brand .t span {
-    display: none;
   }
 
   .pci-fim-v3 .mnav .wrap > a:not(.btn) {

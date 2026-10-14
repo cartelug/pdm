@@ -52,7 +52,6 @@ function boot() {
           .querySelectorAll("[data-project-filter]")
           .forEach((el) => el.setAttribute("aria-pressed", String(el === button)));
         let count = 0;
-        document.querySelector("[data-project-grid]")?.classList.toggle("is-filtered", value !== "all");
         document.querySelectorAll<HTMLElement>("[data-project-status]").forEach((card) => {
           card.hidden = value !== "all" && card.dataset.projectStatus !== value;
           if (!card.hidden) count++;
@@ -63,21 +62,14 @@ function boot() {
       { signal: controller.signal },
     );
   });
-  // Hovering or focusing a stage lights its place on the cycle diagram as well.
-  const stages = Array.from(document.querySelectorAll<HTMLElement>("[data-model-stage]"));
-  const light = (index: string | null) =>
-    document
-      .querySelectorAll("[data-cycle-node]")
-      .forEach((node) => node.classList.toggle("is-focus", node.getAttribute("data-cycle-node") === index));
-  stages.forEach((stage) => {
-    const index = stage.getAttribute("data-model-stage");
-    for (const [type, value] of [
-      ["focus", index],
-      ["blur", null],
-      ["pointerenter", index],
-      ["pointerleave", null],
-    ] as const)
-      stage.addEventListener(type, () => light(value), { signal: controller.signal });
+  document.querySelectorAll<HTMLElement>("[data-model-stage]").forEach((stage) => {
+    stage.addEventListener(
+      "focus",
+      () => {
+        document.querySelectorAll("[data-model-stage]").forEach((el) => el.classList.toggle("is-active", el === stage));
+      },
+      { signal: controller.signal },
+    );
   });
   cleanup = () => {
     alive = false;

@@ -16,9 +16,8 @@ const primary = navigation.filter((n) => n.group === "explore");
       <span class="pci-brand__mark">
         <img src={asset(path, "assets/brand/pamodzi/pamodzi-logo-transparent.png")} width="1273" height="965" alt="" />
       </span>
-      <span class="pci-brand__text">
-        <span class="pci-brand__name">Pamodzi</span>
-        <small>Community Initiative</small>
+      <span>
+        Pamodzi<small>Community Initiative</small>
       </span>
     </a>
     <nav class="pci-desktop-nav" aria-label="Primary navigation">
@@ -30,8 +29,11 @@ const primary = navigation.filter((n) => n.group === "explore");
           </a>
         ))}
     </nav>
-    <a class="pci-button pci-button--ink pci-header__cta" href={href(path, "/contact/#enquiry")}>
-      Partner With Us <Icon name="arrow" />
+    <a class="pci-header__cta" href={href(path, "/contact/#enquiry")}>
+      Partner With Us{" "}
+      <span aria-hidden="true">
+        <Icon name="external" />
+      </span>
     </a>
     <button
       class="pci-menu-toggle"
@@ -42,7 +44,10 @@ const primary = navigation.filter((n) => n.group === "explore");
       data-menu-open
       hidden
     >
-      Menu <Icon name="menu" />
+      Menu{" "}
+      <span aria-hidden="true">
+        <Icon name="menu" />
+      </span>
     </button>
   </div>
   <details class="pci-fallback-nav" data-nav-fallback>
@@ -60,7 +65,10 @@ const primary = navigation.filter((n) => n.group === "explore");
       Pamodzi <span>Community Initiative</span>
     </a>
     <button class="pci-menu__close" type="button" aria-label="Close navigation" data-menu-close>
-      Close <Icon name="close" />
+      Close{" "}
+      <span aria-hidden="true">
+        <Icon name="close" />
+      </span>
     </button>
   </div>
   <div class="pci-menu__body">
@@ -99,8 +107,11 @@ const primary = navigation.filter((n) => n.group === "explore");
         </nav>
       ))}
     </div>
-    <a class="pci-button pci-button--light" href={href(path, "/contact/#enquiry")}>
-      Partner With Pamodzi <Icon name="arrow" />
+    <a class="pci-button pci-button--gold" href={href(path, "/contact/#enquiry")}>
+      Partner With Pamodzi{" "}
+      <span aria-hidden="true">
+        <Icon name="arrow" />
+      </span>
     </a>
     <p class="pci-menu__note">People. Partnerships. Lasting change.</p>
   </div>
