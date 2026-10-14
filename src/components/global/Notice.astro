@@ -1,0 +1,10 @@
+---
+interface Props {
+  lead: string;
+}
+const { lead } = Astro.props;
+---
+
+<p class="pci-notice" data-reveal>
+  <b>{lead}</b> <slot />
+</p>

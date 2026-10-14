@@ -1,0 +1,26 @@
+---
+import Layout from "../../layouts/InstitutionalLayout.astro";
+import PageHero from "../../components/global/PageHero.astro";
+import SectionHead from "../../components/global/SectionHead.astro";
+import UpdatesFeed from "../../components/global/UpdatesFeed.astro";
+import { getPage } from "../../lib/pages";
+const p = await getPage("updates");
+const path = "/updates/";
+---
+
+<Layout {path} title={p.title} description={p.description}>
+  <PageHero {path} label={p.title} heading={p.heading} description={p.description} />
+  <section class="pci-section">
+    <div class="pci-container">
+      <SectionHead eyebrow="Publication record">
+        Stories with
+        <br />
+        <em>a source behind them.</em>
+      </SectionHead>
+      <UpdatesFeed {path} limit={100} />
+      <p class="pci-notice" data-reveal>
+        Received funds, pledges and promises describe different states and are reported separately.
+      </p>
+    </div>
+  </section>
+</Layout>

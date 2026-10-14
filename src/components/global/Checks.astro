@@ -1,0 +1,24 @@
+---
+import Icon from "./Icon.astro";
+interface Item {
+  title: string;
+  text: string;
+  mark?: string;
+}
+interface Props {
+  items: Item[];
+}
+const { items } = Astro.props;
+---
+
+<ul class="pci-checks" data-reveal-group>
+  {items.map((item) => (
+    <li>
+      {item.mark ? <span class="pci-checks__mark">{item.mark}</span> : <Icon name="arrow" />}
+      <span>
+        <b>{item.title}</b>
+        <span>{item.text}</span>
+      </span>
+    </li>
+  ))}
+</ul>

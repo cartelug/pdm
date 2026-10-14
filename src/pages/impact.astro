@@ -1,0 +1,152 @@
+---
+import Layout from "../layouts/InstitutionalLayout.astro";
+import PageHero from "../components/global/PageHero.astro";
+import SectionHead from "../components/global/SectionHead.astro";
+import Rows from "../components/global/Rows.astro";
+import Notice from "../components/global/Notice.astro";
+import Icon from "../components/global/Icon.astro";
+import { getPage } from "../lib/pages";
+import { href } from "../config/site";
+const p = await getPage("impact");
+const path = "/impact/";
+---
+
+<Layout {path} title={p.title} description={p.description}>
+  <PageHero {path} label={p.title} heading={p.heading} description={p.description} />
+  <section class="pci-section">
+    <div class="pci-container">
+      <SectionHead eyebrow="Public impact record">Verified before it is quantified.</SectionHead>
+      <div class="pci-figs" data-reveal>
+        <div class="pci-fig">
+          <b>Member-led</b>
+          <span>Mutual support and shared responsibility</span>
+        </div>
+        <div class="pci-fig">
+          <b>Locally defined</b>
+          <span>Priorities identified by the people they affect</span>
+        </div>
+        <div class="pci-fig">
+          <b>Partnership-based</b>
+          <span>Expertise and resources brought together for clear work</span>
+        </div>
+        <div class="pci-fig">
+          <b>Accountable</b>
+          <span>Names, figures and results published after approval</span>
+        </div>
+      </div>
+      <Notice lead="On public evidence.">
+        Financial totals, beneficiary counts, dates and third-party attributions are added only after the relevant
+        records and permissions have been checked.
+      </Notice>
+    </div>
+  </section>
+  <section class="pci-section pci-section--bone">
+    <div class="pci-container">
+      <SectionHead eyebrow="Areas of practice">Community priorities taking shape.</SectionHead>
+      <Rows
+        {path}
+        items={[
+          {
+            title: "Mutual support and member wellbeing",
+            text: "Members organise practical support around education, medical, household and livelihood needs, combining solidarity with clear records and shared responsibility.",
+          },
+          {
+            title: "Education and school development",
+            text: "Pamodzi’s education work focuses on locally identified school needs, learning environments and the partnerships required to turn a defined priority into a deliverable project.",
+          },
+          {
+            title: "Faith and community infrastructure",
+            text: "Defined community-building needs can be supported through project-specific authorisation, direct beneficiary channels and reporting that continues until the work is complete.",
+            links: [
+              { label: "See Faith in Motion", to: "/faith-in-motion/" },
+              { label: "See Walk for Education", to: "/walk-for-education/" },
+            ],
+          },
+          {
+            title: "Health and community wellbeing",
+            text: "The health pillar is designed around community priorities, practical health education and collaboration with appropriately authorised health professionals and public bodies. A community medical camp convened with the Rotary Club of Akright City and the Kasese District Health Office at Nyabirongo Health Centre III, Kisinga, on 10 June 2023, reached over 600 people with free consultations, screening and treatment.",
+          },
+          {
+            title: "Enterprise and financial inclusion",
+            text: "Community savings, financial literacy, peer support and enterprise development help members strengthen livelihoods while building the discipline needed for larger shared initiatives.",
+          },
+        ]}
+      />
+    </div>
+  </section>
+  <section class="pci-section">
+    <div class="pci-container">
+      <SectionHead
+        eyebrow="Since 2022"
+        lede="Beyond campaigns like Faith in Motion, Pamodzi has convened members and partners into legally distinct, member-owned platforms. These are savings, investment and enterprise structures — not donation channels — governed and financed by their own members."
+      >
+        Platforms we’ve helped establish.
+      </SectionHead>
+      <div class="pci-stats" data-reveal-group>
+        <div class="pci-stat">
+          <b>55</b>
+          <span>committed members</span>
+          <small>Pamodzi 4 Development (P4D), Kasese District</small>
+        </div>
+        <div class="pci-stat">
+          <b>50</b>
+          <span>women entrepreneurs</span>
+          <small>Udada Women Entrepreneurs Network, Wakiso District</small>
+        </div>
+        <div class="pci-stat">
+          <b>16</b>
+          <span>investment partners</span>
+          <small>TBS Meridian Realities LLP</small>
+        </div>
+      </div>
+      <Rows
+        {path}
+        items={[
+          {
+            title: "Pamodzi 4 Development (P4D) — Kasese District",
+            text: "A community-driven platform bringing together 55 committed members around collective savings, an internal lending mechanism and mutual support for business, agriculture, education and household needs.",
+          },
+          {
+            title: "Udada Women Entrepreneurs Network — Wakiso District",
+            text: "A network of 50 women entrepreneurs within Akright City, built around enterprise financing, business networking and peer support for women’s economic empowerment.",
+          },
+          {
+            title: "TBS Meridian Realities LLP",
+            text: "A member-owned real estate investment platform mobilised with 16 investment partners, with holdings already established in hotel suites and condominium units.",
+          },
+          {
+            title: "Business Legends Group (BLG)",
+            text: "A regional private investment initiative expanding hospitality and commercial ventures across East and Southern Africa, in partnership with Bloktavia Estates.",
+          },
+        ]}
+      />
+      <Notice lead="Member platforms, not public donations.">
+        These structures are financed and owned by their own members and investment partners. Consolidated mobilisation
+        figures exist in Pamodzi’s internal institutional record and will be published here once independently verified.
+      </Notice>
+    </div>
+  </section>
+  <section class="pci-section pci-section--night">
+    <div class="pci-container pci-split">
+      <div class="pci-split__aside" data-reveal>
+        <span class="pci-eyebrow">Looking ahead</span>
+        <h2>A growing platform with a clear method.</h2>
+        <p class="pci-lead">
+          The next phase is to document each initiative carefully, strengthen partnerships and publish evidence in a
+          form that communities and partners can trust.
+        </p>
+        <div class="pci-actions">
+          <a class="pci-button pci-button--light" href={href(path, "/partnerships/")}>
+            Partner with us <Icon name="arrow" />
+          </a>
+        </div>
+      </div>
+      <div class="pci-split__main" data-reveal>
+        <blockquote class="pci-quote">
+          Communities are not only beneficiaries of development but active participants and stewards of the solutions
+          they help shape.
+        </blockquote>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -57,10 +57,10 @@ const server = http.createServer((req, res) => {
             "Approved logo has no container background",
           );
           const hero = await page
-            .locator(".pci-hero__image img")
+            .locator(".pci-hero__arch img")
             .evaluate((el) => ({ source: el.currentSrc, loaded: el.complete && el.naturalWidth > 0 }));
           assert.equal(hero.loaded, true, "Hero image loads at " + width);
-          assert.match(hero.source, width <= 720 ? /hero-mobile-/ : /hero-wide-/);
+          assert.match(hero.source, /hero-portrait-/);
         }
       }
     }
@@ -73,6 +73,9 @@ const server = http.createServer((req, res) => {
       ),
     );
     assert.equal(await page.locator(".pci-pillar").count(), 4, "All four programme areas remain navigable");
+    await page.waitForFunction(() =>
+      Array.from(document.querySelectorAll(".pci-pillar")).every((el) => getComputedStyle(el).opacity === "1"),
+    );
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
     const accessibility = await page.evaluate(() =>

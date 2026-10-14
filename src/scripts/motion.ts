@@ -9,7 +9,6 @@ export async function initScrollMotion(): Promise<() => void> {
   let lenis: import("lenis").default | undefined;
   let ticker: ((time: number) => void) | undefined;
   let lenisGeneration = 0;
-  const floats = new Map<Element, ReturnType<typeof gsap.to>>();
 
   // Content stays readable before enhancement and after cleanup.
   if (window.scrollY < 80) {
@@ -19,14 +18,20 @@ export async function initScrollMotion(): Promise<() => void> {
       gsap
         .timeline({ defaults: { ease: "power3.out" } })
         .fromTo(
-          ".pci-hero__image img",
-          { scale: 1.025, opacity: 0.8 },
-          { scale: 1, opacity: 1, duration: 1.2, clearProps: "transform,opacity" },
+          ".pci-hero__arch img",
+          { scale: 1.08, opacity: 0.7 },
+          { scale: 1, opacity: 1, duration: 1.4, clearProps: "transform,opacity" },
           0,
         )
-        .fromTo(lines, { yPercent: 108 }, { yPercent: 0, duration: 0.85, stagger: 0.09, clearProps: "transform" }, 0.08)
         .fromTo(
-          "[data-hero-detail]",
+          ".pci-hero__sun",
+          { scale: 0.4, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 1.1, clearProps: "transform,opacity" },
+          0.2,
+        )
+        .fromTo(lines, { yPercent: 108 }, { yPercent: 0, duration: 0.9, stagger: 0.09, clearProps: "transform" }, 0.08)
+        .fromTo(
+          "[data-hero-detail],.pci-hero__caption",
           { y: 14, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.65, stagger: 0.065, clearProps: "transform,opacity" },
           0.35,
@@ -43,12 +48,12 @@ export async function initScrollMotion(): Promise<() => void> {
           const targets = grouped ? Array.from(entry.target.children) : entry.target;
           gsap.fromTo(
             targets,
-            { y: desktop.matches ? 30 : 18, opacity: 0.25 },
+            { y: desktop.matches ? 36 : 20, opacity: 0.2 },
             {
               y: 0,
               opacity: 1,
-              duration: 0.75,
-              stagger: grouped ? 0.085 : 0,
+              duration: 0.85,
+              stagger: grouped ? 0.09 : 0,
               ease: "power3.out",
               clearProps: "transform,opacity",
             },
@@ -60,78 +65,59 @@ export async function initScrollMotion(): Promise<() => void> {
     { threshold: 0.08 },
   );
   document
-    .querySelectorAll(
-      ".pci-section-heading,.pci-project,.pci-campaign-panel,.pci-evidence,.pci-content .reveal,.pci-footer__invitation,[data-reveal-group]",
-    )
+    .querySelectorAll("[data-reveal],[data-reveal-group],.pci-footer__invitation")
     .forEach((element) => revealObserver.observe(element));
 
-  const ambientObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const float = floats.get(entry.target);
-      if (entry.isIntersecting && !document.hidden && desktop.matches) float?.play();
-      else float?.pause();
-    });
-  });
-  context.add(() => {
-    document.querySelectorAll(".pci-connection-art").forEach((element) => {
-      floats.set(
-        element,
-        gsap.to(element, {
-          y: -8,
-          rotation: 1.5,
-          duration: 4,
-          yoyo: true,
-          repeat: -1,
-          ease: "sine.inOut",
-          paused: true,
-        }),
-      );
-      ambientObserver.observe(element);
-    });
-  });
+  const models = Array.from(document.querySelectorAll<HTMLElement>("[data-model-path]"));
+  const heroArch = document.querySelector<HTMLElement>(".pci-hero__arch");
 
-  const paths = Array.from(document.querySelectorAll<HTMLElement>("[data-model-path]"));
-  const heroImage = document.querySelector<HTMLElement>(".pci-hero__image");
-  const stageObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => entry.target.classList.toggle("is-current", entry.isIntersecting));
-    },
-    { rootMargin: "-15% 0px -35% 0px", threshold: 0.1 },
-  );
-  document.querySelectorAll("[data-model-stage]").forEach((stage) => stageObserver.observe(stage));
-
+  // One stage is "current": the one closest to a reading line a little above the middle of the screen.
   function paintScroll() {
     frame = 0;
     if (!alive || reduce.matches) return;
-    paths.forEach((container) => {
-      const rect = container.getBoundingClientRect();
-      const progress = Math.max(0, Math.min(1, (innerHeight * 0.78 - rect.top) / Math.max(1, rect.height)));
-      const path = container.querySelector<SVGPathElement>("[data-model-progress]");
+    models.forEach((container) => {
+      const list = container.querySelector<HTMLElement>("[data-model]");
+      if (!list) return;
+      const rect = list.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, (innerHeight * 0.62 - rect.top) / Math.max(1, rect.height)));
+      const path = container.querySelector<SVGElement>("[data-model-progress]");
       if (path) {
         path.style.strokeDasharray = "1";
         path.style.strokeDashoffset = String(1 - progress);
       }
+      let current: Element | undefined;
+      if (rect.top < innerHeight && rect.bottom > 0) {
+        const line = innerHeight * 0.46;
+        let best = Infinity;
+        list.querySelectorAll<HTMLElement>("[data-model-stage]").forEach((stage) => {
+          const box = stage.getBoundingClientRect();
+          const distance = Math.abs(box.top + box.height / 2 - line);
+          if (distance < best) {
+            best = distance;
+            current = stage;
+          }
+        });
+      }
+      const index = current?.getAttribute("data-model-stage");
+      container
+        .querySelectorAll("[data-model-stage]")
+        .forEach((stage) => stage.classList.toggle("is-current", stage === current));
+      container
+        .querySelectorAll("[data-cycle-node]")
+        .forEach((node) => node.classList.toggle("is-current", node.getAttribute("data-cycle-node") === index));
     });
-    if (heroImage && desktop.matches) {
-      const rect = heroImage.getBoundingClientRect();
+    if (heroArch && desktop.matches) {
+      const rect = heroArch.getBoundingClientRect();
       if (rect.bottom > 0 && rect.top < innerHeight) {
-        heroImage.style.transform = `translateY(${Math.min(window.scrollY * 0.035, 24)}px)`;
+        heroArch.style.transform = `translateY(${Math.min(window.scrollY * 0.05, 36)}px)`;
       }
     }
   }
   function requestPaint() {
     if (!frame) frame = requestAnimationFrame(paintScroll);
   }
-  function updateFloats() {
-    floats.forEach((float, element) => {
-      const rect = element.getBoundingClientRect();
-      if (!document.hidden && desktop.matches && rect.bottom > 0 && rect.top < innerHeight) float.play();
-      else float.pause();
-    });
-  }
   window.addEventListener("scroll", requestPaint, { signal: abort.signal, passive: true });
   window.addEventListener("resize", requestPaint, { signal: abort.signal });
-  document.addEventListener("visibilitychange", updateFloats, { signal: abort.signal });
   paintScroll();
 
   function stopLenis() {
@@ -139,12 +125,11 @@ export async function initScrollMotion(): Promise<() => void> {
     lenis?.destroy();
     lenis = undefined;
     ticker = undefined;
-    heroImage?.style.removeProperty("transform");
+    heroArch?.style.removeProperty("transform");
   }
   async function prepareLenis() {
     const generation = ++lenisGeneration;
     stopLenis();
-    updateFloats();
     if (!desktop.matches || !alive || reduce.matches) return;
     const { default: Lenis } = await import("lenis");
     if (!alive || !desktop.matches || reduce.matches || generation !== lenisGeneration) return;
@@ -170,10 +155,8 @@ export async function initScrollMotion(): Promise<() => void> {
     abort.abort();
     stopLenis();
     revealObserver.disconnect();
-    ambientObserver.disconnect();
-    stageObserver.disconnect();
     document.querySelectorAll(".is-current").forEach((element) => element.classList.remove("is-current"));
-    paths.forEach((container) => container.querySelector("[data-model-progress]")?.removeAttribute("style"));
+    models.forEach((container) => container.querySelector("[data-model-progress]")?.removeAttribute("style"));
     context.revert();
   };
 }
