@@ -47,10 +47,33 @@ const server = http.createServer((req, res) => {
           route + " fits " + width,
         );
         assert.equal(await page.locator("h1").isVisible(), true);
+        if (route === "/") {
+          assert.equal(
+            await page
+              .locator(".pci-brand__mark")
+              .first()
+              .evaluate((el) => getComputedStyle(el).backgroundColor),
+            "rgba(0, 0, 0, 0)",
+            "Approved logo has no container background",
+          );
+          const hero = await page
+            .locator(".pci-hero__image img")
+            .evaluate((el) => ({ source: el.currentSrc, loaded: el.complete && el.naturalWidth > 0 }));
+          assert.equal(hero.loaded, true, "Hero image loads at " + width);
+          assert.match(hero.source, width <= 720 ? /hero-mobile-/ : /hero-wide-/);
+        }
       }
     }
     await page.setViewportSize({ width: 390, height: 640 });
     await page.goto(base + "/");
+    await page.locator(".pci-pillars").scrollIntoViewIfNeeded();
+    await page.waitForFunction(() =>
+      Array.from(document.querySelectorAll(".pci-pillar img")).every(
+        (image) => image.complete && image.naturalWidth > 0,
+      ),
+    );
+    assert.equal(await page.locator(".pci-pillar").count(), 4, "All four programme areas remain navigable");
+    await page.evaluate(() => window.scrollTo(0, 0));
     await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
     const accessibility = await page.evaluate(() =>
       window.axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"] } }),

@@ -1,4 +1,5 @@
 ---
+import Icon from "./Icon.astro";
 import { getCollection } from "astro:content";
 import { href } from "../../config/site";
 interface Props {
@@ -19,7 +20,9 @@ const entries = (await getCollection("updates", (u) => u.data.publication === "a
           {entry.data.category} · {entry.data.date}
         </span>
         <h3 style="margin-top:18px">
-          <a href={href(path, "/updates/" + entry.id + "/")}>{entry.data.title} ↗</a>
+          <a href={href(path, "/updates/" + entry.id + "/")}>
+            {entry.data.title} <Icon name="external" />
+          </a>
         </h3>
         <p>{entry.data.summary}</p>
       </article>
@@ -34,10 +37,10 @@ const entries = (await getCollection("updates", (u) => u.data.publication === "a
     </p>
     <div class="pci-actions">
       <a class="pci-text-link" href={href(path, "/walk/")}>
-        Faith in Motion Journey ↗
+        Faith in Motion Journey <Icon name="external" />
       </a>
       <a class="pci-text-link" href={href(path, "/walk-for-education/updates/")}>
-        Education Campaign Updates ↗
+        Education Campaign Updates <Icon name="external" />
       </a>
     </div>
   </div>

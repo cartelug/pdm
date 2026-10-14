@@ -17,7 +17,7 @@ if (failures.length) {
 }
 console.log(
   Object.keys(baseline.files).length +
-    " campaign and legacy dependencies remain byte-identical to " +
-    baseline.baselineCommit +
-    ".",
+    " protected campaign and legacy files match the recorded baseline; " +
+    (baseline.presentationReviews?.length || 0) +
+    " explicitly reviewed presentation-only exception(s).",
 );

@@ -1,4 +1,5 @@
 ---
+import Icon from "../global/Icon.astro";
 import type { CollectionEntry } from "astro:content";
 import { asset, href } from "../../config/site";
 import ProjectStatus from "./ProjectStatus.astro";
@@ -36,7 +37,9 @@ const p = project.data;
   <h3>
     <a href={href(path, p.route)}>
       {p.title}
-      <span aria-hidden="true">↗</span>
+      <span aria-hidden="true">
+        <Icon name="external" />
+      </span>
     </a>
   </h3>
   <p>{p.summary}</p>

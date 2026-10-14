@@ -4,6 +4,7 @@ import SiteFooter from "../components/global/SiteFooter.astro";
 import { site, asset } from "../config/site";
 import "../styles/fonts.css";
 import "../styles/global.css";
+import "../styles/crimson.css";
 interface Props {
   path: string;
   title: string;
@@ -29,7 +30,7 @@ const canonical = site.url + path;
     <meta property="og:type" content="website" />
     <meta property="og:image" content={site.url + "/assets/og/share-card.jpg"} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#0C0B09" />
+    <meta name="theme-color" content="#26090F" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     {noindex && <meta name="robots" content="noindex,follow" />}
     <link rel="icon" type="image/png" href={asset(path, "assets/brand/pamodzi/pamodzi-logo-transparent.png")} />
@@ -37,8 +38,8 @@ const canonical = site.url + path;
       <link
         rel="preload"
         as="image"
-        href={asset(path, "assets/institutional-v3/hero-wide-1680.webp")}
-        imagesrcset="assets/institutional-v3/hero-wide-840.webp 840w, assets/institutional-v3/hero-wide-1280.webp 1280w, assets/institutional-v3/hero-wide-1680.webp 1680w"
+        href={asset(path, "assets/crimson/hero-wide-1774.webp")}
+        imagesrcset="assets/crimson/hero-wide-960.webp 960w, assets/crimson/hero-wide-1440.webp 1440w, assets/crimson/hero-wide-1774.webp 1774w"
         imagesizes="100vw"
         media="(min-width: 721px)"
       />
@@ -47,8 +48,8 @@ const canonical = site.url + path;
       <link
         rel="preload"
         as="image"
-        href={asset(path, "assets/institutional-v3/hero-portrait-840.webp")}
-        imagesrcset="assets/institutional-v3/hero-portrait-420.webp 420w, assets/institutional-v3/hero-portrait-840.webp 840w"
+        href={asset(path, "assets/crimson/hero-mobile-1120.webp")}
+        imagesrcset="assets/crimson/hero-mobile-560.webp 560w, assets/crimson/hero-mobile-1120.webp 1120w"
         imagesizes="100vw"
         media="(max-width: 720px)"
       />

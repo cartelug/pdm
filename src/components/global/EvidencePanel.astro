@@ -1,4 +1,5 @@
 ---
+import Icon from "./Icon.astro";
 interface Props {
   claim: string;
   sourceLabel: string;
@@ -13,7 +14,9 @@ const { claim, sourceLabel, sourceHref, date, verified = false } = Astro.props;
   <aside class="pci-evidence">
     <p>{claim}</p>
     <p class="pci-evidence__source">
-      <a href={sourceHref}>{sourceLabel} ↗</a>
+      <a href={sourceHref}>
+        {sourceLabel} <Icon name="external" />
+      </a>
       {date && <time datetime={date}> · {date}</time>}
     </p>
   </aside>

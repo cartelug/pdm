@@ -1,4 +1,5 @@
 ---
+import Icon from "./Icon.astro";
 import { navigation, programmes } from "../../config/navigation";
 import { site, href, asset } from "../../config/site";
 interface Props {
@@ -18,10 +19,13 @@ const { path } = Astro.props;
       </h2>
       <div class="pci-actions">
         <a class="pci-button pci-button--gold" href={href(path, "/contact/#enquiry")}>
-          Partner With Pamodzi <span aria-hidden="true">→</span>
+          Partner With Pamodzi{" "}
+          <span aria-hidden="true">
+            <Icon name="arrow" />
+          </span>
         </a>
         <a class="pci-text-link" href={href(path, "/contact/")}>
-          Get In Touch ↗
+          Get In Touch <Icon name="external" />
         </a>
       </div>
     </div>
@@ -68,7 +72,7 @@ const { path } = Astro.props;
     <div class="pci-footer__socials">
       {site.socials.map((s) => (
         <a href={s.href} target="_blank" rel="noopener noreferrer">
-          {s.label} ↗
+          {s.label} <Icon name="external" />
         </a>
       ))}
     </div>

@@ -1,10 +1,12 @@
 ---
+import Icon from "../components/global/Icon.astro";
 import { getCollection } from "astro:content";
 import Layout from "../layouts/InstitutionalLayout.astro";
 import UpdatesFeed from "../components/global/UpdatesFeed.astro";
 import ModelPreview from "../components/home/ModelPreview.astro";
 import ProjectCard from "../components/projects/ProjectCard.astro";
-import { programmes } from "../config/navigation";
+import HomeHero from "../components/home/HomeHero.astro";
+import ProgrammePillars from "../components/home/ProgrammePillars.astro";
 const records = await getCollection("projects", (p) => p.data.publication !== "draft");
 const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((id) =>
   records.find((p) => p.id === id)!,
@@ -17,63 +19,9 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
   description="Pamodzi brings communities and partners together around locally defined development priorities in Uganda."
   home
 >
-  <section class="pci-hero" id="top">
-    <picture class="pci-hero__image" aria-hidden="true">
-      <source
-        media="(max-width: 720px)"
-        srcset="assets/institutional-v3/hero-portrait-420.webp 420w, assets/institutional-v3/hero-portrait-840.webp 840w"
-        sizes="100vw"
-      />
-      <img
-        src="assets/institutional-v3/hero-wide-1680.webp"
-        srcset="assets/institutional-v3/hero-wide-840.webp 840w, assets/institutional-v3/hero-wide-1280.webp 1280w, assets/institutional-v3/hero-wide-1680.webp 1680w"
-        sizes="100vw"
-        width="1680"
-        height="945"
-        alt=""
-        fetchpriority="high"
-        decoding="async"
-      />
-    </picture>
-    <div class="pci-container">
-      <div class="pci-hero__copy">
-        <span class="pci-eyebrow">Uganda · community-led development</span>
-        <h1>
-          Communities that invest in their <em>own future.</em>
-        </h1>
-        <p>
-          Pamodzi Community Initiative brings people and partners together around priorities communities define for
-          themselves — mobilising local resources and practical expertise across four strategic pillars.
-        </p>
-        <div class="pci-actions">
-          <a class="pci-button pci-button--gold" href="projects/index.html">
-            Explore Our Work <span aria-hidden="true">→</span>
-          </a>
-          <a class="pci-text-link" href="model/index.html">
-            Discover Our Model ↗
-          </a>
-        </div>
-        <a class="pci-scroll" href="#who-we-are">
-          Discover Pamodzi <span aria-hidden="true">↓</span>
-        </a>
-      </div>
-    </div>
-  </section>
-  <div class="pci-container pci-orientation" aria-label="Pamodzi at a glance">
-    <p>
-      <b>Uganda</b>Community-led development
-    </p>
-    <p>
-      <b>Four</b>Strategic pillars
-    </p>
-    <p>
-      <b>Local</b>Community-defined priorities
-    </p>
-    <p>
-      <b>Shared</b>Resources and expertise
-    </p>
-  </div>
-  <section class="pci-section" id="who-we-are">
+  <HomeHero />
+  <ProgrammePillars />
+  <section class="pci-section pci-about-section" id="who-we-are">
     <div class="pci-container pci-split">
       <div>
         <span class="pci-eyebrow">02 / Who we are</span>
@@ -82,6 +30,16 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
           <br />
           <em>A convener.</em>
         </h2>
+        <img
+          class="pci-connection-art"
+          src="assets/crimson/connection-720.webp"
+          width="720"
+          height="720"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          aria-hidden="true"
+        />
       </div>
       <div>
         <p class="pci-statement">
@@ -98,35 +56,8 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
           <span>Sustain</span>
         </div>
         <a class="pci-text-link" href="about/index.html">
-          Meet Pamodzi ↗
+          Meet Pamodzi <Icon name="external" />
         </a>
-      </div>
-    </div>
-  </section>
-  <section class="pci-section pci-muted">
-    <div class="pci-container">
-      <div class="pci-section-heading">
-        <div>
-          <span class="pci-eyebrow">03 / What we do</span>
-          <h2>
-            Four pillars.
-            <br />
-            <em>One shared method.</em>
-          </h2>
-        </div>
-        <p class="pci-lead">Mobilise the community. Build the partnership. Invest together. Keep the asset working.</p>
-      </div>
-      <div>
-        {programmes.map((p, i) => (
-          <a class="pci-programme" href={"what-we-do/index.html#" + p.id}>
-            <span class="pci-programme__number">{String(i + 1).padStart(2, "0")}</span>
-            <h3>{p.title}</h3>
-            <p>{p.summary}</p>
-            <span class="pci-programme__arrow" aria-hidden="true">
-              ↗
-            </span>
-          </a>
-        ))}
       </div>
     </div>
   </section>
@@ -135,7 +66,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
     <div class="pci-container">
       <div class="pci-section-heading">
         <div>
-          <span class="pci-eyebrow">05 / Projects & priorities</span>
+          <span class="pci-eyebrow">04 / Projects & priorities</span>
           <h2>
             Different priorities.
             <br />
@@ -154,7 +85,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
       </div>
       <div class="pci-actions">
         <a class="pci-text-link" href="projects/index.html">
-          Explore All Projects ↗
+          Explore All Projects <Icon name="external" />
         </a>
       </div>
     </div>
@@ -163,7 +94,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
     <div class="pci-container">
       <div class="pci-section-heading">
         <div>
-          <span class="pci-eyebrow">06 / Work in practice</span>
+          <span class="pci-eyebrow">05 / Work in practice</span>
           <h2>
             Local priorities.
             <br />
@@ -196,7 +127,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
       </div>
       <div class="pci-actions">
         <a class="pci-text-link" href="impact/index.html">
-          Explore Our Impact ↗
+          Explore Our Impact <Icon name="external" />
         </a>
       </div>
     </div>
@@ -205,7 +136,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
     <div class="pci-container">
       <div class="pci-section-heading">
         <div>
-          <span class="pci-eyebrow">07 / Walking for Impact</span>
+          <span class="pci-eyebrow">06 / Walking for Impact</span>
           <h2>
             Every journey.
             <br />
@@ -217,7 +148,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
         </p>
       </div>
       <div class="pci-campaign-grid">
-        <article class="pci-campaign-panel">
+        <article class="pci-campaign-panel pci-campaign-panel--faith">
           <span class="pci-status">Journey completed · fundraising continues</span>
           <h3>Faith in Motion</h3>
           <p>
@@ -225,10 +156,10 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
             Kasese District.
           </p>
           <a class="pci-text-link" href="faith-in-motion/index.html">
-            Explore Faith in Motion ↗
+            Explore Faith in Motion <Icon name="external" />
           </a>
         </article>
-        <article class="pci-campaign-panel">
+        <article class="pci-campaign-panel pci-campaign-panel--education">
           <span class="pci-status">Pledges open · walk dates unconfirmed</span>
           <h3>Walk for Education</h3>
           <p>
@@ -236,7 +167,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
             and primary school.
           </p>
           <a class="pci-text-link" href="walk-for-education/index.html" data-protected>
-            Explore Walk for Education ↗
+            Explore Walk for Education <Icon name="external" />
           </a>
         </article>
       </div>
@@ -245,7 +176,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
   <section class="pci-section">
     <div class="pci-container pci-split">
       <div>
-        <span class="pci-eyebrow">08 / Partnerships</span>
+        <span class="pci-eyebrow">07 / Partnerships</span>
         <h2 class="pci-large-statement">
           Progress is built <em>together.</em>
         </h2>
@@ -264,7 +195,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
           <span>Technical</span>
         </div>
         <a class="pci-text-link" href="partnerships/index.html">
-          Explore Partnerships ↗
+          Explore Partnerships <Icon name="external" />
         </a>
       </div>
     </div>
@@ -273,7 +204,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
     <div class="pci-container">
       <div class="pci-section-heading">
         <div>
-          <span class="pci-eyebrow">09 / Selected updates</span>
+          <span class="pci-eyebrow">08 / Selected updates</span>
           <h2>
             The work.
             <br />
@@ -289,7 +220,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
   </section>
   <section class="pci-section">
     <div class="pci-container">
-      <span class="pci-eyebrow">10 / Governance & trust</span>
+      <span class="pci-eyebrow">09 / Governance & trust</span>
       <h2 style="max-width:20ch">
         Trust is built through <em>clear responsibility.</em>
       </h2>
@@ -306,7 +237,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
         </li>
       </ul>
       <a class="pci-text-link" href="governance/index.html">
-        Read Our Governance Framework ↗
+        Read Our Governance Framework <Icon name="external" />
       </a>
     </div>
   </section>

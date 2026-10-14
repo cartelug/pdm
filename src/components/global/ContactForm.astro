@@ -1,4 +1,5 @@
 ---
+import Icon from "./Icon.astro";
 import { asset, site } from "../../config/site";
 interface Props {
   path: string;
@@ -60,14 +61,17 @@ const { path } = Astro.props;
   </p>
   <div>
     <button class="pci-button pci-button--gold" type="submit">
-      Send Enquiry <span aria-hidden="true">→</span>
+      Send Enquiry{" "}
+      <span aria-hidden="true">
+        <Icon name="arrow" />
+      </span>
     </button>
   </div>
   <p class="pci-form__status" role="status" aria-live="polite" data-enquiry-status></p>
   <p class="pci-form__privacy">
     Prefer your email app?{" "}
     <a href={"mailto:" + site.email} data-enquiry-fallback>
-      Open an email draft ↗
+      Open an email draft <Icon name="external" />
     </a>
   </p>
 </form>
