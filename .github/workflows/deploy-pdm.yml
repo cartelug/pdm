@@ -41,6 +41,7 @@ jobs:
           npx playwright install --with-deps chromium
           npm run test:browser
           node tests/navigation/browser.cjs
+          node tests/navigation/motion.cjs
           test -s index.html
 
       - name: Prepare only the live PDM website
