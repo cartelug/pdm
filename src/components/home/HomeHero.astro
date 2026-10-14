@@ -3,24 +3,6 @@ import Icon from "../global/Icon.astro";
 ---
 
 <section class="pci-hero" id="top" aria-labelledby="home-heading">
-  <picture class="pci-hero__image" aria-hidden="true">
-    <source
-      media="(max-width: 720px)"
-      srcset="assets/crimson/hero-mobile-560.webp 560w, assets/crimson/hero-mobile-1120.webp 1120w"
-      sizes="100vw"
-    />
-    <img
-      src="assets/crimson/hero-wide-1774.webp"
-      srcset="assets/crimson/hero-wide-960.webp 960w, assets/crimson/hero-wide-1440.webp 1440w, assets/crimson/hero-wide-1774.webp 1774w"
-      sizes="100vw"
-      width="1774"
-      height="887"
-      alt=""
-      fetchpriority="high"
-      decoding="async"
-    />
-  </picture>
-  <div class="pci-hero__atmosphere" aria-hidden="true"></div>
   <div class="pci-container pci-hero__layout">
     <div class="pci-hero__copy">
       <span class="pci-eyebrow" data-hero-detail>
@@ -34,29 +16,60 @@ import Icon from "../global/Icon.astro";
           <span>we build</span>
         </span>
         <span class="pci-hero__line">
-          <span>what lasts.</span>
+          <span>
+            <em>what lasts.</em>
+          </span>
         </span>
       </h1>
       <p class="pci-hero__intro" data-hero-detail>
-        Local resources. Shared purpose.
-        <br />
-        Lasting development.
+        Local resources. Shared purpose. Lasting development.
       </p>
       <p class="pci-hero__description" data-hero-detail>
         Pamodzi brings communities and partners together around the priorities people define for themselves.
       </p>
       <div class="pci-actions" data-hero-detail>
-        <a class="pci-button pci-button--light" href="projects/index.html">
+        <a class="pci-button" href="projects/index.html">
           Explore Our Work <Icon name="arrow" />
         </a>
         <a class="pci-text-link" href="model/index.html">
           Our approach <Icon />
         </a>
       </div>
-      <a class="pci-scroll" href="#our-pillars" data-hero-detail>
-        Discover the possibilities <Icon name="down" />
-      </a>
+    </div>
+    <figure class="pci-hero__figure">
+      <span class="pci-hero__sun" aria-hidden="true"></span>
+      <span class="pci-hero__frame" aria-hidden="true"></span>
+      <div class="pci-hero__arch">
+        <img
+          src="assets/institutional-v3/hero-portrait-840.webp"
+          srcset="assets/institutional-v3/hero-portrait-420.webp 420w, assets/institutional-v3/hero-portrait-840.webp 840w"
+          sizes="(min-width: 820px) 40vw, 92vw"
+          width="840"
+          height="1050"
+          alt=""
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+      <figcaption class="pci-hero__caption">Illustration · everyday community life</figcaption>
+    </figure>
+  </div>
+  <div class="pci-strip" aria-label="How Pamodzi works">
+    <div class="pci-container">
+      <ul>
+        <li>
+          <span>01</span>Locally defined
+        </li>
+        <li>
+          <span>02</span>Member-led
+        </li>
+        <li>
+          <span>03</span>Partnership-based
+        </li>
+        <li>
+          <span>04</span>Accountable
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="pci-hero__transition" aria-hidden="true"></div>
 </section>

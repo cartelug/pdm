@@ -6,4 +6,6 @@ interface Props {
 const { status } = Astro.props;
 ---
 
-<span class="pci-status">{status}</span>
+<span class="pci-status" data-status={status.toLowerCase().replaceAll(" ", "-")}>
+  {status}
+</span>

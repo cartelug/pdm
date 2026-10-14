@@ -1,5 +1,6 @@
 ---
 import Icon from "../components/global/Icon.astro";
+import Rings from "../components/global/Rings.astro";
 import { getCollection } from "astro:content";
 import Layout from "../layouts/InstitutionalLayout.astro";
 import UpdatesFeed from "../components/global/UpdatesFeed.astro";
@@ -21,40 +22,46 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
 >
   <HomeHero />
   <ProgrammePillars />
-  <section class="pci-section pci-about-section" id="who-we-are">
-    <div class="pci-container pci-split">
-      <div>
+  <section class="pci-section pci-section--bone" id="who-we-are">
+    <div class="pci-container pci-split pci-split--sticky">
+      <div class="pci-split__aside" data-reveal>
         <span class="pci-eyebrow">02 / Who we are</span>
         <h2>
           Not a donor.
           <br />
           <em>A convener.</em>
         </h2>
-        <img
-          class="pci-connection-art"
-          src="assets/crimson/connection-720.webp"
-          width="720"
-          height="720"
-          alt=""
-          loading="lazy"
-          decoding="async"
-          aria-hidden="true"
-        />
+        <figure class="pci-about__art" aria-hidden="true">
+          <img
+            src="assets/crimson/connection-720.webp"
+            width="720"
+            height="720"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
       </div>
-      <div>
+      <div class="pci-split__main pci-body" data-reveal>
         <p class="pci-statement">
           Sustainable development is strongest when communities help shape, resource and steward their own future.
         </p>
-        <p style="margin-top:28px">
+        <ol class="pci-trio">
+          <li>
+            <span>01</span>Convene
+          </li>
+          <li>
+            <span>02</span>Mobilise
+          </li>
+          <li>
+            <span>03</span>Sustain
+          </li>
+        </ol>
+        <p>
           We start with the resources and relationships a community already has — savings groups, cooperatives,
           professionals, businesses, diaspora and local leadership — then organise them around a clear, locally chosen
           priority.
         </p>
-        <div class="pci-tags">
-          <span>Convene</span>
-          <span>Mobilise</span>
-          <span>Sustain</span>
-        </div>
         <a class="pci-text-link" href="about/index.html">
           Meet Pamodzi <Icon name="external" />
         </a>
@@ -64,7 +71,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
   <ModelPreview path="/" />
   <section class="pci-section">
     <div class="pci-container">
-      <div class="pci-section-heading">
+      <div class="pci-section-head" data-reveal>
         <div>
           <span class="pci-eyebrow">04 / Projects & priorities</span>
           <h2>
@@ -78,7 +85,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
           pathway.
         </p>
       </div>
-      <div class="pci-project-grid pci-project-grid--featured">
+      <div class="pci-project-grid">
         {projects.map((project) => (
           <ProjectCard {project} path="/" />
         ))}
@@ -90,9 +97,9 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
       </div>
     </div>
   </section>
-  <section class="pci-section pci-muted">
+  <section class="pci-section pci-section--bone">
     <div class="pci-container">
-      <div class="pci-section-heading">
+      <div class="pci-section-head" data-reveal>
         <div>
           <span class="pci-eyebrow">05 / Work in practice</span>
           <h2>
@@ -106,7 +113,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
           local infrastructure.
         </p>
       </div>
-      <div class="pci-evidence-grid">
+      <div class="pci-columns" data-reveal-group>
         {[
           ["Mutual support", "Members responding to practical household, education, medical and livelihood needs."],
           ["Enterprise & livelihoods", "Community savings, financial literacy, skills and locally led opportunity."],
@@ -118,8 +125,9 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
             "Health & wellbeing",
             "Community participation and collaboration with qualified professionals and public bodies.",
           ],
-        ].map(([title, copy]) => (
-          <article class="pci-evidence">
+        ].map(([title, copy], i) => (
+          <article class="pci-column">
+            <span>0{i + 1}</span>
             <h3>{title}</h3>
             <p>{copy}</p>
           </article>
@@ -132,9 +140,9 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
       </div>
     </div>
   </section>
-  <section class="pci-section pci-dark">
+  <section class="pci-section pci-section--night">
     <div class="pci-container">
-      <div class="pci-section-heading">
+      <div class="pci-section-head" data-reveal>
         <div>
           <span class="pci-eyebrow">06 / Walking for Impact</span>
           <h2>
@@ -148,7 +156,17 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
         </p>
       </div>
       <div class="pci-campaign-grid">
-        <article class="pci-campaign-panel pci-campaign-panel--faith">
+        <article class="pci-campaign-panel pci-campaign-panel--faith" data-reveal>
+          <div class="pci-campaign-panel__media">
+            <img
+              src="assets/faith-in-motion/walk-day-arrival-celebration.jpg"
+              width="1080"
+              height="608"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
           <span class="pci-status">Journey completed · fundraising continues</span>
           <h3>Faith in Motion</h3>
           <p>
@@ -159,7 +177,17 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
             Explore Faith in Motion <Icon name="external" />
           </a>
         </article>
-        <article class="pci-campaign-panel pci-campaign-panel--education">
+        <article class="pci-campaign-panel pci-campaign-panel--education" data-reveal>
+          <div class="pci-campaign-panel__media">
+            <img
+              src="assets/walk-for-education/hero-art-768.webp"
+              width="768"
+              height="512"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
           <span class="pci-status">Pledges open · walk dates unconfirmed</span>
           <h3>Walk for Education</h3>
           <p>
@@ -173,19 +201,20 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
       </div>
     </div>
   </section>
-  <section class="pci-section">
+  <section class="pci-section pci-section--crimson pci-band">
+    <Rings class="pci-band__rings" />
     <div class="pci-container pci-split">
-      <div>
+      <div class="pci-split__aside" data-reveal>
         <span class="pci-eyebrow">07 / Partnerships</span>
-        <h2 class="pci-large-statement">
+        <h2>
           Progress is built <em>together.</em>
         </h2>
       </div>
-      <div>
+      <div class="pci-split__main pci-body" data-reveal>
         <p class="pci-statement">
           Communities, institutions, businesses and technical partners each have a meaningful role.
         </p>
-        <p style="margin-top:28px">
+        <p>
           Bring expertise, networks, practical resources or programme support to a defined community priority. Scope,
           responsibilities and reporting are agreed directly.
         </p>
@@ -194,15 +223,17 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
           <span>Institutional</span>
           <span>Technical</span>
         </div>
-        <a class="pci-text-link" href="partnerships/index.html">
-          Explore Partnerships <Icon name="external" />
-        </a>
+        <div class="pci-actions">
+          <a class="pci-button pci-button--light" href="partnerships/index.html">
+            Explore Partnerships <Icon name="arrow" />
+          </a>
+        </div>
       </div>
     </div>
   </section>
-  <section class="pci-section pci-muted">
+  <section class="pci-section">
     <div class="pci-container">
-      <div class="pci-section-heading">
+      <div class="pci-section-head" data-reveal>
         <div>
           <span class="pci-eyebrow">08 / Selected updates</span>
           <h2>
@@ -218,13 +249,17 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
       <UpdatesFeed path="/" />
     </div>
   </section>
-  <section class="pci-section">
+  <section class="pci-section pci-section--bone">
     <div class="pci-container">
-      <span class="pci-eyebrow">09 / Governance & trust</span>
-      <h2 style="max-width:20ch">
-        Trust is built through <em>clear responsibility.</em>
-      </h2>
-      <ul class="pci-trust-points">
+      <div class="pci-section-head" data-reveal>
+        <div>
+          <span class="pci-eyebrow">09 / Governance & trust</span>
+          <h2>
+            Trust is built through <em>clear responsibility.</em>
+          </h2>
+        </div>
+      </div>
+      <ul class="pci-trust-points" data-reveal-group>
         <li>
           <b>Beneficiary first.</b>Approved beneficiaries and contribution pathways must be identified.
         </li>

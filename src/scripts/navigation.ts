@@ -140,7 +140,7 @@ export function initGlobalNavigation(): () => void {
   window.addEventListener(
     "resize",
     () => {
-      if (innerWidth > 1160) close(false, true);
+      if (innerWidth >= 1100) close(false, true);
     },
     options,
   );

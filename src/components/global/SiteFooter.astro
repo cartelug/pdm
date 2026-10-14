@@ -18,11 +18,8 @@ const { path } = Astro.props;
         <em>Together.</em>
       </h2>
       <div class="pci-actions">
-        <a class="pci-button pci-button--gold" href={href(path, "/contact/#enquiry")}>
-          Partner With Pamodzi{" "}
-          <span aria-hidden="true">
-            <Icon name="arrow" />
-          </span>
+        <a class="pci-button pci-button--light" href={href(path, "/contact/#enquiry")}>
+          Partner With Pamodzi <Icon name="arrow" />
         </a>
         <a class="pci-text-link" href={href(path, "/contact/")}>
           Get In Touch <Icon name="external" />
@@ -38,10 +35,13 @@ const { path } = Astro.props;
               width="1273"
               height="965"
               alt=""
+              loading="lazy"
+              decoding="async"
             />
           </span>
-          <span>
-            Pamodzi<small>Community Initiative</small>
+          <span class="pci-brand__text">
+            <span class="pci-brand__name">Pamodzi</span>
+            <small>Community Initiative</small>
           </span>
         </a>
         <p>Bringing communities and partners together around locally led development.</p>

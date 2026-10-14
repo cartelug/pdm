@@ -9,8 +9,11 @@ import Layout from "../layouts/InstitutionalLayout.astro";
   description="Find your way back to Pamodzi’s programmes, projects and community-led work."
   noindex
 >
-  <section class="pci-section">
+  <section class="pci-section pci-notfound">
     <div class="pci-container">
+      <p class="pci-notfound__code" aria-hidden="true">
+        404
+      </p>
       <span class="pci-eyebrow">404 / Page not found</span>
       <h1>
         Let’s find
@@ -21,7 +24,7 @@ import Layout from "../layouts/InstitutionalLayout.astro";
         This address does not lead to a current page. Explore Pamodzi’s projects, or get in touch if you need help.
       </p>
       <div class="pci-actions">
-        <a class="pci-button pci-button--gold" href="/index.html">
+        <a class="pci-button" href="/index.html">
           Return Home <Icon name="arrow" />
         </a>
         <a class="pci-text-link" href="/projects/index.html">

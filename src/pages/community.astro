@@ -1,0 +1,146 @@
+---
+import Layout from "../layouts/InstitutionalLayout.astro";
+import PageHero from "../components/global/PageHero.astro";
+import ProjectStatus from "../components/projects/ProjectStatus.astro";
+import Checks from "../components/global/Checks.astro";
+import Icon from "../components/global/Icon.astro";
+import { getEntry } from "astro:content";
+import { getPage } from "../lib/pages";
+import { href } from "../config/site";
+const p = await getPage("community");
+const record = (await getEntry("projects", "community"))!.data;
+const path = "/community/";
+const steps = [
+  {
+    when: "Step 01 · Listen",
+    title: "The community names the priority",
+    text: "Members, a school, a parish, an association or another local structure describes the need, who it affects and why it matters.",
+  },
+  {
+    when: "Step 02 · Define",
+    title: "Turn the need into clear work",
+    text: "The intended outcome, scope, responsibilities and evidence needed for approval are set out before the initiative is presented publicly.",
+  },
+  {
+    when: "Step 03 · Organise",
+    title: "Bring resources and partners together",
+    text: "The community identifies what it can contribute and where technical, public, philanthropic or business support may be appropriate.",
+    state: "current",
+  },
+  {
+    when: "Step 04 · Deliver and report",
+    title: "Keep the record connected to the work",
+    text: "Approved initiatives publish their status, verified progress and next responsibility in language the community and partners can understand.",
+    state: "ahead",
+  },
+];
+---
+
+<Layout {path} title={p.title} description={p.description}>
+  <PageHero {path} label={p.title} heading={p.heading} description={p.description}>
+    <div class="pci-detail-meta">
+      <ProjectStatus status={record.status} />
+      <span>{record.category}</span>
+      <span>{record.location}</span>
+    </div>
+  </PageHero>
+  <section class="pci-section" id="detail">
+    <div class="pci-container pci-split pci-split--sticky">
+      <div class="pci-split__aside" data-reveal>
+        <span class="pci-eyebrow">Programme area · Community</span>
+        <h2>Community-led development</h2>
+        <div class="pci-actions">
+          <a class="pci-button pci-button--ink" href={href(path, "/contact/#enquiry")}>
+            Ask about this <Icon name="arrow" />
+          </a>
+        </div>
+      </div>
+      <div class="pci-split__main pci-body" data-reveal>
+        <p class="pci-lead">
+          The starting point is a priority defined by the people it affects. Pamodzi helps make that priority specific,
+          identify the resources already present and establish what additional expertise or partnership is needed.
+        </p>
+        <div class="pci-facts">
+          <div>
+            <b>Member-led</b>
+            <span>Starting point</span>
+          </div>
+          <div>
+            <b>Locally defined</b>
+            <span>Project priority</span>
+          </div>
+          <div>
+            <b>Verified</b>
+            <span>Before public reporting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pci-section pci-section--bone">
+    <div class="pci-container pci-split pci-split--sticky">
+      <div class="pci-split__aside" data-reveal>
+        <span class="pci-eyebrow">How community work develops</span>
+        <h2>Listen, define, organise, report.</h2>
+        <p class="pci-lead">
+          The route is deliberate: listen first, define the work, organise responsibilities, then report what can be
+          evidenced.
+        </p>
+      </div>
+      <div class="pci-split__main" data-reveal>
+        <div class="pci-timeline">
+          {steps.map((step) => (
+            <div class:list={["pci-timeline__item", step.state && "pci-timeline__item--" + step.state]}>
+              <p class="pci-timeline__when">{step.when}</p>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pci-section">
+    <div class="pci-container pci-split pci-split--sticky">
+      <div class="pci-split__aside" data-reveal>
+        <span class="pci-eyebrow">What counts as a community project</span>
+        <h2>Defined, verified and reported on responsibly.</h2>
+      </div>
+      <div class="pci-split__main pci-body" data-reveal>
+        <p class="pci-lead">
+          Pamodzi considers work that can be defined, verified and reported on responsibly. If your initiative fits the
+          marks below, tell us about it.
+        </p>
+        <Checks
+          items={[
+            {
+              mark: "01",
+              title: "A defined piece of work",
+              text: "A clear scope with an end — something that can be called finished, not an open-ended fund.",
+            },
+            {
+              mark: "02",
+              title: "An authorised account to receive funds",
+              text: "Money goes directly to a formally authorised account. Pamodzi and the campaign team never receive or hold a donation.",
+            },
+            {
+              mark: "03",
+              title: "Something verifiable",
+              text: "Beneficiary, need and progress can be confirmed and reported on — so only reconciled figures are ever published.",
+            },
+            {
+              mark: "04",
+              title: "A community behind it",
+              text: "Work shaped and carried by the people it is intended to serve.",
+            },
+          ]}
+        />
+        <div class="pci-actions">
+          <a class="pci-button" href={href(path, "/contact/#enquiry")}>
+            Propose a project <Icon name="arrow" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

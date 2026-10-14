@@ -15,6 +15,7 @@ const p = project.data;
   class:list={["pci-project", { "pci-project--concept": !p.image }]}
   data-project-status={p.status}
   data-project-category={p.category}
+  data-reveal
 >
   <a class="pci-project__media" href={href(path, p.route)} tabindex="-1" aria-hidden="true">
     {p.image ? (
@@ -37,9 +38,7 @@ const p = project.data;
   <h3>
     <a href={href(path, p.route)}>
       {p.title}
-      <span aria-hidden="true">
-        <Icon name="external" />
-      </span>
+      <Icon name="external" />
     </a>
   </h3>
   <p>{p.summary}</p>

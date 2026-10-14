@@ -1,0 +1,67 @@
+---
+import Layout from "../layouts/InstitutionalLayout.astro";
+import PageHero from "../components/global/PageHero.astro";
+import ProjectCard from "../components/projects/ProjectCard.astro";
+import SectionHead from "../components/global/SectionHead.astro";
+import Icon from "../components/global/Icon.astro";
+import { getCollection } from "astro:content";
+import { getPage } from "../lib/pages";
+import { href } from "../config/site";
+const p = await getPage("projects");
+const path = "/projects/";
+const projects = await getCollection("projects", (record) => record.data.publication !== "draft");
+const filters = [
+  ["all", "All projects"],
+  ["Live campaign", "Live campaigns"],
+  ["Under review", "Under review"],
+  ["Pipeline", "Pipeline"],
+  ["Programme area", "Programme areas"],
+  ["Preparing launch", "Preparing launch"],
+];
+---
+
+<Layout {path} title={p.title} description={p.description}>
+  <PageHero {path} label={p.title} heading={p.heading} description={p.description} />
+  <section class="pci-section">
+    <div class="pci-container">
+      <div class="pci-filter-bar" aria-label="Filter projects">
+        {filters.map(([value, label], i) => (
+          <button type="button" data-project-filter={value} aria-pressed={i === 0 ? "true" : "false"}>
+            {label}
+          </button>
+        ))}
+      </div>
+      <p class="pci-filter-count" role="status" aria-live="polite" data-filter-count>
+        {projects.length} projects shown
+      </p>
+      <div class="pci-project-grid" data-project-grid>
+        {projects.map((project) => (
+          <ProjectCard {project} {path} />
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="pci-section pci-section--bone">
+    <div class="pci-container">
+      <SectionHead eyebrow="How a project opens">
+        Verified first.
+        <br />
+        <em>Reported until finished.</em>
+      </SectionHead>
+      <ul class="pci-trust-points" data-reveal-group>
+        <li>
+          <b>Define and verify.</b>Confirm the beneficiary, scope, authorised account and approvals in writing.
+        </li>
+        <li>
+          <b>Open a clear pathway.</b>Publish the approved status, contact route and reporting responsibilities.
+        </li>
+        <li>
+          <b>Keep the record connected.</b>Report verified progress and distinguish received support from commitments.
+        </li>
+      </ul>
+      <a class="pci-button pci-button--ink" href={href(path, "/contact/#enquiry")}>
+        Propose a Community Project <Icon name="arrow" />
+      </a>
+    </div>
+  </section>
+</Layout>

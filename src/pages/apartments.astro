@@ -1,0 +1,183 @@
+---
+import Layout from "../layouts/InstitutionalLayout.astro";
+import PageHero from "../components/global/PageHero.astro";
+import ProjectStatus from "../components/projects/ProjectStatus.astro";
+import Notice from "../components/global/Notice.astro";
+import Icon from "../components/global/Icon.astro";
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import { getEntry } from "astro:content";
+import { getPage } from "../lib/pages";
+import { asset, href, site } from "../config/site";
+const p = await getPage("apartments");
+const record = (await getEntry("projects", "apartments"))!.data;
+const path = "/apartments/";
+// The enquiry form still uses the shared mailto script; its version query follows the file contents.
+const legacyProjectScript =
+  asset(path, "js/pdm.js") + "?v=" + createHash("sha256").update(readFileSync("js/pdm.js")).digest("hex").slice(0, 10);
+const steps = [
+  {
+    when: "Step 01 · Define",
+    title: "Clarify the community need",
+    text: "Document the housing need, intended users, location context and the practical outcome the concept is meant to support.",
+  },
+  {
+    when: "Step 02 · Review",
+    title: "Test feasibility and governance",
+    text: "Review delivery options, responsibilities, approvals, legal requirements and safeguards before any public commitment is invited.",
+  },
+  {
+    when: "Step 03 · Consult",
+    title: "Listen to relevant stakeholders",
+    text: "Gather practical input from the community and appropriately qualified advisers, then revise the concept around evidence.",
+    state: "current",
+  },
+  {
+    when: "Step 04 · Decide",
+    title: "Publish only an approved pathway",
+    text: "If the concept proceeds, Pamodzi will publish its verified status and the appropriate route for questions or participation.",
+    state: "ahead",
+  },
+];
+---
+
+<Layout {path} title={p.title} description={p.description}>
+  <PageHero {path} label={p.title} heading={p.heading} description={p.description}>
+    <div class="pci-detail-meta">
+      <ProjectStatus status={record.status} />
+      <span>{record.category}</span>
+      <span>{record.location}</span>
+    </div>
+  </PageHero>
+  <section class="pci-section" id="detail">
+    <div class="pci-container pci-split pci-split--sticky">
+      <div class="pci-split__aside" data-reveal>
+        <span class="pci-eyebrow">Concept 02 · Housing & development</span>
+        <h2>Kasese Apartment Concept</h2>
+        <div class="pci-actions">
+          <a class="pci-button pci-button--ink" href={href(path, "/contact/#enquiry")}>
+            Ask for an update <Icon name="arrow" />
+          </a>
+        </div>
+      </div>
+      <div class="pci-split__main pci-body" data-reveal>
+        <p class="pci-lead">
+          The concept explores how community-led development could respond to housing needs in Kasese. No design,
+          delivery structure, ownership arrangement, price, return or timetable is being offered on this page.
+        </p>
+        <div class="pci-facts">
+          <div>
+            <b>Under review</b>
+            <span>Current status</span>
+          </div>
+          <div>
+            <b>Kasese</b>
+            <span>Location</span>
+          </div>
+          <div>
+            <b>No public terms</b>
+            <span>Concept stage</span>
+          </div>
+        </div>
+        <Notice lead="Please note.">
+          This is an early concept page, not an investment, sales or ownership offer. Public participation will open
+          only after the project has completed the appropriate reviews and approved information is available.
+        </Notice>
+      </div>
+    </div>
+  </section>
+  <section class="pci-section pci-section--bone">
+    <div class="pci-container pci-split pci-split--sticky">
+      <div class="pci-split__aside" data-reveal>
+        <span class="pci-eyebrow">What happens during review</span>
+        <h2>Define, review, consult, decide.</h2>
+        <p class="pci-lead">
+          The concept moves through definition, governance and feasibility checks before Pamodzi decides whether it is
+          ready for a public project pathway.
+        </p>
+      </div>
+      <div class="pci-split__main" data-reveal>
+        <div class="pci-timeline">
+          {steps.map((step) => (
+            <div class:list={["pci-timeline__item", step.state && "pci-timeline__item--" + step.state]}>
+              <p class="pci-timeline__when">{step.when}</p>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pci-section pci-section--bone" id="contact">
+    <div class="pci-container pci-split">
+      <div class="pci-split__aside" data-reveal>
+        <span class="pci-eyebrow">Get in touch</span>
+        <h2>Ask about the concept review.</h2>
+        <p class="pci-lead">
+          Send a general question or ask to be told when an approved public update is available. This does not register
+          an investment or purchase interest.
+        </p>
+      </div>
+      <div class="pci-split__main" data-reveal>
+        <form class="pci-form" id="enquiryForm" action={"mailto:" + site.email} method="post" enctype="text/plain">
+          <div class="pci-form__row">
+            <div>
+              <label for="iName">Your name</label>
+              <input id="iName" name="name" type="text" autocomplete="name" placeholder="Full name" required />
+            </div>
+            <div>
+              <label for="iContact">Email or phone</label>
+              <input
+                id="iContact"
+                name="contact"
+                type="text"
+                autocomplete="email"
+                placeholder="How we reach you"
+                required
+              />
+            </div>
+          </div>
+          <div class="pci-form__row">
+            <div>
+              <label for="iProject">Which project</label>
+              <select id="iProject" name="project">
+                <option>Faith in Motion — St Joseph Rwembyo Church</option>
+                <option selected>Kasese Apartment Concept</option>
+                <option>Community-led development</option>
+                <option>Something else / general</option>
+              </select>
+            </div>
+            <div>
+              <label for="iType">Reason</label>
+              <select id="iType" name="reason">
+                <option>Request a future update</option>
+                <option>General project question</option>
+                <option>Community or technical feedback</option>
+                <option>Partnership conversation</option>
+                <option>Press or general enquiry</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="iMsg">Your message</label>
+            <textarea id="iMsg" name="message" rows="4" placeholder="A sentence or two is plenty."></textarea>
+          </div>
+          <div>
+            <button class="pci-button" id="send" type="submit">
+              Send enquiry <Icon name="arrow" />
+            </button>
+          </div>
+          <p class="pci-form__privacy">
+            This opens your email app with the message ready to send. Prefer WhatsApp?{" "}
+            <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">
+              Use the contact number
+            </a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+  <div class="pci-toast" id="toast" role="status" aria-live="polite"></div>
+  <script is:inline src={legacyProjectScript} defer></script>
+</Layout>

@@ -1,0 +1,49 @@
+---
+import Icon from "./Icon.astro";
+import { href } from "../../config/site";
+interface Link {
+  label: string;
+  to: string;
+  kind?: "line" | "ink" | "light";
+}
+interface Item {
+  no?: string;
+  title: string;
+  text?: string;
+  tags?: string[];
+  links?: Link[];
+}
+interface Props {
+  path: string;
+  items: Item[];
+}
+const { path, items } = Astro.props;
+---
+
+<ol class="pci-rows" data-reveal-group>
+  {items.map((item, i) => (
+    <li class="pci-row">
+      <span class="pci-row__no">{item.no ?? String(i + 1).padStart(2, "0")}</span>
+      <h3>{item.title}</h3>
+      <div class="pci-row__text">
+        {item.text && <p>{item.text}</p>}
+        {item.tags && (
+          <div class="pci-tags">
+            {item.tags.map((tag) => (
+              <span>{tag}</span>
+            ))}
+          </div>
+        )}
+        {item.links && (
+          <div class="pci-actions">
+            {item.links.map((link) => (
+              <a class={"pci-button pci-button--" + (link.kind ?? "line")} href={href(path, link.to)}>
+                {link.label} <Icon name="arrow" />
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </li>
+  ))}
+</ol>
