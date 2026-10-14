@@ -28,6 +28,28 @@ test("root index.html contains the complete static homepage, without a redirect 
   assert.match(html, /Explore Our Work/);
 });
 
+test("compiled presentation assets resolve at both the domain root and the GitHub Pages subpath", () => {
+  for (const base of ["https://pamodzici.com/", "https://cartelug.github.io/pdm/"]) {
+    const basePath = new URL(base).pathname;
+    for (const route of routes) {
+      const html = fs.readFileSync(path.join(root, route, "index.html"), "utf8");
+      const doc = new JSDOM(html, { url: base + (route ? route + "/" : "") }).window.document;
+      for (const element of doc.querySelectorAll('link[rel="stylesheet"],script[src]')) {
+        const value = element.getAttribute("href") || element.getAttribute("src");
+        if (!value.includes("_astro/")) continue;
+        const resolved = new URL(value, doc.URL);
+        assert.ok(resolved.pathname.startsWith(basePath + "_astro/"), route + " keeps assets under " + basePath);
+        const local = path.join(root, resolved.pathname.slice(basePath.length));
+        assert.ok(fs.existsSync(local), value + " resolves to an exported asset");
+      }
+    }
+  }
+  for (const name of fs.readdirSync(path.join(root, "_astro")).filter((name) => name.endsWith(".css"))) {
+    const css = fs.readFileSync(path.join(root, "_astro", name), "utf8");
+    assert.doesNotMatch(css, /\/_astro\//, "Fonts and imagery stay relative to their compiled stylesheet");
+  }
+});
+
 test("every upgraded page has valid local links, fragments, assets and unique IDs", () => {
   for (const route of routes) {
     const file = path.join(root, route, "index.html");
