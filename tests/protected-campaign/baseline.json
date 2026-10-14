@@ -1,10 +1,10 @@
 {
   "baselineCommit": "15e13113ca838bfec2b193d6a52f6cedca7f61bb",
-  "note": "Protected campaign documents, assets, services and shared legacy dependencies must remain byte-identical.",
+  "note": "Protected campaign documents, assets, services and shared legacy dependencies must match this recorded baseline. Only the explicitly reviewed presentation exceptions below differ from the original baseline commit.",
   "files": {
     "admin/collections/index.html": "deea3c2753c31296a156ca903c2debb117b0009d3edb47aa4dc84022c6f7af04",
     "admin/index.html": "5176fe544d8b2c5880dec31e9d33bf3205112ed823b390d8ab58d42e2fd5c7db",
-    "admin/quick.html": "d14937d53638370f49b48ee806351bcb05cd4887bf8b1ab8e8b6bda039b5b6bb",
+    "admin/quick.html": "7fd9d33fbaacc22b01532de3f2646442c188c42bb2ff7fb23154c79fd36f2146",
     "admin/vendor/jspdf.umd.min.js": "98ccf17aa10c20bb1301762618fcc9b6ab3a4e7f26b6071d64d0b41154df3875",
     "admin/wfe.html": "c557b418beb68aa73928c1fd1fce21c44183c0e5d29cda4602d979e337a74146",
     "api/README.md": "6f37bfdeed6c6561c699b50ab70e3ced493a36db859ba1eaf8cd396c3d7b590b",
@@ -132,5 +132,13 @@
     "walk-for-education/partners/index.html": "60380a3827a12d761a8797a664fcd4700f28b882cbffaa843ec5cd86cec41b1a",
     "walk-for-education/take-part/index.html": "6d46dfedc0bab074b5d82ae1b71a13f3995e43028ddbd8bb60b2be16ee6b8c39",
     "walk-for-education/updates/index.html": "7568491940dce4becc9c756bd9c4fc81f0163a0fa121c25fcdb4974d3f9fb5cf"
-  }
+  },
+  "presentationReviews": [
+    {
+      "path": "admin/quick.html",
+      "date": "2026-10-14",
+      "reason": "User-approved removal of the Pledged and Promised emoji decorations only; status attributes and all runtime logic unchanged.",
+      "previousSha256": "d14937d53638370f49b48ee806351bcb05cd4887bf8b1ab8e8b6bda039b5b6bb"
+    }
+  ]
 }

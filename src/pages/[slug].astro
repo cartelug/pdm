@@ -1,4 +1,5 @@
 ---
+import Icon from "../components/global/Icon.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
@@ -9,6 +10,7 @@ import ProjectCard from "../components/projects/ProjectCard.astro";
 import ContactForm from "../components/global/ContactForm.astro";
 import UpdatesFeed from "../components/global/UpdatesFeed.astro";
 import ProjectStatus from "../components/projects/ProjectStatus.astro";
+import { presentationIcons } from "../lib/presentation";
 import { asset, site } from "../config/site";
 export async function getStaticPaths() {
   return (await getCollection("pages", (p) => p.data.publication !== "draft")).map((page) => ({
@@ -26,7 +28,7 @@ const legacyProjectScript =
   asset(path, "js/pdm.js") + "?v=" + createHash("sha256").update(readFileSync("js/pdm.js")).digest("hex").slice(0, 10);
 const projects = await getCollection("projects", (p) => p.data.publication !== "draft");
 const projectRecord = projects.find((project) => project.id === page.id);
-let content = p.html;
+let content = presentationIcons(p.html);
 if (projectRecord) content = content.replace(/(<b>)UNDER REVIEW(<\/b>)/g, "$1" + projectRecord.data.status + "$2");
 if (page.id === "model") content = content.replace(/<section class="blk on-dark">[\s\S]*?<\/section>/, "");
 content = content
@@ -96,7 +98,7 @@ content = content
             </li>
           </ul>
           <a class="pci-text-link" href="../contact/index.html#enquiry">
-            Propose a Community Project ↗
+            Propose a Community Project <Icon name="external" />
           </a>
         </div>
       </section>
@@ -114,19 +116,25 @@ content = content
           <ul class="pci-contact-options">
             <li>
               <small>Email</small>
-              <a href={"mailto:" + site.email}>{site.email} ↗</a>
+              <a href={"mailto:" + site.email}>
+                {site.email} <Icon name="external" />
+              </a>
             </li>
             <li>
               <small>WhatsApp</small>
               <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">
-                {site.phone} ↗
+                {site.phone} <Icon name="external" />
               </a>
             </li>
             <li>
               <small>Campaign enquiries</small>
-              <a href="../faith-in-motion/index.html">Faith in Motion ↗</a>
+              <a href="../faith-in-motion/index.html">
+                Faith in Motion <Icon name="external" />
+              </a>
               <br />
-              <a href="../walk-for-education/take-part/index.html">Walk for Education ↗</a>
+              <a href="../walk-for-education/take-part/index.html">
+                Walk for Education <Icon name="external" />
+              </a>
             </li>
           </ul>
           <p>
@@ -135,7 +143,7 @@ content = content
           </p>
           <div class="pci-actions">
             <a class="pci-text-link" href="../governance/index.html">
-              Governance & Verification ↗
+              Governance & Verification <Icon name="external" />
             </a>
           </div>
         </div>

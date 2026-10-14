@@ -1,0 +1,50 @@
+---
+import { programmes } from "../../config/navigation";
+import Icon from "../global/Icon.astro";
+const artwork = ["education", "health", "climate", "inclusion"];
+---
+
+<section class="pci-section pci-pillars-section" id="our-pillars" aria-labelledby="pillars-heading">
+  <div class="pci-container">
+    <div class="pci-section-heading">
+      <div>
+        <span class="pci-eyebrow">01 / Our four pillars</span>
+        <h2 id="pillars-heading">
+          One community.
+          <br />
+          <em>Many possibilities.</em>
+        </h2>
+      </div>
+      <p class="pci-lead">
+        Education. Health. A greener future. Financial inclusion. Four areas of work, shaped by the people they serve.
+      </p>
+    </div>
+    <div class="pci-pillars" data-reveal-group>
+      {programmes.map((p, i) => (
+        <a class="pci-pillar" href={"what-we-do/index.html#" + p.id}>
+          <div class="pci-pillar__art" aria-hidden="true">
+            <img
+              src={"assets/crimson/pillar-" + artwork[i] + "-480.webp"}
+              width="480"
+              height="480"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="pci-pillar__heading">
+            <h3>{p.title}</h3>
+            <Icon />
+          </div>
+          <p>{p.summary}</p>
+          <span class="pci-pillar__index" aria-hidden="true">
+            0{i + 1}
+          </span>
+        </a>
+      ))}
+    </div>
+    <p class="pci-art-note">
+      Hero imagery illustrates our programme areas. Project records identify the work and its current status.
+    </p>
+  </div>
+</section>

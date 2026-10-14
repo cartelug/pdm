@@ -1,4 +1,5 @@
 ---
+import Icon from "../../components/global/Icon.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/InstitutionalLayout.astro";
 import PageHero from "../../components/global/PageHero.astro";
@@ -29,11 +30,11 @@ const path = "/updates/" + entry.id + "/";
       <Content />
       <div class="pci-actions">
         <a class="pci-text-link" href={href(path, "/updates/")}>
-          All Updates ↗
+          All Updates <Icon name="external" />
         </a>
         {entry.data.project && (
           <a class="pci-text-link" href={href(path, entry.data.project)}>
-            Related Project ↗
+            Related Project <Icon name="external" />
           </a>
         )}
       </div>

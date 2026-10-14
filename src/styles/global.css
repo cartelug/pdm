@@ -1,19 +1,19 @@
-@layer tokens, base, components, responsive, motion;
+@layer tokens, base, components, responsive, crimson, motion;
 
 @layer tokens {
   :root {
-    --pci-background-dark: #0c0b09;
-    --pci-background-light: #f4f1ea;
-    --pci-surface-muted: #e9e3d6;
-    --pci-text-primary: #0c0b09;
-    --pci-text-secondary: #5b554a;
-    --pci-accent: #c9a569;
-    --pci-accent-on-light: #8a672a;
-    --pci-accent-on-dark: #d8be84;
+    --pci-background-dark: #26090f;
+    --pci-background-light: #fbf8f5;
+    --pci-surface-muted: #f3ebe8;
+    --pci-text-primary: #26090f;
+    --pci-text-secondary: #66565b;
+    --pci-accent: #b71935;
+    --pci-accent-on-light: #9b1630;
+    --pci-accent-on-dark: #f3c9c8;
     --pci-border-subtle: rgb(12 11 9 / 18%);
-    --pci-focus: #8a672a;
-    --pci-serif: "Fraunces Variable", Georgia, serif;
-    --pci-sans: "Montserrat Variable", Arial, sans-serif;
+    --pci-focus: #9b1630;
+    --pci-serif: "Sora Variable", Arial, sans-serif;
+    --pci-sans: "Manrope Variable", Arial, sans-serif;
     --pci-display: clamp(3.2rem, 9.5vw, 9rem);
     --pci-h1: clamp(2.6rem, 6.6vw, 5.4rem);
     --pci-h2: clamp(2rem, 4.4vw, 3.9rem);
@@ -87,7 +87,7 @@
   h2,
   h3 {
     font-family: var(--pci-serif);
-    font-weight: 450;
+    font-weight: 600;
     line-height: 1.08;
     letter-spacing: -0.035em;
     text-wrap: balance;
@@ -107,6 +107,7 @@
   }
 
   em {
+    font-style: normal;
     font-weight: inherit;
   }
 
@@ -314,7 +315,7 @@
     place-items: center;
     width: 50px;
     padding: 5px;
-    background: var(--pci-background-light);
+    background: transparent;
   }
 
   .pci-brand__mark img {

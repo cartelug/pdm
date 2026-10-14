@@ -22,7 +22,7 @@ const routes = [
 
 test("root index.html contains the complete static homepage, without a redirect or JS dependency", () => {
   const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
-  assert.match(html, /Communities that invest in their/);
+  assert.match(html, /Together, we build what lasts/);
   assert.match(html, /<main[^>]*id="main-content"/);
   assert.doesNotMatch(html, /http-equiv="refresh"/i);
   assert.match(html, /Explore Our Work/);

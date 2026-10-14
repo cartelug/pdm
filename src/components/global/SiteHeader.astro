@@ -1,4 +1,5 @@
 ---
+import Icon from "./Icon.astro";
 import { navigation } from "../../config/navigation";
 import { asset, href } from "../../config/site";
 interface Props {
@@ -29,7 +30,10 @@ const primary = navigation.filter((n) => n.group === "explore");
         ))}
     </nav>
     <a class="pci-header__cta" href={href(path, "/contact/#enquiry")}>
-      Partner With Us <span aria-hidden="true">↗</span>
+      Partner With Us{" "}
+      <span aria-hidden="true">
+        <Icon name="external" />
+      </span>
     </a>
     <button
       class="pci-menu-toggle"
@@ -40,7 +44,10 @@ const primary = navigation.filter((n) => n.group === "explore");
       data-menu-open
       hidden
     >
-      Menu <span aria-hidden="true">＋</span>
+      Menu{" "}
+      <span aria-hidden="true">
+        <Icon name="menu" />
+      </span>
     </button>
   </div>
   <details class="pci-fallback-nav" data-nav-fallback>
@@ -58,7 +65,10 @@ const primary = navigation.filter((n) => n.group === "explore");
       Pamodzi <span>Community Initiative</span>
     </a>
     <button class="pci-menu__close" type="button" aria-label="Close navigation" data-menu-close>
-      Close <span aria-hidden="true">×</span>
+      Close{" "}
+      <span aria-hidden="true">
+        <Icon name="close" />
+      </span>
     </button>
   </div>
   <div class="pci-menu__body">
@@ -72,7 +82,9 @@ const primary = navigation.filter((n) => n.group === "explore");
             <a href={href(path, n.route)} aria-current={path === n.route ? "page" : undefined}>
               <span class="pci-menu__index">{String(i + 1).padStart(2, "0")}</span>
               <span>{n.label}</span>
-              <span aria-hidden="true">↗</span>
+              <span aria-hidden="true">
+                <Icon name="external" />
+              </span>
             </a>
           </li>
         ))}
@@ -87,14 +99,19 @@ const primary = navigation.filter((n) => n.group === "explore");
             .map((n) => (
               <a href={href(path, n.route)} data-protected={n.protected || undefined}>
                 {n.label}
-                <span aria-hidden="true">↗</span>
+                <span aria-hidden="true">
+                  <Icon name="external" />
+                </span>
               </a>
             ))}
         </nav>
       ))}
     </div>
     <a class="pci-button pci-button--gold" href={href(path, "/contact/#enquiry")}>
-      Partner With Pamodzi <span aria-hidden="true">→</span>
+      Partner With Pamodzi{" "}
+      <span aria-hidden="true">
+        <Icon name="arrow" />
+      </span>
     </a>
     <p class="pci-menu__note">People. Partnerships. Lasting change.</p>
   </div>

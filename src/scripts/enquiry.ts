@@ -74,7 +74,7 @@ if (form) {
         " Your details are still here. Please try again or use the email draft link below.";
     } finally {
       button.disabled = false;
-      button.textContent = "Send Enquiry →";
+      button.textContent = "Send Enquiry";
     }
   });
 }

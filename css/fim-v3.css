@@ -1,35 +1,35 @@
 /* Faith in Motion presentation only. Ledger scripts and all financial hooks are unchanged. */
 @font-face {
-  font-family: "Fraunces Variable";
+  font-family: "Sora Variable";
   font-style: normal;
   font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/institutional-v3/fonts/fraunces-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 800;
+  src: url("../assets/crimson/fonts/sora-latin-wght-normal.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Montserrat Variable";
+  font-family: "Manrope Variable";
   font-style: normal;
   font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/institutional-v3/fonts/montserrat-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 800;
+  src: url("../assets/crimson/fonts/manrope-latin-wght-normal.woff2") format("woff2");
 }
 
 .pci-fim-v3 {
-  --paper: #f4f1ea;
-  --paper-2: #e9e3d6;
-  --cream: #f4f1ea;
-  --ink: #0c0b09;
-  --ink-2: #25221b;
-  --muted: #5b554a;
-  --line: #d7cebe;
-  --line-2: #c9a569;
-  --accent-gold: #c9a569;
+  --paper: #fbf8f5;
+  --paper-2: #f3ebe8;
+  --cream: #fbf8f5;
+  --ink: #26090f;
+  --ink-2: #43131f;
+  --muted: #66565b;
+  --line: #e4d4d7;
+  --line-2: #b71935;
+  --accent-gold: #b71935;
   --radius: 2px;
   --radius-sm: 2px;
   --wrap: 1480px;
 
-  font-family: "Montserrat Variable", Arial, sans-serif;
+  font-family: "Manrope Variable", Arial, sans-serif;
 }
 
 .pci-fim-v3 h1,
@@ -37,8 +37,8 @@
 .pci-fim-v3 h3,
 .pci-fim-v3 .disp,
 .pci-fim-v3 .sec {
-  font-family: "Fraunces Variable", Georgia, serif;
-  font-weight: 450;
+  font-family: "Sora Variable", Arial, sans-serif;
+  font-weight: 550;
   letter-spacing: -0.035em;
 }
 
@@ -62,8 +62,8 @@
 }
 
 .pci-fim-v3 .brand img {
-  padding: 4px;
-  background: #f4f1ea;
+  padding: 0;
+  background: transparent;
   object-fit: contain;
 }
 
@@ -77,11 +77,11 @@
 }
 
 .pci-fim-v3 .mnav {
-  background: #0c0b09;
+  background: #26090f;
 }
 
 .pci-fim-v3 .mnav .wrap > a:not(.btn) {
-  font-family: "Fraunces Variable", Georgia, serif;
+  font-family: "Sora Variable", Arial, sans-serif;
   font-size: clamp(1.9rem, 5vw, 3rem);
 }
 
@@ -104,7 +104,7 @@
 }
 
 .pci-fim-v3 :focus-visible {
-  outline: 3px solid #8a672a;
+  outline: 3px solid #9b1630;
   outline-offset: 4px;
 }
 

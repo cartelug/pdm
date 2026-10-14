@@ -1,0 +1,62 @@
+---
+import Icon from "../global/Icon.astro";
+---
+
+<section class="pci-hero" id="top" aria-labelledby="home-heading">
+  <picture class="pci-hero__image" aria-hidden="true">
+    <source
+      media="(max-width: 720px)"
+      srcset="assets/crimson/hero-mobile-560.webp 560w, assets/crimson/hero-mobile-1120.webp 1120w"
+      sizes="100vw"
+    />
+    <img
+      src="assets/crimson/hero-wide-1774.webp"
+      srcset="assets/crimson/hero-wide-960.webp 960w, assets/crimson/hero-wide-1440.webp 1440w, assets/crimson/hero-wide-1774.webp 1774w"
+      sizes="100vw"
+      width="1774"
+      height="887"
+      alt=""
+      fetchpriority="high"
+      decoding="async"
+    />
+  </picture>
+  <div class="pci-hero__atmosphere" aria-hidden="true"></div>
+  <div class="pci-container pci-hero__layout">
+    <div class="pci-hero__copy">
+      <span class="pci-eyebrow" data-hero-detail>
+        Community-led development · Uganda
+      </span>
+      <h1 id="home-heading" aria-label="Together, we build what lasts.">
+        <span class="pci-hero__line">
+          <span>Together,</span>
+        </span>
+        <span class="pci-hero__line">
+          <span>we build</span>
+        </span>
+        <span class="pci-hero__line">
+          <span>what lasts.</span>
+        </span>
+      </h1>
+      <p class="pci-hero__intro" data-hero-detail>
+        Local resources. Shared purpose.
+        <br />
+        Lasting development.
+      </p>
+      <p class="pci-hero__description" data-hero-detail>
+        Pamodzi brings communities and partners together around the priorities people define for themselves.
+      </p>
+      <div class="pci-actions" data-hero-detail>
+        <a class="pci-button pci-button--light" href="projects/index.html">
+          Explore Our Work <Icon name="arrow" />
+        </a>
+        <a class="pci-text-link" href="model/index.html">
+          Our approach <Icon />
+        </a>
+      </div>
+      <a class="pci-scroll" href="#our-pillars" data-hero-detail>
+        Discover the possibilities <Icon name="down" />
+      </a>
+    </div>
+  </div>
+  <div class="pci-hero__transition" aria-hidden="true"></div>
+</section>
