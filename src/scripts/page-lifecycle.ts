@@ -57,6 +57,7 @@ function boot() {
           card.hidden = value !== "all" && card.dataset.projectStatus !== value;
           if (!card.hidden) count++;
         });
+        window.dispatchEvent(new Event("pci:layout"));
         const status = document.querySelector("[data-filter-count]");
         if (status) status.textContent = `${count} ${count === 1 ? "project" : "projects"} shown`;
       },

@@ -15,7 +15,7 @@ export default {
     // Range syntax `(width <= 760px)` needs Safari 16.4+; many visitors use older iPhones.
     "media-feature-range-notation": "prefix",
     // Still required by Safari for these properties.
-    "property-no-vendor-prefix": [true, { ignoreProperties: ["-webkit-backdrop-filter", "-webkit-text-size-adjust", "-moz-appearance"] }],
+    "property-no-vendor-prefix": [true, { ignoreProperties: ["-webkit-backdrop-filter", "-webkit-background-clip", "-webkit-text-size-adjust", "-moz-appearance"] }],
     // Keywords are lower-case, but font family names keep their conventional capitals (Arial, Georgia).
     "value-keyword-case": ["lower", { ignoreProperties: ["font-family", "font", "/^--/"] }],
     // Component-grouped files intentionally revisit selectors at later breakpoints; cascade

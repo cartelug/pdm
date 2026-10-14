@@ -36,33 +36,37 @@ const nodes = modelStages.map((_, i) => {
     </div>
     <div class="pci-model-layout">
       <div class="pci-cycle" aria-hidden="true">
-        <svg viewBox="0 0 400 400" focusable="false">
-          <circle class="pci-cycle__track" cx={centre} cy={centre} r={radius}></circle>
-          <circle
-            class="pci-cycle__progress"
-            cx={centre}
-            cy={centre}
-            r={radius}
-            transform={`rotate(-90 ${centre} ${centre})`}
-            pathLength="1"
-            stroke-dasharray="1"
-            data-model-progress
-          ></circle>
-          {nodes.map((node, i) => (
-            <g class="pci-cycle__node" data-cycle-node={i + 1}>
-              <circle cx={node.x} cy={node.y} r="17"></circle>
-              <text x={node.x} y={node.y}>
-                {String(i + 1).padStart(2, "0")}
-              </text>
-            </g>
-          ))}
-          <text class="pci-cycle__title" x={centre} y={centre + 14}>
-            ICIADM
-          </text>
-          <text class="pci-cycle__sub" x={centre} y={centre + 42}>
-            Each stage feeds the next
-          </text>
-        </svg>
+        <div class="pci-cycle__stick">
+          <svg viewBox="0 0 400 400" focusable="false">
+            <circle class="pci-cycle__track" cx={centre} cy={centre} r={radius}></circle>
+            <circle
+              class="pci-cycle__progress"
+              cx={centre}
+              cy={centre}
+              r={radius}
+              transform={`rotate(-90 ${centre} ${centre})`}
+              pathLength="1"
+              stroke-dasharray="1"
+              data-model-progress
+            ></circle>
+            {nodes.map((node, i) => (
+              <g class="pci-cycle__node" data-cycle-node={i + 1}>
+                <circle class="pci-cycle__pulse" cx={node.x} cy={node.y} r="17"></circle>
+                <circle cx={node.x} cy={node.y} r="17"></circle>
+                <text x={node.x} y={node.y}>
+                  {String(i + 1).padStart(2, "0")}
+                </text>
+              </g>
+            ))}
+            <circle class="pci-cycle__dot" cx={nodes[0].x} cy={nodes[0].y} r="6" opacity="0" data-model-dot></circle>
+            <text class="pci-cycle__title" x={centre} y={centre + 14}>
+              ICIADM
+            </text>
+            <text class="pci-cycle__sub" x={centre} y={centre + 42}>
+              Each stage feeds the next
+            </text>
+          </svg>
+        </div>
       </div>
       <ol class="pci-model" data-model>
         {modelStages.map((stage, i) => (

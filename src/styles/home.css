@@ -82,6 +82,12 @@
     right: -4%;
     width: 42%;
     aspect-ratio: 1;
+  }
+
+  .pci-hero__sun::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     border-radius: 50%;
     background: var(--pci-sun);
   }
@@ -110,6 +116,8 @@
     height: 100%;
     object-fit: cover;
     object-position: 50% 0;
+    scale: 1.1;
+    transform: translate3d(0, var(--img-y, 0%), 0);
   }
 
   .pci-hero__caption {
@@ -205,13 +213,13 @@
     border-radius: var(--pci-radius-l);
     background: var(--pci-bone);
     transition:
-      transform 0.5s var(--pci-ease),
+      translate 0.5s var(--pci-ease),
       box-shadow 0.5s var(--pci-ease);
   }
 
   @media (hover: hover) {
     .pci-pillar:hover {
-      transform: translateY(-8px);
+      translate: 0 -8px;
       box-shadow: var(--pci-shadow-s);
     }
   }
@@ -550,10 +558,10 @@
   @media (min-width: 1000px) {
     .pci-model-layout {
       grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-      align-items: start;
+      align-items: stretch;
     }
 
-    .pci-cycle {
+    .pci-cycle__stick {
       position: sticky;
       top: calc(var(--pci-header) + 40px);
     }
@@ -628,12 +636,14 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.9s var(--pci-ease);
+    scale: 1.08;
+    transform: translate3d(0, var(--img-y, 0%), 0);
+    transition: scale 0.9s var(--pci-ease);
   }
 
   @media (hover: hover) {
     .pci-project:hover .pci-project__media img {
-      transform: scale(1.045);
+      scale: 1.13;
     }
   }
 
@@ -822,13 +832,13 @@
     background: rgb(250 246 241 / 5%);
     transition:
       border-color 0.3s,
-      transform 0.5s var(--pci-ease);
+      translate 0.5s var(--pci-ease);
   }
 
   @media (hover: hover) {
     .pci-campaign-panel:hover {
       border-color: var(--pci-blush);
-      transform: translateY(-6px);
+      translate: 0 -6px;
     }
   }
 
@@ -843,12 +853,14 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 1s var(--pci-ease);
+    scale: 1.08;
+    transform: translate3d(0, var(--img-y, 0%), 0);
+    transition: scale 1s var(--pci-ease);
   }
 
   @media (hover: hover) {
     .pci-campaign-panel:hover .pci-campaign-panel__media img {
-      transform: scale(1.05);
+      scale: 1.13;
     }
   }
 
@@ -894,7 +906,8 @@
     inset: 50% auto auto 50%;
     width: min(150vw, 1500px);
     aspect-ratio: 1;
-    transform: translate(-50%, -50%);
+    translate: -50% -50%;
+    rotate: var(--pr, 0deg);
     opacity: 0.2;
     pointer-events: none;
   }

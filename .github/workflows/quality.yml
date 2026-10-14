@@ -46,3 +46,6 @@ jobs:
 
       - name: Institutional browser regression
         run: node tests/navigation/browser.cjs
+
+      - name: Motion regression
+        run: node tests/navigation/motion.cjs

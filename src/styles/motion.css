@@ -1,0 +1,544 @@
+/* Motion. Anything above the fold is CSS-first, so it starts on the first paint with no script and
+   never hides content from slow connections. Scroll-driven effects are added by src/scripts/motion/.
+   Every animation here is inside a no-preference query, so reduced motion gets the plain page. */
+
+/* Cross-document transitions between institutional pages. Campaign pages do not opt in, so
+   navigating to or from them stays an ordinary page load. */
+@view-transition {
+  navigation: auto;
+}
+
+@layer motion {
+  .pci-header {
+    view-transition-name: pci-header;
+  }
+
+  /* Scroll parallax is driven through individual custom properties and the independent
+     `translate` property, so it composes with entrance animations and pointer movement. */
+  .pci-hero__figure {
+    translate: 0 var(--fig-y, 0);
+  }
+
+  .pci-hero__sun {
+    translate: 0 var(--sun-y, 0);
+  }
+
+  .pci-hero__copy {
+    translate: 0 var(--copy-y, 0);
+  }
+
+  .pci-page-hero__art span {
+    translate: 0 var(--art-y, 0);
+  }
+
+  .pci-page-hero__copy {
+    translate: 0 var(--page-copy-y, 0);
+  }
+
+  .pci-split-mask {
+    display: block;
+    margin: -0.14em -0.1em;
+    padding: 0.14em 0.1em;
+    overflow: hidden;
+  }
+
+  .pci-progress {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 90;
+    height: 3px;
+    pointer-events: none;
+  }
+
+  .pci-progress span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--pci-crimson), var(--pci-sun));
+    transform: scaleX(var(--pci-progress, 0));
+    transform-origin: 0 50%;
+  }
+
+  /* ---------- Drawn rules (class added by script, below the fold only) ---------- */
+  .pci-rule {
+    position: relative;
+  }
+
+  .pci-rule--bottom {
+    border-bottom-color: transparent;
+  }
+
+  .pci-rule--top {
+    border-top-color: transparent;
+  }
+
+  .pci-rule::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 1px;
+    background: var(--pci-line);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.3s var(--pci-ease);
+    pointer-events: none;
+  }
+
+  .pci-rule--bottom::after {
+    bottom: -1px;
+  }
+
+  .pci-rule--top::after {
+    top: -1px;
+    background: var(--pci-line-strong);
+  }
+
+  .pci-section--night .pci-rule::after {
+    background: var(--pci-on-night-line);
+  }
+
+  .pci-rule.is-in::after {
+    transform: scaleX(1);
+  }
+
+  /* ---------- Marquee (built by script from the principle strip) ---------- */
+  .pci-strip.is-marquee {
+    overflow: hidden;
+    background: var(--pci-night);
+    border-color: var(--pci-night);
+    color: var(--pci-on-night);
+  }
+
+  .pci-strip.is-marquee > .pci-container {
+    max-width: none;
+    padding-inline: 0;
+  }
+
+  .pci-strip__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .pci-strip.is-marquee ul {
+    display: flex;
+    flex: none;
+  }
+
+  .pci-strip.is-marquee li {
+    flex: none;
+    gap: 18px;
+    padding: clamp(20px, 2.4vw, 34px) clamp(28px, 3.4vw, 56px) clamp(20px, 2.4vw, 34px) 0;
+    border: 0;
+    font-size: clamp(1.9rem, 1.1rem + 2.6vw, 3.8rem);
+    line-height: 1;
+    white-space: nowrap;
+    align-items: center;
+  }
+
+  .pci-strip.is-marquee li span {
+    color: var(--pci-sun);
+  }
+
+  .pci-strip.is-marquee li::after {
+    content: "";
+    flex: none;
+    width: 0.46em;
+    height: 0.46em;
+    margin-left: clamp(28px, 3.4vw, 56px);
+    background: var(--pci-crimson);
+    clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  }
+
+  .pci-strip.is-marquee li + li {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  /* ---------- Cycle diagram ---------- */
+  .pci-cycle__dot {
+    fill: var(--pci-sun);
+    stroke: var(--pci-night);
+    stroke-width: 3;
+  }
+
+  .pci-cycle__pulse {
+    fill: none;
+    stroke: var(--pci-sun);
+    stroke-width: 1.5;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    pointer-events: none;
+  }
+
+  /* ---------- Timeline, flow, footer ---------- */
+  .pci-timeline.is-live::before {
+    transform: scaleY(var(--pci-line, 0));
+    transform-origin: top;
+  }
+
+  .pci-timeline.is-live .pci-timeline__item::before {
+    border-color: var(--pci-line-strong);
+    background: var(--pci-paper);
+    transition:
+      background-color 0.5s,
+      border-color 0.5s,
+      box-shadow 0.5s;
+  }
+
+  .pci-section--bone .pci-timeline.is-live .pci-timeline__item::before {
+    background: var(--pci-bone);
+  }
+
+  .pci-timeline.is-live .pci-timeline__item.is-reached::before {
+    border-color: var(--pci-crimson);
+    background: var(--pci-crimson);
+    box-shadow: 0 0 0 6px rgb(183 25 53 / 16%);
+  }
+
+  .pci-steps.is-live li {
+    transition:
+      background-color 0.6s,
+      box-shadow 0.6s;
+  }
+
+  .pci-steps.is-live li.is-lit {
+    background: rgb(250 246 241 / 9%);
+  }
+
+  .pci-steps.is-live li.is-lit .pci-steps__no {
+    color: #fff;
+  }
+
+  .pci-footer__wordmark {
+    background: linear-gradient(
+      to top,
+      var(--pci-crimson) calc(var(--pci-fill, 0) * 100%),
+      transparent 0
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .pci-tilt {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: scroll()) {
+      .pci-progress span {
+        transform: scaleX(0);
+        animation: pci-progress linear both;
+        animation-timeline: scroll(root block);
+      }
+
+      @keyframes pci-progress {
+        to {
+          transform: scaleX(1);
+        }
+      }
+    }
+
+    /* ----- Entrance: home hero ----- */
+    @keyframes pci-rise {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+    }
+
+    @keyframes pci-line-rise {
+      from {
+        transform: translateY(112%);
+      }
+    }
+
+    @keyframes pci-reveal-up {
+      from {
+        clip-path: inset(100% 0 0 0);
+      }
+
+      to {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    @keyframes pci-image-settle {
+      from {
+        scale: 1.4;
+      }
+    }
+
+    @keyframes pci-sun-rise {
+      from {
+        opacity: 0;
+        scale: 0.4;
+        transform: translateY(46%);
+      }
+    }
+
+    @keyframes pci-pop {
+      from {
+        opacity: 0;
+        scale: 0.7;
+        transform: translateY(16px);
+      }
+    }
+
+    @keyframes pci-float {
+      from {
+        translate: 0 -7px;
+      }
+
+      to {
+        translate: 0 9px;
+      }
+    }
+
+    @keyframes pci-sun-breathe {
+      from {
+        scale: 1;
+      }
+
+      to {
+        scale: 1.07;
+      }
+    }
+
+    .pci-hero__line > span {
+      animation: pci-line-rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    }
+
+    .pci-hero__line:nth-child(1) > span {
+      animation-delay: 0.1s;
+    }
+
+    .pci-hero__line:nth-child(2) > span {
+      animation-delay: 0.22s;
+    }
+
+    .pci-hero__line:nth-child(3) > span {
+      animation-delay: 0.34s;
+    }
+
+    .pci-hero__copy > :nth-child(n + 3) {
+      animation: pci-rise 1s var(--pci-ease) backwards;
+    }
+
+    .pci-hero__copy > .pci-eyebrow {
+      animation: pci-rise 0.9s var(--pci-ease) 0.05s backwards;
+    }
+
+    .pci-hero__copy > .pci-hero__intro {
+      animation-delay: 0.65s;
+    }
+
+    .pci-hero__copy > .pci-hero__description {
+      animation-delay: 0.78s;
+    }
+
+    .pci-hero__copy > .pci-actions {
+      animation-delay: 0.92s;
+    }
+
+    .pci-hero__arch {
+      animation: pci-reveal-up 1.5s cubic-bezier(0.7, 0, 0.2, 1) 0.15s backwards;
+    }
+
+    .pci-hero__arch img {
+      animation: pci-image-settle 2s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards;
+    }
+
+    .pci-hero__frame {
+      animation: pci-reveal-up 1.4s cubic-bezier(0.7, 0, 0.2, 1) 0.55s backwards;
+    }
+
+    .pci-hero__sun::before {
+      animation:
+        pci-sun-rise 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards,
+        pci-sun-breathe 6s ease-in-out 2s infinite alternate;
+    }
+
+    .pci-hero__caption {
+      animation: pci-pop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s backwards;
+    }
+
+    .pci-strip:not(.is-marquee) li {
+      animation: pci-rise 0.9s var(--pci-ease) backwards;
+    }
+
+    .pci-strip li:nth-child(1) {
+      animation-delay: 1s;
+    }
+
+    .pci-strip li:nth-child(2) {
+      animation-delay: 1.08s;
+    }
+
+    .pci-strip li:nth-child(3) {
+      animation-delay: 1.16s;
+    }
+
+    .pci-strip li:nth-child(4) {
+      animation-delay: 1.24s;
+    }
+
+    /* ----- Entrance: inner page heroes ----- */
+    .pci-breadcrumb {
+      animation: pci-rise 0.9s var(--pci-ease) 0.05s backwards;
+    }
+
+    .pci-page-hero__copy > * {
+      animation: pci-rise 1.1s var(--pci-ease) backwards;
+    }
+
+    .pci-page-hero__copy > :nth-child(1) {
+      animation-delay: 0.15s;
+    }
+
+    .pci-page-hero__copy > :nth-child(2) {
+      animation-delay: 0.27s;
+      animation-duration: 1.3s;
+    }
+
+    .pci-page-hero__copy > :nth-child(3) {
+      animation-delay: 0.5s;
+    }
+
+    .pci-page-hero__copy > :nth-child(n + 4) {
+      animation-delay: 0.65s;
+    }
+
+    .pci-page-hero__art span {
+      animation: pci-reveal-up 1.5s cubic-bezier(0.7, 0, 0.2, 1) backwards;
+    }
+
+    .pci-page-hero__art span:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .pci-page-hero__art span:nth-child(2) {
+      animation-delay: 0.38s;
+    }
+
+    .pci-page-hero__art span:nth-child(3) {
+      animation-delay: 0.56s;
+    }
+
+    /* ----- Idle ----- */
+    .pci-pillar__art img {
+      animation: pci-float 5.5s ease-in-out infinite alternate;
+    }
+
+    .pci-pillar:nth-child(2) .pci-pillar__art img {
+      animation-delay: -1.4s;
+      animation-duration: 6.3s;
+    }
+
+    .pci-pillar:nth-child(3) .pci-pillar__art img {
+      animation-delay: -2.8s;
+      animation-duration: 5.1s;
+    }
+
+    .pci-pillar:nth-child(4) .pci-pillar__art img {
+      animation-delay: -4.2s;
+      animation-duration: 6.9s;
+    }
+
+    .pci-about__art img {
+      animation: pci-float 7s ease-in-out infinite alternate;
+    }
+
+    /* ----- Cycle pulse ----- */
+    @keyframes pci-pulse {
+      from {
+        opacity: 0.8;
+        scale: 1;
+      }
+
+      to {
+        opacity: 0;
+        scale: 2.3;
+      }
+    }
+
+    .pci-cycle__node.is-current .pci-cycle__pulse,
+    .pci-cycle__node.is-focus .pci-cycle__pulse {
+      animation: pci-pulse 1.8s ease-out infinite;
+    }
+
+    /* ----- Menu entrance ----- */
+    @keyframes pci-menu-in {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+    }
+
+    .pci-menu[data-state="open"] .pci-menu__links li,
+    .pci-menu[data-state="open"] .pci-menu__utilities nav {
+      animation: pci-menu-in 0.8s var(--pci-ease) backwards;
+      animation-delay: calc(60ms + var(--i, 0) * 55ms);
+    }
+
+    .pci-menu[data-state="open"] .pci-menu__body > .pci-button,
+    .pci-menu[data-state="open"] .pci-menu__note {
+      animation: pci-menu-in 0.8s var(--pci-ease) 0.5s backwards;
+    }
+
+    /* ----- Page transitions ----- */
+    @keyframes pci-view-out {
+      to {
+        opacity: 0;
+        transform: translateY(-14px);
+      }
+    }
+
+    @keyframes pci-view-in {
+      from {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+    }
+
+    ::view-transition-old(root) {
+      animation: pci-view-out 260ms ease both;
+    }
+
+    ::view-transition-new(root) {
+      animation: pci-view-in 560ms var(--pci-ease) both;
+    }
+
+    /* ----- Hover: links and rows ----- */
+    @media (hover: hover) {
+      .pci-row:hover .pci-row__no {
+        letter-spacing: 0.3em;
+      }
+
+      .pci-row__no {
+        transition: letter-spacing 0.5s var(--pci-ease);
+      }
+
+      .pci-trio li {
+        transition:
+          padding-left 0.5s var(--pci-ease),
+          color 0.3s;
+      }
+
+      .pci-trio li:hover {
+        padding-left: 18px;
+        color: var(--pci-crimson);
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation: none !important;
+    }
+  }
+}

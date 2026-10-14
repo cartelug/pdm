@@ -70,7 +70,7 @@ const primary = navigation.filter((n) => n.group === "explore");
     <nav aria-label="Mobile primary navigation">
       <ol class="pci-menu__links">
         {primary.map((n, i) => (
-          <li>
+          <li style={"--i:" + i}>
             <a href={href(path, n.route)} aria-current={path === n.route ? "page" : undefined}>
               <span class="pci-menu__index">{String(i + 1).padStart(2, "0")}</span>
               <span>{n.label}</span>
@@ -83,8 +83,11 @@ const primary = navigation.filter((n) => n.group === "explore");
       </ol>
     </nav>
     <div class="pci-menu__utilities">
-      {(["institutional", "engage"] as const).map((group) => (
-        <nav aria-label={group === "engage" ? "Engage" : "Institutional information"}>
+      {(["institutional", "engage"] as const).map((group, groupIndex) => (
+        <nav
+          aria-label={group === "engage" ? "Engage" : "Institutional information"}
+          style={"--i:" + (primary.length + groupIndex)}
+        >
           <h3 class="pci-eyebrow">{group}</h3>
           {navigation
             .filter((n) => n.group === group)

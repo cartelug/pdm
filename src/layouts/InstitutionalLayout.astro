@@ -11,6 +11,7 @@ import "../styles/components.css";
 import "../styles/shell.css";
 import "../styles/home.css";
 import "../styles/pages.css";
+import "../styles/motion.css";
 interface Props {
   path: string;
   title: string;
@@ -64,6 +65,9 @@ const canonical = site.url + path;
     />
   </head>
   <body class:list={["pci-v3", { "pci-home": home }]} data-pci-v3>
+    <div class="pci-progress" aria-hidden="true">
+      <span></span>
+    </div>
     <a class="pci-skip-link" href="#main-content">
       Skip to main content
     </a>
