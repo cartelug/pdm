@@ -339,8 +339,8 @@
 
   .pci-statement {
     margin: 0;
-    font: 400 clamp(1.9rem, 1.2rem + 2.2vw, 3.3rem) / 1.12 var(--pci-display);
-    letter-spacing: -0.012em;
+    font: 600 clamp(1.9rem, 1.2rem + 2.2vw, 3.3rem) / 1.1 var(--pci-display);
+    letter-spacing: -0.035em;
     text-wrap: balance;
   }
 
@@ -361,8 +361,8 @@
     position: relative;
     margin: 0;
     padding-top: 0.9em;
-    font: italic 400 clamp(1.7rem, 1.1rem + 1.8vw, 2.7rem) / 1.16 var(--pci-display);
-    letter-spacing: -0.01em;
+    font: italic 400 clamp(1.7rem, 1.1rem + 1.8vw, 2.7rem) / 1.2 var(--pci-serif);
+    letter-spacing: -0.015em;
     text-wrap: balance;
   }
 
@@ -419,8 +419,8 @@
 
   .pci-fig b {
     display: block;
-    font: 400 clamp(1.9rem, 1.3rem + 1.6vw, 2.8rem) / 1.02 var(--pci-display);
-    letter-spacing: -0.01em;
+    font: 620 clamp(1.9rem, 1.3rem + 1.6vw, 2.8rem) / 1.02 var(--pci-display);
+    letter-spacing: -0.035em;
   }
 
   .pci-fig span {
@@ -688,7 +688,8 @@
   }
 
   .pci-steps b {
-    font: 400 clamp(1.3rem, 1.05rem + 0.8vw, 1.75rem) / 1.12 var(--pci-display);
+    font: 620 clamp(1.3rem, 1.05rem + 0.8vw, 1.75rem) / 1.12 var(--pci-display);
+    letter-spacing: -0.025em;
   }
 
   @media (min-width: 760px) {

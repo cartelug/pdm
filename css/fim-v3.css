@@ -1,38 +1,22 @@
 /* Faith in Motion presentation only. Ledger scripts and all financial hooks are unchanged.
-   Brings the campaign pages into the Pamodzi editorial system: Instrument Serif for display,
-   Hanken Grotesk for reading and Geist Mono for labels, self-hosted from assets/fonts. The legacy
-   family names are aliased to those files, so the shared foundation needs no edits and no page
-   calls an external font service. */
+   Brings the campaign pages into the Pamodzi editorial system: Bricolage Grotesque for display,
+   Newsreader italic for the editorial accent, Inter Tight for reading and Geist Mono for labels,
+   self-hosted from assets/fonts. The legacy family names are aliased to those files, so the shared
+   foundation needs no edits and no page calls an external font service. */
 @font-face {
   font-family: "Bricolage Grotesque";
   font-style: normal;
   font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2");
+  font-weight: 200 800;
+  src: url("../assets/fonts/bricolage-grotesque-latin-opsz-normal.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Bricolage Grotesque";
+  font-family: Newsreader;
   font-style: italic;
   font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "DM Serif Display";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "DM Serif Display";
-  font-style: italic;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2");
+  font-weight: 200 800;
+  src: url("../assets/fonts/newsreader-latin-wght-italic.woff2") format("woff2");
 }
 
 @font-face {
@@ -40,7 +24,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 100 900;
-  src: url("../assets/fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2");
+  src: url("../assets/fonts/inter-tight-latin-wght-normal.woff2") format("woff2");
 }
 
 @font-face {
@@ -75,7 +59,7 @@
   --shadow-btn: none;
   --shadow-btn-hover: none;
 
-  font-family: Manrope, "Hanken Grotesk Variable", system-ui, sans-serif;
+  font-family: Manrope, "Inter Tight Variable", system-ui, sans-serif;
   font-size: 17px;
   line-height: 1.68;
   background: var(--paper);
@@ -87,16 +71,16 @@
 .pci-fim-v3 h3,
 .pci-fim-v3 .disp,
 .pci-fim-v3 .sec {
-  font-family: "Bricolage Grotesque", "Instrument Serif", Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.015em;
+  font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.035em;
   line-height: 0.98;
 }
 
 .pci-fim-v3 h1 {
   font-size: clamp(3.4rem, 1.2rem + 8vw, 8.4rem);
   line-height: 0.92;
-  letter-spacing: -0.022em;
+  letter-spacing: -0.036em;
 }
 
 .pci-fim-v3 h2,
@@ -107,6 +91,8 @@
 
 .pci-fim-v3 h3 {
   font-size: clamp(1.6rem, 1.2rem + 1.1vw, 2.2rem);
+  font-weight: 620;
+  letter-spacing: -0.03em;
   line-height: 1.06;
 }
 
@@ -128,14 +114,17 @@
 
 .pci-fim-v3 .hero h1 {
   max-width: 15ch;
-  font-size: clamp(3.4rem, 1rem + 7vw, 7.8rem);
+  font-size: clamp(3.4rem, 1rem + 4.4vw, 5.8rem);
   line-height: 0.9;
   text-shadow: none;
 }
 
 .pci-fim-v3 .hero h1 .em {
   color: var(--blush, #f3c9c8);
+  font-family: Newsreader, "Iowan Old Style", Georgia, serif;
   font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
   text-decoration: none;
 }
 
@@ -205,10 +194,10 @@
 }
 
 .pci-fim-v3 .brand .t b {
-  font-family: "Bricolage Grotesque", "Instrument Serif", Georgia, serif;
+  font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   font-size: 1.7rem;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: -0.045em;
   line-height: 0.9;
 }
 
@@ -308,8 +297,10 @@
 }
 
 .pci-fim-v3 .mnav .wrap > a:not(.btn) {
-  font-family: "DM Serif Display", "Instrument Serif", Georgia, serif;
+  font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   font-size: clamp(2rem, 1.2rem + 4vw, 3.2rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
 }
 
 .pci-fim-v3 .mnav a.act,
@@ -384,9 +375,10 @@
 }
 
 .pci-fim-v3 .fbrand b {
-  font-family: "Bricolage Grotesque", "Instrument Serif", Georgia, serif;
+  font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   font-size: 1.9rem;
-  font-weight: 400;
+  font-weight: 700;
+  letter-spacing: -0.045em;
 }
 
 @media (max-width: 760px) {

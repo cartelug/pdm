@@ -81,7 +81,8 @@
   .pci-hero__intro {
     max-width: 30ch;
     margin: 0 0 16px;
-    font: 400 clamp(1.5rem, 1.1rem + 1.2vw, 2.15rem) / 1.14 var(--pci-display);
+    font: 560 clamp(1.5rem, 1.1rem + 1.2vw, 2.15rem) / 1.14 var(--pci-display);
+    letter-spacing: -0.03em;
   }
 
   .pci-hero__description {
@@ -127,8 +128,8 @@
   }
 
   .pci-live strong {
-    font: 400 clamp(1.8rem, 1.4rem + 1vw, 2.4rem) / 1.02 var(--pci-display);
-    letter-spacing: -0.01em;
+    font: 620 clamp(1.8rem, 1.4rem + 1vw, 2.4rem) / 1.02 var(--pci-display);
+    letter-spacing: -0.035em;
   }
 
   .pci-live__go {
@@ -219,7 +220,8 @@
     gap: 12px;
     padding: 18px 12px 18px 0;
     border-bottom: 1px solid rgb(255 255 255 / 24%);
-    font: 400 clamp(1.15rem, 1rem + 0.6vw, 1.6rem) / 1.1 var(--pci-display);
+    font: 620 clamp(1.15rem, 1rem + 0.6vw, 1.6rem) / 1.1 var(--pci-display);
+    letter-spacing: -0.025em;
   }
 
   .pci-strip li span {
@@ -430,8 +432,8 @@
     .pci-pillar__rail::after {
       content: attr(data-title);
       order: 2;
-      font: 400 clamp(1.9rem, 1.3rem + 1vw, 2.5rem) / 1 var(--pci-display);
-      letter-spacing: -0.01em;
+      font: 600 clamp(1.9rem, 1.3rem + 1vw, 2.5rem) / 1 var(--pci-display);
+      letter-spacing: -0.035em;
       writing-mode: vertical-rl;
       rotate: 180deg;
       white-space: nowrap;
@@ -466,8 +468,8 @@
   .pci-manifesto__text {
     max-width: 30ch;
     margin: clamp(32px, 5vw, 80px) 0;
-    font: 400 clamp(2.5rem, 0.9rem + 5.4vw, 6.6rem) / 1.03 var(--pci-display);
-    letter-spacing: -0.02em;
+    font: 600 clamp(2.5rem, 0.9rem + 5.4vw, 6.6rem) / 1 var(--pci-display);
+    letter-spacing: -0.045em;
     text-wrap: balance;
   }
 
@@ -487,8 +489,8 @@
     gap: 18px;
     padding: 14px 0;
     border-bottom: 1px solid var(--pci-line);
-    font: 400 clamp(2.4rem, 1.6rem + 3vw, 4.4rem) / 1.05 var(--pci-display);
-    letter-spacing: -0.015em;
+    font: 600 clamp(2.4rem, 1.6rem + 3vw, 4.4rem) / 1.05 var(--pci-display);
+    letter-spacing: -0.04em;
   }
 
   .pci-trio li span {
@@ -596,10 +598,10 @@
   }
 
   .pci-cycle__title {
-    font: 400 64px var(--pci-display);
+    font: 600 64px var(--pci-display);
     fill: var(--pci-on-night);
     text-anchor: middle;
-    letter-spacing: -1px;
+    letter-spacing: -2.4px;
   }
 
   .pci-cycle__sub {
@@ -823,8 +825,8 @@
 
   .pci-project__typography strong {
     max-width: 12ch;
-    font: 400 clamp(2.3rem, 1.6rem + 2.4vw, 4rem) / 0.98 var(--pci-display);
-    letter-spacing: -0.015em;
+    font: 600 clamp(2.3rem, 1.6rem + 2.4vw, 4rem) / 0.98 var(--pci-display);
+    letter-spacing: -0.04em;
   }
 
   .pci-project__typography span {
@@ -1239,7 +1241,8 @@
   .pci-trust-points b {
     display: block;
     margin-bottom: 10px;
-    font: 400 clamp(1.7rem, 1.3rem + 1vw, 2.3rem) / 1.08 var(--pci-display);
+    font: 620 clamp(1.7rem, 1.3rem + 1vw, 2.3rem) / 1.08 var(--pci-display);
+    letter-spacing: -0.03em;
     color: var(--pci-ink);
   }
 
