@@ -8,15 +8,18 @@ The site is organised around three ideas taken from the name and the work: *toge
 
 | Element | Decision |
 | --- | --- |
-| Display type | **Instrument Serif** (regular and italic), set large. Italic crimson carries the emphasis in each headline. |
-| Reading and interface | **Hanken Grotesk** variable, 17px / 1.68. |
+| Display type | **Bricolage Grotesque** variable (weight and optical-size axes), 600–700, set large with tight tracking (−0.03 to −0.05em). Optical sizing is automatic, so large headlines tighten and small card titles stay open. |
+| Editorial accent | **Newsreader** italic variable, 400, in crimson (blush on dark). It carries the emphasis in each headline (`h1 em`, `h2 em`, `h3 em`, `.pci-statement em`), the pull quote and the menu note. |
+| Reading and interface | **Inter Tight** variable, 17px / 1.68. |
 | Labels and figures | **Geist Mono** variable, uppercase and tracked, for eyebrows, statuses and numerals. |
 | Colour | Warm paper `#FAF6F1`, bone `#F2EBE3`, burgundy ink `#1B0A0E`, night `#220A10`, brand crimson `#B71935`, with sun `#E6AD3E` and forest `#2F5D46` as small accents. Tokens live in `src/styles/tokens.css`. |
 | Shape | Arches (the doorway; also the *Every door, one address* line on Projects), concentric rings (together), pill buttons, 20–34px radii. |
 | Icons | Four bespoke one-weight programme icons (`PillarIcon.astro`) and the existing SVG arrow set. |
 | Motion | See *Motion* below. Entrances run in CSS from the first paint; scroll effects are an enhancement. Content is complete without JavaScript and under reduced motion. |
 
-All three families are SIL OFL, self-hosted (npm for the Astro layer, `assets/fonts/` for the static campaign pages) with licences kept beside the files. Latin subsets only: about 100 KB for the three families, against roughly 270 KB for Fraunces with its optical-size axes. Two fonts are preloaded on every page.
+All four families are SIL OFL, self-hosted (npm for the Astro layer, `assets/fonts/` for the static campaign pages) with licences kept beside the files. Latin subsets only: about 210 KB for the four (Bricolage 77 KB, Newsreader italic 65 KB, Inter Tight 45 KB, Geist Mono 23 KB). Bricolage and Inter Tight are preloaded on every page; the italic accent and the mono face load on demand. The footer wordmark and the 404 numeral are solid low-opacity fills rather than outlined text, because variable fonts keep overlapping contours that show up under `-webkit-text-stroke`.
+
+The Faith in Motion pages alias their legacy family names in `css/fim-v3.css`: "Bricolage Grotesque" is now the real face, "Manrope" maps to Inter Tight, "JetBrains Mono" to Geist Mono, and "Newsreader" supplies the hero accent.
 
 ## Home page (second pass)
 

@@ -70,27 +70,29 @@
   h4 {
     margin: 0;
     font-family: var(--pci-display);
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1;
-    letter-spacing: -0.012em;
+    letter-spacing: -0.03em;
     text-wrap: balance;
   }
 
   h1 {
     font-size: var(--pci-fs-h1);
     line-height: 0.94;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.04em;
   }
 
   h2 {
     font-size: var(--pci-fs-h2);
     line-height: 0.98;
-    letter-spacing: -0.018em;
+    letter-spacing: -0.038em;
   }
 
   h3 {
     font-size: var(--pci-fs-h3);
+    font-weight: 620;
     line-height: 1.06;
+    letter-spacing: -0.03em;
   }
 
   h4 {
@@ -103,8 +105,12 @@
 
   h1 em,
   h2 em,
-  h3 em {
+  h3 em,
+  .pci-statement em {
+    font-family: var(--pci-serif);
     font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
     color: var(--pci-crimson);
   }
 

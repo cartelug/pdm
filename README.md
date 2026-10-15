@@ -2,7 +2,7 @@
 
 The approved crimson presentation refresh introduces Sora/Manrope typography, transparent placement of the unchanged PCI master logo, separate mobile and desktop programme hero illustrations, four transparent pillar sculptures and page-scoped motion. Institutional authoring remains in `src/`; build output is committed at the existing public paths. See `CRIMSON-REDESIGN.md` for scope, asset notes and release checks.
 
-The institutional pages and the Faith in Motion pages have since been redesigned with the editorial system (Instrument Serif, Hanken Grotesk and Geist Mono, arches and rings, paper/ink/crimson tokens). See `EDITORIAL-REDESIGN.md` for the direction, file map and checks; where it differs from `CRIMSON-REDESIGN.md` (typography, hero, stylesheets), the editorial document is current.
+The institutional pages and the Faith in Motion pages have since been redesigned with the editorial system (Bricolage Grotesque, Newsreader italic, Inter Tight and Geist Mono, arches and rings, paper/ink/crimson tokens). See `EDITORIAL-REDESIGN.md` for the direction, file map and checks; where it differs from `CRIMSON-REDESIGN.md` (typography, hero, stylesheets), the editorial document is current.
 
 Astro 5 and TypeScript author the institutional V3 pages. `npm run build` exports real static documents into the repository root and existing page folders. **Root `index.html` is the deployable homepage**, and cPanel continues serving the existing PHP campaign registers, payments and certificates.
 

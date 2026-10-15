@@ -2,8 +2,8 @@
 import SiteHeader from "../components/global/SiteHeader.astro";
 import SiteFooter from "../components/global/SiteFooter.astro";
 import { site, asset } from "../config/site";
-import serifFont from "@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url";
-import sansFont from "@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2?url";
+import displayFont from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2?url";
+import sansFont from "@fontsource-variable/inter-tight/files/inter-tight-latin-wght-normal.woff2?url";
 import "../styles/fonts.css";
 import "../styles/tokens.css";
 import "../styles/base.css";
@@ -41,7 +41,7 @@ const canonical = site.url + path;
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     {noindex && <meta name="robots" content="noindex,follow" />}
     <link rel="icon" type="image/png" href={asset(path, "assets/brand/pamodzi/pamodzi-logo-transparent.png")} />
-    <link rel="preload" as="font" type="font/woff2" href={serifFont} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={displayFont} crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={sansFont} crossorigin />
     {home && (
       <>
