@@ -92,11 +92,11 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "9d3efcff78e798081ceab35f43db53a36388a854467f6fd21493a5c3abee28b6",
-    "contribute/payment/index.html": "e70b7d0ee9f7526428a395137f2c7d0492e0c93f09db0b32626aeb3dd05aeeba",
-    "contribute/privacy/index.html": "acdec70135516283b5b0e9ba28699d78def18c330f01216c95de00111e7f2092",
-    "contribute/terms/index.html": "0d7eb78338deff5c3cf129de08997a4e5f57d8dcbe668b3ca704cc6af227a574",
-    "contribute/verify/index.html": "278dde498d412c50fd7c9c074beafc7e1e2f3299f1c369624d2aeebfb2b2f102",
+    "contribute/index.html": "deff36d69b88f465654df2be9c3795ca498638734011bb3bd3c7e22c9cbadf93",
+    "contribute/payment/index.html": "3f2f8fac169298d6f75a4dcb7d0e1ea9915281c74cb1d525f471978ac520699d",
+    "contribute/privacy/index.html": "7535c3d954ec6e44e5fe59a8d5e8bd86f57ff0b4857a72ffd75ea905b16d6fac",
+    "contribute/terms/index.html": "f49403e0af0fe9b26f0358ec4baf8ec1ef88db01b9af51b7a02715c1319b2a86",
+    "contribute/verify/index.html": "d863d487b339d34c09a0efb7ea70d86b5aef72fef53c0c7302f98ca1873f4561",
     "css/base.css": "368d70b67bd5c7c3e60f7f44a9d8c93bfb8db7e2e8559cb00f223cfcf14893c5",
     "css/collections.css": "cd779925dd2f0519e39b3b7e5f577d660dcee3bf08f8ce98c67bad5615a47f23",
     "css/contribute.css": "e02336271318e777f18aa7a98cb227dd896eed88bebe9de6bc0b054622ed2c81",
@@ -127,11 +127,11 @@
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "f4b73bdf7a6dc3af0a488a965b97f726195afc8edd05b50522bb11dd35378bad",
     "js/wfe.js": "01746af6d7f7ec88c36d981ac649764bde29693f2da3bb65e28f3406978bf4e2",
-    "walk-for-education/accountability/index.html": "46aa1bf11903ad903612d68410242a672c9c0cd56ee396ff5d78b900d60b9078",
-    "walk-for-education/index.html": "d8c6b068783ce80dbb6ebb3e87789cb1c1cc49760964896c72927f1188e34db7",
-    "walk-for-education/partners/index.html": "60380a3827a12d761a8797a664fcd4700f28b882cbffaa843ec5cd86cec41b1a",
-    "walk-for-education/take-part/index.html": "6d46dfedc0bab074b5d82ae1b71a13f3995e43028ddbd8bb60b2be16ee6b8c39",
-    "walk-for-education/updates/index.html": "7568491940dce4becc9c756bd9c4fc81f0163a0fa121c25fcdb4974d3f9fb5cf"
+    "walk-for-education/accountability/index.html": "1bbaa2c67170ae10d52e876b94a4d728e9cbc32909e578a62e287cb13b27f88c",
+    "walk-for-education/index.html": "13ae58dfd72450afdf9a3f2076783ee797376fa67123417ee881dcb5681d52bb",
+    "walk-for-education/partners/index.html": "59d12cb3874f829d994e25d49ee8f829cffd4bb4cc0e4fc316bfe1f567ea73c7",
+    "walk-for-education/take-part/index.html": "be4f44085900bc798d4e06015c3a717826d5cf70db9c9c864171f48e7718ac31",
+    "walk-for-education/updates/index.html": "fceccb933b9919146528f35bb3a737465e59800ad689923592ac278173a9491f"
   },
   "presentationReviews": [
     {
@@ -139,6 +139,66 @@
       "date": "2026-10-14",
       "reason": "User-approved removal of the Pledged and Promised emoji decorations only; status attributes and all runtime logic unchanged.",
       "previousSha256": "d14937d53638370f49b48ee806351bcb05cd4887bf8b1ab8e8b6bda039b5b6bb"
+    },
+    {
+      "path": "walk-for-education/index.html",
+      "date": "2026-10-15",
+      "reason": "User-requested Walk for Education redesign: head-only presentation change. Google Fonts links replaced by self-hosted font preloads and css/wfe-editorial.css is loaded after the campaign stylesheets. Body markup, scripts, IDs, forms, pricing, pledge and payment hooks are unchanged.",
+      "previousSha256": "d8c6b068783ce80dbb6ebb3e87789cb1c1cc49760964896c72927f1188e34db7"
+    },
+    {
+      "path": "walk-for-education/take-part/index.html",
+      "date": "2026-10-15",
+      "reason": "User-requested Walk for Education redesign: head-only presentation change. Google Fonts links replaced by self-hosted font preloads and css/wfe-editorial.css is loaded after the campaign stylesheets. Body markup, scripts, IDs, forms, pricing, pledge and payment hooks are unchanged.",
+      "previousSha256": "6d46dfedc0bab074b5d82ae1b71a13f3995e43028ddbd8bb60b2be16ee6b8c39"
+    },
+    {
+      "path": "walk-for-education/partners/index.html",
+      "date": "2026-10-15",
+      "reason": "User-requested Walk for Education redesign: head-only presentation change. Google Fonts links replaced by self-hosted font preloads and css/wfe-editorial.css is loaded after the campaign stylesheets. Body markup, scripts, IDs, forms, pricing, pledge and payment hooks are unchanged.",
+      "previousSha256": "60380a3827a12d761a8797a664fcd4700f28b882cbffaa843ec5cd86cec41b1a"
+    },
+    {
+      "path": "walk-for-education/accountability/index.html",
+      "date": "2026-10-15",
+      "reason": "User-requested Walk for Education redesign: head-only presentation change. Google Fonts links replaced by self-hosted font preloads and css/wfe-editorial.css is loaded after the campaign stylesheets. Body markup, scripts, IDs, forms, pricing, pledge and payment hooks are unchanged.",
+      "previousSha256": "46aa1bf11903ad903612d68410242a672c9c0cd56ee396ff5d78b900d60b9078"
+    },
+    {
+      "path": "walk-for-education/updates/index.html",
+      "date": "2026-10-15",
+      "reason": "User-requested Walk for Education redesign: head-only presentation change. Google Fonts links replaced by self-hosted font preloads and css/wfe-editorial.css is loaded after the campaign stylesheets. Body markup, scripts, IDs, forms, pricing, pledge and payment hooks are unchanged.",
+      "previousSha256": "7568491940dce4becc9c756bd9c4fc81f0163a0fa121c25fcdb4974d3f9fb5cf"
+    },
+    {
+      "path": "contribute/index.html",
+      "date": "2026-10-15",
+      "reason": "Type and surface alignment with the Walk for Education redesign: head-only presentation change. Google Fonts links replaced by a self-hosted font preload and css/wfe-editorial.css. Body markup, scripts, forms, pledge, payment and certificate hooks are unchanged.",
+      "previousSha256": "9d3efcff78e798081ceab35f43db53a36388a854467f6fd21493a5c3abee28b6"
+    },
+    {
+      "path": "contribute/payment/index.html",
+      "date": "2026-10-15",
+      "reason": "Type and surface alignment with the Walk for Education redesign: head-only presentation change. Google Fonts links replaced by a self-hosted font preload and css/wfe-editorial.css. Body markup, scripts, forms, pledge, payment and certificate hooks are unchanged.",
+      "previousSha256": "e70b7d0ee9f7526428a395137f2c7d0492e0c93f09db0b32626aeb3dd05aeeba"
+    },
+    {
+      "path": "contribute/privacy/index.html",
+      "date": "2026-10-15",
+      "reason": "Type and surface alignment with the Walk for Education redesign: head-only presentation change. Google Fonts links replaced by a self-hosted font preload and css/wfe-editorial.css. Body markup, scripts, forms, pledge, payment and certificate hooks are unchanged.",
+      "previousSha256": "acdec70135516283b5b0e9ba28699d78def18c330f01216c95de00111e7f2092"
+    },
+    {
+      "path": "contribute/terms/index.html",
+      "date": "2026-10-15",
+      "reason": "Type and surface alignment with the Walk for Education redesign: head-only presentation change. Google Fonts links replaced by a self-hosted font preload and css/wfe-editorial.css. Body markup, scripts, forms, pledge, payment and certificate hooks are unchanged.",
+      "previousSha256": "0d7eb78338deff5c3cf129de08997a4e5f57d8dcbe668b3ca704cc6af227a574"
+    },
+    {
+      "path": "contribute/verify/index.html",
+      "date": "2026-10-15",
+      "reason": "Type and surface alignment with the Walk for Education redesign: head-only presentation change. Google Fonts links replaced by a self-hosted font preload and css/wfe-editorial.css. Body markup, scripts, forms, pledge, payment and certificate hooks are unchanged.",
+      "previousSha256": "278dde498d412c50fd7c9c074beafc7e1e2f3299f1c369624d2aeebfb2b2f102"
     }
   ]
 }

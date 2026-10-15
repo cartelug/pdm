@@ -340,7 +340,7 @@
   .pci-statement {
     margin: 0;
     font: 600 clamp(1.9rem, 1.2rem + 2.2vw, 3.3rem) / 1.1 var(--pci-display);
-    letter-spacing: -0.035em;
+    letter-spacing: -0.03em;
     text-wrap: balance;
   }
 
@@ -420,7 +420,7 @@
   .pci-fig b {
     display: block;
     font: 620 clamp(1.9rem, 1.3rem + 1.6vw, 2.8rem) / 1.02 var(--pci-display);
-    letter-spacing: -0.035em;
+    letter-spacing: -0.03em;
   }
 
   .pci-fig span {
@@ -689,7 +689,7 @@
 
   .pci-steps b {
     font: 620 clamp(1.3rem, 1.05rem + 0.8vw, 1.75rem) / 1.12 var(--pci-display);
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
   }
 
   @media (min-width: 760px) {

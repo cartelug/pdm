@@ -52,7 +52,7 @@
 
   .pci-brand__name {
     font: 700 1.9rem / 0.9 var(--pci-display);
-    letter-spacing: -0.045em;
+    letter-spacing: -0.038em;
   }
 
   .pci-brand__text small {
@@ -279,7 +279,7 @@
 
   .pci-menu__identity {
     font: 640 1.7rem / 1 var(--pci-display);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.024em;
   }
 
   .pci-menu__identity span {
@@ -338,7 +338,7 @@
     gap: 12px;
     padding: clamp(8px, 1.6vh, 16px) 0;
     font: 600 clamp(1.9rem, 1rem + min(3.4vw, 6.2vh), 3.8rem) / 1.08 var(--pci-display);
-    letter-spacing: -0.04em;
+    letter-spacing: -0.034em;
     transition:
       color 0.2s,
       padding-left 0.3s var(--pci-ease);
@@ -473,7 +473,7 @@
 
   .pci-footer__invitation h2 {
     font-size: clamp(3rem, 1rem + 8vw, 8.6rem);
-    line-height: 0.92;
+    line-height: 0.97;
     max-width: 14ch;
   }
 
@@ -564,7 +564,7 @@
     margin: 0;
     overflow: hidden;
     font: 700 min(23rem, calc((100vw - 2 * var(--pci-gutter)) / 3.8)) / 0.8 var(--pci-display);
-    letter-spacing: -0.05em;
+    letter-spacing: -0.042em;
     color: rgb(250 246 241 / 7%);
     user-select: none;
     white-space: nowrap;
