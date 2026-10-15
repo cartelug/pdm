@@ -70,28 +70,4 @@ export function chrome({ gsap, ScrollTrigger, signal, pointerFine, cleanups }: M
       { signal },
     );
   });
-
-  // Programme cards tilt in three dimensions.
-  qsa(".pci-pillar").forEach((card) => {
-    gsap.set(card, { transformPerspective: 900 });
-    const rx = gsap.quickTo(card, "rotationX", { duration: 0.6, ease: "power3.out" });
-    const ry = gsap.quickTo(card, "rotationY", { duration: 0.6, ease: "power3.out" });
-    card.addEventListener(
-      "pointermove",
-      (event) => {
-        const box = card.getBoundingClientRect();
-        ry(((event.clientX - box.left) / box.width - 0.5) * 11);
-        rx(-((event.clientY - box.top) / box.height - 0.5) * 11);
-      },
-      { signal },
-    );
-    card.addEventListener(
-      "pointerleave",
-      () => {
-        rx(0);
-        ry(0);
-      },
-      { signal },
-    );
-  });
 }

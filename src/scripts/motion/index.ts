@@ -11,6 +11,7 @@ import { footer } from "./footer";
 import { hero } from "./hero";
 import { parallax } from "./parallax";
 import { reveal } from "./reveal";
+import { scrub } from "./scrub";
 import type { Motion } from "./types";
 
 // Scroll-driven motion. Page content is complete without it: nothing here is needed to read the page,
@@ -44,7 +45,8 @@ export async function initScrollMotion(): Promise<() => void> {
     cleanups,
   };
   const context = gsap.context(() => {
-    for (const feature of [hero, reveal, parallax, counters, cycle, flow, footer, filter, chrome]) feature(motion);
+    for (const feature of [hero, reveal, scrub, parallax, counters, cycle, flow, footer, filter, chrome])
+      feature(motion);
   });
 
   // Layout can change after load (images, filters, text zoom): measure again, but not on every frame.

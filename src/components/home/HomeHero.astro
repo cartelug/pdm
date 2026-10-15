@@ -3,6 +3,30 @@ import Icon from "../global/Icon.astro";
 ---
 
 <section class="pci-hero" id="top" aria-labelledby="home-heading">
+  <div class="pci-hero__media" aria-hidden="true">
+    <picture>
+      <source
+        media="(max-width: 719px)"
+        srcset="assets/institutional-v3/hero-portrait-420.webp 420w, assets/institutional-v3/hero-portrait-840.webp 840w"
+        sizes="100vw"
+      />
+      <img
+        src="assets/institutional-v3/hero-wide-1680.webp"
+        srcset="
+          assets/institutional-v3/hero-wide-840.webp 840w,
+          assets/institutional-v3/hero-wide-1280.webp 1280w,
+          assets/institutional-v3/hero-wide-1680.webp 1680w
+        "
+        sizes="100vw"
+        width="1672"
+        height="941"
+        alt=""
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
+  </div>
+  <div class="pci-hero__shade" aria-hidden="true"></div>
   <div class="pci-container pci-hero__layout">
     <div class="pci-hero__copy">
       <span class="pci-eyebrow" data-hero-detail>
@@ -10,10 +34,7 @@ import Icon from "../global/Icon.astro";
       </span>
       <h1 id="home-heading" aria-label="Together, we build what lasts.">
         <span class="pci-hero__line">
-          <span>Together,</span>
-        </span>
-        <span class="pci-hero__line">
-          <span>we build</span>
+          <span>Together, we build</span>
         </span>
         <span class="pci-hero__line">
           <span>
@@ -28,7 +49,7 @@ import Icon from "../global/Icon.astro";
         Pamodzi brings communities and partners together around the priorities people define for themselves.
       </p>
       <div class="pci-actions" data-hero-detail>
-        <a class="pci-button" href="projects/index.html">
+        <a class="pci-button pci-button--light" href="projects/index.html">
           Explore Our Work <Icon name="arrow" />
         </a>
         <a class="pci-text-link" href="model/index.html">
@@ -36,40 +57,40 @@ import Icon from "../global/Icon.astro";
         </a>
       </div>
     </div>
-    <figure class="pci-hero__figure">
-      <span class="pci-hero__sun" aria-hidden="true"></span>
-      <span class="pci-hero__frame" aria-hidden="true"></span>
-      <div class="pci-hero__arch">
-        <img
-          src="assets/institutional-v3/hero-portrait-840.webp"
-          srcset="assets/institutional-v3/hero-portrait-420.webp 420w, assets/institutional-v3/hero-portrait-840.webp 840w"
-          sizes="(min-width: 820px) 40vw, 92vw"
-          width="840"
-          height="1050"
-          alt=""
-          fetchpriority="high"
-          decoding="async"
-        />
-      </div>
-      <figcaption class="pci-hero__caption">Illustration · everyday community life</figcaption>
-    </figure>
+    <aside class="pci-hero__live" aria-label="Current campaigns">
+      <a class="pci-live" href="faith-in-motion/index.html">
+        <span class="pci-live__status">Journey completed · fundraising continues</span>
+        <strong>Faith in Motion</strong>
+        <span class="pci-live__go" aria-hidden="true">
+          <Icon name="external" />
+        </span>
+      </a>
+      <a class="pci-live" href="walk-for-education/index.html" data-protected>
+        <span class="pci-live__status">Pledges open · walk dates unconfirmed</span>
+        <strong>Walk for Education</strong>
+        <span class="pci-live__go" aria-hidden="true">
+          <Icon name="external" />
+        </span>
+      </a>
+    </aside>
   </div>
-  <div class="pci-strip" aria-label="How Pamodzi works">
-    <div class="pci-container">
-      <ul>
-        <li>
-          <span>01</span>Locally defined
-        </li>
-        <li>
-          <span>02</span>Member-led
-        </li>
-        <li>
-          <span>03</span>Partnership-based
-        </li>
-        <li>
-          <span>04</span>Accountable
-        </li>
-      </ul>
-    </div>
-  </div>
+  <p class="pci-hero__caption">Illustration · everyday community life</p>
 </section>
+<div class="pci-strip" aria-label="How Pamodzi works">
+  <div class="pci-container">
+    <ul>
+      <li>
+        <span>01</span>Locally defined
+      </li>
+      <li>
+        <span>02</span>Member-led
+      </li>
+      <li>
+        <span>03</span>Partnership-based
+      </li>
+      <li>
+        <span>04</span>Accountable
+      </li>
+    </ul>
+  </div>
+</div>

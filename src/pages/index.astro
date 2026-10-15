@@ -22,31 +22,20 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
 >
   <HomeHero />
   <ProgrammePillars />
-  <section class="pci-section pci-section--bone" id="who-we-are">
-    <div class="pci-container pci-split pci-split--sticky">
-      <div class="pci-split__aside" data-reveal>
+  <section class="pci-section pci-section--bone pci-manifesto" id="who-we-are">
+    <div class="pci-container">
+      <div data-reveal>
         <span class="pci-eyebrow">02 / Who we are</span>
-        <h2>
+        <h2 class="pci-manifesto__title">
           Not a donor.
-          <br />
           <em>A convener.</em>
         </h2>
-        <figure class="pci-about__art" aria-hidden="true">
-          <img
-            src="assets/crimson/connection-720.webp"
-            width="720"
-            height="720"
-            alt=""
-            loading="lazy"
-            decoding="async"
-          />
-        </figure>
       </div>
-      <div class="pci-split__main pci-body" data-reveal>
-        <p class="pci-statement">
-          Sustainable development is strongest when communities help shape, resource and steward their own future.
-        </p>
-        <ol class="pci-trio">
+      <p class="pci-manifesto__text" data-scrub-words>
+        Sustainable development is strongest when communities help shape, resource and steward their own future.
+      </p>
+      <div class="pci-manifesto__grid">
+        <ol class="pci-trio" data-reveal>
           <li>
             <span>01</span>Convene
           </li>
@@ -57,19 +46,31 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
             <span>03</span>Sustain
           </li>
         </ol>
-        <p>
-          We start with the resources and relationships a community already has — savings groups, cooperatives,
-          professionals, businesses, diaspora and local leadership — then organise them around a clear, locally chosen
-          priority.
-        </p>
-        <a class="pci-text-link" href="about/index.html">
-          Meet Pamodzi <Icon name="external" />
-        </a>
+        <div class="pci-manifesto__aside pci-body" data-reveal>
+          <figure class="pci-about__art" aria-hidden="true">
+            <img
+              src="assets/crimson/connection-720.webp"
+              width="720"
+              height="720"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <p>
+            We start with the resources and relationships a community already has — savings groups, cooperatives,
+            professionals, businesses, diaspora and local leadership — then organise them around a clear, locally chosen
+            priority.
+          </p>
+          <a class="pci-text-link" href="about/index.html">
+            Meet Pamodzi <Icon name="external" />
+          </a>
+        </div>
       </div>
     </div>
   </section>
   <ModelPreview path="/" />
-  <section class="pci-section">
+  <section class="pci-section pci-projects" id="projects">
     <div class="pci-container">
       <div class="pci-section-head" data-reveal>
         <div>
@@ -85,12 +86,25 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
           pathway.
         </p>
       </div>
-      <div class="pci-project-grid">
+    </div>
+    <div class="pci-carousel" data-carousel>
+      <div class="pci-carousel__track" role="region" aria-label="Featured projects" tabindex="0" data-carousel-track>
         {projects.map((project) => (
           <ProjectCard {project} path="/" />
         ))}
       </div>
-      <div class="pci-actions">
+      <div class="pci-container pci-carousel__bar">
+        <div class="pci-carousel__progress" aria-hidden="true">
+          <span data-carousel-progress></span>
+        </div>
+        <div class="pci-carousel__buttons">
+          <button type="button" class="pci-carousel__button" data-carousel-prev aria-label="Previous projects" hidden>
+            <Icon name="arrow" />
+          </button>
+          <button type="button" class="pci-carousel__button" data-carousel-next aria-label="Next projects" hidden>
+            <Icon name="arrow" />
+          </button>
+        </div>
         <a class="pci-text-link" href="projects/index.html">
           Explore All Projects <Icon name="external" />
         </a>
@@ -140,7 +154,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
       </div>
     </div>
   </section>
-  <section class="pci-section pci-section--night">
+  <section class="pci-section pci-section--night pci-duo-section">
     <div class="pci-container">
       <div class="pci-section-head" data-reveal>
         <div>
@@ -155,18 +169,20 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
           Distinct campaigns, each with its own beneficiary, contribution route and reconciliation record.
         </p>
       </div>
-      <div class="pci-campaign-grid">
-        <article class="pci-campaign-panel pci-campaign-panel--faith" data-reveal>
-          <div class="pci-campaign-panel__media">
-            <img
-              src="assets/faith-in-motion/walk-day-arrival-celebration.jpg"
-              width="1080"
-              height="608"
-              alt=""
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
+    </div>
+    <div class="pci-duo">
+      <article class="pci-duo__panel pci-duo__panel--faith">
+        <div class="pci-duo__media" aria-hidden="true">
+          <img
+            src="assets/faith-in-motion/walk-day-arrival-celebration.jpg"
+            width="1080"
+            height="608"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="pci-duo__body">
           <span class="pci-status">Journey completed · fundraising continues</span>
           <h3>Faith in Motion</h3>
           <p>
@@ -176,18 +192,22 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
           <a class="pci-text-link" href="faith-in-motion/index.html">
             Explore Faith in Motion <Icon name="external" />
           </a>
-        </article>
-        <article class="pci-campaign-panel pci-campaign-panel--education" data-reveal>
-          <div class="pci-campaign-panel__media">
-            <img
-              src="assets/walk-for-education/hero-art-768.webp"
-              width="768"
-              height="512"
-              alt=""
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
+        </div>
+      </article>
+      <article class="pci-duo__panel pci-duo__panel--education">
+        <div class="pci-duo__media" aria-hidden="true">
+          <img
+            src="assets/walk-for-education/hero-art-1536.webp"
+            srcset="assets/walk-for-education/hero-art-768.webp 768w, assets/walk-for-education/hero-art-1536.webp 1536w"
+            sizes="(min-width: 900px) 50vw, 100vw"
+            width="1536"
+            height="1024"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="pci-duo__body">
           <span class="pci-status">Pledges open · walk dates unconfirmed</span>
           <h3>Walk for Education</h3>
           <p>
@@ -197,8 +217,8 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
           <a class="pci-text-link" href="walk-for-education/index.html" data-protected>
             Explore Walk for Education <Icon name="external" />
           </a>
-        </article>
-      </div>
+        </div>
+      </article>
     </div>
   </section>
   <section class="pci-section pci-section--crimson pci-band">
