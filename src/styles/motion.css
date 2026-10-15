@@ -524,6 +524,40 @@
     }
   }
 
+  /* The pointer disc over cards and photographs (scripts/motion/cursor.ts). The outer element is the
+     point the script moves; the disc inside does its own scaling, so the two never fight. */
+  .pci-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    pointer-events: none;
+  }
+
+  .pci-cursor > span {
+    display: grid;
+    place-items: center;
+    width: 92px;
+    height: 92px;
+    margin: -46px 0 0 -46px;
+    border-radius: 50%;
+    background: var(--pci-crimson);
+    color: #fff;
+    font: 500 10.5px/1 var(--pci-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0;
+    scale: 0.2;
+    transition:
+      scale 0.5s var(--pci-ease),
+      opacity 0.3s var(--pci-ease);
+  }
+
+  .pci-cursor.is-active > span {
+    opacity: 1;
+    scale: 1;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     ::view-transition-group(*),
     ::view-transition-old(*),

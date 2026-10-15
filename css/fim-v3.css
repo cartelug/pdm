@@ -362,8 +362,10 @@
   outline-offset: 4px;
 }
 
-/* Footer */
+/* Footer. The shared foundation forces footer paragraphs to var(--muted), which is too dark on night. */
 .pci-fim-v3 footer {
+  --muted: rgb(250 246 241 / 72%);
+
   background: #220a10;
 }
 
@@ -410,4 +412,44 @@
   .pci-fim-v3 .mnav .wrap > a:not(.btn) {
     min-height: 48px;
   }
+}
+
+/* Legibility and touch floor. The shared campaign foundation sets many labels at 8–10px; they stay
+   small and mono here, but no smaller than 10px for chips and 11px for reading labels. */
+.pci-fim-v3 .hero-meta .m > span,
+.pci-fim-v3 .m .u,
+.pci-fim-v3 .statline .s > span,
+.pci-fim-v3 .ledger-head > span,
+.pci-fim-v3 .tally .k,
+.pci-fim-v3 .segbox .k,
+.pci-fim-v3 .paybox .k,
+.pci-fim-v3 .customrow > label,
+.pci-fim-v3 .journey-label,
+.pci-fim-v3 .journey-meta,
+.pci-fim-v3 .lrow .i,
+.pci-fim-v3 .lrow .seg,
+.pci-fim-v3 .lrow .a > i,
+.pci-fim-v3 .slot .cap,
+.pci-fim-v3 .datalist .mk,
+.pci-fim-v3 .milestone .badge > span,
+.pci-fim-v3 .verb .n,
+.pci-fim-v3 .fbot > span {
+  font-size: 11px;
+}
+
+.pci-fim-v3 .tier > span,
+.pci-fim-v3 .pill {
+  font-size: 10px;
+}
+
+.pci-fim-v3 .crumb,
+.pci-fim-v3 .crumb a,
+.pci-fim-v3 .crumb b {
+  font-size: 12px;
+}
+
+.pci-fim-v3 .crumb a {
+  display: inline-block;
+  padding-block: 12px;
+  margin-block: -12px;
 }

@@ -40,13 +40,15 @@ export function reveal({ gsap, ScrollTrigger, SplitText, cleanups }: Motion) {
             mask.append(line);
           });
           if (played) return;
-          return gsap.from(self.lines, {
-            yPercent: 115,
-            duration: 1.15,
-            ease: "power4.out",
-            stagger: 0.11,
+          const timeline = gsap.timeline({
             scrollTrigger: { trigger: heading, start: "top 88%", once: true, onEnter: () => (played = true) },
           });
+          timeline.from(self.lines, { yPercent: 115, duration: 1.15, ease: "power4.out", stagger: 0.11 });
+          // The italic accent arrives a beat later and slides into place, so the pairing reads as a pair.
+          const accents = qsa("em", heading);
+          if (accents.length)
+            timeline.from(accents, { opacity: 0, x: -22, duration: 1.1, ease: "power3.out", stagger: 0.08 }, 0.28);
+          return timeline;
         },
       });
     });
@@ -86,21 +88,21 @@ export function reveal({ gsap, ScrollTrigger, SplitText, cleanups }: Motion) {
     });
   });
 
-  // Photographs wipe open from the bottom edge.
-  qsa(".pci-project__media").forEach((media) => {
-    const radius = getComputedStyle(media).borderTopLeftRadius;
-    gsap.fromTo(
-      media,
-      { clipPath: `inset(100% 0 0 0 round ${radius})` },
-      {
-        clipPath: `inset(0% 0 0 0 round ${radius})`,
-        duration: 1.4,
-        ease: "power4.inOut",
-        clearProps: "clipPath",
-        scrollTrigger: { trigger: media, start: "top 90%", once: true },
-      },
-    );
-  });
+  // Photographs wipe open from the bottom edge while the picture inside settles from a slight zoom.
+  qsa(".pci-project__media, .pci-duo__media, .pci-about__art")
+    .filter((media) => !inView(media))
+    .forEach((media) => {
+      const radius = getComputedStyle(media).borderTopLeftRadius;
+      const picture = qs("img", media);
+      const timeline = gsap.timeline({ scrollTrigger: { trigger: media, start: "top 90%", once: true } });
+      timeline.fromTo(
+        media,
+        { clipPath: `inset(100% 0 0 0 round ${radius})` },
+        { clipPath: `inset(0% 0 0 0 round ${radius})`, duration: 1.4, ease: "power4.inOut", clearProps: "clipPath" },
+      );
+      if (picture)
+        timeline.from(picture, { scale: 1.16, duration: 1.9, ease: "power3.out", clearProps: "transform" }, 0.05);
+    });
 
   // Hairlines draw left to right.
   const ruled: Element[] = [];

@@ -4,6 +4,7 @@ import { SplitText } from "gsap/SplitText";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { chrome } from "./chrome";
 import { counters } from "./counters";
+import { cursor } from "./cursor";
 import { cycle } from "./cycle";
 import { flow } from "./flow";
 import { filter } from "./filter";
@@ -45,7 +46,7 @@ export async function initScrollMotion(): Promise<() => void> {
     cleanups,
   };
   const context = gsap.context(() => {
-    for (const feature of [hero, reveal, scrub, parallax, counters, cycle, flow, footer, filter, chrome])
+    for (const feature of [hero, reveal, scrub, parallax, counters, cycle, flow, footer, filter, chrome, cursor])
       feature(motion);
   });
 

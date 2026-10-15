@@ -343,6 +343,7 @@ body.wfe-campaign {
 .wfe-campaign .wfe-link,
 .wfe-campaign .wfp-link {
   gap: 10px;
+  padding-top: 8px;
   padding-bottom: 5px;
   border-bottom: 0;
   background: linear-gradient(currentcolor, currentcolor) left bottom / 100% 1px no-repeat;
@@ -758,6 +759,12 @@ body.wfe-campaign {
   font-family: var(--ed-mono);
   font-weight: 500;
   letter-spacing: 0.1em;
+}
+
+.wfe-campaign .pledge-country-code,
+.collections-page .pledge-country-code {
+  font-size: 10.5px;
+  color: var(--ed-muted);
 }
 
 .wfe-campaign .pledge-country-options strong {
@@ -2095,6 +2102,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .wfe2-contact-card > a:not(.wfe-btn) {
+  margin: 4px 0;
   font-size: 16px;
   color: var(--ed-gold);
   text-underline-offset: 4px;
@@ -2525,6 +2533,7 @@ body.wfe-campaign {
 .wfe-campaign .wfp-level-name {
   font: 500 11px/1.4 var(--ed-mono);
   letter-spacing: 0.14em;
+  color: var(--ed-ink-soft);
 }
 
 .wfe-campaign .wfp-level strong {
@@ -2671,6 +2680,10 @@ body.wfe-campaign {
    Surface and type only; the pledge, payment and certificate scripts and
    every hook they read are unchanged.
    ========================================================================== */
+.collections-page.wfe-contribute {
+  --muted: var(--ed-muted);
+}
+
 body.collections-page {
   background: var(--ed-paper);
   color: var(--ed-ink);
@@ -2689,6 +2702,9 @@ body.collections-page {
 }
 
 .collections-page .collections-header nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: 15px;
   font-weight: 500;
   color: var(--ed-ink-soft);
@@ -2767,6 +2783,84 @@ body.collections-page {
 .collections-page .collection-footer {
   background: var(--ed-night);
   border-top: 0;
+}
+
+/* ==========================================================================
+   Legibility and touch floor
+   The campaign stylesheets set many labels at 7–10px and many links shorter
+   than a fingertip. Labels stay small and mono, but no smaller than 10.5px,
+   and standalone links get a taller hit area without moving the layout.
+   ========================================================================== */
+.wfe-campaign .wfe2-brand small,
+.wfe-campaign .v3-step-options button strong small,
+.wfe-campaign .v3-suggested,
+.wfe-campaign .v3-builder > strong small,
+.wfe-campaign .v3-people-image > span,
+.collections-page .collections-header .brand .t span {
+  font-size: 10.5px;
+}
+
+.wfe-campaign .v3-give-assurance,
+.wfe-campaign .pledge-rate b,
+.wfe-campaign .field-meta,
+.wfe-campaign .field-source,
+.wfe-campaign .wfp-facts dt,
+.wfe-campaign .v3-campus-tag,
+.wfe-campaign
+  :is(.launch-hero-art, .launch-feature-art, .wfe2-editorial-image, .wfp-hero-media)
+  figcaption,
+.wfe-campaign .v3-hero-foot .wfe-shell > *,
+.collections-page .collection-footer > span,
+.collections-page .step-checkout-aside figcaption {
+  font-size: 11px !important;
+}
+
+.wfe-campaign .v3-builder-foot > a,
+.collections-page .collection-progress-steps > span {
+  font-size: 13.5px;
+}
+
+.collections-page .collection-progress-steps {
+  color: var(--ed-muted);
+}
+
+.collections-page .collection-progress-steps b,
+.collections-page #selectionReview > div:first-child > span {
+  font-size: 10.5px;
+}
+
+.collections-page #selectionReview > div:first-child > span {
+  color: var(--ed-ink-soft);
+}
+
+.collections-page .pledge-country-options small {
+  font-size: 12px;
+}
+
+.wfe-campaign .wfe2-brand,
+.collections-page .collections-header .brand {
+  min-height: 44px;
+}
+
+.wfe-campaign .wfe2-footer nav {
+  gap: 2px;
+}
+
+.wfe-campaign .wfe2-footer nav a,
+.wfe-campaign .wfe2-footer-contact a,
+.wfe-campaign .wfe2-footer-contact > button,
+.wfe-campaign .wfe2-contact-card > a:not(.wfe-btn),
+.wfe-campaign .v3-goal a,
+.collections-page .collection-footer > a {
+  padding-block: 8px;
+}
+
+.wfe-campaign .wfp-breadcrumb a,
+.wfe-campaign .v3-campus figcaption a,
+.collections-page .collection-support a {
+  display: inline-block;
+  padding-block: 10px;
+  margin-block: -6px;
 }
 
 /* ==========================================================================
@@ -2934,5 +3028,11 @@ body.collections-page {
       animation-timeline: view();
       animation-range: entry 10% cover 35%;
     }
+  }
+}
+
+@media (max-width: 400px) {
+  .collections-page .collections-header .brand .t span {
+    display: none;
   }
 }
