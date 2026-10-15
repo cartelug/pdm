@@ -2,8 +2,8 @@ import { type Motion, qsa } from "./types";
 
 export function parallax({ gsap }: Motion) {
   // Photographs drift against their frames.
-  qsa(".pci-project__media img, .pci-campaign-panel__media img").forEach((image) => {
-    const frame = image.parentElement as HTMLElement;
+  qsa(".pci-project__media img, .pci-duo__media img").forEach((image) => {
+    const frame = (image.closest(".pci-duo__panel") ?? image.parentElement) as HTMLElement;
     gsap.fromTo(
       image,
       { "--img-y": "-6%" },

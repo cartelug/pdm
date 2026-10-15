@@ -5,29 +5,21 @@ export function hero({ gsap, signal, pointerFine }: Motion) {
   const home = qs(".pci-hero");
   if (home) {
     const scrub = { ease: "none", scrollTrigger: { trigger: home, start: "top top", end: "bottom top", scrub: true } };
-    gsap.to(".pci-hero__figure", { "--fig-y": "64px", ...scrub });
-    gsap.to(".pci-hero__sun", { "--sun-y": "-90px", ...scrub });
-    gsap.to(".pci-hero__copy", { "--copy-y": "-36px", ...scrub });
-    gsap.to(".pci-hero__arch img", { "--img-y": "7%", ...scrub });
+    gsap.to(".pci-hero__copy", { "--copy-y": "-48px", ...scrub });
+    gsap.to(".pci-hero__media img", { "--img-y": "9%", ...scrub });
 
     if (pointerFine) {
+      const media = qs(".pci-hero__media img");
+      const cards = qsa(".pci-live");
       const layers = [
-        { element: qs(".pci-hero__sun"), dx: 30, dy: 24 },
-        { element: qs(".pci-hero__frame"), dx: -18, dy: -12 },
-        { element: qs(".pci-hero__arch"), dx: 10, dy: 8 },
-        { element: qs(".pci-hero__caption"), dx: -26, dy: -16 },
-      ].flatMap(({ element, dx, dy }) =>
-        element
-          ? [
-              {
-                dx,
-                dy,
-                x: gsap.quickTo(element, "x", { duration: 1.3, ease: "power3.out" }),
-                y: gsap.quickTo(element, "y", { duration: 1.3, ease: "power3.out" }),
-              },
-            ]
-          : [],
-      );
+        ...(media ? [{ element: media, dx: -14, dy: -10 }] : []),
+        ...cards.map((element, index) => ({ element, dx: 12 + index * 6, dy: 8 + index * 4 })),
+      ].map(({ element, dx, dy }) => ({
+        dx,
+        dy,
+        x: gsap.quickTo(element, "x", { duration: 1.3, ease: "power3.out" }),
+        y: gsap.quickTo(element, "y", { duration: 1.3, ease: "power3.out" }),
+      }));
       const move = (event: PointerEvent) => {
         const box = home.getBoundingClientRect();
         const nx = ((event.clientX - box.left) / box.width) * 2 - 1;

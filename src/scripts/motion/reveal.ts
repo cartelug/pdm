@@ -87,7 +87,7 @@ export function reveal({ gsap, ScrollTrigger, SplitText, cleanups }: Motion) {
   });
 
   // Photographs wipe open from the bottom edge.
-  qsa(".pci-project__media, .pci-campaign-panel__media").forEach((media) => {
+  qsa(".pci-project__media").forEach((media) => {
     const radius = getComputedStyle(media).borderTopLeftRadius;
     gsap.fromTo(
       media,

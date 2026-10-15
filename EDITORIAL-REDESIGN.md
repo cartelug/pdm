@@ -18,6 +18,22 @@ The site is organised around three ideas taken from the name and the work: *toge
 
 All three families are SIL OFL, self-hosted (npm for the Astro layer, `assets/fonts/` for the static campaign pages) with licences kept beside the files. Latin subsets only: about 100 KB for the three families, against roughly 270 KB for Fraunces with its optical-size axes. Two fonts are preloaded on every page.
 
+## Home page (second pass)
+
+The home page was redesigned again after the first release. The inner pages keep the arch and ring language; the home page is the cinematic entry to it.
+
+| Section | Design |
+| --- | --- |
+| Hero | Full-bleed illustration (labelled as such) under a burgundy shade, a two-line headline set very large, and two glass cards that link straight to the live campaigns with their current status. A portrait crop is used on phones so the faces stay above the text. |
+| Principle strip | A crimson band, a scroll-speed marquee when scripted. |
+| Four pillars | Expanding panels on a wide screen with a mouse (one open, three folded, vertical titles); ordinary cards on touch devices and narrow screens. Keyboard focus opens a panel. |
+| Who we are | A manifesto set at display size whose words come up as it is read, then *Convene, Mobilise, Sustain*. |
+| Model | The nine-stage cycle, unchanged. |
+| Projects | A snap-scrolling carousel with previous/next buttons and a progress line; plain horizontal scrolling without script. |
+| Walking for Impact | Two full-bleed halves that lean toward the one under the pointer. |
+
+All copy and status wording is unchanged.
+
 ## Motion
 
 The rule: **nothing above the fold waits for a script, and nothing is needed to read the page.**

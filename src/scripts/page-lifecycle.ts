@@ -64,6 +64,35 @@ function boot() {
       { signal: controller.signal },
     );
   });
+  // Project carousel: native scrolling with snap, plus buttons and a progress line when scripted.
+  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>("[data-carousel-track]");
+    const prev = carousel.querySelector<HTMLButtonElement>("[data-carousel-prev]");
+    const next = carousel.querySelector<HTMLButtonElement>("[data-carousel-next]");
+    const progress = carousel.querySelector<HTMLElement>("[data-carousel-progress]");
+    if (!track) return;
+    prev && (prev.hidden = false);
+    next && (next.hidden = false);
+    const paint = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      if (prev) prev.disabled = track.scrollLeft <= 4;
+      if (next) next.disabled = track.scrollLeft >= max - 4;
+      progress?.style.setProperty(
+        "--p",
+        String(Math.min(1, (track.scrollLeft + track.clientWidth) / track.scrollWidth)),
+      );
+    };
+    const step = (direction: number) => {
+      const card = track.querySelector<HTMLElement>("[data-project-status]");
+      const distance = (card?.offsetWidth ?? track.clientWidth * 0.8) + 24;
+      track.scrollBy({ left: direction * distance, behavior: reduce.matches ? "auto" : "smooth" });
+    };
+    prev?.addEventListener("click", () => step(-1), { signal: controller.signal });
+    next?.addEventListener("click", () => step(1), { signal: controller.signal });
+    track.addEventListener("scroll", paint, { passive: true, signal: controller.signal });
+    window.addEventListener("resize", paint, { signal: controller.signal });
+    paint();
+  });
   // Hovering or focusing a stage lights its place on the cycle diagram as well.
   const stages = Array.from(document.querySelectorAll<HTMLElement>("[data-model-stage]"));
   const light = (index: string | null) =>

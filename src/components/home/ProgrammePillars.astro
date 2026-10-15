@@ -1,7 +1,8 @@
 ---
 import { programmes } from "../../config/navigation";
 import Icon from "../global/Icon.astro";
-const artwork = ["education", "health", "climate", "inclusion"];
+import PillarIcon from "../global/PillarIcon.astro";
+const artwork = ["education", "health", "climate", "inclusion"] as const;
 ---
 
 <section class="pci-section" id="our-pillars" aria-labelledby="pillars-heading">
@@ -19,7 +20,7 @@ const artwork = ["education", "health", "climate", "inclusion"];
         Education. Health. A greener future. Financial inclusion. Four areas of work, shaped by the people they serve.
       </p>
     </div>
-    <div class="pci-pillars" data-reveal-group>
+    <div class="pci-pillars" data-reveal>
       {programmes.map((p, i) => (
         <a class="pci-pillar" href={"what-we-do/index.html#" + p.id} data-pillar={artwork[i]}>
           <div class="pci-pillar__art" aria-hidden="true">
@@ -32,10 +33,11 @@ const artwork = ["education", "health", "climate", "inclusion"];
               decoding="async"
             />
           </div>
+          <span class="pci-pillar__rail" aria-hidden="true" data-title={p.title}>
+            <span class="pci-pillar__index">0{i + 1}</span>
+            <PillarIcon name={artwork[i]} />
+          </span>
           <div class="pci-pillar__body">
-            <span class="pci-pillar__index" aria-hidden="true">
-              0{i + 1}
-            </span>
             <h3>{p.title}</h3>
             <p>{p.summary}</p>
           </div>
