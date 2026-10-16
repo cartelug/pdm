@@ -1,22 +1,14 @@
 /* Faith in Motion presentation only. Ledger scripts and all financial hooks are unchanged.
-   Brings the campaign pages into the Pamodzi editorial system: Bricolage Grotesque for display,
-   Newsreader italic for the editorial accent, Inter Tight for reading and Geist Mono for labels,
-   self-hosted from assets/fonts. The legacy family names are aliased to those files, so the shared
-   foundation needs no edits and no page calls an external font service. */
+   Brings the campaign pages into the Pamodzi editorial system: Inter for headlines and reading,
+   Instrument Serif italic for the editorial accent and Geist Mono for labels, self-hosted from
+   assets/fonts. The legacy family names are aliased to those files, so the shared foundation needs
+   no edits and no page calls an external font service. */
 @font-face {
   font-family: "Bricolage Grotesque";
   font-style: normal;
   font-display: swap;
-  font-weight: 200 800;
-  src: url("../assets/fonts/bricolage-grotesque-latin-opsz-normal.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: Newsreader;
-  font-style: italic;
-  font-display: swap;
-  font-weight: 200 800;
-  src: url("../assets/fonts/newsreader-latin-wght-italic.woff2") format("woff2");
+  font-weight: 100 900;
+  src: url("../assets/fonts/inter-latin-opsz-normal.woff2") format("woff2");
 }
 
 @font-face {
@@ -24,7 +16,15 @@
   font-style: normal;
   font-display: swap;
   font-weight: 100 900;
-  src: url("../assets/fonts/inter-tight-latin-wght-normal.woff2") format("woff2");
+  src: url("../assets/fonts/inter-latin-opsz-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400;
+  src: url("../assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2");
 }
 
 @font-face {
@@ -59,7 +59,7 @@
   --shadow-btn: none;
   --shadow-btn-hover: none;
 
-  font-family: Manrope, "Inter Tight Variable", system-ui, sans-serif;
+  font-family: Manrope, "Inter Variable", system-ui, sans-serif;
   font-size: 17px;
   line-height: 1.68;
   background: var(--paper);
@@ -73,14 +73,14 @@
 .pci-fim-v3 .sec {
   font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   font-weight: 600;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
   line-height: 0.98;
 }
 
 .pci-fim-v3 h1 {
   font-size: clamp(3.4rem, 1.2rem + 8vw, 8.4rem);
-  line-height: 0.92;
-  letter-spacing: -0.036em;
+  line-height: 0.97;
+  letter-spacing: -0.034em;
 }
 
 .pci-fim-v3 h2,
@@ -92,7 +92,7 @@
 .pci-fim-v3 h3 {
   font-size: clamp(1.6rem, 1.2rem + 1.1vw, 2.2rem);
   font-weight: 620;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.024em;
   line-height: 1.06;
 }
 
@@ -115,16 +115,17 @@
 .pci-fim-v3 .hero h1 {
   max-width: 15ch;
   font-size: clamp(3.4rem, 1rem + 4.4vw, 5.8rem);
-  line-height: 0.9;
+  line-height: 0.97;
   text-shadow: none;
 }
 
 .pci-fim-v3 .hero h1 .em {
   color: var(--blush, #f3c9c8);
-  font-family: Newsreader, "Iowan Old Style", Georgia, serif;
+  font-family: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  font-size: 1.08em;
   font-style: italic;
   font-weight: 400;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   text-decoration: none;
 }
 
@@ -197,7 +198,7 @@
   font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   font-size: 1.7rem;
   font-weight: 700;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.038em;
   line-height: 0.9;
 }
 
@@ -300,7 +301,7 @@
   font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   font-size: clamp(2rem, 1.2rem + 4vw, 3.2rem);
   font-weight: 600;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.034em;
 }
 
 .pci-fim-v3 .mnav a.act,
@@ -361,8 +362,10 @@
   outline-offset: 4px;
 }
 
-/* Footer */
+/* Footer. The shared foundation forces footer paragraphs to var(--muted), which is too dark on night. */
 .pci-fim-v3 footer {
+  --muted: rgb(250 246 241 / 72%);
+
   background: #220a10;
 }
 
@@ -378,7 +381,7 @@
   font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   font-size: 1.9rem;
   font-weight: 700;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.038em;
 }
 
 @media (max-width: 760px) {
@@ -409,4 +412,44 @@
   .pci-fim-v3 .mnav .wrap > a:not(.btn) {
     min-height: 48px;
   }
+}
+
+/* Legibility and touch floor. The shared campaign foundation sets many labels at 8–10px; they stay
+   small and mono here, but no smaller than 10px for chips and 11px for reading labels. */
+.pci-fim-v3 .hero-meta .m > span,
+.pci-fim-v3 .m .u,
+.pci-fim-v3 .statline .s > span,
+.pci-fim-v3 .ledger-head > span,
+.pci-fim-v3 .tally .k,
+.pci-fim-v3 .segbox .k,
+.pci-fim-v3 .paybox .k,
+.pci-fim-v3 .customrow > label,
+.pci-fim-v3 .journey-label,
+.pci-fim-v3 .journey-meta,
+.pci-fim-v3 .lrow .i,
+.pci-fim-v3 .lrow .seg,
+.pci-fim-v3 .lrow .a > i,
+.pci-fim-v3 .slot .cap,
+.pci-fim-v3 .datalist .mk,
+.pci-fim-v3 .milestone .badge > span,
+.pci-fim-v3 .verb .n,
+.pci-fim-v3 .fbot > span {
+  font-size: 11px;
+}
+
+.pci-fim-v3 .tier > span,
+.pci-fim-v3 .pill {
+  font-size: 10px;
+}
+
+.pci-fim-v3 .crumb,
+.pci-fim-v3 .crumb a,
+.pci-fim-v3 .crumb b {
+  font-size: 12px;
+}
+
+.pci-fim-v3 .crumb a {
+  display: inline-block;
+  padding-block: 12px;
+  margin-block: -12px;
 }
