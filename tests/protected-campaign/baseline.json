@@ -92,11 +92,11 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "6539d125204fd2f4837408b76fc8b263463a5119e986bfae8a2e07802c300950",
-    "contribute/payment/index.html": "9771f8e9ab765594007abb47283456d74190418114e0fe44d3cfd19ed425b5aa",
-    "contribute/privacy/index.html": "c4ca9fb4a2e04c33cef5b3e62929026fb469daf4ceaf5ea346abea63439cdfab",
-    "contribute/terms/index.html": "f6fab8b8954f67a92038bb047ae04423fae8cf07b0e88c0719fc2587bd4f9f15",
-    "contribute/verify/index.html": "41e75a4c42495a459e282d4465022b358729c9ccbb63d9286ce9ecc69cc8441b",
+    "contribute/index.html": "f0c4201a3c716e062359c0371a221fbe7e024c458a4840500a9d67fc7650a8e1",
+    "contribute/payment/index.html": "0b00e53da74a17aa346ad0a668557429f6401f2ad2fca2e4c3e9ce25078620df",
+    "contribute/privacy/index.html": "689455cc9a703f7e2ab5fe7a92f3954e16a9794e4ffa5ce9e35d10c96d192eb0",
+    "contribute/terms/index.html": "dda2d836da3a50b41d082b18614c5306259255fa31301c35b03f07cda535f93e",
+    "contribute/verify/index.html": "45de692d823f39e53c33b77f7299f7bee4c8b22dae046a19802fc8082d848c37",
     "css/base.css": "368d70b67bd5c7c3e60f7f44a9d8c93bfb8db7e2e8559cb00f223cfcf14893c5",
     "css/collections.css": "cd779925dd2f0519e39b3b7e5f577d660dcee3bf08f8ce98c67bad5615a47f23",
     "css/contribute.css": "e02336271318e777f18aa7a98cb227dd896eed88bebe9de6bc0b054622ed2c81",
@@ -123,15 +123,15 @@
     "js/site-motion.js": "6c350b326056cf5a928b92a714e73da40aa7e6d54b7737ceb57af3c9483e232b",
     "js/step-pricing.js": "c0c2d4ff9607c2bfd23be319a02963042e5c1b8dbd6d0f6559a9f05aee848380",
     "js/updates-data.js": "01ccac31e1d5781213804df801b8f805e74092afc58ca656f9989482d913c92a",
-    "js/wfe-data.js": "584c1e9dff341185813848cb7440e8b24f6c292cb75539c10493e2fff3a16806",
+    "js/wfe-data.js": "bb56f89fa58f0063717d8109219da9a4f0ea35e5f96e405f35d4fc1d9def7e5e",
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "f4b73bdf7a6dc3af0a488a965b97f726195afc8edd05b50522bb11dd35378bad",
     "js/wfe.js": "01746af6d7f7ec88c36d981ac649764bde29693f2da3bb65e28f3406978bf4e2",
-    "walk-for-education/accountability/index.html": "20753d6cbf101ac37001629479844c722881c7ac0b6bba31939ca8c23add4291",
-    "walk-for-education/index.html": "98728d579aaa6619522ec8399dc7ffa97a9f71a62ea1e5d158491de4251e4e8e",
-    "walk-for-education/partners/index.html": "26ac4720e5d70a79da6e2388834ba213b21d5505b18383e73052f9791b9d2a2c",
-    "walk-for-education/take-part/index.html": "7aeb2c849e67fff318f728360c166aea9eb153c2de300986f04719c8195de119",
-    "walk-for-education/updates/index.html": "426b6b0944424350143a6b7c1857d3cf0e4c2c8ead7fefa61c67167b3d2e1634"
+    "walk-for-education/accountability/index.html": "cd69358591af69da7ef47718e7c244122d44c12c78ad524281a5da51c1c7d5ac",
+    "walk-for-education/index.html": "44b79c84a02141ceff199630b15d0d6f5a00a6e39819e0759beb89176e9aa07c",
+    "walk-for-education/partners/index.html": "d4ebbe964e11e87c87b1efe23e1760b5efb0f668c9df4213e8e9f5d5b521bbd5",
+    "walk-for-education/take-part/index.html": "c64272c8bb96a29d3217d9be7d394095f964d992f94dc01b5d93ec15d51a00e3",
+    "walk-for-education/updates/index.html": "f0dcacbdfe291852d19ab6b571cda5e4a1253260e5e4844733d51294cd88eed0"
   },
   "presentationReviews": [
     {
@@ -142,8 +142,8 @@
     },
     {
       "path": "walk-for-education/index.html",
-      "date": "2026-10-15",
-      "reason": "User-requested Walk for Education redesign: head-only presentation change. Google Fonts links replaced by self-hosted font preloads and css/wfe-editorial.css is loaded after the campaign stylesheets. Body markup, scripts, IDs, forms, pricing, pledge and payment hooks are unchanged.",
+      "date": "2026-10-17",
+      "reason": "User-requested update. Head: self-hosted fonts and css/wfe-editorial.css. Body: the direct contribution channel cards were updated to the details the user confirmed from the campaign payment document. Pledge, pricing and payment hooks are unchanged.",
       "previousSha256": "d8c6b068783ce80dbb6ebb3e87789cb1c1cc49760964896c72927f1188e34db7"
     },
     {
@@ -172,8 +172,8 @@
     },
     {
       "path": "contribute/index.html",
-      "date": "2026-10-15",
-      "reason": "Type and surface alignment with the Walk for Education redesign: head-only presentation change. Google Fonts links replaced by a self-hosted font preload and css/wfe-editorial.css. Body markup, scripts, forms, pledge, payment and certificate hooks are unchanged.",
+      "date": "2026-10-17",
+      "reason": "User-requested contribution page redesign: new headline, three-step journey, a How to pay card, a purpose band and two added questions. The pledge form, every ID, data attribute, pricing hook, script and the WhatsApp hand-off are unchanged; display styling lives in css/wfe-editorial.css and js/contribute-pay.js.",
       "previousSha256": "9d3efcff78e798081ceab35f43db53a36388a854467f6fd21493a5c3abee28b6"
     },
     {
@@ -211,6 +211,12 @@
       "date": "2026-10-17",
       "reason": "Image optimisation only: same file name and aspect ratio, resized to roughly twice its largest displayed size and stored as an 8-bit palette PNG (mean colour error under 0.5 of 255). No page, script or style changed.",
       "previousSha256": "ba90384ff5d1c635548b649aad9b14663ef118cd27d7ffbc32689479bec30758"
+    },
+    {
+      "path": "js/wfe-data.js",
+      "date": "2026-10-17",
+      "reason": "User-confirmed update of the direct contribution channel list and its verification note, from the campaign payment document. No other field changed.",
+      "previousSha256": "584c1e9dff341185813848cb7440e8b24f6c292cb75539c10493e2fff3a16806"
     }
   ]
 }
