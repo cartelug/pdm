@@ -27,7 +27,7 @@
     "assets/brand/mtn/mtn-logo.png": "28c5cfe43b963ab6734dad7ee741f2368ee92c26fd9effccdb71d724296f067a",
     "assets/brand/pamodzi/README.md": "9105560112df11526327e7e6eec2b595474d9229d1043bbc5672f266ac28abba",
     "assets/brand/pamodzi/pamodzi-logo-source.png": "8cc5bd1fdb1a2b1f19df4506ac7871cd289e387c617fa15d59421c3d902ea24b",
-    "assets/brand/pamodzi/pamodzi-logo-transparent.png": "91f160a43db49552b0fecd13e6d16a67b1a11c901dde9b3f0e43a7ff906532f6",
+    "assets/brand/pamodzi/pamodzi-logo-transparent.png": "58ed1098e7d511ccc6789baaec97a88c0462cf7d6721fb60986b6d75008bee82",
     "assets/brand/pamodzi/pamodzi-mark-ink.png": "82de53a1341eee7f4f4f779f1e8bbf343cebc22e940b62e9ad71d533eea7de5b",
     "assets/brand/pamodzi/pamodzi-mark-light.png": "b5ec8d319d5d72801188c53efc1a38fc8580e45dd0a17321b3e0f8749677aa4d",
     "assets/brand/pamodzi/pamodzi-mark-primary.png": "1f31d1fbda0368be660cf3c2f58087c74f49e91300c87d6b0d622769d935b142",
@@ -88,7 +88,7 @@
     "assets/walk-for-education/students-1440.webp": "5f1e31dbb741abb98b94f865db1234d4c5ee6582eb0c1f8190f1b6c0b64e2a96",
     "assets/walk-for-education/students-640.webp": "59d7dda12b725874000f188d574752cbd52badcd259e88d6edad9aae7210fdc2",
     "assets/walk-for-education/students-960.webp": "58bfa2daee55bf5dc28ef92ccc2f756fdd1a81edb55cd81694c324c4ddbcf7ec",
-    "assets/walk-for-education/walk-for-education-logo.png": "ba90384ff5d1c635548b649aad9b14663ef118cd27d7ffbc32689479bec30758",
+    "assets/walk-for-education/walk-for-education-logo.png": "b4280f5a27e6215c97ea1d404eba3f4803cb064449d80805cb9d7dcc1ca1ab46",
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
@@ -199,6 +199,18 @@
       "date": "2026-10-15",
       "reason": "Type and surface alignment with the Walk for Education redesign: head-only presentation change. Google Fonts links replaced by a self-hosted font preload and css/wfe-editorial.css. Body markup, scripts, forms, pledge, payment and certificate hooks are unchanged.",
       "previousSha256": "278dde498d412c50fd7c9c074beafc7e1e2f3299f1c369624d2aeebfb2b2f102"
+    },
+    {
+      "path": "assets/brand/pamodzi/pamodzi-logo-transparent.png",
+      "date": "2026-10-17",
+      "reason": "Image optimisation only: same file name and aspect ratio, resized to roughly twice its largest displayed size and stored as an 8-bit palette PNG (mean colour error under 0.5 of 255). No page, script or style changed.",
+      "previousSha256": "91f160a43db49552b0fecd13e6d16a67b1a11c901dde9b3f0e43a7ff906532f6"
+    },
+    {
+      "path": "assets/walk-for-education/walk-for-education-logo.png",
+      "date": "2026-10-17",
+      "reason": "Image optimisation only: same file name and aspect ratio, resized to roughly twice its largest displayed size and stored as an 8-bit palette PNG (mean colour error under 0.5 of 255). No page, script or style changed.",
+      "previousSha256": "ba90384ff5d1c635548b649aad9b14663ef118cd27d7ffbc32689479bec30758"
     }
   ]
 }

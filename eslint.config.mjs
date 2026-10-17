@@ -24,7 +24,7 @@ export default [
   },
   // Playwright evaluates parts of these files inside the page, so browser globals are valid there too.
   {
-    files: ["tests/**/*.cjs"],
+    files: ["tests/**/*.cjs", "scripts/**/*.cjs"],
     languageOptions: { sourceType: "commonjs", globals: { ...globals.node, ...globals.browser } },
   },
 ];

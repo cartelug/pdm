@@ -21,6 +21,22 @@ interface Props {
 }
 const { path, title, description, home = false, noindex = false } = Astro.props;
 const canonical = site.url + path;
+// Pages with their own generated share card (scripts/og-cards.cjs); every other page uses the shared one.
+const CARDS = [
+  "about",
+  "what-we-do",
+  "model",
+  "impact",
+  "projects",
+  "apartments",
+  "community",
+  "partnerships",
+  "governance",
+  "contact",
+  "updates",
+];
+const slug = path.replace(/^\/|\/$/g, "");
+const shareImage = site.url + (CARDS.includes(slug) ? `/assets/og/pages/${slug}.jpg` : "/assets/og/share-card.jpg");
 ---
 
 <!doctype html>
@@ -35,8 +51,12 @@ const canonical = site.url + path;
     <meta property="og:title" content={title + " — Pamodzi Community Initiative"} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={site.url + "/assets/og/share-card.jpg"} />
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title + " — Pamodzi Community Initiative"} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={shareImage} />
     <meta name="theme-color" content="#FAF6F1" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     {noindex && <meta name="robots" content="noindex,follow" />}
