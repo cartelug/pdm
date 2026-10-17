@@ -40,7 +40,7 @@ const canonical = site.url + path;
     <meta name="theme-color" content="#FAF6F1" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     {noindex && <meta name="robots" content="noindex,follow" />}
-    <link rel="icon" type="image/png" href={asset(path, "assets/brand/pamodzi/pamodzi-logo-transparent.png")} />
+    <link rel="icon" type="image/png" href={asset(path, "assets/brand/pamodzi/pamodzi-logo-160.png")} />
     <link rel="preload" as="font" type="font/woff2" href={sansFont} crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={serifFont} crossorigin />
     {home && (
@@ -70,10 +70,23 @@ const canonical = site.url + path;
         "@type": "Organization",
         name: site.name,
         url: site.url,
-        logo: site.url + "/assets/brand/pamodzi/pamodzi-logo-transparent.png",
+        logo: site.url + "/assets/brand/pamodzi/pamodzi-logo-320.png",
         sameAs: site.socials.map((s) => s.href),
       })}
     />
+    {!home && !noindex && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Pamodzi", item: site.url + "/" },
+            { "@type": "ListItem", position: 2, name: title, item: canonical },
+          ],
+        })}
+      />
+    )}
   </head>
   <body class:list={["pci-v3", { "pci-home": home }]} data-pci-v3>
     <div class="pci-progress" aria-hidden="true">

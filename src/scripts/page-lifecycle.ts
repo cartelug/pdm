@@ -11,7 +11,19 @@ function boot() {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)");
   let alive = true;
   let generation = 0;
+  // Data saver, a slow connection or a very small device: keep the page light and skip the scripted
+  // scroll effects (about 54 KB). The CSS entrances and every piece of content are unaffected.
+  const connection = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } })
+    .connection;
+  const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
+  const lite = Boolean(
+    connection?.saveData ||
+    /(^|-)(2g|3g)$/.test(connection?.effectiveType ?? "") ||
+    (memory !== undefined && memory <= 2),
+  );
+  document.documentElement.toggleAttribute("data-lite", lite);
   const idle = window.setTimeout(async () => {
+    if (lite) return;
     const { initScrollMotion } = await import("./motion");
     const start = async () => {
       const ticket = ++generation;

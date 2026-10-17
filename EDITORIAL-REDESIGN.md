@@ -61,6 +61,14 @@ Guard rails:
 - **Transforms:** scripted parallax uses custom properties and the independent `translate`/`scale`/`rotate` properties, so it composes with hover rules, entrances and pointer movement rather than fighting them.
 - **Cost:** the scroll-motion chunk is loaded after the page is interactive (about 54 KB gzipped, plus about 10 KB for the FLIP plugin on the projects page only, and Lenis on desktop). All six GSAP plugins used are bundled from the existing `gsap` dependency.
 
+## Performance and reach
+
+- **Logo:** the 512 KB transparent PNG was loaded at 52px on every page. Header, footer and Faith in Motion pages now use `pamodzi-logo-160.webp` (6 KB) and `-320.webp` (13 KB, the first-paint logo); the original stays for the protected pages and the baseline. Favicons use a 14 KB PNG.
+- **Lite mode:** when the browser reports data saver, a 2G/3G connection or 2 GB of memory or less, the scroll-motion chunk and smooth scrolling are not loaded (`html[data-lite]`). Content and the CSS entrances are unchanged. Home transfers about 456 KB in lite mode against 611 KB.
+- **Structured data:** inner pages add `BreadcrumbList` next to the existing `Organization` markup; the organisation logo points at the small PNG.
+- **Already in place:** responsive `srcset` hero images with preload, a complete `sitemap.xml` (27 public pages) and `robots.txt`.
+- **Server caching (not changed here):** the repository has no root `.htaccess`, and the deploy replaces the server's files, so adding one could overwrite the host's own rules. Ask the host to enable gzip/Brotli and long `Cache-Control` for `/assets/`, `/_astro/` and the hashed `?v=` CSS and JS.
+
 ## Imagery policy (unchanged)
 
 No generated or stock image is presented as evidence of a project. The homepage hero is still labelled *Illustration*; the four programme sculptures are kept as programme art; the Kagando campus photograph keeps its "not a photograph of the school" caption; the campaign panels use each campaign's own supplied photography and artwork.
