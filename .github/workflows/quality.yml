@@ -49,3 +49,9 @@ jobs:
 
       - name: Motion regression
         run: node tests/navigation/motion.cjs
+
+      - name: Accessibility scan (axe, WCAG 2.2 A and AA)
+        run: node tests/quality/a11y.cjs
+
+      - name: Speed budget (throttled phone lab test)
+        run: node tests/quality/speed.cjs

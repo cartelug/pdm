@@ -1,0 +1,45 @@
+{
+  "note": "Ceilings are the 17 Oct 2026 lab results plus about 15% headroom. Lower them as fixes land. Targets: LCP 2500 ms, 450 KB, blocking time 200 ms.",
+  "pages": {
+    "/": {
+      "lcpMs": 2300,
+      "kb": 360,
+      "blockingMs": 950
+    },
+    "/about/": {
+      "lcpMs": 3050,
+      "kb": 240,
+      "blockingMs": 480
+    },
+    "/projects/": {
+      "lcpMs": 3450,
+      "kb": 375,
+      "blockingMs": 350
+    },
+    "/walk-for-education/": {
+      "lcpMs": 4300,
+      "kb": 485,
+      "blockingMs": 670
+    },
+    "/walk-for-education/take-part/": {
+      "lcpMs": 3700,
+      "kb": 410,
+      "blockingMs": 250
+    },
+    "/contribute/": {
+      "lcpMs": 2400,
+      "kb": 260,
+      "blockingMs": 200
+    },
+    "/faith-in-motion/": {
+      "lcpMs": 4400,
+      "kb": 840,
+      "blockingMs": 520
+    },
+    "/give/": {
+      "lcpMs": 3400,
+      "kb": 535,
+      "blockingMs": 270
+    }
+  }
+}
