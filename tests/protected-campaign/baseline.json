@@ -92,7 +92,7 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "f0c4201a3c716e062359c0371a221fbe7e024c458a4840500a9d67fc7650a8e1",
+    "contribute/index.html": "242274b7ceca8ab0ab8923b7cd297344d5053c6934bca6db504d31f972abe912",
     "contribute/payment/index.html": "0b00e53da74a17aa346ad0a668557429f6401f2ad2fca2e4c3e9ce25078620df",
     "contribute/privacy/index.html": "689455cc9a703f7e2ab5fe7a92f3954e16a9794e4ffa5ce9e35d10c96d192eb0",
     "contribute/terms/index.html": "dda2d836da3a50b41d082b18614c5306259255fa31301c35b03f07cda535f93e",
@@ -172,8 +172,8 @@
     },
     {
       "path": "contribute/index.html",
-      "date": "2026-10-17",
-      "reason": "User-requested contribution page redesign: new headline, three-step journey, a How to pay card, a purpose band and two added questions. The pledge form, every ID, data attribute, pricing hook, script and the WhatsApp hand-off are unchanged; display styling lives in css/wfe-editorial.css and js/contribute-pay.js.",
+      "date": "2026-10-18",
+      "reason": "User-requested contribution page redesign: full-bleed hero with quick-pick steps, the form set over campaign artwork, a trust strip, an impact band and a sticky mobile bar. The pledge form, every ID, data attribute, pricing hook, script and the WhatsApp hand-off are unchanged; display styling lives in css/wfe-editorial.css and css/contribute-wow.css, behaviour that only clicks, scrolls or reads the form lives in js/contribute-pay.js.",
       "previousSha256": "9d3efcff78e798081ceab35f43db53a36388a854467f6fd21493a5c3abee28b6"
     },
     {

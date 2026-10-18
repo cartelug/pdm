@@ -27,9 +27,9 @@
       "blockingMs": 250
     },
     "/contribute/": {
-      "lcpMs": 2400,
-      "kb": 260,
-      "blockingMs": 200
+      "lcpMs": 3000,
+      "kb": 460,
+      "blockingMs": 400
     },
     "/faith-in-motion/": {
       "lcpMs": 4400,

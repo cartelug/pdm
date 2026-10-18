@@ -133,3 +133,83 @@
   setRegion(pressedCountry());
   syncAmount();
 })();
+
+/* ==========================================================================
+   Contribution page — hero quick picks, journey progress and the sticky bar
+   Everything here only clicks, scrolls or reads what the pledge form already
+   shows. No value leaves the page.
+   ========================================================================== */
+(function () {
+  "use strict";
+
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var form = document.getElementById("contributionForm");
+  if (!form) return;
+
+  function scrollTo(target) {
+    if (target && target.scrollIntoView)
+      target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+  }
+
+  document.querySelectorAll("[data-hero-steps]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      var preset = document.querySelector(
+        '.amount-options [data-steps="' + button.getAttribute("data-hero-steps") + '"]',
+      );
+      if (preset) preset.click();
+      scrollTo(document.getElementById("give"));
+    });
+  });
+
+  var steps = document.querySelectorAll(".collection-progress-steps li");
+  var saved = document.getElementById("pledgeSavedPanel");
+  function syncJourney() {
+    var done = saved && !saved.hidden;
+    steps.forEach(function (item, index) {
+      item.classList.toggle("is-done", done ? index < 2 : index < 1);
+    });
+  }
+  if (saved && window.MutationObserver) {
+    new MutationObserver(syncJourney).observe(saved, { attributes: true, attributeFilter: ["hidden"] });
+  }
+  syncJourney();
+
+  var bar = document.querySelector("[data-sticky]");
+  var amount = document.getElementById("summaryAmount");
+  var count = document.getElementById("summarySteps");
+  var hero = document.querySelector(".cx-hero");
+  var card = document.querySelector(".pledge-form-card");
+  if (!bar || !hero || !card || !("IntersectionObserver" in window)) return;
+
+  var heroSeen = true;
+  var cardSeen = false;
+  function paintBar() {
+    var show = !heroSeen && !cardSeen && !(saved && !saved.hidden);
+    bar.hidden = false;
+    bar.classList.toggle("is-visible", show);
+  }
+  function syncBarText() {
+    var value = amount ? (amount.textContent || "").trim() : "";
+    var target = bar.querySelector("[data-sticky-amount]");
+    var label = bar.querySelector("[data-sticky-steps]");
+    if (target) target.textContent = value || "—";
+    if (label) label.textContent = count ? (count.textContent || "").trim() : "";
+  }
+  new IntersectionObserver(function (entries) {
+    heroSeen = entries[0].isIntersecting;
+    paintBar();
+  }).observe(hero);
+  new IntersectionObserver(
+    function (entries) {
+      cardSeen = entries[0].isIntersecting;
+      paintBar();
+    },
+    { threshold: 0.12 },
+  ).observe(card);
+  [amount, count].forEach(function (node) {
+    if (node && window.MutationObserver) {
+      new MutationObserver(syncBarText).observe(node, { childList: true, characterData: true, subtree: true });
+    }
+  });
+  syncBarText();
+})();
