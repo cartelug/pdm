@@ -45,10 +45,12 @@ export async function initScrollMotion(): Promise<() => void> {
     pointerFine: matchMedia("(hover: hover) and (pointer: fine)").matches,
     cleanups,
   };
-  const context = gsap.context(() => {
-    for (const feature of [hero, reveal, scrub, parallax, counters, cycle, flow, footer, filter, chrome, cursor])
-      feature(motion);
-  });
+  // Each feature sets up in its own task, so no single stretch of work blocks the main thread for long.
+  const context = gsap.context(() => {});
+  for (const feature of [hero, reveal, scrub, parallax, counters, cycle, flow, footer, filter, chrome, cursor]) {
+    context.add(() => feature(motion));
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+  }
 
   // Layout can change after load (images, filters, text zoom): measure again, but not on every frame.
   const refresh = () => {
