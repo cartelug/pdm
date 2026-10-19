@@ -41,6 +41,9 @@ jobs:
       - name: Install test browser
         run: npx playwright install --with-deps chromium
 
+      - name: Walk for Education redesign regression
+        run: node tests/navigation/wfe-redesign.cjs
+
       - name: Campaign browser regression
         run: npm run test:browser
 
@@ -49,9 +52,6 @@ jobs:
 
       - name: Motion regression
         run: node tests/navigation/motion.cjs
-
-      - name: Walk for Education redesign regression
-        run: node tests/navigation/wfe-redesign.cjs
 
       - name: Accessibility scan (axe, WCAG 2.2 A and AA)
         run: node tests/quality/a11y.cjs

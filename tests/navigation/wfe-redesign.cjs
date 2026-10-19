@@ -153,6 +153,7 @@ function check(value, message) {
       })),
     );
     fs.writeFileSync(path.join(shots, "accessibility-results.json"), JSON.stringify(violations, null, 2));
+    if (violations.length) console.error("Accessibility violations:", JSON.stringify(violations, null, 2));
     check(violations.length === 0, "redesigned page passes the WCAG A/AA accessibility scan");
     check(errors.length === 0, "redesign interactions produce no JavaScript errors");
     console.log(checks + " redesign browser checks passed. Screenshots: " + shots);

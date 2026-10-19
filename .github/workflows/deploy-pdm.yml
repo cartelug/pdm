@@ -39,10 +39,10 @@ jobs:
           python3 tests/payments/test_http.py
           python3 tests/enquiry/test_http.py
           npx playwright install --with-deps chromium
+          node tests/navigation/wfe-redesign.cjs
           npm run test:browser
           node tests/navigation/browser.cjs
           node tests/navigation/motion.cjs
-          node tests/navigation/wfe-redesign.cjs
           test -s index.html
 
       - name: Prepare only the live PDM website
