@@ -20,7 +20,7 @@
     "build": "astro build && node scripts/export-v3.mjs && node scripts/assets.mjs",
     "check:types": "astro check",
     "check:protected": "node scripts/check-protected.mjs",
-    "check:v3": "node --test tests/pages/v3.test.cjs tests/navigation/menu.test.cjs",
+    "check:v3": "node --test tests/pages/v3.test.cjs tests/navigation/menu.test.cjs tests/pages/wfe-redesign.test.cjs",
     "validate": "npm run check:types && npm run build && npm run lint && npm run check:protected && npm run check:v3",
     "format:source": "prettier --write \"src/**/*.{astro,ts,css,json,md}\""
   },
