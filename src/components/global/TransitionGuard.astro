@@ -1,0 +1,25 @@
+<!-- Register before first render: browser-owned transitions may be cancelled during navigation or preference changes. -->
+<script is:inline data-pci-transition-guard>
+  (function () {
+    function observe(event) {
+      var transition = event.viewTransition;
+      if (!transition) return;
+      transition.ready.catch(function (error) {
+        var name = error && error.name;
+        var message = String((error && error.message) || "");
+        if (
+          name === "AbortError" ||
+          name === "TimeoutError" ||
+          message.indexOf("ViewTransition opt-in disabled") !== -1
+        )
+          return;
+        // Unexpected failures remain visible to monitoring and browser regression tests.
+        window.setTimeout(function () {
+          throw error;
+        }, 0);
+      });
+    }
+    window.addEventListener("pageswap", observe);
+    window.addEventListener("pagereveal", observe);
+  })();
+</script>

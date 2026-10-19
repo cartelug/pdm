@@ -63,7 +63,8 @@ Keep the redesign scoped to this campaign overview and its new presentation asse
 - Self-hosted Fraunces and Montserrat render in the browser.
 - Layout checks pass at 320, 360, 390, 430, 768, 1024 and 1440 pixels.
 - 181 existing campaign browser checks, 25 redesign browser checks, 81 ledger checks and 54 payment HTTP checks passed locally. Institutional enquiry fixtures passed without sending external mail.
-- The build, source checks, protected-file guard and 13 source/navigation tests passed. Only the explicitly authorised campaign overview presentation is updated in the protected baseline.
+- The build, source checks, protected-file guard and 15 source/navigation tests passed. Only the explicitly authorised campaign overview presentation is updated in the protected baseline.
+- Institutional navigation regression checks passed after handling expected browser-owned transition cancellations. Unexpected transition errors remain reported.
 - The redesigned page passed the automated WCAG A/AA scan, including contrast and accessible control names. Menu focus, Escape handling, gallery arrow keys, focus return and reduced-motion preferences were exercised.
 - Throttled phone lab test: median LCP 3,060 ms; initial transfer 336 KiB; blocking time 595 ms. All are within the repository's existing campaign ceilings. These are local lab measurements, not field performance guarantees.
 - Production checkout activation, payment verification and finance publication retain their existing gates. No live payment, pledge submission, enquiry message or finance record was created during redesign testing.

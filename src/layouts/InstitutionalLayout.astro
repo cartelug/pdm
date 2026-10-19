@@ -1,6 +1,7 @@
 ---
 import SiteHeader from "../components/global/SiteHeader.astro";
 import SiteFooter from "../components/global/SiteFooter.astro";
+import TransitionGuard from "../components/global/TransitionGuard.astro";
 import { site, asset } from "../config/site";
 import sansFont from "@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2?url";
 import serifFont from "@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url";
@@ -44,6 +45,7 @@ const shareImage = site.url + (CARDS.includes(slug) ? `/assets/og/pages/${slug}.
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <TransitionGuard />
     <title>{title} — Pamodzi Community Initiative</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
