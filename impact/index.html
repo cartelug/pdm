@@ -1,4 +1,8 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><!-- Register before first render: browser-owned transitions may be cancelled during navigation or preference changes. --><script data-pci-transition-guard>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><!-- Opt in before pagereveal, including restored documents whose external stylesheet is not yet applied. --><style data-pci-navigation-transition>
+      @view-transition {
+        navigation: auto;
+      }
+    </style><!-- Register before first render: browser-owned transitions may be cancelled during navigation or preference changes. --><script data-pci-transition-guard>
   (function () {
     function observe(event) {
       var transition = event.viewTransition;

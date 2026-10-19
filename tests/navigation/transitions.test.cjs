@@ -3,9 +3,13 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
-const source = fs
-  .readFileSync(path.resolve(__dirname, "../../src/components/global/TransitionGuard.astro"), "utf8")
-  .match(/<script[^>]*>([\s\S]*?)<\/script>/)[1];
+const component = fs.readFileSync(path.resolve(__dirname, "../../src/components/global/TransitionGuard.astro"), "utf8");
+const source = component.match(/<script[^>]*>([\s\S]*?)<\/script>/)[1];
+test("cross-document navigation opts in synchronously before its event handlers", () => {
+  const layout = fs.readFileSync(path.resolve(__dirname, "../../src/layouts/InstitutionalLayout.astro"), "utf8");
+  assert.match(layout, /<style is:inline[^>]*>[\s\S]*@view-transition\s*\{\s*navigation:\s*auto;/);
+  assert.ok(layout.indexOf("<style") < layout.indexOf("<TransitionGuard"));
+});
 function fixture() {
   const listeners = {};
   const errors = [];
