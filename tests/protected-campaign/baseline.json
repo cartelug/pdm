@@ -128,7 +128,7 @@
     "js/wfe-shell.js": "f4b73bdf7a6dc3af0a488a965b97f726195afc8edd05b50522bb11dd35378bad",
     "js/wfe.js": "01746af6d7f7ec88c36d981ac649764bde29693f2da3bb65e28f3406978bf4e2",
     "walk-for-education/accountability/index.html": "cd69358591af69da7ef47718e7c244122d44c12c78ad524281a5da51c1c7d5ac",
-    "walk-for-education/index.html": "bfcd67d17c9b6622cc2a479cde2d953ddc9bfeba8e78748b5bb4cbaca911e82d",
+    "walk-for-education/index.html": "e630352444ad4e2a7a67473b631573104c628873a250c3314e0913193fc587cd",
     "walk-for-education/partners/index.html": "d4ebbe964e11e87c87b1efe23e1760b5efb0f668c9df4213e8e9f5d5b521bbd5",
     "walk-for-education/take-part/index.html": "c64272c8bb96a29d3217d9be7d394095f964d992f94dc01b5d93ec15d51a00e3",
     "walk-for-education/updates/index.html": "f0dcacbdfe291852d19ab6b571cda5e4a1253260e5e4844733d51294cd88eed0"
@@ -228,7 +228,7 @@
       ],
       "reason": "User explicitly requested a full Walk for Education redesign, use of all generated imagery, Fraunces and Montserrat and direct main publication. All existing pricing, pledge, payment and certificate services are preserved.",
       "previousSha256": "44b79c84a02141ceff199630b15d0d6f5a00a6e39819e0759beb89176e9aa07c",
-      "sha256": "bfcd67d17c9b6622cc2a479cde2d953ddc9bfeba8e78748b5bb4cbaca911e82d"
+      "sha256": "e630352444ad4e2a7a67473b631573104c628873a250c3314e0913193fc587cd"
     }
   ]
 }

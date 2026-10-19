@@ -1929,6 +1929,11 @@
   border-color: var(--r-gold);
 }
 
+.wfe-redesign .wfe2-preview-label {
+  color: #5c4728;
+  font-size: 10px;
+}
+
 .wfe-redesign .wfe2-caption {
   margin-top: 15px;
   font-size: 10px;
