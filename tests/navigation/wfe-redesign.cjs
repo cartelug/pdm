@@ -134,8 +134,8 @@ function check(value, message) {
     await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
     await page.screenshot({ path: path.join(shots, "PCI_WFE_Desktop_Hero.png") });
     check(
-      await page.locator("h1").evaluate((el) => getComputedStyle(el).fontFamily.includes("Fraunces")),
-      "display type uses Fraunces",
+      await page.locator("h1").evaluate((el) => getComputedStyle(el).fontFamily.includes("Montserrat")),
+      "display type uses Montserrat",
     );
     check(
       await page.locator("#campaignSteps").evaluate((el) => getComputedStyle(el).fontFamily.includes("Montserrat")),

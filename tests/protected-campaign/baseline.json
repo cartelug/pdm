@@ -84,7 +84,7 @@
     "assets/walk-for-education/mission-art-1536.webp": "81004b95e7114fac3abdfe3becf5dd069d5d77e6ac27325e0d567347d1143ae9",
     "assets/walk-for-education/mission-art-768.webp": "f88b08c82c7d6a9a35a923dab1dfaddaac58985976b9d4239b8a09e716905d3e",
     "assets/walk-for-education/rotary-akright.png": "5aefbaba7488dc9b91ac99de52525006346b046162b5e016a6006112b8d54484",
-    "assets/walk-for-education/south-rwenzori.png": "134e834a97c65e4c04b378157d24044d5f1eda0467a97caaf660b80f1ac056fa",
+    "assets/walk-for-education/south-rwenzori.png": "e424e23f6f61cc3238206c87e6cf2a2f4331bfd2f77b1bd86632c4d8d1727297",
     "assets/walk-for-education/students-1440.webp": "5f1e31dbb741abb98b94f865db1234d4c5ee6582eb0c1f8190f1b6c0b64e2a96",
     "assets/walk-for-education/students-640.webp": "59d7dda12b725874000f188d574752cbd52badcd259e88d6edad9aae7210fdc2",
     "assets/walk-for-education/students-960.webp": "58bfa2daee55bf5dc28ef92ccc2f756fdd1a81edb55cd81694c324c4ddbcf7ec",
@@ -92,8 +92,8 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "c9ef965b7d9aa806b07791045b1fdee27f8b1ed8938954226df759e5e34203c5",
-    "contribute/payment/index.html": "99dd08be927f3fe34de083c23a749e031a28a64c44fde3a0e72e5b6b14038da3",
+    "contribute/index.html": "90166021e0af3881af2273fe5508044b2d65bd65d467ded75f9ed2a239eb5ea9",
+    "contribute/payment/index.html": "c167e2dc281246323a36e2e31ef71b3c7b3ffe4127054558c55df303f123bc5e",
     "contribute/privacy/index.html": "689455cc9a703f7e2ab5fe7a92f3954e16a9794e4ffa5ce9e35d10c96d192eb0",
     "contribute/terms/index.html": "dda2d836da3a50b41d082b18614c5306259255fa31301c35b03f07cda535f93e",
     "contribute/verify/index.html": "45de692d823f39e53c33b77f7299f7bee4c8b22dae046a19802fc8082d848c37",
@@ -127,9 +127,9 @@
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "f4b73bdf7a6dc3af0a488a965b97f726195afc8edd05b50522bb11dd35378bad",
     "js/wfe.js": "01746af6d7f7ec88c36d981ac649764bde29693f2da3bb65e28f3406978bf4e2",
-    "walk-for-education/accountability/index.html": "cd69358591af69da7ef47718e7c244122d44c12c78ad524281a5da51c1c7d5ac",
-    "walk-for-education/index.html": "bb7c1ccd02572370f4b57146956cb76303db3e89b598ad6bdb7cb1027b55506f",
-    "walk-for-education/partners/index.html": "d4ebbe964e11e87c87b1efe23e1760b5efb0f668c9df4213e8e9f5d5b521bbd5",
+    "walk-for-education/accountability/index.html": "dcbd4073071e21dd806ec392e072fce65400901541d96b8e41e1d397123b531e",
+    "walk-for-education/index.html": "712288aea43b02b64a14a9c4ad8621c9dbd12e6a82ba4c269b7b2a5b836c030c",
+    "walk-for-education/partners/index.html": "80d4a79ec37e1b25089cfd613d630382c46dfaf5d428ffc9d0fa648a1218e692",
     "walk-for-education/take-part/index.html": "c64272c8bb96a29d3217d9be7d394095f964d992f94dc01b5d93ec15d51a00e3",
     "walk-for-education/updates/index.html": "f0dcacbdfe291852d19ab6b571cda5e4a1253260e5e4844733d51294cd88eed0"
   },
@@ -257,6 +257,48 @@
       "reason": "User-requested sharper journey road artwork (2x super-resolution master with 2000 and 2800 px sizes) and soft fades into the neighbouring sections. Image sources and CSS reference hashes only; no text, price, ID or service changes.",
       "previousSha256": "23b80752734201e89728f03663598de4cf630cad2dd11dc962d31ee2597ca963",
       "sha256": "bb7c1ccd02572370f4b57146956cb76303db3e89b598ad6bdb7cb1027b55506f"
+    },
+    {
+      "path": "assets/walk-for-education/south-rwenzori.png",
+      "date": "2026-10-20",
+      "reason": "User-requested correct Diocese of South Rwenzori crest from Google Drive (PCI > Walk for Education > Project Hub > 01 Logos and Brand > Diocese_South_Rwenzori_Transparent.png), cropped above its wordmark on a transparent background. Image only.",
+      "previousSha256": "134e834a97c65e4c04b378157d24044d5f1eda0467a97caaf660b80f1ac056fa",
+      "sha256": "e424e23f6f61cc3238206c87e6cf2a2f4331bfd2f77b1bd86632c4d8d1727297"
+    },
+    {
+      "path": "walk-for-education/index.html",
+      "date": "2026-10-20",
+      "reason": "User-requested correct Diocese of South Rwenzori crest (image cache reference) and single sans-serif typography (Montserrat only, Fraunces preloads removed). CSS and image reference hashes only; no text, price, ID or service changes.",
+      "previousSha256": "bb7c1ccd02572370f4b57146956cb76303db3e89b598ad6bdb7cb1027b55506f",
+      "sha256": "712288aea43b02b64a14a9c4ad8621c9dbd12e6a82ba4c269b7b2a5b836c030c"
+    },
+    {
+      "path": "contribute/index.html",
+      "date": "2026-10-20",
+      "reason": "User-requested single sans-serif typography (Montserrat only, Fraunces preloads removed). Font preloads and CSS reference hashes only; no text, price, ID or service changes.",
+      "previousSha256": "c9ef965b7d9aa806b07791045b1fdee27f8b1ed8938954226df759e5e34203c5",
+      "sha256": "90166021e0af3881af2273fe5508044b2d65bd65d467ded75f9ed2a239eb5ea9"
+    },
+    {
+      "path": "contribute/payment/index.html",
+      "date": "2026-10-20",
+      "reason": "User-requested single sans-serif typography (Montserrat only, Fraunces preloads removed). Font preloads and CSS reference hashes only; no text, price, ID or service changes.",
+      "previousSha256": "99dd08be927f3fe34de083c23a749e031a28a64c44fde3a0e72e5b6b14038da3",
+      "sha256": "c167e2dc281246323a36e2e31ef71b3c7b3ffe4127054558c55df303f123bc5e"
+    },
+    {
+      "path": "walk-for-education/partners/index.html",
+      "date": "2026-10-20",
+      "reason": "User-requested correct Diocese of South Rwenzori crest: image cache reference only; no text, price, ID or service changes.",
+      "previousSha256": "d4ebbe964e11e87c87b1efe23e1760b5efb0f668c9df4213e8e9f5d5b521bbd5",
+      "sha256": "80d4a79ec37e1b25089cfd613d630382c46dfaf5d428ffc9d0fa648a1218e692"
+    },
+    {
+      "path": "walk-for-education/accountability/index.html",
+      "date": "2026-10-20",
+      "reason": "User-requested correct Diocese of South Rwenzori crest: image cache reference only; no text, price, ID or service changes.",
+      "previousSha256": "cd69358591af69da7ef47718e7c244122d44c12c78ad524281a5da51c1c7d5ac",
+      "sha256": "dcbd4073071e21dd806ec392e072fce65400901541d96b8e41e1d397123b531e"
     }
   ]
 }
