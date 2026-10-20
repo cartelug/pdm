@@ -288,10 +288,14 @@ async function submitPledgeViaWhatsapp(page, base) {
     await page.locator("#campaignContribute").click();
     await page.waitForURL("**/contribute/?steps=7&country=UG&ref=qa-club");
     await page.locator("#submitContribution:not([disabled])").waitFor();
+    const retained = {
+      steps: await page.locator("#stepCount").inputValue(),
+      amount: await page.locator("#summaryAmount").innerText(),
+    };
     check(
-      (await page.locator("#stepCount").inputValue()) === "7" &&
-        (await page.locator("#summaryAmount").innerText()) === "UGX 35,000",
-      "checkout retains selected steps and amount",
+      retained.steps === "7" && retained.amount === "UGX 35,000",
+      "checkout retains selected steps and amount" +
+        (retained.steps === "7" && retained.amount === "UGX 35,000" ? "" : " (got " + JSON.stringify(retained) + ")"),
     );
     check(
       (await page.locator("#checkoutChoicePanel").isHidden()) &&
