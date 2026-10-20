@@ -38,7 +38,8 @@ const CROPS = [
   ["ambition-detail", "campaign/full/14-campus-architectural-detail.webp", [0, 0, 1, 1], [560, 900]],
   ["journey-bg", "campaign/full/02-progress-path-background.webp", [0, 0, 1, 1], [800, 1400, 1672]],
   ["journey-walker", "campaign/full/07-walker-and-bag-cutout.webp", [0, 0, 1, 1], [480, 860], true],
-  ["journey-road", "campaign/full/05-journey-transition-background.webp", [0, 0, 1, 1], [800, 1400]],
+  // Full-bleed: a 2x super-resolution master of 05-journey-transition-background (campaign/hd).
+  ["journey-road", "campaign/hd/05-journey-transition-background-2x.webp", [0, 0, 1, 1], [800, 1400, 2000, 2800]],
   ["friends-books", "campus/full/31-books-passed-between-friends.webp", [0, 0.12, 0.76, 1], [640, 1000]],
   ["together-music", "campus/full/16-campus-acoustic-music-circle.webp", [0, 0.22, 1, 1], [800, 1400]],
   ["trust-rain", "campus/full/18-campus-after-the-rain.webp", [0, 0.3, 1, 0.92], [800, 1600]],

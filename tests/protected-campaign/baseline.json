@@ -128,7 +128,7 @@
     "js/wfe-shell.js": "f4b73bdf7a6dc3af0a488a965b97f726195afc8edd05b50522bb11dd35378bad",
     "js/wfe.js": "01746af6d7f7ec88c36d981ac649764bde29693f2da3bb65e28f3406978bf4e2",
     "walk-for-education/accountability/index.html": "cd69358591af69da7ef47718e7c244122d44c12c78ad524281a5da51c1c7d5ac",
-    "walk-for-education/index.html": "23b80752734201e89728f03663598de4cf630cad2dd11dc962d31ee2597ca963",
+    "walk-for-education/index.html": "bb7c1ccd02572370f4b57146956cb76303db3e89b598ad6bdb7cb1027b55506f",
     "walk-for-education/partners/index.html": "d4ebbe964e11e87c87b1efe23e1760b5efb0f668c9df4213e8e9f5d5b521bbd5",
     "walk-for-education/take-part/index.html": "c64272c8bb96a29d3217d9be7d394095f964d992f94dc01b5d93ec15d51a00e3",
     "walk-for-education/updates/index.html": "f0dcacbdfe291852d19ab6b571cda5e4a1253260e5e4844733d51294cd88eed0"
@@ -250,6 +250,13 @@
       "reason": "User-requested studio redesign of the full contribution journey (campaign, pledge form, saved pledge, WhatsApp handoff and pledge record) on the new Walk for Education system (css/wfe-system.css, wfe-campaign.css, wfe-contribute.css). Every element ID, data attribute, price, country, referral, step bound, finance, certificate and payment-service rule used by the protected scripts is preserved; presentation and wording around them only.",
       "previousSha256": "0b00e53da74a17aa346ad0a668557429f6401f2ad2fca2e4c3e9ce25078620df",
       "sha256": "99dd08be927f3fe34de083c23a749e031a28a64c44fde3a0e72e5b6b14038da3"
+    },
+    {
+      "path": "walk-for-education/index.html",
+      "date": "2026-10-20",
+      "reason": "User-requested sharper journey road artwork (2x super-resolution master with 2000 and 2800 px sizes) and soft fades into the neighbouring sections. Image sources and CSS reference hashes only; no text, price, ID or service changes.",
+      "previousSha256": "23b80752734201e89728f03663598de4cf630cad2dd11dc962d31ee2597ca963",
+      "sha256": "bb7c1ccd02572370f4b57146956cb76303db3e89b598ad6bdb7cb1027b55506f"
     }
   ]
 }

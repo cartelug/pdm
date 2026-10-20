@@ -158,12 +158,14 @@
     ]
   },
   "journey-road": {
-    "source": "campaign/full/05-journey-transition-background.webp",
-    "width": 1672,
-    "height": 941,
+    "source": "campaign/hd/05-journey-transition-background-2x.webp",
+    "width": 3344,
+    "height": 1882,
     "widths": [
       800,
-      1400
+      1400,
+      2000,
+      2800
     ]
   },
   "friends-books": {

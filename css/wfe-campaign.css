@@ -1782,7 +1782,8 @@ figure img {
     180deg,
     rgb(246 241 231 / 92%),
     rgb(246 241 231 / 70%) 40%,
-    rgb(246 241 231 / 96%)
+    rgb(246 241 231 / 96%) 70%,
+    var(--paper)
   );
 }
 
@@ -1993,22 +1994,26 @@ figure img {
   text-transform: uppercase;
 }
 
+/* The landscape fades in from the section above and out into the next one,
+   so the artwork has no hard top or bottom edge. */
 .w-journey__road {
   position: relative;
-  margin-top: clamp(56px, 8vw, 104px);
+  margin-top: clamp(8px, 2vw, 32px);
+  mask-image: linear-gradient(180deg, transparent, #000 30%, #000 84%, transparent);
 }
 
 .w-journey__road img {
-  max-height: 72vh;
-  aspect-ratio: 1672 / 700;
+  max-height: 80vh;
+  aspect-ratio: 1672 / 720;
   object-fit: cover;
+  object-position: 50% 70%;
 }
 
 .w-journey__road::after {
   content: "";
   position: absolute;
-  inset: 45% 0 0;
-  background: linear-gradient(180deg, transparent, rgb(14 31 58 / 55%));
+  inset: 40% 0 0;
+  background: linear-gradient(180deg, transparent, rgb(14 31 58 / 48%) 66%, transparent 96%);
   pointer-events: none;
 }
 
@@ -2017,7 +2022,7 @@ figure img {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: clamp(16px, 3vw, 40px);
+  bottom: calc(16% + clamp(4px, 1vw, 16px));
   color: var(--paper);
   font-family: var(--display);
   font-size: clamp(1.4rem, 1rem + 2vw, 2.8rem);
@@ -2072,8 +2077,18 @@ figure img {
     padding-right: 72px;
   }
 
+  .w-journey__road {
+    mask-image: linear-gradient(180deg, transparent, #000 20%, #000 88%, transparent);
+  }
+
   .w-journey__road img {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 4 / 5;
+    object-position: 64% 72%;
+  }
+
+  .w-journey__road figcaption {
+    bottom: calc(12% + 8px);
+    font-size: 1.375rem;
   }
 }
 
