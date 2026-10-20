@@ -57,7 +57,7 @@
   }
 }
 
-@media (max-width: 419px) {
+@media (max-width: 479px) {
   .w-header__help span {
     position: absolute;
     width: 1px;
@@ -866,8 +866,16 @@
   background: var(--whatsapp);
 }
 
+.w-next li > div {
+  min-width: 0;
+}
+
 .w-next .w-btn {
-  white-space: nowrap;
+  width: 100%;
+  gap: 8px;
+  padding-inline: 14px;
+  text-align: center;
+  text-wrap: balance;
 }
 
 .w-next b {
@@ -1467,6 +1475,23 @@
 .receipt-list dd {
   font-weight: 650;
   overflow-wrap: anywhere;
+}
+
+/* Narrow phones: label above value, so references stay on one line. */
+@media (max-width: 380px) {
+  .receipt-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .receipt-list dt {
+    padding-bottom: 0;
+    border-bottom: 0;
+    font-size: 0.8125rem;
+  }
+
+  .receipt-list dd {
+    padding-top: 2px;
+  }
 }
 
 .w-record__actions {

@@ -563,6 +563,7 @@ use[href="#i-whatsapp"] {
 .w-country__options button {
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   justify-items: start;
   gap: 2px;
   min-height: 74px;
@@ -614,20 +615,25 @@ use[href="#i-whatsapp"] {
   overflow-wrap: break-word;
 }
 
+/* Phones: two featured countries side by side, the third option as a full-width row,
+   so every label fits at 100% zoom and with larger system text. */
 @media (max-width: 430px) {
-  .w-country__options button {
-    padding-inline: 10px;
+  .w-country__options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .w-country__options strong {
-    font-size: 0.8125rem;
-    letter-spacing: -0.01em;
+  .w-country__options button:last-child {
+    grid-column: 1 / -1;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-content: center;
+    align-items: center;
+    column-gap: 12px;
+    min-height: 60px;
+    padding-right: 36px;
   }
-}
 
-@media (max-width: 359px) {
-  .w-country__options strong {
-    font-size: 0.75rem;
+  .w-country__options button:last-child .pledge-country-code {
+    grid-row: span 2;
   }
 }
 
@@ -1235,6 +1241,18 @@ use[href="#i-whatsapp"] {
 }
 
 @media (max-width: 359px) {
+  .w-header__bar {
+    gap: 8px;
+  }
+
+  .w-campaign-mark {
+    width: 92px;
+  }
+
+  .w-menu-button {
+    padding: 0 12px;
+  }
+
   .wfe-sticky-contribute strong {
     display: none;
   }
@@ -1247,6 +1265,13 @@ use[href="#i-whatsapp"] {
 
   .w-sticky .w-btn {
     padding: 0 12px;
+  }
+}
+
+/* The sticky bar carries the pledge action on phones; the header keeps room for both logos. */
+@media (max-width: 479px) {
+  .w-header__cta {
+    display: none;
   }
 }
 

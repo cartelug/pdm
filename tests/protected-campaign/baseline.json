@@ -92,8 +92,8 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "90166021e0af3881af2273fe5508044b2d65bd65d467ded75f9ed2a239eb5ea9",
-    "contribute/payment/index.html": "c167e2dc281246323a36e2e31ef71b3c7b3ffe4127054558c55df303f123bc5e",
+    "contribute/index.html": "9c6993a29a1ddf42ef9e750cb1ade9254bce539908d834925bb2f42b02c793c7",
+    "contribute/payment/index.html": "4730c67e1b098b8a1353aba5d3d45cdde2e6c9f173151d42ab166315f664f481",
     "contribute/privacy/index.html": "689455cc9a703f7e2ab5fe7a92f3954e16a9794e4ffa5ce9e35d10c96d192eb0",
     "contribute/terms/index.html": "dda2d836da3a50b41d082b18614c5306259255fa31301c35b03f07cda535f93e",
     "contribute/verify/index.html": "45de692d823f39e53c33b77f7299f7bee4c8b22dae046a19802fc8082d848c37",
@@ -128,7 +128,7 @@
     "js/wfe-shell.js": "f4b73bdf7a6dc3af0a488a965b97f726195afc8edd05b50522bb11dd35378bad",
     "js/wfe.js": "01746af6d7f7ec88c36d981ac649764bde29693f2da3bb65e28f3406978bf4e2",
     "walk-for-education/accountability/index.html": "dcbd4073071e21dd806ec392e072fce65400901541d96b8e41e1d397123b531e",
-    "walk-for-education/index.html": "712288aea43b02b64a14a9c4ad8621c9dbd12e6a82ba4c269b7b2a5b836c030c",
+    "walk-for-education/index.html": "749706d739fc74ae44498b8fb59c3729f09c2205b12038a4f9bcb05adb2b2410",
     "walk-for-education/partners/index.html": "80d4a79ec37e1b25089cfd613d630382c46dfaf5d428ffc9d0fa648a1218e692",
     "walk-for-education/take-part/index.html": "c64272c8bb96a29d3217d9be7d394095f964d992f94dc01b5d93ec15d51a00e3",
     "walk-for-education/updates/index.html": "f0dcacbdfe291852d19ab6b571cda5e4a1253260e5e4844733d51294cd88eed0"
@@ -299,6 +299,27 @@
       "reason": "User-requested correct Diocese of South Rwenzori crest: image cache reference only; no text, price, ID or service changes.",
       "previousSha256": "cd69358591af69da7ef47718e7c244122d44c12c78ad524281a5da51c1c7d5ac",
       "sha256": "dcbd4073071e21dd806ec392e072fce65400901541d96b8e41e1d397123b531e"
+    },
+    {
+      "path": "walk-for-education/index.html",
+      "date": "2026-10-20",
+      "reason": "User-requested clean phone layout at 100% zoom: no sideways overflow after saving a pledge, full-width third country option, stacked record details on narrow phones. CSS reference hashes only; no text, price, ID or service changes.",
+      "previousSha256": "712288aea43b02b64a14a9c4ad8621c9dbd12e6a82ba4c269b7b2a5b836c030c",
+      "sha256": "749706d739fc74ae44498b8fb59c3729f09c2205b12038a4f9bcb05adb2b2410"
+    },
+    {
+      "path": "contribute/index.html",
+      "date": "2026-10-20",
+      "reason": "User-requested clean phone layout at 100% zoom: no sideways overflow after saving a pledge, full-width third country option, stacked record details on narrow phones. CSS reference hashes only; no text, price, ID or service changes.",
+      "previousSha256": "90166021e0af3881af2273fe5508044b2d65bd65d467ded75f9ed2a239eb5ea9",
+      "sha256": "9c6993a29a1ddf42ef9e750cb1ade9254bce539908d834925bb2f42b02c793c7"
+    },
+    {
+      "path": "contribute/payment/index.html",
+      "date": "2026-10-20",
+      "reason": "User-requested clean phone layout at 100% zoom: no sideways overflow after saving a pledge, full-width third country option, stacked record details on narrow phones. CSS reference hashes only; no text, price, ID or service changes.",
+      "previousSha256": "c167e2dc281246323a36e2e31ef71b3c7b3ffe4127054558c55df303f123bc5e",
+      "sha256": "4730c67e1b098b8a1353aba5d3d45cdde2e6c9f173151d42ab166315f664f481"
     }
   ]
 }

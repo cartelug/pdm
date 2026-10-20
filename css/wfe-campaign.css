@@ -372,6 +372,16 @@ figure img {
     white-space: nowrap;
   }
 
+  @media (max-width: 380px) {
+    .w-hero__status {
+      max-width: 100%;
+      border-radius: 14px;
+      letter-spacing: 0.03em;
+      line-height: 1.35;
+      white-space: normal;
+    }
+  }
+
   .r-countdown {
     grid-area: status;
   }
@@ -620,6 +630,7 @@ figure img {
 .w-steps button {
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   align-content: start;
   justify-items: start;
   gap: 0;
@@ -994,6 +1005,11 @@ figure img {
 
   .w-steps strong {
     font-size: 0.75rem;
+  }
+
+  .w-steps .v3-suggested {
+    padding-inline: 6px;
+    letter-spacing: 0.02em;
   }
 }
 
@@ -2459,6 +2475,25 @@ figure img {
 @media (hover: hover) {
   .w-tiers td a:hover {
     text-decoration: underline;
+  }
+}
+
+@media (max-width: 380px) {
+  .w-tiers {
+    font-size: 0.875rem;
+  }
+
+  .w-tiers thead th {
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+  }
+
+  .w-tiers tbody th {
+    font-size: 1rem;
+  }
+
+  .w-tiers td a {
+    gap: 4px;
   }
 }
 
