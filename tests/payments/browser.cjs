@@ -293,6 +293,26 @@ async function submitPledgeViaWhatsapp(page, base) {
       amount: await page.locator("#summaryAmount").innerText(),
       text: await page.locator("#summaryAmount").textContent(),
       root: await page.evaluate(() => document.documentElement.className),
+      chain: await page.evaluate(() => {
+        const out = [matchMedia("(prefers-reduced-motion: reduce)").matches ? "reduce" : "motion"];
+        for (let n = document.getElementById("summaryAmount"); n && n !== document; n = n.parentElement) {
+          const cs = getComputedStyle(n);
+          out.push(
+            n.tagName +
+              "." +
+              n.className +
+              " v=" +
+              cs.visibility +
+              " d=" +
+              cs.display +
+              " o=" +
+              cs.opacity +
+              " cv=" +
+              cs.contentVisibility,
+          );
+        }
+        return out;
+      }),
     };
     check(
       retained.steps === "7" && retained.amount === "UGX 35,000",
