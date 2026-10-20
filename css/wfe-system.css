@@ -924,14 +924,24 @@ use[href="#i-whatsapp"] {
   inset: 0 0 auto;
   z-index: 60;
   padding-top: env(safe-area-inset-top);
-  transition:
-    background-color var(--t-panel) var(--ease-out),
-    box-shadow var(--t-panel) var(--ease-out),
-    transform var(--t-panel) var(--ease-out);
+  transition: transform var(--t-panel) var(--ease-out);
 }
 
-.w-header.is-scrolled,
-.r-menu-open .w-header {
+/* The frosted bar is painted by a pseudo-element, never by the header itself. A backdrop-filter on the header
+   would make it the containing block of the fixed, full-screen menu panel and shrink that panel to the bar. */
+.w-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  transition:
+    background-color var(--t-panel) var(--ease-out),
+    box-shadow var(--t-panel) var(--ease-out);
+}
+
+.w-header.is-scrolled::before,
+.r-menu-open .w-header::before {
   background: rgb(251 248 242 / 92%);
   box-shadow: 0 1px 0 var(--line);
   -webkit-backdrop-filter: saturate(1.4) blur(14px);
@@ -1106,7 +1116,7 @@ use[href="#i-whatsapp"] {
   .w-nav {
     position: fixed;
     inset: 0;
-    z-index: 1;
+    z-index: -1; /* under the bar's logos and the Menu / Close button, which stay tappable */
     flex-direction: column;
     align-items: stretch;
     gap: 0;

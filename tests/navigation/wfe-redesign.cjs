@@ -49,6 +49,25 @@ function check(value, message) {
       await page.evaluate(() => document.querySelector("main").inert && document.body.style.overflow === "hidden"),
       "mobile menu locks the background",
     );
+    // The header's frosted backdrop must never become the containing block of the fixed menu panel: that
+    // shrank it to a strip over the Menu / Close button, so the button could not be tapped to close.
+    check(
+      await page.evaluate(() => document.getElementById("wfeMenu").getBoundingClientRect().height === innerHeight),
+      "mobile menu panel fills the screen while open",
+    );
+    check(
+      await page.evaluate(() => {
+        const rect = document.getElementById("wfeMenuButton").getBoundingClientRect();
+        return document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2).id === "wfeMenuButton";
+      }),
+      "the Close button stays above the open menu panel",
+    );
+    await page.locator("#wfeMenuButton").click();
+    check(
+      await page.evaluate(() => !document.getElementById("wfeMenu").classList.contains("is-open")),
+      "tapping the Close button closes the mobile menu",
+    );
+    await page.locator("#wfeMenuButton").click();
     await page.locator("#wfeMenuButton").focus();
     await page.keyboard.press("Tab");
     check(
