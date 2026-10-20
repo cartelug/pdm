@@ -631,6 +631,22 @@ use[href="#i-whatsapp"] {
   font-size: 0.75rem;
 }
 
+.w-country__options strong,
+.w-country__options small {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 359px) {
+  .w-country__options button {
+    padding-inline: 10px;
+  }
+
+  .w-country__options strong {
+    font-size: 0.8125rem;
+  }
+}
+
 .w-country__options [aria-pressed="true"] {
   background: var(--navy);
   color: var(--paper);
@@ -1678,9 +1694,11 @@ use[href="#i-whatsapp"] {
   .w-page *,
   .w-page *::before,
   .w-page *::after {
-    animation-duration: 1ms !important;
+    /* Zero, not a token 1ms: a 1ms transition on every property would also
+       delay visibility changes, such as a total revealed once its price is ready. */
+    animation-duration: 0s !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 1ms !important;
-    transition-delay: 0ms !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
   }
 }

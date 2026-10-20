@@ -92,8 +92,8 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "6424250452db95b861e95006d763e8f9ef5d97d05769a9efe35bf3815b5a93df",
-    "contribute/payment/index.html": "b223159b1b3b585b78a40002bc94567b31569775f943a5abda840106cf07da85",
+    "contribute/index.html": "c9ef965b7d9aa806b07791045b1fdee27f8b1ed8938954226df759e5e34203c5",
+    "contribute/payment/index.html": "99dd08be927f3fe34de083c23a749e031a28a64c44fde3a0e72e5b6b14038da3",
     "contribute/privacy/index.html": "689455cc9a703f7e2ab5fe7a92f3954e16a9794e4ffa5ce9e35d10c96d192eb0",
     "contribute/terms/index.html": "dda2d836da3a50b41d082b18614c5306259255fa31301c35b03f07cda535f93e",
     "contribute/verify/index.html": "45de692d823f39e53c33b77f7299f7bee4c8b22dae046a19802fc8082d848c37",
@@ -128,7 +128,7 @@
     "js/wfe-shell.js": "f4b73bdf7a6dc3af0a488a965b97f726195afc8edd05b50522bb11dd35378bad",
     "js/wfe.js": "01746af6d7f7ec88c36d981ac649764bde29693f2da3bb65e28f3406978bf4e2",
     "walk-for-education/accountability/index.html": "cd69358591af69da7ef47718e7c244122d44c12c78ad524281a5da51c1c7d5ac",
-    "walk-for-education/index.html": "f5a2a489a9d7d546aaebc9a7bc4074833b4089db14ba1f24c74210bbdb88af6f",
+    "walk-for-education/index.html": "23b80752734201e89728f03663598de4cf630cad2dd11dc962d31ee2597ca963",
     "walk-for-education/partners/index.html": "d4ebbe964e11e87c87b1efe23e1760b5efb0f668c9df4213e8e9f5d5b521bbd5",
     "walk-for-education/take-part/index.html": "c64272c8bb96a29d3217d9be7d394095f964d992f94dc01b5d93ec15d51a00e3",
     "walk-for-education/updates/index.html": "f0dcacbdfe291852d19ab6b571cda5e4a1253260e5e4844733d51294cd88eed0"
@@ -235,21 +235,21 @@
       "date": "2026-10-20",
       "reason": "User-requested studio redesign of the full contribution journey (campaign, pledge form, saved pledge, WhatsApp handoff and pledge record) on the new Walk for Education system (css/wfe-system.css, wfe-campaign.css, wfe-contribute.css). Every element ID, data attribute, price, country, referral, step bound, finance, certificate and payment-service rule used by the protected scripts is preserved; presentation and wording around them only.",
       "previousSha256": "e630352444ad4e2a7a67473b631573104c628873a250c3314e0913193fc587cd",
-      "sha256": "f5a2a489a9d7d546aaebc9a7bc4074833b4089db14ba1f24c74210bbdb88af6f"
+      "sha256": "23b80752734201e89728f03663598de4cf630cad2dd11dc962d31ee2597ca963"
     },
     {
       "path": "contribute/index.html",
       "date": "2026-10-20",
       "reason": "User-requested studio redesign of the full contribution journey (campaign, pledge form, saved pledge, WhatsApp handoff and pledge record) on the new Walk for Education system (css/wfe-system.css, wfe-campaign.css, wfe-contribute.css). Every element ID, data attribute, price, country, referral, step bound, finance, certificate and payment-service rule used by the protected scripts is preserved; presentation and wording around them only.",
       "previousSha256": "242274b7ceca8ab0ab8923b7cd297344d5053c6934bca6db504d31f972abe912",
-      "sha256": "6424250452db95b861e95006d763e8f9ef5d97d05769a9efe35bf3815b5a93df"
+      "sha256": "c9ef965b7d9aa806b07791045b1fdee27f8b1ed8938954226df759e5e34203c5"
     },
     {
       "path": "contribute/payment/index.html",
       "date": "2026-10-20",
       "reason": "User-requested studio redesign of the full contribution journey (campaign, pledge form, saved pledge, WhatsApp handoff and pledge record) on the new Walk for Education system (css/wfe-system.css, wfe-campaign.css, wfe-contribute.css). Every element ID, data attribute, price, country, referral, step bound, finance, certificate and payment-service rule used by the protected scripts is preserved; presentation and wording around them only.",
       "previousSha256": "0b00e53da74a17aa346ad0a668557429f6401f2ad2fca2e4c3e9ce25078620df",
-      "sha256": "b223159b1b3b585b78a40002bc94567b31569775f943a5abda840106cf07da85"
+      "sha256": "99dd08be927f3fe34de083c23a749e031a28a64c44fde3a0e72e5b6b14038da3"
     }
   ]
 }
