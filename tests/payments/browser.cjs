@@ -291,6 +291,8 @@ async function submitPledgeViaWhatsapp(page, base) {
     const retained = {
       steps: await page.locator("#stepCount").inputValue(),
       amount: await page.locator("#summaryAmount").innerText(),
+      text: await page.locator("#summaryAmount").textContent(),
+      root: await page.evaluate(() => document.documentElement.className),
     };
     check(
       retained.steps === "7" && retained.amount === "UGX 35,000",
@@ -752,10 +754,18 @@ async function submitPledgeViaWhatsapp(page, base) {
       await view.click('[data-steps="50"]');
       await view.reload();
       await view.locator("#submitContribution:not([disabled])").waitFor();
+      const refreshed = {
+        steps: await view.locator("#stepCount").inputValue(),
+        amount: await view.locator("#summaryAmount").innerText(),
+        text: await view.locator("#summaryAmount").textContent(),
+        root: await view.evaluate(() => document.documentElement.className),
+      };
       check(
-        (await view.locator("#stepCount").inputValue()) === "50" &&
-          (await view.locator("#summaryAmount").innerText()) === "KSh 10,000",
-        "refresh keeps the latest preset rather than an older deep-link amount",
+        refreshed.steps === "50" && refreshed.amount === "KSh 10,000",
+        "refresh keeps the latest preset rather than an older deep-link amount" +
+          (refreshed.steps === "50" && refreshed.amount === "KSh 10,000"
+            ? ""
+            : " (got " + JSON.stringify(refreshed) + ")"),
       );
       await view.click("#changeContribution");
       for (const width of [320, 360, 375, 390, 768, 1024, 1440, 1920]) {
