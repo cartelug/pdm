@@ -1,0 +1,224 @@
+{
+  "hero-portrait": {
+    "source": "campaign/full/10-rotarian-editorial-portrait.webp",
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      480,
+      800,
+      1120
+    ]
+  },
+  "hero-campus": {
+    "source": "campus/full/19-first-light-on-campus.webp",
+    "width": 1505,
+    "height": 790,
+    "widths": [
+      480,
+      800
+    ]
+  },
+  "bag-detail": {
+    "source": "campaign/full/12-backpack-editorial-detail.webp",
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      640,
+      1000,
+      1254
+    ]
+  },
+  "bag-staff": {
+    "source": "campaign/full/11-shoulder-strap-and-staff-detail.webp",
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      640,
+      1000
+    ]
+  },
+  "bag-purpose": {
+    "source": "campaign/full/16-bag-and-purpose-editorial.webp",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      800,
+      1400
+    ]
+  },
+  "bag-cutout": {
+    "source": "campaign/full/08-black-backpack-cutout.webp",
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      360,
+      640
+    ]
+  },
+  "learn-bubbles": {
+    "source": "campus/full/21-bubbles-and-playground-wonder.webp",
+    "width": 1672,
+    "height": 602,
+    "widths": [
+      800,
+      1400
+    ]
+  },
+  "learn-scientists": {
+    "source": "campus/full/13-young-scientists-in-sunlight.webp",
+    "width": 1104,
+    "height": 922,
+    "widths": [
+      640,
+      1000
+    ]
+  },
+  "learn-blocks": {
+    "source": "campus/full/17-children-building-together.webp",
+    "width": 1104,
+    "height": 734,
+    "widths": [
+      640,
+      1000
+    ]
+  },
+  "learn-hinge": {
+    "source": "campus/full/23-older-students-mentoring-children.webp",
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      800,
+      1400,
+      1672
+    ]
+  },
+  "learn-solar": {
+    "source": "campus/full/14-student-solar-maker-workshop.webp",
+    "width": 1254,
+    "height": 847,
+    "widths": [
+      640,
+      1000
+    ]
+  },
+  "learn-model": {
+    "source": "campus/full/24-students-making-a-campus-model.webp",
+    "width": 1254,
+    "height": 753,
+    "widths": [
+      640,
+      1000
+    ]
+  },
+  "learn-ideas": {
+    "source": "campus/full/20-ideas-shared-under-the-trees.webp",
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      800,
+      1400
+    ]
+  },
+  "ambition-bg": {
+    "source": "campaign/full/03-project-purpose-background.webp",
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      800,
+      1400,
+      1672
+    ]
+  },
+  "ambition-detail": {
+    "source": "campaign/full/14-campus-architectural-detail.webp",
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      560,
+      900
+    ]
+  },
+  "journey-bg": {
+    "source": "campaign/full/02-progress-path-background.webp",
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      800,
+      1400,
+      1672
+    ]
+  },
+  "journey-walker": {
+    "source": "campaign/full/07-walker-and-bag-cutout.webp",
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      480,
+      860
+    ]
+  },
+  "journey-road": {
+    "source": "campaign/full/05-journey-transition-background.webp",
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      800,
+      1400
+    ]
+  },
+  "friends-books": {
+    "source": "campus/full/31-books-passed-between-friends.webp",
+    "width": 1271,
+    "height": 828,
+    "widths": [
+      640,
+      1000
+    ]
+  },
+  "together-music": {
+    "source": "campus/full/16-campus-acoustic-music-circle.webp",
+    "width": 1672,
+    "height": 734,
+    "widths": [
+      800,
+      1400
+    ]
+  },
+  "trust-rain": {
+    "source": "campus/full/18-campus-after-the-rain.webp",
+    "width": 1672,
+    "height": 583,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "trust-report": {
+    "source": "campaign/full/18-payment-report-received-artwork.webp",
+    "width": 727,
+    "height": 878,
+    "widths": [
+      400,
+      700
+    ]
+  },
+  "updates-lens": {
+    "source": "campus/full/22-students-exploring-photography.webp",
+    "width": 1338,
+    "height": 847,
+    "widths": [
+      640,
+      1000
+    ]
+  },
+  "close-blue-hour": {
+    "source": "campus/full/34-campus-at-blue-hour.webp",
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      800,
+      1400,
+      1672
+    ]
+  }
+}

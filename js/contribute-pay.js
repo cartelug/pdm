@@ -183,8 +183,10 @@
 
   var heroSeen = true;
   var cardSeen = false;
+  var footerSeen = false;
+  var footer = document.querySelector("footer");
   function paintBar() {
-    var show = !heroSeen && !cardSeen && !(saved && !saved.hidden);
+    var show = !heroSeen && !cardSeen && !footerSeen && !(saved && !saved.hidden);
     bar.hidden = false;
     bar.classList.toggle("is-visible", show);
   }
@@ -206,10 +208,149 @@
     },
     { threshold: 0.12 },
   ).observe(card);
+  // Step aside at the footer so its links stay reachable.
+  if (footer) {
+    new IntersectionObserver(function (entries) {
+      footerSeen = entries[0].isIntersecting;
+      paintBar();
+    }).observe(footer);
+  }
   [amount, count].forEach(function (node) {
     if (node && window.MutationObserver) {
       new MutationObserver(syncBarText).observe(node, { childList: true, characterData: true, subtree: true });
     }
   });
   syncBarText();
+})();
+
+/* ==========================================================================
+   Contribution journey — presentation and next steps
+   Shared by the pledge form and the pledge record. Motion follows the device
+   setting; the five-friend invitation only builds a share link from the page
+   address and never reads or sends the supporter's details.
+   ========================================================================== */
+(function () {
+  "use strict";
+
+  var root = document.documentElement;
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var header = document.querySelector("[data-header]");
+
+  function onScroll() {
+    if (header) header.classList.toggle("is-scrolled", window.scrollY > 8);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // Scroll reveals, as on the campaign page.
+  var pending = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
+  pending.forEach(function (node) {
+    var kind = node.getAttribute("data-reveal");
+    var parts = kind === "lines" ? node.querySelectorAll(".w-line") : kind === "stagger" ? node.children : [];
+    Array.prototype.forEach.call(parts, function (part, index) {
+      part.style.setProperty("--i", index);
+    });
+  });
+  if (!reduced && "IntersectionObserver" in window && pending.length) {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12 },
+    );
+    root.classList.add("w-reveal-ready");
+    pending.forEach(function (node) {
+      observer.observe(node);
+    });
+    // A masked figure is fully clipped before it reveals, so the observer can miss it: check positions on scroll too.
+    var queued = false;
+    var revealPassed = function () {
+      queued = false;
+      pending = pending.filter(function (node) {
+        if (node.classList.contains("is-in")) return false;
+        if (node.getBoundingClientRect().top > window.innerHeight * 0.92) return true;
+        node.classList.add("is-in");
+        observer.unobserve(node);
+        return false;
+      });
+      if (!pending.length) window.removeEventListener("scroll", onRevealScroll);
+    };
+    var onRevealScroll = function () {
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(revealPassed);
+    };
+    window.addEventListener("scroll", onRevealScroll, { passive: true });
+  } else {
+    pending.forEach(function (node) {
+      node.classList.add("is-in");
+    });
+  }
+  root.classList.add("w-go");
+
+  // A preselected amount opens straight on the form, so the intro stays short.
+  try {
+    if (new URLSearchParams(window.location.search).get("steps")) root.classList.add("has-preset");
+  } catch (error) {
+    /* Optional. */
+  }
+
+  // The total gives a small sign each time it changes.
+  var total = document.getElementById("summaryAmount");
+  var box = total && total.closest(".w-total");
+  if (box && window.MutationObserver) {
+    var last = total.textContent;
+    new MutationObserver(function () {
+      if (total.textContent === last) return;
+      last = total.textContent;
+      if (reduced || root.classList.contains("pledge-pending")) return;
+      box.classList.remove("is-bump");
+      void box.offsetWidth;
+      box.classList.add("is-bump");
+    }).observe(total, { childList: true, characterData: true, subtree: true });
+  }
+
+  // Invite five friends: the campaign link, carrying the ambassador referral this visit arrived with.
+  var invite = document.querySelector("[data-invite-five]");
+  if (invite) {
+    var script = document.querySelector('script[src*="contribute-pay.js"]');
+    var campaign = new URL("../walk-for-education/", script ? script.src : location.href);
+    try {
+      var ref = new URLSearchParams(window.location.search).get("ref");
+      if (ref) campaign.searchParams.set("ref", ref);
+    } catch (error) {
+      /* Optional. */
+    }
+    var text =
+      "I have pledged steps for Walk for Education 2026, supporting UCU–Kagando University College and Kagando Nursery & Primary School. " +
+      "Five steps is a good start. Join me: " +
+      campaign.href;
+    invite.href = "https://wa.me/?text=" + encodeURIComponent(text);
+  }
+
+  // A saved pledge opens at its top, so the WhatsApp step is the first thing in view.
+  var savedPanel = document.getElementById("pledgeSavedPanel");
+  if (savedPanel && window.MutationObserver) {
+    new MutationObserver(function () {
+      if (savedPanel.hidden) return;
+      window.requestAnimationFrame(function () {
+        savedPanel.scrollIntoView({ block: "start", behavior: reduced ? "auto" : "smooth" });
+      });
+    }).observe(savedPanel, { attributes: true, attributeFilter: ["hidden"] });
+  }
+
+  // On the pledge record, the payment reminder appears with the other next steps.
+  var reminder = document.querySelector("[data-pay-reminder]");
+  var community = document.getElementById("pledgeCommunityInvite");
+  if (reminder && community && window.MutationObserver) {
+    var sync = function () {
+      reminder.hidden = community.hidden;
+    };
+    new MutationObserver(sync).observe(community, { attributes: true, attributeFilter: ["hidden"] });
+    sync();
+  }
 })();
