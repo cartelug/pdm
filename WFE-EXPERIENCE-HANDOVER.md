@@ -41,7 +41,7 @@ checkout availability and reconciled digital totals. A valid step selection is
 remembered in the browser session and carried into the contribution form.
 The sticky shortcut hides beside active forms and becomes inert when hidden.
 
-See WFE-REDESIGN-PLAN.md for the redesign decisions and source constraints.
+See docs/archive/WFE-REDESIGN-PLAN.md for the redesign decisions and source constraints.
 
 The campaign page is rebuilt around choosing sponsored steps at UGX 5,000 each.
 The same selection carries to the contribution form, with the server checking

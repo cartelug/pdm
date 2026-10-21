@@ -1,3 +1,5 @@
+> **Archived on 21 October 2026.** Kept for history only: a plan for the no-build vanilla site (css/pdm.css); the institutional site is now built with Astro and its motion lives in src/scripts/motion. For how the platform works today, read [ARCHITECTURE.md](../../ARCHITECTURE.md).
+
 # Motion, Animation & Responsiveness Plan — Signature Tier
 
 **Scope:** whole site — Pamodzi org (`css/pdm.css` · `js/pdm.js`) and Faith in Motion (`css/fim.css` · `js/fim.js`).

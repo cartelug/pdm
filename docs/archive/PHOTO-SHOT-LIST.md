@@ -1,3 +1,5 @@
+> **Archived on 21 October 2026.** Kept for history only: a how-to for adding photographs to the finished Faith in Motion campaign; new photography is listed in the design plan instead. For how the platform works today, read [ARCHITECTURE.md](../../ARCHITECTURE.md).
+
 # PHOTO SHOT LIST — FAITH IN MOTION
 
 The site is complete and shippable right now with hand-drawn artwork in every image position. Each photograph you add replaces one illustration and makes the page measurably more persuasive. **Nothing breaks if a photo is missing or slow to arrive.**

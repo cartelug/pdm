@@ -12,7 +12,7 @@ Astro 5 and TypeScript are an authoring layer, not a replacement PHP runtime. `n
 
 | Area | Implementation |
 | --- | --- |
-| Design system | Superseded by `EDITORIAL-REDESIGN.md`: paper/ink/crimson tokens, Instrument Serif, Hanken Grotesk and Geist Mono, responsive layout and a noindex `/design-system/` review page. |
+| Design system | Superseded by `EDITORIAL-REDESIGN.md`: paper/ink/crimson tokens, Inter, Instrument Serif and Geist Mono, responsive layout and a noindex `/design-system/` review page. |
 | Homepage | Cinematic responsive hero, orientation strip, institutional statement, programme rows, nine-stage model, asymmetric projects, work in practice, separate campaigns, partnership invitation, updates fallback, governance reminder and closing/footer invitation. |
 | Navigation | One configuration powers desktop navigation, full-screen mobile navigation and footer links. Native modal dialog, focus management, inert background, scroll restoration, Escape, rapid state changes, internal menu scrolling and lifecycle cleanup. Static details navigation works without JavaScript or dialog support. |
 | Institutional routes | About, What We Do, Model, Projects, Impact, Partnerships, Governance, Updates, Contact, Apartments and Community pages use the new shell. Existing narrative, objectives, values and governance text is retained in content collections. |

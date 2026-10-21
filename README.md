@@ -1,8 +1,8 @@
 # Pamodzi for Development
 
-The approved crimson presentation refresh introduces Sora/Manrope typography, transparent placement of the unchanged PCI master logo, separate mobile and desktop programme hero illustrations, four transparent pillar sculptures and page-scoped motion. Institutional authoring remains in `src/`; build output is committed at the existing public paths. See `CRIMSON-REDESIGN.md` for scope, asset notes and release checks.
+Source for https://pamodzici.com/. **Start with [ARCHITECTURE.md](ARCHITECTURE.md)**: how the site is built, which files are protected, the quality gates, where each campaign fact lives, and the decisions taken so far. Older plans are kept in [docs/archive/](docs/archive/).
 
-The institutional pages, Faith in Motion, Walk for Education and the contribution pages have since been redesigned with the editorial system (Inter, Instrument Serif italic and Geist Mono, arches and rings, paper/ink/crimson tokens). See `EDITORIAL-REDESIGN.md` for the direction, file map and checks; where it differs from `CRIMSON-REDESIGN.md` (typography, hero, stylesheets), the editorial document is current.
+The live institutional look (Inter, Instrument Serif and Geist Mono; arches and rings; paper, ink and crimson) is recorded in `EDITORIAL-REDESIGN.md`. The Walk for Education home and contribution pages use Montserrat, its inner pages mix Bricolage Grotesque, Manrope, Inter and Instrument Serif, and Faith in Motion uses Bricolage Grotesque, Manrope, JetBrains Mono and Instrument Serif, so the three still look like three sites; `ARCHITECTURE.md` explains the plan to bring them onto one design system.
 
 Astro 5 and TypeScript author the institutional V3 pages. `npm run build` exports real static documents into the repository root and existing page folders. **Root `index.html` is the deployable homepage**, and cPanel continues serving the existing PHP campaign registers, payments and certificates.
 

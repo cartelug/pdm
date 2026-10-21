@@ -1,3 +1,5 @@
+> **Archived on 21 October 2026.** Kept for history only: the one-off brief that built the Faith in Motion system; that campaign is finished and now an archive. For how the platform works today, read [ARCHITECTURE.md](../../ARCHITECTURE.md).
+
 # MASTER BUILD PROMPT — FAITH IN MOTION DIGITAL SYSTEM
 
 > **How to use this.** Paste this entire file as the first message of a new Claude Cowork task (or Claude Code session) with agentic tools enabled. It briefs the agent completely, tells it what to ask you for once at the start, and then has it build and finish the whole system without further prompting. Everything from `## AGENT BRIEF` down is written **to the agent**, not to you.

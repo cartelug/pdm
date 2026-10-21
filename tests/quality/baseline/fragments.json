@@ -1,0 +1,93 @@
+{
+ "note": "Recorded by tests/quality/fragments.cjs --record. Recording again is a reviewed act: it accepts the current text of every fragment as the new reference.",
+ "fragments": [
+  {
+   "id": "wfe-pledge-chooser",
+   "page": "/walk-for-education/",
+   "selector": "#choose-steps",
+   "reason": "Country, step chips, custom steps, live total and the continue link; carries pledge, price and bounds hooks",
+   "bytes": 7222,
+   "sha256": "e1f12c4285d6ec6cebfc9ad11791a3ad4eb410c4cf9430f15b0bea6d6ab4ac0d"
+  },
+  {
+   "id": "wfe-pricing-status",
+   "page": "/walk-for-education/",
+   "selector": "[data-pricing-status]",
+   "reason": "Country price loading and failure notice",
+   "bytes": 96,
+   "sha256": "a2da2a8a4dde78b7223ecbb87446e423a5177c20508b962a6b3bbf76f50b35e1"
+  },
+  {
+   "id": "wfe-checkout-status",
+   "page": "/walk-for-education/",
+   "selector": "#campaignCheckoutStatus",
+   "reason": "Pledge-only reassurance line the chooser script updates",
+   "bytes": 109,
+   "sha256": "ac2398976979dc916cc3ea68bbc361951d4561de66e6129fce42e6376734b42c"
+  },
+  {
+   "id": "wfe-official-channels",
+   "page": "/walk-for-education/",
+   "selector": "#official-channels",
+   "reason": "Exact payment channel numbers and names confirmed by the campaign team",
+   "bytes": 2839,
+   "sha256": "060619adadf3fcbc8387be923707782f25dfcc69eb2a1b5f388eed25ee86fcff"
+  },
+  {
+   "id": "wfe-certificate",
+   "page": "/walk-for-education/",
+   "selector": "#certificate",
+   "reason": "Certificate eligibility rules tied to a verified payment",
+   "bytes": 2208,
+   "sha256": "789bc99966788414fa66fbb927946deffb186ccf9b60aeeeb329cad7bac40423"
+  },
+  {
+   "id": "wfe-take-part-enquiry",
+   "page": "/walk-for-education/take-part/",
+   "selector": "form.wfe-enquiry-form",
+   "reason": "Enquiry form field names and validation hooks",
+   "bytes": 1556,
+   "sha256": "05bfc43c13d510302e8ba7953cbd0b0d9984f0a0d078e122616306500e8bce98"
+  },
+  {
+   "id": "wfe-partners-enquiry",
+   "page": "/walk-for-education/partners/",
+   "selector": "form.wfe-enquiry-form",
+   "reason": "Institution and club enquiry form field names and validation hooks",
+   "bytes": 3360,
+   "sha256": "3086871c971ae0b6249f3ecbf48502b478b459721e2c7892d725e6127e74dff8"
+  },
+  {
+   "id": "contribute-form",
+   "page": "/contribute/",
+   "selector": "#contributionForm",
+   "reason": "The pledge and payment form: steps, country, name, WhatsApp number",
+   "bytes": 8331,
+   "sha256": "c5325786499b7146b5fe3e2b2f5bf95a5bf9d16b1452d394681998ac07c5bcb5"
+  },
+  {
+   "id": "contribute-checkout-notice",
+   "page": "/contribute/",
+   "selector": "#checkoutNotice",
+   "reason": "Checkout availability notice the payment script updates",
+   "bytes": 117,
+   "sha256": "95425e892985b77e48ca989690fe5b85cef968ffa79d96da200aa528be6f1657"
+  },
+  {
+   "id": "contribute-payment-main",
+   "page": "/contribute/payment/",
+   "selector": "main",
+   "reason": "Payment result page: status check, receipt and certificate download",
+   "bytes": 6470,
+   "sha256": "c77e0b75001ed872e97e8e5ac8ede609abc656632bbc059c5bb1164edd41c882"
+  },
+  {
+   "id": "contribute-verify-form",
+   "page": "/contribute/verify/",
+   "selector": "#certificateVerification",
+   "reason": "Certificate verification form",
+   "bytes": 422,
+   "sha256": "95072363b37ee15bc95a8a4d3f4f2fea013b8c72e7bdeb6c596262ab29c89927"
+  }
+ ]
+}

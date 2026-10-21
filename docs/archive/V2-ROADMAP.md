@@ -1,3 +1,5 @@
+> **Archived on 21 October 2026.** Kept for history only: the V2 release checklist, completed and replaced by V3-IMPLEMENTATION.md. For how the platform works today, read [ARCHITECTURE.md](../../ARCHITECTURE.md).
+
 # Pamodzi V2 completion roadmap
 
 This is the working release plan for completing the Pamodzi for Development website without changing the approved logo or weakening the verified Faith in Motion register.

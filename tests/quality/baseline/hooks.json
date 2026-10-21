@@ -1,0 +1,1200 @@
+{
+ "note": "Recorded by tests/quality/hooks.cjs --record. Recording again is a reviewed act: it accepts the current markup as the new reference for money and register hooks.",
+ "presentationOnly": [
+  "data-reveal",
+  "data-parallax",
+  "data-motion",
+  "data-page-transition",
+  "data-stagger",
+  "data-delay",
+  "data-lines"
+ ],
+ "pages": {
+  "/accountability/": {
+   "ids": [
+    "burger",
+    "hdr",
+    "liveBand",
+    "main-content",
+    "mnav",
+    "tPaid",
+    "tPaidC",
+    "tPled",
+    "tPledC",
+    "tTot",
+    "tTotC",
+    "toast",
+    "top"
+   ],
+   "data": {
+    "data-t": [
+     "km",
+     "left",
+     "pct",
+     "steps"
+    ],
+    "data-unit": [
+     ""
+    ]
+   },
+   "fields": [],
+   "forms": [],
+   "scripts": [
+    "../js/preloader.js",
+    "../js/roll-data.js",
+    "../api/roll.php",
+    "../js/core.js",
+    "../js/fim.js",
+    "../js/site-motion.js"
+   ],
+   "inlineScripts": [
+    "52c83f0593a60c25",
+    "989f9c51e2783a6c"
+   ]
+  },
+  "/church/": {
+   "ids": [
+    "burger",
+    "church",
+    "copyLink",
+    "csky",
+    "hdr",
+    "liveBand",
+    "main-content",
+    "mnav",
+    "toast",
+    "top",
+    "waShare"
+   ],
+   "data": {
+    "data-slot": [
+     "build",
+     "church",
+     "parish"
+    ]
+   },
+   "fields": [],
+   "forms": [],
+   "scripts": [
+    "../js/preloader.js",
+    "../js/roll-data.js",
+    "../api/roll.php",
+    "../js/core.js",
+    "../js/fim.js",
+    "../js/site-motion.js"
+   ],
+   "inlineScripts": [
+    "7310cbf5fa3bcd9c",
+    "989f9c51e2783a6c"
+   ]
+  },
+  "/contribute/": {
+   "ids": [
+    "amount",
+    "campaign",
+    "changeContribution",
+    "checkoutChoicePanel",
+    "checkoutCustom",
+    "checkoutNotice",
+    "consent",
+    "contributionForm",
+    "contributionKinds",
+    "copyPledgeMessage",
+    "country",
+    "email",
+    "feedback",
+    "give",
+    "giveHeading",
+    "heroTitle",
+    "i-arrow",
+    "i-down",
+    "i-out",
+    "i-whatsapp",
+    "impactHeading",
+    "kindHint",
+    "main-content",
+    "openPledgeWhatsapp",
+    "pay",
+    "payHeading",
+    "phone",
+    "phoneHint",
+    "pledgeCopyStatus",
+    "pledgeCountryHeading",
+    "pledgeCountrySearch",
+    "pledgeSavedMessage",
+    "pledgeSavedPanel",
+    "pledgeSavedReference",
+    "pledgeSavedSummary",
+    "selectedStepsAmount",
+    "selectedStepsLabel",
+    "selectionReview",
+    "stepCount",
+    "stepCountHint",
+    "stepValidation",
+    "submitContribution",
+    "summaryAmount",
+    "summarySteps",
+    "summaryType",
+    "supporterName",
+    "viewPledgeRecord",
+    "whyHeading"
+   ],
+   "data": {
+    "data-variant": [
+     "wfe"
+    ],
+    "data-header": [
+     ""
+    ],
+    "data-wfe-whatsapp": [
+     ""
+    ],
+    "data-enter": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "data-sp": [
+     "code",
+     "min",
+     "policy",
+     "unit"
+    ],
+    "data-country-featured": [
+     "INT",
+     "KE",
+     "UG"
+    ],
+    "data-pricing-status": [
+     ""
+    ],
+    "data-country-panel": [
+     ""
+    ],
+    "data-country-search": [
+     ""
+    ],
+    "data-kind": [
+     "payment",
+     "pledge"
+    ],
+    "data-steps": [
+     "10",
+     "100",
+     "20",
+     "5",
+     "50"
+    ],
+    "data-sp-steps": [
+     "10",
+     "100",
+     "20",
+     "5",
+     "50"
+    ],
+    "data-checkout-adjust": [
+     "-1",
+     "1"
+    ],
+    "data-invite-five": [
+     ""
+    ],
+    "data-wfe-email": [
+     ""
+    ],
+    "data-pay-amount": [
+     ""
+    ],
+    "data-pay-methods": [
+     ""
+    ],
+    "data-pay-for": [
+     "INT",
+     "KE",
+     "UG"
+    ],
+    "data-copy": [
+     "1001201151098",
+     "1001201151100",
+     "1001201151102",
+     "1104672",
+     "400200",
+     "588461",
+     "EQBLUGKAXXX"
+    ],
+    "data-pay-toggle": [
+     ""
+    ],
+    "data-sticky": [
+     ""
+    ],
+    "data-sticky-amount": [
+     ""
+    ],
+    "data-sticky-steps": [
+     ""
+    ]
+   },
+   "fields": [
+    "input[id=amount][type=hidden]",
+    "input[id=campaign][type=hidden]",
+    "input[id=consent][type=checkbox][required=]",
+    "input[id=email][name=email][type=hidden]",
+    "input[id=phone][name=phone][type=tel][required=][autocomplete=tel]",
+    "input[id=pledgeCountrySearch][type=search][autocomplete=off]",
+    "input[id=stepCount][type=number][min=5][max=20000][step=1][required=][inputmode=numeric]",
+    "input[id=supporterName][name=name][required=][autocomplete=name]",
+    "select[id=country][name=country][autocomplete=country]",
+    "textarea[id=pledgeSavedMessage]"
+   ],
+   "forms": [
+    "form#contributionForm[action=][method=]"
+   ],
+   "scripts": [
+    "../js/preloader.js",
+    "../js/campaign-contacts.js",
+    "../js/step-pricing.js",
+    "../js/wfe-data.js",
+    "../js/contributions.js",
+    "../js/contribute-pay.js"
+   ],
+   "inlineScripts": [
+    "0575325418d3d19b"
+   ]
+  },
+  "/contribute/payment/": {
+   "ids": [
+    "certificateFeedback",
+    "certificateNumber",
+    "certificatePanel",
+    "copyPledgeWhatsappMessage",
+    "downloadCertificate",
+    "feedback",
+    "i-arrow",
+    "i-down",
+    "i-out",
+    "i-whatsapp",
+    "joinCampaignGroup",
+    "main-content",
+    "pledgeCommunityInvite",
+    "pledgeWhatsappCopyMessage",
+    "pledgeWhatsappCopyStatus",
+    "pledgeWhatsappMessage",
+    "pledgeWhatsappPanel",
+    "printReceipt",
+    "receiptAmount",
+    "receiptContent",
+    "receiptDate",
+    "receiptEnvironment",
+    "receiptHeading",
+    "receiptNumber",
+    "receiptReconciled",
+    "receiptReference",
+    "receiptState",
+    "receiptSteps",
+    "refreshPayment",
+    "sendPledgeWhatsapp"
+   ],
+   "data": {
+    "data-variant": [
+     "wfe"
+    ],
+    "data-header": [
+     ""
+    ],
+    "data-enter": [
+     "1",
+     "2"
+    ],
+    "data-pay-reminder": [
+     ""
+    ]
+   },
+   "fields": [
+    "textarea[id=pledgeWhatsappCopyMessage]"
+   ],
+   "forms": [],
+   "scripts": [
+    "../../js/preloader.js",
+    "../../js/campaign-contacts.js",
+    "../../js/step-pricing.js",
+    "../../js/wfe-data.js",
+    "../../js/contributions.js",
+    "../../js/contribute-pay.js"
+   ],
+   "inlineScripts": [
+    "96681ef075311b19"
+   ]
+  },
+  "/contribute/privacy/": {
+   "ids": [
+    "main-content"
+   ],
+   "data": {
+    "data-variant": [
+     "wfe"
+    ]
+   },
+   "fields": [],
+   "forms": [],
+   "scripts": [
+    "../../js/preloader.js"
+   ],
+   "inlineScripts": []
+  },
+  "/contribute/terms/": {
+   "ids": [
+    "main-content"
+   ],
+   "data": {
+    "data-variant": [
+     "wfe"
+    ]
+   },
+   "fields": [],
+   "forms": [],
+   "scripts": [
+    "../../js/preloader.js"
+   ],
+   "inlineScripts": []
+  },
+  "/contribute/verify/": {
+   "ids": [
+    "certificateCode",
+    "certificateVerification",
+    "verificationMessage",
+    "verifiedAmount",
+    "verifiedCertificate",
+    "verifiedDate",
+    "verifiedSteps"
+   ],
+   "data": {
+    "data-variant": [
+     "wfe"
+    ]
+   },
+   "fields": [
+    "input[id=certificateCode][required=][autocomplete=off]"
+   ],
+   "forms": [
+    "form#certificateVerification[action=][method=]"
+   ],
+   "scripts": [
+    "../../js/preloader.js",
+    "../../js/step-pricing.js",
+    "../../js/certificate-verify.js"
+   ],
+   "inlineScripts": []
+  },
+  "/faith-in-motion/": {
+   "ids": [
+    "burger",
+    "cSteps",
+    "copyLink",
+    "gapSteps",
+    "hRaised",
+    "hSponsors",
+    "hSteps",
+    "hdr",
+    "journey",
+    "journeyUpdates",
+    "ledgerBody",
+    "liveBand",
+    "main-content",
+    "mnav",
+    "msNext",
+    "outAmt",
+    "outBar",
+    "outDist",
+    "outPlace",
+    "outSeg",
+    "payment-details",
+    "rFill",
+    "rPath",
+    "rPins",
+    "rWalker",
+    "rail",
+    "railBead",
+    "railFill",
+    "railKm",
+    "road",
+    "roadCount",
+    "roll",
+    "rollToggle",
+    "sponsor",
+    "stepRange",
+    "tPaid",
+    "tPaidC",
+    "tPled",
+    "tPledC",
+    "tTot",
+    "tTotC",
+    "tiers",
+    "toast",
+    "top",
+    "waPledge",
+    "waShare"
+   ],
+   "data": {
+    "data-s": [
+     "1",
+     "10",
+     "100",
+     "1000",
+     "25",
+     "250",
+     "50",
+     "500"
+    ],
+    "data-t": [
+     "km",
+     "pct"
+    ],
+    "data-unit": [
+     ""
+    ]
+   },
+   "fields": [
+    "input[id=cSteps][type=number][min=1][max=1000][step=1][inputmode=numeric]"
+   ],
+   "forms": [],
+   "scripts": [
+    "../js/preloader.js",
+    "../js/roll-data.js",
+    "../api/roll.php",
+    "../js/fim-content.js",
+    "../js/core.js",
+    "../js/fim.js",
+    "../js/site-motion.js"
+   ],
+   "inlineScripts": [
+    "d5034b023a285d14",
+    "989f9c51e2783a6c"
+   ]
+  },
+  "/give/": {
+   "ids": [
+    "burger",
+    "cSteps",
+    "copyNo",
+    "hdr",
+    "liveBand",
+    "main-content",
+    "mnav",
+    "outAmt",
+    "outBar",
+    "outDist",
+    "outPlace",
+    "outSeg",
+    "payment-details",
+    "sponsor",
+    "tiers",
+    "toast",
+    "top",
+    "waPledge"
+   ],
+   "data": {
+    "data-unit": [
+     ""
+    ],
+    "data-s": [
+     "1",
+     "10",
+     "100",
+     "1000",
+     "25",
+     "250",
+     "50",
+     "500"
+    ]
+   },
+   "fields": [
+    "input[id=cSteps][type=number][min=1][max=1000][step=1][inputmode=numeric]"
+   ],
+   "forms": [],
+   "scripts": [
+    "../js/preloader.js",
+    "../js/roll-data.js",
+    "../api/roll.php",
+    "../js/core.js",
+    "../js/fim.js",
+    "../js/site-motion.js"
+   ],
+   "inlineScripts": [
+    "a2d964dc0d644258",
+    "989f9c51e2783a6c"
+   ]
+  },
+  "/roll/": {
+   "ids": [
+    "burger",
+    "copyLink",
+    "hdr",
+    "leadBand",
+    "ledgerBody",
+    "liveBand",
+    "main-content",
+    "mnav",
+    "pfBar",
+    "pfPaid",
+    "pfPct",
+    "pfPled",
+    "roll",
+    "tPaid",
+    "tPaidC",
+    "tPled",
+    "tPledC",
+    "tTot",
+    "tTotC",
+    "toast",
+    "top",
+    "waFulfil",
+    "waShare"
+   ],
+   "data": {
+    "data-full": [
+     ""
+    ]
+   },
+   "fields": [],
+   "forms": [],
+   "scripts": [
+    "../js/preloader.js",
+    "../js/roll-data.js",
+    "../api/roll.php",
+    "../js/core.js",
+    "../js/fim.js",
+    "../js/site-motion.js"
+   ],
+   "inlineScripts": [
+    "4808658bdf31c819",
+    "989f9c51e2783a6c"
+   ]
+  },
+  "/take-part/": {
+   "ids": [
+    "burger",
+    "copyLink",
+    "hdr",
+    "liveBand",
+    "main-content",
+    "mnav",
+    "msNext",
+    "sysShare",
+    "toast",
+    "top",
+    "waShare"
+   ],
+   "data": {
+    "data-unit": [
+     ""
+    ]
+   },
+   "fields": [],
+   "forms": [],
+   "scripts": [
+    "../js/preloader.js",
+    "../js/roll-data.js",
+    "../api/roll.php",
+    "../js/core.js",
+    "../js/fim.js",
+    "../js/site-motion.js"
+   ],
+   "inlineScripts": [
+    "a1c944d2cb8b2d2e",
+    "989f9c51e2783a6c"
+   ]
+  },
+  "/walk/": {
+   "ids": [
+    "burger",
+    "copyLink",
+    "gallery",
+    "gapSteps",
+    "hdr",
+    "liveBand",
+    "main-content",
+    "mnav",
+    "msNext",
+    "rFill",
+    "rPath",
+    "rPins",
+    "rWalker",
+    "road",
+    "roadCount",
+    "toast",
+    "top",
+    "waShare",
+    "walk",
+    "wrd",
+    "wsky"
+   ],
+   "data": {
+    "data-slot": [
+     "build",
+     "parish",
+     "road",
+     "walker"
+    ],
+    "data-t": [
+     "km",
+     "pct"
+    ],
+    "data-unit": [
+     ""
+    ]
+   },
+   "fields": [],
+   "forms": [],
+   "scripts": [
+    "../js/preloader.js",
+    "../js/roll-data.js",
+    "../api/roll.php",
+    "../js/core.js",
+    "../js/fim.js",
+    "../js/site-motion.js"
+   ],
+   "inlineScripts": [
+    "1ed05dbb65016b80",
+    "4f3b940c73997065"
+   ]
+  },
+  "/walk-for-education/": {
+   "ids": [
+    "ambitionHeading",
+    "bag",
+    "bagHeading",
+    "builders",
+    "campaign-updates",
+    "campaignAction",
+    "campaignCheckoutStatus",
+    "campaignContribute",
+    "campaignCountry",
+    "campaignCountryHeading",
+    "campaignCountrySearch",
+    "campaignCustom",
+    "campaignGallery",
+    "campaignStepSummary",
+    "campaignSteps",
+    "campaignTitle",
+    "campaignTotal",
+    "campaignValidation",
+    "certHeading",
+    "certificate",
+    "channelsHeading",
+    "choose-steps",
+    "closingHeading",
+    "faqHeading",
+    "five-friends",
+    "fiveHeading",
+    "galleryCount",
+    "galleryFeedback",
+    "galleryHeading",
+    "galleryLoadMore",
+    "i-arrow",
+    "i-down",
+    "i-out",
+    "i-whatsapp",
+    "imageViewer",
+    "impact",
+    "journey",
+    "journeyHeading",
+    "learnHeading",
+    "learning",
+    "main-content",
+    "meetHeading",
+    "motionToggle",
+    "official-channels",
+    "pledge-intro",
+    "pledgeHeading",
+    "progress",
+    "questions",
+    "story",
+    "take-part",
+    "toast",
+    "trustHeading",
+    "updatesHeading",
+    "viewerCategory",
+    "viewerClose",
+    "viewerImage",
+    "viewerNext",
+    "viewerNote",
+    "viewerPosition",
+    "viewerPrevious",
+    "viewerTitle",
+    "visual-stories",
+    "waysHeading",
+    "wfeDigitalDate",
+    "wfeDigitalTotal",
+    "wfeMenu",
+    "wfeMenuButton",
+    "wfeScrollLine",
+    "wfeShare",
+    "wfeShareFeedback",
+    "wfeSticky",
+    "wfeVerifiedProgress"
+   ],
+   "data": {
+    "data-variant": [
+     "wfe"
+    ],
+    "data-header": [
+     ""
+    ],
+    "data-enter": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    "data-campaign-field": [
+     "currentStudents",
+     "statusLabel",
+     "studentProjection",
+     "targetLong"
+    ],
+    "data-wfe-countdown": [
+     ""
+    ],
+    "data-wfe-show-if": [
+     "campaignStartDate",
+     "receivedTotal"
+    ],
+    "data-sp": [
+     "code",
+     "label",
+     "min",
+     "policy",
+     "unit"
+    ],
+    "data-checkout-brief": [
+     ""
+    ],
+    "data-country-featured": [
+     "INT",
+     "KE",
+     "UG"
+    ],
+    "data-pricing-status": [
+     ""
+    ],
+    "data-country-panel": [
+     ""
+    ],
+    "data-country-search": [
+     ""
+    ],
+    "data-step-option": [
+     "10",
+     "100",
+     "20",
+     "5",
+     "50"
+    ],
+    "data-sp-amount": [
+     "10",
+     "100",
+     "20",
+     "5",
+     "50"
+    ],
+    "data-step-adjust": [
+     "-1",
+     "1"
+    ],
+    "data-wfe-whatsapp": [
+     ""
+    ],
+    "data-wfe-email": [
+     ""
+    ],
+    "data-scene": [
+     "bag",
+     "journey"
+    ],
+    "data-frame": [
+     "0",
+     "1",
+     "2"
+    ],
+    "data-chapter": [
+     "school",
+     "university"
+    ],
+    "data-depth": [
+     "18"
+    ],
+    "data-route": [
+     ""
+    ],
+    "data-wfe-stages": [
+     ""
+    ],
+    "data-sp-steps": [
+     "5"
+    ],
+    "data-share-whatsapp": [
+     ""
+    ],
+    "data-copy-link": [
+     ""
+    ],
+    "data-five": [
+     ""
+    ],
+    "data-five-dots": [
+     ""
+    ],
+    "data-ledger": [
+     ""
+    ],
+    "data-wfe-progress": [
+     ""
+    ],
+    "data-digital-empty": [
+     ""
+    ],
+    "data-wfe-whatsapp-text": [
+     "Hello, I have contributed to Walk for Education and would like help with payment verification.",
+     "Hello, I would like help supporting the Walk for Education."
+    ],
+    "data-wfe-latest-update": [
+     ""
+    ],
+    "data-gallery-filter": [
+     "all",
+     "campaign",
+     "campus",
+     "school",
+     "university"
+    ],
+    "data-image-id": [
+     "life-25",
+     "life-26",
+     "life-27",
+     "life-28",
+     "life-29",
+     "life-30",
+     "life-31",
+     "life-34",
+     "life-36"
+    ],
+    "data-wfe-payment-channels": [
+     ""
+    ]
+   },
+   "fields": [
+    "input[id=campaignCountrySearch][type=search][autocomplete=off]",
+    "input[id=campaignSteps][type=number][min=5][max=20000][step=1][inputmode=numeric]",
+    "select[id=campaignCountry][name=country][autocomplete=country]"
+   ],
+   "forms": [],
+   "scripts": [
+    "../js/preloader.js",
+    "../js/campaign-contacts.js",
+    "../js/step-pricing.js",
+    "../js/wfe-shell.js",
+    "../js/wfe-data.js",
+    "../api/campaign.php",
+    "../js/wfe.js",
+    "../js/wfe-redesign.js"
+   ],
+   "inlineScripts": [
+    "0575325418d3d19b",
+    "005f6152259da5b6"
+   ]
+  },
+  "/walk-for-education/accountability/": {
+   "ids": [
+    "main-content",
+    "toast",
+    "wfeDigitalDate",
+    "wfeDigitalTotal",
+    "wfeMenu",
+    "wfeMenuButton",
+    "wfeScrollLine",
+    "wfeShare",
+    "wfeShareFeedback",
+    "wfeSticky",
+    "wfeVerifiedProgress"
+   ],
+   "data": {
+    "data-variant": [
+     "wfe"
+    ],
+    "data-sp": [
+     "min",
+     "unit"
+    ],
+    "data-campaign-field": [
+     "reviewedDate",
+     "target",
+     "targetLong",
+     "unitValue"
+    ],
+    "data-checkout-brief": [
+     ""
+    ],
+    "data-digital-empty": [
+     ""
+    ],
+    "data-wfe-email": [
+     ""
+    ]
+   },
+   "fields": [],
+   "forms": [],
+   "scripts": [
+    "../../js/preloader.js",
+    "../../js/campaign-contacts.js",
+    "../../js/step-pricing.js",
+    "../../js/wfe-shell.js",
+    "../../js/wfe-data.js",
+    "../../api/campaign.php",
+    "../../js/wfe.js"
+   ],
+   "inlineScripts": [
+    "b9dea3a6b1d2a3a5"
+   ]
+  },
+  "/walk-for-education/partners/": {
+   "ids": [
+    "builders",
+    "main-content",
+    "partner-builder",
+    "partner-contact",
+    "partner-message",
+    "partner-name",
+    "partner-org",
+    "partner-priority",
+    "partner-route",
+    "priorities",
+    "request-pack",
+    "routes",
+    "toast",
+    "wfeMenu",
+    "wfeMenuButton",
+    "wfeScrollLine",
+    "wfeShare",
+    "wfeShareFeedback",
+    "wfeSticky",
+    "wfp-builders-title",
+    "wfp-coalition-title",
+    "wfp-contact-title",
+    "wfp-priorities-title",
+    "wfp-process-title",
+    "wfp-request-title",
+    "wfp-routes-title",
+    "wfp-title",
+    "wfp-trust-title",
+    "wfpChips",
+    "wfpSelection"
+   ],
+   "data": {
+    "data-variant": [
+     "wfe"
+    ],
+    "data-campaign-field": [
+     "currentStudents",
+     "distance",
+     "studentProjection",
+     "targetLong"
+    ],
+    "data-wfp-builder": [
+     "bronze",
+     "diamond",
+     "gold",
+     "platinum",
+     "silver"
+    ],
+    "data-wfp-route": [
+     "Construction & facilities",
+     "Equipment & learning tools",
+     "Financial sponsorship",
+     "Professional expertise",
+     "Programme investment",
+     "Research, innovation & training"
+    ],
+    "data-wfp-priority": [
+     "campus",
+     "expansion",
+     "hostels",
+     "learning",
+     "school"
+    ],
+    "data-wfe-email": [
+     ""
+    ],
+    "data-wfe-whatsapp": [
+     ""
+    ],
+    "data-wfe-whatsapp-text": [
+     "Hello, I would like to discuss supporting the Walk for Education campaign."
+    ],
+    "data-wfe-partners": [
+     "wfp-confirmed-card"
+    ],
+    "data-sp": [
+     "min"
+    ]
+   },
+   "fields": [
+    "input[id=partner-contact][name=contact][required=][autocomplete=email]",
+    "input[id=partner-name][name=name][required=][autocomplete=name]",
+    "input[id=partner-org][name=organisation][autocomplete=organization]",
+    "select[id=partner-builder][name=builder]",
+    "select[id=partner-priority][name=priority]",
+    "select[id=partner-route][name=route]",
+    "textarea[id=partner-message][name=message]"
+   ],
+   "forms": [
+    "form#-[action=][method=]"
+   ],
+   "scripts": [
+    "../../js/preloader.js",
+    "../../js/campaign-contacts.js",
+    "../../js/step-pricing.js",
+    "../../js/wfe-shell.js",
+    "../../js/wfe-data.js",
+    "../../api/campaign.php",
+    "../../js/wfe.js",
+    "../../js/wfe-partners.js"
+   ],
+   "inlineScripts": [
+    "0f0dcc450cdc4fce"
+   ]
+  },
+  "/walk-for-education/take-part/": {
+   "ids": [
+    "main-content",
+    "panel-individual",
+    "panel-organisation",
+    "panel-rotary",
+    "participation-contact",
+    "participation-form",
+    "participation-message",
+    "participation-name",
+    "participation-org",
+    "participation-route",
+    "tab-individual",
+    "tab-organisation",
+    "tab-rotary",
+    "toast",
+    "wfeMenu",
+    "wfeMenuButton",
+    "wfeScrollLine",
+    "wfeShare",
+    "wfeShareFeedback",
+    "wfeSticky"
+   ],
+   "data": {
+    "data-variant": [
+     "wfe"
+    ],
+    "data-audience-tab": [
+     "individual",
+     "organisation",
+     "rotary"
+    ],
+    "data-audience-panel": [
+     "individual",
+     "organisation",
+     "rotary"
+    ],
+    "data-sp": [
+     "min",
+     "unit"
+    ],
+    "data-enquiry-route": [
+     "Rotary club participation"
+    ],
+    "data-wfe-email": [
+     ""
+    ],
+    "data-wfe-whatsapp": [
+     ""
+    ],
+    "data-wfe-whatsapp-text": [
+     "Hello, I would like to discuss supporting the Walk for Education campaign."
+    ]
+   },
+   "fields": [
+    "input[id=participation-contact][name=contact][required=][autocomplete=email]",
+    "input[id=participation-name][name=name][required=][autocomplete=name]",
+    "input[id=participation-org][name=organisation][autocomplete=organization]",
+    "select[id=participation-route][name=route]",
+    "textarea[id=participation-message][name=message]"
+   ],
+   "forms": [
+    "form#-[action=][method=]"
+   ],
+   "scripts": [
+    "../../js/preloader.js",
+    "../../js/campaign-contacts.js",
+    "../../js/step-pricing.js",
+    "../../js/wfe-shell.js",
+    "../../js/wfe-data.js",
+    "../../api/campaign.php",
+    "../../js/wfe.js"
+   ],
+   "inlineScripts": [
+    "f07823f37142d415"
+   ]
+  },
+  "/walk-for-education/updates/": {
+   "ids": [
+    "main-content",
+    "toast",
+    "wfeMenu",
+    "wfeMenuButton",
+    "wfeScrollLine",
+    "wfeShare",
+    "wfeShareFeedback",
+    "wfeSticky"
+   ],
+   "data": {
+    "data-variant": [
+     "wfe"
+    ],
+    "data-share-campaign": [
+     ""
+    ],
+    "data-wfe-updates": [
+     ""
+    ],
+    "data-wfe-show-if": [
+     "updates"
+    ],
+    "data-wfe-hide-if": [
+     "updates"
+    ],
+    "data-wfe-email": [
+     ""
+    ],
+    "data-sp": [
+     "min"
+    ]
+   },
+   "fields": [],
+   "forms": [],
+   "scripts": [
+    "../../js/preloader.js",
+    "../../js/campaign-contacts.js",
+    "../../js/step-pricing.js",
+    "../../js/wfe-shell.js",
+    "../../js/wfe-data.js",
+    "../../api/campaign.php",
+    "../../js/wfe.js"
+   ],
+   "inlineScripts": [
+    "2be9790edec774b6"
+   ]
+  }
+ }
+}

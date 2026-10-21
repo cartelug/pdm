@@ -1,7 +1,7 @@
 {
   "name": "pamodzi-website",
   "private": true,
-  "description": "Front-end quality tooling for pamodzici.com. The site itself has no build step; these tools only check and format the source.",
+  "description": "Authoring and quality tooling for pamodzici.com. Astro builds the institutional pages into the repository root; the Walk for Education, contribution and Faith in Motion pages are hand-written and protected. See ARCHITECTURE.md.",
   "scripts": {
     "lint": "npm run lint:js && npm run lint:css && npm run format:check && npm run check:hover && npm run check:prices && npm run check:pages && npm run check:assets",
     "lint:js": "eslint .",
@@ -21,7 +21,15 @@
     "check:types": "astro check",
     "check:protected": "node scripts/check-protected.mjs",
     "check:v3": "node --test tests/pages/v3.test.cjs tests/navigation/menu.test.cjs tests/pages/wfe-redesign.test.cjs tests/navigation/transitions.test.cjs",
-    "validate": "npm run check:types && npm run build && npm run lint && npm run check:protected && npm run check:v3",
+    "tokens": "node scripts/tokens.mjs",
+    "check:tokens": "node scripts/tokens.mjs --check && node tests/quality/contrast.cjs",
+    "check:hooks": "node tests/quality/hooks.cjs",
+    "check:fragments": "node tests/quality/fragments.cjs",
+    "check:facts": "node tests/quality/facts.cjs",
+    "check:links": "node tests/quality/links.cjs",
+    "check:gates": "npm run check:tokens && npm run check:hooks && npm run check:fragments && npm run check:facts && npm run check:links",
+    "test:responsive": "node tests/quality/responsive.cjs",
+    "validate": "npm run check:types && npm run build && npm run lint && npm run check:protected && npm run check:v3 && npm run check:gates",
     "format:source": "prettier --write \"src/**/*.{astro,ts,css,json,md}\""
   },
   "devDependencies": {

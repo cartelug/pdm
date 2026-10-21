@@ -1,3 +1,5 @@
+> **Archived on 21 October 2026.** Kept for history only: a redesign brief specifying Fraunces and Montserrat; not what shipped and not the direction now (see ARCHITECTURE.md). For how the platform works today, read [ARCHITECTURE.md](../../ARCHITECTURE.md).
+
 # Walk for Education — full redesign brief
 
 ## Master implementation prompt

@@ -1,3 +1,5 @@
+> **Archived on 21 October 2026.** Kept for history only: a consolidation of earlier plans that states the site has no build step, which stopped being true when Astro was added. For how the platform works today, read [ARCHITECTURE.md](../../ARCHITECTURE.md).
+
 # Pamodzi Community Initiative — Website Build & Upgrade Plan (2026)
 
 This consolidates the status of the four existing plan documents (`V2-ROADMAP.md`, `PCI-BUILD-PLAN.md`, `MOTION-AND-RESPONSIVE-PLAN.md`, `PERFORMANCE-SEO-DISTRIBUTION-PLAN.md`), adds the newly-launched Walk for Education campaign into the roadmap, and sets the next 90 days of priority. It does not replace those documents — it says, in one place, where each of them actually stands today and what to do next across the whole site.

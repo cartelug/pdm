@@ -1,3 +1,5 @@
+> **Archived on 21 October 2026.** Kept for history only: the first completion plan, written for a different repository (cartelug/faith-in-motion-site) and a design system that no longer exists. For how the platform works today, read [ARCHITECTURE.md](../../ARCHITECTURE.md).
+
 # PCI Uganda — Full Completion Build Plan
 
 **Source:** Notion — *"PCI Uganda — Website Development, Digital Strategy & Faith in Motion Command Center"* (Master Update, 24 July 2026).

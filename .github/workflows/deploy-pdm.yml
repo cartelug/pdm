@@ -47,7 +47,7 @@ jobs:
 
       - name: Prepare only the live PDM website
         run: |
-          rsync -a --delete --exclude '.git' --exclude '.github' --exclude 'deploy' --exclude 'tests' --exclude '*.md' --exclude 'api/payments/config.example.php' \
+          rsync -a --delete --exclude '.git' --exclude '.github' --exclude 'deploy' --exclude 'tests' --exclude 'docs' --exclude '*.md' --exclude 'api/payments/config.example.php' \
             --exclude 'node_modules' --exclude 'scripts' --exclude 'package.json' --exclude 'package-lock.json' \
             --exclude 'src' --exclude '.astro' --exclude 'build-v3' --exclude 'public-v3' --exclude 'astro.config.mjs' --exclude 'tsconfig.json' \
             --exclude 'eslint.config.mjs' --exclude 'stylelint.config.mjs' --exclude '.prettierrc.json' --exclude '.prettierignore' --exclude '.editorconfig' \

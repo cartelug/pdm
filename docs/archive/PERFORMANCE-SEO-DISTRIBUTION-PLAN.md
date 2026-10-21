@@ -1,3 +1,5 @@
+> **Archived on 21 October 2026.** Kept for history only: an early speed and SEO plan for the no-build GitHub Pages site; current budgets are in tests/quality/budget.json. For how the platform works today, read [ARCHITECTURE.md](../../ARCHITECTURE.md).
+
 # Performance, SEO & Distribution Plan
 
 **Scope:** all 14 pages + `admin/`. Static, no build step, GitHub Pages.

@@ -1,3 +1,5 @@
+> **Archived on 21 October 2026.** Kept for history only: the 6 October Walk for Education revision plan; the behaviour it describes is recorded in WFE-EXPERIENCE-HANDOVER.md. For how the platform works today, read [ARCHITECTURE.md](../../ARCHITECTURE.md).
+
 # Walk for Education — campaign experience revision
 
 6 October 2026. The latest revision follows the new campaign artwork and the user’s explicit five-step minimum. The objective is a clearer contribution journey across

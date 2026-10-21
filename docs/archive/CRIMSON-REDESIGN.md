@@ -1,3 +1,5 @@
+> **Archived on 21 October 2026.** Kept for history only: Sora/Manrope presentation refresh, replaced by the editorial redesign (EDITORIAL-REDESIGN.md) before it shipped further. For how the platform works today, read [ARCHITECTURE.md](../../ARCHITECTURE.md).
+
 # Pamodzi crimson presentation refresh
 
 The homepage now introduces PCI's four programme areas through an illustrative, blended photographic hero, then continues into a warm-paper pillar section. The separate mobile composition avoids cropping the desktop scene around its headline. Hero headings and actions remain HTML, with independent CSS gradients maintaining the transition across viewport sizes.

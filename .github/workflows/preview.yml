@@ -1,0 +1,100 @@
+name: PR preview
+
+# Builds the site exactly as the deploy job does, then uploads the static result so a change can be looked at on a
+# phone or laptop before it is merged. The preview is static only: api/ and admin/ are left out, so pledges cannot be
+# saved and no payment or live register is reachable. It never touches the deploy job or the GitHub Pages settings.
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    name: Build a static preview
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install tooling
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # Generated pages are committed so an upload never needs Node on the server. A source change without a rebuild
+      # would make the preview differ from what the deploy job uploads, so say so here.
+      - name: Generated pages match the source
+        run: |
+          if ! git diff --quiet; then
+            echo "Run npm run build and commit the generated pages. These files differ from the build:"
+            git diff --stat
+            exit 1
+          fi
+
+      - name: Assemble the static site
+        run: |
+          mkdir preview
+          rsync -a \
+            --exclude '.git' --exclude '.github' --exclude 'preview' --exclude 'tests' --exclude '*.md' \
+            --exclude 'node_modules' --exclude 'scripts' --exclude 'package.json' --exclude 'package-lock.json' \
+            --exclude 'src' --exclude '.astro' --exclude 'build-v3' --exclude 'public-v3' --exclude 'astro.config.mjs' \
+            --exclude 'tsconfig.json' --exclude 'eslint.config.mjs' --exclude 'stylelint.config.mjs' \
+            --exclude '.prettierrc.json' --exclude '.prettierignore' --exclude '.editorconfig' \
+            --exclude 'api' --exclude 'admin' --exclude 'docs' --exclude 'legacy' \
+            ./ preview/
+          printf 'Static preview of commit %s.\nServe it with: python3 -m http.server --directory . 8080\nThen open http://localhost:8080/\napi/ and admin/ are not included, so pledges cannot be saved here.\n' "$GITHUB_SHA" > preview/PREVIEW.txt
+          test -s preview/index.html
+
+      - name: Upload the preview
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-${{ github.event.pull_request.number || github.run_id }}
+          path: preview
+          retention-days: 14
+
+      - name: Say where the preview is
+        run: |
+          {
+            echo "### Static preview"
+            echo
+            echo "Download **preview-${{ github.event.pull_request.number || github.run_id }}** from the artifacts of this run:"
+            echo "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo
+            echo 'Unzip it and serve it with `python3 -m http.server --directory . 8080`, then open http://localhost:8080/.'
+            echo 'The preview is static only: `api/` and `admin/` are not included, so pledges cannot be saved and no payment is reachable.'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Forks get a read-only token, so a comment can fail there; the run summary above still has the link.
+      - name: Comment the preview link
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker = '<!-- pci-preview -->';
+            const run = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const body = [
+              marker,
+              `**Static preview** for ${context.sha.slice(0, 7)}: download the \`preview-${context.issue.number}\` artifact from [this run](${run}).`,
+              'Unzip it and serve it with `python3 -m http.server --directory . 8080`. It is static only, so pledges cannot be saved and no payment is reachable.',
+            ].join('\n\n');
+            const { data: comments } = await github.rest.issues.listComments({ ...context.repo, issue_number: context.issue.number, per_page: 100 });
+            const existing = comments.find((comment) => comment.body.includes(marker));
+            if (existing) await github.rest.issues.updateComment({ ...context.repo, comment_id: existing.id, body });
+            else await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body });
