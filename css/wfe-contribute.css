@@ -218,7 +218,7 @@
 
 .w-route-steps small {
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
 }
 
@@ -258,7 +258,7 @@
 
   .w-cx__proof li {
     padding: 5px 10px;
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
   }
 
   .w-route-steps li {
@@ -390,7 +390,7 @@
 
 .w-selection span {
   color: var(--cyan-bright);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -495,7 +495,7 @@
   background: var(--gold);
   color: var(--navy);
   font-family: var(--sans);
-  font-size: 0.625rem;
+  font-size: 0.8125rem;
   font-weight: 750;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -623,7 +623,7 @@
 
 #summaryType {
   color: var(--cyan-ink);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -788,7 +788,7 @@
 
 .collection-kicker {
   color: var(--cyan-ink);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -1003,7 +1003,7 @@
 
 .pay-fields dt {
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
 }
 
@@ -1036,7 +1036,7 @@
   background: var(--navy);
   color: var(--paper);
   font-family: var(--sans);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 650;
   letter-spacing: 0;
   transition: transform var(--t-press) var(--ease-press);
@@ -1101,7 +1101,7 @@
   }
 
   .w-amounts small {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
   }
 }
 
@@ -1295,7 +1295,7 @@
   padding: 6px 12px 6px 6px;
   border-radius: 999px;
   background: rgb(251 248 242 / 92%);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 650;
 }
 
@@ -1429,7 +1429,7 @@
   border-radius: 999px;
   background: var(--navy);
   color: var(--paper);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;

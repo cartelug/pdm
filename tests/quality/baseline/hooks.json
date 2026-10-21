@@ -27,6 +27,9 @@
     "top"
    ],
    "data": {
+    "data-brand": [
+     "pci"
+    ],
     "data-t": [
      "km",
      "left",
@@ -67,6 +70,9 @@
     "waShare"
    ],
    "data": {
+    "data-brand": [
+     "pci"
+    ],
     "data-slot": [
      "build",
      "church",
@@ -140,8 +146,8 @@
     "whyHeading"
    ],
    "data": {
-    "data-variant": [
-     "wfe"
+    "data-brand": [
+     "walk"
     ],
     "data-header": [
      ""
@@ -299,8 +305,8 @@
     "sendPledgeWhatsapp"
    ],
    "data": {
-    "data-variant": [
-     "wfe"
+    "data-brand": [
+     "walk"
     ],
     "data-header": [
      ""
@@ -334,8 +340,8 @@
     "main-content"
    ],
    "data": {
-    "data-variant": [
-     "wfe"
+    "data-brand": [
+     "walk"
     ]
    },
    "fields": [],
@@ -350,8 +356,8 @@
     "main-content"
    ],
    "data": {
-    "data-variant": [
-     "wfe"
+    "data-brand": [
+     "walk"
     ]
    },
    "fields": [],
@@ -372,8 +378,8 @@
     "verifiedSteps"
    ],
    "data": {
-    "data-variant": [
-     "wfe"
+    "data-brand": [
+     "walk"
     ]
    },
    "fields": [
@@ -439,6 +445,9 @@
     "waShare"
    ],
    "data": {
+    "data-brand": [
+     "pci"
+    ],
     "data-s": [
      "1",
      "10",
@@ -497,6 +506,9 @@
     "waPledge"
    ],
    "data": {
+    "data-brand": [
+     "pci"
+    ],
     "data-unit": [
      ""
     ],
@@ -555,6 +567,9 @@
     "waShare"
    ],
    "data": {
+    "data-brand": [
+     "pci"
+    ],
     "data-full": [
      ""
     ]
@@ -589,6 +604,9 @@
     "waShare"
    ],
    "data": {
+    "data-brand": [
+     "pci"
+    ],
     "data-unit": [
      ""
     ]
@@ -633,6 +651,9 @@
     "wsky"
    ],
    "data": {
+    "data-brand": [
+     "pci"
+    ],
     "data-slot": [
      "build",
      "parish",
@@ -738,8 +759,8 @@
     "wfeVerifiedProgress"
    ],
    "data": {
-    "data-variant": [
-     "wfe"
+    "data-brand": [
+     "walk"
     ],
     "data-header": [
      ""
@@ -925,8 +946,8 @@
     "wfeVerifiedProgress"
    ],
    "data": {
-    "data-variant": [
-     "wfe"
+    "data-brand": [
+     "walk"
     ],
     "data-sp": [
      "min",
@@ -997,8 +1018,8 @@
     "wfpSelection"
    ],
    "data": {
-    "data-variant": [
-     "wfe"
+    "data-brand": [
+     "walk"
     ],
     "data-campaign-field": [
      "currentStudents",
@@ -1094,8 +1115,8 @@
     "wfeSticky"
    ],
    "data": {
-    "data-variant": [
-     "wfe"
+    "data-brand": [
+     "walk"
     ],
     "data-audience-tab": [
      "individual",
@@ -1159,8 +1180,8 @@
     "wfeSticky"
    ],
    "data": {
-    "data-variant": [
-     "wfe"
+    "data-brand": [
+     "walk"
     ],
     "data-share-campaign": [
      ""

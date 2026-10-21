@@ -3,6 +3,7 @@
      fail  hScroll     the page scrolls sideways (rules R3 and R15)
      fail  clipped     content is cut off at the page edge instead of reflowing
      fail  below24     a tap target under 24 x 24 px on a phone with another target within 24 px (WCAG 2.5.8)
+     note  truncated   text cut off inside its own box instead of wrapping
      note  under44     tap targets under the 44 px design floor (rule R9)
      note  smallText   visible text under 13 px (rule R7)
      note  smallInput  form fields under 16 px, which makes iPhones zoom in (rule R12)
@@ -109,6 +110,16 @@ function inspect(phone) {
     if (size < 13) smallText.set(label(el), Math.round(size * 10) / 10);
   }
 
+  // Text cut off inside its own box: a pill, label or button that clips or truncates instead of wrapping.
+  const truncated = [];
+  for (const el of document.body.querySelectorAll("*")) {
+    if (el.scrollWidth <= el.clientWidth + 1 || el.clientWidth < 8 || el.clientHeight > 160) continue;
+    const style = getComputedStyle(el);
+    if (!/(hidden|clip)/.test(style.overflowX) || !shown(el) || hiddenFromUsers(el)) continue;
+    if (style.whiteSpace !== "nowrap" && style.textOverflow !== "ellipsis") continue;
+    if (el.textContent.trim().length > 2) truncated.push(label(el));
+  }
+
   let below24 = 0;
   let under44 = 0;
   const targetSamples = [];
@@ -151,6 +162,7 @@ function inspect(phone) {
     vw,
     hScroll: document.documentElement.scrollWidth - vw,
     clipped,
+    truncated: truncated.slice(0, 5),
     smallText: [...smallText].slice(0, 5).map(([name, size]) => `${name} ${size}px`),
     smallTextCount: smallText.size,
     below24,
@@ -265,6 +277,9 @@ function stylesheetScan() {
     if (r.clipped.length) parts.push(`clipped: ${r.clipped.slice(0, 3).join("; ")}`);
     if (r.below24) parts.push(`${r.below24} target(s) under 24px: ${r.targetSamples.slice(0, 3).join("; ")}`);
     console.log(`FAIL ${r.viewport.padEnd(12)} ${r.route}  ${parts.join(" | ")}`);
+  }
+  for (const r of results.filter((r) => r.truncated.length)) {
+    console.log(`note: truncated ${r.viewport.padEnd(12)} ${r.route}  ${r.truncated.slice(0, 3).join("; ")}`);
   }
   const noFit = [...new Set(results.filter((r) => !r.viewportFit).map((r) => r.route))];
   const noSize = [...new Set(results.filter((r) => r.imageSize).map((r) => r.route))];

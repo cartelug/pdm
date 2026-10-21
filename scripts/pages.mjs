@@ -4,11 +4,9 @@
    usage: node scripts/pages.mjs
 
    Public pages are index.html files outside admin/, plus 404.html. Each must:
-     • load css/preloader.css and js/preloader.js in <head>, before any other
-       stylesheet, so the branded preloader paints with the first frame;
-     • open <body> with the .site-loader markup (Walk for Education and
-       contribution pages use data-variant="wfe");
-     • declare a language, a viewport and a <title>.
+     • declare a language, a viewport and a <title>;
+     • on the hand-written pages: declare data-brand, load css/brand.css then css/one-look.css last,
+       preload only Archivo and Lexend, and hold no loading screen (no .site-loader, no preloader.css).
    Root-level *.html files other than 404.html are redirects and are skipped.
    ========================================================================== */
 import fs from "node:fs";
@@ -66,20 +64,21 @@ for (const file of pages) {
     continue;
   }
 
-  const firstStylesheet = head.search(/<link[^>]+rel="stylesheet"|<link href="https:\/\/fonts/);
-  const preloaderCss = head.search(/<link rel="stylesheet" href="[^"]*css\/preloader\.css(\?v=[^"]*)?">/);
-  const preloaderJs = head.search(/<script src="[^"]*js\/preloader\.js(\?v=[^"]*)?"><\/script>/);
-  if (preloaderCss === -1) fail("css/preloader.css is not loaded in <head>");
-  else if (preloaderCss !== firstStylesheet) fail("css/preloader.css must be the first stylesheet");
-  if (preloaderJs === -1) fail("js/preloader.js is not loaded synchronously in <head>");
-
-  const body = html.match(/<body[^>]*>\s*([\s\S]{0,400})/);
-  const loader = body && body[1].match(/^<div class="site-loader"( data-variant="(\w+)")? aria-hidden="true">/);
-  if (!loader) fail("<body> must start with the .site-loader markup");
-  else {
-    const campaign = /^(walk-for-education|contribute)\//.test(where);
-    if (campaign && loader[2] !== "wfe") fail('campaign pages use data-variant="wfe" on .site-loader');
-    if (!campaign && loader[2]) fail("only campaign pages set a loader variant");
+  // Hand-written pages share one type system and never hold a loading screen (decision D9).
+  if (!/<html[^>]*\bdata-brand="(walk|pci)"/.test(html)) fail('missing data-brand="walk" or "pci" on <html>');
+  if (!/viewport-fit=cover/.test(head)) fail("viewport meta needs viewport-fit=cover");
+  if (/css\/preloader\.css/.test(head)) fail("css/preloader.css must not be loaded; there is no loading screen");
+  if (/class="site-loader"/.test(html)) fail("the .site-loader markup must not be present");
+  const sheets = [...head.matchAll(/<link[^>]+rel="stylesheet"[^>]*href="([^"]+)"/g)].map((m) =>
+    m[1].replace(/^(\.\.\/)+/, "").replace(/\?.*$/, ""),
+  );
+  const brandAt = sheets.indexOf("css/brand.css");
+  if (brandAt === -1) fail("css/brand.css is not loaded");
+  if (sheets[sheets.length - 1] !== "css/one-look.css") fail("css/one-look.css must be the last stylesheet");
+  else if (brandAt === -1 || brandAt > sheets.length - 2) fail("css/brand.css must come before css/one-look.css");
+  for (const preload of head.matchAll(/<link rel="preload"[^>]*href="([^"]+\.woff2)"/g)) {
+    if (!/archivo-latin-wght-normal|lexend-latin-wght-normal/.test(preload[1]))
+      fail(`preloads an old font: ${preload[1]}`);
   }
 }
 

@@ -55,7 +55,7 @@ figure img {
   border-radius: 999px;
   background: rgb(251 248 242 / 70%);
   color: var(--navy);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.12em;
 }
 
@@ -129,7 +129,7 @@ figure img {
 .w-beneficiaries dt {
   margin-bottom: 4px;
   color: var(--cyan-ink);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -220,7 +220,7 @@ figure img {
 
 .w-hero__caption span {
   color: var(--cyan-bright);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 650;
   letter-spacing: 0.06em;
 }
@@ -228,7 +228,7 @@ figure img {
 .w-hero__caption small {
   margin-top: 4px;
   color: rgb(251 248 242 / 72%);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
 }
 
 .w-hero__line {
@@ -367,7 +367,7 @@ figure img {
     grid-area: status;
     justify-self: start;
     margin-bottom: 14px;
-    font-size: 0.625rem;
+    font-size: 0.8125rem;
     letter-spacing: 0.05em;
     white-space: nowrap;
   }
@@ -670,7 +670,7 @@ figure img {
 .w-steps__u {
   margin-top: 2px;
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
 }
 
@@ -697,7 +697,7 @@ figure img {
   border-radius: 999px;
   background: var(--gold);
   color: var(--navy);
-  font-size: 0.625rem;
+  font-size: 0.8125rem;
   font-weight: 750;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -850,7 +850,7 @@ figure img {
 }
 
 .w-summary > div span {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -929,7 +929,7 @@ figure img {
 .w-chooser__policy {
   margin-top: 4px;
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   text-align: center;
 }
 
@@ -942,7 +942,7 @@ figure img {
   padding-top: 16px;
   border-top: 1px solid var(--line);
   color: var(--ink-2);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
 }
 
@@ -1004,7 +1004,7 @@ figure img {
   }
 
   .w-steps strong {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
   }
 
   .w-steps .v3-suggested {
@@ -1191,7 +1191,7 @@ figure img {
 .w-bag__frame figcaption span {
   grid-row: span 2;
   color: var(--cyan-bright);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.1em;
 }
@@ -1205,7 +1205,7 @@ figure img {
 
 .w-bag__credit {
   color: rgb(251 248 242 / 60%);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
 }
 
 .w-bag__ticks {
@@ -1469,7 +1469,7 @@ figure img {
   border-radius: 999px;
   background: rgb(251 248 242 / 92%);
   color: var(--navy);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
@@ -1542,7 +1542,7 @@ figure img {
   .w-learn__fig figcaption {
     left: 8px;
     bottom: 8px;
-    font-size: 0.6875rem;
+    font-size: 0.8125rem;
   }
 }
 
@@ -1654,7 +1654,7 @@ figure img {
 .w-priorities__title {
   margin-bottom: 14px;
   color: var(--cyan-bright);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -1839,7 +1839,7 @@ figure img {
 
 .w-route__end span {
   color: var(--cyan-ink);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -1903,7 +1903,7 @@ figure img {
   right: clamp(18px, 3vw, 32px);
   bottom: 10px;
   color: var(--muted);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
 }
 
@@ -1924,7 +1924,7 @@ figure img {
 
 .w-journey__facts dt {
   color: var(--cyan-ink);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -1995,7 +1995,7 @@ figure img {
 }
 
 .w-stages .stage-state {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2345,7 +2345,7 @@ figure img {
 
 .w-way__n {
   color: var(--cyan-ink);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -2414,7 +2414,7 @@ figure img {
 .w-tiers thead th {
   padding: 0 0 10px;
   color: var(--muted);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-align: left;
@@ -2484,7 +2484,7 @@ figure img {
   }
 
   .w-tiers thead th {
-    font-size: 0.625rem;
+    font-size: 0.8125rem;
     letter-spacing: 0.08em;
   }
 
@@ -2573,7 +2573,7 @@ figure img {
   border-radius: 50%;
   background: var(--paper);
   box-shadow: inset 0 0 0 1.5px var(--navy);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
 }
 
@@ -2621,7 +2621,7 @@ figure img {
 
 .w-approved .lbl {
   color: var(--cyan-bright);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -2717,7 +2717,7 @@ figure img {
 
 .w-trust__label {
   color: var(--cyan-ink);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -2882,7 +2882,7 @@ figure img {
   flex-wrap: wrap;
   gap: 4px 14px;
   color: var(--cyan-ink);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3073,7 +3073,7 @@ figure img {
 
 .r-gallery-meta small {
   color: var(--cyan-ink);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -3167,7 +3167,7 @@ figure img {
 
 .w-resources__grid small {
   color: var(--cyan-ink);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.1em;
 }
@@ -3283,7 +3283,7 @@ figure img {
 
 .w-viewer__top span {
   color: var(--cyan-bright);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -3413,7 +3413,7 @@ figure img {
 
 .w-ledger-list .channel-type {
   color: var(--cyan-ink);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -3605,7 +3605,7 @@ figure img {
 
 .w-certificate > div > span:not(.w-certificate__seal) {
   color: var(--cyan-ink);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -3644,7 +3644,7 @@ figure img {
   background: var(--navy);
   color: var(--paper);
   font-family: var(--display);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-style: normal;
   line-height: 1.25;
   box-shadow:
@@ -3660,7 +3660,7 @@ figure img {
   border-radius: 999px;
   background: var(--navy);
   color: var(--paper);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3786,7 +3786,7 @@ figure img {
   right: var(--gutter);
   bottom: 14px;
   color: rgb(251 248 242 / 70%);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
 }
 
 @media (max-width: 640px) {

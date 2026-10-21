@@ -1,0 +1,244 @@
+/* ==========================================================================
+   one-look — the shared presentation layer for the hand-written pages
+   --------------------------------------------------------------------------
+   Loaded last on Walk for Education, the contribution pages and Faith in Motion, after css/brand.css (design
+   tokens and the Archivo and Lexend fonts). It puts all three families on one type system without touching the
+   protected stylesheets or any pledge, price or payment code: it only changes how things look.
+
+   Rules enforced here (decisions D1, D6, D9; responsive rulebook R3, R7, R9):
+     - Archivo for headings, menus, buttons, labels and figures; Lexend for everything else
+     - no italics anywhere
+     - no loading screen
+     - nothing smaller than 13 px, and nothing wider than the screen
+   Each page family keeps its own palette; the brand is chosen by data-brand on <html>.
+
+   This file is a migration layer. A page that moves to the Astro build drops it.
+   ========================================================================== */
+
+/* ---------- 1. Type roles ---------- */
+
+/* Everything defaults to the reading face. !important is deliberate: the protected stylesheets name their fonts
+   directly and with higher specificity, so this is the only way to apply one system on top of them. */
+html[data-brand] body,
+html[data-brand] body :where(*) {
+  font-family: var(--font-body) !important;
+  font-style: normal !important;
+  font-synthesis: none;
+}
+
+html[data-brand]
+  body
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    button,
+    summary,
+    label,
+    legend,
+    th,
+    caption,
+    figcaption,
+    nav a,
+    .brand b
+  ),
+html[data-brand]
+  body
+  :is([class*="btn"], [class*="button"], [class*="kicker"], [class*="eyebrow"], [class*="crumb"]),
+html[data-brand] body :is([class*="label"], [class*="badge"], [class*="pill"], [class*="chip"]),
+html[data-brand] body :is([class*="display"], [class*="headline"], [class*="figure"]),
+html[data-brand]
+  body
+  :is(
+    [class*="total"],
+    [class*="amount"],
+    [id*="otal"],
+    [id*="mount"],
+    [data-sp-amount],
+    [data-sp-steps]
+  ) {
+  font-family: var(--font-head) !important;
+}
+
+html[data-brand]
+  body
+  :is(
+    [class*="figure"],
+    [class*="total"],
+    [class*="amount"],
+    [id*="otal"],
+    [id*="mount"],
+    [data-sp-amount],
+    [data-sp-steps],
+    th,
+    td.num
+  ) {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Emphasis is carried by weight and colour, never by slant. */
+html[data-brand] body :is(em, i, cite, dfn, address, var) {
+  font-style: normal !important;
+  font-weight: 600;
+}
+
+/* The stylesheets also reach their fonts through variables, a few of them with !important. Pointing the variables
+   at the same two fonts keeps those rules in line with the roles above. */
+html[data-brand] {
+  --display: var(--font-head);
+  --sans: var(--font-body);
+  --ed-sans: var(--font-body);
+  --ed-serif: var(--font-head);
+  --ed-mono: var(--font-head);
+  --wfe-display: var(--font-head);
+  --wfe-serif: var(--font-head);
+  --wfe-body: var(--font-body);
+}
+
+html[data-brand] .wfp {
+  --wfp-display: var(--font-head);
+  --wfp-serif: var(--font-head);
+  --wfp-body: var(--font-body);
+}
+
+/* ---------- 1b. One Walk palette ---------- */
+
+/* The inner Walk pages were built on a red-and-blue editorial palette, the home page on navy, gold and cyan.
+   The editorial variables now read the Walk tokens, so every Walk page is navy and ivory with gold fills and
+   cyan links. The PCI mark keeps its own red. */
+html[data-brand="walk"] {
+  --ed-ink: var(--c-ink);
+  --ed-ink-soft: var(--c-ink-soft);
+  --ed-muted: var(--c-muted);
+  --ed-paper: var(--c-paper);
+  --ed-bone: var(--c-ivory);
+  --ed-navy: var(--c-deep);
+  --ed-gold: var(--c-accent);
+  --ed-blue: var(--c-link);
+  --ed-crimson: var(--c-deep);
+  --ed-crimson-deep: var(--c-ink);
+  --ed-line: var(--c-line);
+  --ed-line-strong: var(--c-line-strong);
+}
+
+/* ---------- 2. No loading screen ---------- */
+
+.site-loader {
+  display: none !important;
+}
+
+/* ---------- 3. Nothing wider than the screen ---------- */
+
+html[data-brand]
+  :where(a[href^="mailto:"], a[href^="tel:"], [data-wfe-email], [data-wfe-whatsapp]) {
+  overflow-wrap: anywhere;
+}
+
+html[data-brand] body :where(p, li, dd, dt, td, th, h1, h2, h3, h4, label, summary) {
+  overflow-wrap: break-word;
+}
+
+html[data-brand] :where(img, svg, video, canvas, iframe) {
+  max-width: 100%;
+}
+
+/* ---------- 4. Narrow screens and large text ---------- */
+
+/* A grid or flex item will not shrink below its content unless it is told it may. :where() keeps this at zero
+   specificity, so it only replaces the browser default (min-width: auto) and never an explicit min-width. */
+:where(div, section, article, aside, header, footer, form, ul, ol, li, figure, main, nav, dl) {
+  min-width: 0;
+}
+
+html[data-brand] body :where(h1, h2, h3, h4, h5, h6) {
+  overflow-wrap: anywhere;
+}
+
+/* Text in a narrow box wraps instead of running past the edge (account numbers, long names, large text). */
+html[data-brand]
+  body
+  :where(.w-tiers, .pay-method, .r-gallery-meta, .wfe2-report-card, .wfe2-section-heading)
+  :where(*) {
+  overflow-wrap: anywhere;
+}
+
+html[data-brand] .w-tiers {
+  table-layout: fixed;
+}
+
+/* The small header of the contribution pages keeps its links on screen at 320 px and with large text. */
+html[data-brand] .collections-header .wrap,
+html[data-brand] .collections-header nav {
+  flex-wrap: wrap;
+}
+
+html[data-brand] .collections-header nav {
+  row-gap: 0;
+}
+
+/* The Walk header and the campaign status line wrap at large text instead of pushing the page sideways. */
+html[data-brand] .w-header__bar {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+html[data-brand] .w-kicker.w-hero__status {
+  white-space: normal;
+  border-radius: 20px;
+}
+
+/* ---------- 5. Nothing under 13 px (rule R7) ---------- */
+
+/* Faith in Motion captions, counters and labels that were authored smaller. Every instance of these is small. */
+html[data-brand="pci"]
+  :is(
+    .c,
+    .a,
+    .unitline,
+    dt,
+    small,
+    em,
+    .range-help,
+    .copyb,
+    .nm,
+    .fineprint,
+    .tcard .n,
+    .road-head .mono,
+    .lead span span,
+    .pf .legend span,
+    .pf .legend b
+  ) {
+  font-size: 0.8125rem;
+}
+
+/* The same on the contribution and Walk pages that sit on protected stylesheets. */
+html[data-brand="walk"] :is(.w-tiers td small, .wfp-index, .wfp li > a > span, .receipt-box p) {
+  font-size: 0.8125rem;
+}
+
+/* Inline styles under 13 px (a few Faith in Motion and verification captions) can only be overridden with
+   !important. The exact pixel values are listed so nothing larger is touched. */
+html[data-brand]
+  :is(
+    [style*="font-size:9px"],
+    [style*="font-size: 9px"],
+    [style*="font-size:9.5px"],
+    [style*="font-size: 9.5px"],
+    [style*="font-size:10px"],
+    [style*="font-size: 10px"],
+    [style*="font-size:10.5px"],
+    [style*="font-size: 10.5px"],
+    [style*="font-size:11px"],
+    [style*="font-size: 11px"],
+    [style*="font-size:11.5px"],
+    [style*="font-size: 11.5px"],
+    [style*="font-size:12px"],
+    [style*="font-size: 12px"],
+    [style*="font-size:12.5px"],
+    [style*="font-size: 12.5px"]
+  ) {
+  font-size: 0.8125rem !important;
+}

@@ -245,7 +245,7 @@ body.wfe-campaign {
 .wfe-campaign .wfe-eyebrow,
 .wfe-campaign .wfp-kicker,
 .wfe-campaign .wfp-label {
-  font: 500 11.5px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ed-crimson);
@@ -392,7 +392,7 @@ body.wfe-campaign {
 
 .wfe-campaign .wfe2-brand small {
   margin-top: 6px;
-  font: 500 9.5px/1.2 var(--ed-mono);
+  font: 500 13px/1.2 var(--ed-mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ed-muted);
@@ -646,7 +646,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .launch-hero-art figcaption small {
-  font: 500 10.5px/1.6 var(--ed-mono);
+  font: 500 13px/1.6 var(--ed-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ed-muted);
@@ -666,7 +666,7 @@ body.wfe-campaign {
 .wfe-campaign .v3-hero-foot {
   padding: 18px 0;
   border-top: 1px solid var(--ed-on-navy-line);
-  font: 500 11px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ed-on-navy-muted);
@@ -692,7 +692,7 @@ body.wfe-campaign {
 
 .wfe-campaign .v3-give-heading .wfe-eyebrow {
   margin-bottom: 12px;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--ed-crimson);
 }
 
@@ -763,7 +763,7 @@ body.wfe-campaign {
 
 .wfe-campaign .pledge-country-code,
 .collections-page .pledge-country-code {
-  font-size: 10.5px;
+  font-size: 13px;
   color: var(--ed-muted);
 }
 
@@ -774,7 +774,7 @@ body.wfe-campaign {
 
 .wfe-campaign .pledge-country-options small,
 .wfe-campaign .v3-step-options button > span {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--ed-muted);
 }
 
@@ -833,7 +833,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .v3-step-options button strong small {
-  font: 500 9.5px/1.2 var(--ed-mono);
+  font: 500 13px/1.2 var(--ed-mono);
   letter-spacing: 0.12em;
   color: var(--ed-muted);
 }
@@ -843,7 +843,7 @@ body.wfe-campaign {
   padding: 3px 10px;
   border-radius: 999px;
   background: var(--ed-ink);
-  font: 500 9.5px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -887,7 +887,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .v3-give-total > div small {
-  font: 500 11px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.08em;
   color: var(--ed-ink);
 }
@@ -942,7 +942,7 @@ body.wfe-campaign {
 .wfe-campaign .v3-give-assurance {
   gap: 18px;
   border-top-color: var(--ed-line);
-  font: 500 10.5px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ed-muted);
@@ -970,7 +970,7 @@ body.wfe-campaign {
 
 .wfe-campaign .wfe2-partners .wfe-eyebrow {
   margin-bottom: 22px;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--ed-muted);
 }
 
@@ -998,7 +998,7 @@ body.wfe-campaign {
 
 .wfe-campaign .launch-feature-art figcaption {
   padding: 16px 24px;
-  font: 500 10.5px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ed-on-navy-muted);
@@ -1083,7 +1083,7 @@ body.wfe-campaign {
 
 .wfe-campaign .v3-campus figcaption small,
 .wfe-campaign .v3-campus figcaption a {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--ed-on-navy-muted);
 }
 
@@ -1093,7 +1093,7 @@ body.wfe-campaign {
   padding: 8px 14px;
   border-radius: 999px;
   background: rgb(250 248 244 / 92%);
-  font: 500 10.5px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.12em;
   color: var(--ed-ink);
 }
@@ -1166,7 +1166,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .v3-priorities > a > span {
-  font: 500 11px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.12em;
   color: var(--ed-crimson);
 }
@@ -1234,7 +1234,7 @@ body.wfe-campaign {
 
 .wfe-campaign .v3-distance > span,
 .wfe-campaign .v3-route span {
-  font: 500 11px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.14em;
   color: var(--ed-on-navy-muted);
 }
@@ -1298,7 +1298,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .launch-briefings .field-meta {
-  font: 500 10.5px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ed-on-navy-muted);
@@ -1347,7 +1347,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .v3-builder > span {
-  font: 500 11px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.14em;
   color: var(--ed-muted);
 }
@@ -1358,7 +1358,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .v3-builder > strong small {
-  font: 500 10px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.12em;
 }
 
@@ -1399,7 +1399,7 @@ body.wfe-campaign {
   padding: 7px 12px;
   border-radius: 999px;
   background: rgb(250 248 244 / 92%);
-  font: 500 10px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ed-ink);
@@ -1462,7 +1462,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .v3-paths > a > span {
-  font: 500 11px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.12em;
   color: var(--ed-crimson);
 }
@@ -1514,7 +1514,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .channel-type {
-  font: 500 11px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ed-crimson);
@@ -1575,7 +1575,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .channel-meta dt {
-  font: 500 11px/1.9 var(--ed-mono);
+  font: 500 13px/1.9 var(--ed-mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ed-muted);
@@ -1616,7 +1616,7 @@ body.wfe-campaign {
   width: 36px;
   height: 36px;
   border-color: var(--ed-line-strong);
-  font: 500 11px/34px var(--ed-mono);
+  font: 500 13px/34px var(--ed-mono);
   color: var(--ed-crimson);
 }
 
@@ -1645,7 +1645,7 @@ body.wfe-campaign {
 
 .wfe-campaign .wfe2-cert-preview span:not(.wfe2-cert-seal),
 .wfe-campaign .wfe2-preview-label {
-  font: 500 9px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.16em;
 }
 
@@ -1663,7 +1663,7 @@ body.wfe-campaign {
 .wfe-campaign .wfe2-cert-seal {
   border-color: #d9b45a;
   background: var(--ed-navy);
-  font: 600 8px/1.4 var(--ed-sans);
+  font: 600 13px/1.4 var(--ed-sans);
   letter-spacing: 0.06em;
 }
 
@@ -1807,7 +1807,7 @@ body.wfe-campaign {
 
 .wfe-campaign .wfe2-footer .campaign-socials > span {
   margin-right: 8px;
-  font: 500 11px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ed-gold);
@@ -1845,7 +1845,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .wfe2-footer-contact > span {
-  font: 500 11px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.14em;
   color: var(--ed-gold);
 }
@@ -1877,7 +1877,7 @@ body.wfe-campaign {
 
 .wfe-campaign .wfe2-footer-bottom {
   border-top-color: var(--ed-on-navy-line);
-  font: 500 11px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ed-on-navy-muted);
@@ -1902,7 +1902,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .wfe-sticky-contribute small {
-  font: 500 10px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.08em;
   color: var(--ed-muted);
 }
@@ -1989,7 +1989,7 @@ body.wfe-campaign {
 .wfe-campaign .wfe2-breadcrumb,
 .wfe-campaign .wfp-breadcrumb {
   margin-bottom: clamp(28px, 4vw, 52px);
-  font: 500 11px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ed-muted);
@@ -2044,7 +2044,7 @@ body.wfe-campaign {
 
 .wfe-campaign .wfe2-editorial-image figcaption {
   margin-top: 14px;
-  font: 500 10.5px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ed-muted);
@@ -2239,7 +2239,7 @@ body.wfe-campaign {
 
 .wfe-campaign .wfe2-definition-grid article > span,
 .wfe-campaign .wfe2-definition-grid .wfe2-index {
-  font: 500 11px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ed-crimson);
@@ -2289,7 +2289,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .wfe2-report-card dt {
-  font: 500 11px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ed-muted);
@@ -2319,7 +2319,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .wfe2-doc-list > div > span {
-  font: 500 11px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.1em;
   color: var(--ed-crimson);
 }
@@ -2342,7 +2342,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .field-meta {
-  font: 500 11px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ed-muted);
@@ -2364,7 +2364,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .field-source {
-  font: 500 10.5px/1.6 var(--ed-mono) !important;
+  font: 500 13px/1.6 var(--ed-mono) !important;
   letter-spacing: 0.06em;
 }
 
@@ -2373,7 +2373,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .wfe2-update-themes span {
-  font: 500 11px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.12em;
   color: var(--ed-gold);
 }
@@ -2419,7 +2419,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .wfp-hero-media figcaption {
-  font: 500 10.5px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ed-on-navy-muted);
@@ -2432,7 +2432,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .wfp-hero-badge span {
-  font: 500 10.5px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.12em;
   color: var(--ed-crimson);
 }
@@ -2448,7 +2448,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .wfp-facts dt {
-  font: 500 10.5px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ed-on-navy-muted);
@@ -2535,7 +2535,7 @@ body.wfe-campaign {
 }
 
 .wfe-campaign .wfp-level-name {
-  font: 500 11px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.14em;
   color: var(--ed-ink-soft);
 }
@@ -2716,7 +2716,7 @@ body.collections-page {
 
 .collections-page .collection-kicker,
 .collections-page .collection-label {
-  font: 500 11.5px/1.5 var(--ed-mono);
+  font: 500 13px/1.5 var(--ed-mono);
   letter-spacing: 0.14em;
   color: var(--ed-crimson);
 }
@@ -2801,7 +2801,7 @@ body.collections-page {
 .wfe-campaign .v3-builder > strong small,
 .wfe-campaign .v3-people-image > span,
 .collections-page .collections-header .brand .t span {
-  font-size: 10.5px;
+  font-size: 13px;
 }
 
 .wfe-campaign .v3-give-assurance,
@@ -2816,7 +2816,7 @@ body.collections-page {
 .wfe-campaign .v3-hero-foot .wfe-shell > *,
 .collections-page .collection-footer > span,
 .collections-page .step-checkout-aside figcaption {
-  font-size: 11px !important;
+  font-size: 13px !important;
 }
 
 .wfe-campaign .v3-builder-foot > a,
@@ -2830,7 +2830,7 @@ body.collections-page {
 
 .collections-page .collection-progress-steps b,
 .collections-page #selectionReview > div:first-child > span {
-  font-size: 10.5px;
+  font-size: 13px;
 }
 
 .collections-page #selectionReview > div:first-child > span {
@@ -2838,7 +2838,7 @@ body.collections-page {
 }
 
 .collections-page .pledge-country-options small {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .wfe-campaign .wfe2-brand,
@@ -3112,7 +3112,7 @@ body.collections-page {
   border-radius: 50%;
   background: var(--ed-navy);
   color: var(--ed-on-navy);
-  font: 500 12px/1 var(--ed-mono);
+  font: 500 13px/1 var(--ed-mono);
   letter-spacing: 0.04em;
 }
 
@@ -3130,7 +3130,7 @@ body.collections-page {
 }
 
 .wfe-contribute .collection-progress-steps small {
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 400;
   letter-spacing: 0;
   color: var(--ed-muted);
@@ -3200,7 +3200,7 @@ body.collections-page {
 
 .wfe-contribute .pay-method h3 {
   margin: 0 0 12px;
-  font: 500 11.5px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ed-gold);
@@ -3213,7 +3213,7 @@ body.collections-page {
 }
 
 .wfe-contribute .pay-fields dt {
-  font: 500 11px/1.4 var(--ed-mono);
+  font: 500 13px/1.4 var(--ed-mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ed-on-navy-muted);
@@ -3341,7 +3341,7 @@ body.collections-page {
 
 .wfe-contribute .why-band figcaption {
   margin-top: 10px;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--ed-muted);
 }
 

@@ -92,11 +92,11 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "9c6993a29a1ddf42ef9e750cb1ade9254bce539908d834925bb2f42b02c793c7",
-    "contribute/payment/index.html": "4730c67e1b098b8a1353aba5d3d45cdde2e6c9f173151d42ab166315f664f481",
-    "contribute/privacy/index.html": "689455cc9a703f7e2ab5fe7a92f3954e16a9794e4ffa5ce9e35d10c96d192eb0",
-    "contribute/terms/index.html": "dda2d836da3a50b41d082b18614c5306259255fa31301c35b03f07cda535f93e",
-    "contribute/verify/index.html": "45de692d823f39e53c33b77f7299f7bee4c8b22dae046a19802fc8082d848c37",
+    "contribute/index.html": "bbef3d99a79bc7b1a47046856280635f65618bc90b0cb2d764ea3044690acf81",
+    "contribute/payment/index.html": "ee5de58f23c254163fcb2234196196f12f57371ea3c2182df47028ac1ade8acd",
+    "contribute/privacy/index.html": "3dc6069ab27344ccdfc66cd6cd2c613f9b70dcf77085d6704133e76ff34d4813",
+    "contribute/terms/index.html": "4ed98316f2516a273e4542ed28cdd5ba2ef81bad53a76903de4c9e9955f25271",
+    "contribute/verify/index.html": "18869973602530285ba7162a947fa4a26170c01527dbe526ce9502035aed8504",
     "css/base.css": "368d70b67bd5c7c3e60f7f44a9d8c93bfb8db7e2e8559cb00f223cfcf14893c5",
     "css/collections.css": "cd779925dd2f0519e39b3b7e5f577d660dcee3bf08f8ce98c67bad5615a47f23",
     "css/contribute.css": "e02336271318e777f18aa7a98cb227dd896eed88bebe9de6bc0b054622ed2c81",
@@ -118,7 +118,7 @@
     "js/fim.js": "e337eaf69e7ba1e5cad30685a0c144a63cf5641bcd62b8ee20ba3216c7844e36",
     "js/pci.js": "6aba35c8fcde6e71ae42f83d0bdd2beae9c3de976c7373a80bb81fa8ffae39f4",
     "js/pdm.js": "2282104c672d80439ecbdd2acac5aa1b73a400cf9b7cad927c669199157a50c8",
-    "js/preloader.js": "a18f3d2865a1d1aa03a66dffa58ab18f7e9cb069f158dae4a1bb748557b4618e",
+    "js/preloader.js": "a24fd4d4160d1d35551dc4488bf03b02503f2ea79932cc3a80f1df8dd3a52bd6",
     "js/roll-data.js": "12639a4702202543a292ddfc95f9cc4cd1034bfc79272ac8293cb803bff0624c",
     "js/site-motion.js": "6c350b326056cf5a928b92a714e73da40aa7e6d54b7737ceb57af3c9483e232b",
     "js/step-pricing.js": "c0c2d4ff9607c2bfd23be319a02963042e5c1b8dbd6d0f6559a9f05aee848380",
@@ -127,11 +127,11 @@
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "f4b73bdf7a6dc3af0a488a965b97f726195afc8edd05b50522bb11dd35378bad",
     "js/wfe.js": "01746af6d7f7ec88c36d981ac649764bde29693f2da3bb65e28f3406978bf4e2",
-    "walk-for-education/accountability/index.html": "dcbd4073071e21dd806ec392e072fce65400901541d96b8e41e1d397123b531e",
-    "walk-for-education/index.html": "749706d739fc74ae44498b8fb59c3729f09c2205b12038a4f9bcb05adb2b2410",
-    "walk-for-education/partners/index.html": "80d4a79ec37e1b25089cfd613d630382c46dfaf5d428ffc9d0fa648a1218e692",
-    "walk-for-education/take-part/index.html": "c64272c8bb96a29d3217d9be7d394095f964d992f94dc01b5d93ec15d51a00e3",
-    "walk-for-education/updates/index.html": "f0dcacbdfe291852d19ab6b571cda5e4a1253260e5e4844733d51294cd88eed0"
+    "walk-for-education/accountability/index.html": "18153c25cbea5d5495878e780a7da7f83116a26aaeb9733be15bea18171c1b84",
+    "walk-for-education/index.html": "963c2862426325ac239a6954779b4666c9b29de13a3603560cf2770b633ae4b9",
+    "walk-for-education/partners/index.html": "589dc3aec8fb1e424b6f99e0e78a8fd13056735ed2714cd4e8bc3dc681311e87",
+    "walk-for-education/take-part/index.html": "b4570b8d5f9e9f4f6fe6aaaa31675c5e5bf91163eb8004b43c5b7c1a9cde3986",
+    "walk-for-education/updates/index.html": "0c7c877ce0e91ba47e8ecd0af4e25c63ea0703b81ac485e8bf92d59726940af9"
   },
   "presentationReviews": [
     {
@@ -320,6 +320,72 @@
       "reason": "User-requested clean phone layout at 100% zoom: no sideways overflow after saving a pledge, full-width third country option, stacked record details on narrow phones. CSS reference hashes only; no text, price, ID or service changes.",
       "previousSha256": "c167e2dc281246323a36e2e31ef71b3c7b3ffe4127054558c55df303f123bc5e",
       "sha256": "4730c67e1b098b8a1353aba5d3d45cdde2e6c9f173151d42ab166315f664f481"
+    },
+    {
+      "path": "contribute/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "9c6993a29a1ddf42ef9e750cb1ade9254bce539908d834925bb2f42b02c793c7"
+    },
+    {
+      "path": "contribute/payment/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "4730c67e1b098b8a1353aba5d3d45cdde2e6c9f173151d42ab166315f664f481"
+    },
+    {
+      "path": "contribute/privacy/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "689455cc9a703f7e2ab5fe7a92f3954e16a9794e4ffa5ce9e35d10c96d192eb0"
+    },
+    {
+      "path": "contribute/terms/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "dda2d836da3a50b41d082b18614c5306259255fa31301c35b03f07cda535f93e"
+    },
+    {
+      "path": "contribute/verify/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "45de692d823f39e53c33b77f7299f7bee4c8b22dae046a19802fc8082d848c37"
+    },
+    {
+      "path": "js/preloader.js",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign (decision D9): the branded loading screen is retired. The page-ready contract is kept (PamodziPreloader.whenDone, the pamodzi:preloaded event, html.is-preloaded) but finishes at once, shows nothing and never adds has-preloader. No pledge, price or payment logic is involved.",
+      "previousSha256": "a18f3d2865a1d1aa03a66dffa58ab18f7e9cb069f158dae4a1bb748557b4618e"
+    },
+    {
+      "path": "walk-for-education/accountability/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "dcbd4073071e21dd806ec392e072fce65400901541d96b8e41e1d397123b531e"
+    },
+    {
+      "path": "walk-for-education/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "749706d739fc74ae44498b8fb59c3729f09c2205b12038a4f9bcb05adb2b2410"
+    },
+    {
+      "path": "walk-for-education/partners/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "80d4a79ec37e1b25089cfd613d630382c46dfaf5d428ffc9d0fa648a1218e692"
+    },
+    {
+      "path": "walk-for-education/take-part/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "c64272c8bb96a29d3217d9be7d394095f964d992f94dc01b5d93ec15d51a00e3"
+    },
+    {
+      "path": "walk-for-education/updates/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "f0dcacbdfe291852d19ab6b571cda5e4a1253260e5e4844733d51294cd88eed0"
     }
   ]
 }

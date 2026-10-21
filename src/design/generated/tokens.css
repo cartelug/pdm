@@ -6,8 +6,10 @@
    Brands: data-brand="pci" or data-brand="walk" on <html>. PCI is the default. */
 
 :root {
-  --font-head: "Archivo", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
-  --font-body: "Lexend", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --font-head:
+    "Archivo", "Archivo Fallback", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --font-body:
+    "Lexend", "Lexend Fallback", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
   --fs-display: clamp(2.5rem, 1.6rem + 4.2vw, 5rem);
   --fs-h1: clamp(2.125rem, 1.5rem + 3vw, 3.75rem);
   --fs-h2: clamp(1.75rem, 1.35rem + 1.8vw, 2.75rem);
@@ -69,7 +71,7 @@
   --c-link-on-deep: #e6ad3e;
   --c-highlight: #e6ad3e;
   --c-success: #2f5d46;
-  --c-on-success: #ffffff;
+  --c-on-success: #fff;
   --c-danger: #a3271d;
   --c-focus: #9b1630;
   --c-focus-on-deep: #e6ad3e;
@@ -97,7 +99,7 @@
   --c-link-on-deep: #5cc8e8;
   --c-highlight: #2a9cc1;
   --c-success: #1f7a4d;
-  --c-on-success: #ffffff;
+  --c-on-success: #fff;
   --c-danger: #a3271d;
   --c-focus: #0b6e8e;
   --c-focus-on-deep: #5cc8e8;

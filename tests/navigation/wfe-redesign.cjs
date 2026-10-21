@@ -134,12 +134,12 @@ function check(value, message) {
     await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
     await page.screenshot({ path: path.join(shots, "PCI_WFE_Desktop_Hero.png") });
     check(
-      await page.locator("h1").evaluate((el) => getComputedStyle(el).fontFamily.includes("Montserrat")),
-      "display type uses Montserrat",
+      await page.locator("h1").evaluate((el) => getComputedStyle(el).fontFamily.includes("Archivo")),
+      "display type uses Archivo",
     );
     check(
-      await page.locator("#campaignSteps").evaluate((el) => getComputedStyle(el).fontFamily.includes("Montserrat")),
-      "controls use Montserrat",
+      await page.locator("#campaignSteps").evaluate((el) => getComputedStyle(el).fontFamily.includes("Lexend")),
+      "controls use Lexend",
     );
     await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
     const scanAccessibility = () =>

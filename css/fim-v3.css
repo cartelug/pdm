@@ -153,7 +153,7 @@
 .pci-fim-v3 .survey,
 .pci-fim-v3 .eyebrow {
   font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: 0.13em;
 }
@@ -204,7 +204,7 @@
 
 .pci-fim-v3 .brand .t span {
   margin-top: 6px;
-  font-size: 0.6rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.16em;
 }
 
@@ -371,7 +371,7 @@
 
 .pci-fim-v3 footer h2 {
   font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -434,18 +434,18 @@
 .pci-fim-v3 .milestone .badge > span,
 .pci-fim-v3 .verb .n,
 .pci-fim-v3 .fbot > span {
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .pci-fim-v3 .tier > span,
 .pci-fim-v3 .pill {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .pci-fim-v3 .crumb,
 .pci-fim-v3 .crumb a,
 .pci-fim-v3 .crumb b {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .pci-fim-v3 .crumb a {
