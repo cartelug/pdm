@@ -21,5 +21,7 @@ export function withCampaign(project: ProjectEntry): ProjectEntry {
 
 export async function getProjects(): Promise<ProjectEntry[]> {
   const records = await getCollection("projects", (record) => record.data.publication !== "draft");
-  return records.map(withCampaign);
+  // The content loader gives no ordering guarantee (entries arrive as files finish reading), so sort explicitly:
+  // the generated pages must be identical on every machine.
+  return records.map(withCampaign).sort((a, b) => a.id.localeCompare(b.id));
 }
