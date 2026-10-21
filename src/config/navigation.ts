@@ -19,6 +19,34 @@ export const navigation: NavigationEntry[] = [
   { label: "Faith in Motion", route: "/faith-in-motion/", group: "engage" },
   { label: "Walk for Education", route: "/walk-for-education/", group: "engage", protected: true },
 ];
+
+// The header, the mobile menu and the sitemap read the same grouping, by what a visitor wants to know.
+export type NavItem = { label: string; route: string };
+export type NavGroup = { label: string; route: string; items?: NavItem[] };
+export const primaryNav: NavGroup[] = [
+  {
+    label: "Our work",
+    route: "/what-we-do/",
+    items: [
+      { label: "What We Do", route: "/what-we-do/" },
+      { label: "Our Projects", route: "/projects/" },
+      { label: "Our Model", route: "/model/" },
+    ],
+  },
+  {
+    label: "Impact and trust",
+    route: "/impact/",
+    items: [
+      { label: "Our Impact", route: "/impact/" },
+      { label: "Governance", route: "/governance/" },
+    ],
+  },
+  { label: "Partner with us", route: "/partnerships/" },
+  { label: "Updates", route: "/updates/" },
+  { label: "About", route: "/about/" },
+];
+export const isCurrent = (group: NavGroup, path: string) =>
+  group.route === path || (group.items ?? []).some((item) => item.route === path);
 export const programmes = [
   {
     id: "education",

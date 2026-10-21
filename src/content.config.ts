@@ -17,7 +17,7 @@ export const collections = {
     schema: z.object({
       title: z.string(),
       route: z.string(),
-      status: z.enum(["Live campaign", "Under review", "Pipeline", "Programme area", "Preparing launch"]),
+      status: z.enum(["Live campaign", "Under review", "Pipeline", "Programme area", "Preparing launch", "Completed"]),
       category: z.string(),
       location: z.string(),
       summary: z.string(),

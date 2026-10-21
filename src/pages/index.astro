@@ -1,14 +1,16 @@
 ---
 import Icon from "../components/global/Icon.astro";
 import Rings from "../components/global/Rings.astro";
-import { getCollection } from "astro:content";
 import Layout from "../layouts/InstitutionalLayout.astro";
 import UpdatesFeed from "../components/global/UpdatesFeed.astro";
 import ModelPreview from "../components/home/ModelPreview.astro";
 import ProjectCard from "../components/projects/ProjectCard.astro";
 import HomeHero from "../components/home/HomeHero.astro";
 import ProgrammePillars from "../components/home/ProgrammePillars.astro";
-const records = await getCollection("projects", (p) => p.data.publication !== "draft");
+import { campaignView } from "../lib/campaign";
+import { getProjects } from "../lib/projects";
+const records = await getProjects();
+const walk = campaignView();
 const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((id) =>
   records.find((p) => p.id === id)!,
 );
@@ -208,7 +210,7 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
           />
         </div>
         <div class="pci-duo__body">
-          <span class="pci-status">Pledges open · walk dates unconfirmed</span>
+          <span class="pci-status">{walk.label}</span>
           <h3>Walk for Education</h3>
           <p>
             A planned Nairobi-to-Kagando journey supporting UCU–Kagando University College and the neighbouring nursery

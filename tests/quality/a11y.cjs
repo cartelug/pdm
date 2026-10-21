@@ -20,6 +20,10 @@ const skip = new Set([
   ".git",
   ".github",
   "dist",
+  "build-v3",
+  "public-v3",
+  "docs",
+  "deploy",
 ]);
 
 function routes(dir = root, prefix = "/") {

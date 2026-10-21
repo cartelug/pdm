@@ -103,15 +103,13 @@
     line-height: 1.3;
   }
 
+  /* The accent words in a headline are set apart by colour, never by slant (decision D1). */
   h1 em,
   h2 em,
   h3 em,
   .pci-statement em {
-    font-family: var(--pci-serif);
-    font-size: 1.08em;
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.01em;
+    font-style: normal;
+    font-weight: inherit;
     color: var(--pci-crimson);
   }
 
@@ -125,6 +123,34 @@
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  /* A grid or flex item will not shrink below its content unless told it may; :where() keeps this at zero
+     specificity so it only replaces the browser default. Long words wrap instead of running off a narrow screen. */
+  :where(div, section, article, aside, header, footer, form, ul, ol, li, figure, main, nav, dl) {
+    min-width: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  code {
+    overflow-wrap: anywhere;
+  }
+
+  p,
+  li,
+  dd,
+  dt,
+  figcaption,
+  blockquote,
+  td,
+  th,
+  summary,
+  b,
+  strong {
+    overflow-wrap: break-word;
   }
 
   b,

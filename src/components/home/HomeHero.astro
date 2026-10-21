@@ -1,5 +1,7 @@
 ---
 import Icon from "../global/Icon.astro";
+import { campaignView } from "../../lib/campaign";
+const walk = campaignView();
 ---
 
 <section class="pci-hero" id="top" aria-labelledby="home-heading">
@@ -66,7 +68,7 @@ import Icon from "../global/Icon.astro";
         </span>
       </a>
       <a class="pci-live" href="walk-for-education/index.html" data-protected>
-        <span class="pci-live__status">Pledges open · walk dates unconfirmed</span>
+        <span class="pci-live__status">{walk.label}</span>
         <strong>Walk for Education</strong>
         <span class="pci-live__go" aria-hidden="true">
           <Icon name="external" />

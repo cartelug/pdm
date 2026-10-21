@@ -94,7 +94,12 @@ test("under-review concept stays distinct from a live campaign; draft updates ar
   assert.ok(concept.textContent.includes("No public investment"));
   const home = fs.readFileSync(path.join(root, "index.html"), "utf8");
   assert.match(home, /Pledges open/);
-  assert.match(home, /walk dates unconfirmed/);
+  // The home page describes the campaign with the record's own wording, not a second copy of it.
+  const walkLabel = require("node:vm").runInNewContext(
+    fs.readFileSync(path.join(root, "js/wfe-data.js"), "utf8") + ";window.WFE_CAMPAIGN.statusLabel",
+    { window: {} },
+  );
+  assert.ok(home.includes(walkLabel), "home shows the campaign record's status label: " + walkLabel);
   assert.doesNotMatch(home, /UGX 3,460,000|Campaign register reaches 33 entries/);
 });
 

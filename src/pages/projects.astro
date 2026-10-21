@@ -4,12 +4,12 @@ import PageHero from "../components/global/PageHero.astro";
 import ProjectCard from "../components/projects/ProjectCard.astro";
 import SectionHead from "../components/global/SectionHead.astro";
 import Icon from "../components/global/Icon.astro";
-import { getCollection } from "astro:content";
+import { getProjects } from "../lib/projects";
 import { getPage } from "../lib/pages";
 import { href } from "../config/site";
 const p = await getPage("projects");
 const path = "/projects/";
-const projects = await getCollection("projects", (record) => record.data.publication !== "draft");
+const projects = await getProjects();
 const filters = [
   ["all", "All projects"],
   ["Live campaign", "Live campaigns"],
@@ -17,6 +17,7 @@ const filters = [
   ["Pipeline", "Pipeline"],
   ["Programme area", "Programme areas"],
   ["Preparing launch", "Preparing launch"],
+  ["Completed", "Completed"],
 ];
 ---
 

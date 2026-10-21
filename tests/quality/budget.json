@@ -1,44 +1,44 @@
 {
-  "note": "Ceilings are the 17 Oct 2026 lab results plus about 15% headroom. Lower them as fixes land. Targets: LCP 2500 ms, 450 KB, blocking time 200 ms.",
+  "note": "Ceilings are the 21 Oct 2026 lab results after the redesign plus about 15% headroom, and only ever move down. Targets: LCP 2500 ms, 450 KB, blocking time 200 ms. The two self-hosted fonts (74.6 KB) cost the Walk home about 150 ms against the previous single font; it still meets its targets.",
   "pages": {
     "/": {
-      "lcpMs": 2300,
-      "kb": 360,
-      "blockingMs": 950
+      "lcpMs": 2050,
+      "kb": 310,
+      "blockingMs": 400
     },
     "/about/": {
       "lcpMs": 3050,
-      "kb": 240,
-      "blockingMs": 480
+      "kb": 195,
+      "blockingMs": 250
     },
     "/projects/": {
-      "lcpMs": 3450,
-      "kb": 375,
-      "blockingMs": 350
+      "lcpMs": 3300,
+      "kb": 330,
+      "blockingMs": 250
     },
     "/walk-for-education/": {
-      "lcpMs": 4300,
-      "kb": 485,
+      "lcpMs": 3600,
+      "kb": 395,
       "blockingMs": 670
     },
     "/walk-for-education/take-part/": {
-      "lcpMs": 3700,
-      "kb": 410,
+      "lcpMs": 2900,
+      "kb": 360,
       "blockingMs": 250
     },
     "/contribute/": {
-      "lcpMs": 3000,
-      "kb": 460,
+      "lcpMs": 2000,
+      "kb": 250,
       "blockingMs": 400
     },
     "/faith-in-motion/": {
-      "lcpMs": 4400,
-      "kb": 840,
-      "blockingMs": 520
+      "lcpMs": 4300,
+      "kb": 810,
+      "blockingMs": 450
     },
     "/give/": {
-      "lcpMs": 3400,
-      "kb": 535,
+      "lcpMs": 3050,
+      "kb": 475,
       "blockingMs": 270
     }
   }

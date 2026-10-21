@@ -76,7 +76,7 @@ with tempfile.TemporaryDirectory(prefix='pci-http-test-') as private:
         check(request('reconcile',{'reference':ref,'fee':0,'settlementReference':'fixture'},csrf)[0]==422,'pledge cannot be reconciled as payment')
         request('logout',{},csrf);_,s,_=request('session');csrf=s['csrf'];_,login,_=request('login',{'username':'admin','password':'Fixture-Only-Password'},csrf);csrf=login['csrf']
         code,backup,_=request('backup',{},csrf);check(code==200 and Path(private,'backups',backup['backup']).is_file(),'administrator creates actual snapshot')
-        code,data,_=request('dashboard',{},csrf);check(data['rows'][0]['status']=='closed' and len(data['audit'])>=4,'pledge changes and exports audited')
+        code,data,_=request('dashboard',{},csrf);mine=[r for r in data['rows'] if r.get('reference')==ref];check(len(mine)==1 and mine[0]['status']=='closed' and len(data['audit'])>=4,'pledge changes and exports audited')
         for path in ['/walk-for-education/','/contribute/','/contribute/payment/','/contribute/verify/','/contribute/privacy/','/contribute/terms/','/admin/collections/']:
             check(urllib.request.urlopen(base+path).status==200,'page available: '+path)
         # Isolated ledger fixture only. No provider call or production record is changed.

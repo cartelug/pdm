@@ -2,37 +2,77 @@
 import Icon from "../components/global/Icon.astro";
 import PillarIcon from "../components/global/PillarIcon.astro";
 import Layout from "../layouts/InstitutionalLayout.astro";
-const swatches = [
-  ["Ink", "#1B0A0E", "Text, dark surfaces"],
-  ["Paper", "#FAF6F1", "Page ground"],
-  ["Bone", "#F2EBE3", "Alternate sections"],
-  ["Rose", "#FBE7E4", "Notices, soft emphasis"],
-  ["Crimson", "#B71935", "Brand, primary action"],
-  ["Crimson deep", "#8C1228", "Hover, pressed"],
-  ["Blush", "#F3C9C8", "Accent on dark"],
-  ["Night", "#220A10", "Dark surfaces"],
-  ["Sun", "#E6AD3E", "Highlights, status"],
-  ["Forest", "#2F5D46", "Climate, programme areas"],
+import tokens from "../design/tokens.json";
+
+// Everything on this page is read from src/design/tokens.json, so the documentation cannot drift from the system.
+const lin = (v: number) => {
+  const c = v / 255;
+  return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+};
+const channels = (hex: string) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+const lum = ([r, g, b]: number[]) => 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+const ratio = (a: number[], b: number[]) => {
+  const [hi, lo] = [lum(a), lum(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+};
+
+type Brand = keyof typeof tokens.brands;
+const brands = Object.keys(tokens.brands) as Brand[];
+
+function resolve(brand: Brand, name: string, over?: number[]): number[] {
+  const definition = tokens.brands[brand];
+  const colour = definition.colour as Record<string, string>;
+  if (colour[name]) return channels(colour[name]);
+  if (name === "on-deep-muted" && over) {
+    const alpha = definition.alpha["on-deep-muted"] / 100;
+    return channels(colour["on-deep"]).map((c, i) => Math.round(c * alpha + over[i] * (1 - alpha)));
+  }
+  throw new Error(`${brand} has no colour ${name}`);
+}
+
+const pairs = (brand: Brand) =>
+  tokens.contrast.pairs.map((pair) => {
+    const bg = resolve(brand, pair.bg);
+    const value = ratio(resolve(brand, pair.fg, bg), bg);
+    return { ...pair, value, ok: value >= pair.min };
+  });
+
+const typeValue = (key: string) => (tokens.type as Record<string, string>)[key];
+const typeRoles: [string, string, string][] = [
+  ["display", "Display", "Archivo 800, hero only"],
+  ["h1", "Heading 1", "Archivo 800"],
+  ["h2", "Heading 2", "Archivo 800"],
+  ["h3", "Heading 3", "Archivo 700"],
+  ["lead", "Lead", "Lexend 400"],
+  ["body", "Body", "Lexend 400, 60 characters wide"],
+  ["small", "Small", "Lexend 400"],
+  ["caption", "Caption", "Lexend 400, 13 px is the floor"],
 ];
+const roleStyle = (key: string) =>
+  `font-size:var(--fs-${key});` +
+  (["lead", "body", "small", "caption"].includes(key)
+    ? "font-family:var(--font-body);font-weight:400"
+    : "font-family:var(--font-head);font-weight:" + (key === "h3" ? 700 : 800));
 ---
 
 <Layout
   path="/design-system/"
   title="Design System Review"
-  description="Pamodzi editorial typography, colour and component review."
+  description="Pamodzi design tokens, type, colour, contrast and rules for both brands."
   noindex
 >
   <section class="pci-section">
     <div class="pci-container">
-      <span class="pci-eyebrow">Editorial system / Foundation review</span>
+      <span class="pci-eyebrow">Design system / version {tokens.version}</span>
       <h1 style="margin-top:24px">
-        People. Partnerships.
+        One system.
         <br />
-        <em>Lasting change.</em>
+        <em>Two brands.</em>
       </h1>
       <p class="pci-lead" style="margin-top:30px">
-        Inter for headlines, reading and interfaces. Instrument Serif italic for the editorial accent. Geist Mono for
-        labels and figures.
+        {tokens.fonts.head.family} for headings, menus, buttons, labels and figures. {tokens.fonts.body.family} for
+        paragraphs, forms and small text. No italics. This page is generated from <code>src/design/tokens.json</code>,
+        the single source for the institutional site, Walk for Education and Faith in Motion.
       </p>
       <div class="pci-actions">
         <a class="pci-button" href="../contact/index.html">
@@ -50,63 +90,205 @@ const swatches = [
       </div>
     </div>
   </section>
+
   <section class="pci-section pci-section--bone">
     <div class="pci-container">
       <div class="pci-section-head">
         <div>
           <span class="pci-eyebrow">Type scale</span>
           <h2>
-            Display set in <em>Inter Display.</em>
+            Archivo leads. <em>Lexend reads.</em>
           </h2>
         </div>
         <p class="pci-lead">
-          Body copy is Inter at 17px with a 1.68 line height. Accents are Instrument Serif italic. Labels use Geist
-          Mono.
+          Weight-only variable files (no width axis, so type can never look stretched), self-hosted, 74.6 KB together.
+          Archivo carries tabular figures, so money and counts line up. Emphasis is weight or colour, never slant.
         </p>
       </div>
-      <div class="pci-cards">
-        <article class="pci-card">
-          <span class="pci-card__label">Heading 3 / Serif</span>
-          <h3>Locally led, accountable and lasting.</h3>
-          <p>Card titles, row titles and campaign names use the serif at heading-three scale.</p>
-        </article>
-        <article class="pci-card">
-          <span class="pci-card__label">Statement / Serif</span>
-          <p class="pci-statement">Communities shape, resource and steward their own future.</p>
-        </article>
-        <article class="pci-card">
-          <span class="pci-card__label">Figures / Serif</span>
-          <div class="pci-fig" style="border:0;padding:0">
-            <b>55</b>
-            <span>Figures are set large and captioned plainly.</span>
+      <div class="pci-ds-specimens">
+        {typeRoles.map(([key, name, note]) => (
+          <div class="pci-ds-specimen">
+            <span class="pci-card__label">
+              {name} · {note}
+            </span>
+            <p style={roleStyle(key)}>Every step builds a future.</p>
+            <code>
+              --fs-{key}: {typeValue(key)}
+            </code>
           </div>
+        ))}
+        <div class="pci-ds-specimen">
+          <span class="pci-card__label">Figure · Archivo 800, tabular</span>
+          <p style="font:800 var(--fs-figure)/1 var(--font-head);font-variant-numeric:tabular-nums">UGX 250,000</p>
+          <code>--fs-figure: {tokens.type.figure}</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {brands.map((brand) => (
+    <section class:list={["pci-section", { "pci-section--bone": brand === "walk" }]}>
+      <div class="pci-container" data-brand={brand}>
+        <div class="pci-section-head">
+          <div>
+            <span class="pci-eyebrow">Colour / {tokens.brands[brand].name}</span>
+            <h2>
+              {brand === "pci" ? (
+                <>
+                  Warm paper, burgundy ink, <em>one crimson.</em>
+                </>
+              ) : (
+                <>
+                  Ivory, navy, <em>gold and cyan.</em>
+                </>
+              )}
+            </h2>
+          </div>
+          <p class="pci-lead">
+            Select a brand with <code>data-brand="{brand}"</code> on the page root. Gold, cyan and sun are fills and
+            decoration only; they fail as text on light surfaces.
+          </p>
+        </div>
+        <div class="pci-swatches">
+          {Object.entries(tokens.brands[brand].colour).map(([name, hex]) => (
+            <article class="pci-swatch">
+              <div class="pci-swatch__chip" style={`background:var(--c-${name})`} />
+              <h4>{name}</h4>
+              <p>
+                {hex} · <code>--c-{name}</code>
+              </p>
+            </article>
+          ))}
+        </div>
+        <div
+          class="pci-ds-table-wrap"
+          role="region"
+          aria-label={`Contrast checks for ${tokens.brands[brand].name}`}
+          tabindex="0"
+        >
+          <table class="pci-ds-table">
+            <caption>Contrast, computed with the WCAG 2.2 formula</caption>
+            <thead>
+              <tr>
+                <th scope="col">Foreground on background</th>
+                <th scope="col">Ratio</th>
+                <th scope="col">Needs</th>
+                <th scope="col">Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pairs(brand).map((pair) => (
+                <tr>
+                  <th scope="row">
+                    <span
+                      class="pci-ds-pair"
+                      style={`background:var(--c-${pair.bg === "deep" ? "deep" : pair.bg});color:${pair.fg === "on-deep-muted" ? "var(--c-on-deep-muted)" : `var(--c-${pair.fg})`}`}
+                    >
+                      Aa
+                    </span>
+                    {pair.fg} on {pair.bg}
+                  </th>
+                  <td>{pair.value.toFixed(2)}</td>
+                  <td>{pair.min}:1</td>
+                  <td>{pair.ok ? "Pass" : "Fail"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="pci-section pci-section--bone">
+    <div class="pci-container">
+      <div class="pci-section-head">
+        <div>
+          <span class="pci-eyebrow">Space, shape, motion</span>
+          <h2>
+            A few values, <em>used everywhere.</em>
+          </h2>
+        </div>
+        <p class="pci-lead">
+          Three breakpoints only: {tokens.breakpoints.sm}, {tokens.breakpoints.md} and {tokens.breakpoints.lg} px,
+          always min-width. Layout is mobile first. Touch targets are 44 px; nothing is smaller than 24 px.
+        </p>
+      </div>
+      <div class="pci-ds-grid">
+        <article class="pci-card">
+          <span class="pci-card__label">Space (4 px scale)</span>
+          <p class="pci-ds-bars">
+            {Object.entries(tokens.space).map(([name, px]) => (
+              <span title={`--s-${name}: ${px}px`} style={`width:${px}px`} />
+            ))}
+          </p>
+          <code>{Object.values(tokens.space).join(", ")} px</code>
+        </article>
+        <article class="pci-card">
+          <span class="pci-card__label">Radius</span>
+          <p class="pci-ds-radii">
+            {Object.entries(tokens.radius).map(([name, value]) => (
+              <span title={`--r-${name}: ${value}`} style={`border-radius:${value}`}>
+                {name}
+              </span>
+            ))}
+          </p>
+        </article>
+        <article class="pci-card">
+          <span class="pci-card__label">Motion</span>
+          <p>
+            {Object.entries(tokens.motion.duration)
+              .map(([name, ms]) => `${name} ${ms}`)
+              .join(" · ")}
+          </p>
+          <code>ease-out {tokens.motion.ease.out}</code>
+        </article>
+        <article class="pci-card">
+          <span class="pci-card__label">Layers</span>
+          <p>
+            {Object.entries(tokens.layers)
+              .map(([name, z]) => `${name} ${z}`)
+              .join(" · ")}
+          </p>
+          <code>
+            shell {tokens.layout.shell}, gutter {tokens.layout.gutter}
+          </code>
         </article>
       </div>
     </div>
   </section>
+
   <section class="pci-section">
     <div class="pci-container">
       <div class="pci-section-head">
         <div>
-          <span class="pci-eyebrow">Colour</span>
+          <span class="pci-eyebrow">Rules the build enforces</span>
           <h2>
-            Warm paper, burgundy ink, <em>one crimson.</em>
+            What every page <em>must do.</em>
           </h2>
         </div>
       </div>
-      <div class="pci-swatches">
-        {swatches.map(([name, colour, use]) => (
-          <article class="pci-swatch">
-            <div class="pci-swatch__chip" style={"background:" + colour}></div>
-            <h4>{name}</h4>
-            <p>
-              {colour} · {use}
-            </p>
-          </article>
-        ))}
-      </div>
+      <ul class="pci-trust-points">
+        <li>
+          <b>Contrast from tokens.</b>Every pair above is a test. A change that breaks one fails the build.
+        </li>
+        <li>
+          <b>Fonts.</b>Archivo and Lexend only, self-hosted, no italics, no third-party font host on public pages.
+        </li>
+        <li>
+          <b>Responsive.</b>320 px to 1536 px, landscape and 200% text, with no sideways scroll and nothing under 13 px.
+        </li>
+        <li>
+          <b>Honest state.</b>A figure is a target, pledged or verified. A date that is not confirmed is never shown.
+        </li>
+        <li>
+          <b>One fact, one home.</b>Campaign facts are read from the campaign record; a build check fails on any page
+          that disagrees.
+        </li>
+      </ul>
     </div>
   </section>
+
   <section class="pci-section pci-section--night">
     <div class="pci-container">
       <div class="pci-section-head">

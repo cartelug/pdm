@@ -92,11 +92,11 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "bbef3d99a79bc7b1a47046856280635f65618bc90b0cb2d764ea3044690acf81",
-    "contribute/payment/index.html": "ee5de58f23c254163fcb2234196196f12f57371ea3c2182df47028ac1ade8acd",
-    "contribute/privacy/index.html": "3dc6069ab27344ccdfc66cd6cd2c613f9b70dcf77085d6704133e76ff34d4813",
-    "contribute/terms/index.html": "4ed98316f2516a273e4542ed28cdd5ba2ef81bad53a76903de4c9e9955f25271",
-    "contribute/verify/index.html": "18869973602530285ba7162a947fa4a26170c01527dbe526ce9502035aed8504",
+    "contribute/index.html": "afaaa86d6b35c6d18191aa64b1d76ba391297bdf5784c4304f51a1461074bee0",
+    "contribute/payment/index.html": "a29b52a544b6b4bf81c3755f3648437a233854ee1f9deae0041f4b1146d893e2",
+    "contribute/privacy/index.html": "ff7eeccb3fc0788269fdc26f99846af250babeda53a02f24ce53bce1be1ae9bc",
+    "contribute/terms/index.html": "1918852be50a2410de2dcb3b2ae1766d43adc5a4d9dd977eb867f642fe97fbad",
+    "contribute/verify/index.html": "f3ee4ee32ea55113752aa6c03ebca49a7dc9f5504078a3859e02352ba572b5f6",
     "css/base.css": "368d70b67bd5c7c3e60f7f44a9d8c93bfb8db7e2e8559cb00f223cfcf14893c5",
     "css/collections.css": "cd779925dd2f0519e39b3b7e5f577d660dcee3bf08f8ce98c67bad5615a47f23",
     "css/contribute.css": "e02336271318e777f18aa7a98cb227dd896eed88bebe9de6bc0b054622ed2c81",
@@ -127,11 +127,11 @@
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "f4b73bdf7a6dc3af0a488a965b97f726195afc8edd05b50522bb11dd35378bad",
     "js/wfe.js": "01746af6d7f7ec88c36d981ac649764bde29693f2da3bb65e28f3406978bf4e2",
-    "walk-for-education/accountability/index.html": "18153c25cbea5d5495878e780a7da7f83116a26aaeb9733be15bea18171c1b84",
-    "walk-for-education/index.html": "963c2862426325ac239a6954779b4666c9b29de13a3603560cf2770b633ae4b9",
-    "walk-for-education/partners/index.html": "589dc3aec8fb1e424b6f99e0e78a8fd13056735ed2714cd4e8bc3dc681311e87",
-    "walk-for-education/take-part/index.html": "b4570b8d5f9e9f4f6fe6aaaa31675c5e5bf91163eb8004b43c5b7c1a9cde3986",
-    "walk-for-education/updates/index.html": "0c7c877ce0e91ba47e8ecd0af4e25c63ea0703b81ac485e8bf92d59726940af9"
+    "walk-for-education/accountability/index.html": "cdd7ec174edd115bc9759ed297e099d7980b0737697d7ee8d671f3aceb2e51c9",
+    "walk-for-education/index.html": "6ccb2be7eeddf78501a48320447121ac1714149c117c57626e8078b7b2ad2139",
+    "walk-for-education/partners/index.html": "92ae6bdb01f499b489512ffb775b7c85003640e0c38015f7aac4cd2b0d43fe26",
+    "walk-for-education/take-part/index.html": "ba410ad6cb9520dc2caa548ac740b78bb2f0cb47c104ee1bdea361b0c456bc0d",
+    "walk-for-education/updates/index.html": "2efed9d9194facef3624c1acbbc2c73ba02a9df44e3f56680601028002e0035f"
   },
   "presentationReviews": [
     {
@@ -386,6 +386,66 @@
       "date": "2026-10-21",
       "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
       "previousSha256": "f0dcacbdfe291852d19ab6b571cda5e4a1253260e5e4844733d51294cd88eed0"
+    },
+    {
+      "path": "contribute/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "bbef3d99a79bc7b1a47046856280635f65618bc90b0cb2d764ea3044690acf81"
+    },
+    {
+      "path": "contribute/payment/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "ee5de58f23c254163fcb2234196196f12f57371ea3c2182df47028ac1ade8acd"
+    },
+    {
+      "path": "contribute/privacy/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "3dc6069ab27344ccdfc66cd6cd2c613f9b70dcf77085d6704133e76ff34d4813"
+    },
+    {
+      "path": "contribute/terms/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "4ed98316f2516a273e4542ed28cdd5ba2ef81bad53a76903de4c9e9955f25271"
+    },
+    {
+      "path": "contribute/verify/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "18869973602530285ba7162a947fa4a26170c01527dbe526ce9502035aed8504"
+    },
+    {
+      "path": "walk-for-education/accountability/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates). The og:image, twitter:image and image alt now point at this page's own share card (assets/og/pages/walk-accountability.jpg).",
+      "previousSha256": "18153c25cbea5d5495878e780a7da7f83116a26aaeb9733be15bea18171c1b84"
+    },
+    {
+      "path": "walk-for-education/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates).",
+      "previousSha256": "963c2862426325ac239a6954779b4666c9b29de13a3603560cf2770b633ae4b9"
+    },
+    {
+      "path": "walk-for-education/partners/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates). The og:image, twitter:image and image alt now point at this page's own share card (assets/og/pages/walk-partners.jpg).",
+      "previousSha256": "589dc3aec8fb1e424b6f99e0e78a8fd13056735ed2714cd4e8bc3dc681311e87"
+    },
+    {
+      "path": "walk-for-education/take-part/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates). The og:image, twitter:image and image alt now point at this page's own share card (assets/og/pages/walk-take-part.jpg).",
+      "previousSha256": "b4570b8d5f9e9f4f6fe6aaaa31675c5e5bf91163eb8004b43c5b7c1a9cde3986"
+    },
+    {
+      "path": "walk-for-education/updates/index.html",
+      "date": "2026-10-21",
+      "reason": "User-authorised Release 1 redesign, head and loading-screen markup only: data-brand added to <html>, viewport-fit=cover added, old font preloads replaced by Archivo and Lexend, css/preloader.css removed, css/brand.css and css/one-look.css added last, and the .site-loader block removed. The body is otherwise byte-identical; scripts, IDs, forms, pricing, pledge and payment hooks are unchanged (tests/quality hooks and fragments gates). The og:image, twitter:image and image alt now point at this page's own share card (assets/og/pages/walk-updates.jpg).",
+      "previousSha256": "0c7c877ce0e91ba47e8ecd0af4e25c63ea0703b81ac485e8bf92d59726940af9"
     }
   ]
 }

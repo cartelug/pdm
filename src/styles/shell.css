@@ -21,9 +21,10 @@
 
   .pci-header__inner {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
+    gap: 8px 24px;
     min-height: var(--pci-header);
   }
 
@@ -31,7 +32,8 @@
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    flex: none;
+    flex: 0 1 auto;
+    min-width: 0;
     min-height: 44px;
   }
 
@@ -57,7 +59,7 @@
   }
 
   .pci-brand__text small {
-    font: 500 0.66rem / 1 var(--pci-mono);
+    font: 500 0.8125rem / 1 var(--pci-mono);
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--pci-muted);
@@ -188,7 +190,7 @@
     max-width: calc(var(--pci-max) + var(--pci-gutter) * 2);
     margin-inline: auto;
     padding: 12px var(--pci-gutter);
-    font: 500 0.78rem / 1.2 var(--pci-mono);
+    font: 500 0.8125rem / 1.2 var(--pci-mono);
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
@@ -208,11 +210,15 @@
     border-bottom: 1px solid var(--pci-line);
   }
 
-  @media (min-width: 1100px) {
+  @media (min-width: 1200px) {
     .pci-desktop-nav {
+      display: block;
+    }
+
+    .pci-desktop-nav > ul {
       display: flex;
       align-items: center;
-      gap: clamp(18px, 2.2vw, 36px);
+      gap: clamp(16px, 1.8vw, 32px);
     }
 
     .pci-header__cta {
@@ -221,6 +227,185 @@
 
     .pci-menu-toggle {
       display: none;
+    }
+  }
+
+  /* ---------- Grouped navigation, campaign chip ---------- */
+  .pci-desktop-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pci-nav-item {
+    position: relative;
+  }
+
+  .pci-nav-item.has-sub > a {
+    padding-right: 16px;
+  }
+
+  .pci-nav-item.has-sub > a::before {
+    content: "";
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid currentcolor;
+    border-bottom: 1.5px solid currentcolor;
+    opacity: 0.55;
+    transform: translateY(-75%) rotate(45deg);
+  }
+
+  /* The submenu opens on focus as well as hover, so it works by keyboard; without scripts the links stay plain. */
+  .pci-dropdown {
+    position: absolute;
+    z-index: 5;
+    top: 100%;
+    left: -18px;
+    min-width: 230px;
+    padding: 8px;
+    border: 1px solid var(--pci-line);
+    border-radius: 16px;
+    background: var(--pci-paper);
+    box-shadow: var(--pci-shadow-l);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition:
+      opacity 0.2s,
+      transform 0.25s var(--pci-ease),
+      visibility 0s linear 0.25s;
+  }
+
+  .pci-nav-item:focus-within > .pci-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  @media (hover: hover) {
+    .pci-nav-item:hover > .pci-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition-delay: 0s;
+    }
+  }
+
+  /* Escape closes an open submenu until the pointer or focus leaves the item (WCAG 1.4.13). */
+  .pci-nav-item[data-dismissed] > .pci-dropdown {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .pci-dropdown a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  .pci-dropdown a::after {
+    display: none;
+  }
+
+  @media (hover: hover) {
+    .pci-dropdown a:hover {
+      background: var(--pci-bone);
+    }
+  }
+
+  .pci-campaign-chip {
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    max-width: 15rem;
+    padding: 7px 16px;
+    border: 1px solid var(--pci-line-strong);
+    border-radius: 18px;
+    line-height: 1.15;
+    transition: border-color 0.2s;
+  }
+
+  @media (min-width: 1200px) {
+    .pci-campaign-chip {
+      display: flex;
+    }
+  }
+
+  @media (hover: hover) {
+    .pci-campaign-chip:hover {
+      border-color: var(--pci-ink);
+    }
+  }
+
+  .pci-campaign-chip__name {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font: 650 0.9rem / 1.1 var(--pci-display);
+  }
+
+  .pci-campaign-chip__name::before {
+    content: "";
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pci-crimson);
+  }
+
+  .pci-campaign-chip__status {
+    display: none;
+    font: 400 0.8125rem / 1.25 var(--pci-sans);
+    color: var(--pci-muted);
+  }
+
+  @media (min-width: 1360px) {
+    .pci-campaign-chip__status {
+      display: block;
+    }
+  }
+
+  .pci-menu__group + .pci-menu__group,
+  .pci-menu__group + .pci-menu__links {
+    margin-top: 28px;
+  }
+
+  .pci-menu__group > .pci-eyebrow {
+    margin: 0 0 6px;
+  }
+
+  /* Room for the longer group labels and the campaign chip. The full header starts at 1200 px (decision D3). */
+  @media (min-width: 1200px) {
+    .pci-brand__text small {
+      display: none;
+    }
+
+    .pci-header__cta {
+      min-height: 46px;
+      padding-left: 20px;
+    }
+
+    .pci-header__cta .pci-icon {
+      display: none;
+    }
+  }
+
+  @media (min-width: 1360px) {
+    .pci-brand__text small {
+      display: block;
+    }
+
+    .pci-header__cta {
+      padding-left: 24px;
+    }
+
+    .pci-header__cta .pci-icon {
+      display: block;
     }
   }
 
@@ -286,7 +471,7 @@
   .pci-menu__identity span {
     display: none;
     margin-left: 8px;
-    font: 500 0.68rem / 1 var(--pci-mono);
+    font: 500 0.8125rem / 1 var(--pci-mono);
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--pci-on-night-muted);
@@ -358,7 +543,7 @@
   }
 
   .pci-menu__index {
-    font: 500 0.72rem / 1 var(--pci-mono);
+    font: 500 0.8125rem / 1 var(--pci-mono);
     letter-spacing: 0.1em;
     color: var(--pci-on-night-muted);
   }
@@ -397,7 +582,7 @@
 
   .pci-menu__note {
     margin: 0;
-    font: italic 400 1.35rem / 1.3 var(--pci-serif);
+    font: 500 1.35rem / 1.3 var(--pci-serif);
     color: var(--pci-on-night-muted);
   }
 
@@ -579,7 +764,7 @@
     justify-content: space-between;
     padding-block: 22px 28px;
     border-top: 1px solid var(--pci-on-night-line);
-    font: 500 0.7rem / 1.5 var(--pci-mono);
+    font: 500 0.8125rem / 1.5 var(--pci-mono);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--pci-on-night-muted);

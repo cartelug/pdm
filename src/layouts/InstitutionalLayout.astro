@@ -3,9 +3,10 @@ import SiteHeader from "../components/global/SiteHeader.astro";
 import SiteFooter from "../components/global/SiteFooter.astro";
 import TransitionGuard from "../components/global/TransitionGuard.astro";
 import { site, asset } from "../config/site";
-import sansFont from "@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2?url";
-import serifFont from "@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url";
-import "../styles/fonts.css";
+import headFont from "@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2?url";
+import bodyFont from "@fontsource-variable/lexend/files/lexend-latin-wght-normal.woff2?url";
+import "../design/generated/fonts.css";
+import "../design/generated/tokens.css";
 import "../styles/tokens.css";
 import "../styles/base.css";
 import "../styles/components.css";
@@ -24,6 +25,7 @@ const { path, title, description, home = false, noindex = false } = Astro.props;
 const canonical = site.url + path;
 // Pages with their own generated share card (scripts/og-cards.cjs); every other page uses the shared one.
 const CARDS = [
+  "home",
   "about",
   "what-we-do",
   "model",
@@ -36,15 +38,15 @@ const CARDS = [
   "contact",
   "updates",
 ];
-const slug = path.replace(/^\/|\/$/g, "");
+const slug = path.replace(/^\/|\/$/g, "") || "home";
 const shareImage = site.url + (CARDS.includes(slug) ? `/assets/og/pages/${slug}.jpg` : "/assets/og/share-card.jpg");
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-brand="pci">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <!-- Opt in before pagereveal, including restored documents whose external stylesheet is not yet applied. -->
     <style is:inline data-pci-navigation-transition>
       @view-transition {
@@ -69,8 +71,8 @@ const shareImage = site.url + (CARDS.includes(slug) ? `/assets/og/pages/${slug}.
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     {noindex && <meta name="robots" content="noindex,follow" />}
     <link rel="icon" type="image/png" href={asset(path, "assets/brand/pamodzi/pamodzi-logo-160.png")} />
-    <link rel="preload" as="font" type="font/woff2" href={sansFont} crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href={serifFont} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={headFont} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={bodyFont} crossorigin />
     {home && (
       <>
         <link

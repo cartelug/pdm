@@ -78,3 +78,21 @@ If PCI controls the domain's DNS, the free plan adds compression, edge caching a
 4. Lower the ceilings in `tests/quality/budget.json` to the new lab numbers.
 
 Rollback: remove the added block and reload. Nothing else depends on it.
+
+## 5. Real redirects for the old `.html` links (optional, decision D14)
+
+Eighteen files in the repository root (`about.html`, `walk.html`, `give.html` and so on) exist only to forward old shared links to the folder pages, using a meta refresh. A server redirect does the same job faster and tells search engines the move is permanent. The files stay as a fallback, so applying this is safe to undo.
+
+`npm run check:links` confirms every one of the eighteen follows the pattern `name.html` to `/name/` and that every target exists, which is what lets one rule cover them. Add this above the existing rewrite rules, after the blocks in section 2 and after reading what the host's current `.htaccess` already does:
+
+```apache
+# 301 for legacy root .html links: about.html -> /about/, walk.html -> /walk/, and so on
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_URI} !^/(404|index)\.html$
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^([a-z-]+)\.html$ /$1/ [R=301,L]
+</IfModule>
+```
+
+The extra condition sends a request to the folder only when the folder exists, so an unknown `.html` name still reaches the 404 page. Test it on staging first with `curl -sI https://pamodzici.com/about.html` and expect `301` and `location: /about/`.

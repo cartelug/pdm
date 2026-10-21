@@ -1,0 +1,18 @@
+# Keeps build tooling and workflow actions current. Updates arrive as pull requests with the usual gates and a
+# static preview; nothing is merged or deployed by Dependabot itself.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      astro:
+        patterns: ["astro", "@astrojs/*"]
+      lint:
+        patterns: ["eslint*", "@eslint/*", "stylelint*", "prettier*", "typescript"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

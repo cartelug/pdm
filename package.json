@@ -20,17 +20,19 @@
     "build": "astro build && node scripts/export-v3.mjs && node scripts/assets.mjs",
     "check:types": "astro check",
     "check:protected": "node scripts/check-protected.mjs",
-    "check:v3": "node --test tests/pages/v3.test.cjs tests/navigation/menu.test.cjs tests/pages/wfe-redesign.test.cjs tests/navigation/transitions.test.cjs",
+    "check:v3": "node --test tests/pages/v3.test.cjs tests/pages/campaign-state.test.cjs tests/navigation/menu.test.cjs tests/pages/wfe-redesign.test.cjs tests/navigation/transitions.test.cjs",
     "tokens": "node scripts/tokens.mjs",
     "check:tokens": "node scripts/tokens.mjs --check && node tests/quality/contrast.cjs",
     "check:hooks": "node tests/quality/hooks.cjs",
     "check:fragments": "node tests/quality/fragments.cjs",
     "check:facts": "node tests/quality/facts.cjs",
     "check:links": "node tests/quality/links.cjs",
-    "check:gates": "npm run check:tokens && npm run check:hooks && npm run check:fragments && npm run check:facts && npm run check:links",
+    "check:gates": "npm run check:tokens && npm run check:hooks && npm run check:fragments && npm run check:facts && npm run check:links && npm run check:sitemap",
     "test:responsive": "node tests/quality/responsive.cjs",
     "validate": "npm run check:types && npm run build && npm run lint && npm run check:protected && npm run check:v3 && npm run check:gates",
-    "format:source": "prettier --write \"src/**/*.{astro,ts,css,json,md}\""
+    "format:source": "prettier --write \"src/**/*.{astro,ts,css,json,md}\"",
+    "sitemap": "node scripts/sitemap.mjs",
+    "check:sitemap": "node scripts/sitemap.mjs --check"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",

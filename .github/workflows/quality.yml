@@ -59,7 +59,12 @@ jobs:
       - name: Speed budget (throttled phone lab test)
         run: node tests/quality/speed.cjs
 
-      # Reports where pages break at 320 to 1536 px, in landscape and with text at 200%. It lists today's problems
-      # without failing the build; switch it to --strict once the list is clean.
-      - name: Responsive report (320 to 1536 px, landscape, 200% text)
-        run: node tests/quality/responsive.cjs
+      # No sideways scroll, clipped content, tiny tap targets or text under 13 px at 320 to 1536 px, in landscape
+      # and with text at 200%. The list was cleaned on 21 October 2026, so this now fails the build.
+      - name: Responsive gate (320 to 1536 px, landscape, 200% text)
+        run: node tests/quality/responsive.cjs --strict
+
+      # The findings are in build-time tooling and need a breaking Astro upgrade, so this reports and does not fail.
+      - name: Dependency audit (report)
+        continue-on-error: true
+        run: npm audit --audit-level=high

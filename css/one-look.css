@@ -207,6 +207,11 @@ html[data-brand="pci"]
     .fineprint,
     .tcard .n,
     .road-head .mono,
+    .rail .cap,
+    .rail .km,
+    .road-ends .e span,
+    .ledger-head,
+    .fbot,
     .lead span span,
     .pf .legend span,
     .pf .legend b
@@ -241,4 +246,28 @@ html[data-brand]
     [style*="font-size: 12.5px"]
   ) {
   font-size: 0.8125rem !important;
+}
+
+/* The Walk header holds an off-screen menu panel; clip it at the header's edge so large text cannot widen the page. */
+html[data-brand] .w-header {
+  overflow-x: clip;
+}
+
+/* The contribution form's amount choices stay inside their card at large text. */
+html[data-brand] .w-choice,
+html[data-brand] .w-choice :where(button, label, span, strong, small) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Footer and navigation links wrap inside their column at large text. */
+html[data-brand] :where(footer, nav) a {
+  overflow-wrap: anywhere;
+}
+
+/* Contact links in the pledge help panel are comfortable to tap (rule R9). */
+html[data-brand] .w-help a:not(.w-btn) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }

@@ -103,6 +103,11 @@
     padding-inline: 0;
   }
 
+  /* The marquee band is decorative: it is clipped at the page edge instead of scrolling the page sideways. */
+  .pci-strip {
+    overflow-x: clip;
+  }
+
   .pci-strip__track {
     display: flex;
     width: max-content;
@@ -543,7 +548,7 @@
     border-radius: 50%;
     background: var(--pci-crimson);
     color: #fff;
-    font: 500 10.5px/1 var(--pci-mono);
+    font: 500 13px/1 var(--pci-mono);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     opacity: 0;

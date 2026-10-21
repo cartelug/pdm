@@ -1,13 +1,19 @@
 ---
 import Icon from "./Icon.astro";
-import { navigation } from "../../config/navigation";
+import { navigation, primaryNav, isCurrent } from "../../config/navigation";
 import { asset, href } from "../../config/site";
+import { campaignView } from "../../lib/campaign";
 interface Props {
   path: string;
   home?: boolean;
 }
 const { path, home = false } = Astro.props;
-const primary = navigation.filter((n) => n.group === "explore");
+const walk = campaignView();
+const labelFor = (route: string) => navigation.find((n) => n.route === route)?.label ?? route;
+// Groups with several pages keep a heading in the phone menu; single pages follow as plain rows.
+const grouped = primaryNav.filter((g) => g.items);
+const singles = primaryNav.filter((g) => !g.items);
+let rowIndex = 0;
 ---
 
 <header class:list={["pci-header", { "pci-header--home": home }]} data-site-header>
@@ -22,16 +28,35 @@ const primary = navigation.filter((n) => n.group === "explore");
       </span>
     </a>
     <nav class="pci-desktop-nav" aria-label="Primary navigation">
-      {navigation
-        .filter((n) => n.desktop)
-        .map((n) => (
-          <a href={href(path, n.route)} aria-current={path === n.route ? "page" : undefined}>
-            {n.label.replace("Pamodzi", "").replace("Our ", "").trim()}
-          </a>
+      <ul>
+        {primaryNav.map((group) => (
+          <li class:list={["pci-nav-item", { "has-sub": group.items }]}>
+            <a href={href(path, group.route)} aria-current={isCurrent(group, path) ? "page" : undefined}>
+              {group.label}
+            </a>
+            {group.items && (
+              <ul class="pci-dropdown">
+                {group.items.map((item) => (
+                  <li>
+                    <a href={href(path, item.route)} aria-current={path === item.route ? "page" : undefined}>
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
         ))}
+      </ul>
     </nav>
-    <a class="pci-button pci-button--ink pci-header__cta" href={href(path, "/contact/#enquiry")}>
-      Partner With Us <Icon name="arrow" />
+    {walk.live && (
+      <a class="pci-campaign-chip" href={href(path, "/walk-for-education/")} data-protected>
+        <span class="pci-campaign-chip__name">Walk for Education</span>
+        <span class="pci-campaign-chip__status">{walk.label}</span>
+      </a>
+    )}
+    <a class="pci-button pci-button--ink pci-header__cta" href={href(path, "/contact/")}>
+      Contact <Icon name="arrow" />
     </a>
     <button
       class="pci-menu-toggle"
@@ -68,12 +93,30 @@ const primary = navigation.filter((n) => n.group === "explore");
       Explore Pamodzi
     </h2>
     <nav aria-label="Mobile primary navigation">
+      {grouped.map((group) => (
+        <section class="pci-menu__group">
+          <h3 class="pci-eyebrow">{group.label}</h3>
+          <ol class="pci-menu__links">
+            {group.items!.map((item) => (
+              <li style={"--i:" + rowIndex++}>
+                <a href={href(path, item.route)} aria-current={path === item.route ? "page" : undefined}>
+                  <span class="pci-menu__index">{String(rowIndex).padStart(2, "0")}</span>
+                  <span>{labelFor(item.route)}</span>
+                  <span aria-hidden="true">
+                    <Icon name="external" />
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
       <ol class="pci-menu__links">
-        {primary.map((n, i) => (
-          <li style={"--i:" + i}>
-            <a href={href(path, n.route)} aria-current={path === n.route ? "page" : undefined}>
-              <span class="pci-menu__index">{String(i + 1).padStart(2, "0")}</span>
-              <span>{n.label}</span>
+        {singles.map((group) => (
+          <li style={"--i:" + rowIndex++}>
+            <a href={href(path, group.route)} aria-current={path === group.route ? "page" : undefined}>
+              <span class="pci-menu__index">{String(rowIndex).padStart(2, "0")}</span>
+              <span>{labelFor(group.route)}</span>
               <span aria-hidden="true">
                 <Icon name="external" />
               </span>
@@ -83,12 +126,9 @@ const primary = navigation.filter((n) => n.group === "explore");
       </ol>
     </nav>
     <div class="pci-menu__utilities">
-      {(["institutional", "engage"] as const).map((group, groupIndex) => (
-        <nav
-          aria-label={group === "engage" ? "Engage" : "Institutional information"}
-          style={"--i:" + (primary.length + groupIndex)}
-        >
-          <h3 class="pci-eyebrow">{group}</h3>
+      {(["engage"] as const).map((group, groupIndex) => (
+        <nav aria-label="Campaigns and contact" style={"--i:" + (rowIndex + groupIndex)}>
+          <h3 class="pci-eyebrow">Campaigns and contact</h3>
           {navigation
             .filter((n) => n.group === group)
             .map((n) => (
@@ -108,3 +148,18 @@ const primary = navigation.filter((n) => n.group === "explore");
     <p class="pci-menu__note">People. Partnerships. Lasting change.</p>
   </div>
 </dialog>
+<script>
+  // Escape closes an open submenu until the pointer or focus leaves its item (WCAG 1.4.13).
+  document.querySelectorAll<HTMLElement>(".pci-nav-item.has-sub").forEach((item) => {
+    const clear = () => item.removeAttribute("data-dismissed");
+    item.addEventListener("mouseleave", clear);
+    item.addEventListener("focusout", (event) => {
+      if (!item.contains(event.relatedTarget as Node | null)) clear();
+    });
+    item.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      item.setAttribute("data-dismissed", "");
+      item.querySelector<HTMLElement>(":scope > a")?.focus();
+    });
+  });
+</script>
