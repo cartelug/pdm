@@ -75,16 +75,29 @@ function check(value, message) {
       const scrollBefore = await page.evaluate(() => scrollY);
       await page.locator("#wfeMenuButton").click();
       await page.waitForFunction(() => document.getElementById("wfeMenu").dataset.state === "open");
+      const menuGeometry = await page.locator("#wfeMenu").evaluate((menu) => {
+        const rect = menu.getBoundingClientRect();
+        const hit = document.elementFromPoint(innerWidth / 2, innerHeight / 2);
+        return {
+          top: rect.top,
+          height: rect.height,
+          viewportHeight: innerHeight,
+          viewportWidth: innerWidth,
+          receivesTaps: menu.contains(hit),
+          hit: hit?.tagName + "." + hit?.className,
+          clip: getComputedStyle(menu).clipPath,
+          headerFilter: getComputedStyle(document.querySelector(".w-header")).backdropFilter,
+          bodyTop: document.body.style.top,
+        };
+      });
       check(
-        await page.locator("#wfeMenu").evaluate((menu) => {
-          const rect = menu.getBoundingClientRect();
-          return (
-            Math.abs(rect.top) < 1 &&
-            Math.abs(rect.height - innerHeight) < 2 &&
-            menu.contains(document.elementFromPoint(innerWidth / 2, innerHeight / 2))
-          );
-        }),
-        "menu remains full height and receives taps after scrolling at " + width + "px",
+        Math.abs(menuGeometry.top) < 1 &&
+          Math.abs(menuGeometry.height - menuGeometry.viewportHeight) < 2 &&
+          menuGeometry.receivesTaps,
+        "menu remains full height and receives taps after scrolling at " +
+          width +
+          "px: " +
+          JSON.stringify(menuGeometry),
       );
       await page.locator("#wfeMenu a").last().scrollIntoViewIfNeeded();
       check(

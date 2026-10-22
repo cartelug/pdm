@@ -125,13 +125,13 @@
     "js/updates-data.js": "01ccac31e1d5781213804df801b8f805e74092afc58ca656f9989482d913c92a",
     "js/wfe-data.js": "bb56f89fa58f0063717d8109219da9a4f0ea35e5f96e405f35d4fc1d9def7e5e",
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
-    "js/wfe-shell.js": "bcfaad2a33c0ffd1bb0a747101298d52b2fad87e5ac9d2d98d343389c7ac2023",
+    "js/wfe-shell.js": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
     "js/wfe.js": "01746af6d7f7ec88c36d981ac649764bde29693f2da3bb65e28f3406978bf4e2",
-    "walk-for-education/accountability/index.html": "760ed3746051ffae98291e50f4310ef62701fb77b18cab1736e1c9313eb2f571",
-    "walk-for-education/index.html": "603cc21fb0444a3b0f26fb7e55ef3da56bdbbf34ea6df2eefadb40ebfe04fd94",
-    "walk-for-education/partners/index.html": "b99981b6dc8a5117d8f84618d65eae0afa62d4326534eebea3ec44425f03b460",
-    "walk-for-education/take-part/index.html": "2b4332ca28fc8549c0da1727a4070c701a608220876a3f21106a567eda6727c1",
-    "walk-for-education/updates/index.html": "9adb4cc973cfb619ff1dbf1db7c0676b69b86684ec6e836330d8f8d50ec950d6"
+    "walk-for-education/accountability/index.html": "17c773687c6da1c14432c012ff6d7e14c5437220b4a5817edfbd0f97e56ca179",
+    "walk-for-education/index.html": "46c8178835b52a46fc6438e8d6a0940565538d4d01a5b6581ea663102b9faacd",
+    "walk-for-education/partners/index.html": "73a97a89b371e3b07b68c1afd51aa21857807abcdb19e43de510abda87cf0b45",
+    "walk-for-education/take-part/index.html": "f07c46d5db69300f3abfc7d86145be93e935e667ffa163edc82d5fb2631957f0",
+    "walk-for-education/updates/index.html": "73d41c331f0a30d4738b782991fa7ea0e8a833aee95c621bd0b0c1fb01e6d007"
   },
   "presentationReviews": [
     {
@@ -512,6 +512,42 @@
       "date": "2026-10-22",
       "reason": "User-authorised 22 October menu and motion repair: content-hash query strings only for updated presentation CSS/JavaScript. All markup, forms, content, script sources and ordering, contribution hooks and payment behaviour are byte-identical after removing cache-busting hashes.",
       "previousSha256": "2efed9d9194facef3624c1acbbc2c73ba02a9df44e3f56680601028002e0035f"
+    },
+    {
+      "path": "js/wfe-shell.js",
+      "date": "2026-10-22",
+      "reason": "22 October menu follow-up: the presentation state waits for actual CSS panel transitions, with a generation guard for rapid reversals, rather than a matching-duration timer. Only the menu block changes; pricing, attribution and pledge/service code remain unchanged.",
+      "previousSha256": "bcfaad2a33c0ffd1bb0a747101298d52b2fad87e5ac9d2d98d343389c7ac2023"
+    },
+    {
+      "path": "walk-for-education/accountability/index.html",
+      "date": "2026-10-22",
+      "reason": "22 October menu follow-up: refresh only the wfe-shell.js content-hash query string after synchronising the menu state with its actual CSS transition. Markup, forms, fields, content and script ordering remain unchanged.",
+      "previousSha256": "760ed3746051ffae98291e50f4310ef62701fb77b18cab1736e1c9313eb2f571"
+    },
+    {
+      "path": "walk-for-education/index.html",
+      "date": "2026-10-22",
+      "reason": "22 October menu follow-up: refresh only the wfe-shell.js content-hash query string after synchronising the menu state with its actual CSS transition. Markup, forms, fields, content and script ordering remain unchanged.",
+      "previousSha256": "603cc21fb0444a3b0f26fb7e55ef3da56bdbbf34ea6df2eefadb40ebfe04fd94"
+    },
+    {
+      "path": "walk-for-education/partners/index.html",
+      "date": "2026-10-22",
+      "reason": "22 October menu follow-up: refresh only the wfe-shell.js content-hash query string after synchronising the menu state with its actual CSS transition. Markup, forms, fields, content and script ordering remain unchanged.",
+      "previousSha256": "b99981b6dc8a5117d8f84618d65eae0afa62d4326534eebea3ec44425f03b460"
+    },
+    {
+      "path": "walk-for-education/take-part/index.html",
+      "date": "2026-10-22",
+      "reason": "22 October menu follow-up: refresh only the wfe-shell.js content-hash query string after synchronising the menu state with its actual CSS transition. Markup, forms, fields, content and script ordering remain unchanged.",
+      "previousSha256": "2b4332ca28fc8549c0da1727a4070c701a608220876a3f21106a567eda6727c1"
+    },
+    {
+      "path": "walk-for-education/updates/index.html",
+      "date": "2026-10-22",
+      "reason": "22 October menu follow-up: refresh only the wfe-shell.js content-hash query string after synchronising the menu state with its actual CSS transition. Markup, forms, fields, content and script ordering remain unchanged.",
+      "previousSha256": "9adb4cc973cfb619ff1dbf1db7c0676b69b86684ec6e836330d8f8d50ec950d6"
     }
   ]
 }

@@ -137,3 +137,21 @@ test("page navigation and back-forward restoration cannot retain a frozen body",
   assert.equal(f.w.document.body.style.position, "");
   f.dom.window.close();
 });
+
+test("menu state follows the actual panel transition instead of a duration timer", async () => {
+  const f = fixture();
+  let finish;
+  const finished = new Promise((resolve) => {
+    finish = resolve;
+  });
+  f.menu.getAnimations = () => [{ finished }];
+  f.button.click();
+  assert.equal(f.menu.dataset.state, "opening");
+  finish();
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(f.menu.dataset.state, "open");
+  f.button.click();
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(f.menu.dataset.state, "closed");
+  f.dom.window.close();
+});

@@ -362,6 +362,7 @@
   var menu = byId("wfeMenu");
   var menuButton = byId("wfeMenuButton");
   var menuTimer = 0;
+  var menuGeneration = 0;
   var menuLocked = false;
   var menuScroll = 0;
   var menuBodyStyle = "";
@@ -411,6 +412,7 @@
     open = open && menuIsMobile();
     var wasOpen = menu.classList.contains("is-open");
     window.clearTimeout(menuTimer);
+    var generation = ++menuGeneration;
     if (open) lockMenu();
     menu.classList.toggle("is-open", open);
     document.body.classList.toggle("r-menu-open", open);
@@ -425,12 +427,23 @@
       if (wasOpen && returnFocus) menuButton.focus({ preventScroll: true });
     }
     window.dispatchEvent(new CustomEvent("wfe:menu-state", { detail: open }));
+    function settled() {
+      if (generation === menuGeneration) menu.dataset.state = open ? "open" : "closed";
+    }
     if (immediate || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      menu.dataset.state = open ? "open" : "closed";
+      settled();
+    } else if (typeof menu.getAnimations === "function") {
+      // CSS can start on a later frame after a phone resize. Follow the actual panel transition,
+      // rather than declaring the menu open when a matching-duration JS timer happens to fire.
+      Promise.all(
+        menu.getAnimations().map(function (animation) {
+          return animation.finished.catch(function () {
+            /* Superseded transitions are expected. */
+          });
+        }),
+      ).then(settled);
     } else {
-      menuTimer = window.setTimeout(function () {
-        menu.dataset.state = open ? "open" : "closed";
-      }, 420);
+      menuTimer = window.setTimeout(settled, 420);
     }
   }
 
