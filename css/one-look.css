@@ -248,9 +248,206 @@ html[data-brand]
   font-size: 0.8125rem !important;
 }
 
-/* The Walk header holds an off-screen menu panel; clip it at the header's edge so large text cannot widen the page. */
-html[data-brand] .w-header {
-  overflow-x: clip;
+/* A filter on a fixed menu's ancestor makes that ancestor its containing block. Keep the blur on a separate
+   surface: the menu remains anchored to the viewport, rather than collapsing to the 58 px header. */
+html[data-brand="walk"] .w-header {
+  overflow: visible;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+html[data-brand="walk"] .w-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(251 248 242 / 94%);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  backdrop-filter: saturate(1.4) blur(14px);
+  opacity: 0;
+  transition: opacity 240ms var(--ease-out);
+  pointer-events: none;
+}
+
+html[data-brand="walk"] .w-header.is-scrolled::before {
+  opacity: 1;
+}
+
+html[data-brand="walk"] .r-menu-open .w-header::before {
+  opacity: 0;
+}
+
+html[data-brand="walk"]
+  .w-header__bar
+  > :is(.w-brand, .w-campaign-mark, .w-header__cta, .w-motion, .w-menu-button) {
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 1180px) {
+  html[data-brand="walk"] .w-nav {
+    inset: 0 0 auto;
+    width: 100%;
+    height: 100dvh;
+    min-height: 100%;
+    padding-top: calc(var(--header-h) + env(safe-area-inset-top) + 28px);
+    padding-bottom: calc(32px + env(safe-area-inset-bottom));
+    background:
+      radial-gradient(ellipse at 100% 100%, rgb(42 156 193 / 10%), transparent 65%), var(--paper);
+    transition:
+      clip-path 420ms cubic-bezier(0.76, 0, 0.24, 1),
+      visibility 0s linear 420ms;
+  }
+
+  html[data-brand="walk"] .w-nav.is-open {
+    transition:
+      clip-path 420ms cubic-bezier(0.76, 0, 0.24, 1),
+      visibility 0s;
+  }
+
+  html[data-brand="walk"] .w-nav::before {
+    content: "Explore the campaign";
+    flex: none;
+    padding-bottom: 16px;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  html[data-brand="walk"] .w-nav > a {
+    flex: none;
+    min-height: 52px;
+    font-size: clamp(1.5rem, 1.1rem + 2.6vw, 2.4rem);
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  html[data-brand="walk"] .w-nav .w-nav__cta {
+    min-height: 56px;
+    margin-top: 24px;
+    font-size: 1rem;
+  }
+
+  html[data-brand="walk"] .r-menu-open .w-menu-button {
+    background: var(--navy);
+    color: var(--paper);
+  }
+}
+
+/* ---------- 6. Campaign motion details ----------
+   Each layer composes with the original chapter motion. No numbers are animated, and the existing visible
+   pause control, device preference and data-saver setting stop every decorative layer. */
+@media (prefers-reduced-motion: no-preference) {
+  .w-page.r-motion-ready .w-detail-in {
+    animation: w-detail-arrive 680ms var(--ease-out) backwards;
+    animation-delay: calc(var(--detail-order, 0) * 65ms);
+  }
+
+  .w-page.r-motion-ready .w-hero__inset {
+    animation: w-campus-float 4s var(--ease-inout) 1.2s 3;
+  }
+
+  .w-page.r-motion-ready .w-hero__portrait {
+    translate: var(--pointer-x, 0) var(--pointer-y, 0);
+    transition: translate 900ms var(--ease-out);
+  }
+
+  .w-page.r-motion-ready :is(.w-learn__fig, .w-journey__road, .w-builders__fig) img {
+    translate: 0 var(--story-y, 0);
+    scale: 1.035;
+  }
+
+  .w-page.r-motion-ready .w-cert__preview.is-in .w-certificate__seal {
+    animation: w-seal-arrive 850ms var(--ease-out) 280ms backwards;
+  }
+
+  .w-page.r-motion-ready .w-ledger.is-in .w-ledger__n {
+    animation: w-seal-arrive 700ms var(--ease-out) backwards;
+    animation-delay: calc(var(--i, 0) * 140ms + 100ms);
+  }
+
+  .w-page.r-motion-ready .w-footer__mark {
+    animation: w-detail-arrive 700ms var(--ease-out) backwards;
+  }
+
+  @supports (interpolate-size: allow-keywords) and (transition-behavior: allow-discrete) {
+    .w-page.r-motion-ready .w-faq__list details::details-content {
+      block-size: 0;
+      overflow: clip;
+      interpolate-size: allow-keywords;
+      transition:
+        block-size 320ms var(--ease-out),
+        content-visibility 320ms allow-discrete;
+    }
+
+    .w-page.r-motion-ready .w-faq__list details[open]::details-content {
+      block-size: auto;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .w-page.r-motion-ready :is(.w-resources__grid > a, .w-ways__grid > a, .r-gallery-card) {
+      transition:
+        translate 320ms var(--ease-out),
+        box-shadow 320ms var(--ease-out);
+    }
+
+    .w-page.r-motion-ready :is(.w-resources__grid > a, .w-ways__grid > a, .r-gallery-card):hover {
+      translate: 0 -4px;
+    }
+
+    .w-page.r-motion-ready .w-btn .w-i {
+      transition: translate 240ms var(--ease-out);
+    }
+
+    .w-page.r-motion-ready .w-btn:hover .w-i {
+      translate: 3px 0;
+    }
+  }
+
+  .w-page.r-menu-open .w-hero__inset,
+  .w-page.r-menu-open .w-dot::after {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes w-detail-arrive {
+  from {
+    opacity: 0.35;
+    translate: 0 18px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes w-campus-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -6px;
+  }
+}
+
+@keyframes w-seal-arrive {
+  from {
+    opacity: 0.3;
+    scale: 0.78;
+    rotate: -10deg;
+  }
+
+  to {
+    opacity: 1;
+    scale: 1;
+    rotate: 0deg;
+  }
 }
 
 /* The contribution form's amount choices stay inside their card at large text. */

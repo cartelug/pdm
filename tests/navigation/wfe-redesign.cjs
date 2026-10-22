@@ -46,6 +46,13 @@ function check(value, message) {
     await page.locator(".site-loader").waitFor({ state: "detached" });
     await page.locator("#wfeMenuButton").click();
     check(
+      await page.locator("#wfeMenu").evaluate((menu) => {
+        const rect = menu.getBoundingClientRect();
+        return Math.abs(rect.top) < 1 && Math.abs(rect.height - innerHeight) < 2;
+      }),
+      "mobile menu fills the viewport instead of collapsing inside the blurred header",
+    );
+    check(
       await page.evaluate(() => document.querySelector("main").inert && document.body.style.overflow === "hidden"),
       "mobile menu locks the background",
     );
@@ -62,6 +69,72 @@ function check(value, message) {
       await page.evaluate(() => !document.querySelector("main").inert && document.activeElement.id === "wfeMenuButton"),
       "Escape closes the mobile menu and returns focus",
     );
+    for (const width of [320, 768, 1180]) {
+      await page.setViewportSize({ width, height: width === 768 ? 375 : 844 });
+      await page.evaluate(() => scrollTo({ top: 900, behavior: "instant" }));
+      const scrollBefore = await page.evaluate(() => scrollY);
+      await page.locator("#wfeMenuButton").click();
+      await page.waitForFunction(() => document.getElementById("wfeMenu").dataset.state === "open");
+      const menuGeometry = await page.locator("#wfeMenu").evaluate((menu) => {
+        const rect = menu.getBoundingClientRect();
+        const hit = document.elementFromPoint(innerWidth / 2, innerHeight / 2);
+        return {
+          top: rect.top,
+          height: rect.height,
+          viewportHeight: innerHeight,
+          viewportWidth: innerWidth,
+          receivesTaps: menu.contains(hit),
+          hit: hit?.tagName + "." + hit?.className,
+          clip: getComputedStyle(menu).clipPath,
+          headerFilter: getComputedStyle(document.querySelector(".w-header")).backdropFilter,
+          bodyTop: document.body.style.top,
+        };
+      });
+      check(
+        Math.abs(menuGeometry.top) < 1 &&
+          Math.abs(menuGeometry.height - menuGeometry.viewportHeight) < 2 &&
+          menuGeometry.receivesTaps,
+        "menu remains full height and receives taps after scrolling at " +
+          width +
+          "px: " +
+          JSON.stringify(menuGeometry),
+      );
+      await page.locator("#wfeMenu a").last().scrollIntoViewIfNeeded();
+      check(
+        await page
+          .locator("#wfeMenu a")
+          .last()
+          .evaluate((link) => {
+            const rect = link.getBoundingClientRect();
+            return (
+              rect.top >= 0 &&
+              rect.bottom <= innerHeight + 1 &&
+              link.contains(document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2))
+            );
+          }),
+        "last menu action is reachable even in a short viewport at " + width + "px",
+      );
+      await page.keyboard.press("Escape");
+      check(
+        Math.abs((await page.evaluate(() => scrollY)) - scrollBefore) < 2,
+        "closing restores the exact page position at " + width + "px",
+      );
+    }
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.locator("#wfeMenuButton").click();
+    await page.locator("#wfeMenuButton").click();
+    await page.locator("#wfeMenuButton").click();
+    await page.waitForFunction(() => document.getElementById("wfeMenu").dataset.state === "open");
+    check(
+      (await page.locator("#wfeMenuButton").getAttribute("aria-expanded")) === "true",
+      "rapid taps settle in the requested open state",
+    );
+    await page.setViewportSize({ width: 1280, height: 900 });
+    check(
+      await page.evaluate(() => !document.getElementById("wfeMenu").inert && document.body.style.position !== "fixed"),
+      "desktop resize releases the mobile lock",
+    );
+    await page.setViewportSize({ width: 390, height: 844 });
     await page.locator("[data-gallery-filter='school']").click();
     await page.locator("#galleryCount").filter({ hasText: "9 of 15" }).waitFor();
     check(

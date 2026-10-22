@@ -361,18 +361,95 @@
 
   var menu = byId("wfeMenu");
   var menuButton = byId("wfeMenuButton");
+  var menuTimer = 0;
+  var menuGeneration = 0;
+  var menuLocked = false;
+  var menuScroll = 0;
+  var menuBodyStyle = "";
+  var menuScrollBehavior = "";
+  var menuInert = new Map();
 
-  function setMenu(open, returnFocus) {
+  function menuIsMobile() {
+    // Follow the page's actual CSS breakpoint, including the older campaign inner pages.
+    return window.getComputedStyle(menuButton).display !== "none";
+  }
+
+  function lockMenu() {
+    if (menuLocked) return;
+    menuScroll = window.scrollY;
+    menuBodyStyle = document.body.style.cssText;
+    menuScrollBehavior = document.documentElement.style.scrollBehavior;
+    var scrollbar = window.innerWidth - document.documentElement.clientWidth;
+    var padding = parseFloat(window.getComputedStyle(document.body).paddingRight) || 0;
+    document.documentElement.style.scrollBehavior = "auto";
+    document.body.style.position = "fixed";
+    document.body.style.top = -menuScroll + "px";
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
+    if (scrollbar) document.body.style.paddingRight = padding + scrollbar + "px";
+    all(
+      "main, footer, .w-sticky, .wfe-sticky-contribute, .w-brand, .w-campaign-mark, .w-header__cta, #motionToggle",
+    ).forEach(function (node) {
+      menuInert.set(node, node.inert);
+      node.inert = true;
+    });
+    menuLocked = true;
+  }
+
+  function unlockMenu() {
+    if (!menuLocked) return;
+    document.body.style.cssText = menuBodyStyle;
+    menuInert.forEach(function (wasInert, node) {
+      node.inert = wasInert;
+    });
+    menuInert.clear();
+    window.scrollTo({ top: menuScroll, behavior: "instant" });
+    document.documentElement.style.scrollBehavior = menuScrollBehavior;
+    menuLocked = false;
+  }
+
+  function setMenu(open, returnFocus, immediate) {
+    open = open && menuIsMobile();
     var wasOpen = menu.classList.contains("is-open");
+    window.clearTimeout(menuTimer);
+    var generation = ++menuGeneration;
+    if (open) lockMenu();
     menu.classList.toggle("is-open", open);
+    document.body.classList.toggle("r-menu-open", open);
+    menu.inert = menuIsMobile() && !open;
+    menu.dataset.state = open ? "opening" : wasOpen ? "closing" : "closed";
     menuButton.setAttribute("aria-expanded", String(open));
     menuButton.textContent = open ? "Close −" : "Menu +";
-    if (!open && wasOpen && returnFocus) menuButton.focus();
+    menuButton.setAttribute("aria-label", open ? "Close campaign menu" : "Open campaign menu");
+    if (open && !wasOpen) menu.querySelector("a[href]")?.focus({ preventScroll: true });
+    if (!open) {
+      unlockMenu();
+      if (wasOpen && returnFocus) menuButton.focus({ preventScroll: true });
+    }
+    window.dispatchEvent(new CustomEvent("wfe:menu-state", { detail: open }));
+    function settled() {
+      if (generation === menuGeneration) menu.dataset.state = open ? "open" : "closed";
+    }
+    if (immediate || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      settled();
+    } else if (typeof menu.getAnimations === "function") {
+      // CSS can start on a later frame after a phone resize. Follow the actual panel transition,
+      // rather than declaring the menu open when a matching-duration JS timer happens to fire.
+      Promise.all(
+        menu.getAnimations().map(function (animation) {
+          return animation.finished.catch(function () {
+            /* Superseded transitions are expected. */
+          });
+        }),
+      ).then(settled);
+    } else {
+      menuTimer = window.setTimeout(settled, 420);
+    }
   }
 
   if (menu && menuButton) {
     menuButton.addEventListener("click", function () {
-      setMenu(!menu.classList.contains("is-open"), false);
+      setMenu(!menu.classList.contains("is-open"), true);
     });
     menu.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
@@ -380,11 +457,42 @@
       });
     });
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") setMenu(false, true);
+      if (!menu.classList.contains("is-open")) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMenu(false, true);
+      }
+      if (event.key !== "Tab") return;
+      var links = Array.from(menu.querySelectorAll("a[href]")).filter(function (link) {
+        return link.getClientRects().length;
+      });
+      if (!links.length) return;
+      var active = document.activeElement;
+      if (event.shiftKey && active === links[0]) {
+        event.preventDefault();
+        menuButton.focus({ preventScroll: true });
+      } else if (!event.shiftKey && active === menuButton) {
+        event.preventDefault();
+        links[0].focus({ preventScroll: true });
+      } else if (active !== menuButton && !menu.contains(active)) {
+        event.preventDefault();
+        (event.shiftKey ? menuButton : links[0]).focus({ preventScroll: true });
+      }
     });
     document.addEventListener("click", function (event) {
       if (!menu.contains(event.target) && !menuButton.contains(event.target)) setMenu(false, false);
     });
+    window.addEventListener("resize", function () {
+      if (!menuIsMobile()) setMenu(false, false, true);
+      else menu.inert = !menu.classList.contains("is-open");
+    });
+    window.addEventListener("pagehide", function () {
+      setMenu(false, false, true);
+    });
+    window.addEventListener("pageshow", function (event) {
+      if (event.persisted) setMenu(false, false, true);
+    });
+    menu.inert = menuIsMobile();
   }
 
   /* ---------- 5. Scroll reveals ---------- */
@@ -452,7 +560,7 @@
     if (scrollLine) {
       scrollLine.style.transform = "scaleX(" + Math.max(0, Math.min(1, distance ? window.scrollY / distance : 0)) + ")";
     }
-    if (!sticky) return;
+    if (!sticky || menuLocked) return;
 
     var finalCall = document.querySelector(".wfe-final");
     var typing = document.activeElement && /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);

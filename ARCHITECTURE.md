@@ -2,7 +2,7 @@
 
 This is the one place that says how the site is built, what is protected, how a change is proven safe, and which decisions have been taken. If another document disagrees with this one, this one wins and the other is wrong. Update it in the same pull request as the code it describes.
 
-Last verified against the repository on 21 October 2026.
+Last verified against the repository on 22 October 2026.
 
 ## 1. What the site is
 
@@ -57,6 +57,14 @@ Commands: `npm ci`, `npm run build`, `npm run validate` (everything that must pa
 Pledge, price, bounds, referral, session, ledger and payment behaviour must not change by accident. `tests/protected-campaign/baseline.json` records the SHA-256 of 130 files, and `npm run check:protected` fails if any of them changes or disappears. Every reviewed exception is listed there with its reason; the Release 1 entries (21 October 2026) cover head-only changes to the ten Walk and Contribute pages and the retirement of the loading screen in `js/preloader.js`.
 
 A presentation-only change to a protected file is allowed through a reviewed exception: make the change, add an entry to `presentationReviews` in the baseline with the previous hash, the date and the reason, and update the file's hash. Do this only for changes to appearance, never to pledge, price, payment or register logic.
+
+The 22 October menu repair is one such exception. `js/wfe-shell.js` is the sole owner of the campaign menu,
+including fixed-body scroll locking, keyboard focus, prior inert-state restoration and page/resize cleanup.
+`js/wfe-redesign.js` only highlights the current section and supplies decorative motion. The Walk header blur
+lives on its `::before` surface in `css/one-look.css`; putting a filter on the header itself would make the
+fixed menu resolve against the header rather than the viewport. The menu's `100dvh` sheet scrolls internally
+on short screens. Menu and motion changes never change the chooser, country prices, pledge URLs or services.
+See [the menu and motion audit](docs/quality/MENU-MOTION-2026-10-22.md) for reproduction and validation.
 
 Two further checks look at what a protected page is allowed to *contain*, so a redesign cannot quietly drop a hook:
 
@@ -154,7 +162,7 @@ Decisions come from the platform plan of 21 October 2026. A decision is reversib
 | D2 | Archivo is a weight-only file, with no width axis. | A weight-only file cannot look stretched | **Applied.** |
 | D3 | Three breakpoints only: 640, 900 and 1200 px, min-width. | There are 38 distinct breakpoint widths in the stylesheets today | **Partly.** Defined once in the tokens and used for the new header (1200 px). The existing stylesheets still use 35 other widths; the responsive gate passes at every tested width regardless. |
 | D4 | Faith in Motion becomes a frozen campaign archive, restyled only through `css/fim-v3.css`. | A finished campaign with a live register | **Applied with one difference:** it is restyled through the shared `css/brand.css` and `css/one-look.css` (head change on its seven pages) as well, so all three families share one layer. Its register, scripts and ledger are untouched. |
-| D5 | Protected JavaScript and PHP are not edited by the redesign. | Money safety | **One reviewed exception:** `js/preloader.js` (decision D9). It keeps its public contract and contains no pledge, price or payment logic. No PHP and no other protected script changed. |
+| D5 | Protected JavaScript and PHP are not edited by the redesign. | Money safety | **Reviewed presentation exceptions:** `js/preloader.js` (decision D9) and the menu/sticky presentation blocks in `js/wfe-shell.js` (22 October repair). Attribution, country pricing, pledge and payment logic are unchanged. No PHP changed. |
 | D6 | Gold, cyan and sun are fills and decoration, never text on a light surface. | They fail contrast | **Applied** and tested. |
 | D7 | One platform: Astro builds every public page, and the markup that carries pledge and payment hooks is included as frozen fragments. Migrate one page at a time with an equivalence proof, keeping the old version for rollback. | Best fit for safety, speed and upkeep on a static plus PHP host | **Not started for the protected pages.** The equivalence tooling (hooks, fragments, facts) exists and was used to prove Release 1. Migrating the ten live pledge pages into Astro is the largest remaining item and should go one page at a time with a cutover window, as the plan says. |
 | D8 | No public URL changes without the product owner's approval. | Links live in WhatsApp groups for years | **Respected.** No URL was added, renamed or removed. |
