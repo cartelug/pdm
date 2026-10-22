@@ -86,6 +86,11 @@
     .pci-header .pci-brand__text small {
       display: none;
     }
+
+    .pci-header .pci-menu-toggle {
+      gap: 8px;
+      padding-left: 14px;
+    }
   }
 
   .pci-desktop-nav {

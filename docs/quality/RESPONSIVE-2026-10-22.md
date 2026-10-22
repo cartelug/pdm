@@ -18,7 +18,7 @@ two additional issues that the old viewport matrix did not cover.
 | Campaign type | Every nested span explicitly received Lexend, overriding the Archivo role of its heading or button. | Descendants inherit their selected role; inputs, selects and textareas explicitly retain Lexend. |
 | Walk pledge instructions | Decorative bag art and step counters consumed most of the instruction column. | Narrow intro containers give instructions the full width and omit the redundant decorative bag. |
 | Contribution hero | An 80px decorative portrait reserved 96px beside a 320px phone heading. | Small-phone headings use their full 288px shell and two natural lines. |
-| Backpack scene | A fixed viewport-height stage could clip images and captions on short screens. | Below 640px height, all three frames use normal document flow; resizing restores the scene. |
+| Backpack scene | A fixed viewport-height stage could clip short screens; in normal flow, a 100%-height picture also pushed its caption outside the clipped card. | Below 640px height, all three frames use normal document flow; pictures leave room for their captions, and resizing restores the scene. |
 | Wide Faith hero | A fixed 680px box included a gutter that grew with the viewport, eventually consuming its text space. | The outer width grows with that gutter; the measured heading keeps 436px at both 1920px and 2560px. |
 
 ## Regression coverage
@@ -30,7 +30,8 @@ uses normal CSS scaling. The report records each viewport and whether text enlar
 
 Sideways scrolling, page-edge clipping and crowded targets below 24px retain their existing strict failures.
 Additional review notes identify split heading words, headings squeezed into five or more short lines, and
-wrapped text clipped in width or height. Heroes outside `main`, including Faith in Motion and Give, are included.
+wrapped text clipped in width or height by its own box or an ancestor. Heroes outside `main`, including Faith
+in Motion and Give, are included.
 Deliberate editorial breaks and enlarged-text wrapping are reviewed separately from normal-zoom defects.
 
 The Walk browser suite also checks nested headline font inheritance, short-landscape caption flow and scene
@@ -42,3 +43,7 @@ CI saves the full responsive JSON as the `responsive-layout-report` artifact for
 The ten protected Walk/Contribute HTML changes contain only refreshed CSS/JavaScript cache versions. Each is
 recorded as a presentation review with its previous hash. Frozen forms, campaign facts, hooks, prices, payment
 services, register logic and destinations are unchanged.
+
+## Browser evidence
+
+![320px About page: single-row header and whole heading words](responsive-2026-10-22/phone-about-normal-zoom.jpg)

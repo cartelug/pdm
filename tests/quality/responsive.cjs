@@ -4,7 +4,7 @@
      fail  clipped     content is cut off at the page edge instead of reflowing
      fail  below24     a tap target under 24 x 24 px on a phone with another target within 24 px (WCAG 2.5.8)
      note  truncated   text cut off inside its own box instead of wrapping
-     note  textCutOff  wrapped text clipped horizontally or vertically inside a text container
+     note  textCutOff  wrapped text clipped by its own box or a non-scrolling ancestor
      note  brokenWords heading words split across rendered lines
      note  narrowHeads headings squeezed into at least five short lines
      note  under44     tap targets under the 44 px design floor (rule R9)
@@ -191,9 +191,11 @@ function inspect(phone) {
     }
   }
 
-  // Unlike the old nowrap-only check, this also catches a paragraph or heading whose
-  // final lines disappear under max-height/overflow. Skip mixed media and closed UI.
+  // Unlike the old nowrap-only check, this also catches a paragraph or caption whose
+  // final lines disappear under its own or an ancestor's overflow. Skip mixed media
+  // and closed UI; an auto/scroll container permits content beyond its scrollport.
   const textCutOff = [];
+  const clipBoxes = new Map();
   const textBoxes = [
     ...document.querySelectorAll("h1, h1 span"),
     ...contentRoots.flatMap((main) => [
@@ -204,14 +206,49 @@ function inspect(phone) {
     if (!textVisible(el) || !el.textContent.trim() || el.querySelector("img, svg, video, canvas, iframe, table, form"))
       continue;
     const style = getComputedStyle(el);
-    if (style.display === "inline" || el.clientWidth < 8 || el.clientHeight < 8) continue;
     const tolerance = Math.max(4, parseFloat(style.fontSize) * 0.25);
-    const clippedX = /(hidden|clip)/.test(style.overflowX) && el.scrollWidth > el.clientWidth + tolerance;
-    const clippedY = /(hidden|clip)/.test(style.overflowY) && el.scrollHeight > el.clientHeight + tolerance;
+    const hasBox = style.display !== "inline" && el.clientWidth >= 8 && el.clientHeight >= 8;
+    const clippedX = hasBox && /(hidden|clip)/.test(style.overflowX) && el.scrollWidth > el.clientWidth + tolerance;
+    const clippedY = hasBox && /(hidden|clip)/.test(style.overflowY) && el.scrollHeight > el.clientHeight + tolerance;
     if (clippedX || clippedY) {
       textCutOff.push(
         `${label(el)} clips ${[clippedX && "width", clippedY && "height"].filter(Boolean).join(" and ")}`,
       );
+      continue;
+    }
+
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const textRect = range.getBoundingClientRect();
+    if (textRect.width < 1 || textRect.height < 1) continue;
+    let scrollsX = false;
+    let scrollsY = false;
+    for (
+      let ancestor = el.parentElement;
+      ancestor && ancestor !== document.body && ancestor !== document.documentElement;
+      ancestor = ancestor.parentElement
+    ) {
+      if (!clipBoxes.has(ancestor)) {
+        clipBoxes.set(ancestor, { style: getComputedStyle(ancestor), rect: ancestor.getBoundingClientRect() });
+      }
+      const clip = clipBoxes.get(ancestor);
+      scrollsX ||= /(auto|scroll)/.test(clip.style.overflowX);
+      scrollsY ||= /(auto|scroll)/.test(clip.style.overflowY);
+      if (scrollsX && scrollsY) break;
+      const outsideX =
+        !scrollsX &&
+        /(hidden|clip)/.test(clip.style.overflowX) &&
+        (textRect.left < clip.rect.left - tolerance || textRect.right > clip.rect.right + tolerance);
+      const outsideY =
+        !scrollsY &&
+        /(hidden|clip)/.test(clip.style.overflowY) &&
+        (textRect.top < clip.rect.top - tolerance || textRect.bottom > clip.rect.bottom + tolerance);
+      if (outsideX || outsideY) {
+        textCutOff.push(
+          `${label(el)} clipped by ${label(ancestor)} (${[outsideX && "width", outsideY && "height"].filter(Boolean).join(" and ")})`,
+        );
+        break;
+      }
     }
   }
 

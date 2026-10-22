@@ -254,6 +254,22 @@ html[data-brand="walk"] .w-hero__title {
   }
 }
 
+/* In normal flow the picture must leave room for its caption inside the clipped card. */
+html[data-brand="walk"] .w-bag:not(.is-scrolly) .w-bag__frame {
+  display: grid;
+  grid-template-rows: auto auto;
+}
+
+html[data-brand="walk"] .w-bag:not(.is-scrolly) .w-bag__frame picture,
+html[data-brand="walk"] .w-bag:not(.is-scrolly) .w-bag__frame img {
+  height: auto;
+}
+
+html[data-brand="walk"] .w-bag:not(.is-scrolly) .w-bag__frame img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
 /* Keep the Faith hero's text width when the outer desktop gutter grows. */
 @media (min-width: 781px) {
   html[data-brand="pci"] .pci-fim-v3 .hero-in {
