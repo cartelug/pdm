@@ -10,7 +10,7 @@
      4. Scroll scenes: hero depth, the backpack frames, the journey line,
         the learning chapters and background depth
      5. The five-friends circle and the pledge summary feedback
-     6. Mobile menu: background lock, focus trap and current section
+     6. Current section (the campaign shell owns the menu)
      7. Illustration gallery and accessible viewer
 
    Scrolling stays native: nothing here intercepts wheel or touch input.
@@ -21,7 +21,6 @@
   var root = document.documentElement;
   var body = document.body;
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var mobile = window.matchMedia("(max-width: 1180px)");
   var wide = window.matchMedia("(min-width: 900px)");
   var toggle = document.getElementById("motionToggle");
   var paused = false;
@@ -197,6 +196,8 @@
   }
 
   function scenes() {
+    // A fixed-body menu must not reset the hero, chapter or route scenes to scroll zero.
+    if (body.classList.contains("r-menu-open")) return;
     var height = window.innerHeight;
     var on = !motionOff();
 
@@ -241,6 +242,17 @@
         node.style.setProperty("--depth", (Math.max(-1, Math.min(1, offset)) * -amount).toFixed(1) + "px");
       });
 
+    if (on)
+      storyImages.forEach(function (node) {
+        var area = node.parentElement.getBoundingClientRect();
+        if (area.bottom < 0 || area.top > height) return;
+        var travel = wide.matches ? 18 : 8;
+        node.style.setProperty(
+          "--story-y",
+          ((clamp((height - area.top) / (height + area.height)) - 0.5) * travel).toFixed(1) + "px",
+        );
+      });
+
     if (header) header.classList.toggle("is-scrolled", window.scrollY > 12);
     revealPassed();
   }
@@ -256,6 +268,59 @@
   }
   window.addEventListener("scroll", requestFrame, { passive: true });
   window.addEventListener("resize", requestFrame);
+  window.addEventListener("wfe:menu-state", requestFrame);
+
+  /* Small, one-shot details complement the chapter scenes. No content is hidden while waiting.
+     Native scrolling, native links and the original numbers remain the source of truth. */
+  var storyImages = Array.from(
+    document.querySelectorAll(".w-learn__fig img, .w-journey__road img, .w-builders__fig img"),
+  );
+  var detailObserver = hasObserver
+    ? new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            if (!motionOff()) entry.target.classList.add("w-detail-in");
+            detailObserver.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.12 },
+      )
+    : null;
+  function observeDetails(scope) {
+    if (!detailObserver) return;
+    scope
+      .querySelectorAll(
+        ".r-gallery-card, .w-resources__grid > a, .w-tiers tbody tr, .w-ledger-list > *, .w-faq__list details, .w-footer__top > *",
+      )
+      .forEach(function (node, index) {
+        node.style.setProperty("--detail-order", index % 3);
+        detailObserver.observe(node);
+      });
+  }
+  observeDetails(document);
+
+  // Pointer depth composes with the existing image transforms; touch keeps its native gestures.
+  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  var heroMedia = document.querySelector(".w-hero__media");
+  if (heroMedia) {
+    heroMedia.addEventListener("pointermove", function (event) {
+      if (!finePointer.matches || motionOff() || body.classList.contains("r-menu-open")) return;
+      var box = heroMedia.getBoundingClientRect();
+      heroMedia.style.setProperty(
+        "--pointer-x",
+        (((event.clientX - box.left) / box.width - 0.5) * 10).toFixed(1) + "px",
+      );
+      heroMedia.style.setProperty(
+        "--pointer-y",
+        (((event.clientY - box.top) / box.height - 0.5) * 8).toFixed(1) + "px",
+      );
+    });
+    heroMedia.addEventListener("pointerleave", function () {
+      heroMedia.style.removeProperty("--pointer-x");
+      heroMedia.style.removeProperty("--pointer-y");
+    });
+  }
 
   // Learning chapters: the current place to learn lights its marker.
   if (hasObserver) {
@@ -343,56 +408,10 @@
     }).observe(total, { childList: true, characterData: true, subtree: true });
   }
 
-  /* ---------- 6. mobile menu ---------- */
+  /* ---------- 6. current section ---------- */
 
   var menu = document.getElementById("wfeMenu");
-  var menuButton = document.getElementById("wfeMenuButton");
-  var main = document.querySelector("main");
-  var footer = document.querySelector("footer");
-  var priorOverflow = "";
-  var menuWasOpen = false;
-  function syncMenu() {
-    var open = mobile.matches && menu.classList.contains("is-open");
-    menu.inert = mobile.matches && !open;
-    if (open && !menuWasOpen) {
-      priorOverflow = body.style.overflow;
-      body.style.overflow = "hidden";
-      menu.querySelector("a").focus({ preventScroll: true });
-    }
-    if (!open && menuWasOpen) {
-      body.style.overflow = priorOverflow;
-      if (menu.contains(document.activeElement)) menuButton.focus({ preventScroll: true });
-    }
-    body.classList.toggle("r-menu-open", open);
-    main.inert = open;
-    footer.inert = open;
-    menuWasOpen = open;
-  }
-  if (menu && menuButton) {
-    new MutationObserver(syncMenu).observe(menu, { attributes: true, attributeFilter: ["class"] });
-    mobile.addEventListener("change", function () {
-      if (!mobile.matches) {
-        menu.classList.remove("is-open");
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.textContent = "Menu +";
-      }
-      syncMenu();
-    });
-    document.addEventListener("keydown", function (event) {
-      if (!menuWasOpen || event.key !== "Tab") return;
-      var links = Array.from(menu.querySelectorAll("a[href]"));
-      var first = links[0];
-      var last = menuButton;
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    });
-    syncMenu();
-
+  if (menu) {
     // The section in view is marked in the navigation.
     if (hasObserver) {
       var navLinks = Array.from(menu.querySelectorAll('a[href^="#"]:not(.w-btn)'));
@@ -511,6 +530,7 @@
     data.slice(before, limit).forEach(function (item, index) {
       grid.appendChild(makeCard(item, index));
     });
+    observeDetails(grid);
     count.textContent = "Showing " + Math.min(limit, data.length) + " of " + data.length + " illustrations";
     more.hidden = limit >= data.length;
     feedback.textContent = "";
