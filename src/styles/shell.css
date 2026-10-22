@@ -39,6 +39,7 @@
 
   .pci-brand__mark {
     display: block;
+    flex: none;
     width: 52px;
     background: none;
   }
@@ -65,7 +66,7 @@
     color: var(--pci-muted);
   }
 
-  @media (max-width: 419px) {
+  @media (max-width: 639px) {
     .pci-header__inner {
       gap: 12px;
     }
@@ -76,6 +77,10 @@
 
     .pci-brand__mark {
       width: 44px;
+    }
+
+    .pci-header .pci-brand__name {
+      font-size: clamp(1.5rem, 7.2vw, 1.9rem);
     }
 
     .pci-header .pci-brand__text small {
@@ -364,7 +369,7 @@
     color: var(--pci-muted);
   }
 
-  @media (min-width: 1360px) {
+  @media (min-width: 1440px) {
     .pci-campaign-chip__status {
       display: block;
     }
@@ -395,7 +400,7 @@
     }
   }
 
-  @media (min-width: 1360px) {
+  @media (min-width: 1440px) {
     .pci-brand__text small {
       display: block;
     }
@@ -458,6 +463,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
     min-height: var(--pci-header);
     padding-inline: var(--pci-gutter);
     border-bottom: 1px solid var(--pci-on-night-line);
@@ -519,7 +525,7 @@
 
   .pci-menu__links a {
     display: grid;
-    grid-template-columns: 2.6rem 1fr auto;
+    grid-template-columns: max-content minmax(0, 1fr) auto;
     align-items: baseline;
     gap: 12px;
     padding: clamp(8px, 1.6vh, 16px) 0;
@@ -586,7 +592,7 @@
     color: var(--pci-on-night-muted);
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 640px) {
     .pci-menu__identity span {
       display: inline;
     }
@@ -674,7 +680,7 @@
   .pci-footer__grid {
     display: grid;
     gap: 44px 32px;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     padding-block: clamp(44px, 5vw, 72px);
   }
 
@@ -770,9 +776,15 @@
     color: var(--pci-on-night-muted);
   }
 
+  @media (min-width: 640px) {
+    .pci-footer__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   @media (min-width: 900px) {
     .pci-footer__invitation {
-      grid-template-columns: 1fr auto;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
       align-items: end;
     }
 
@@ -781,7 +793,7 @@
     }
 
     .pci-footer__grid {
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
     }
 
     .pci-footer__grid > div:first-child {
