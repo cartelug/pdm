@@ -1362,8 +1362,8 @@
 
   .pci-home #iciadm {
     background:
-      linear-gradient(100deg, rgb(34 10 16 / 94%), rgb(34 10 16 / 88%)),
-      url("/assets/home-backgrounds/paths-wide-840.webp") center / cover;
+      radial-gradient(70% 85% at 85% 12%, rgb(183 25 53 / 16%), transparent 80%),
+      linear-gradient(100deg, var(--pci-night), var(--pci-night-raised));
   }
 
   .pci-home .pci-projects {
@@ -1508,8 +1508,7 @@
 
     .pci-home #iciadm {
       background:
-        linear-gradient(0deg, rgb(34 10 16 / 94%), rgb(34 10 16 / 82%)),
-        url("/assets/home-backgrounds/paths-mobile-420.webp") center top / cover;
+        radial-gradient(85% 45% at 88% 5%, rgb(183 25 53 / 18%), transparent 80%), var(--pci-night);
     }
 
     .pci-home .pci-practice__backdrop img {
