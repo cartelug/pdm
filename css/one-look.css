@@ -305,6 +305,15 @@ html[data-brand="walk"] .w-bag:not(.is-scrolly) .w-bag__frame img {
   object-fit: cover;
 }
 
+/* Credits stay in the figure's flow so enlarged text cannot escape an image overlay. */
+html[data-brand="walk"] :is(.w-meet__photo, .w-why figure) figcaption {
+  position: static;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 0;
+}
+
 /* Keep the Faith hero's text width when the outer desktop gutter grows. */
 @media (min-width: 781px) {
   html[data-brand="pci"] .pci-fim-v3 .hero-in {

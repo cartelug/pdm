@@ -46,6 +46,8 @@ The ten protected Walk/Contribute HTML changes contain only refreshed CSS/JavaSc
 recorded as a presentation review with its previous hash. Frozen forms, campaign facts, hooks, prices, payment
 services, register logic and destinations are unchanged.
 
+The enlarged-text review also caught two photograph credits clipped inside image overlays. Both credits now wrap in the figure’s document flow, preserving the complete text at 200% enlargement.
+
 ## Browser evidence
 
 ![320px About page: single-row header and whole heading words](responsive-2026-10-22/phone-about-normal-zoom.jpg)
