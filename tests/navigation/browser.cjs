@@ -60,7 +60,12 @@ const server = http.createServer((req, res) => {
             .locator(".pci-hero__media img")
             .evaluate((el) => ({ source: el.currentSrc, loaded: el.complete && el.naturalWidth > 0 }));
           assert.equal(hero.loaded, true, "Hero image loads at " + width);
-          assert.match(hero.source, width <= 719 ? /hero-portrait-/ : /hero-wide-/);
+          assert.match(
+            hero.source,
+            width <= 719
+              ? /\/assets\/home-backgrounds\/paths-mobile-\d+\.webp$/
+              : /\/assets\/home-backgrounds\/paths-wide-\d+\.webp$/,
+          );
         }
       }
     }
