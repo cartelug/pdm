@@ -1,9 +1,12 @@
-/* Responsive gate: every public page at 320 to 1536 px, in phone landscape and with text at 200%.
+/* Responsive gate: every public page at 320 to 2560 px, in phone landscape and with text at 200%.
    Measures what a visitor would notice:
      fail  hScroll     the page scrolls sideways (rules R3 and R15)
      fail  clipped     content is cut off at the page edge instead of reflowing
      fail  below24     a tap target under 24 x 24 px on a phone with another target within 24 px (WCAG 2.5.8)
      note  truncated   text cut off inside its own box instead of wrapping
+     note  textCutOff  wrapped text clipped by its own box or a non-scrolling ancestor
+     note  brokenWords heading words split across rendered lines
+     note  narrowHeads headings squeezed into at least five short lines
      note  under44     tap targets under the 44 px design floor (rule R9)
      note  smallText   visible text under 13 px (rule R7)
      note  smallInput  form fields under 16 px, which makes iPhones zoom in (rule R12)
@@ -35,10 +38,19 @@ const viewports = [
   { name: "320", width: 320, height: 640, phone: true },
   { name: "360", width: 360, height: 740, phone: true },
   { name: "390", width: 390, height: 844, phone: true },
+  { name: "414", width: 414, height: 896, phone: true },
+  { name: "430", width: 430, height: 932, phone: true },
   { name: "768", width: 768, height: 1024 },
+  { name: "900", width: 900, height: 1180 },
   { name: "1024", width: 1024, height: 768 },
+  { name: "1180", width: 1180, height: 820 },
+  { name: "1200", width: 1200, height: 800 },
   { name: "1280", width: 1280, height: 800 },
+  { name: "1360", width: 1360, height: 800 },
+  { name: "1440", width: 1440, height: 900 },
   { name: "1536", width: 1536, height: 864 },
+  { name: "1920", width: 1920, height: 1080 },
+  { name: "2560", width: 2560, height: 1440 },
   { name: "landscape", width: 667, height: 375, phone: true },
   { name: "text200-390", width: 390, height: 844, phone: true, textZoom: true, noShot: true },
   { name: "text200-1280", width: 1280, height: 800, textZoom: true, noShot: true },
@@ -120,6 +132,130 @@ function inspect(phone) {
     if (el.textContent.trim().length > 2) truncated.push(label(el));
   }
 
+  // A page can pass the overflow gate while its headings form a one-word-wide column.
+  // Measure rendered word fragments, rather than guessing from CSS or counting <br>s.
+  // These remain review notes: a deliberate editorial line break is not a failed layout.
+  const brokenWords = [];
+  const narrowHeads = [];
+  // The archived campaign places its public hero before <main>. Include that
+  // content explicitly and always inspect h1, wherever the page authors put it.
+  const contentRoots = [...document.querySelectorAll('main, [role="main"], .hero, .page-hero, .w-hero')];
+  const textVisible = (el) => {
+    if (
+      !shown(el) ||
+      hiddenFromUsers(el) ||
+      el.closest('[inert], details:not([open]), nav, footer, [role="navigation"], [role="contentinfo"]')
+    )
+      return false;
+    for (let ancestor = el.parentElement; ancestor; ancestor = ancestor.parentElement) {
+      const style = getComputedStyle(ancestor);
+      if (style.visibility === "hidden" || Number(style.opacity) === 0) return false;
+    }
+    return true;
+  };
+  const textLabel = (el) => {
+    const text = (el.innerText || el.textContent || "").replace(/\s+/g, " ").trim();
+    return `${label(el)} “${text.length > 84 ? text.slice(0, 83) + "…" : text}”`;
+  };
+  const headings = [
+    ...document.querySelectorAll("h1"),
+    ...contentRoots.flatMap((main) => [...main.querySelectorAll("h1, h2, h3")]),
+  ];
+  for (const heading of new Set(headings)) {
+    if (!textVisible(heading)) continue;
+    const size = parseFloat(getComputedStyle(heading).fontSize);
+    const lines = [];
+    let textLeft = Infinity;
+    let textRight = -Infinity;
+    const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (!textVisible(node.parentElement)) continue;
+      for (const word of node.textContent.matchAll(/[\p{L}\p{N}][\p{L}\p{N}\u2019']*/gu)) {
+        const range = document.createRange();
+        range.setStart(node, word.index);
+        range.setEnd(node, word.index + word[0].length);
+        const rects = [...range.getClientRects()].filter((rect) => rect.width > 0.5 && rect.height > 0.5);
+        const wordLines = [];
+        for (const rect of rects) {
+          textLeft = Math.min(textLeft, rect.left);
+          textRight = Math.max(textRight, rect.right);
+          if (!wordLines.some((top) => Math.abs(top - rect.top) < 2)) wordLines.push(rect.top);
+          if (!lines.some((top) => Math.abs(top - rect.top) < Math.max(3, size * 0.2))) lines.push(rect.top);
+        }
+        if (word[0].length >= 6 && wordLines.length > 1) {
+          brokenWords.push(`${textLabel(heading)} splits “${word[0]}” across ${wordLines.length} lines`);
+        }
+      }
+    }
+    const width = Math.min(heading.getBoundingClientRect().width, textRight - textLeft);
+    if (lines.length >= 5 && width / size < 7 && heading.textContent.trim().length >= 24) {
+      narrowHeads.push(
+        `${textLabel(heading)} ${lines.length} lines in ${Math.round(width)}px at ${Math.round(size)}px type`,
+      );
+    }
+  }
+
+  // Unlike the old nowrap-only check, this also catches a paragraph or caption whose
+  // final lines disappear under its own or an ancestor's overflow. Skip mixed media
+  // and closed UI; an auto/scroll container permits content beyond its scrollport.
+  const textCutOff = [];
+  const clipBoxes = new Map();
+  const textBoxes = [
+    ...document.querySelectorAll("h1, h1 span"),
+    ...contentRoots.flatMap((main) => [
+      ...main.querySelectorAll("h1, h2, h3, h4, h1 span, h2 span, h3 span, p, li, dd, dt, label, figcaption"),
+    ]),
+  ];
+  for (const el of new Set(textBoxes)) {
+    if (!textVisible(el) || !el.textContent.trim() || el.querySelector("img, svg, video, canvas, iframe, table, form"))
+      continue;
+    const style = getComputedStyle(el);
+    const tolerance = Math.max(4, parseFloat(style.fontSize) * 0.25);
+    const hasBox = style.display !== "inline" && el.clientWidth >= 8 && el.clientHeight >= 8;
+    const clippedX = hasBox && /(hidden|clip)/.test(style.overflowX) && el.scrollWidth > el.clientWidth + tolerance;
+    const clippedY = hasBox && /(hidden|clip)/.test(style.overflowY) && el.scrollHeight > el.clientHeight + tolerance;
+    if (clippedX || clippedY) {
+      textCutOff.push(
+        `${textLabel(el)} clips ${[clippedX && "width", clippedY && "height"].filter(Boolean).join(" and ")}`,
+      );
+      continue;
+    }
+
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const textRect = range.getBoundingClientRect();
+    if (textRect.width < 1 || textRect.height < 1) continue;
+    let scrollsX = false;
+    let scrollsY = false;
+    for (
+      let ancestor = el.parentElement;
+      ancestor && ancestor !== document.body && ancestor !== document.documentElement;
+      ancestor = ancestor.parentElement
+    ) {
+      if (!clipBoxes.has(ancestor)) {
+        clipBoxes.set(ancestor, { style: getComputedStyle(ancestor), rect: ancestor.getBoundingClientRect() });
+      }
+      const clip = clipBoxes.get(ancestor);
+      scrollsX ||= /(auto|scroll)/.test(clip.style.overflowX);
+      scrollsY ||= /(auto|scroll)/.test(clip.style.overflowY);
+      if (scrollsX && scrollsY) break;
+      const outsideX =
+        !scrollsX &&
+        /(hidden|clip)/.test(clip.style.overflowX) &&
+        (textRect.left < clip.rect.left - tolerance || textRect.right > clip.rect.right + tolerance);
+      const outsideY =
+        !scrollsY &&
+        /(hidden|clip)/.test(clip.style.overflowY) &&
+        (textRect.top < clip.rect.top - tolerance || textRect.bottom > clip.rect.bottom + tolerance);
+      if (outsideX || outsideY) {
+        textCutOff.push(
+          `${textLabel(el)} clipped by ${label(ancestor)} (${[outsideX && "width", outsideY && "height"].filter(Boolean).join(" and ")})`,
+        );
+        break;
+      }
+    }
+  }
+
   let below24 = 0;
   let under44 = 0;
   const targetSamples = [];
@@ -163,6 +299,12 @@ function inspect(phone) {
     hScroll: document.documentElement.scrollWidth - vw,
     clipped,
     truncated: truncated.slice(0, 5),
+    textCutOff: textCutOff.slice(0, 5),
+    textCutOffCount: textCutOff.length,
+    brokenWords: brokenWords.slice(0, 5),
+    brokenWordCount: brokenWords.length,
+    narrowHeads: narrowHeads.slice(0, 5),
+    narrowHeadCount: narrowHeads.length,
     smallText: [...smallText].slice(0, 5).map(([name, size]) => `${name} ${size}px`),
     smallTextCount: smallText.size,
     below24,
@@ -214,6 +356,7 @@ function stylesheetScan() {
       isMobile: Boolean(viewport.phone),
       hasTouch: Boolean(viewport.phone),
       reducedMotion: "reduce",
+      deviceScaleFactor: 1,
     });
     await context.route(/^https?:\/\/(?!127\.0\.0\.1|localhost)/, (request) => request.abort());
     const page = await context.newPage();
@@ -224,9 +367,17 @@ function stylesheetScan() {
         await page.waitForLoadState("domcontentloaded").catch(() => {});
       }
       if (viewport.textZoom) await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
+      await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(450);
       const measured = await page.evaluate(inspect, Boolean(viewport.phone));
-      results.push({ route, viewport: viewport.name, ...measured });
+      results.push({
+        route,
+        viewport: viewport.name,
+        width: viewport.width,
+        height: viewport.height,
+        textZoom: Boolean(viewport.textZoom),
+        ...measured,
+      });
       if (shotsDir && !viewport.noShot && keyRoutes.includes(route)) {
         const name =
           (route === "/" ? "home" : route.replace(/^\/|\/$/g, "").replace(/\//g, "_")) + `.${viewport.name}.jpg`;
@@ -280,6 +431,11 @@ function stylesheetScan() {
   }
   for (const r of results.filter((r) => r.truncated.length)) {
     console.log(`note: truncated ${r.viewport.padEnd(12)} ${r.route}  ${r.truncated.slice(0, 3).join("; ")}`);
+  }
+  for (const key of ["textCutOff", "brokenWords", "narrowHeads"]) {
+    for (const r of results.filter((r) => r[key].length)) {
+      console.log(`note: ${key} ${r.viewport.padEnd(12)} ${r.route}  ${r[key].slice(0, 3).join("; ")}`);
+    }
   }
   const noFit = [...new Set(results.filter((r) => !r.viewportFit).map((r) => r.route))];
   const noSize = [...new Set(results.filter((r) => r.imageSize).map((r) => r.route))];

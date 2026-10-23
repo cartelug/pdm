@@ -135,6 +135,42 @@ function check(value, message) {
       "desktop resize releases the mobile lock",
     );
     await page.setViewportSize({ width: 390, height: 844 });
+    await page.setViewportSize({ width: 667, height: 375 });
+    await page.waitForFunction(() => !document.querySelector('[data-scene="bag"]').classList.contains("is-scrolly"));
+    check(
+      await page.locator(".w-bag__frame").evaluateAll((frames) =>
+        frames.every((frame) => {
+          const caption = frame.querySelector("figcaption").getBoundingClientRect();
+          const box = frame.getBoundingClientRect();
+          return getComputedStyle(frame).position !== "absolute" && caption.bottom <= box.bottom + 1;
+        }),
+      ),
+      "short landscape screens show every backpack frame and caption in normal flow",
+    );
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.waitForFunction(() => document.querySelector('[data-scene="bag"]').classList.contains("is-scrolly"));
+    check(true, "portrait resize restores the backpack scene when it has enough height");
+    const enlargedText = await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
+    await page.evaluate(() => dispatchEvent(new Event("resize")));
+    check(
+      await page.locator('[data-scene="bag"]').evaluate((bag) => {
+        const scrolly = bag.classList.contains("is-scrolly");
+        const frames = [...bag.querySelectorAll(".w-bag__frame")].filter(
+          (frame) => !scrolly || frame.classList.contains("is-active"),
+        );
+        return (
+          !document.body.classList.contains("r-motion-paused") &&
+          frames.length > 0 &&
+          frames.every((frame) => {
+            const caption = frame.querySelector("figcaption").getBoundingClientRect();
+            return caption.bottom <= frame.getBoundingClientRect().bottom + 1;
+          })
+        );
+      }),
+      "enlarged text keeps backpack captions readable while decorative motion is enabled",
+    );
+    await enlargedText.evaluate((style) => style.remove());
+    await page.evaluate(() => dispatchEvent(new Event("resize")));
     await page.locator("[data-gallery-filter='school']").click();
     await page.locator("#galleryCount").filter({ hasText: "9 of 15" }).waitFor();
     check(
@@ -209,6 +245,14 @@ function check(value, message) {
     check(
       await page.locator("h1").evaluate((el) => getComputedStyle(el).fontFamily.includes("Archivo")),
       "display type uses Archivo",
+    );
+    check(
+      await page
+        .locator("h1 .w-line span")
+        .evaluateAll(
+          (spans) => spans.length > 0 && spans.every((span) => getComputedStyle(span).fontFamily.includes("Archivo")),
+        ),
+      "nested headline text inherits the heading font instead of switching to the reading font",
     );
     check(
       await page.locator("#campaignSteps").evaluate((el) => getComputedStyle(el).fontFamily.includes("Lexend")),

@@ -85,7 +85,7 @@
     opacity: 1;
   }
 
-  @media (min-width: 900px) {
+  @media (min-width: 1200px) {
     .pci-page-hero__art {
       display: block;
     }
@@ -101,6 +101,15 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--pci-muted);
+  }
+
+  /* Interior side headings follow the width of their column, not the whole viewport. */
+  .pci-v3:not(.pci-home) .pci-split__aside {
+    container-type: inline-size;
+  }
+
+  .pci-v3:not(.pci-home) .pci-split__aside h2 {
+    font-size: clamp(2rem, 12cqi, var(--pci-fs-h2));
   }
 
   /* ---------- Sub-navigation ---------- */
@@ -159,6 +168,7 @@
   }
 
   .pci-pillar-mark .pci-pillar-icon {
+    flex: none;
     width: 56px;
     height: 56px;
     padding: 12px;
@@ -242,8 +252,14 @@
     }
   }
 
+  /* Long values and cross-pillar commitments need room for complete words. */
+  .pci-values .pci-cards,
+  .pci-pillar-section ~ .pci-section--night .pci-cards {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  }
+
   .pci-values .pci-card h3 {
-    font-size: clamp(2rem, 1.5rem + 1.2vw, 2.8rem);
+    font-size: var(--pci-fs-h3);
   }
 
   /* ---------- Impact ---------- */
@@ -369,7 +385,8 @@
     margin-bottom: 26px;
   }
 
-  @media (min-width: 960px) {
+  /* Keep the form full-width on tablets instead of squeezing its fields into a side panel. */
+  @media (min-width: 1200px) {
     .pci-contact-grid {
       grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
       align-items: start;

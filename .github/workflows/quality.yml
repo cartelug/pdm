@@ -59,10 +59,19 @@ jobs:
       - name: Speed budget (throttled phone lab test)
         run: node tests/quality/speed.cjs
 
-      # No sideways scroll, clipped content, tiny tap targets or text under 13 px at 320 to 1536 px, in landscape
-      # and with text at 200%. The list was cleaned on 21 October 2026, so this now fails the build.
-      - name: Responsive gate (320 to 1536 px, landscape, 200% text)
-        run: node tests/quality/responsive.cjs --strict
+      # All public pages at normal zoom, across phone/tablet/header boundaries, landscape and 200% text.
+      # Broken heading words, narrow heading columns and clipped wrapped text are also reported for review.
+      - name: Responsive gate (320 to 2560 px, landscape, 200% text)
+        run: node tests/quality/responsive.cjs --strict --json responsive-report.json
+
+      - name: Save responsive measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: responsive-layout-report
+          path: responsive-report.json
+          if-no-files-found: ignore
+          retention-days: 14
 
       # The findings are in build-time tooling and need a breaking Astro upgrade, so this reports and does not fail.
       - name: Dependency audit (report)

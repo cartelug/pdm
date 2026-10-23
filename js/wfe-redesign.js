@@ -172,12 +172,29 @@
 
   function setupScenes() {
     var on = !motionOff();
-    if (bag) bag.classList.toggle("is-scrolly", on);
-    if (!on) {
+    var bagOn = on && window.innerHeight >= 640;
+    if (bag) {
+      bag.classList.toggle("is-scrolly", bagOn);
+      if (bagOn) {
+        var stage = bag.querySelector(".w-bag__stage");
+        var copy = bag.querySelector(".w-bag__copy");
+        var stageStyle = window.getComputedStyle(stage);
+        var room = stage.clientHeight - parseFloat(stageStyle.paddingTop) - parseFloat(stageStyle.paddingBottom);
+        bagOn =
+          copy.offsetHeight <= room &&
+          frames.every(function (frame) {
+            return frame.clientHeight <= room + 1 && frame.querySelector("picture").clientHeight >= 128;
+          });
+        bag.classList.toggle("is-scrolly", bagOn);
+      }
+    }
+    if (!bagOn) {
       frames.forEach(function (frame, index) {
         frame.classList.toggle("is-active", index === 0);
       });
       activeFrame = -1;
+    }
+    if (!on) {
       depthNodes.concat(heroArt ? [heroArt] : []).forEach(function (node) {
         node.style.removeProperty("--depth");
       });
@@ -204,7 +221,7 @@
     if (heroArt && on && wide.matches && window.scrollY < height * 1.2)
       heroArt.style.setProperty("--depth", Math.min(24, window.scrollY * 0.05).toFixed(1) + "px");
 
-    if (bag && on && frames.length) {
+    if (bag && on && bag.classList.contains("is-scrolly") && frames.length) {
       var rect = bag.getBoundingClientRect();
       var travel = Math.max(1, rect.height - height);
       var progress = clamp(-rect.top / travel);
@@ -267,8 +284,16 @@
     });
   }
   window.addEventListener("scroll", requestFrame, { passive: true });
-  window.addEventListener("resize", requestFrame);
+  window.addEventListener("resize", function () {
+    setupScenes();
+    requestFrame();
+  });
   window.addEventListener("wfe:menu-state", requestFrame);
+  if (document.fonts)
+    document.fonts.ready.then(function () {
+      setupScenes();
+      requestFrame();
+    });
 
   /* Small, one-shot details complement the chapter scenes. No content is hidden while waiting.
      Native scrolling, native links and the original numbers remain the source of truth. */

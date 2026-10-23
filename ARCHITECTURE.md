@@ -2,7 +2,7 @@
 
 This is the one place that says how the site is built, what is protected, how a change is proven safe, and which decisions have been taken. If another document disagrees with this one, this one wins and the other is wrong. Update it in the same pull request as the code it describes.
 
-Last verified against the repository on 22 October 2026.
+Last verified against the repository on 23 October 2026.
 
 ## 1. What the site is
 
@@ -100,7 +100,7 @@ Archivo (headings, menus, buttons, labels, figures) and Lexend (everything else)
 | Walk for Education and Contribute | `css/brand.css` and `css/one-look.css`, loaded last (`data-brand="walk"`) | Walk: ivory, navy, gold, cyan |
 | Faith in Motion | the same two files (`data-brand="pci"`) | PCI crimson |
 
-`css/one-look.css` is a migration layer, not a design system. The protected stylesheets name their fonts directly and at high specificity, so it applies the roles with `!important` and points their font variables at the new fonts. It also holds the narrow-screen and large-text fixes and the 13 px floor. A page that moves to the Astro build drops it. `scripts/pages.mjs` checks that every hand-written page declares its brand, loads the two files in order, preloads only the new fonts and carries no loading screen.
+`css/one-look.css` is a migration layer, not a design system. The protected stylesheets name their fonts directly and at high specificity, so it applies the roles with `!important` and points their font variables at the new fonts. Nested text inherits its heading, button or reading role; form controls explicitly use Lexend. It also holds the narrow-screen and large-text fixes and the 13 px floor. A page that moves to the Astro build drops it. `scripts/pages.mjs` checks that every hand-written page declares its brand, loads the two files in order, preloads only the new fonts and carries no loading screen.
 
 The institutional header is regrouped into five items (Our work, Impact and trust, Partner with us, Updates, About) with light dropdowns that open on focus as well as hover, close with Escape and stay plain links without JavaScript, a campaign chip, and a Contact button. The full header starts at 1200 px; below that the menu sheet shows the groups under small headings. `/design-system/` documents both brands from `tokens.json`, including every contrast ratio.
 
@@ -121,7 +121,7 @@ The institutional header is regrouped into five items (Our work, Impact and trus
 | Browser regression | `npm run test:browser`, `node tests/navigation/browser.cjs`, `node tests/navigation/motion.cjs`, `node tests/navigation/wfe-redesign.cjs` | Campaign and institutional flows, menu, motion | Yes (CI) |
 | Accessibility | `node tests/quality/a11y.cjs` | Zero axe violations, WCAG 2.2 A and AA | Yes (CI) |
 | Speed | `node tests/quality/speed.cjs` | Each page stays within `tests/quality/budget.json` on a throttled phone | Yes (CI) |
-| Responsive | `node tests/quality/responsive.cjs --strict` | No sideways scroll, clipped content, undersized targets or text under 13 px at 320 to 1536 px, in landscape and at 200% text | Yes (CI) |
+| Responsive | `node tests/quality/responsive.cjs --strict` | Every public page across 19 viewport/text settings from 320 to 2560 px, including landscape and 200% text. Sideways scroll, edge clipping and crowded targets under 24 px fail; small text, split heading words, narrow headings and clipped wrapped text are reported for review. | Yes (CI) |
 | Sitemap | `npm run check:sitemap` | `sitemap.xml` is exactly what the indexable pages produce | Yes |
 | Dependencies | `npm audit` | Reported, not enforced: the findings are build tooling and need a breaking Astro upgrade | No (report) |
 

@@ -36,8 +36,8 @@
     --pci-sans: var(--font-body);
     --pci-mono: var(--font-head);
     --pci-fs-display: clamp(3.7rem, 1.2rem + 9vw, 9.75rem);
-    --pci-fs-h1: clamp(3.1rem, 1.3rem + 6vw, 6.9rem);
-    --pci-fs-h2: clamp(2.5rem, 1.4rem + 3.7vw, 4.8rem);
+    --pci-fs-h1: clamp(2.35rem, 1.3rem + 6vw, 6.9rem);
+    --pci-fs-h2: clamp(2rem, 1.4rem + 3.7vw, 4.8rem);
     --pci-fs-h3: clamp(1.65rem, 1.25rem + 1.1vw, 2.3rem);
     --pci-fs-lede: clamp(1.14rem, 1rem + 0.55vw, 1.42rem);
     --pci-fs-body: 1.0625rem;
