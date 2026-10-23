@@ -92,11 +92,11 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "4b4d76e863f289bf899577c390894404bccd334c5532fe27ab20509dfd2e08cc",
-    "contribute/payment/index.html": "ae25ffa361a56ba3ef7078299352814db86796a9f7a9839e1621008c60d0cfb1",
-    "contribute/privacy/index.html": "87fc2b290711069500ad4e2eb5932ed290a91f521867feb16cc427754e23c3b7",
-    "contribute/terms/index.html": "9c7319a57d709edcb6cda63a1669ec6d7c28182327045062a24e85e404922da9",
-    "contribute/verify/index.html": "184b42d5221d73cb27a751e9a6d45dd5786d4f94890f029285dcf03966565d4b",
+    "contribute/index.html": "8b6da6071ae1d11ed475acd693be563678c3da8315535cb3cf3430a3fa98404c",
+    "contribute/payment/index.html": "481625d15df43caab332cc728ebd33f1c59c2ef61870b6021a5e7c83a538157b",
+    "contribute/privacy/index.html": "e8e631e013717479466dfc8e713a16d826c8861975f65b98009fe6f66ca4c095",
+    "contribute/terms/index.html": "b94d04510016fe0d6f58b67277da25f268770acbc7c2e0724363f2020bce4d51",
+    "contribute/verify/index.html": "2719d4bc87fb29b94c5a6fbe73f87e9f5b4df7a3bc49e8085fc2d55dd7e8a43e",
     "css/base.css": "368d70b67bd5c7c3e60f7f44a9d8c93bfb8db7e2e8559cb00f223cfcf14893c5",
     "css/collections.css": "cd779925dd2f0519e39b3b7e5f577d660dcee3bf08f8ce98c67bad5615a47f23",
     "css/contribute.css": "e02336271318e777f18aa7a98cb227dd896eed88bebe9de6bc0b054622ed2c81",
@@ -127,11 +127,11 @@
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
     "js/wfe.js": "01746af6d7f7ec88c36d981ac649764bde29693f2da3bb65e28f3406978bf4e2",
-    "walk-for-education/accountability/index.html": "07c3390aca172d484c59d21939f1360e93b07394a9ce9bd34d7bf9a23fee5da2",
-    "walk-for-education/index.html": "d38372572c3d5f126f3f434e54a28ef1481c32d4f4d2b12864869c7e15ba15f0",
-    "walk-for-education/partners/index.html": "b363f9eb0927b6dcb18559f5e70856f9037a25792b7dd6acf53438f9c0a4d5a3",
-    "walk-for-education/take-part/index.html": "846d97abe41518d896853b74ed8e732c296ec54c6c9cd3c3477f54e9c0730713",
-    "walk-for-education/updates/index.html": "20945e2bdf53aaebf2afdffd490434f1e9d8a2083bdd34d59d6bee4fb7f910fb"
+    "walk-for-education/accountability/index.html": "815618ac2fb27404a47fa404d2e56abfcb9bddc994171b57d5fac02fbe74a63e",
+    "walk-for-education/index.html": "6e12fed68e17412947f3d6a68401461531f5d23774d5b1b8930382f9a2467953",
+    "walk-for-education/partners/index.html": "288bc36d25536040e6cbaa04965179d1daad0e3bac00b94fe734de44dd51d30f",
+    "walk-for-education/take-part/index.html": "5a8936a40760f896250bee91ee406c898592502073a71dc2a6f6945e800ab656",
+    "walk-for-education/updates/index.html": "637742dd7b40d2cfdb1e7b092f1bd947933a87a5480173b78871ce5b88f600d2"
   },
   "presentationReviews": [
     {
@@ -551,62 +551,62 @@
     },
     {
       "path": "contribute/index.html",
-      "date": "2026-10-22",
-      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and the short-screen decorative scene fallback in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
+      "date": "2026-10-23",
+      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and decorative scene fit checks in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
       "previousSha256": "7bc09b02914b72af15e32e060a3487197bfa7ad259c028e2f871440009314584"
     },
     {
       "path": "contribute/payment/index.html",
-      "date": "2026-10-22",
-      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and the short-screen decorative scene fallback in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
+      "date": "2026-10-23",
+      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and decorative scene fit checks in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
       "previousSha256": "232c3892f2d76104cdcdb5caa06f250017d689a1788d11a2fba94bf6d22dfca3"
     },
     {
       "path": "contribute/privacy/index.html",
-      "date": "2026-10-22",
-      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and the short-screen decorative scene fallback in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
+      "date": "2026-10-23",
+      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and decorative scene fit checks in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
       "previousSha256": "174cc56ceabea92dc26a6358f9cdabec83a50e4ab654484915b36e140dc52f28"
     },
     {
       "path": "contribute/terms/index.html",
-      "date": "2026-10-22",
-      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and the short-screen decorative scene fallback in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
+      "date": "2026-10-23",
+      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and decorative scene fit checks in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
       "previousSha256": "bf348ea4df92437b497327702dafc2b281477905bc0153e9344256f96a6140b5"
     },
     {
       "path": "contribute/verify/index.html",
-      "date": "2026-10-22",
-      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and the short-screen decorative scene fallback in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
+      "date": "2026-10-23",
+      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and decorative scene fit checks in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
       "previousSha256": "b035d938464f75d7fcacdd0d480e276659518a8062544ab18c5ea8c633f20c31"
     },
     {
       "path": "walk-for-education/accountability/index.html",
-      "date": "2026-10-22",
-      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and the short-screen decorative scene fallback in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
+      "date": "2026-10-23",
+      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and decorative scene fit checks in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
       "previousSha256": "17c773687c6da1c14432c012ff6d7e14c5437220b4a5817edfbd0f97e56ca179"
     },
     {
       "path": "walk-for-education/index.html",
-      "date": "2026-10-22",
-      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and the short-screen decorative scene fallback in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
+      "date": "2026-10-23",
+      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and decorative scene fit checks in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
       "previousSha256": "46c8178835b52a46fc6438e8d6a0940565538d4d01a5b6581ea663102b9faacd"
     },
     {
       "path": "walk-for-education/partners/index.html",
-      "date": "2026-10-22",
-      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and the short-screen decorative scene fallback in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
+      "date": "2026-10-23",
+      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and decorative scene fit checks in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
       "previousSha256": "73a97a89b371e3b07b68c1afd51aa21857807abcdb19e43de510abda87cf0b45"
     },
     {
       "path": "walk-for-education/take-part/index.html",
-      "date": "2026-10-22",
-      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and the short-screen decorative scene fallback in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
+      "date": "2026-10-23",
+      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and decorative scene fit checks in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
       "previousSha256": "f07c46d5db69300f3abfc7d86145be93e935e667ffa163edc82d5fb2631957f0"
     },
     {
       "path": "walk-for-education/updates/index.html",
-      "date": "2026-10-22",
-      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and the short-screen decorative scene fallback in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
+      "date": "2026-10-23",
+      "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and decorative scene fit checks in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
       "previousSha256": "73d41c331f0a30d4738b782991fa7ea0e8a833aee95c621bd0b0c1fb01e6d007"
     }
   ]

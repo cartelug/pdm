@@ -2,7 +2,7 @@
 
 This is the one place that says how the site is built, what is protected, how a change is proven safe, and which decisions have been taken. If another document disagrees with this one, this one wins and the other is wrong. Update it in the same pull request as the code it describes.
 
-Last verified against the repository on 22 October 2026.
+Last verified against the repository on 23 October 2026.
 
 ## 1. What the site is
 

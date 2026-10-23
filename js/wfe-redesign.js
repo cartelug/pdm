@@ -173,7 +173,21 @@
   function setupScenes() {
     var on = !motionOff();
     var bagOn = on && window.innerHeight >= 640;
-    if (bag) bag.classList.toggle("is-scrolly", bagOn);
+    if (bag) {
+      bag.classList.toggle("is-scrolly", bagOn);
+      if (bagOn) {
+        var stage = bag.querySelector(".w-bag__stage");
+        var copy = bag.querySelector(".w-bag__copy");
+        var stageStyle = window.getComputedStyle(stage);
+        var room = stage.clientHeight - parseFloat(stageStyle.paddingTop) - parseFloat(stageStyle.paddingBottom);
+        bagOn =
+          copy.offsetHeight <= room &&
+          frames.every(function (frame) {
+            return frame.clientHeight <= room + 1 && frame.querySelector("picture").clientHeight >= 128;
+          });
+        bag.classList.toggle("is-scrolly", bagOn);
+      }
+    }
     if (!bagOn) {
       frames.forEach(function (frame, index) {
         frame.classList.toggle("is-active", index === 0);
@@ -275,6 +289,11 @@
     requestFrame();
   });
   window.addEventListener("wfe:menu-state", requestFrame);
+  if (document.fonts)
+    document.fonts.ready.then(function () {
+      setupScenes();
+      requestFrame();
+    });
 
   /* Small, one-shot details complement the chapter scenes. No content is hidden while waiting.
      Native scrolling, native links and the original numbers remain the source of truth. */

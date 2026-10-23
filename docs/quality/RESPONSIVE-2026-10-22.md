@@ -1,4 +1,4 @@
-# Normal-zoom layout audit — 22 October 2026
+# Normal-zoom layout audit — 22–23 October 2026
 
 Six parallel source audits covered the institutional shell, homepage, interior pages, shared typography/components,
 campaign pages and responsive gate. Browser inspection at normal zoom then checked the reported risks and exposed
@@ -18,8 +18,10 @@ two additional issues that the old viewport matrix did not cover.
 | Campaign type | Every nested span explicitly received Lexend, overriding the Archivo role of its heading or button. | Descendants inherit their selected role; inputs, selects and textareas explicitly retain Lexend. |
 | Walk pledge instructions | Decorative bag art and step counters consumed most of the instruction column. | Narrow intro containers give instructions the full width and omit the redundant decorative bag. |
 | Contribution hero | An 80px decorative portrait reserved 96px beside a 320px phone heading. | Small-phone headings use their full 288px shell and two natural lines. |
-| Backpack scene | A fixed viewport-height stage could clip short screens; in normal flow, a 100%-height picture also pushed its caption outside the clipped card. | Below 640px height, all three frames use normal document flow; pictures leave room for their captions, and resizing restores the scene. |
+| Backpack scene | A fixed viewport-height stage could clip short screens; in normal flow, a 100%-height picture also pushed its caption outside the clipped card. | Below 640px height, all three frames use normal document flow; pictures leave room for their captions, and resizing restores the scene. Actual copy/frame measurements after font loading also disable the fixed stage when enlarged text leaves too little image room. |
 | Wide Faith hero | A fixed 680px box included a gutter that grew with the viewport, eventually consuming its text space. | The outer width grows with that gutter; the measured heading keeps 436px at both 1920px and 2560px. |
+
+The first 570-case pass also exposed nine normal-zoom typography review cases: narrow campaign headings, a split partnership title, a split transformation card title, and a narrow Model heading. Phone campaign gutters and title scales, the commitment-card grid, and interior column-based heading sizes now address those cases.
 
 ## Regression coverage
 
@@ -34,7 +36,7 @@ wrapped text clipped in width or height by its own box or an ancestor. Heroes ou
 in Motion and Give, are included.
 Deliberate editorial breaks and enlarged-text wrapping are reviewed separately from normal-zoom defects.
 
-The Walk browser suite also checks nested headline font inheritance, short-landscape caption flow and scene
+The Walk browser suite also checks nested headline font inheritance, short-landscape caption flow, enlarged text with motion enabled, and scene
 restoration after resizing. Existing menu, pledge, payment, motion and accessibility regressions remain in place.
 CI saves the full responsive JSON as the `responsive-layout-report` artifact for 14 days.
 

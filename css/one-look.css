@@ -252,6 +252,41 @@ html[data-brand="walk"] .w-hero__title {
   html[data-brand="walk"] .w-cx__art {
     display: none;
   }
+
+  /* These headings keep their emphasis without turning a phone into a narrow display column. */
+  html[data-brand="walk"] .wfp-hero h1,
+  html[data-brand="pci"] .pci-fim-v3 .page-hero h1 {
+    max-width: none;
+    font-size: clamp(2.4rem, 1.35rem + 4.5vw, 3.2rem);
+  }
+
+  html[data-brand="walk"] .wfp-form-card {
+    padding: 20px;
+  }
+
+  html[data-brand="walk"] .wfp-form-card h2 {
+    font-size: clamp(1.9rem, 1.3rem + 2vw, 2.4rem);
+  }
+
+  /* The archive's wrap already removes 32 px from its width; its extra padding doubled that gutter. */
+  html[data-brand="pci"] .pci-fim-v3 .wrap {
+    padding-inline: 0;
+  }
+
+  html[data-brand="pci"] .pci-fim-v3 .closer h2 {
+    max-width: none;
+    font-size: clamp(2rem, 1.4rem + 2.4vw, 2.5rem);
+  }
+
+  html[data-brand="pci"] .pci-fim-v3 .journey-card.lead .journey-copy,
+  html[data-brand="pci"] .pci-fim-v3 .sponsor-promise {
+    padding: 20px;
+  }
+
+  html[data-brand="pci"] .pci-fim-v3 .journey-card.lead h3 {
+    max-width: none;
+    font-size: clamp(1.75rem, 1.2rem + 2.8vw, 2.25rem);
+  }
 }
 
 /* In normal flow the picture must leave room for its caption inside the clipped card. */

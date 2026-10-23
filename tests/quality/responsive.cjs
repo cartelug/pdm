@@ -153,6 +153,10 @@ function inspect(phone) {
     }
     return true;
   };
+  const textLabel = (el) => {
+    const text = (el.innerText || el.textContent || "").replace(/\s+/g, " ").trim();
+    return `${label(el)} “${text.length > 84 ? text.slice(0, 83) + "…" : text}”`;
+  };
   const headings = [
     ...document.querySelectorAll("h1"),
     ...contentRoots.flatMap((main) => [...main.querySelectorAll("h1, h2, h3")]),
@@ -179,14 +183,14 @@ function inspect(phone) {
           if (!lines.some((top) => Math.abs(top - rect.top) < Math.max(3, size * 0.2))) lines.push(rect.top);
         }
         if (word[0].length >= 6 && wordLines.length > 1) {
-          brokenWords.push(`${label(heading)} “${word[0]}” across ${wordLines.length} lines`);
+          brokenWords.push(`${textLabel(heading)} splits “${word[0]}” across ${wordLines.length} lines`);
         }
       }
     }
     const width = Math.min(heading.getBoundingClientRect().width, textRight - textLeft);
     if (lines.length >= 5 && width / size < 7 && heading.textContent.trim().length >= 24) {
       narrowHeads.push(
-        `${label(heading)} ${lines.length} lines in ${Math.round(width)}px at ${Math.round(size)}px type`,
+        `${textLabel(heading)} ${lines.length} lines in ${Math.round(width)}px at ${Math.round(size)}px type`,
       );
     }
   }
@@ -212,7 +216,7 @@ function inspect(phone) {
     const clippedY = hasBox && /(hidden|clip)/.test(style.overflowY) && el.scrollHeight > el.clientHeight + tolerance;
     if (clippedX || clippedY) {
       textCutOff.push(
-        `${label(el)} clips ${[clippedX && "width", clippedY && "height"].filter(Boolean).join(" and ")}`,
+        `${textLabel(el)} clips ${[clippedX && "width", clippedY && "height"].filter(Boolean).join(" and ")}`,
       );
       continue;
     }
@@ -245,7 +249,7 @@ function inspect(phone) {
         (textRect.top < clip.rect.top - tolerance || textRect.bottom > clip.rect.bottom + tolerance);
       if (outsideX || outsideY) {
         textCutOff.push(
-          `${label(el)} clipped by ${label(ancestor)} (${[outsideX && "width", outsideY && "height"].filter(Boolean).join(" and ")})`,
+          `${textLabel(el)} clipped by ${label(ancestor)} (${[outsideX && "width", outsideY && "height"].filter(Boolean).join(" and ")})`,
         );
         break;
       }
