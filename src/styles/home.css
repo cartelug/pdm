@@ -1332,3 +1332,200 @@
     fill: var(--pci-night);
   }
 }
+
+@layer home {
+  /* Image-led backgrounds are scoped to the homepage; protected campaigns retain their own art. */
+  .pci-home .pci-hero__media picture {
+    width: 100%;
+    height: 100%;
+  }
+
+  .pci-home .pci-hero__media img {
+    scale: 1.02;
+    object-position: 56% 48%;
+  }
+
+  .pci-home .pci-hero__shade {
+    background:
+      linear-gradient(90deg, rgb(34 10 16 / 30%), rgb(34 10 16 / 6%) 65%),
+      linear-gradient(0deg, rgb(34 10 16 / 82%), transparent 52%);
+  }
+
+  .pci-home #our-pillars {
+    background:
+      radial-gradient(75% 65% at 90% 5%, var(--pci-rose), transparent 80%), var(--pci-paper);
+  }
+
+  .pci-home .pci-manifesto {
+    background: linear-gradient(155deg, var(--pci-bone), var(--pci-paper) 78%);
+  }
+
+  .pci-home #iciadm {
+    background:
+      radial-gradient(70% 85% at 85% 12%, rgb(183 25 53 / 16%), transparent 80%),
+      linear-gradient(100deg, var(--pci-night), var(--pci-night-raised));
+  }
+
+  .pci-home .pci-projects {
+    background:
+      radial-gradient(60% 55% at 6% 4%, var(--pci-rose), transparent 86%), var(--pci-paper);
+  }
+
+  .pci-home .pci-practice {
+    isolation: isolate;
+    overflow: hidden;
+    padding-top: clamp(360px, 40vw, 560px);
+  }
+
+  .pci-home .pci-practice__backdrop {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 0;
+    height: clamp(390px, 45vw, 600px);
+    pointer-events: none;
+  }
+
+  .pci-home .pci-practice__backdrop picture,
+  .pci-home .pci-practice__backdrop img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .pci-home .pci-practice__backdrop img {
+    object-fit: cover;
+    object-position: 50% 42%;
+  }
+
+  .pci-home .pci-practice__backdrop::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 16%,
+      rgb(242 235 227 / 14%) 36%,
+      var(--pci-bone) 95%
+    );
+  }
+
+  .pci-home .pci-practice > .pci-container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .pci-home .pci-practice__caption {
+    position: absolute;
+    top: 18px;
+    right: var(--pci-gutter);
+    z-index: 1;
+    padding: 5px 9px;
+    border-radius: 6px;
+    background: rgb(34 10 16 / 72%);
+    color: #fff;
+    font: 500 0.75rem / 1.4 var(--pci-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .pci-home .pci-duo-section {
+    background: radial-gradient(75% 85% at 60% 0%, var(--pci-night-raised), var(--pci-night));
+  }
+
+  .pci-home .pci-band {
+    isolation: isolate;
+    background: var(--pci-crimson-deep);
+  }
+
+  .pci-home .pci-band__backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .pci-home .pci-band__backdrop picture,
+  .pci-home .pci-band__backdrop img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .pci-home .pci-band__backdrop img {
+    object-fit: cover;
+    object-position: 58% 42%;
+  }
+
+  .pci-home .pci-band__backdrop::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgb(100 13 34 / 95%), rgb(58 10 23 / 70%) 58%, rgb(34 10 16 / 38%)),
+      linear-gradient(0deg, rgb(34 10 16 / 54%), transparent 65%);
+  }
+
+  .pci-home .pci-band__rings {
+    z-index: 1;
+    opacity: 0.12;
+  }
+
+  .pci-home .pci-band .pci-container {
+    z-index: 2;
+  }
+
+  .pci-home .pci-band .pci-split__main {
+    padding: clamp(20px, 3vw, 36px);
+    border: 1px solid rgb(255 255 255 / 22%);
+    border-radius: var(--pci-radius-m);
+    background: rgb(34 10 16 / 72%);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+
+  .pci-home .pci-band__caption {
+    position: absolute;
+    right: var(--pci-gutter);
+    bottom: 16px;
+    z-index: 2;
+    margin: 0;
+    color: rgb(255 255 255 / 82%);
+    font: 500 0.75rem / 1.4 var(--pci-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .pci-home main > .pci-section:last-child {
+    background: linear-gradient(150deg, var(--pci-paper), var(--pci-bone));
+  }
+
+  @media (max-width: 719px) {
+    .pci-home .pci-hero__media img {
+      object-position: 50% 12%;
+    }
+
+    .pci-home .pci-hero__shade {
+      background: linear-gradient(0deg, rgb(34 10 16 / 94%), rgb(34 10 16 / 20%) 66%, transparent);
+    }
+
+    .pci-home #iciadm {
+      background:
+        radial-gradient(85% 45% at 88% 5%, rgb(183 25 53 / 18%), transparent 80%), var(--pci-night);
+    }
+
+    .pci-home .pci-practice__backdrop img {
+      object-position: 50% 22%;
+    }
+
+    .pci-home .pci-band__backdrop img {
+      object-position: 50% 20%;
+    }
+
+    .pci-home .pci-band__backdrop::after {
+      background: linear-gradient(
+        0deg,
+        rgb(34 10 16 / 95%),
+        rgb(34 10 16 / 62%) 64%,
+        rgb(34 10 16 / 22%)
+      );
+    }
+  }
+}
