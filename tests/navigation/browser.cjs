@@ -130,8 +130,16 @@ const server = http.createServer((req, res) => {
     assert.equal(await page.locator("dialog").evaluate((el) => el.open), false);
     await page.goto(base + "/projects/");
     await page.getByRole("button", { name: "Under review", exact: true }).click();
-    assert.equal(await page.locator("[data-project-status]:visible").count(), 1);
-    assert.match(await page.locator("[data-project-status]:visible").innerText(), /Kasese Apartment/);
+    assert.equal(
+      await page.locator("[data-project-status]:visible").count(),
+      0,
+      "Retired apartment concept is not promoted",
+    );
+    await page.getByRole("button", { name: "All projects", exact: true }).click();
+    const titles = await page.locator(".pci-project h3").allTextContents();
+    assert.match(titles[0], /Walk for Education/);
+    assert.match(titles[1], /Faith in Motion/);
+    assert.ok(!titles.join(" ").includes("Kasese Apartment"));
     await page.goto(base + "/contact/");
     assert.equal(await page.locator("#enquiry").isVisible(), true, "Enhanced enquiry form stays visible");
     await page.locator("#enquiryName").fill("Fixture Person");

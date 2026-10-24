@@ -287,6 +287,8 @@ function pci_session(): void {
 function pci_require_admin(): string {
     pci_session();
     if (empty($_SESSION['pci_admin']) || time()-(int)($_SESSION['pci_active'] ?? 0)>1800) throw new DomainException('Sign in to the collections console');
+    $user=pci_config()['admin_users'][$_SESSION['pci_admin']] ?? null;
+    if (!$user || ($user['role'] ?? 'viewer')!==($_SESSION['pci_role'] ?? '')) { unset($_SESSION['pci_admin'],$_SESSION['pci_role']);throw new DomainException('Named account permissions changed; sign in again'); }
     $_SESSION['pci_active']=time();return $_SESSION['pci_admin'];
 }
 function pci_require_csrf(): void {
@@ -294,7 +296,8 @@ function pci_require_csrf(): void {
 }
 function pci_login(string $username,string $password): bool {
     $users=pci_config()['admin_users'];
-    if (!$users) { require_once dirname(__DIR__).'/config.php';$users=['admin'=>['hash'=>FIM_ADMIN_PASSWORD_HASH,'role'=>'admin']]; }
+    // Finance and editorial sessions require explicitly provisioned named accounts.
+    if (!$users) return false;
     $u=$users[$username] ?? null;
     if (!$u || !password_verify($password,(string)($u['hash'] ?? ''))) return false;
     session_regenerate_id(true);$_SESSION['pci_admin']=$username;$_SESSION['pci_role']=$u['role'] ?? 'viewer';$_SESSION['pci_active']=time();$_SESSION['pci_csrf']=bin2hex(random_bytes(32));return true;

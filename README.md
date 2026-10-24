@@ -19,6 +19,10 @@ private SQLite ledger outside the document root, and `/admin/collections/`.
 Checkout is closed until Pesapal configuration and PCI approvals are complete.
 See `PESAPAL-HANDOVER.md` for configuration, testing and the remaining launch gates.
 
+## Campaign operations (24 October 2026)
+
+Use `/admin/operations/` for the contribution register, reconciliation, import preview, owner publishing and HD graphics. See [operations handover](docs/OPERATIONS-HANDOVER.md) and `/admin/operations/guide.html`. The private `admin_users` configuration must contain named accounts; no shared-password sign-in fallback remains. Legacy Walk publishing is retired. The homepage, projects and Walk pages consume the same approved public projection without a rebuild. Old register instructions below are historical for Walk; Faith in Motion remains separate.
+
 ## Site structure
 
 Institutional source lives in `src/`; build output is committed at the existing public paths. Campaign updates use PHP, and the payment module uses a private SQLite ledger on the cPanel server. The following legacy architecture notes describe preserved campaign services and the pre-V3 baseline.

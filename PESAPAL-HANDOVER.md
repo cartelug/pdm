@@ -1,3 +1,5 @@
+> 24 October 2026: named accounts are now required; no shared-password fallback remains. The new canonical operations/public totals preserve currencies separately. See `docs/OPERATIONS-HANDOVER.md`. Existing gateway-console UGX-equivalent tiles are a historical display only; public gateway progress reports actual UGX and separate currency buckets.
+
 # PCI payment preparation - implemented 4 October 2026
 
 The existing cPanel/PHP website remains the host. The Faith in Motion register

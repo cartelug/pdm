@@ -11,7 +11,7 @@ import { campaignView } from "../lib/campaign";
 import { getProjects } from "../lib/projects";
 const records = await getProjects();
 const walk = campaignView();
-const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((id) =>
+const projects = ["walk-for-education", "faith-in-motion", "community", "kagando"].map((id) =>
   records.find((p) => p.id === id)!,
 );
 ---
@@ -193,6 +193,31 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
       </div>
     </div>
     <div class="pci-duo">
+      <article class="pci-duo__panel pci-duo__panel--education" data-cursor="Explore">
+        <div class="pci-duo__media" aria-hidden="true">
+          <img
+            src="assets/walk-for-education/hero-art-1536.webp"
+            srcset="assets/walk-for-education/hero-art-768.webp 768w, assets/walk-for-education/hero-art-1536.webp 1536w"
+            sizes="(min-width: 900px) 50vw, 100vw"
+            width="1536"
+            height="1024"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="pci-duo__body">
+          <span class="pci-status">{walk.label}</span>
+          <h3>Walk for Education</h3>
+          <p>
+            The Nairobi-to-Kagando campaign supporting UCU–Kagando University College and the neighbouring nursery and
+            primary school.
+          </p>
+          <a class="pci-text-link" href="walk-for-education/index.html" data-protected>
+            Explore Walk for Education <Icon name="external" />
+          </a>
+        </div>
+      </article>
       <article class="pci-duo__panel pci-duo__panel--faith" data-cursor="Explore">
         <div class="pci-duo__media" aria-hidden="true">
           <img
@@ -213,31 +238,6 @@ const projects = ["faith-in-motion", "apartments", "community", "kagando"].map((
           </p>
           <a class="pci-text-link" href="faith-in-motion/index.html">
             Explore Faith in Motion <Icon name="external" />
-          </a>
-        </div>
-      </article>
-      <article class="pci-duo__panel pci-duo__panel--education" data-cursor="Explore">
-        <div class="pci-duo__media" aria-hidden="true">
-          <img
-            src="assets/walk-for-education/hero-art-1536.webp"
-            srcset="assets/walk-for-education/hero-art-768.webp 768w, assets/walk-for-education/hero-art-1536.webp 1536w"
-            sizes="(min-width: 900px) 50vw, 100vw"
-            width="1536"
-            height="1024"
-            alt=""
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div class="pci-duo__body">
-          <span class="pci-status">{walk.label}</span>
-          <h3>Walk for Education</h3>
-          <p>
-            A planned Nairobi-to-Kagando journey supporting UCU–Kagando University College and the neighbouring nursery
-            and primary school.
-          </p>
-          <a class="pci-text-link" href="walk-for-education/index.html" data-protected>
-            Explore Walk for Education <Icon name="external" />
           </a>
         </div>
       </article>

@@ -16,8 +16,8 @@ export const navigation: NavigationEntry[] = [
   { label: "Governance", route: "/governance/", group: "institutional" },
   { label: "Updates", route: "/updates/", group: "institutional" },
   { label: "Contact", route: "/contact/", group: "engage" },
-  { label: "Faith in Motion", route: "/faith-in-motion/", group: "engage" },
   { label: "Walk for Education", route: "/walk-for-education/", group: "engage", protected: true },
+  { label: "Faith in Motion", route: "/faith-in-motion/", group: "engage" },
 ];
 
 // The header, the mobile menu and the sitemap read the same grouping, by what a visitor wants to know.
@@ -28,6 +28,8 @@ export const primaryNav: NavGroup[] = [
     label: "Our work",
     route: "/what-we-do/",
     items: [
+      { label: "Walk for Education", route: "/walk-for-education/" },
+      { label: "Faith in Motion", route: "/faith-in-motion/" },
       { label: "What We Do", route: "/what-we-do/" },
       { label: "Our Projects", route: "/projects/" },
       { label: "Our Model", route: "/model/" },

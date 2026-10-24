@@ -2,7 +2,9 @@
 
 This is the one place that says how the site is built, what is protected, how a change is proven safe, and which decisions have been taken. If another document disagrees with this one, this one wins and the other is wrong. Update it in the same pull request as the code it describes.
 
-Last verified against the repository on 23 October 2026.
+Last verified against the repository on 24 October 2026.
+
+**Live operations release:** `docs/OPERATIONS-HANDOVER.md` supersedes the legacy console, shared-password, live-publication and financial-aggregation descriptions below. `/admin/operations/` and `/api/operations.php` reuse the private SQLite ledger with additive tables, named roles, verified-only per-currency totals, import preview, consent, owner versions and snapshot-based PNG exports. `/api/campaign.php` reads that approved projection; its shared-password write route is retired. This is an explicitly authorised functional release, not a presentation-only redesign. `functionalReviews` in the protected baseline records the exact changed files and hashes. Existing pledge, checkout, certificate, pricing and frozen-fragment contracts remain tested.
 
 ## 1. What the site is
 

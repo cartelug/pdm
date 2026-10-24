@@ -924,7 +924,8 @@
     "../js/wfe-data.js",
     "../api/campaign.php",
     "../js/wfe.js",
-    "../js/wfe-redesign.js"
+    "../js/wfe-redesign.js",
+    "../js/operations-public.js"
    ],
    "inlineScripts": [
     "0575325418d3d19b",
@@ -978,7 +979,8 @@
     "../../js/wfe-shell.js",
     "../../js/wfe-data.js",
     "../../api/campaign.php",
-    "../../js/wfe.js"
+    "../../js/wfe.js",
+    "../../js/operations-public.js"
    ],
    "inlineScripts": [
     "b9dea3a6b1d2a3a5"
@@ -1085,7 +1087,8 @@
     "../../js/wfe-data.js",
     "../../api/campaign.php",
     "../../js/wfe.js",
-    "../../js/wfe-partners.js"
+    "../../js/wfe-partners.js",
+    "../../js/operations-public.js"
    ],
    "inlineScripts": [
     "0f0dcc450cdc4fce"
@@ -1162,7 +1165,8 @@
     "../../js/wfe-shell.js",
     "../../js/wfe-data.js",
     "../../api/campaign.php",
-    "../../js/wfe.js"
+    "../../js/wfe.js",
+    "../../js/operations-public.js"
    ],
    "inlineScripts": [
     "f07823f37142d415"
@@ -1211,7 +1215,8 @@
     "../../js/wfe-shell.js",
     "../../js/wfe-data.js",
     "../../api/campaign.php",
-    "../../js/wfe.js"
+    "../../js/wfe.js",
+    "../../js/operations-public.js"
    ],
    "inlineScripts": [
     "2be9790edec774b6"

@@ -36,6 +36,7 @@ jobs:
         run: |
           php tests/payments/ledger.php
           python3 tests/payments/test_http.py
+          python3 tests/operations/test_http.py
           python3 tests/enquiry/test_http.py
 
       - name: Install test browser
@@ -43,6 +44,9 @@ jobs:
 
       - name: Walk for Education redesign regression
         run: node tests/navigation/wfe-redesign.cjs
+
+      - name: Operations and actual PNG export acceptance
+        run: node tests/operations/browser.cjs
 
       - name: Campaign browser regression
         run: npm run test:browser

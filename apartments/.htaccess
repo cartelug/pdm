@@ -1,0 +1,2 @@
+# Retire promotion while retaining historical source and an accessible HTML fallback.
+RedirectMatch 301 ^/apartments(?:/.*)?$ /projects/

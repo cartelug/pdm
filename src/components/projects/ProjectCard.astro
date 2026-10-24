@@ -33,7 +33,9 @@ const p = project.data;
     <span>
       {p.category} · {p.location}
     </span>
-    <ProjectStatus status={p.status} />
+    <span data-ops-project-status={project.id === "walk-for-education" ? "" : undefined}>
+      <ProjectStatus status={p.status} />
+    </span>
   </div>
   <h3>
     <a href={href(path, p.route)}>

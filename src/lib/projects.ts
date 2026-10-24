@@ -23,5 +23,9 @@ export async function getProjects(): Promise<ProjectEntry[]> {
   const records = await getCollection("projects", (record) => record.data.publication !== "draft");
   // The content loader gives no ordering guarantee (entries arrive as files finish reading), so sort explicitly:
   // the generated pages must be identical on every machine.
-  return records.map(withCampaign).sort((a, b) => a.id.localeCompare(b.id));
+  const priority = ["walk-for-education", "faith-in-motion"];
+  return records.map(withCampaign).sort((a, b) => {
+    const rank = (id: string) => (priority.includes(id) ? priority.indexOf(id) : 2);
+    return rank(a.id) - rank(b.id) || a.id.localeCompare(b.id);
+  });
 }

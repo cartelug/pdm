@@ -1,0 +1,271 @@
+/* Campaign operations: scoped phone-first console and live reporting panel. */
+.ops {
+  margin: 0;
+  background: #f4f6f9;
+  color: #112c48;
+  font-family: Lexend, sans-serif;
+  line-height: 1.6;
+}
+
+.ops *,
+.ops-live * {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.ops main {
+  max-width: 1160px;
+  margin: auto;
+  padding: 24px 16px 80px;
+}
+
+.ops h1,
+.ops h2,
+.ops h3,
+.ops button {
+  font-family: Archivo, sans-serif;
+}
+
+.ops h1 {
+  font-size: clamp(1.3rem, 4vw, 2rem);
+  margin: 0;
+}
+
+.ops h2 {
+  font-size: clamp(1.25rem, 3vw, 1.8rem);
+}
+
+.ops p,
+.ops li,
+.ops pre,
+.ops-live p {
+  overflow-wrap: anywhere;
+}
+
+.ops-top {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: white;
+  border-bottom: 4px solid #ac2039;
+}
+
+.ops-top img {
+  object-fit: contain;
+}
+
+.ops-top p {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+.ops-top > button {
+  margin-left: auto;
+}
+
+.ops-card {
+  margin: 24px 0;
+  padding: clamp(16px, 3vw, 32px);
+  background: white;
+  border: 1px solid #ccd8e4;
+  border-radius: 16px;
+}
+
+.ops #login {
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.ops label {
+  display: block;
+  margin-block: 8px;
+}
+
+.ops input,
+.ops textarea,
+.ops select {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border: 1px solid #8c9cad;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 16px;
+  background: white;
+  color: #112c48;
+}
+
+.ops input[type="checkbox"] {
+  display: inline;
+  width: auto;
+}
+
+.ops button,
+.ops-actions a {
+  display: inline-block;
+  padding: 12px 16px;
+  min-height: 48px;
+  border: 0;
+  border-radius: 6px;
+  background: #163d69;
+  color: white;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.ops button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.ops a {
+  color: #163d69;
+}
+
+.ops .ops-actions a {
+  color: white;
+}
+
+.ops-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ops-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+}
+
+.ops-wide {
+  grid-column: 1 / -1;
+}
+
+.ops-record {
+  border-top: 1px solid #ccd8e4;
+  padding-block: 18px;
+}
+
+.ops-record p {
+  margin: 4px 0;
+}
+
+.ops-record button {
+  margin: 8px 8px 0 0;
+}
+
+.ops pre {
+  white-space: pre-wrap;
+  max-height: 480px;
+  overflow: auto;
+  font: inherit;
+  font-size: 0.875rem;
+}
+
+.ops canvas {
+  display: block;
+  width: min(100%, 480px);
+  height: auto;
+  margin: 24px auto;
+  border-radius: 8px;
+}
+
+.ops dialog {
+  max-width: min(560px, 92vw);
+  border: 1px solid #ccd8e4;
+  border-radius: 14px;
+  color: #112c48;
+}
+
+.ops dialog::backdrop {
+  background: rgb(10 25 45 / 65%);
+}
+
+.ops :focus-visible {
+  outline: 3px solid #ac2039;
+  outline-offset: 3px;
+}
+
+.ops [hidden],
+.ops-live[hidden] {
+  display: none !important;
+}
+
+.ops-live {
+  margin: 28px auto;
+  width: min(1160px, calc(100% - 32px));
+  padding: clamp(20px, 4vw, 48px);
+  background: #f2f7fc;
+  color: #112c48;
+  border: 1px solid #c0d1e2;
+  border-top: 5px solid #163d69;
+  border-radius: 12px;
+  font-family: Lexend, sans-serif;
+  line-height: 1.7;
+}
+
+.ops-live h2,
+.ops-live h3 {
+  font-family: Archivo, sans-serif;
+  color: #112c48;
+}
+
+.ops-live h2 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  line-height: 1.2;
+  margin-block: 0 18px;
+}
+
+.ops-live h3 {
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  line-height: 1.4;
+  margin-block: 16px;
+}
+
+.ops-live p {
+  margin-block: 12px;
+  font-size: 1rem;
+  max-width: 70ch;
+}
+
+.ops-live img {
+  max-width: 100%;
+  max-height: 440px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.ops-live ul {
+  padding-inline-start: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ops *,
+  .ops-live * {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Verified figures may exceed the width of historic campaign report cards. */
+html[data-brand="walk"] .progress-figs {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+}
+
+html[data-brand="walk"]
+  :where(
+    .progress-fig b,
+    #wfeDigitalTotal,
+    [data-campaign-field="receivedTotal"],
+    [data-campaign-field="pledgedTotal"]
+  ) {
+  overflow-wrap: anywhere;
+  white-space: normal;
+  min-width: 0;
+}

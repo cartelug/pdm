@@ -142,7 +142,7 @@ async function stuckElements(page) {
     await scrollThrough(motion);
     assert.equal(await motion.locator(".pci-steps li.is-lit").count(), 8, "Every step of the money trail lights up");
 
-    await motion.goto(base + "/apartments/");
+    await motion.goto(base + "/community/");
     await motion.waitForTimeout(700);
     await scrollThrough(motion);
     assert.equal(
@@ -154,7 +154,7 @@ async function stuckElements(page) {
     // The project filter reflows with a transition and still ends in the right state.
     await motion.goto(base + "/projects/");
     await motion.waitForTimeout(900);
-    await motion.getByRole("button", { name: "Under review", exact: true }).click();
+    await motion.getByRole("button", { name: "Pipeline", exact: true }).click();
     await motion.waitForTimeout(1800);
     assert.equal(await motion.locator("[data-project-status]:visible").count(), 1);
     assert.equal(
@@ -163,12 +163,12 @@ async function stuckElements(page) {
     );
     await motion.getByRole("button", { name: "All projects", exact: true }).click();
     await motion.waitForTimeout(1800);
-    assert.equal(await motion.locator("[data-project-status]:visible").count(), 5);
+    assert.equal(await motion.locator("[data-project-status]:visible").count(), 4);
     assert.deepEqual(
       await motion
         .locator("[data-project-status]")
         .evaluateAll((cards) => cards.map((card) => getComputedStyle(card).opacity)),
-      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1"],
       "No card is left faded after filtering",
     );
 

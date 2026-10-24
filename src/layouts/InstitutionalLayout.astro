@@ -130,6 +130,8 @@ const shareImage = site.url + (CARDS.includes(slug) ? `/assets/og/pages/${slug}.
       <slot />
     </main>
     <SiteFooter {path} />
+    <link rel="stylesheet" href={asset(path, "css/operations.css")} />
+    <script is:inline src={asset(path, "js/operations-public.js")} defer></script>
     <script>
       import "../scripts/page-lifecycle";
     </script>

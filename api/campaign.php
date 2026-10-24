@@ -130,54 +130,31 @@ function wfe_validate($c): bool {
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 if ($method === 'POST') {
-  header('Content-Type: application/json; charset=utf-8');
-  header('Cache-Control: no-store');
-
-  $raw = file_get_contents('php://input');
-  $body = $raw === false || strlen($raw) > 400000 ? null : json_decode($raw, true);
-  if (!is_array($body)) {
-    http_response_code(400);
-    echo json_encode(['ok' => false, 'error' => 'Malformed request']);
-    exit;
-  }
-
-  $password = $body['password'] ?? '';
-  if (!is_string($password) || $password === '' || !password_verify($password, FIM_ADMIN_PASSWORD_HASH)) {
-    http_response_code(401);
-    echo json_encode(['ok' => false, 'error' => 'Wrong password']);
-    exit;
-  }
-
-  $campaign = $body['campaign'] ?? null;
-  if (!wfe_validate($campaign)) {
-    http_response_code(422);
-    echo json_encode(['ok' => false, 'error' => 'Campaign record failed validation']);
-    exit;
-  }
-
-  if (!is_dir($dataDir) && !@mkdir($dataDir, 0755, true) && !is_dir($dataDir)) {
-    http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Data directory is not writable']);
-    exit;
-  }
-
-  $updated = gmdate('c');
-  $payload = ['campaign' => (object) $campaign, 'updated' => $updated];
-  $tmp = $liveFile . '.' . bin2hex(random_bytes(4)) . '.tmp';
-  $written = @file_put_contents($tmp, json_encode($payload, JSON_UNESCAPED_UNICODE), LOCK_EX);
-  if ($written === false || !@rename($tmp, $liveFile)) {
-    @unlink($tmp);
-    http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Could not write the live campaign record']);
-    exit;
-  }
-
-  echo json_encode(['ok' => true, 'updated' => $updated]);
-  exit;
+  header('Content-Type: application/json; charset=utf-8');header('Cache-Control: no-store');http_response_code(410);
+  echo json_encode(['ok'=>false,'error'=>'Use /admin/operations/ with a named account to publish approved updates. Shared-password publishing is retired.']);exit;
 }
 
 /* ---- GET ---- */
 $data = wfe_load($liveFile);
+$data['campaign']=(array)$data['campaign'];
+// Legacy contact/channel configuration remains; manual legacy totals never enter public reporting.
+foreach (['receivedTotal','pledgedTotal','lastReconciledAt','distanceCoveredKm','routeStatus','updates','statusLabel'] as $key) $data['campaign'][$key]=null;
+try {
+  require_once __DIR__.'/lib/operations.php';$projection=ops_public();
+  $ugx=array_values(array_filter($projection['totals']['currencies'],static fn($r)=>$r['currency']==='UGX'));
+  $data['campaign']['receivedTotal']=$ugx[0]['received'] ?? null;
+  $data['campaign']['pledgedTotal']=$ugx[0]['pledged'] ?? null;
+  $data['campaign']['lastReconciledAt']=$projection['totals']['lastReconciledAt'];
+  $w=$projection['walk'];
+  if ($w) {
+    $data['campaign']['status']=$w['activity']==='active'?'launched':($w['activity']==='archived'?'completed':$w['activity']);
+    $data['campaign']['statusLabel']=$w['activity'].' campaign · '.str_replace('-',' ',$w['physical']);
+    $data['campaign']['distanceCoveredKm']=$w['km'];$data['campaign']['routeStatus']=$w['town'].' · '.$w['date'];
+    $data['campaign']['updates']=[['date'=>$w['date'],'title'=>$w['town'],'body'=>$w['story'],'location'=>$w['town'],'image'=>$w['photo'],'imageAlt'=>$w['photoAlt']]];
+  }
+  $data['updated']=$projection['approvedAt'];
+} catch (Throwable $e) { $data['campaign']['publicReportingState']='Verified reporting is temporarily unavailable. No zero balance is inferred.'; }
+
 $format = $_GET['format'] ?? 'js';
 
 if ($format === 'json') {

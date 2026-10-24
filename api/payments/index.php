@@ -28,7 +28,7 @@ try {
             $valid=pci_certificate_eligible($row);respond(['valid'=>$valid,'status'=>$valid?'verified':'inactive','code'=>$row['code'],'campaign'=>'Walk for Education 2026','steps'=>$valid?(int)$row['steps']:null,'amount'=>$valid?(int)$row['amount']:null,'currency'=>$valid?$row['currency']:null,'issuedAt'=>$row['issued_at']]);
         }
         if ($action==='progress') {
-            $t=pci_totals();respond(['campaign'=>'walk-for-education-2026','target'=>25000000000,'received'=>(int)$t['reconciled'],'pledged'=>(int)$t['pledged'],'lastReconciledAt'=>$t['lastReconciledAt'],'currency'=>'UGX','basis'=>'ugx-at-campaign-step-value','scope'=>'pesapal-ledger','includesLegacyCollections'=>false]);
+            $t=pci_totals();$ugx=array_values(array_filter($t['byCurrency'],static fn($r)=>$r['currency']==='UGX'));respond(['campaign'=>'walk-for-education-2026','target'=>25000000000,'received'=>(int)($ugx[0]['reconciled'] ?? 0),'pledged'=>(int)($ugx[0]['pledged'] ?? 0),'lastReconciledAt'=>$t['lastReconciledAt'],'currency'=>'UGX','basis'=>'actual-UGX-receipts-only','scope'=>'pesapal-ledger','byCurrency'=>array_map(static fn($r)=>['currency'=>$r['currency'],'received'=>(int)$r['reconciled'],'pledged'=>(int)$r['pledged']],$t['byCurrency']),'includesLegacyCollections'=>false]);
         }
         pci_session();respond(['csrf'=>$_SESSION['pci_csrf'],'signedIn'=>!empty($_SESSION['pci_admin']) && time()-(int)($_SESSION['pci_active'] ?? 0)<=1800,'username'=>$_SESSION['pci_admin'] ?? null,'role'=>$_SESSION['pci_role'] ?? null]);
     }
@@ -70,6 +70,7 @@ try {
     $actor=pci_require_admin();
     if ($action==='logout') { $_SESSION=[];session_destroy();respond(['ok'=>true]); }
     if ($action==='dashboard') {
+        pci_require_role(['admin','finance','recorder','viewer']);
         $rows=pci_db()->query('SELECT * FROM contributions ORDER BY created_at DESC LIMIT 2000')->fetchAll();
         foreach ($rows as &$r) unset($r['viewer_hash'],$r['request_key'],$r['redirect_url']);unset($r);
         $c=pci_config();$audit=pci_db()->query('SELECT * FROM audit ORDER BY id DESC LIMIT 100')->fetchAll();

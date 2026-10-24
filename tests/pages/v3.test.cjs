@@ -87,11 +87,15 @@ test("every upgraded page has valid local links, fragments, assets and unique ID
   }
 });
 
-test("under-review concept stays distinct from a live campaign; draft updates are excluded", () => {
+test("retired apartment concept is not promoted; live campaigns come first and draft updates are excluded", () => {
   const doc = new JSDOM(fs.readFileSync(path.join(root, "projects/index.html"), "utf8")).window.document;
-  const concept = doc.querySelector('[data-project-status="Under review"]');
-  assert.ok(concept.textContent.includes("Kasese Apartment Concept"));
-  assert.ok(concept.textContent.includes("No public investment"));
+  assert.ok(!doc.body.textContent.includes("Kasese Apartment Concept"));
+  const cards = [...doc.querySelectorAll(".pci-project h3")].map((n) => n.textContent);
+  assert.match(cards[0], /Walk for Education/);
+  assert.match(cards[1], /Faith in Motion/);
+  const retired = fs.readFileSync(path.join(root, "apartments/index.html"), "utf8");
+  assert.match(retired, /noindex/);
+  assert.match(retired, /location.replace/);
   const home = fs.readFileSync(path.join(root, "index.html"), "utf8");
   assert.match(home, /Pledges open/);
   // The home page describes the campaign with the record's own wording, not a second copy of it.

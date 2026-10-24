@@ -12,7 +12,7 @@ return [
     /* Currencies the Pesapal merchant account can take and settle. Contributions in any other currency are
        recorded as pledges. Add a currency only after Pesapal has confirmed it for this merchant account. */
     'payment_currencies' => ['UGX'],
-    /* Optional named users, with password_hash() outputs and admin / finance / viewer roles.
-       Until configured, username admin uses the existing campaign-console password. */
+    /* Required named users with password_hash() outputs. Roles: admin, finance, recorder,
+       owner, editor, viewer. No shared-password fallback. See docs/OPERATIONS-HANDOVER.md. */
     'admin_users' => [],
 ];

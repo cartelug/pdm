@@ -366,6 +366,11 @@
   /* ---------- odometer ---------- */
 
   function odometer(node, text) {
+    // Large financial figures must remain readable; honour reduced motion before building digit reels.
+    if (reduceQuery.matches || text.length > 14) {
+      node.textContent = text;
+      return;
+    }
     node.textContent = "";
     node.appendChild(el("span", "sr-only", text));
     var visual = el("span", "odo");

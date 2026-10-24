@@ -45,7 +45,7 @@ function makeDocumentsPortable(directory) {
       for (const [oldName, newName] of renamedStyles)
         html = html.replaceAll("/_astro/" + oldName, "/_astro/" + newName);
       html = html.replaceAll("/_astro/", prefix);
-      fs.writeFileSync(location, html);
+      fs.writeFileSync(location, html.replace(/[ \t]+$/gm, ""));
     }
   }
 }
