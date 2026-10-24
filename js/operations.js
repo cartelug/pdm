@@ -7,10 +7,14 @@
     rows = [],
     version = 0,
     importRows = [],
-    importBody = null;
+    importBody = null,
+    pledgeRecords = [],
+    publishedPrices = [],
+    priceEdited = false;
   const permissions = {
     admin: ["read", "record", "finance", "publish", "consent", "milestone", "graphic"],
     finance: ["read", "record", "finance", "consent", "milestone", "graphic"],
+    coordinator: ["read", "record", "publish", "graphic"],
     recorder: ["read", "record", "graphic"],
     owner: ["publish", "graphic"],
     editor: ["publish", "graphic"],
@@ -27,6 +31,34 @@
     n.textContent = text;
     return n;
   };
+  function today() {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Africa/Kampala",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).formatToParts(new Date());
+    const get = (type) => parts.find((p) => p.type === type).value;
+    return get("year") + "-" + get("month") + "-" + get("day");
+  }
+  function entryDefaults() {
+    const form = $("record-form").elements;
+    if (!form.namedItem("date").value) form.namedItem("date").value = today();
+    if (priceEdited) return;
+    const linked = pledgeRecords.find((p) => (p.id || p.reference) === form.namedItem("pledgeId").value);
+    if (linked) form.namedItem("currency").value = linked.currency;
+    const currency = form.namedItem("currency").value;
+    const price = publishedPrices.find((p) => p.currency === currency && p.priceStatus === "published");
+    const unit = linked ? Number(linked.step_unit || 0) : Number(price?.step || 0);
+    form.namedItem("stepUnit").value = unit;
+    form.namedItem("country").value = linked ? linked.country || "" : price?.code || "";
+    $("record-price-note").textContent =
+      unit > 0
+        ? (linked ? "Linked pledge price: " : "Current published price: ") +
+          money(unit, currency) +
+          " per sponsored step. Finance confirmation is still required."
+        : "Step price is unconfirmed. No sponsored steps are inferred; finance can confirm the historical price under Optional details.";
+  }
   async function api(action, body) {
     const r = await fetch("/api/operations.php?action=" + action, {
       method: body ? "POST" : "GET",
@@ -54,6 +86,7 @@
     $("login").hidden = true;
     $("workspace").hidden = false;
     $("logout").hidden = false;
+    $("review-action").textContent = can("finance") ? "Review payments" : "View contributions";
   }
   function renderRecords() {
     const query = $("search").value.toLowerCase();
@@ -144,6 +177,7 @@
     if (can("read")) {
       const d = await api("dashboard", {});
       rows = d.rows;
+      pledgeRecords = [...d.rows.filter((r) => r.kind === "pledge" && r.status === "pledged"), ...d.gatewayPledges];
       $("totals").replaceChildren();
       for (const t of d.totals.currencies) {
         const card = node("article", "");
@@ -233,6 +267,35 @@
       location.reload();
     }),
   );
+  for (const key of ["currency", "pledgeId"])
+    $("record-form")
+      .elements.namedItem(key)
+      .addEventListener("change", () => {
+        priceEdited = false;
+        entryDefaults();
+      });
+  for (const key of ["country", "stepUnit"])
+    $("record-form")
+      .elements.namedItem(key)
+      .addEventListener("input", () => {
+        priceEdited = true;
+        $("record-price-note").textContent =
+          "Using a manually entered historical price/country. Finance must confirm the snapshot before any sponsored steps count.";
+      });
+  entryDefaults();
+  $("walk-form").elements.namedItem("date").value = today();
+  fetch("/assets/data/step-prices.json", { cache: "no-store" })
+    .then((r) => {
+      if (!r.ok) throw new Error("Price data unavailable");
+      return r.json();
+    })
+    .then((d) => {
+      publishedPrices = d.countries || [];
+      entryDefaults();
+    })
+    .catch(() => {
+      entryDefaults();
+    });
   let requestId = crypto.randomUUID();
   $("record-form").addEventListener(
     "submit",
@@ -244,6 +307,8 @@
       await api("record", b);
       requestId = crypto.randomUUID();
       $("record-form").reset();
+      priceEdited = false;
+      entryDefaults();
       await refresh();
       say("Recorded. Public collections are unchanged until finance reconciliation.");
     }),

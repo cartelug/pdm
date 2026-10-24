@@ -53,6 +53,7 @@ function ops_actor(string $capability): string {
     $role=$u['role'] ?? 'viewer';if ($role!==($_SESSION['pci_role'] ?? '')) throw new DomainException('Permissions changed; sign in again');
     $caps=['admin'=>['read','record','finance','publish','consent','milestone','graphic'],
       'finance'=>['read','record','finance','consent','milestone','graphic'],
+      'coordinator'=>['read','record','publish','graphic'],
       'recorder'=>['read','record','graphic'], 'owner'=>['publish','graphic'], 'editor'=>['publish','graphic'], 'viewer'=>[]];
     if (!in_array($capability,$caps[$role] ?? [],true)) throw new DomainException('Your named account cannot perform this action');
     return $actor;

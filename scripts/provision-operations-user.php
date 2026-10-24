@@ -6,7 +6,7 @@ require dirname(__DIR__).'/api/lib/payments.php';
 try {
   $b=json_decode(stream_get_contents(STDIN),true,32,JSON_THROW_ON_ERROR);
   if (!is_array($b) || !preg_match('/^[a-z][a-z0-9-]{2,60}$/D',$b['username'] ?? '')) throw new InvalidArgumentException('Use a named username: 3–61 lowercase letters, numbers or hyphens');
-  if (!in_array($b['role'] ?? '',['admin','finance','recorder','owner','editor','viewer'],true)) throw new InvalidArgumentException('Invalid role');
+  if (!in_array($b['role'] ?? '',['admin','finance','coordinator','recorder','owner','editor','viewer'],true)) throw new InvalidArgumentException('Invalid role');
   if (!is_string($b['hash'] ?? null) || (password_get_info($b['hash'])['algoName'] ?? 'unknown')==='unknown') throw new InvalidArgumentException('Provide a password_hash output, never a plaintext password');
   $dir=pci_config()['private_dir'];$lock=fopen($dir.'/accounts.lock','c');chmod($dir.'/accounts.lock',0600);if(!$lock || !flock($lock,LOCK_EX)) throw new RuntimeException('Could not lock private configuration');
   $file=$dir.'/config.php';if(!is_file($file)) throw new RuntimeException('Configure private config.php first; this tool does not invent a host configuration');

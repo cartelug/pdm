@@ -11,7 +11,7 @@ def check(ok,label):
     print('PASS',label)
 with tempfile.TemporaryDirectory(prefix='pci-ops-test-') as private:
     hashed=subprocess.check_output([php,'-r','echo password_hash("Operations-Fixture-Only",PASSWORD_DEFAULT);'],text=True)
-    users=','.join("'%s'=>['hash'=>'%s','role'=>'%s']"%(u,hashed,r) for u,r in [('finance','finance'),('recorder','recorder'),('neeza','owner'),('communications','editor'),('administrator','admin')])
+    users=','.join("'%s'=>['hash'=>'%s','role'=>'%s']"%(u,hashed,r) for u,r in [('finance','finance'),('joshua','coordinator'),('recorder','recorder'),('neeza','owner'),('communications','editor'),('administrator','admin')])
     Path(private,'config.php').write_text("<?php return ['environment'=>'live','admin_users'=>["+users+"]];")
     sock=socket.socket();sock.bind(('127.0.0.1',0));port=sock.getsockname()[1];sock.close()
     env={**os.environ,'PCI_PRIVATE_DIR':private};log=tempfile.TemporaryFile()
@@ -120,6 +120,14 @@ with tempfile.TemporaryDirectory(prefix='pci-ops-test-') as private:
         check(request('export',{})[0]==200,'unified CSV report downloads')
         check(request('public')[1]['totals']['confirmedSteps']==106,'overlap also cannot inflate sponsored steps')
         check(request('status',None,'/api/payments/index.php')[1]['checkoutEnabled'] is False,'Pesapal checkout remains closed')
+        login('joshua');check(request('dashboard',{})[0]==200,'coordinator can view contribution records')
+        before_received=received();code,c=record(name='Synthetic coordinator entry',amount=1000,transactionRef='COORD-0001',requestId='coord-record-0001');check(code==200 and c['record']['status']=='pending' and received()==before_received,'coordinator entry cannot increase collections before finance verification')
+        check(request('reconcile',{'id':c['record']['id'],'evidence':'not authorised'})[0]==401,'coordinator cannot approve financial receipts')
+        check(request('reverse',{'id':c['record']['id'],'reason':'not authorised'})[0]==401,'coordinator cannot reverse receipts')
+        check(request('consent',{'id':c['record']['id'],'displayName':True,'displayAmount':True,'evidence':'not authorised'})[0]==401,'coordinator cannot grant recognition consent')
+        check(request('milestone',{'label':'Not authorised','amount':25000000,'currency':'UGX','approval':'Not authorised'})[0]==401,'coordinator cannot approve milestones')
+        check(request('walk-preview',{**w,'baseVersion':request('public')[1]['version']})[0]==200,'coordinator can prepare walk updates')
+        check(request('snapshot',{})[0]==200 and request('export',{})[0]==200,'coordinator can generate graphics and download reports')
         print(f'\n{checks} operations HTTP checks passed. Synthetic data only.')
     finally:
         server.terminate();server.wait(timeout=5);log.close()

@@ -17,7 +17,7 @@ const out = process.env.PCI_TEST_SCREENSHOTS || path.join(os.tmpdir(), "pci-oper
   });
   fs.writeFileSync(
     path.join(privateDir, "config.php"),
-    `<?php return ['environment'=>'live','admin_users'=>['fixture-admin'=>['hash'=>'${hash}','role'=>'admin']]];`,
+    `<?php return ['environment'=>'live','admin_users'=>['fixture-admin'=>['hash'=>'${hash}','role'=>'admin'],'fixture-joshua'=>['hash'=>'${hash}','role'=>'coordinator']]];`,
   );
   const socket = net.createServer();
   await new Promise((r) => socket.listen(0, "127.0.0.1", r));
@@ -186,6 +186,92 @@ const out = process.env.PCI_TEST_SCREENSHOTS || path.join(os.tmpdir(), "pci-oper
     await page.locator(".ops-live").filter({ hasText: "temporarily unavailable" }).waitFor();
     assert(!(await page.locator(".ops-live").textContent()).includes("UGX 0"));
     console.log("PASS owner update appears across connected pages without build; API failure is truthful");
+    const coordinator = await browser.newPage({
+      viewport: { width: 390, height: 844 },
+      reducedMotion: "reduce",
+      timezoneId: "America/New_York",
+    });
+    await coordinator.clock.install({ time: new Date("2026-10-24T22:30:00Z") });
+    await coordinator.goto(`http://127.0.0.1:${port}/admin/operations/start.html`);
+    for (const width of [320, 390, 768, 1440]) {
+      await coordinator.setViewportSize({ width, height: 900 });
+      assert(
+        await coordinator.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+        "quick-start guide fits " + width,
+      );
+    }
+    await coordinator.goto(`http://127.0.0.1:${port}/admin/operations/`);
+    await coordinator.locator('[name="username"]').fill("fixture-joshua");
+    await coordinator.locator('[name="password"]').fill("Operations-Browser-Fixture");
+    await coordinator.locator("#login button").click();
+    await coordinator.locator("#workspace:not([hidden])").waitFor();
+    await coordinator.waitForFunction(() => document.querySelector('#record-form [name="stepUnit"]').value === "5000");
+    assert.equal(
+      await coordinator.locator('#record-form [name="date"]').inputValue(),
+      "2026-10-25",
+      "new-entry date uses Uganda time, not the browser timezone",
+    );
+    await coordinator.selectOption('#record-form [name="currency"]', "KES");
+    assert.equal(await coordinator.locator('#record-form [name="stepUnit"]').inputValue(), "200");
+    await coordinator.selectOption('#record-form [name="currency"]', "USD");
+    assert.equal(
+      await coordinator.locator('#record-form [name="stepUnit"]').inputValue(),
+      "0",
+      "unconfirmed currency price is never invented",
+    );
+    const historical = await coordinator.evaluate(async () =>
+      window.PCIOperations.api("record", {
+        name: "Historical pledge fixture",
+        kind: "pledge",
+        amount: 10000,
+        currency: "UGX",
+        date: "2026-09-01",
+        requestId: "historic-defaults-check",
+        country: "UG",
+        stepUnit: 1000,
+      }),
+    );
+    await coordinator.reload();
+    await coordinator.locator("#workspace:not([hidden])").waitFor();
+    await coordinator
+      .locator("#pledges option")
+      .filter({ hasText: "Historical pledge fixture" })
+      .waitFor({ state: "attached" });
+    await coordinator.selectOption("#pledges", historical.record.id);
+    assert.equal(
+      await coordinator.locator('#record-form [name="stepUnit"]').inputValue(),
+      "1000",
+      "linked historical price is retained",
+    );
+    await coordinator.selectOption("#pledges", "");
+    assert.equal(await coordinator.locator('#record-form [name="stepUnit"]').inputValue(), "5000");
+    const receivedBefore = await coordinator.evaluate(async () => {
+      const d = await window.PCIOperations.api("public");
+      return d.totals.currencies.find((r) => r.currency === "UGX").received;
+    });
+    await coordinator.locator('#record-form [name="name"]').fill("Coordinator pending receipt");
+    await coordinator.locator('#record-form [name="amount"]').fill("500000");
+    await coordinator.locator('#record-form [name="channel"]').fill("MTN MoMo");
+    await coordinator.locator('#record-form [name="transactionRef"]').fill("COORDINATOR-UI-0001");
+    await coordinator.locator("#record-form button").click();
+    await coordinator.locator(".ops-record").filter({ hasText: "Coordinator pending receipt" }).waitFor();
+    assert.equal(
+      await coordinator.getByRole("button", { name: "Verify & reconcile", exact: true }).count(),
+      0,
+      "coordinator never sees finance approval controls",
+    );
+    assert.equal(await coordinator.locator("#walk").isVisible(), true);
+    assert.equal(await coordinator.locator("#studio").isVisible(), true);
+    assert.equal(await coordinator.locator("#report").isVisible(), true);
+    const receivedAfter = await coordinator.evaluate(async () => {
+      const d = await window.PCIOperations.api("public");
+      return d.totals.currencies.find((r) => r.currency === "UGX").received;
+    });
+    assert.equal(receivedAfter, receivedBefore, "coordinator entry does not inflate public collections");
+    console.log(
+      "PASS Joshua coordinator flow, Uganda dates, published prices, historical snapshots and finance separation",
+    );
+    await coordinator.close();
     assert.deepEqual(errors, []);
     console.log("PASS no browser JavaScript errors");
   } finally {

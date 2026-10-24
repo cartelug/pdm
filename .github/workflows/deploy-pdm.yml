@@ -38,6 +38,7 @@ jobs:
           php tests/payments/ledger.php
           python3 tests/payments/test_http.py
           python3 tests/operations/test_http.py
+          python3 tests/operations/test_setup.py
           python3 tests/enquiry/test_http.py
           npx playwright install --with-deps chromium
           node tests/navigation/wfe-redesign.cjs

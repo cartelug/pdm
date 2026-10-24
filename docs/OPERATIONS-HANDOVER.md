@@ -27,14 +27,16 @@ Gateway refund, status verification, reconciliation and certificates remain in `
 
 ## Named access — host owner action required
 
+The fast setup and standard coordinator/finance arrangement is documented in `QUICK-START-SETUP.md`. Joshua’s staff walkthrough is `/admin/operations/start.html`. Use `scripts/setup-operations-user.php` for a guided terminal setup with hidden password entry; the existing hash-only provisioner remains available.
+
 No private host configuration or credentials were available in this session. **No account is claimed active and no password is committed.** Both new operations and existing gateway sign-in now require explicitly configured named accounts; the shared-password fallback has been removed. Provision accounts before staff use.
 
 Existing `admin_users` in the private `config.php` is reused:
 
 | Suggested identity, after verification | Role | Permissions |
 | --- | --- | --- |
-| Neeza | owner | Walk drafts/preview/publish/revert and graphics; no private finance rows or receipt approval |
-| Joshua | owner or separately approved admin | Owner publishing by default; admin adds financial authority only with explicit PCI approval |
+| Neeza | coordinator (standard daily setup) | Records, reports, Walk drafts/preview/publish/revert and graphics; no receipt approval |
+| Joshua | coordinator (standard daily setup) | Records, reports, walking updates and graphics; finance approval remains separate |
 | Named finance member | finance | Record, review, reconcile/reverse, reports, consent, milestone approval, graphics |
 | Named collector | recorder | Record/import/reports; no receipt approval or editorial publishing |
 | Shyaka Mbanda | owner | Walk publishing and graphics |
