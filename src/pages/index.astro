@@ -1,5 +1,6 @@
 ---
 import Icon from "../components/global/Icon.astro";
+import ScenePicture from "../components/global/ScenePicture.astro";
 import Rings from "../components/global/Rings.astro";
 import Layout from "../layouts/InstitutionalLayout.astro";
 import UpdatesFeed from "../components/global/UpdatesFeed.astro";
@@ -115,24 +116,8 @@ const projects = ["walk-for-education", "faith-in-motion", "community", "kagando
   </section>
   <section class="pci-section pci-section--bone pci-practice">
     <div class="pci-practice__backdrop" aria-hidden="true">
-      <picture>
-        <source
-          media="(max-width: 719px)"
-          srcset="assets/home-backgrounds/garden-mobile-420.webp 420w, assets/home-backgrounds/garden-mobile-840.webp 840w"
-          sizes="100vw"
-        />
-        <img
-          src="assets/home-backgrounds/garden-wide-1440.webp"
-          srcset="assets/home-backgrounds/garden-wide-840.webp 840w, assets/home-backgrounds/garden-wide-1440.webp 1440w"
-          sizes="100vw"
-          width="1672"
-          height="941"
-          alt=""
-          loading="lazy"
-          decoding="async"
-        />
-      </picture>
-      <span class="pci-practice__caption">Illustration · community work</span>
+      <ScenePicture scene="07" />
+      <span class="pci-practice__caption">Campaign illustration · learning together</span>
     </div>
     <div class="pci-container">
       <div class="pci-section-head" data-reveal>
@@ -195,16 +180,7 @@ const projects = ["walk-for-education", "faith-in-motion", "community", "kagando
     <div class="pci-duo">
       <article class="pci-duo__panel pci-duo__panel--education" data-cursor="Explore">
         <div class="pci-duo__media" aria-hidden="true">
-          <img
-            src="assets/walk-for-education/hero-art-1536.webp"
-            srcset="assets/walk-for-education/hero-art-768.webp 768w, assets/walk-for-education/hero-art-1536.webp 1536w"
-            sizes="(min-width: 900px) 50vw, 100vw"
-            width="1536"
-            height="1024"
-            alt=""
-            loading="lazy"
-            decoding="async"
-          />
+          <ScenePicture scene="02" />
         </div>
         <div class="pci-duo__body">
           <span class="pci-status">{walk.label}</span>
@@ -245,23 +221,7 @@ const projects = ["walk-for-education", "faith-in-motion", "community", "kagando
   </section>
   <section class="pci-section pci-section--crimson pci-band">
     <div class="pci-band__backdrop" aria-hidden="true">
-      <picture>
-        <source
-          media="(max-width: 719px)"
-          srcset="assets/home-backgrounds/collaboration-mobile-420.webp 420w, assets/home-backgrounds/collaboration-mobile-840.webp 840w"
-          sizes="100vw"
-        />
-        <img
-          src="assets/home-backgrounds/collaboration-wide-1440.webp"
-          srcset="assets/home-backgrounds/collaboration-wide-840.webp 840w, assets/home-backgrounds/collaboration-wide-1440.webp 1440w"
-          sizes="100vw"
-          width="1672"
-          height="941"
-          alt=""
-          loading="lazy"
-          decoding="async"
-        />
-      </picture>
+      <ScenePicture scene="19" />
     </div>
     <Rings class="pci-band__rings" />
     <div class="pci-container pci-split">

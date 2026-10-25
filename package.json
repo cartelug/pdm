@@ -20,7 +20,7 @@
     "build": "astro build && node scripts/export-v3.mjs && node scripts/assets.mjs",
     "check:types": "astro check",
     "check:protected": "node scripts/check-protected.mjs",
-    "check:v3": "node --test tests/pages/v3.test.cjs tests/pages/campaign-state.test.cjs tests/navigation/menu.test.cjs tests/navigation/wfe-menu.test.cjs tests/pages/wfe-redesign.test.cjs tests/navigation/transitions.test.cjs",
+    "check:v3": "node --test tests/pages/v3.test.cjs tests/pages/campaign-state.test.cjs tests/navigation/menu.test.cjs tests/navigation/wfe-menu.test.cjs tests/pages/wfe-redesign.test.cjs tests/navigation/transitions.test.cjs tests/pages/official-kit.test.cjs",
     "tokens": "node scripts/tokens.mjs",
     "check:tokens": "node scripts/tokens.mjs --check && node tests/quality/contrast.cjs",
     "check:hooks": "node tests/quality/hooks.cjs",

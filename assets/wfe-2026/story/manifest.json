@@ -1,8 +1,8 @@
 {
   "hero-portrait": {
-    "source": "campaign/full/10-rotarian-editorial-portrait.webp",
-    "width": 1122,
-    "height": 1402,
+    "source": "official-kit/scene-02-mobile-master.webp",
+    "width": 1024,
+    "height": 1536,
     "widths": [
       480,
       800,
@@ -10,18 +10,18 @@
     ]
   },
   "hero-campus": {
-    "source": "campus/full/19-first-light-on-campus.webp",
-    "width": 1505,
-    "height": 790,
+    "source": "official-kit/scene-08-desktop-master.webp",
+    "width": 1672,
+    "height": 941,
     "widths": [
       480,
       800
     ]
   },
   "bag-detail": {
-    "source": "campaign/full/12-backpack-editorial-detail.webp",
-    "width": 1254,
-    "height": 1254,
+    "source": "official-kit/scene-04-desktop-master.webp",
+    "width": 1672,
+    "height": 941,
     "widths": [
       640,
       1000,
@@ -29,27 +29,27 @@
     ]
   },
   "bag-staff": {
-    "source": "campaign/full/11-shoulder-strap-and-staff-detail.webp",
-    "width": 1122,
-    "height": 1402,
+    "source": "official-kit/scene-12-desktop-master.webp",
+    "width": 1672,
+    "height": 941,
     "widths": [
       640,
       1000
     ]
   },
   "bag-purpose": {
-    "source": "campaign/full/16-bag-and-purpose-editorial.webp",
-    "width": 1536,
-    "height": 1024,
+    "source": "official-kit/scene-02-desktop-master.webp",
+    "width": 1672,
+    "height": 941,
     "widths": [
       800,
       1400
     ]
   },
   "bag-cutout": {
-    "source": "campaign/full/08-black-backpack-cutout.webp",
-    "width": 1122,
-    "height": 1402,
+    "source": "official-kit/bag-cutout-master.webp",
+    "width": 1086,
+    "height": 1448,
     "widths": [
       360,
       640
@@ -149,9 +149,9 @@
     ]
   },
   "journey-walker": {
-    "source": "campaign/full/07-walker-and-bag-cutout.webp",
-    "width": 1086,
-    "height": 1448,
+    "source": "official-kit/scene-05-mobile-master.webp",
+    "width": 1024,
+    "height": 1536,
     "widths": [
       480,
       860

@@ -213,6 +213,32 @@ function check(value, message) {
       (await page.locator("#campaignGallery [data-image-id]").count()) === 56,
       "the public gallery exposes all 56 generated images",
     );
+    await page.locator("[data-gallery-filter='campaign']").click();
+    await page.locator("#galleryCount").filter({ hasText: "9 of 20" }).waitFor();
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.locator("#campaignGallery [data-image-id]").first().click();
+    await page.waitForFunction(() =>
+      /scene-\d+-mobile-master\.webp/.test(document.getElementById("viewerImage").currentSrc),
+    );
+    check(true, "campaign viewer selects the separately composed portrait on a phone");
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.waitForFunction(() =>
+      /scene-\d+-desktop-master\.webp/.test(document.getElementById("viewerImage").currentSrc),
+    );
+    check(true, "campaign viewer selects the wide companion on desktop");
+    await page.keyboard.press("Escape");
+    await page.locator("[data-gallery-filter='school']").click();
+    await page.locator("#campaignGallery [data-image-id]").first().click();
+    await page.waitForFunction(
+      () => !document.getElementById("viewerImage").parentElement.querySelector("source").hasAttribute("srcset"),
+    );
+    check(
+      !(await page
+        .locator("#viewerImage")
+        .evaluate((img) => img.parentElement.querySelector("source").hasAttribute("srcset"))),
+      "switching to the original school collection clears the previous campaign portrait",
+    );
+    await page.keyboard.press("Escape");
     await page.locator("[data-gallery-filter='all']").click();
     await page.locator("#motionToggle").click();
     check(
@@ -230,6 +256,11 @@ function check(value, message) {
       );
     }
     await page.setViewportSize({ width: 390, height: 844 });
+    await page.locator(".w-hero__portrait img").evaluate((img) => img.decode());
+    check(
+      await page.locator(".w-hero__portrait img").evaluate((img) => img.naturalWidth > 0),
+      "official-kit hero decodes with reduced motion and after responsive source changes",
+    );
     await page.locator("#choose-steps").scrollIntoViewIfNeeded();
     await page.screenshot({ path: path.join(shots, "PCI_WFE_Mobile_Pledge.png") });
     await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));

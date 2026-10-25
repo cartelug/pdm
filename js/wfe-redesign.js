@@ -490,6 +490,7 @@
       controller.abort();
     }, 8000);
     var url = new URL("../assets/wfe-2026/gallery.json", window.location.href);
+    url.searchParams.set("v", "official-kit-20261025");
     request = fetch(url.href, { signal: controller.signal })
       .then(function (response) {
         if (!response.ok) throw new Error("The illustration collection could not be loaded.");
@@ -605,6 +606,11 @@
     var apply = function () {
       image.width = item.width;
       image.height = item.height;
+      var mobileSource = image.parentElement.querySelector("source");
+      if (mobileSource) {
+        if (item.mobileSrc) mobileSource.srcset = item.mobileSrc;
+        else mobileSource.removeAttribute("srcset");
+      }
       image.src = item.src;
       image.classList.remove("is-swapping");
     };

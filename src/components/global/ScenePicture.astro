@@ -1,0 +1,47 @@
+---
+import { asset } from "../../config/site";
+import collection from "../../../assets/wfe-2026/official-kit/manifest.json";
+interface Props {
+  scene: string;
+  from?: string;
+  alt?: string;
+  eager?: boolean;
+}
+const { scene, from = "/", alt = "", eager = false } = Astro.props;
+const record = collection.scenes.find((item) => item.id === scene);
+if (!record) throw new Error(`Unknown campaign scene ${scene}`);
+const base = `assets/wfe-2026/official-kit/scene-${scene}`;
+const src = (suffix: string) => asset(from, `${base}-${suffix}`);
+const set = (orientation: string, format: string, widths: number[]) =>
+  widths.map((width) => `${src(`${orientation}-${width}.${format}`)} ${width}w`).join(", ");
+---
+
+<picture data-campaign-scene={scene}>
+  <source
+    media="(max-width: 719px)"
+    type="image/avif"
+    srcset={set("mobile", "avif", [480, 800])}
+    sizes="100vw"
+    width={record.compositions.mobile.width}
+    height={record.compositions.mobile.height}
+  />
+  <source
+    media="(max-width: 719px)"
+    srcset={set("mobile", "webp", [480, 800])}
+    sizes="100vw"
+    width={record.compositions.mobile.width}
+    height={record.compositions.mobile.height}
+  />
+  <source type="image/avif" srcset={set("desktop", "avif", [800, 1440])} sizes="100vw" />
+  <img
+    src={src("desktop-1440.webp")}
+    srcset={set("desktop", "webp", [800, 1440])}
+    sizes="100vw"
+    width={record.compositions.desktop.width}
+    height={record.compositions.desktop.height}
+    alt={alt}
+    loading={eager ? "eager" : "lazy"}
+    fetchpriority={eager ? "high" : "auto"}
+    decoding="async"
+  />
+</picture>

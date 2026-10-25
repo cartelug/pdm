@@ -28,11 +28,15 @@ const base = {
 };
 const day = (value) => new Date(value + "T12:00:00Z");
 
-test("the live record is read and is in the preparing state with no start date", () => {
+test("the confirmed ongoing walk does not invent a start date or day count", () => {
   const record = loadCampaignRecord(root);
   assert.equal(record.slug, "walk-for-education");
   assert.equal(record.campaignStartDate, null);
-  assert.equal(campaignState(record, day("2026-10-21")), "preparing");
+  assert.equal(campaignState(record, day("2026-10-25")), "walking");
+  const view = campaignView(record, day("2026-10-25"));
+  assert.equal(view.label, "Walk underway · sponsor education");
+  assert.doesNotMatch(view.label, /Day \d|NaN|2026/);
+  assert.equal(record.distanceCoveredKm, null);
 });
 
 test("preparing shows the record's own label and never invents a date", () => {

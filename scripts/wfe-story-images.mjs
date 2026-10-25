@@ -49,8 +49,22 @@ const CROPS = [
 ];
 
 fs.mkdirSync(OUT, { recursive: true });
-const manifest = {};
-for (const [name, source, [l, t, r, b], widths, alpha] of CROPS) {
+const officialOnly = process.argv.includes("--official-only");
+const officialSources = {
+  "hero-portrait": "official-kit/scene-02-mobile-master.webp",
+  "hero-campus": "official-kit/scene-08-desktop-master.webp",
+  "bag-detail": "official-kit/scene-04-desktop-master.webp",
+  "bag-staff": "official-kit/scene-12-desktop-master.webp",
+  "bag-purpose": "official-kit/scene-02-desktop-master.webp",
+  "bag-cutout": "official-kit/bag-cutout-master.webp",
+  "journey-walker": "official-kit/scene-05-mobile-master.webp",
+};
+const manifest = officialOnly ? JSON.parse(fs.readFileSync(path.join(OUT, "manifest.json"), "utf8")) : {};
+for (const [name, legacySource, legacyCrop, widths, alpha] of CROPS) {
+  if (officialOnly && !officialSources[name]) continue;
+  const official = officialSources[name] && fs.existsSync(path.join(SRC, officialSources[name]));
+  const source = official ? officialSources[name] : legacySource;
+  const [l, t, r, b] = official ? [0, 0, 1, 1] : legacyCrop;
   const input = path.join(SRC, source);
   const meta = await sharp(input).metadata();
   const left = Math.round(l * meta.width);
@@ -76,7 +90,7 @@ fs.writeFileSync(path.join(OUT, "manifest.json"), JSON.stringify(manifest, null,
 const EXPLAINERS = path.join(SRC, "explainers");
 const PREVIEWS = path.join(EXPLAINERS, "previews");
 fs.mkdirSync(PREVIEWS, { recursive: true });
-for (const file of fs.readdirSync(EXPLAINERS).filter((f) => f.endsWith(".svg"))) {
+for (const file of fs.readdirSync(EXPLAINERS).filter((f) => !officialOnly && f.endsWith(".svg"))) {
   await sharp(path.join(EXPLAINERS, file), { density: 96 })
     .resize({ width: 560 })
     .flatten({ background: "#f4efe6" })

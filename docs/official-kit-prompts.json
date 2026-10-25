@@ -1,0 +1,125 @@
+{
+  "master": "Create a premium photographic campaign background for Pamodzi Community Initiative's Walk for Education, featuring the real Mbanda Shyaka where specified. Treat the supplied face portrait as an identity lock, the supplied black campaign T-shirt and black backpack photographs as wardrobe/product locks, and the supplied UCU–Kagando main block photograph as the architecture lock. Preserve Shyaka's face, beard, hair/headwrap, visible build and natural skin. Give him normal adult proportions and a physically convincing walking gait; keep the head in proportion to the torso, limbs and surrounding people. The backpack is functional and naturally carried, with realistic strap tension and fabric weight. Preserve the arrangement of the actual printed shirt/bag surfaces; no invented badges, mirrored writing, extra emblems or decorative replacement backpack.\nArt direction: exceptionally refined documentary-style East African campaign photography; natural skin texture; tactile cotton, nylon, soil and building surfaces; coherent sun direction and colour temperature; believable lens perspective; carefully shaped daylight; subtle atmospheric depth, genuine contact shadows and controlled highlights. The image should feel directed by an expert photographer, not assembled from incompatible stock photographs. Use a single dominant action and a simple readable silhouette, with a purposeful foreground/middle distance/background. Convey dignity, connection and educational possibility through believable human action. Avoid excessive visual busyness, glossy plastic skin, exaggerated head size, forced smiles, cloned crowds, staged poverty, floating objects, implausible hands, fashion-ad poses or fantasy architecture.\nThe location is a plausible campaign environment unless an actual place is directly referenced. Do not add a named road, border landmark, fabricated route map, timestamp, completed distance, contribution amount, finish banner or implied verified event. When the scene imagines arrival or future educational activity, treat it as a campaign illustration, not evidence that it happened. Use the main block's real facade and roof proportions whenever it appears. Do not replace the building with a generic new university or turn it into a finished facility that the reference does not show.\nCompose as an elegant website section background. Reserve the specified quiet copy area, with usable tonal separation and no important face, hand, shirt print or architectural landmark underneath it. No headline, UI, caption, CTA, watermark, route labels or sponsor strip burned into the image. Existing physical kit artwork may remain visible in the scene. Preserve crisp subjects and subtle detail at the eventual display scale. Put low-detail natural atmosphere in the upper and lower transition margins so neighbouring sections can blend without visible rectangles. Never fade away a face or an important building edge to make a gradient.\nMatch the adjacent scene's light, edge luminance and colour family. Use cream/soft sky for paper sections, warm earth where specified, or blue-charcoal atmosphere for dark sections. Blend through sky, soft foliage or shadow in the environment rather than generating a solid white strip. Keep the visual treatment cohesive with PCI crimson, warm paper and ink, and the Walk page's restrained blue accents. Colours on skin and the official kit remain natural.\nDeliver a single image in the requested orientation. Use the scene's lens, action, relative positions, emotional intention and compositional constraints. Keep the environment spacious enough for a responsive site while preserving the subject's identity and the locked references. No collage, double exposure, painted lettering, heavy vignette, exaggerated HDR, beauty smoothing, unnatural oversharpening, fake grain blankets, giant campaign logo or dramatic effects that obscure the walk.",
+  "scenes": [
+    {
+      "id": "01",
+      "title": "The walk is happening",
+      "prompt": "Show Shyaka actively walking on a believable, quiet East African roadside at shoulder-height camera level, using a natural 50 mm perspective. He occupies the right middle distance in a three-quarter walking view, with the official backpack naturally carried. Make the planted foot, trailing leg, hip rotation and relaxed arm swing convincingly readable. His expression is focused and calm. A broad road edge and gently layered vegetation create depth and lead the eye in his direction. Keep the left half open and low in detail for the actual website headline. The campaign kit is identifiable without becoming an oversized advertising board. Use restrained warm sunlight and real shadows. No finish arch, location sign or claim of an exact current road.",
+      "composition": " full figure/right, left quiet. **Mobile:** full figure/lower centre, open sky above. Preserve the walking action when checked at 320 px wide.\n\n"
+    },
+    {
+      "id": "02",
+      "title": "One walker, a specific destination",
+      "prompt": "Create a grounded signature composition in which Shyaka walks in the foreground and the actual main university block is visible beyond him in a credible spatial arrangement. Use a normal 40–50 mm perspective and the supplied three-quarter building view. The building must remain recognisable rather than an interchangeable campus silhouette. Shyaka's clothing and backpack are the new black official kit, with normal body proportions. His direction of movement should visually connect him with the building without suggesting a documented arrival. Keep the people-to-building scale plausible and prevent the building from floating above his shoulders. Shape the light consistently across person and architecture. The scene represents the campaign's destination and purpose; no finish-line banners or arrival date.",
+      "composition": " walker on right third, building beyond centre, headline left. **Mobile:** building in upper-middle, walker lower-middle; use more sky above for copy.\n\n"
+    },
+    {
+      "id": "03",
+      "title": "The person behind the walk",
+      "prompt": "Photographically render Shyaka in a calm mid-stride moment beside a lightly wooded road, close enough to recognise his real face but wide enough to retain the shoulders, backpack straps and body context. Use a natural 70 mm portrait perspective without enlarging the head. Keep his dark headwrap, beard, hair and facial landmarks faithful to the reference. The black campaign shirt replaces the old portrait's grey shirt in this new illustrative scene. Give the gesture a small human purpose—looking ahead towards companions outside the frame—rather than a forced commercial smile. Let soft foliage and atmospheric sky form the background, with restrained directional light and believable fabric folds. Leave a broad quiet copy field beside him.",
+      "composition": " waist/thigh-up on right, text left. **Mobile:** relaxed three-quarter body lower in frame; never enlarge the head to fill the screen.\n\n"
+    },
+    {
+      "id": "04",
+      "title": "The actual bag carries the message",
+      "prompt": "Build a premium, restrained editorial scene around the supplied black campaign backpack resting naturally on a low clean bench or stone surface beside a path. Preserve its rounded upper body, handles, seam and zip layout, front compartments, printed mark placement and small Uganda flag. Use a tactile 65–85 mm product-photography treatment with soft edge light and realistic weight against the support surface. Keep it recognisably the same useful real bag, with modest natural fabric imperfections, not a glossy luxury redesign. A few soft leaves and the path can suggest movement and purpose; do not add floating books, money, badges or a magical glow. Reserve the opposite side for live HTML contribution copy.",
+      "composition": " bag right, negative space left. **Mobile:** bag complete in lower 55%; quiet top. **Accuracy:** use the supplied photograph itself for the final readable print detail when generation cannot reproduce it accurately.\n\n"
+    },
+    {
+      "id": "05",
+      "title": "Carrying it for real",
+      "prompt": "Show a close but spatially coherent rear three-quarter view of Shyaka walking, with the official backpack's form and strap loading as the main subject. Include enough shoulder, elbow, hip and walking context to understand that this is a person carrying it along a journey. The bag's upper handle, compartment shapes, print regions and lower flag should sit in the right order and perspective. Use a 70 mm documentary-detail look and subtle daylight catching the black fabric without turning it grey or losing every seam. Keep the surrounding road and vegetation subdued. Do not invent a second bag or transpose the printed surface onto a shoulder strap. Preserve the physical connection between bag and wearer.",
+      "composition": " bag/wearer on right two-fifths. **Mobile:** centred bag with shoulder and upper-leg context; do not crop the main printed panel.\n\n"
+    },
+    {
+      "id": "06",
+      "title": "Every step has effort",
+      "prompt": "Create a low, respectful walking-detail scene focused on a convincing pair of legs and grounded footwear moving along a quiet path. Show one loaded foot and the other completing a natural stride, with a sensible leg-to-body connection and a hint of the official black shirt/bag above. Use a restrained 50 mm viewpoint near knee height; avoid an extreme wide-angle shoe that looks larger than the torso. Fine dust, road texture and a single real shadow communicate effort without theatrical flying debris. Keep the distant background simple and atmospheric. This scene is about physical movement, not an invented map or mileage milestone. Maintain enough context that it does not become a generic outdoor product ad.",
+      "composition": " stride across right half, clear left tonal field. **Mobile:** vertical path, both lower legs readable; keep the narrative of movement intact.\n\n"
+    },
+    {
+      "id": "07",
+      "title": "The reason to keep walking",
+      "prompt": "Show a small group of fictional East African children absorbed in a lively outdoor learning activity with a caring adult nearby. Their expressions should arise from what they are doing—discovering an answer, sharing a book or building a simple learning model—rather than everyone smiling at the camera. Use a natural 50 mm perspective, believable hands and age-appropriate proportions, modest everyday surroundings and soft foliage behind. The emotional centre is shared curiosity and confidence. Let their own actions carry the story. Keep the composition spacious enough for a website background, with a clean copy area on one side. Avoid ragged-costume clichés, donor props, invented school logos and overwhelming staged crowds.",
+      "composition": " learning group right, copy left. **Mobile:** group in lower two-thirds, faces distinct and comfortably framed. Mark as illustrative learning imagery.\n\n"
+    },
+    {
+      "id": "08",
+      "title": "The signature main block",
+      "prompt": "Use the exact supplied UCU–Kagando main block as the architectural subject, from a closely supported three-quarter viewpoint. Preserve the number of visible levels, blue vertical/horizontal framing, cream wall infill, repeated windows and open balcony rails, pitched roof and brick stair tower. Refine the daylight and surrounding atmosphere while keeping the real building recognisable. Maintain believable scale, perspective and ground contact. The original architecture is the hero; no redesigned glass campus, extra storeys, imaginary new wing or invented sign. Keep the foreground quiet and reduce parked-vehicle clutter only in an explicitly illustrative version. Do not describe a visualisation as a current documentary photograph of finished new works.",
+      "composition": " building middle-right, soft sky/landscape copy area left. **Mobile:** preserve the identifiable facade and stair tower; reframe vertically without stretching the building.\n\n"
+    },
+    {
+      "id": "09",
+      "title": "Joy in learning",
+      "prompt": "Create an intimate, believable learning moment with a few fictional children comparing a drawing and an open exercise book at a simple table. A teacher or mentor listens rather than posing as a central saviour. Show small differences in attention and expression, and enough environmental context for depth. Use natural window or veranda light, accurate hands and book proportions, tactile timber and modest classroom materials. Keep any writing abstract and non-legible instead of inventing school or campaign text. Compose a clear triangle of attention around the shared activity, with the quiet copy zone outside it. The feeling is possibility through everyday learning, not a staged award ceremony or proof of delivered services.",
+      "composition": " table/group on right, quieter wall/foliage left. **Mobile:** fewer visible participants, one strong interaction, copy above.\n\n"
+    },
+    {
+      "id": "10",
+      "title": "From early learning to higher education",
+      "prompt": "Show a small group of fictional young adult students working together on a practical educational activity near a campus veranda. Their hands, notebooks and simple materials should read naturally, with engagement and mutual respect. Use the actual main block only in a supported exterior background angle; do not invent a fully equipped interior and present it as an existing UCU–Kagando facility. Frame a thoughtful mentoring connection, with a slightly older student explaining an idea to peers, and keep the environment uncluttered. Use a 50 mm perspective, soft directional daylight and gentle depth. Preserve a large calm copy area, and avoid fabricated institutional badges, medical equipment or technology that implies unverified provision.",
+      "composition": " students in right half, restrained campus context. **Mobile:** two or three clearly separated figures; no crowd compressed beneath the heading. Caption as an educational vision.\n\n"
+    },
+    {
+      "id": "11",
+      "title": "A community chooses to participate",
+      "prompt": "Show Shyaka walking with a small, varied group of adult community members on a broad, safe path. Each person should have distinct features and a believable reason for participating: listening, speaking, walking alongside a friend. His official black kit remains consistent, but he does not become an oversized central figure. Use a 50 mm eye-level documentary view with modest depth and coherent shadows. Convey collective ownership and warmth through natural interactions. Keep the group to a manageable number so anatomy and expressions remain convincing. Do not dress everyone in invented sponsor uniforms or add a donation handover. Leave space for the website's real Five Friends message and verified participation action.",
+      "composition": " group flows across right/middle with quiet left copy zone. **Mobile:** compact staggered group, Shyaka identifiable without a giant head.\n\n"
+    },
+    {
+      "id": "12",
+      "title": "Persistence, with a human pause",
+      "prompt": "Render a dignified rest moment beside a quiet path: Shyaka standing or seated naturally for a short pause, the actual backpack close beside him or still correctly worn. Show calm resolve rather than exhaustion theatrics. A relaxed hand, believable elbow/shoulder placement and a subtle crease in the black cotton establish physical realism. Use a normal 70 mm documentary perspective, soft side light and a darker foliage background. Keep the scene clean and avoid injury, distress, medical equipment or invented suffering. If a walking staff is included, it must be consistent with an approved existing reference and naturally grounded; otherwise omit it. Maintain a quiet field for the accompanying section copy.",
+      "composition": " person/bag right, deep quiet tone left. **Mobile:** body and bag remain in the same coherent scene; do not substitute a close oversized face.\n\n"
+    },
+    {
+      "id": "13",
+      "title": "The journey continues",
+      "prompt": "Show Shyaka moving away along a softly lit path at the start of another walking day, seen from a natural rear/side distance. The actual backpack silhouette and black shirt provide continuity with the other scenes. Use layered dawn light, a credible low horizon and restrained mist, keeping the atmosphere hopeful and clear rather than cinematic fantasy. He should be one normal-sized person within the environment. Avoid a giant sunrise disk, dramatic lens flares, numbered milestones or a route line drawn into the terrain. Leave the live statistics area visually calm and separate from the artwork. The scene represents ongoing effort; it does not establish today's location, kilometres or fundraising achievement.",
+      "composition": " walker right and low, left field for a real data panel. **Mobile:** clear walking silhouette in lower half. Keep gradients behind the statistics independently adjustable in CSS.\n\n"
+    },
+    {
+      "id": "14",
+      "title": "Walking alongside the next generation",
+      "prompt": "Show Shyaka walking along a safe school-like footpath near a small group of fictional children, with a responsible adult present. Their happiness comes from conversation and natural movement, not a choreographed line all staring into camera. Shyaka wears the exact black kit and carries the proper bag; keep his head and shoulders proportionate relative to the children and adults. Use a 50 mm eye-level viewpoint, gentle side light and a visible safe walking surface. The group should remain comfortably separated with plausible limbs and foot contact. Include a quiet landscaped background and an open copy area. Do not imply these are identified beneficiaries, a real visit, or a specific school event.",
+      "composition": " loose walking group right, calm foliage/sky left. **Mobile:** simplify to the most meaningful interaction, preserve the adult-supervised context. Label as campaign illustration.\n\n"
+    },
+    {
+      "id": "15",
+      "title": "The destination comes into view",
+      "prompt": "Compose an aspirational approach to the actual main university block, with Shyaka at a believable distance in the foreground and the building's recognisable facade beyond. Use the reference-supported three-quarter building orientation and natural 50 mm perspective. The path and landscape should lead the eye towards the blue-framed cream structure and brick stair tower. Keep the actual building larger in visual importance than in the generic walking scenes, satisfying its role as the campaign signature. The official backpack and shirt remain consistent. Leave an uncluttered sky/ground region for partnership copy. No triumphant finish arch, completion certificate, confetti or claim that he has already reached Kagando.",
+      "composition": " walker lower right/middle, building middle-right, copy left. **Mobile:** layered vertical depth, with building and walker both legible rather than one cropped away.\n\n"
+    },
+    {
+      "id": "16",
+      "title": "An imagined arrival worth working towards",
+      "prompt": "Visualise a future arrival near the actual main block: Shyaka in the same official black campaign kit, walking towards a small welcoming group of distinct adults and students. Keep their gestures believable—an open hand, a warm smile, a person stepping forward—rather than everyone jumping or throwing confetti. Use a natural 50 mm view with the building's true facade preserved and a realistic relationship between ground, people and architecture. The backpack remains correctly worn and Shyaka has normal adult proportions. Make the scene emotionally powerful through anticipation and connection. This is a campaign vision, not a photograph of an event that has happened. Do not add an arrival date, ribbon cutting, finish banner or fabricated speech.",
+      "composition": " approach and welcome in right two-thirds, clean left copy. **Mobile:** Shyaka and two welcoming figures lower-centre, building above/behind. Publish with a visible “Campaign illustration — imagined arrival” caption.\n\n"
+    },
+    {
+      "id": "17",
+      "title": "A welcome shared by the community",
+      "prompt": "Continue the previous aspirational scene from a compatible camera position, showing a modest welcoming gathering in front of the same real main block. Prioritise a few sincere interactions between Shyaka, community adults and students, with distinct faces and natural spacing. Match wardrobe, architecture, sun direction and colour temperature to scene 16. Use ordinary plausible clothing, not invented uniforms bearing organisation marks. Keep joy understated and human: people talking, smiling and recognising shared effort. Avoid cloned crowds, oversized ceremonial props and a heroic central scale distortion. Leave a calm peripheral region for real partnership copy. Do not portray named people as present or imply a completed ceremony, official endorsement or verified attendance.",
+      "composition": " gathering right with clear architectural anchor. **Mobile:** select a small cluster; do not squeeze the entire wide crowd into portrait. Caption as an imagined community welcome.\n\n"
+    },
+    {
+      "id": "18",
+      "title": "Everyone can carry a part",
+      "prompt": "Build a practical community participation scene around a small group discussing the educational walk on a shaded veranda or beside a path. Shyaka in the actual black kit can be listening at one side, while the group's interaction remains the centre. An open notebook or a simple book can anchor the conversation; do not show cash, fake receipts, bank screens or branded donation certificates. Use a believable 50 mm documentary view with natural hands and no duplicate participants. Convey accessibility and shared responsibility through body language and clear space, not a giant pointing pose. Keep the headline area quiet and make the resulting image useful behind a real participation form link.",
+      "composition": " gathering right, wide clear copy left. **Mobile:** smaller cluster lower in frame, open top; no important detail directly behind form fields.\n\n"
+    },
+    {
+      "id": "19",
+      "title": "The future this effort supports",
+      "prompt": "Create an educational-vision image connecting the actual main block with everyday learning and a warm, active community. Use a small foreground group engaged with books or a practical project, and the real architecture in a supported three-quarter background view. Keep one clear point of human attention rather than a montage of unrelated success symbols. Use natural 50 mm perspective, plausible people-to-building scale and coherent light across the scene. Preserve the blue/cream facade, balcony and brick stair tower details. No invented new facilities, graduation claim, giant diploma, foreign campus or promise of specific delivered outcomes. Let the image express the purpose of the campaign while leaving room for measured, accurate website copy.",
+      "composition": " learner action and building on right, quiet left. **Mobile:** retain one activity plus recognisable main block; simplify surrounding extras. Caption as an educational vision.\n\n"
+    },
+    {
+      "id": "20",
+      "title": "Keep the walk moving",
+      "prompt": "Close the collection with Shyaka continuing along a clear path in the official black campaign shirt and real backpack, seen in a natural three-quarter view. Keep the action forward-moving and the silhouette unmistakably walking. A subdued view of the actual main block may sit in the distance only when it can be placed coherently; otherwise use a simple landscape. Shape gentle warm edge light and a low-detail dark tonal area for the real call to action. Give the moment quiet resolve and possibility rather than a fictional finished triumph. Use a natural 50–70 mm perspective, grounded feet, proportionate face and authentic fabric. No sunset cliché overload, finish line, giant logos or generated donation text.",
+      "composition": " walker right, dark copy field left. **Mobile:** figure lower-centre/right, enough negative space above for a short HTML heading and button. Preserve the actual site closing colours through CSS rather than a fixed black rectangle in the image.\n\n"
+    }
+  ]
+}

@@ -1,32 +1,13 @@
 ---
 import Icon from "../global/Icon.astro";
+import ScenePicture from "../global/ScenePicture.astro";
 import { campaignView } from "../../lib/campaign";
 const walk = campaignView();
 ---
 
 <section class="pci-hero" id="top" aria-labelledby="home-heading">
   <div class="pci-hero__media" aria-hidden="true">
-    <picture>
-      <source
-        media="(max-width: 719px)"
-        srcset="assets/home-backgrounds/paths-mobile-420.webp 420w, assets/home-backgrounds/paths-mobile-840.webp 840w"
-        sizes="100vw"
-      />
-      <img
-        src="assets/home-backgrounds/paths-wide-1680.webp"
-        srcset="
-          assets/home-backgrounds/paths-wide-840.webp 840w,
-          assets/home-backgrounds/paths-wide-1120.webp 1120w,
-          assets/home-backgrounds/paths-wide-1680.webp 1680w
-        "
-        sizes="100vw"
-        width="1916"
-        height="821"
-        alt=""
-        fetchpriority="high"
-        decoding="async"
-      />
-    </picture>
+    <ScenePicture scene="01" eager />
   </div>
   <div class="pci-hero__shade" aria-hidden="true"></div>
   <div class="pci-container pci-hero__layout">
@@ -76,7 +57,7 @@ const walk = campaignView();
       </a>
     </aside>
   </div>
-  <p class="pci-hero__caption">Illustration · paths of shared progress</p>
+  <p class="pci-hero__caption">Campaign illustration · the walk for education</p>
 </section>
 <div class="pci-strip" aria-label="How Pamodzi works">
   <div class="pci-container">

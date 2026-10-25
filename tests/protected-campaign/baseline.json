@@ -74,7 +74,7 @@
     "assets/walk-for-education/community-art-768.webp": "0488be7fec2909b25676822d6b895b242d360461d4cfc8b6610167eb62ee3965",
     "assets/walk-for-education/hero-art-1536.webp": "27f39605f7a4221ed8443b71e72bc6b5248dfa1e3c84c2927108336006c803d4",
     "assets/walk-for-education/hero-art-768.webp": "42c9b10451c6b7708c062d9cad95c7cc80f8d975e3e27e090b13e0451a403f7d",
-    "assets/walk-for-education/hero-share.jpg": "753a7f5f7232de13984c721cefb42ebb18f408481ba4d12243a53027da8a5c6e",
+    "assets/walk-for-education/hero-share.jpg": "e4ab5b9a8e74a61d8e06884744e70da529e6e89f0c82afcd4ae97066176252c0",
     "assets/walk-for-education/kagando-campus-enhanced-1536.webp": "ab09702c067f8c8192d31e6f2f144bcec6cb1e3d50fbeabfb119a996822c26b0",
     "assets/walk-for-education/kagando-campus-enhanced-800.webp": "00a27f86c5ed427855e0ec462c743fedc0ae0ad099dfafb4349a124c49e59468",
     "assets/walk-for-education/kagando-campus.webp": "6929bb0931c99ce1fd659a01d5eb0d5acff4680cfb768180d3ff4b8b400486e1",
@@ -92,8 +92,8 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "f734c3783c526bdee839afa200cbc035e50a7004f2fb481d408a65f6442022ad",
-    "contribute/payment/index.html": "49a37dfe102d1b749a7004921fafc17aa8019a120b9a7617e2b1b94375682761",
+    "contribute/index.html": "81ab02a6068ea0f79563b9a11b6e47695ab0811dedf812bd87d63341fcf3b0bb",
+    "contribute/payment/index.html": "111f4ace30092bf10372239de37da84db3a22eeca70cbd61d97e7ca4fdfa61c4",
     "contribute/privacy/index.html": "5bb7f49e9622b723383b1fafdb796378b3d998d36203e8199a0f4d96972df180",
     "contribute/terms/index.html": "f18afa79a36524f79fc351e14d06ead5cf6c57323ee1862fecde24f374e2cda7",
     "contribute/verify/index.html": "bbfc2c4192a5ef24b32c4bea2ed4719ce09a19858386d2d4e5443a7817913463",
@@ -123,15 +123,15 @@
     "js/site-motion.js": "6c350b326056cf5a928b92a714e73da40aa7e6d54b7737ceb57af3c9483e232b",
     "js/step-pricing.js": "c0c2d4ff9607c2bfd23be319a02963042e5c1b8dbd6d0f6559a9f05aee848380",
     "js/updates-data.js": "01ccac31e1d5781213804df801b8f805e74092afc58ca656f9989482d913c92a",
-    "js/wfe-data.js": "bb56f89fa58f0063717d8109219da9a4f0ea35e5f96e405f35d4fc1d9def7e5e",
+    "js/wfe-data.js": "bfcc4f70fdef098039e6eb7864b3564327a4653048037f231798ad7521cfe18a",
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
     "js/wfe.js": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
-    "walk-for-education/accountability/index.html": "f7f15f69bb04bf38776593dd8d5182b01bc9612f2d8f54ef415347e8c42fd5a1",
-    "walk-for-education/index.html": "0ce05ed88456bccd619ea3580b866b53e917887d0aaa8493336ad366a54b567e",
-    "walk-for-education/partners/index.html": "e9c341d0d8749d9b272199c6326e4e68744fbbca05eafdb76cfdf50633edf1db",
-    "walk-for-education/take-part/index.html": "e85e4c54911421b47ba7f14393ad4a13fb2eeb7ba7afd33f520bae44054cc8c6",
-    "walk-for-education/updates/index.html": "6d808eecd92404024bab8fd4d1ba0de82fe48ac7fdd9824921bf45d6c3aef971"
+    "walk-for-education/accountability/index.html": "84e5e3d7f2e205001dab3409cd327825b92cd907851ec2ac6e687f2dfaa9590e",
+    "walk-for-education/index.html": "0edca1ae3d1ef916151d82ef2a9f55afeca746a83f0824563fac5eb81c029465",
+    "walk-for-education/partners/index.html": "712683d87843466b25043522265fbd37deca4e15e0eb8828acc553ca7eeb94fe",
+    "walk-for-education/take-part/index.html": "f256ed70984794d4660d7c0f7dcb3e082b07dd3813f39f97f5a481743df3e84d",
+    "walk-for-education/updates/index.html": "63b460d05d6f1ee3e5023d9cbe7a1a382381bc42dadff9fc7c7d83a5aed6b8fe"
   },
   "presentationReviews": [
     {
@@ -608,6 +608,62 @@
       "date": "2026-10-23",
       "reason": "Cache-version references only for reviewed responsive typography, layout and caption fixes in css/one-look.css and decorative scene fit checks in js/wfe-redesign.js. All campaign markup, forms, hooks, pricing and services are unchanged.",
       "previousSha256": "73d41c331f0a30d4738b782991fa7ea0e8a833aee95c621bd0b0c1fb01e6d007"
+    },
+    {
+      "file": "assets/walk-for-education/hero-share.jpg",
+      "previousSha256": "753a7f5f7232de13984c721cefb42ebb18f408481ba4d12243a53027da8a5c6e",
+      "sha256": "e4ab5b9a8e74a61d8e06884744e70da529e6e89f0c82afcd4ae97066176252c0",
+      "date": "2026-10-25",
+      "authorisation": "User approved the complete 20-scene/40-composition official-kit plan: proceed and push one final version main after",
+      "reason": "Replace campaign social-share artwork with the reference-led black-kit/main-block image; no campaign facts or payment details are baked in."
+    },
+    {
+      "file": "contribute/index.html",
+      "previousSha256": "f734c3783c526bdee839afa200cbc035e50a7004f2fb481d408a65f6442022ad",
+      "sha256": "81ab02a6068ea0f79563b9a11b6e47695ab0811dedf812bd87d63341fcf3b0bb",
+      "date": "2026-10-25",
+      "authorisation": "User approved the complete 20-scene/40-composition official-kit plan: proceed and push one final version main after",
+      "reason": "Official-kit presentation release: responsive background integration where applicable and current content hashes for the canonical campaign data/gallery script. Existing forms, financial controls and script order are preserved."
+    },
+    {
+      "file": "contribute/payment/index.html",
+      "previousSha256": "49a37dfe102d1b749a7004921fafc17aa8019a120b9a7617e2b1b94375682761",
+      "sha256": "111f4ace30092bf10372239de37da84db3a22eeca70cbd61d97e7ca4fdfa61c4",
+      "date": "2026-10-25",
+      "authorisation": "User approved the complete 20-scene/40-composition official-kit plan: proceed and push one final version main after",
+      "reason": "Official-kit presentation release: responsive background integration where applicable and current content hashes for the canonical campaign data/gallery script. Existing forms, financial controls and script order are preserved."
+    },
+    {
+      "file": "walk-for-education/accountability/index.html",
+      "previousSha256": "f7f15f69bb04bf38776593dd8d5182b01bc9612f2d8f54ef415347e8c42fd5a1",
+      "sha256": "84e5e3d7f2e205001dab3409cd327825b92cd907851ec2ac6e687f2dfaa9590e",
+      "date": "2026-10-25",
+      "authorisation": "User approved the complete 20-scene/40-composition official-kit plan: proceed and push one final version main after",
+      "reason": "Official-kit presentation release: responsive background integration where applicable and current content hashes for the canonical campaign data/gallery script. Existing forms, financial controls and script order are preserved."
+    },
+    {
+      "file": "walk-for-education/partners/index.html",
+      "previousSha256": "e9c341d0d8749d9b272199c6326e4e68744fbbca05eafdb76cfdf50633edf1db",
+      "sha256": "712683d87843466b25043522265fbd37deca4e15e0eb8828acc553ca7eeb94fe",
+      "date": "2026-10-25",
+      "authorisation": "User approved the complete 20-scene/40-composition official-kit plan: proceed and push one final version main after",
+      "reason": "Official-kit presentation release: responsive background integration where applicable and current content hashes for the canonical campaign data/gallery script. Existing forms, financial controls and script order are preserved."
+    },
+    {
+      "file": "walk-for-education/take-part/index.html",
+      "previousSha256": "e85e4c54911421b47ba7f14393ad4a13fb2eeb7ba7afd33f520bae44054cc8c6",
+      "sha256": "f256ed70984794d4660d7c0f7dcb3e082b07dd3813f39f97f5a481743df3e84d",
+      "date": "2026-10-25",
+      "authorisation": "User approved the complete 20-scene/40-composition official-kit plan: proceed and push one final version main after",
+      "reason": "Official-kit presentation release: responsive background integration where applicable and current content hashes for the canonical campaign data/gallery script. Existing forms, financial controls and script order are preserved."
+    },
+    {
+      "file": "walk-for-education/updates/index.html",
+      "previousSha256": "6d808eecd92404024bab8fd4d1ba0de82fe48ac7fdd9824921bf45d6c3aef971",
+      "sha256": "63b460d05d6f1ee3e5023d9cbe7a1a382381bc42dadff9fc7c7d83a5aed6b8fe",
+      "date": "2026-10-25",
+      "authorisation": "User approved the complete 20-scene/40-composition official-kit plan: proceed and push one final version main after",
+      "reason": "Official-kit presentation release: responsive background integration where applicable and current content hashes for the canonical campaign data/gallery script. Existing forms, financial controls and script order are preserved."
     }
   ],
   "functionalReviews": [
@@ -706,6 +762,22 @@
       "date": "2026-10-24",
       "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised operations release: append approved live-reporting stylesheet and public script after all existing campaign scripts; preserve original script order, form hooks and frozen pledge/payment fragments. Content hashes refreshed."
+    },
+    {
+      "file": "js/wfe-data.js",
+      "previousSha256": "bb56f89fa58f0063717d8109219da9a4f0ea35e5f96e405f35d4fc1d9def7e5e",
+      "sha256": "bfcc4f70fdef098039e6eb7864b3564327a4653048037f231798ad7521cfe18a",
+      "date": "2026-10-25",
+      "authorisation": "User approved the complete 20-scene/40-composition official-kit plan: proceed and push one final version main after",
+      "reason": "User confirmed the walk is underway: update the canonical status without inventing dates, town or kilometres; point historical editorial briefings to the official-kit artwork."
+    },
+    {
+      "file": "walk-for-education/index.html",
+      "previousSha256": "0ce05ed88456bccd619ea3580b866b53e917887d0aaa8493336ad366a54b567e",
+      "sha256": "0edca1ae3d1ef916151d82ef2a9f55afeca746a83f0824563fac5eb81c029465",
+      "date": "2026-10-25",
+      "authorisation": "User approved the complete 20-scene/40-composition official-kit plan: proceed and push one final version main after",
+      "reason": "Apply the authorised official-kit image collection, responsive pictures, actual bag cutout and ongoing-walk wording. Pledge/payment fragments, financial hooks and script order remain intact; only the reviewed JSON-LD wording hash changes."
     }
   ]
 }

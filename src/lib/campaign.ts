@@ -73,10 +73,10 @@ export function campaignView(record: CampaignRecord = loadCampaignRecord(), toda
         projectStatus: "Live campaign",
       };
     case "walking": {
-      const day = Math.floor((today.getTime() - (start as Date).getTime()) / 86400000) + 1;
+      const day = start ? Math.floor((today.getTime() - start.getTime()) / 86400000) + 1 : null;
       return {
         state,
-        label: `Day ${day} on the road`,
+        label: day === null ? record.statusLabel : `Day ${day} on the road`,
         action: "Choose my steps",
         live: true,
         projectStatus: "Live campaign",

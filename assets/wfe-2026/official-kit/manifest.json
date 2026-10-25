@@ -1,0 +1,1701 @@
+{
+  "generatedOn": "2026-10-25",
+  "method": "Built-in image generation; individual desktop and mobile compositions, reference-led illustrations.",
+  "references": [
+    "assets/wfe-2026/references/official-backpack.png",
+    "assets/wfe-2026/references/official-shirt.png",
+    "assets/walk-for-education/walking-rotarian-photo.jpg",
+    "assets/walk-for-education/kagando-campus.webp"
+  ],
+  "scenes": [
+    {
+      "id": "01",
+      "title": "The walk is happening",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "21f37d08a5937f73a8fbccb05ac878fe7aa0ad52b8cea43b7ded8a56b3903e09",
+          "master": "scene-01-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-01-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 42902
+            },
+            {
+              "file": "scene-01-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 56370
+            },
+            {
+              "file": "scene-01-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 82776
+            },
+            {
+              "file": "scene-01-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 122922
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "9572af0e9a52cdb6fb99725b4aa2dcbb8b937415ddd5b1203ed81094331ee0ce",
+          "master": "scene-01-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-01-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 40961
+            },
+            {
+              "file": "scene-01-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 54012
+            },
+            {
+              "file": "scene-01-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 78988
+            },
+            {
+              "file": "scene-01-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 114786
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "02",
+      "title": "One walker, a specific destination",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "ff880ebc484342488524beb2d05833b1f44d9e7c92f02501e77a7c6047e9378a",
+          "master": "scene-02-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-02-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 40896
+            },
+            {
+              "file": "scene-02-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 52626
+            },
+            {
+              "file": "scene-02-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 77270
+            },
+            {
+              "file": "scene-02-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 112800
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "b877c89f9310861a4325b1a5eafad51f4d129edaa6f083b846a555cbd553f75f",
+          "master": "scene-02-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-02-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 45599
+            },
+            {
+              "file": "scene-02-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 55734
+            },
+            {
+              "file": "scene-02-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 81190
+            },
+            {
+              "file": "scene-02-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 111752
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "03",
+      "title": "The person behind the walk",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "a72b1ff27347fc781d59ca7cd9c66c7bc256098d2f5400b346a421d2e34d8dde",
+          "master": "scene-03-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-03-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 26331
+            },
+            {
+              "file": "scene-03-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 38348
+            },
+            {
+              "file": "scene-03-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 49339
+            },
+            {
+              "file": "scene-03-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 80040
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "dfc1a9183feedf4a5c4c455869cad451a96ff86dc9fb48822f8c27256d42f7fc",
+          "master": "scene-03-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-03-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 28670
+            },
+            {
+              "file": "scene-03-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 41300
+            },
+            {
+              "file": "scene-03-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 51772
+            },
+            {
+              "file": "scene-03-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 80806
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "04",
+      "title": "The actual bag carries the message",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "9a36cf0fe87d18358bff69babfad9c9ff59d6c2f248e67d44257b02c20877427",
+          "master": "scene-04-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-04-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 23775
+            },
+            {
+              "file": "scene-04-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 36020
+            },
+            {
+              "file": "scene-04-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 46581
+            },
+            {
+              "file": "scene-04-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 78610
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "62417c6845c94e8482f78178c03fecc4763f7ccf21c77fe7b9f27390bc57be6f",
+          "master": "scene-04-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-04-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 25269
+            },
+            {
+              "file": "scene-04-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 36710
+            },
+            {
+              "file": "scene-04-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 46451
+            },
+            {
+              "file": "scene-04-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 74022
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "05",
+      "title": "Carrying it for real",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "f029bead5a687e783ebe25d37c90c0362233ed919a831f7e715e2bd34d03182c",
+          "master": "scene-05-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-05-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 26228
+            },
+            {
+              "file": "scene-05-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 38128
+            },
+            {
+              "file": "scene-05-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 50501
+            },
+            {
+              "file": "scene-05-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 82548
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "b56bf2b98e9659ba124489efb87f77418e9e48f9e3f3fafe922a6cd26077d205",
+          "master": "scene-05-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-05-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 25362
+            },
+            {
+              "file": "scene-05-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 36952
+            },
+            {
+              "file": "scene-05-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 46039
+            },
+            {
+              "file": "scene-05-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 73464
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "06",
+      "title": "Every step has effort",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "205c4d0ad176c372723c96383ddb3755d91985450a41a13897297347d59bddc0",
+          "master": "scene-06-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-06-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 27174
+            },
+            {
+              "file": "scene-06-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 39864
+            },
+            {
+              "file": "scene-06-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 56118
+            },
+            {
+              "file": "scene-06-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 89444
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "6e4cb499abf854263fbdaf30e46d66858e1ca189ff68afab91c401b7bcd7bec7",
+          "master": "scene-06-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-06-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 35360
+            },
+            {
+              "file": "scene-06-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 49340
+            },
+            {
+              "file": "scene-06-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 68555
+            },
+            {
+              "file": "scene-06-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 104076
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "07",
+      "title": "The reason to keep walking",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "d257036da3456b59acd20969aa16eb4945de16a1981619a896203a01c1f1c7c8",
+          "master": "scene-07-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-07-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 40702
+            },
+            {
+              "file": "scene-07-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 50362
+            },
+            {
+              "file": "scene-07-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 78447
+            },
+            {
+              "file": "scene-07-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 111302
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "8422c57279cb4f0d3a3cb4e0f2813d0363eaf14d45c9e1d33ec0cf2523ba82a3",
+          "master": "scene-07-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-07-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 45516
+            },
+            {
+              "file": "scene-07-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 53732
+            },
+            {
+              "file": "scene-07-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 82272
+            },
+            {
+              "file": "scene-07-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 110458
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "08",
+      "title": "The signature main block",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "0a076981ce56f49dc827caae206f9e1ecf58cc4a04cff7cdae1f3cbc03464817",
+          "master": "scene-08-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-08-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 42818
+            },
+            {
+              "file": "scene-08-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 53564
+            },
+            {
+              "file": "scene-08-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 94059
+            },
+            {
+              "file": "scene-08-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 133842
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "cbec4e99e50f08af54b68de09500329677bbf87cb775ff893f39f409eed6f27f",
+          "master": "scene-08-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-08-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 44777
+            },
+            {
+              "file": "scene-08-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 53558
+            },
+            {
+              "file": "scene-08-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 95381
+            },
+            {
+              "file": "scene-08-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 125650
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "09",
+      "title": "Joy in learning",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "a79bce42a3f1a5e20f806ca926e0cc88f984c099c0ca0abbb2967c7204c5075d",
+          "master": "scene-09-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-09-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 38454
+            },
+            {
+              "file": "scene-09-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 51600
+            },
+            {
+              "file": "scene-09-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 76654
+            },
+            {
+              "file": "scene-09-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 117412
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "1022d41e8aceb7ece81c13ed29b3caaf93d59b68907549b85deb85568e335b9d",
+          "master": "scene-09-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-09-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 41769
+            },
+            {
+              "file": "scene-09-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 53136
+            },
+            {
+              "file": "scene-09-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 78501
+            },
+            {
+              "file": "scene-09-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 112764
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "10",
+      "title": "From early learning to higher education",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "b2351f506405b80f9c71298f96d893c516ae2b6b11718a935aef3567e71e9ad2",
+          "master": "scene-10-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-10-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 29152
+            },
+            {
+              "file": "scene-10-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 39030
+            },
+            {
+              "file": "scene-10-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 57416
+            },
+            {
+              "file": "scene-10-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 87596
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "86bbca3a2956042aef1023660f145332272fe83e33617f87442358170685f862",
+          "master": "scene-10-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-10-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 34429
+            },
+            {
+              "file": "scene-10-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 43696
+            },
+            {
+              "file": "scene-10-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 64452
+            },
+            {
+              "file": "scene-10-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 92178
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "11",
+      "title": "A community chooses to participate",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "6504e433e851fcfbbb6bf5dc687aa172dc8bd0ee5f8f2b87efff7cb5815ac573",
+          "master": "scene-11-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-11-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 34465
+            },
+            {
+              "file": "scene-11-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 47252
+            },
+            {
+              "file": "scene-11-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 68403
+            },
+            {
+              "file": "scene-11-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 104372
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "c3744ec65154b6ec45d9d85169b91ca78aa6e0def6dd083dc915853cb3287682",
+          "master": "scene-11-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-11-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 36325
+            },
+            {
+              "file": "scene-11-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 46508
+            },
+            {
+              "file": "scene-11-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 68783
+            },
+            {
+              "file": "scene-11-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 96486
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "12",
+      "title": "Persistence, with a human pause",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "2b2deea8d851b9cbb4e8187399b71670a932f89f1f086954ae1ae195b6e2d7b2",
+          "master": "scene-12-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-12-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 33835
+            },
+            {
+              "file": "scene-12-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 45100
+            },
+            {
+              "file": "scene-12-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 63137
+            },
+            {
+              "file": "scene-12-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 96936
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "62ed12f8642dad67816dae6aac3b33eab2299cce37484e6d054d943a9d0d6431",
+          "master": "scene-12-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-12-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 42336
+            },
+            {
+              "file": "scene-12-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 53406
+            },
+            {
+              "file": "scene-12-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 76494
+            },
+            {
+              "file": "scene-12-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 107688
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "13",
+      "title": "The journey continues",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "d63149674011325f9ef0ddb27268d1dab0f31460d935ae552ae94b4d0194bb75",
+          "master": "scene-13-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-13-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 37165
+            },
+            {
+              "file": "scene-13-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 49094
+            },
+            {
+              "file": "scene-13-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 75082
+            },
+            {
+              "file": "scene-13-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 111018
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "7a240b628481c1e059e03aa36af47ffccc9effd3ef1e0dc7c5c335d3af664b3d",
+          "master": "scene-13-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-13-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 41157
+            },
+            {
+              "file": "scene-13-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 52672
+            },
+            {
+              "file": "scene-13-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 80155
+            },
+            {
+              "file": "scene-13-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 113104
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "14",
+      "title": "Walking alongside the next generation",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "b573e7781c72ae3d9f7c01eb0d8b86e09a35943dcfdb13ae95e428f8e38c4a32",
+          "master": "scene-14-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-14-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 39433
+            },
+            {
+              "file": "scene-14-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 50370
+            },
+            {
+              "file": "scene-14-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 74608
+            },
+            {
+              "file": "scene-14-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 107126
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "273133fb418351d711fa77f34ed86f1969db7bb92a7f9ebbc0666f0e7660cbf9",
+          "master": "scene-14-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-14-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 36775
+            },
+            {
+              "file": "scene-14-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 46878
+            },
+            {
+              "file": "scene-14-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 68239
+            },
+            {
+              "file": "scene-14-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 95032
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "15",
+      "title": "The destination comes into view",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "71491d6a1a3002d7d6fb806d44bab4d46b6484013377c0568c9d12c6c1564a4a",
+          "master": "scene-15-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-15-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 51596
+            },
+            {
+              "file": "scene-15-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 60508
+            },
+            {
+              "file": "scene-15-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 93803
+            },
+            {
+              "file": "scene-15-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 126366
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "744cab2d56a47e96dfc4500f2855afcc18e1d35e5260a1bb4d7560082f8627c0",
+          "master": "scene-15-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-15-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 46389
+            },
+            {
+              "file": "scene-15-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 52990
+            },
+            {
+              "file": "scene-15-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 84023
+            },
+            {
+              "file": "scene-15-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 108192
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "16",
+      "title": "An imagined arrival worth working towards",
+      "illustration": true,
+      "imaginedArrival": true,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "fe6372e91529a7a51a85df2b9a72fdb245c71a2fbb55b78057dee817362006be",
+          "master": "scene-16-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-16-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 30363
+            },
+            {
+              "file": "scene-16-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 41458
+            },
+            {
+              "file": "scene-16-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 55314
+            },
+            {
+              "file": "scene-16-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 85922
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "9afa2562cc23706639319961ac68793c4c9652181f9440eee6990f59243d3c2c",
+          "master": "scene-16-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-16-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 32199
+            },
+            {
+              "file": "scene-16-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 42082
+            },
+            {
+              "file": "scene-16-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 55726
+            },
+            {
+              "file": "scene-16-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 82646
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "17",
+      "title": "A welcome shared by the community",
+      "illustration": true,
+      "imaginedArrival": true,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "a60371d8a6e993649ca5e53b931687fed2fb43fabf0e40501448de85c25ebdde",
+          "master": "scene-17-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-17-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 41744
+            },
+            {
+              "file": "scene-17-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 53964
+            },
+            {
+              "file": "scene-17-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 77213
+            },
+            {
+              "file": "scene-17-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 114132
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "88baa33ae7ef55af934e5304893bf7e61db29c958ee60e5c7e018b2653204c52",
+          "master": "scene-17-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-17-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 37292
+            },
+            {
+              "file": "scene-17-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 45848
+            },
+            {
+              "file": "scene-17-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 66847
+            },
+            {
+              "file": "scene-17-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 94286
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "18",
+      "title": "Everyone can carry a part",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "c621ad56ea45c2e5158ddeb484568b4fe7ffb030efce2de74baa849c669470a3",
+          "master": "scene-18-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-18-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 36422
+            },
+            {
+              "file": "scene-18-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 48086
+            },
+            {
+              "file": "scene-18-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 68578
+            },
+            {
+              "file": "scene-18-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 102716
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "fe59b43ddf5496a0189ad324fff7e2ae6dff65d69ed2322e7613474fd9211b2f",
+          "master": "scene-18-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-18-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 38830
+            },
+            {
+              "file": "scene-18-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 47470
+            },
+            {
+              "file": "scene-18-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 67116
+            },
+            {
+              "file": "scene-18-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 93336
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "19",
+      "title": "The future this effort supports",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "945a6c25f0e274abab352f461ba6ca3fabfd9fca4e1cf56fa9b55e186cada3df",
+          "master": "scene-19-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-19-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 49061
+            },
+            {
+              "file": "scene-19-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 57272
+            },
+            {
+              "file": "scene-19-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 92153
+            },
+            {
+              "file": "scene-19-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 126598
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "cceb508c88a241542be7b594ed6cb9ca7c9721f4a36f7af66578d6323b841e92",
+          "master": "scene-19-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-19-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 45872
+            },
+            {
+              "file": "scene-19-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 51326
+            },
+            {
+              "file": "scene-19-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 82834
+            },
+            {
+              "file": "scene-19-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 106842
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "20",
+      "title": "Keep the walk moving",
+      "illustration": true,
+      "imaginedArrival": false,
+      "textSafe": {
+        "desktop": "left 6–43%; main action right",
+        "mobile": "upper 8–34%; action below"
+      },
+      "compositions": {
+        "desktop": {
+          "width": 1672,
+          "height": 941,
+          "sourceSha256": "8d3e4ed7dd8c5b97443010fc450f2e0bbc5fe41a134b88394cff428adde1b96f",
+          "master": "scene-20-desktop-master.webp",
+          "images": [
+            {
+              "file": "scene-20-desktop-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 450,
+              "bytes": 37037
+            },
+            {
+              "file": "scene-20-desktop-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 450,
+              "bytes": 50598
+            },
+            {
+              "file": "scene-20-desktop-1440.avif",
+              "format": "avif",
+              "width": 1440,
+              "height": 810,
+              "bytes": 72343
+            },
+            {
+              "file": "scene-20-desktop-1440.webp",
+              "format": "webp",
+              "width": 1440,
+              "height": 810,
+              "bytes": 108258
+            }
+          ]
+        },
+        "mobile": {
+          "width": 1024,
+          "height": 1536,
+          "sourceSha256": "3471ad80d6967927e07214deb6c37f21b24c7c379d8b859cf0d8890f069602d2",
+          "master": "scene-20-mobile-master.webp",
+          "images": [
+            {
+              "file": "scene-20-mobile-480.avif",
+              "format": "avif",
+              "width": 480,
+              "height": 720,
+              "bytes": 61302
+            },
+            {
+              "file": "scene-20-mobile-480.webp",
+              "format": "webp",
+              "width": 480,
+              "height": 720,
+              "bytes": 75486
+            },
+            {
+              "file": "scene-20-mobile-800.avif",
+              "format": "avif",
+              "width": 800,
+              "height": 1200,
+              "bytes": 116134
+            },
+            {
+              "file": "scene-20-mobile-800.webp",
+              "format": "webp",
+              "width": 800,
+              "height": 1200,
+              "bytes": 156746
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "bagCutout": {
+    "source": "bag-cutout-master.webp",
+    "width": 1086,
+    "height": 1448,
+    "alpha": true
+  },
+  "decorativeBackdrops": {
+    "18": "backdrop-18-mobile / backdrop-18-desktop; same art-directed sources, smaller decorative delivery"
+  }
+}

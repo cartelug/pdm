@@ -78,16 +78,18 @@ const shareImage = site.url + (CARDS.includes(slug) ? `/assets/og/pages/${slug}.
         <link
           rel="preload"
           as="image"
-          href={asset(path, "assets/home-backgrounds/paths-wide-1680.webp")}
-          imagesrcset="assets/home-backgrounds/paths-wide-840.webp 840w, assets/home-backgrounds/paths-wide-1120.webp 1120w, assets/home-backgrounds/paths-wide-1680.webp 1680w"
+          type="image/avif"
+          href={asset(path, "assets/wfe-2026/official-kit/scene-01-desktop-1440.avif")}
+          imagesrcset="assets/wfe-2026/official-kit/scene-01-desktop-800.avif 800w, assets/wfe-2026/official-kit/scene-01-desktop-1440.avif 1440w"
           imagesizes="100vw"
           media="(min-width: 720px)"
         />
         <link
           rel="preload"
           as="image"
-          href={asset(path, "assets/home-backgrounds/paths-mobile-840.webp")}
-          imagesrcset="assets/home-backgrounds/paths-mobile-420.webp 420w, assets/home-backgrounds/paths-mobile-840.webp 840w"
+          type="image/avif"
+          href={asset(path, "assets/wfe-2026/official-kit/scene-01-mobile-800.avif")}
+          imagesrcset="assets/wfe-2026/official-kit/scene-01-mobile-480.avif 480w, assets/wfe-2026/official-kit/scene-01-mobile-800.avif 800w"
           imagesizes="100vw"
           media="(max-width: 719px)"
         />

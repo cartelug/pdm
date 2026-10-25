@@ -1347,7 +1347,7 @@
 
   .pci-home .pci-hero__shade {
     background:
-      linear-gradient(90deg, rgb(34 10 16 / 30%), rgb(34 10 16 / 6%) 65%),
+      linear-gradient(90deg, rgb(34 10 16 / 94%), rgb(34 10 16 / 64%) 45%, rgb(34 10 16 / 12%) 82%),
       linear-gradient(0deg, rgb(34 10 16 / 82%), transparent 52%);
   }
 
@@ -1499,11 +1499,13 @@
 
   @media (max-width: 719px) {
     .pci-home .pci-hero__media img {
-      object-position: 50% 12%;
+      object-position: 70% 12%;
     }
 
     .pci-home .pci-hero__shade {
-      background: linear-gradient(0deg, rgb(34 10 16 / 94%), rgb(34 10 16 / 20%) 66%, transparent);
+      background:
+        linear-gradient(90deg, rgb(34 10 16 / 45%), rgb(34 10 16 / 8%)),
+        linear-gradient(0deg, rgb(34 10 16 / 96%), rgb(34 10 16 / 74%) 58%, rgb(34 10 16 / 24%));
     }
 
     .pci-home #iciadm {

@@ -1,0 +1,104 @@
+/* Individually art-directed campaign images. Text and live figures remain real HTML. */
+.kit-scene {
+  position: relative;
+  isolation: isolate;
+}
+
+.kit-scene__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.2;
+  mask-image: linear-gradient(180deg, transparent, #000 15%, #000 80%, transparent);
+}
+
+.kit-scene__media picture,
+.kit-scene__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.kit-scene__media img {
+  object-fit: cover;
+  object-position: 68% 50%;
+}
+
+.kit-scene__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--paper, #faf6f1) 5%, transparent 85%);
+}
+
+.kit-scene--dark .kit-scene__media {
+  opacity: 0.34;
+}
+
+.kit-scene--dark .kit-scene__media::after {
+  background: linear-gradient(90deg, var(--navy, #0e1f3a) 5%, rgb(14 31 58 / 55%) 80%);
+}
+
+.kit-photo img {
+  object-position: 72% 45%;
+}
+
+.w-meet__photo [data-campaign-scene] img,
+.w-learn__fig [data-campaign-scene] img,
+.w-priorities__fig [data-campaign-scene] img,
+.w-five__fig [data-campaign-scene] img {
+  object-position: 72% 45%;
+}
+
+.w-hero__portrait:has([data-campaign-scene]) {
+  width: min(100%, 540px);
+  border-radius: 28px 28px 100px;
+}
+
+.w-hero__portrait [data-campaign-scene] img {
+  object-position: 72% 45%;
+}
+
+.w-bag__frame [data-campaign-scene] img {
+  object-position: 72% 50%;
+}
+
+.w-pledge__bag:has([data-campaign-scene]) {
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.kit-reference {
+  display: inline-flex;
+  margin-top: 12px;
+  font-size: 0.875rem;
+}
+
+.w-viewer__figure > picture {
+  display: contents;
+}
+
+@media (max-width: 719px) {
+  .kit-scene__media {
+    opacity: 0.14;
+  }
+
+  .kit-scene__media img,
+  .w-hero__portrait [data-campaign-scene] img,
+  .w-bag__frame [data-campaign-scene] img,
+  .w-meet__photo [data-campaign-scene] img,
+  .w-learn__fig [data-campaign-scene] img,
+  .w-priorities__fig [data-campaign-scene] img,
+  .w-five__fig [data-campaign-scene] img,
+  .kit-photo img {
+    object-position: 50% 50%;
+  }
+
+  .w-hero__portrait:has([data-campaign-scene]) {
+    width: 82%;
+    aspect-ratio: 2 / 3;
+    margin-right: 0;
+  }
+}
