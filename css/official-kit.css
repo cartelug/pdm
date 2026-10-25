@@ -57,8 +57,12 @@
   border-radius: 28px 28px 100px;
 }
 
+.w-hero__portrait > [data-campaign-scene] {
+  display: contents;
+}
+
 .w-hero__portrait [data-campaign-scene] img {
-  object-position: 72% 45%;
+  object-position: 58% 42%;
 }
 
 .w-bag__frame [data-campaign-scene] img {

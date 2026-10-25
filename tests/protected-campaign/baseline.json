@@ -128,9 +128,9 @@
     "js/wfe-shell.js": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
     "js/wfe.js": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
     "walk-for-education/accountability/index.html": "84e5e3d7f2e205001dab3409cd327825b92cd907851ec2ac6e687f2dfaa9590e",
-    "walk-for-education/index.html": "0edca1ae3d1ef916151d82ef2a9f55afeca746a83f0824563fac5eb81c029465",
-    "walk-for-education/partners/index.html": "712683d87843466b25043522265fbd37deca4e15e0eb8828acc553ca7eeb94fe",
-    "walk-for-education/take-part/index.html": "f256ed70984794d4660d7c0f7dcb3e082b07dd3813f39f97f5a481743df3e84d",
+    "walk-for-education/index.html": "03de5ba95b67768ea5eb19974729c3593dd647f28923a89f6fc692e369ddc1fc",
+    "walk-for-education/partners/index.html": "30c47a2cd013ce1b391f1a83f6c63cdc25a021c1a8a9883261c47b7a4e2f7457",
+    "walk-for-education/take-part/index.html": "eab2414dbb169b6a5ca72a574b1ca184e8e4affb3f5b3ab3f16418f966dd3787",
     "walk-for-education/updates/index.html": "63b460d05d6f1ee3e5023d9cbe7a1a382381bc42dadff9fc7c7d83a5aed6b8fe"
   },
   "presentationReviews": [
@@ -664,6 +664,30 @@
       "date": "2026-10-25",
       "authorisation": "User approved the complete 20-scene/40-composition official-kit plan: proceed and push one final version main after",
       "reason": "Official-kit presentation release: responsive background integration where applicable and current content hashes for the canonical campaign data/gallery script. Existing forms, financial controls and script order are preserved."
+    },
+    {
+      "file": "walk-for-education/index.html",
+      "previousSha256": "0edca1ae3d1ef916151d82ef2a9f55afeca746a83f0824563fac5eb81c029465",
+      "sha256": "03de5ba95b67768ea5eb19974729c3593dd647f28923a89f6fc692e369ddc1fc",
+      "date": "2026-10-25",
+      "authorisation": "User instruction in session: do all the proposed visual refinements and push the working branch (not main).",
+      "reason": "Cache-busting version query on css/official-kit.css changed after the Walk hero portrait fix (picture wrapper no longer collapses the desktop image inside its tall frame). No markup, script order, form, payment or fragment change."
+    },
+    {
+      "file": "walk-for-education/partners/index.html",
+      "previousSha256": "712683d87843466b25043522265fbd37deca4e15e0eb8828acc553ca7eeb94fe",
+      "sha256": "30c47a2cd013ce1b391f1a83f6c63cdc25a021c1a8a9883261c47b7a4e2f7457",
+      "date": "2026-10-25",
+      "authorisation": "User instruction in session: do all the proposed visual refinements and push the working branch (not main).",
+      "reason": "Cache-busting version query on css/official-kit.css changed after the Walk hero portrait fix (picture wrapper no longer collapses the desktop image inside its tall frame). No markup, script order, form, payment or fragment change."
+    },
+    {
+      "file": "walk-for-education/take-part/index.html",
+      "previousSha256": "f256ed70984794d4660d7c0f7dcb3e082b07dd3813f39f97f5a481743df3e84d",
+      "sha256": "eab2414dbb169b6a5ca72a574b1ca184e8e4affb3f5b3ab3f16418f966dd3787",
+      "date": "2026-10-25",
+      "authorisation": "User instruction in session: do all the proposed visual refinements and push the working branch (not main).",
+      "reason": "Cache-busting version query on css/official-kit.css changed after the Walk hero portrait fix (picture wrapper no longer collapses the desktop image inside its tall frame). No markup, script order, form, payment or fragment change."
     }
   ],
   "functionalReviews": [
