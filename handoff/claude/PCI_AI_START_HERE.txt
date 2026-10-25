@@ -1,0 +1,867 @@
+PCI: ONE SMALL FILE FOR CHATGPT AND CLAUDE
+Prepared 25 October 2026 for Neeza Shyaka.
+
+READ THIS FIRST
+
+The ZIPs are backup handoff files. Some chat connectors cannot deliver large binary archives, and some chat interfaces do not accept ZIP input. Do not keep requesting large base64 responses or assume a Drive link can authenticate a direct download.
+
+RECOMMENDED WORKFLOW
+
+Use the GitHub repository as the working source:
+https://github.com/cartelug/pdm
+
+Use the dedicated instruction branch:
+https://github.com/cartelug/pdm/tree/handoff/claude-pci-2026-10-25
+
+Read handoff/claude/README.md first. All code, image assets and the guides are available there. There is no need to extract ZIPs or restore older gallery files when using a full clone of this branch.
+
+CHATGPT / CODEX
+
+Use a coding environment connected to cartelug/pdm and select/fetch the handoff branch. A normal conversation may be able to read files but may not have a writable checkout or a build runtime. Check the actual capabilities before promising code execution.
+
+CLAUDE
+
+Use Add from GitHub for reading the selected repository files. For implementation and tests, use Claude Code or another coding-enabled workspace with a checkout. Plain chat file support and archive execution depend on the enabled capabilities. The complete guide below is plain UTF-8 text and can be used for project understanding even without archive support.
+
+ALTERNATIVE ROUTES
+
+1. Manually download the Drive ZIPs on your own computer. If the target chat supports archive processing, attach them directly to that chat; its file upload path is different from a blocked Drive download in a remote sandbox.
+2. If ZIPs are not accepted, extract locally and upload this TXT plus selected source/text/image files in supported formats. Do not upload an entire binary asset collection into a text-only project knowledge system.
+3. Use a local Git clone with a local coding agent. Keep changes in separate branches and coordinate work; do not let two agents blindly overwrite the same files.
+4. If the platform offers editable network settings, allow only the actual required hosts. GitHub workflow: github.com, raw.githubusercontent.com, codeload.github.com, api.github.com as required. Drive workflow: drive.google.com and drive.usercontent.google.com plus any actual redirect host reported. An allowlist does not authenticate private Drive files or grant repository permissions.
+5. Use the existing small TXT in the PCI Drive folder as the text-only fallback. Network and connector restrictions are specific to each session; do not bypass them or make private files public merely to move a handoff.
+
+KEEPING WORK CURRENT
+
+GitHub holds code and changes. Drive holds reference uploads and handoff backups. Use one branch per active change, record the commit used, and refresh/sync before a new analysis. Publish only when Neeza asks. Read the guides below, then inspect the actual code. Do not invent live walking data or financial balances.
+
+
+PASTE-READY TAKEOVER PROMPT
+
+I am Neeza Shyaka. Continue the PCI / Walk for Education website using GitHub instead of the Drive ZIPs.
+
+Repository: https://github.com/cartelug/pdm
+Handoff branch: handoff/claude-pci-2026-10-25
+Start file: handoff/claude/README.md
+
+Read the handoff and all relevant guides before changing anything. All website code and all image assets are already in this branch, at the repository root. Do not fetch the ZIPs or run an older-image restore step for a full Git clone.
+
+If you have already started work, preserve your existing branch, edits and docs/joshua/ guide. Read this branch's instructions without overwriting your work. Compare your existing guide against the packaged ten-minute guide.
+
+Tell me what is already complete, what genuinely needs improvement, and any actual access blocker. He is ALREADY WALKING. Prioritise clear mobile/desktop layouts, the actual bag/shirt/main-building references, accurate Shyaka proportions, Archivo/Lexend typography and the simple staff workflow. Keep finance verification, consent, prices, payment hooks and protected fragments intact.
+
+Use a working branch for new changes. Do not push main or deploy until I ask. If you can only read repository context, explain that limitation and continue the review; use a coding workspace for editing/building rather than pretending a connector is a full runtime.
+
+FULL GUIDES
+
+
+========================================================================
+00_START_HERE.md
+========================================================================
+
+# Start here
+
+This is everything needed to understand, continue and operate the published PCI website from its source. It is not just a design prompt.
+
+## Original archive instructions (Git users follow the branch README instead)
+
+1. Upload the complete ZIP to Claude in a project or coding workspace that can read archives and edit files.
+2. Paste `SEND_TO_CLAUDE.txt`. Ask Claude to read the package before proposing changes.
+
+If Claude's upload limit rejects the full archive, extract it locally. Upload the `handoff/claude/guides/` directory and `CLAUDE.md`, then connect the GitHub repository or let Claude clone it. All website assets are already tracked there. Do not solve a size limit by deleting image masters from the repository or uploading private credentials.
+
+## What is already shipped
+
+The baseline is the final 25 October release, not an earlier preview. Both site addresses were verified against the same commit. It already contains:
+
+- Twenty campaign scenes, forty independent landscape/portrait compositions, native compressed masters and responsive AVIF/WebP output.
+- Official shirt/bag references, a transparent bag treatment, actual main-building reference and illustrated arrival labels.
+- Refined image gradients and mobile framing across the homepage, Walk page, partners and participation pages.
+- An ongoing-walk state that does not invent a start date or day count.
+- Named-role operations, contribution recording, finance reconciliation, public approved progress, consent handling, reports and HD PNG generation.
+- Joshua's staff start page, full guide and a separate one-time host account setup kit.
+
+The complete prior design plan, forty-composition manifest, twenty detailed image prompts, contact sheet, QA reports and all existing project documentation are inside `docs/` and the asset tree.
+
+## Choose the right next action
+
+| Need | Start with |
+| --- | --- |
+| Joshua wants to use the system | Guide 02; guide 03 only if his account is not activated |
+| Claude needs to improve design | Guides 04, 05 and 06, then the actual source |
+| Claude needs to run or edit the code | Guide 07 and `ARCHITECTURE.md` |
+| Claude is ready to release | Guide 08 and the actual workflows |
+| A campaign fact is missing | Guide 09; keep it unconfirmed until an authorised source supplies it |
+
+## Source versus a working checkout
+
+the repository root contains the exact files from the published commit. Git history, installed `node_modules` and build caches are deliberately absent. For ongoing work, use a real clone of `cartelug/pdm` and inspect current remote changes. If the remote still points to the snapshot, the files should already match; copying them back is unnecessary. If it has advanced, review differences before applying anything from the ZIP.
+
+The bundle itself is the deliverable for this request. No additional deployment is needed simply to hand it to Claude.
+
+
+========================================================================
+01_CLAUDE_TAKEOVER_PROMPT.md
+========================================================================
+
+# Complete takeover brief for Claude
+
+Act as the implementation owner for Neeza's existing PCI website. You are continuing a working project with live campaign operations, not starting a generic demo. Read the supplied code, current documentation and release evidence before deciding what to replace.
+
+## Product goal
+
+Make the site immediately understandable and easy to use: Rotarian Mbanda Shyaka is already walking from Nairobi towards UCU–Kagando to support education. A visitor should quickly understand the purpose, see the human story, find verified progress and choose how to contribute or participate. A staff member should record a genuine contribution or publish an approved walking update without navigating a complicated system.
+
+Neeza wants professional visual direction, accurate identity and architecture, neat readable typography, smooth transitions, strong phone layouts and fast loading. Prefer deliberate composition and clear hierarchy to adding more text, cards or animation. Keep the accepted assets and working functions available.
+
+## Work already completed
+
+The 25 October release at `a4843dd` contains twenty distinct scenes with forty separate desktop/mobile compositions; native-resolution compressed masters; responsive AVIF/WebP delivery; the actual bag and shirt originals; a transparent bag treatment; reference-led main-block imagery; labelled imagined-arrival scenes; mobile gallery selection; smooth gradients; and ongoing-walk copy without invented dates or progress.
+
+The earlier operations release contains named roles, manual contribution capture, finance reconciliation, independent currency buckets, partial pledge allocation, imports, audit history, consent-aware public recognition, approved live progress, walking updates, reports, staff guides and real Canvas PNG exports. These are functioning features with tests. Do not replace them with placeholder dashboards or random sample balances.
+
+## First work session
+
+1. Identify the source commit and check current `main`. Read `ARCHITECTURE.md`, the operations handover and the official-kit QA report. Summarise their current contracts in concrete terms.
+2. Open the shipped homepage and Walk page at phone and desktop sizes. Inspect actual text wrapping, image selection, menu behaviour and gradients. Do not judge an undecoded screenshot as a missing image.
+3. Build a short inventory: shipped, proposed improvement, and genuinely blocked by owner/host access. Do not present the twenty-scene generation or operations feature set as unfinished.
+4. Select a small high-value visual refinement and implement it end to end in a branch. Start with shared type/spacing and the hero, prove it on representative pages, then apply consistently.
+5. Run the relevant existing checks. Before publication, complete the full required gates and inspect the final diff, including generated output and protected review entries.
+
+Continue routine implementation without repeatedly asking Neeza to confirm ordinary decisions. Ask only for information that changes a material choice or for access you truly cannot supply yourself. While waiting, complete independent work.
+
+## Visual priorities
+
+- Walk for Education is the first campaign. Faith in Motion follows. The apartments concept is not a promoted active offering; retain its approved fallback and existing links.
+- Make walking visible, not merely implied by a portrait. Preserve Shyaka's identity and natural head-to-body proportions. Use the official black shirt and actual bag in relevant scenes.
+- The actual main university block is the architectural signature. Avoid inserting a generic fantasy university.
+- Keep PCI's paper/crimson identity and the Walk's navy/ivory/gold/cyan identity related through the shared type system.
+- Use Archivo for headings, navigation, buttons, labels and figures; Lexend for body reading and forms. Improve the typography system before considering a new family. A change of family is a deliberate owner decision, not a side effect of installed packages.
+- Phone layouts must be composed for the phone. Keep the separate portrait art, sensible gutters, visible CTAs, legible body text, safe fixed controls and a usable short-screen menu.
+- Use real HTML for copy, buttons and live figures; images are visual support. Keep overlays strong enough for actual text contrast across light and dark parts of the frame.
+- Motion should help orientation. Retain reduced-motion and no-JavaScript usability. Do not add a blocking splash screen or force scroll effects onto every section.
+
+## Non-negotiable functional contracts
+
+Do not alter contribution prices, minimum/maximum controls, referrals, payment routes, receipt verification, financial sums, currency handling, certificates, consent or roles under the label of a visual redesign. The protected baseline covers 130 files and the tests also check hooks and eleven frozen fragments. Respect those contracts and document narrow, authorised exceptions without discarding previous hashes.
+
+Money promised is not money received. A finance-reconciled receipt is the evidence for public collections. Sponsored steps are not physical kilometres. Currencies are not added together. An unknown start date is not a reason to invent a day number. An imagined welcome is not evidence of arrival. Current public totals come from the approved server projection, not a static number in the design.
+
+Keep the existing PHP/cPanel architecture. GitHub Pages is a static mirror and cannot execute the operations/payment PHP. Never claim that a successful static preview proves the staff backend is configured.
+
+## Staff setup
+
+Joshua and Neeza use separate coordinator accounts. Finance retains reconciliation authority. The host administrator runs the packaged CLI setup once for each approved person and delivers credentials privately. After that, staff need only the console URL and their login. The walkthrough must be doable on a phone in ten minutes. Practise using SAMPLE DATA graphics rather than fake production donations.
+
+## Final deliverable from Claude
+
+Provide the working source changes, generated output, a short change explanation and the actual checks run. Report any material remaining dependency precisely. When Neeza asks to publish, push the tested release using the existing repository/deployment process, observe all required Actions results and verify the live pages and representative assets. Give the commit and live URL. Never say “done” based on a push alone.
+
+
+========================================================================
+02_JOSHUA_10_MINUTE_GUIDE.md
+========================================================================
+
+# Joshua's ten-minute start guide
+
+You use a browser on your phone or computer. You do not install software or edit the website code.
+
+Start page: https://pamodzici.com/admin/operations/start.html
+
+Daily console: https://pamodzici.com/admin/operations/
+
+Full staff guide: https://pamodzici.com/admin/operations/guide.html
+
+## Before the ten minutes begin
+
+Ask the PCI account administrator for your personal **coordinator** login. If you have not received an activated username and password, the administrator must complete guide 03 first. The website release did not automatically activate named accounts.
+
+Bookmark the console on your phone. Your own account works on both phone and computer. Finance uses a different role to verify money; your coordinator account handles recording, reports, walking updates and graphics.
+
+## Minutes 0–2: sign in and find four actions
+
+Open the console and sign in. Locate:
+
+- Record contribution.
+- Update walk status.
+- Generate graphic.
+- View records / Download report.
+
+A coordinator should not have a Verify & reconcile action. If you see unexpected permissions, ask the administrator to check your role rather than using them.
+
+## Minutes 2–4: learn how to record a genuine contribution
+
+Use the first real contribution you are authorised to record. If you have no real receipt, review the fields without saving a practice entry.
+
+1. Enter the supporter, amount, currency, payment channel and transaction/reference details.
+2. Check the actual date. New entries start with today's Uganda date, but an older receipt must keep its real date.
+3. If the receipt pays part of an existing pledge, choose that pledge instead of making a duplicate.
+4. Check the stored country/step price. An older pledge keeps its historical price; do not replace it with today's price.
+5. Save once. It is awaiting finance verification, not automatically confirmed money.
+
+If a gateway payment already exists in the online ledger, ask finance to review it rather than entering it again as a separate manual receipt. Search the reference before repeating an entry.
+
+## Minutes 4–5: understand what finance does
+
+Finance matches the entry to the actual bank/mobile-money receipt and settlement, then reconciles it. Only eligible verified money increases public received collections. A pledge, WhatsApp promise or screenshot alone is not a reconciled receipt.
+
+Keep these four things separate: promised support, received money, sponsored steps and kilometres walked. Uganda and Kenya amounts also remain in their own currencies.
+
+## Minutes 5–7: prepare an approved walking update
+
+Open Update walk status. Use the walker/team's confirmed date, town, cumulative kilometres, short story and approved photo. The walk is already underway, but that does not supply today's location or distance.
+
+Preview the update. Publish only the approved facts, or keep a draft. Campaign activity and the walker's physical state are separate: an ongoing campaign can have a rest day. Never invent a new stage or reset cumulative distance to fit a graphic.
+
+## Minutes 7–9: practise a graphic safely
+
+Choose **Generate graphic → SAMPLE DATA → Collections snapshot → Feed → Create graphic preview → Download PNG**.
+
+This is the safe practice route. SAMPLE DATA graphics do not write a donation into the register. For a real post, select the approved live snapshot instead and check its reporting cut-off. Supporter names and amounts need the appropriate consent before recognition.
+
+Open the downloaded PNG on your phone. Confirm that the logos, wording and numbers are readable and the image is complete. Previewing the page is not the same as checking the downloaded file.
+
+## Minutes 9–10: check and sign out
+
+Open https://pamodzici.com/walk-for-education/ and check the published update. Public views refresh on a new page load or within about a minute on an open page. Find Download report in the console, then sign out on a shared device.
+
+## The standard daily routine
+
+1. Record each genuine contribution once.
+2. Finance checks and reconciles it.
+3. Publish the approved walking update when the walker/team supplies it.
+4. Review pending entries with finance, download the report and generate an approved graphic when needed.
+5. Sign out.
+
+## If something looks wrong
+
+| Situation | What to do |
+| --- | --- |
+| You cannot sign in | Confirm your own activated account with the administrator; do not share another person's login |
+| You saved the wrong amount or reference | Give finance the entry/reference so it can correct it through the audited process; do not add a second entry to cancel it |
+| The total did not rise after saving | Check whether finance has reconciled the receipt |
+| The service is unavailable | Wait and retry; unavailable does not mean collections are zero |
+| A supporter withdraws recognition consent | Ask finance to update consent; remove previously shared graphics manually as well |
+| A location or kilometre value is uncertain | Save a draft or wait for confirmation |
+
+This written walkthrough is a training aid. Completion means Joshua has actually signed in, found the four actions, downloaded a sample PNG and understood the finance handoff; sending the guide alone does not prove training is complete.
+
+
+========================================================================
+03_HOST_ACCOUNT_SETUP.md
+========================================================================
+
+# One-time host account setup
+
+Audience: the authorised hosting administrator. Joshua does not perform server setup.
+
+## What you need
+
+- Access to the existing cPanel/SSH terminal for the production website.
+- The real website document-root path, supplied by the host; do not guess it from a local development folder.
+- A confirmed person and approved role for each account.
+- The existing private configuration and storage preserved in place.
+
+This handoff has no production login, SSH key, private config or live database. No named account is claimed active. A GitHub push cannot safely activate a staff password through a public build.
+
+## Standard roles
+
+| Person | Standard role | Main responsibilities |
+| --- | --- | --- |
+| Neeza | coordinator | Record, review records, publish approved walking updates, graphics, reports |
+| Joshua | coordinator | The same everyday workflow from his own login |
+| Appointed finance verifier | finance | Check actual receipts and settlements; reconcile/reverse; authorised consent and milestone actions |
+| Hosting administrator | admin, if required and authorised | Administration and account configuration |
+
+The code supports other named roles; consult `docs/OPERATIONS-HANDOVER.md` before assigning them. Do not make everyone an administrator for convenience.
+
+## Activation procedure
+
+1. Preserve the current private configuration, existing named users and database. Follow the host's backup procedure before changing configuration.
+2. Use the included `assets/operations/setup/PCI_Account_Setup.zip`. The same kit is published at https://pamodzici.com/assets/operations/setup/PCI_Account_Setup.zip . The nested archive contains the CLI helpers and instructions; it contains no account or private configuration.
+3. Upload the kit to the production website root using cPanel File Manager and extract it there. Normal web deployment excludes `scripts/`, so the terminal helpers are installed separately for this task.
+4. Open Terminal/SSH in that website root and run:
+
+```sh
+php scripts/setup-operations-user.php
+```
+
+5. Enter the verified person's username, approved role, and a unique personal password twice. Password entry is hidden. The helper requires at least 14 characters, validates the role, confirms replacement of an existing username, backs up existing private config and updates it atomically through the hash-only provisioner. Keep the terminal private.
+6. Repeat for each approved person. Deliver each login privately to that verified owner, using your organisation's normal secure channel. Do not paste credentials into Claude, this ZIP, Git, a ticket or build output.
+7. Sign in with a coordinator account and confirm the everyday actions are available but Verify & reconcile is absent. Check the finance role separately against its approved responsibilities.
+8. Complete guide 02 with Joshua on his actual phone. Use SAMPLE DATA graphics for practice.
+
+The helpers return 404 when accessed over HTTP; they are terminal tools, not web setup pages. The kit can be regenerated from source with `python3 scripts/package-operations-setup.py` if needed. Do not alter the site's public build to expose the scripts.
+
+## What successful setup means
+
+Each person can sign in with a personal account, the role is correct, real financial approval remains with finance, the console can reach the existing writable private storage, and Joshua can complete the staff walkthrough. Successful deployment alone does not establish those facts.
+
+If there is no cPanel/SSH access, give the authorised host owner this guide and the kit. The rest of the design work can continue without access to the production ledger. Claude should report account activation as a host dependency rather than invent a default password.
+
+
+========================================================================
+04_FULL_WEBSITE_REDESIGN_GUIDE.md
+========================================================================
+
+# Full website redesign guide
+
+This guide defines the next design work from the shipped baseline. It is a continuation plan, not a claim that these future refinements have already been implemented.
+
+## Creative direction
+
+A confident education campaign with a human story: a real walker, a specific university destination, a community participating and a credible way to give. Aim for an editorial nonprofit website with deliberate photography, strong typography, generous useful space and simple decisions. Avoid a long sequence of identical cards or a decorative dashboard full of invented figures.
+
+Within five seconds, a visitor should understand who is walking, why it matters, where the walk leads and the next useful action. The site must make this equally clear on a narrow phone.
+
+## Brand system
+
+Use the tokens already in `src/design/tokens.json` and the institutional aliases in `src/styles/tokens.css`.
+
+| Role | PCI | Walk for Education |
+| --- | --- | --- |
+| Main paper | `#faf6f1` | `#fbf8f2` |
+| Secondary light | `#f2ebe3` | `#f6f1e7` |
+| Main ink / deep | `#1b0a0e` / `#220a10` | `#0e1f3a` |
+| Primary accent | Crimson `#b71935` | Gold `#c9a04a` |
+| Accessible accent ink | `#9b1630` | `#7a5814` |
+| Light-surface link | `#9b1630` | `#0b6e8e` |
+
+Keep the identities related through the same Archivo/Lexend system, spacing logic, controls and image treatment. Gold/cyan/sun remain fills or decoration on light backgrounds where their text contrast fails. Use tested dark text on gold buttons. Do not recolour all pages indiscriminately or bake brand text into background images.
+
+## Page-by-page direction
+
+| Page or family | Purpose | Recommended refinement | Preserve |
+| --- | --- | --- | --- |
+| Homepage `/` | Explain PCI and prioritise the live walk | One clear walking hero; concise purpose; one primary action and one secondary path; visible approved progress; strong campaign order | Institutional source, existing navigation and verified live panel |
+| `/walk-for-education/` | Explain the journey and convert interest into support | Improve section rhythm and text measure; keep walking, bag, education and actual-building narrative connected; make choices clear without a crowded hero | Pledge chooser, direct payment cards, gallery, live projection, hooks and protected fragments |
+| `/walk-for-education/take-part/` | Give concrete participation routes | Keep one strong action per participation route; tiny decorative background; simple partner/contact path | Existing forms and lightweight `backdrop-18-*` delivery |
+| `/walk-for-education/partners/` | Establish credible partnership | Clear roles, restrained logos, real main-block reference and useful partnership CTA | Confirmed versus prospective distinctions; actual building figure |
+| Walk updates | Show dated approved field updates | Strong date/location hierarchy, readable stories, obvious latest entry and honest empty states | No fabricated reporting, photos or kilometres |
+| Walk accountability | Explain where information and funds come from | Clear distinction between ambition, approved milestone, received funds and reporting cut-off | Reconciliation rules, currencies, consent and source wording |
+| `/contribute/` and results | Help a supporter act confidently | Refine type, spacing, errors and confirmation hierarchy around the existing flow | Country/price snapshots, bounds, referrals, sessions, forms, certificates and gateway rules |
+| `/projects/` | Explain current priorities | Walk first, Faith in Motion second, then other verified work; concise status labels | Current project data and apartments fallback |
+| About / model / what we do | Explain PCI's role | Short opening statement, useful headings, tighter copy measure, selected supporting imagery | Actual organisational facts and existing URLs |
+| Impact / governance / partnerships | Build trust | Distinguish evidence from ambition, make documents easy to find, avoid decorative statistics | Verified claims, accountability language and contact paths |
+| Updates / contact | Help people follow or reach PCI | Readable update list, clear contact methods, visible form errors and success state | Enquiry action and validation; actual approved handles |
+| Faith in Motion family | Preserve its separate campaign record | Consistent typography, restrained archive framing and usable register | Separate finances, register, existing routes and protected behaviour |
+| Staff operations | Make daily work obvious | Improve labels and grouping only after walking through the current console with staff | Named roles, recording/verification separation, imports, reports, consent and actual PNG export |
+
+## Recommended Walk story sequence
+
+1. The walker is already on the road: one clear hero message and useful action.
+2. What the campaign supports: education, students and the actual main block.
+3. How to participate: sponsor steps, contribute through approved channels or join the effort.
+4. The person and the effort: Shyaka, official kit, walking details and a human pause.
+5. The educational purpose: children learning, older students and the future the effort supports.
+6. Verified live progress and dated updates: factual, independent of illustrations.
+7. Credible partners and accountability.
+8. Campaign art and resources, loaded lazily.
+9. A simple closing action.
+
+The current Walk page already tells much of this story. Reorder only after reviewing its IDs, anchors, script dependencies and frozen fragments. Do not remove useful content merely to make a shorter screenshot.
+
+## Image transitions and gradients
+
+Use the twenty accepted scenes as a connected visual narrative, not twenty equally dominant full-viewport backgrounds. Alternate a full scene, a quieter paper section, a detail image and a low-opacity decorative band. Carry a compatible dark or paper colour through adjacent sections so a fade feels continuous.
+
+Keep masks and overlays in CSS. The existing `.kit-scene__media` uses vertical fade-in/fade-out masks, a text-side colour gradient and lower opacity on mobile. `css/official-kit.css` contains the handwritten treatments; homepage grading is in `src/styles/home.css`. Refine these sources rather than repainting image files with text or permanent fades.
+
+Check readability against the brightest actual image region, not an average colour. Preserve faces, the bag message and the building silhouette. Darken the text side with a deliberate gradient; do not make the whole picture dull or add a hard rectangle around every paragraph.
+
+## Phone layout rules
+
+- Compose a true single-column story where space requires it. Use the separate portrait image at the existing 719/720 px art-direction boundary.
+- Keep body reading near 16–18 px; controls must remain usable with 200% text and the keyboard open. Prefer 44 px touch targets while preserving the existing stricter gate's rules.
+- Give text useful measure and breathing room. Avoid a heading squeezed into a tiny left column beside a portrait.
+- Let headings wrap as words, without artificial line breaks for one screenshot. Do not fix text clipping with `overflow: hidden`.
+- Keep primary actions discoverable without covering content. Safe-area padding and short landscape screens matter.
+- Retain menu focus trapping, scroll restoration, Escape handling and the viewport-sized menu sheet. The Walk header's blur stays on its pseudo-element; a filter on the header itself can break fixed-menu geometry.
+- Show the original kit/reference links and illustration labels without making them compete with the main message.
+
+## Motion direction
+
+Use short press/hover feedback, modest panel transitions and restrained entry reveals. Shared token timings are 120/180/240/420/640 ms for press, hover, UI, panel and reveal. Do not animate essential content into permanent invisibility, delay clicks or trap native scrolling. On reduced motion, content should be immediately visible and functional. No-JavaScript navigation and content should remain useful.
+
+## Implementation order
+
+First refine typography and shared spacing on the homepage and Walk hero. Prove phone, tablet, desktop and large-text layouts. Then apply page-level improvements in small groups. Finish the gallery/participation details, SEO/share previews and staff usability checks. Run the full release checks once the final changes are stable. Avoid a framework migration, backend rewrite or new font dependency in the same visual change unless separately required.
+
+Measure the result by clarity, task completion, responsive layout, image selection, contrast and loading speed. “More animations” or “more complex” alone is not evidence that the redesign is better.
+
+
+========================================================================
+05_FONT_TYPOGRAPHY_GUIDE.md
+========================================================================
+
+# Font and typography redesign guide
+
+The current approved public system is **Archivo + Lexend**, self-hosted. Redesign the hierarchy, wrapping, spacing and reading experience around those families first. This is not a request to reactivate older Inter, Instrument Serif or Geist Mono styling simply because their assets/packages are still present.
+
+## Actual roles and files
+
+| Role | Family | Declared range | Use |
+| --- | --- | --- | --- |
+| Heading / UI / figures | Archivo | 500–800, normal | Headings, menus, buttons, labels, money and counts |
+| Reading / forms | Lexend | 400–600, normal | Paragraphs, forms, captions and helper text |
+
+Public files are `assets/fonts/archivo-latin-wght-normal.woff2` and `assets/fonts/lexend-latin-wght-normal.woff2`. Their licences are included alongside them. The source font declarations use weight-only variable files; no width scaling or synthetic italics is needed. Current tokens explicitly set `italics: false`. The two active font files together cost approximately 74.6 KB before HTTP overhead.
+
+Archivo supports tabular figures for aligned money and counts. Lexend does not supply that role in this implementation. Arrows use a system fallback rather than assuming the active font contains every symbol.
+
+## There are two sizing layers
+
+`src/design/tokens.json` defines the shared type scale. `src/styles/tokens.css` adds the institutional `--pci-fs-*` scale and page CSS can override the hero. Updating only one layer will not uniformly change every page.
+
+| Shared role | Current token value |
+| --- | --- |
+| Display | `clamp(2.5rem, 1.6rem + 4.2vw, 5rem)` |
+| H1 | `clamp(2.125rem, 1.5rem + 3vw, 3.75rem)` |
+| H2 | `clamp(1.75rem, 1.35rem + 1.8vw, 2.75rem)` |
+| H3 | `clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem)` |
+| Body | `clamp(1rem, 0.97rem + 0.15vw, 1.0625rem)` |
+| Small | `0.875rem` |
+| Caption | `0.8125rem` |
+| Reading measure | `60ch` |
+
+The institutional H1 alias currently reaches `6.9rem`, and the homepage hero has its own container-responsive size up to `8rem`. Inspect the computed value and available copy width before changing an H1 token. Very large titles are a specific composition choice, not the default for every page.
+
+## Recommended next refinement
+
+These are proposed design targets, not a description of a new shipped implementation:
+
+- Homepage/Walk hero: Archivo 650–750 with a comfortable word-based wrap; approximately 40–56 px on narrow phones where the copy permits, growing with the actual text container on desktop.
+- Interior H1: Archivo 600–700, clearly smaller than the campaign hero; keep the title and opening explanation in the same visual unit.
+- H2: Archivo 600–650; consistent section hierarchy with a readable line height around 1.05–1.15 where needed.
+- Body: Lexend 400 at roughly 16–18 px with 1.55–1.7 line height and about 55–65 characters per line.
+- Buttons: Archivo 600–700 with short sentence-case labels. Increase padding before increasing letter spacing.
+- Inputs and helper text: Lexend; at least 16 px input text on phones, persistent labels, visible validation and enough line height for wrapping.
+- Money and counters: Archivo with tabular figures. Keep the currency label, reporting date and source meaning close to the number; avoid huge unexplained totals.
+- Labels/captions: keep at or above the existing 13 px floor. Avoid wide-tracked uppercase for long instructions.
+
+Treat these as starting values to test against real copy. Do not hard-code them into every selector or shrink a difficult title until the page merely stops scrolling.
+
+## Where to make the change
+
+1. Edit font family/role and shared type decisions in `src/design/tokens.json`.
+2. Run `npm run tokens`. This generates `src/design/generated/tokens.css`, `src/design/generated/fonts.css` and `css/brand.css`.
+3. Refine institutional aliases in `src/styles/tokens.css` and relevant source styles in `base.css`, `home.css`, `components.css`, `shell.css` and `pages.css`.
+4. Handwritten pages receive shared font roles through `css/brand.css` and `css/one-look.css`. The latter intentionally overrides high-specificity legacy font declarations. Keep it last in the page head. New official-kit CSS loads before it.
+5. If a protected page's head, preload or markup changes, use the narrow review process and keep its script order and functional hooks.
+6. Run `npm run build`; commit the generated institutional HTML and `_astro/` files alongside their authoring sources.
+
+Do not directly edit generated font CSS or a compiled `_astro/pci-*.css` file. They will be overwritten. `InstitutionalLayout.astro` imports and preloads the two active font packages explicitly; a deliberate family replacement would need to update those imports and the handwritten preload paths as well.
+
+## CSS role example
+
+This illustrates the intended roles; adapt to the real source selectors instead of appending a competing global layer:
+
+```css
+.campaign-heading {
+  font-family: var(--font-head);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.campaign-reading {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.65;
+  max-width: 60ch;
+}
+
+.campaign-amount {
+  font-family: var(--font-head);
+  font-variant-numeric: tabular-nums;
+}
+```
+
+Avoid `transform: scaleX(...)`, fixed heading heights, nonbreaking spaces across long phrases, and indiscriminate `word-break: break-all`. Use sensible container widths and CSS wrapping. Preserve the fallback metrics already generated for Arial so font arrival does not cause unnecessary text movement.
+
+## Font-family replacement, if Neeza deliberately requests it
+
+Preview a restrained alternative against the same real homepage, long heading, contribution form, currency figure and phone navigation. Check glyph coverage, weights, licence, total transfer size, fallback metrics and both authoring lanes. Record the new decision in `ARCHITECTURE.md`, update tokens/imports/preloads/assets and run all relevant checks. Do not propose a fashionable display face that makes forms, names or amounts harder to read.
+
+## Verification
+
+Inspect computed font families for an H1, paragraph, navigation item, button, form field, caption and money figure across the homepage, Walk, Contribute and Faith in Motion. Confirm only the intended two public families load and no third-party font host was added. Test 320, 390, 768, 1024, 1440 and 2560 px, short landscape, 200% text, no-JavaScript and reduced motion.
+
+Run `npm run check:tokens`, `npm run validate`, the browser suites, axe, speed and the strict responsive sweep. Old admin consoles can have legacy font loading; do not confuse their protected implementation with the approved public typography contract.
+
+
+========================================================================
+06_IMAGE_ART_DIRECTION_GUIDE.md
+========================================================================
+
+# Images, references and art direction
+
+Twenty scenes are already generated and integrated. Each has its own separately generated desktop landscape and phone portrait composition: forty distinct accepted sources. Use them rather than generating the same campaign again without a reason.
+
+## Source references
+
+| Reference | Included path under the repository root |
+| --- | --- |
+| Original uploaded backpack | `assets/wfe-2026/references/official-backpack.png` |
+| Original uploaded shirt | `assets/wfe-2026/references/official-shirt.png` |
+| Real walker portrait | `assets/walk-for-education/walking-rotarian-photo.jpg` |
+| Actual main university block | `assets/walk-for-education/kagando-campus.webp` |
+| Transparent accepted bag treatment | `assets/wfe-2026/official-kit/bag-cutout-master.webp` |
+| Twenty detailed generation briefs | `docs/official-kit-prompts.json` |
+| Original comprehensive visual plan | `docs/PCI-OFFICIAL-KIT-VISUAL-PLAN.md` |
+| Twenty-pair contact sheet | `docs/quality/OFFICIAL-KIT-CONTACT-SHEET.jpg` |
+
+The bag and shirt PNGs are the actual uploaded originals. Their SHA-256 values are checked by the existing image tests. The original copies were also saved in the PCI Drive folder: https://drive.google.com/drive/folders/1HTyyxhZTvzPcZr2kzCvNl_1t3uyYW2PF . Access depends on the owner's Drive permissions.
+
+## Scene map
+
+| ID | Story purpose | Suggested visual role |
+| --- | --- | --- |
+| 01 | The walk is happening | Homepage hero |
+| 02 | One walker, a specific destination | Walk hero / featured campaign |
+| 03 | The person behind the walk | Meet the walker |
+| 04 | The actual bag carries the message | Official kit / campaign message |
+| 05 | Carrying it for real | Bag in use |
+| 06 | Every step has effort | Walking detail / journey |
+| 07 | The reason to keep walking | Learning and purpose |
+| 08 | The signature main block | Destination / actual-building reference |
+| 09 | Joy in learning | Education story |
+| 10 | From early learning to higher education | Education pathway |
+| 11 | A community chooses to participate | Join-in story |
+| 12 | Persistence, with a human pause | Human effort / bag detail |
+| 13 | The journey continues | Road / journey band |
+| 14 | Walking alongside the next generation | Intergenerational hinge |
+| 15 | The destination comes into view | Partners page |
+| 16 | An imagined arrival worth working towards | Clearly labelled imagined arrival |
+| 17 | A welcome shared by the community | Clearly labelled imagined welcome |
+| 18 | Everyone can carry a part | Participation |
+| 19 | The future this effort supports | Future / partner band |
+| 20 | Keep the walk moving | Closing action |
+
+Exact output dimensions, file sizes, source hashes and `imaginedArrival` flags are in `assets/wfe-2026/official-kit/manifest.json`. Do not invent a common native resolution for all sources. The accepted WebP masters retain each source's native dimensions; the original generator PNG files outside Git are not bundled.
+
+## Visual continuity rules
+
+Preserve Shyaka's face from the actual portrait, natural head/body proportions, the black official shirt and the supplied backpack form. Do not enlarge his head to emphasise identity. The main university block, its blue/cream treatment and brick stair tower are the architectural signature; do not substitute a generic university or present the university block as a nearby primary-school classroom.
+
+Keep Ugandan/Kenyan people and context credible without a poverty stereotype. Children should look happy and engaged; generated supporting people are illustrative. No generated image proves an actual event, donation, school activity or completed walk. Scenes 16 and 17 must remain explicitly labelled as imagined arrival/welcome.
+
+Printed shirt copy includes a 1,300 km / 1,650,000-step campaign message. The canonical route-planning source currently has an approximate 1,100 km value. These differ. Do not silently pick one as verified travelled distance. Keep the original artwork unchanged and seek an approved campaign fact correction if needed. Never calculate live walking progress from printed kit text.
+
+## Responsive delivery
+
+The naming pattern is:
+
+```text
+scene-NN-desktop-master.webp
+scene-NN-desktop-800.avif / .webp
+scene-NN-desktop-1440.avif / .webp
+scene-NN-mobile-master.webp
+scene-NN-mobile-480.avif / .webp
+scene-NN-mobile-800.avif / .webp
+```
+
+Use `ScenePicture.astro` for institutional pages. It selects phone sources at max-width 719 px, then desktop AVIF with WebP fallback, actual width/height metadata, lazy loading by default and eager/high priority for a true hero. Handwritten campaign markup follows the same source-selection pattern. Match image preloads to media conditions so a phone does not download both hero orientations.
+
+The participation hero uses separately optimised `backdrop-18-mobile.*` and `backdrop-18-desktop.*`; its phone AVIF is about 15.7 KB. Keep this tiny decorative version on the page while retaining the full-quality scene for the gallery. Do not replace it with a master file just because the master looks sharper at 100% zoom.
+
+The gallery keeps 36 older school/campus illustrations plus twenty new campaign-art records. The new records have `mobileSrc`; the viewer switches sources with screen size and clears the mobile source when returning to older records. Preserve those behaviours and the keyboard/focus model in `js/wfe-redesign.js`.
+
+## If new images are genuinely needed
+
+Use the master prompt and matching scene brief in `docs/official-kit-prompts.json`, attach the original kit/face/building references, and generate each orientation as its own composition. One landscape crop is not a new phone composition. Leave text space intentionally and render final copy as HTML, not as raster text. Review anatomy, face, kit, architecture, children, frame edges and both crops before accepting.
+
+`scripts/official-kit-images.mjs` needs a separate accepted-source mapping JSON with keys such as `01-desktop`, `01-mobile` and optional `bag-cutout`, pointing to actual files. The old temporary mapping and raw PNG paths are not available in a clean clone. Do not run this script as part of routine build or fabricate the original source hashes from a recompressed master. Existing delivery assets build and serve without rerunning it.
+
+`scripts/integrate-official-kit.cjs` is a narrow one-time/idempotent integration utility, not a substitute for understanding current markup. `scripts/wfe-story-images.mjs --official-only` refreshes the legacy story derivatives from accepted kit masters. Review output and manifest changes before committing any regeneration.
+
+
+========================================================================
+07_CODE_ARCHITECTURE_MAP.md
+========================================================================
+
+# Code map and local setup
+
+The repository deliberately has two authoring lanes. Keep them separate until an explicit, tested migration is requested.
+
+## Lane one: institutional Astro pages
+
+Author in `src/`, build to `build-v3/`, then `scripts/export-v3.mjs` copies approved generated HTML and `_astro/` assets into the repository root. Generated output is committed so the production server needs no Node build.
+
+| Edit | Source |
+| --- | --- |
+| Homepage | `src/pages/index.astro` and `src/components/home/` |
+| About, projects, model, impact and other institutional pages | `src/pages/` |
+| Shared HTML head and imports | `src/layouts/InstitutionalLayout.astro` |
+| Header/footer and UI components | `src/components/global/` |
+| URLs, contact and social configuration | `src/config/site.ts`, `src/config/navigation.ts` |
+| Shared tokens and font definitions | `src/design/tokens.json`, generated by `scripts/tokens.mjs` |
+| Institutional CSS | `src/styles/tokens.css`, `base.css`, `components.css`, `shell.css`, `home.css`, `pages.css`, `motion.css` |
+| Responsive campaign images | `src/components/global/ScenePicture.astro` |
+| Build-time campaign lifecycle | `src/lib/campaign.ts` |
+| Project data and state | `src/lib/projects.ts` and its referenced content |
+
+Do not hand-edit root `index.html` or other generated institutional HTML; the next build overwrites it. Use the source and commit both lanes' resulting output coherently.
+
+## Lane two: handwritten campaigns and backend
+
+| Area | Source / route |
+| --- | --- |
+| Walk home and inner pages | `walk-for-education/` |
+| Contributions and results/privacy/terms/certificates | `contribute/` |
+| Faith in Motion and its related pages | `faith-in-motion/`, `give/`, `roll/`, `church/`, `take-part/`, `walk/`, `accountability/` |
+| Handwritten styling | `css/` |
+| Canonical campaign facts | `js/wfe-data.js` |
+| Country/price source | `assets/data/step-prices.json` |
+| Walk menu owner | `js/wfe-shell.js` |
+| Gallery and decorative presentation | `js/wfe-redesign.js` |
+| New imagery layer | `css/official-kit.css` |
+| Final shared appearance layer | `css/one-look.css`, last in applicable page heads |
+| Staff operations | `admin/operations/` and `api/operations.php` |
+| Gateway services / console | `api/payments/`, `admin/collections/` |
+| Setup helpers | `scripts/setup-operations-user.php`, `scripts/provision-operations-user.php` |
+
+The backend is PHP 8.3 with PDO SQLite/SQLite3. The real ledger and operational configuration stay in private host storage outside the public source tree. Operations adds tables to the existing ledger; it is not a second set of invented public balances.
+
+## Local development from a real clone
+
+Use Node 22, npm, PHP 8.3 with `pdo_sqlite`/`sqlite3`, Python 3, and Chromium for browser tests. These versions match the project workflows; inspect the lockfile and workflow if the project has advanced.
+
+```sh
+git clone https://github.com/cartelug/pdm.git
+cd pdm
+git switch -c claude/pci-continuation
+npm ci
+npm run validate
+```
+
+Check `git rev-parse HEAD` and compare it with the snapshot before applying any files. A new remote commit must be reviewed, not overwritten with this package. The snapshot directory itself has no `.git` history.
+
+To serve the committed pages and PHP locally:
+
+```sh
+php -S 127.0.0.1:8080 -t .
+```
+
+Open `http://127.0.0.1:8080/`. This development server does not provide production credentials or a copy of the live ledger. Use the isolated test fixtures for write-path testing; do not point a developer server at production storage. Astro's authoring preview covers its generated lane, while the PHP root server is useful for the whole combined tree.
+
+## Source and output commands
+
+```sh
+npm run tokens
+npm run build
+npm run validate
+```
+
+Only run token generation when token source changed. Build updates generated pages, asset hashes and compiled output. `validate` includes a build too; run build/validate sequentially because they mutate the same generated files. Inspect the diff after the final run.
+
+`scripts/export-v3.mjs` makes generated `_astro` links portable between `/` on cPanel and `/pdm/` on GitHub Pages, while canonical URLs remain production URLs. Preserve relative asset/href helpers and this export step; a root-absolute asset path can work on production and still break the static mirror.
+
+## Protected change process
+
+`tests/protected-campaign/baseline.json` contains 130 file hashes with reviewed exceptions. The current release has 83 presentation review entries and 14 functional review entries. Hooks and eleven frozen fragments are checked separately. For a legitimate protected presentation change, retain the old hash, date, reason and narrow authorisation/review entry, then update only the necessary recorded hash. Do not routinely record every current page as a new baseline.
+
+Functional changes need their own explicit scope and meaningful tests. A CSS redesign is not authority to modify reconciliation, authentication or transaction logic.
+
+## What documentation to trust
+
+Read `ARCHITECTURE.md` with its explicit operations override, `docs/OPERATIONS-HANDOVER.md`, `docs/QUICK-START-SETUP.md` and `docs/quality/OFFICIAL-KIT-2026-10-25.md` together. `EDITORIAL-REDESIGN.md` is historical for its old font choices; `docs/archive/` is superseded. Installed packages and old image families are not proof that their older design is current.
+
+
+========================================================================
+08_TEST_DEPLOY_ROLLBACK.md
+========================================================================
+
+# Testing, deployment and rollback
+
+Run commands from the actual website repository, not the handoff package root. The workflows in `.github/workflows/` are the executable release definition. This guide records the current commands without changing their budgets or policy.
+
+## Fast development validation
+
+```sh
+npm ci
+npm run validate
+```
+
+`validate` checks Astro types, builds/exports the institutional site, lints and formats, checks protected files, runs page/state/image tests, then checks tokens, contrast, hooks, frozen fragments, facts, links and sitemap. The image tests check forty distinct compositions, decoded variants, source checksums and integration of all twenty scenes.
+
+Do not run build/validate jobs concurrently in the same checkout. They replace generated HTML and `_astro` files. Review the final generated diff before committing.
+
+## Backend fixtures and real-browser checks
+
+Use the existing isolated fixtures. They exercise writes against temporary private storage; they are not instructions to fill the production register with sample records.
+
+```sh
+php tests/payments/ledger.php
+python3 tests/payments/test_http.py
+python3 tests/operations/test_http.py
+python3 tests/operations/test_setup.py
+python3 tests/enquiry/test_http.py
+npx playwright install --with-deps chromium
+node tests/navigation/wfe-redesign.cjs
+node tests/operations/browser.cjs
+npm run test:browser
+node tests/navigation/browser.cjs
+node tests/navigation/motion.cjs
+node tests/quality/a11y.cjs
+node tests/quality/speed.cjs
+node tests/quality/responsive.cjs --strict --json responsive-report.json
+```
+
+PHP needs PDO SQLite/SQLite3. The fixtures can use `PCI_TEST_PHP` for a compatible executable. `PCI_TEST_CHROMIUM` can select an installed Chromium binary if Playwright's expected revision is unavailable. Some suites also accept a Playwright module path; inspect the actual test before using environment overrides. Do not disable browser checks because a local machine lacks its runtime; install the runtime or use CI and report the actual result.
+
+The source snapshot has no installed dependencies. `npm ci` uses the included lockfile. Do not regenerate dependency versions merely to get a first local build.
+
+## Unchanged route budgets
+
+The enforcing file is `tests/quality/budget.json`. These are current ceilings, not measured results or universal web performance targets:
+
+| Route | LCP ceiling ms | Transfer ceiling KB | Blocking ceiling ms |
+| --- | --- | --- | --- |
+| `/` | 2050 | 310 | 400 |
+| `/about/` | 3050 | 195 | 250 |
+| `/projects/` | 3300 | 330 | 250 |
+| `/walk-for-education/` | 3600 | 395 | 670 |
+| `/walk-for-education/take-part/` | 2900 | 360 | 250 |
+| `/contribute/` | 2000 | 250 | 400 |
+| `/faith-in-motion/` | 4300 | 810 | 450 |
+| `/give/` | 3050 | 475 | 270 |
+
+The speed test uses throttled phone measurements and a three-run median. Keep the existing ceilings; fix heavy images, eager downloads or blocking work rather than raising a budget. A lab result is not a guarantee of every visitor's network speed.
+
+The strict responsive gate currently covers thirty public pages across nineteen configurations, giving 570 measurements. It includes 320–2560 px, landscape and 200% text. It fails horizontal overflow, clipping and crowded targets under its rules, and retains additional typography/image diagnostics for review. Do not hide overflow to silence a real layout defect.
+
+## Baseline evidence
+
+The final official-kit release passed local validation, the operations HTTP and browser suites, Walk browser checks, payment/contribution browser checks, institutional and motion tests, axe with zero WCAG 2.2 A/AA violations on the tested pages, all eight speed budgets and the strict responsive sweep. Both deployment jobs and the hosted front-end quality run subsequently succeeded. See `docs/quality/OFFICIAL-KIT-2026-10-25.md` and this package's `evidence/` directory.
+
+Those results describe the packaged release, not future edits by Claude. Run relevant checks again after making new changes, and run the complete required release checks before publishing the final result.
+
+## Deployment architecture
+
+- Pushing `main` triggers **Deploy PDM to cPanel** through `.github/workflows/deploy-pdm.yml`.
+- That job installs tooling, validates, runs backend/browser gates, prepares a public deployment tree and uploads static files plus PHP over the existing SSH configuration.
+- **Front-end quality** runs the broader accessibility, speed and responsive gates as a separate workflow. Observe it as well; production deployment does not wait on every separate quality step.
+- GitHub Pages serves the committed static output at `/pdm/`. It cannot execute PHP operations or payment endpoints.
+- Pull-request static preview artifacts intentionally omit `api/` and `admin/`; they are visual previews, not a backend environment.
+
+Existing GitHub Actions secret names are `CPANEL_HOST`, `CPANEL_USERNAME`, `CPANEL_SSH_KEY`, `CPANEL_SSH_PASSPHRASE`, `CPANEL_PORT` and `CPANEL_TARGET`. Values are not in this package. Do not ask for them unless an actual deployment failure requires host-owner action, and never put their values into source or handoff files.
+
+## Release procedure
+
+1. Finish the change in a branch; inspect the entire diff and generated output.
+2. Complete the checks and protected review records. Confirm factual copy and image labels.
+3. Follow Neeza's current instruction for merging/pushing the tested commit. Never force-push `main` or overwrite a newer remote head.
+4. Observe cPanel deployment, GitHub Pages deployment and the required quality workflow for that exact commit.
+5. Fetch the real production homepage, Walk home, partners, take-part, manifest and gallery. Check representative desktop/mobile image and font URLs. Compare served content to the committed files where practical.
+6. Check `/api/operations.php?action=public` is available without publishing private response data. Confirm checkout retains its intended state at `/api/payments/index.php?action=status`; a visual release is not an instruction to enable it.
+7. Open the real site at phone and desktop widths. Wait for image decoding, check correct source selection and inspect browser errors. Verify the staff guide loads, without submitting a live receipt or invented walk update.
+8. Report the commit, live URL, actual checks and any material remaining host dependency.
+
+## Rollback
+
+For a presentation-only regression, revert the reviewed website commit through Git and redeploy the last tested source/output. Keep the current private configuration, staff accounts, ledger and uploaded records. Do not restore a stale database, remove additive operations tables or copy test fixtures to production to undo a visual change.
+
+For a backend incident, follow the host's approved recovery procedure: stop affected writers/checkouts as appropriate, take a consistent private SQLite snapshot including the host's WAL/SHM handling, preserve later transactions and audit history, then recover deliberately. An older shared-password publisher must not be re-enabled as a shortcut. Do not improvise a production database restoration from a source ZIP.
+
+
+========================================================================
+09_KNOWN_GAPS_AND_DECISIONS.md
+========================================================================
+
+# Known gaps, facts and decisions
+
+This page prevents old plans or ambitious visuals from becoming false claims in a new design.
+
+## Shipped versus still dependent on people
+
+| Topic | Established state | What must not be assumed |
+| --- | --- | --- |
+| Website source | Final official-kit commit `a4843dd` was published to `main` | The snapshot will remain the newest remote commit forever |
+| Two addresses | Production and static mirror were verified on the same release | GitHub Pages can execute PHP or host the live ledger |
+| Campaign activity | Neeza confirmed the walker is already walking | A confirmed start date, day count, current town or cumulative km |
+| Imagery | Twenty accepted scenes and forty separate compositions are included | The arrival/welcome illustrations record a completed arrival |
+| Staff access | Named roles, setup kit and walkthrough are implemented | Joshua's or Neeza's production account is activated |
+| Finance | Recording/reconciliation/public projection code exists and is tested | Every historical register has been imported or reconciled |
+| Public recognition | Consent-aware functionality is implemented | Every supporter consents to public name/amount recognition |
+| Milestone | Approval workflow exists | The proposed UGX 25 million operational milestone is approved |
+| Checkout | The last live read-only check reported disabled | Publishing a new design authorises enabling checkout |
+| Social access | Owner-controlled handles/configuration exist in source | Claude or ChatGPT has been granted posting or account access |
+
+## Facts and conflicts to handle honestly
+
+`js/wfe-data.js` is the canonical static campaign record, and the public approved operations projection supplies live facts. The five-year ambition is UGX 25 billion. It is not the same thing as an approved short-term operational milestone or money received.
+
+The original printed shirt includes 1,300 km and 1,650,000 steps, while the static route-planning source currently carries approximately 1,100 km. Keep original artwork intact and flag this discrepancy for an approved factual decision. Neither value establishes kilometres already walked. Sponsored steps are contribution units and do not measure physical walking distance.
+
+Do not seed public totals from a WhatsApp list, add up unlike currencies, treat an old spreadsheet “paid” label as finance reconciliation, or invent a report cut-off. If importing historical records is requested, use the original register, preview its mapping, preserve source row identity and dates, resolve duplicates and have finance verify evidence.
+
+Payment instructions already in the public source are part of the existing approved UI. Do not copy private payment credentials into the redesign, change account numbers from memory, or replace the tested forms with a decorative button.
+
+## Deliberate design decisions
+
+- Archivo headings/UI/figures and Lexend reading/forms; no public italics in the current system.
+- PCI paper/crimson and Walk navy/ivory/gold/cyan share one type/token foundation.
+- Walk is the first project priority; Faith in Motion follows; apartments is not a promoted live concept.
+- Main university block is the signature architecture, as specified in the prior Joshua reference.
+- Phone images are independently composed, not just landscape crops.
+- Useful motion respects reduced motion and no-JavaScript access; no blocking splash screen.
+- Protected financial and pledge behaviour survives a visual redesign.
+- Existing public URLs and relative asset portability are preserved.
+
+## Work that is optional, not a hidden unfinished requirement
+
+Migrating handwritten campaign pages into Astro is a separate, page-by-page project requiring hook/fragment equivalence and rollback. Moving the heavy gallery to a separate route is an optional product decision, not necessary to use the current gallery. Replacing the font families or changing hosting is a deliberate new scope. None of those should be bundled casually into the next visual refinement.
+
+No new site change was made to create this handoff. Claude should first inspect the supplied release, then implement Neeza's next requested improvement rather than automatically redoing shipped work.
+
+
+========================================================================
+10_ACCEPTANCE_CHECKLIST.md
+========================================================================
+
+# Completion checklist for the next Claude release
+
+Use this against the actual final result, not a plan or screenshot alone.
+
+## Product and content
+
+- The first view explains the live walk, educational purpose, destination and useful next action.
+- Walk for Education is the first campaign; Faith in Motion and the other work follow correctly.
+- Unknown date/location/km/collections stay unknown until approved evidence supplies them.
+- Actual kit/face/main-building references are preserved; arrival illustrations are labelled.
+- No fabricated donor names, money, progress or partner confirmation is published.
+
+## Design and fonts
+
+- Archivo and Lexend roles are consistent across all public page families, or a deliberate owner-approved replacement is fully documented.
+- Real headings wrap naturally on phones, body copy has a comfortable measure, forms remain legible and currency figures align.
+- Gradients protect readability without hiding important image subjects.
+- Phone and desktop each load their intended image composition; decorative participation art remains small.
+- Menus, fixed controls, landscape layouts and 200% text work without clipping or horizontal overflow.
+- Keyboard, focus, reduced motion and no-JavaScript behaviour are checked.
+
+## Functional continuity
+
+- Pledge, contribution, country price, referral, bounds, payment, certificate and enquiry contracts remain intact.
+- Coordinators record; finance reconciles; public sums use the approved projection and separate currencies.
+- Consent, partial pledges, duplicate prevention, imports, reports and audit history remain tested.
+- PNG verification checks the actual downloaded file, including long text/amount cases and current consent handling.
+- Staff accounts are reported active only after host activation and a real role check.
+
+## Code and evidence
+
+- Real remote history is preserved; no force-push or blind snapshot overwrite.
+- Source and generated output agree; compiled assets are not hand-edited.
+- Protected exceptions retain their previous hashes and narrow review records.
+- `npm run validate`, required backend/browser tests, axe, speed and strict responsive checks pass without relaxed gates.
+- The final diff contains no private credentials, live ledger, test uploads or accidental generated scratch files.
+
+## Publishing and handover
+
+- Publish only according to Neeza's current instruction.
+- Observe all required workflows for the exact final commit, not an older successful run.
+- Verify both addresses, representative images, manifest/gallery and the intended backend availability/state.
+- State what changed, how it was tested, the commit/live link and any genuine remaining dependency.
+- Joshua can complete the ten-minute walkthrough from his phone, using sample graphics safely and understanding the finance handoff.

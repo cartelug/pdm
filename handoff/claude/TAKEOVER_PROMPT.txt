@@ -1,0 +1,13 @@
+I am Neeza Shyaka. Continue the PCI / Walk for Education website using GitHub instead of the Drive ZIPs.
+
+Repository: https://github.com/cartelug/pdm
+Handoff branch: handoff/claude-pci-2026-10-25
+Start file: handoff/claude/README.md
+
+Read the handoff and all relevant guides before changing anything. All website code and all image assets are already in this branch, at the repository root. Do not fetch the ZIPs or run an older-image restore step for a full Git clone.
+
+If you have already started work, preserve your existing branch, edits and docs/joshua/ guide. Read this branch's instructions without overwriting your work. Compare your existing guide against the packaged ten-minute guide.
+
+Tell me what is already complete, what genuinely needs improvement, and any actual access blocker. He is ALREADY WALKING. Prioritise clear mobile/desktop layouts, the actual bag/shirt/main-building references, accurate Shyaka proportions, Archivo/Lexend typography and the simple staff workflow. Keep finance verification, consent, prices, payment hooks and protected fragments intact.
+
+Use a working branch for new changes. Do not push main or deploy until I ask. If you can only read repository context, explain that limitation and continue the review; use a coding workspace for editing/building rather than pretending a connector is a full runtime.
