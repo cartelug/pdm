@@ -293,7 +293,6 @@ body.wfe-campaign :is(.wfp-hero, .wfp-navy, .v3-hero, .v3-journey, .wfe2-forest)
       radial-gradient(42% 42% at 24% 76%, rgb(42 156 193 / 22%), transparent 70%),
       radial-gradient(30% 30% at 88% 86%, rgb(14 31 58 / 14%), transparent 70%);
     animation: wfe-aurora 24s ease-in-out infinite alternate;
-    will-change: transform;
   }
 
   body.wfe-campaign:not(.r-motion-paused) .w-hero::before {
@@ -302,7 +301,6 @@ body.wfe-campaign :is(.wfp-hero, .wfp-navy, .v3-hero, .v3-journey, .wfe2-forest)
 
   body.wfe-campaign:not(.r-motion-paused) .w-hero__media::before {
     inset: -8% -10%;
-    filter: blur(24px);
   }
 
   body.wfe-campaign:not(.r-motion-paused) .w-hero > .w-shell {
@@ -317,7 +315,7 @@ body.wfe-campaign :is(.wfp-hero, .wfp-navy, .v3-hero, .v3-journey, .wfe2-forest)
     box-shadow: 0 18px 34px -16px rgb(183 25 53 / 85%);
   }
 
-  /* The headline accent shimmers between crimson and blue. */
+  /* The headline accent is a crimson-to-blue gradient (static: a moving text clip repaints every frame). */
   body.wfe-campaign:not(.r-motion-paused) .w-hero__title em span,
   body.wfe-campaign:not(.r-motion-paused) .w-hero__title em {
     background: linear-gradient(95deg, #b71935 0%, #d91f3d 30%, #2a59a6 70%, #0b6e8e 100%);
@@ -325,13 +323,12 @@ body.wfe-campaign :is(.wfp-hero, .wfp-navy, .v3-hero, .v3-journey, .wfe2-forest)
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: wfe-sheen 9s ease-in-out infinite alternate;
   }
 
-  /* Progress fills shimmer. */
+  /* Progress fills shimmer a few times, then rest. */
   body.wfe-campaign:not(.r-motion-paused) .w-approved .progress-track i {
     background-size: 220% 100%;
-    animation: wfe-sheen 5s linear infinite alternate;
+    animation: wfe-sheen 5s linear 3 alternate;
   }
 
   /* Scroll-linked effects: only where the browser supports them, and always ending fully visible. */

@@ -3,7 +3,7 @@
   "private": true,
   "description": "Authoring and quality tooling for pamodzici.com. Astro builds the institutional pages into the repository root; the Walk for Education, contribution and Faith in Motion pages are hand-written and protected. See ARCHITECTURE.md.",
   "scripts": {
-    "lint": "npm run lint:js && npm run lint:css && npm run format:check && npm run check:hover && npm run check:prices && npm run check:pages && npm run check:assets",
+    "lint": "npm run lint:js && npm run lint:css && npm run format:check && npm run check:hover && npm run check:prices && npm run check:pages && npm run check:assets && npm run check:theme",
     "lint:js": "eslint .",
     "lint:css": "stylelint \"css/**/*.css\" \"src/styles/**/*.css\"",
     "format": "prettier --write \"css/**/*.css\" \"js/**/*.js\" \"scripts/**/*.mjs\" \"tests/**/*.cjs\"",
@@ -13,6 +13,8 @@
     "prices": "node scripts/step-prices.mjs",
     "assets": "node scripts/assets.mjs",
     "check:assets": "node scripts/assets.mjs --check",
+    "theme": "node scripts/wfe-theme.mjs",
+    "check:theme": "node scripts/wfe-theme.mjs --check",
     "check:pages": "node scripts/pages.mjs",
     "test:browser": "node tests/payments/browser.cjs",
     "check:hover": "node scripts/css-hover.mjs --check css/*.css src/styles/*.css",
