@@ -1,0 +1,63 @@
+---
+import Icon from "../global/Icon.astro";
+import ScenePicture from "../global/ScenePicture.astro";
+import { campaignView, loadCampaignRecord } from "../../lib/campaign";
+const walk = campaignView();
+const choose = ["preparing", "dated", "walking"].includes(walk.state)
+  ? "walk-for-education/index.html#choose-steps"
+  : "walk-for-education/index.html";
+const record = loadCampaignRecord();
+const km = new Intl.NumberFormat("en-GB").format(record.distanceKm);
+---
+
+<section class="pci-section pci-spotlight" id="the-walk" aria-labelledby="spotlight-heading">
+  <div class="pci-spotlight__glow" aria-hidden="true"></div>
+  <div class="pci-container pci-spotlight__grid">
+    <div class="pci-spotlight__copy" data-reveal>
+      <span class="pci-eyebrow">{walk.label}</span>
+      <h2 id="spotlight-heading">
+        One Rotarian. One long road.
+        <em>A campus to build.</em>
+      </h2>
+      <p class="pci-lead">
+        Rotarian Shyaka Mbanda is walking from Nairobi to Kagando, supporting UCU–Kagando University College and the
+        neighbouring Kagando Nursery &amp; Primary School.
+      </p>
+      <p class="pci-spotlight__status" role="status">
+        <span class="pci-pulse" aria-hidden="true"></span>
+        <span data-ops-walk-status>Confirmed walking updates are published here.</span>
+      </p>
+      <dl class="pci-spotlight__facts">
+        <div>
+          <dt>Route</dt>
+          <dd>Nairobi to Kagando</dd>
+        </div>
+        <div>
+          <dt>Planned distance</dt>
+          <dd>About {km} km</dd>
+        </div>
+        <div>
+          <dt>Ways to take part</dt>
+          <dd>Sponsor steps · give · join</dd>
+        </div>
+      </dl>
+      <div class="pci-actions">
+        <a class="pci-button" href={choose} data-protected>
+          {walk.action} <Icon name="arrow" />
+        </a>
+        <a class="pci-text-link" href="walk-for-education/index.html" data-protected>
+          Meet the walk <Icon name="external" />
+        </a>
+      </div>
+      <p class="pci-spotlight__note">
+        Distance is a planning estimate. Kilometres walked are shown only once confirmed.
+      </p>
+    </div>
+    <figure class="pci-spotlight__media" data-reveal>
+      <div class="pci-spotlight__frame">
+        <ScenePicture scene="08" alt="Campaign illustration of the UCU–Kagando main university block." />
+      </div>
+      <figcaption>Campaign illustration · the main block at UCU–Kagando</figcaption>
+    </figure>
+  </div>
+</section>

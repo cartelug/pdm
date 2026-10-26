@@ -127,11 +127,11 @@
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
     "js/wfe.js": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
-    "walk-for-education/accountability/index.html": "d121f53623474d3a1adabcc6086b48195c8532b44464c6eb2d22b57ee2d041b0",
-    "walk-for-education/index.html": "d27e32e09ddcbfdda559bbed54ff0174e374978d07d4836941fea4b459108a86",
-    "walk-for-education/partners/index.html": "19714c39f328ee1ceca5f8130449720299058606082850313f8afafacd69a591",
-    "walk-for-education/take-part/index.html": "2d72a80cdde14d2f66181f3299dd9e504ebadb6cd139a360b9b54f7673d941a0",
-    "walk-for-education/updates/index.html": "fc4e67e55c21252c5bd2432060252f78702113a95306c563b5cd81531031aadf"
+    "walk-for-education/accountability/index.html": "121868a9fc0d2b4add40889dae721b57796f3136b56e231b852267b0e93e3ed1",
+    "walk-for-education/index.html": "5b7dc82b20c3f24849f3a86dbdf66fa27529dbeaa992d10288b66eae48b72a5b",
+    "walk-for-education/partners/index.html": "d20d6320a680ea1751d68ecbd9feb586a24f97b95633b3cc1c95b55112bd79db",
+    "walk-for-education/take-part/index.html": "7ae02f3a0cf76954aed96a14f3e3eebb56cd43de1fe9470c6839826863333aaa",
+    "walk-for-education/updates/index.html": "2251c791c3ca276a008babc0cc3e0806de4ce7ca556e47d3f5d6f72349bdaa59"
   },
   "presentationReviews": [
     {
@@ -752,6 +752,46 @@
       "date": "2026-10-26",
       "authorisation": "User instruction in session: change the Walk for Education colouring to PCI red and black with the Walk blues, with fading animations and gradients.",
       "reason": "Cache-hash query for css/wfe-editorial.css only. The Walk theme added to that stylesheet is scoped to body.wfe-campaign and does not apply to this page. No markup, script, form, payment or fragment change."
+    },
+    {
+      "file": "walk-for-education/index.html",
+      "previousSha256": "d27e32e09ddcbfdda559bbed54ff0174e374978d07d4836941fea4b459108a86",
+      "sha256": "5b7dc82b20c3f24849f3a86dbdf66fa27529dbeaa992d10288b66eae48b72a5b",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: remove the live-reporting panel from the home page and completely redo the home page.",
+      "reason": "Cache-hash query for js/operations-public.js only. That script no longer mounts the finance report panel on the home page and instead fills a compact walking-status line there; its behaviour on the Walk pages is unchanged. No markup, script order, form, payment or fragment change."
+    },
+    {
+      "file": "walk-for-education/partners/index.html",
+      "previousSha256": "19714c39f328ee1ceca5f8130449720299058606082850313f8afafacd69a591",
+      "sha256": "d20d6320a680ea1751d68ecbd9feb586a24f97b95633b3cc1c95b55112bd79db",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: remove the live-reporting panel from the home page and completely redo the home page.",
+      "reason": "Cache-hash query for js/operations-public.js only. That script no longer mounts the finance report panel on the home page and instead fills a compact walking-status line there; its behaviour on the Walk pages is unchanged. No markup, script order, form, payment or fragment change."
+    },
+    {
+      "file": "walk-for-education/take-part/index.html",
+      "previousSha256": "2d72a80cdde14d2f66181f3299dd9e504ebadb6cd139a360b9b54f7673d941a0",
+      "sha256": "7ae02f3a0cf76954aed96a14f3e3eebb56cd43de1fe9470c6839826863333aaa",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: remove the live-reporting panel from the home page and completely redo the home page.",
+      "reason": "Cache-hash query for js/operations-public.js only. That script no longer mounts the finance report panel on the home page and instead fills a compact walking-status line there; its behaviour on the Walk pages is unchanged. No markup, script order, form, payment or fragment change."
+    },
+    {
+      "file": "walk-for-education/updates/index.html",
+      "previousSha256": "fc4e67e55c21252c5bd2432060252f78702113a95306c563b5cd81531031aadf",
+      "sha256": "2251c791c3ca276a008babc0cc3e0806de4ce7ca556e47d3f5d6f72349bdaa59",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: remove the live-reporting panel from the home page and completely redo the home page.",
+      "reason": "Cache-hash query for js/operations-public.js only. That script no longer mounts the finance report panel on the home page and instead fills a compact walking-status line there; its behaviour on the Walk pages is unchanged. No markup, script order, form, payment or fragment change."
+    },
+    {
+      "file": "walk-for-education/accountability/index.html",
+      "previousSha256": "d121f53623474d3a1adabcc6086b48195c8532b44464c6eb2d22b57ee2d041b0",
+      "sha256": "121868a9fc0d2b4add40889dae721b57796f3136b56e231b852267b0e93e3ed1",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: remove the live-reporting panel from the home page and completely redo the home page.",
+      "reason": "Cache-hash query for js/operations-public.js only. That script no longer mounts the finance report panel on the home page and instead fills a compact walking-status line there; its behaviour on the Walk pages is unchanged. No markup, script order, form, payment or fragment change."
     }
   ],
   "functionalReviews": [

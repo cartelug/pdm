@@ -1,4 +1,5 @@
-/* One approved public projection on homepage, project cards and the Walk pages. */
+/* One approved public projection on the homepage, project cards and the Walk pages. The homepage shows only the
+   confirmed walking status; the finance-reconciled report stays on the project and Walk pages. */
 (function () {
   "use strict";
   const path = location.pathname;
@@ -13,10 +14,8 @@
   const body = document.createElement("div");
   body.textContent = "Checking approved campaign reporting…";
   panel.append(h, body);
-  if (path === "/" || path === "/index.html") {
-    const first = main.querySelector("section");
-    first ? first.after(panel) : main.prepend(panel);
-  } else main.append(panel);
+  const home = path === "/" || path === "/index.html";
+  if (!home) main.append(panel);
   const el = (tag, text) => {
     const n = document.createElement(tag);
     n.textContent = text;
@@ -41,6 +40,9 @@
       document.querySelectorAll(".pci-campaign-chip__status").forEach((n) => {
         n.textContent = status;
       });
+      document.querySelectorAll("[data-ops-walk-status]").forEach((n) => {
+        n.textContent = w.town + " · " + w.date + " · " + w.km + " km confirmed";
+      });
       document.querySelectorAll(".pci-live, .pci-duo__panel, .pci-project").forEach((card) => {
         if (!card.querySelector('a[href*="walk-for-education"]') && !card.matches('a[href*="walk-for-education"]'))
           return;
@@ -52,13 +54,17 @@
           card.dataset.projectStatus = w.activity === "active" ? "Live campaign" : "Preparing launch";
         }
       });
-    } else
+    } else {
+      document.querySelectorAll("[data-ops-walk-status]").forEach((n) => {
+        n.textContent = "The next confirmed walking update awaits publication";
+      });
       body.append(
         el(
           "p",
           "Campaign reporting is live. The next named-owner walking update awaits publication; no walking distance is inferred.",
         ),
       );
+    }
     for (const t of d.totals.currencies) {
       body.append(
         el("h3", money(t.received, t.currency) + " reconciled collections"),
@@ -137,7 +143,7 @@
       render(d);
       last = d.reportingCutoff;
     } catch {
-      document.querySelectorAll(".pci-campaign-chip__status").forEach((n) => {
+      document.querySelectorAll(".pci-campaign-chip__status, [data-ops-walk-status]").forEach((n) => {
         n.textContent = "Update temporarily unavailable";
       });
       // Remove recognition immediately on failure: its consent may have been withdrawn.

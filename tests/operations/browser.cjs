@@ -146,7 +146,10 @@ const out = process.env.PCI_TEST_SCREENSHOTS || path.join(os.tmpdir(), "pci-oper
     await (await wait).saveAs(path.join(out, "withdrawn-thanks-square.png"));
     console.log("PASS live snapshot, large amount, long name, consent withdrawal between preview and export");
     await page.goto(`http://127.0.0.1:${port}/`);
-    await page.locator(".ops-live").filter({ hasText: "123 km confirmed" }).waitFor();
+    // The homepage shows the confirmed walking status only; the finance report stays on the project and Walk pages.
+    await page.locator("[data-ops-walk-status]").filter({ hasText: "123 km confirmed" }).waitFor();
+    assert.equal(await page.locator(".ops-live").count(), 0, "homepage does not carry the finance report panel");
+    assert(!(await page.locator("main").innerText()).includes("reconciled collections"));
     for (const route of ["/projects/", "/walk-for-education/"]) {
       await page.goto(`http://127.0.0.1:${port}${route}`);
       await page.locator(".ops-live").filter({ hasText: "123 km confirmed" }).waitFor();

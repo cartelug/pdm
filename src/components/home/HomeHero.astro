@@ -3,6 +3,9 @@ import Icon from "../global/Icon.astro";
 import ScenePicture from "../global/ScenePicture.astro";
 import { campaignView } from "../../lib/campaign";
 const walk = campaignView();
+const choose = ["preparing", "dated", "walking"].includes(walk.state)
+  ? "walk-for-education/index.html#choose-steps"
+  : "walk-for-education/index.html";
 ---
 
 <section class="pci-hero" id="top" aria-labelledby="home-heading">
@@ -32,6 +35,9 @@ const walk = campaignView();
         Pamodzi brings communities and partners together around the priorities people define for themselves.
       </p>
       <div class="pci-actions" data-hero-detail>
+        <a class="pci-button pci-button--cta" href={choose} data-protected>
+          {walk.action} <Icon name="arrow" />
+        </a>
         <a class="pci-button pci-button--light" href="projects/index.html">
           Explore Our Work <Icon name="arrow" />
         </a>
