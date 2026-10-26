@@ -4039,6 +4039,26 @@ body.wfe-campaign :is(.wfp-hero, .wfp-navy, .v3-hero, .v3-journey, .wfe2-forest)
   color: var(--k-red-lit);
 }
 
+/* ---------- 2b. Imagery ---------- */
+
+/* The wide education photo is capped to the viewport height, which crops a 16:9 scene to its middle third. Keep the
+   walker's head and everyone's faces in frame on tablet and desktop, and feather the top and bottom into the page. */
+@media (min-width: 720px) {
+  body.wfe-campaign .w-learn__hinge img {
+    object-position: 50% 9%;
+  }
+}
+
+body.wfe-campaign .w-learn__hinge img {
+  mask-image: linear-gradient(180deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+}
+
+/* One scroll-progress line, under the header, in the campaign colours. */
+body.wfe-campaign .w-progress {
+  height: 3px;
+  background: var(--k-spectrum);
+}
+
 /* ---------- 3. Motion ---------- */
 
 @keyframes wfe-aurora {
@@ -4070,16 +4090,6 @@ body.wfe-campaign :is(.wfp-hero, .wfp-navy, .v3-hero, .v3-journey, .wfe2-forest)
   to {
     opacity: 1;
     translate: 0 0;
-  }
-}
-
-@keyframes wfe-progress {
-  from {
-    transform: scaleX(0);
-  }
-
-  to {
-    transform: scaleX(1);
   }
 }
 
@@ -4149,19 +4159,6 @@ body.wfe-campaign :is(.wfp-hero, .wfp-navy, .v3-hero, .v3-journey, .wfe2-forest)
       animation: wfe-rise-in linear both;
       animation-timeline: view();
       animation-range: entry 4% cover 26%;
-    }
-
-    body.wfe-campaign:not(.r-motion-paused)::after {
-      content: "";
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 2000;
-      height: 3px;
-      pointer-events: none;
-      background: var(--k-spectrum);
-      transform-origin: 0 50%;
-      animation: wfe-progress linear both;
-      animation-timeline: scroll(root block);
     }
   }
 }
