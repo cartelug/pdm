@@ -12,7 +12,19 @@
   "source": "projects/index.html and campaign home at baseline commit",
   "publication": "existing-public",
   "reviewedAt": null,
-  "image": "assets/wfe-2026/official-kit/scene-02-desktop-1440.webp",
+  "image": "assets/wfe-2026/cards/walk-card-720.webp",
   "imageAlt": "Campaign illustration of Shyaka in the official black kit walking with the UCU–Kagando main block behind him",
-  "imageNote": "Reference-led campaign illustration, not a photograph of the walk"
+  "imageNote": "Reference-led campaign illustration, not a photograph of the walk",
+  "imageSet": [
+    {
+      "src": "assets/wfe-2026/cards/walk-card-720.webp",
+      "avif": "assets/wfe-2026/cards/walk-card-720.avif",
+      "width": 720
+    },
+    {
+      "src": "assets/wfe-2026/cards/walk-card-1100.webp",
+      "avif": "assets/wfe-2026/cards/walk-card-1100.avif",
+      "width": 1100
+    }
+  ]
 }

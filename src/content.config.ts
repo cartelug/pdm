@@ -24,6 +24,7 @@ export const collections = {
       image: z.string().optional(),
       imageAlt: z.string().optional(),
       imageNote: z.string().optional(),
+      imageSet: z.array(z.object({ src: z.string(), avif: z.string(), width: z.number() })).optional(),
       walkStatus: z.string().optional(),
       pledgeStatus: z.string().optional(),
       paymentStatus: z.string().optional(),

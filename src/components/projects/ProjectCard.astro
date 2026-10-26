@@ -18,7 +18,25 @@ const p = project.data;
   data-reveal
 >
   <a class="pci-project__media" href={href(path, p.route)} tabindex="-1" aria-hidden="true">
-    {p.image ? (
+    {p.image && p.imageSet ? (
+      <picture>
+        <source
+          type="image/avif"
+          srcset={p.imageSet.map((s) => `${asset(path, s.avif)} ${s.width}w`).join(", ")}
+          sizes="(max-width: 719px) 92vw, 50vw"
+        />
+        <img
+          src={asset(path, p.image)}
+          srcset={p.imageSet.map((s) => `${asset(path, s.src)} ${s.width}w`).join(", ")}
+          sizes="(max-width: 719px) 92vw, 50vw"
+          alt=""
+          width="1000"
+          height="700"
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
+    ) : p.image ? (
       <img src={asset(path, p.image)} alt="" width="1000" height="700" loading="lazy" decoding="async" />
     ) : (
       <div class="pci-project__typography">

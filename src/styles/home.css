@@ -1906,12 +1906,8 @@
 
 /* Project card pictures: keep heads and faces in frame when a wide scene fills a tall or square card. */
 @layer home {
-  .pci-project__media img[src*="official-kit/scene-02"] {
-    object-position: 58% 16%;
-  }
-
-  .pci-project__media img[src*="official-kit/scene-11"] {
-    object-position: 62% 22%;
+  .pci-project__media picture {
+    display: contents;
   }
 
   .pci-project__media img[src*="faith-1000"] {
