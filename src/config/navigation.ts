@@ -53,22 +53,54 @@ export const programmes = [
   {
     id: "education",
     title: "Education",
+    short: "Education",
     summary: "Learning environments, school infrastructure, digital learning and teacher capacity.",
+    covers: [
+      "Schools and classroom blocks",
+      "Science and ICT laboratories",
+      "Teachers’ housing and sanitation",
+      "Digital learning and teacher capacity",
+    ],
+    cta: "See our education work",
   },
   {
     id: "health",
     title: "Health",
+    short: "Health",
     summary: "Community-defined health priorities, facilities, equipment and professional partnerships.",
+    covers: [
+      "Health Centre II, III and IV facilities",
+      "Theatres and diagnostic laboratories",
+      "Equipment and ambulances",
+      "Energy, water and digital health",
+    ],
+    cta: "See our health work",
   },
   {
     id: "climate",
     title: "Climate & Green Development",
+    short: "Climate",
     summary: "Renewable energy, climate-smart agriculture, conservation and resilient local infrastructure.",
+    covers: [
+      "Renewable energy",
+      "Climate-smart agriculture",
+      "Afforestation and restoration",
+      "Waste management and education",
+    ],
+    cta: "See our climate work",
   },
   {
     id: "inclusion",
     title: "Financial Inclusion",
+    short: "Inclusion",
     summary: "Savings groups, cooperatives, financial literacy and community enterprise.",
+    covers: [
+      "VSLAs, SACCOs and cooperatives",
+      "Youth and women’s enterprises",
+      "Financial literacy and investment readiness",
+      "Responsible use of community resources",
+    ],
+    cta: "See our financial inclusion work",
   },
 ];
 export const modelStages = [

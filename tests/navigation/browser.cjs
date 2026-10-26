@@ -161,6 +161,71 @@ const server = http.createServer((req, res) => {
     );
     assert.equal(await plain.getByRole("link", { name: "Explore Our Work" }).isVisible(), true);
     await nojs.close();
+    // Four pillars: choosing, keyboard, a phone swipe and the no-script reading order.
+    const stage = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    await stage.goto(base + "/");
+    const pillars = stage.locator(".pci-pillars");
+    await pillars.scrollIntoViewIfNeeded();
+    assert.equal(await pillars.getAttribute("data-active"), "education");
+    await stage.locator("#pillar-tab-climate").click();
+    assert.equal(await pillars.getAttribute("data-active"), "climate");
+    assert.equal(await stage.locator("#pillar-tab-climate").getAttribute("aria-selected"), "true");
+    assert.equal(await stage.locator("#pillar-tab-education").getAttribute("aria-selected"), "false");
+    await stage.locator("#pillar-tab-climate").focus();
+    await stage.keyboard.press("ArrowRight");
+    assert.equal(await pillars.getAttribute("data-active"), "inclusion");
+    await stage.keyboard.press("ArrowRight");
+    assert.equal(await pillars.getAttribute("data-active"), "education", "arrow keys wrap round the ring");
+    await stage.keyboard.press("End");
+    assert.equal(await pillars.getAttribute("data-active"), "inclusion");
+    await stage.waitForFunction(
+      () =>
+        Array.from(document.querySelectorAll(".pci-pillars__panel"))
+          .map((el) => getComputedStyle(el).visibility)
+          .join() === "hidden,hidden,hidden,visible",
+    );
+    assert.equal(
+      await stage.locator('.pci-pillars__panel[data-pillar="inclusion"] a').getAttribute("href"),
+      "what-we-do/index.html#inclusion",
+    );
+    await stage.close();
+    const swipe = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      hasTouch: true,
+      isMobile: true,
+      deviceScaleFactor: 2,
+    });
+    const phone = await swipe.newPage();
+    await phone.goto(base + "/");
+    const phonePillars = phone.locator(".pci-pillars");
+    await phonePillars.scrollIntoViewIfNeeded();
+    await phone.locator("#pillar-tab-health").tap();
+    await phone.waitForFunction(() => document.querySelector("[data-pillars-panels]").scrollLeft > 100);
+    assert.equal(await phonePillars.getAttribute("data-active"), "health");
+    await phone.evaluate(() => {
+      const track = document.querySelector("[data-pillars-panels]");
+      const card = track.querySelectorAll(".pci-pillars__panel")[3];
+      track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "instant" });
+    });
+    await phone.waitForFunction(() => document.querySelector(".pci-pillars").dataset.active === "inclusion");
+    assert.equal(await phone.locator("#pillar-tab-inclusion").getAttribute("aria-selected"), "true");
+    assert.ok(
+      await phone.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+      "the pillar cards swipe inside the stage without widening the page",
+    );
+    await swipe.close();
+    const bare = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1440, height: 900 } });
+    const bareStage = await bare.newPage();
+    await bareStage.goto(base + "/");
+    assert.equal(await bareStage.locator(".pci-pillars__tabs").evaluate((el) => getComputedStyle(el).display), "none");
+    assert.deepEqual(
+      await bareStage
+        .locator(".pci-pillars__panel")
+        .evaluateAll((els) => els.map((el) => getComputedStyle(el).visibility + "/" + getComputedStyle(el).opacity)),
+      ["visible/1", "visible/1", "visible/1", "visible/1"],
+      "without the script all four pillars are stacked and readable",
+    );
+    await bare.close();
     assert.deepEqual(errors, []);
     console.log(
       "Institutional browser checks passed: responsive routes, modal lifecycle, reduced motion, filters and no-JS navigation.",

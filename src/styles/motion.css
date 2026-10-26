@@ -423,23 +423,11 @@
     }
 
     /* ----- Idle ----- */
-    .pci-pillar__art img {
-      animation: pci-float 5.5s ease-in-out infinite alternate;
-    }
-
-    .pci-pillar:nth-child(2) .pci-pillar__art img {
-      animation-delay: -1.4s;
-      animation-duration: 6.3s;
-    }
-
-    .pci-pillar:nth-child(3) .pci-pillar__art img {
-      animation-delay: -2.8s;
-      animation-duration: 5.1s;
-    }
-
-    .pci-pillar:nth-child(4) .pci-pillar__art img {
-      animation-delay: -4.2s;
-      animation-duration: 6.9s;
+    .pci-pillars[data-active="education"] [data-for="education"] img,
+    .pci-pillars[data-active="health"] [data-for="health"] img,
+    .pci-pillars[data-active="climate"] [data-for="climate"] img,
+    .pci-pillars[data-active="inclusion"] [data-for="inclusion"] img {
+      animation: pci-float 5.8s ease-in-out infinite alternate;
     }
 
     .pci-about__art img {

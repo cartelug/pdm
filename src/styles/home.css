@@ -271,227 +271,506 @@
     }
   }
 
-  /* ---------- Pillars ---------- */
+  /* ---------- Pillars: four sculptures, one ring ---------- */
   .pci-pillars {
-    display: grid;
-    gap: 14px;
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .pci-pillar {
-    --open: 1;
+    --glow: #d91f3d;
+    --deep: #3a0b17;
+    --on: #fff;
+    --lit: #ff6b82;
+    --spin: 0deg;
+    --dir: 1;
 
     position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 12px 12px 28px;
-    border-radius: 30px;
-    background: var(--pci-tint, var(--pci-blush));
-  }
-
-  .pci-pillar[data-pillar="education"] {
-    --pci-tint: #f6d6d2;
-  }
-
-  .pci-pillar[data-pillar="health"] {
-    --pci-tint: #f9ddd0;
-  }
-
-  .pci-pillar[data-pillar="climate"] {
-    --pci-tint: #e8e1c6;
-  }
-
-  .pci-pillar[data-pillar="inclusion"] {
-    --pci-tint: #f6e0b4;
-  }
-
-  .pci-pillar__art {
+    isolation: isolate;
     display: grid;
-    place-items: center;
-    aspect-ratio: 1 / 0.88;
-    margin-bottom: 22px;
-    border-radius: var(--pci-arch);
-    background: rgb(255 255 255 / 42%);
-    overflow: hidden;
+    gap: 6px;
+    padding: 22px 20px 26px;
+    overflow: clip;
+    border-radius: 32px;
+    container-type: inline-size;
+    color: var(--pci-on-night);
+    background:
+      radial-gradient(
+        70% 60% at 50% 12%,
+        color-mix(in srgb, var(--glow) 34%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        60% 50% at 0% 100%,
+        color-mix(in srgb, var(--glow) 14%, transparent),
+        transparent 70%
+      ),
+      linear-gradient(165deg, var(--deep), #0d0709 78%);
+    box-shadow: 0 50px 90px -50px rgb(13 7 9 / 80%);
+    transition:
+      --glow 0.8s ease,
+      --deep 0.8s ease,
+      --spin 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
-  .pci-pillar__art img {
-    width: 80%;
-    transition: transform 0.7s var(--pci-ease);
+  .pci-pillars[data-active="education"] {
+    --glow: #d91f3d;
+    --deep: #3a0b17;
+    --on: #fff;
+    --lit: #ff6b82;
   }
 
-  .pci-pillar__rail {
+  .pci-pillars[data-active="health"] {
+    --glow: #2a9cc1;
+    --deep: #0b2236;
+    --on: #07182a;
+    --lit: #7fd6f0;
+  }
+
+  .pci-pillars[data-active="climate"] {
+    --glow: #3fb37f;
+    --deep: #0b2a1d;
+    --on: #06180f;
+    --lit: #8fe0b4;
+  }
+
+  .pci-pillars[data-active="inclusion"] {
+    --glow: #e6ad3e;
+    --deep: #2f1f06;
+    --on: #1f1403;
+    --lit: #f4cf7e;
+  }
+
+  /* The stage: a halo in the active colour, one large sculpture, and the four selectors. */
+  .pci-pillars__stage {
+    position: relative;
+    display: grid;
+    gap: 10px;
+    container-type: inline-size;
+  }
+
+  .pci-pillars__halo {
+    position: absolute;
+    top: 38cqw;
+    left: 50%;
+    z-index: -1;
+    width: 110cqw;
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    pointer-events: none;
+    background: radial-gradient(
+      closest-side,
+      color-mix(in srgb, var(--glow) 46%, transparent),
+      transparent 74%
+    );
+  }
+
+  .pci-pillars__ring {
     display: none;
   }
 
-  .pci-pillar__body {
-    display: grid;
-    flex: 1;
-    align-content: start;
-    gap: 10px;
-    padding-inline: 14px;
+  .pci-pillars__art {
+    position: relative;
+    aspect-ratio: 1 / 0.8;
   }
 
-  .pci-pillar h3 {
-    font-size: clamp(1.9rem, 1.4rem + 1vw, 2.5rem);
-  }
-
-  .pci-pillar p {
-    margin: 0;
-    font-size: 0.98rem;
-    line-height: 1.55;
-    color: var(--pci-ink-soft);
-  }
-
-  .pci-pillar__go {
-    display: grid;
-    flex: none;
-    align-self: flex-end;
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    margin: 24px 14px 0;
-    border-radius: 50%;
-    background: var(--pci-ink);
-    color: var(--pci-paper);
+  .pci-pillars__sculpture {
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    width: min(64cqw, 320px);
+    translate: -50% -50%;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(calc(var(--dir) * 26px), 18px, 0) rotate(calc(var(--dir) * -9deg))
+      scale(0.9);
     transition:
-      background-color 0.3s,
-      rotate 0.4s var(--pci-ease);
+      opacity 0.5s var(--pci-ease),
+      transform 0.85s var(--pci-ease);
   }
 
-  .pci-pillar__go .pci-icon {
+  .pci-pillars__sculpture img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 26px 30px rgb(0 0 0 / 46%));
+  }
+
+  .pci-pillars[data-active="education"] [data-for="education"],
+  .pci-pillars[data-active="health"] [data-for="health"],
+  .pci-pillars[data-active="climate"] [data-for="climate"],
+  .pci-pillars[data-active="inclusion"] [data-for="inclusion"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .pci-pillars__floor {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    width: 52cqw;
+    height: 7cqw;
+    translate: -50% 0;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(0 0 0 / 50%), transparent);
+  }
+
+  /* Selectors: a sculpture in a coin, in a row on a phone, on the ring on a desktop. */
+  .pci-pillars__tabs {
+    display: grid;
+    gap: 4px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .pci-pillar {
+    display: grid;
+    gap: 7px;
+    justify-items: center;
+    min-height: 44px;
+    padding: 6px 0 4px;
+    border: 0;
+    background: none;
+    color: rgb(250 246 241 / 68%);
+    font: 600 0.8125rem / 1.15 var(--pci-display);
+    letter-spacing: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .pci-pillar[data-pillar="education"] {
+    --c: #d91f3d;
+  }
+
+  .pci-pillar[data-pillar="health"] {
+    --c: #2a9cc1;
+  }
+
+  .pci-pillar[data-pillar="climate"] {
+    --c: #3fb37f;
+  }
+
+  .pci-pillar[data-pillar="inclusion"] {
+    --c: #e6ad3e;
+  }
+
+  .pci-pillar__coin {
+    display: grid;
+    place-items: center;
+    width: clamp(54px, 17cqw, 76px);
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 1.5px solid rgb(250 246 241 / 24%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 30%, rgb(255 255 255 / 16%), rgb(255 255 255 / 4%));
+    transition:
+      border-color 0.3s,
+      box-shadow 0.4s,
+      scale 0.4s var(--pci-ease);
+  }
+
+  .pci-pillar__coin img {
+    display: block;
+    width: 82%;
+    height: auto;
+  }
+
+  .pci-pillar[aria-selected="true"] {
+    color: #fff;
+  }
+
+  .pci-pillar[aria-selected="true"] .pci-pillar__coin {
+    border-color: var(--c);
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--c) 30%, transparent),
+      0 14px 34px -12px var(--c);
+    scale: 1.08;
+  }
+
+  .pci-pillar:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+    border-radius: 18px;
+  }
+
+  /* The text: swipeable cards on a phone, one at a time beside the stage on a desktop. */
+  .pci-pillars__panels {
+    display: flex;
+    gap: 12px;
+    margin-inline: -20px;
+    padding: 6px 20px 2px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: 20px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .pci-pillars__panels::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pci-pillars__panel {
+    display: grid;
+    flex: 0 0 calc(100% - 36px);
+    align-content: start;
+    gap: 14px;
+    padding: 22px 20px 24px;
+    border: 1px solid rgb(250 246 241 / 14%);
+    border-radius: 24px;
+    scroll-snap-align: start;
+    background: linear-gradient(160deg, rgb(250 246 241 / 9%), rgb(250 246 241 / 3%));
+  }
+
+  .pci-pillars__panel h3 {
+    margin: 0;
+    font: 640 clamp(2.1rem, 11cqi, 3.2rem) / 0.98 var(--pci-display);
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+    color: #fff;
+  }
+
+  .pci-pillars__summary {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--pci-on-night-muted);
+  }
+
+  .pci-pillars__covers {
+    display: grid;
+    margin: 4px 0 6px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pci-pillars__covers li {
+    position: relative;
+    padding: 11px 0 11px 26px;
+    border-top: 1px solid rgb(250 246 241 / 12%);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: rgb(250 246 241 / 90%);
+  }
+
+  .pci-pillars__covers li::before {
+    content: "";
+    position: absolute;
+    top: 1.05em;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 0 80%;
+    background: var(--lit);
+    rotate: -8deg;
+  }
+
+  .pci-pillars__go {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    justify-self: start;
+    min-height: 52px;
+    padding: 6px 8px 6px 22px;
+    border-radius: 999px;
+    background: var(--glow);
+    color: var(--on);
+    font: 640 1rem / 1.15 var(--pci-display);
+    letter-spacing: -0.005em;
+    transition: translate 0.3s var(--pci-ease);
+  }
+
+  .pci-pillars__go span {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgb(0 0 0 / 22%);
+  }
+
+  .pci-pillars__go .pci-icon {
     width: 18px;
     height: 18px;
   }
 
+  .pci-pillars__go:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+  }
+
   @media (hover: hover) {
-    .pci-pillar:hover .pci-pillar__go {
-      background: var(--pci-crimson);
-      rotate: 45deg;
+    .pci-pillars__go:hover {
+      translate: 0 -2px;
     }
 
-    .pci-pillar:hover .pci-pillar__art img {
-      transform: scale(1.06) rotate(-2deg);
-    }
-  }
-
-  @media (min-width: 640px) {
-    .pci-pillars {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .pci-pillar:hover .pci-pillar__coin {
+      border-color: var(--c);
+      scale: 1.06;
     }
   }
 
-  @media (min-width: 1200px) {
-    .pci-pillars {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
+  /* Without the script, all four pillars are simply stacked and readable. */
+  .pci-pillars:not(.is-live) .pci-pillars__tabs {
+    display: none;
   }
 
-  /* The accordion needs room for its expanded copy as well as the three folded panels. */
-  @media (min-width: 1200px) and (hover: hover) {
+  .pci-pillars:not(.is-live) .pci-pillars__panels {
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .pci-pillars:not(.is-live) .pci-pillars__panel {
+    flex-basis: auto;
+  }
+
+  @media (min-width: 1000px) {
     .pci-pillars {
-      display: flex;
-      height: clamp(540px, 68vh, 680px);
+      align-items: center;
+      gap: clamp(28px, 4vw, 72px);
+      padding: clamp(36px, 4.4vw, 80px);
+      border-radius: 44px;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      grid-template-areas: "panels stage";
+    }
+
+    .pci-pillars__stage {
+      grid-area: stage;
+      display: block;
+      aspect-ratio: 1;
+    }
+
+    .pci-pillars__halo {
+      top: 50%;
+      width: 118cqw;
+    }
+
+    .pci-pillars__ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: block;
+      width: 82cqw;
+      aspect-ratio: 1;
+      translate: -50% -50%;
+      border: 1px dashed rgb(250 246 241 / 26%);
+      border-radius: 50%;
+    }
+
+    .pci-pillars__art {
+      position: absolute;
+      inset: 0;
+      aspect-ratio: auto;
+    }
+
+    .pci-pillars__sculpture {
+      top: 47%;
+      width: 56cqw;
+    }
+
+    .pci-pillars__floor {
+      top: 71%;
+      width: 40cqw;
+      height: 6cqw;
+    }
+
+    .pci-pillars__tabs {
+      position: absolute;
+      inset: 0;
+      display: block;
     }
 
     .pci-pillar {
-      --open: 0;
+      --ang: calc(var(--i) * 90deg + var(--spin) + 90deg);
 
-      flex: 1 1 0;
-      min-width: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 17cqw;
+      margin: -8.5cqw 0 0 -8.5cqw;
       padding: 0;
-      overflow: hidden;
-      transition: flex-grow 0.9s var(--pci-ease);
+      transform: rotate(var(--ang)) translateX(41cqw) rotate(calc(var(--ang) * -1));
     }
 
-    .pci-pillar:first-child {
-      --open: 1;
-
-      flex-grow: 3.6;
+    .pci-pillar__coin {
+      width: 100%;
     }
 
-    .pci-pillars:has(.pci-pillar:hover, .pci-pillar:focus-visible)
-      .pci-pillar:first-child:not(:hover, :focus-visible) {
-      --open: 0;
-
-      flex-grow: 1;
-    }
-
-    .pci-pillar:hover,
-    .pci-pillar:focus-visible {
-      --open: 1;
-
-      flex-grow: 3.6;
-    }
-
-    .pci-pillar__art,
-    .pci-pillar__body,
-    .pci-pillar__go {
-      opacity: var(--open);
-      transition: opacity 0.5s var(--pci-ease) 0.12s;
-    }
-
-    .pci-pillar__art {
+    .pci-pillar__label {
       position: absolute;
-      top: 28px;
-      right: 28px;
-      width: min(58%, 260px);
-      aspect-ratio: 1 / 0.88;
-      margin: 0;
-    }
-
-    .pci-pillar__body {
-      position: absolute;
-      bottom: 34px;
-      left: 34px;
-      width: calc(100% - 68px);
-      max-width: 400px;
-      padding: 0;
-    }
-
-    .pci-pillar__body h3 {
-      font-size: clamp(2.6rem, 1.6rem + 2vw, 3.8rem);
-    }
-
-    .pci-pillar__go {
-      position: absolute;
-      top: 28px;
-      left: 28px;
-      margin: 0;
-    }
-
-    .pci-pillar__rail {
-      position: absolute;
-      inset: 28px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      opacity: calc(1 - var(--open));
-      transition: opacity 0.4s var(--pci-ease);
-    }
-
-    .pci-pillar__rail::after {
-      content: attr(data-title);
-      order: 2;
-      font: 600 clamp(1.9rem, 1.3rem + 1vw, 2.5rem) / 1 var(--pci-display);
-      letter-spacing: -0.03em;
-      writing-mode: vertical-rl;
-      rotate: 180deg;
+      top: 100%;
+      left: 50%;
+      padding: 5px 12px;
+      border-radius: 999px;
+      translate: -50% 8px;
+      opacity: 0;
       white-space: nowrap;
+      background: rgb(13 7 9 / 78%);
+      color: #fff;
+      font-size: 0.875rem;
+      transition: opacity 0.3s;
     }
 
-    .pci-pillar__index {
-      font: 500 0.8125rem / 1 var(--pci-mono);
-      letter-spacing: 0.12em;
-      color: var(--pci-crimson-ink);
+    .pci-pillar[aria-selected="true"] .pci-pillar__label,
+    .pci-pillar:focus-visible .pci-pillar__label {
+      opacity: 1;
     }
 
-    .pci-pillar__rail .pci-pillar-icon {
-      order: 3;
-      width: 38px;
-      height: 38px;
-      color: var(--pci-ink);
+    @media (hover: hover) {
+      .pci-pillar:hover .pci-pillar__label {
+        opacity: 1;
+      }
+    }
+
+    .pci-pillars__panels {
+      grid-area: panels;
+      display: grid;
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+      scroll-snap-type: none;
+    }
+
+    .pci-pillars__panel {
+      grid-area: 1 / 1;
+      padding: 0;
+      border: 0;
+      background: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(16px);
+      transition:
+        opacity 0.45s ease,
+        transform 0.7s var(--pci-ease),
+        visibility 0s linear 0.45s;
+    }
+
+    .pci-pillars__panel h3 {
+      font-size: clamp(2.4rem, 5.4cqi, 5.4rem);
+    }
+
+    .pci-pillars__summary {
+      max-width: 40ch;
+      font-size: 1.0625rem;
+    }
+
+    .pci-pillars[data-active="education"] [role="tabpanel"][data-pillar="education"],
+    .pci-pillars[data-active="health"] [role="tabpanel"][data-pillar="health"],
+    .pci-pillars[data-active="climate"] [role="tabpanel"][data-pillar="climate"],
+    .pci-pillars[data-active="inclusion"] [role="tabpanel"][data-pillar="inclusion"] {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition-delay: 0.16s, 0.16s, 0s;
+    }
+
+    .pci-pillars:not(.is-live) .pci-pillars__panels {
+      display: grid;
+      gap: 28px;
+    }
+
+    .pci-pillars:not(.is-live) .pci-pillars__panel {
+      grid-area: auto;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
     }
   }
 
@@ -1819,7 +2098,6 @@
 
   /* ---------- Cards ---------- */
   @media (hover: hover) {
-    .pci-home .pci-pillar,
     .pci-home .pci-column,
     .pci-home .pci-duo__panel {
       transition:
@@ -1827,7 +2105,6 @@
         translate 0.5s var(--pci-ease);
     }
 
-    .pci-home .pci-pillar:hover,
     .pci-home .pci-column:hover {
       translate: 0 -6px;
       box-shadow:
@@ -2141,5 +2418,37 @@
         animation-range: entry 8% cover 48%;
       }
     }
+  }
+}
+
+/* The pillar stage animates its colours and its ring; registering them lets the browser blend them. */
+@property --glow {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #d91f3d;
+}
+
+@property --deep {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #3a0b17;
+}
+
+@property --spin {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pci-pillars,
+  .pci-pillar__coin,
+  .pci-pillars__panel {
+    transition: none;
+  }
+
+  .pci-pillars__sculpture {
+    transform: none;
+    transition: opacity 0.2s;
   }
 }

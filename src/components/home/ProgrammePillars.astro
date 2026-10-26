@@ -1,11 +1,12 @@
 ---
 import { programmes } from "../../config/navigation";
 import Icon from "../global/Icon.astro";
-import PillarIcon from "../global/PillarIcon.astro";
-const artwork = ["education", "health", "climate", "inclusion"] as const;
+
+// One satin ribbon sculpture per pillar, drawn in that pillar's colour (assets/pillars).
+const art = (id: string) => `assets/pillars/sculpture-${id}`;
 ---
 
-<section class="pci-section" id="our-pillars" aria-labelledby="pillars-heading">
+<section class="pci-section pci-pillars-section" id="our-pillars" aria-labelledby="pillars-heading">
   <div class="pci-container">
     <div class="pci-section-head" data-reveal>
       <div>
@@ -20,35 +21,77 @@ const artwork = ["education", "health", "climate", "inclusion"] as const;
         Education. Health. A greener future. Financial inclusion. Four areas of work, shaped by the people they serve.
       </p>
     </div>
-    <div class="pci-pillars" data-reveal>
-      {programmes.map((p, i) => (
-        <a class="pci-pillar" href={"what-we-do/index.html#" + p.id} data-pillar={artwork[i]}>
-          <div class="pci-pillar__art" aria-hidden="true">
-            <img
-              src={"assets/crimson/pillar-" + artwork[i] + "-480.webp"}
-              width="480"
-              height="480"
-              alt=""
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-          <span class="pci-pillar__rail" aria-hidden="true" data-title={p.title}>
-            <span class="pci-pillar__index">0{i + 1}</span>
-            <PillarIcon name={artwork[i]} />
-          </span>
-          <div class="pci-pillar__body">
+    <div class="pci-pillars" data-pillars data-active="education">
+      <div class="pci-pillars__stage">
+        <span class="pci-pillars__halo" aria-hidden="true"></span>
+        <span class="pci-pillars__ring" aria-hidden="true"></span>
+        <div class="pci-pillars__art" aria-hidden="true">
+          {programmes.map((p) => (
+            <picture class="pci-pillars__sculpture" data-for={p.id}>
+              <source type="image/avif" srcset={`${art(p.id)}.avif`} />
+              <img src={`${art(p.id)}.webp`} width="480" height="480" alt="" loading="lazy" decoding="async" />
+            </picture>
+          ))}
+          <span class="pci-pillars__floor"></span>
+        </div>
+        <div class="pci-pillars__tabs" role="tablist" aria-label="Our four pillars">
+          {programmes.map((p, i) => (
+            <button
+              type="button"
+              role="tab"
+              class="pci-pillar"
+              id={`pillar-tab-${p.id}`}
+              aria-controls={`pillar-panel-${p.id}`}
+              aria-selected={i === 0 ? "true" : "false"}
+              tabindex={i === 0 ? 0 : -1}
+              data-pillar={p.id}
+              style={`--i:${i}`}
+            >
+              <span class="pci-pillar__coin">
+                <picture>
+                  <source type="image/avif" srcset={`${art(p.id)}.avif`} />
+                  <img src={`${art(p.id)}.webp`} width="480" height="480" alt="" loading="lazy" decoding="async" />
+                </picture>
+              </span>
+              <span class="pci-pillar__label">{p.short}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div class="pci-pillars__panels" data-pillars-panels>
+        {programmes.map((p) => (
+          <article
+            class="pci-pillars__panel"
+            role="tabpanel"
+            id={`pillar-panel-${p.id}`}
+            aria-labelledby={`pillar-tab-${p.id}`}
+            data-pillar={p.id}
+          >
             <h3>{p.title}</h3>
-            <p>{p.summary}</p>
-          </div>
-          <span class="pci-pillar__go" aria-hidden="true">
-            <Icon />
-          </span>
-        </a>
-      ))}
+            <p class="pci-pillars__summary">{p.summary}</p>
+            <ul class="pci-pillars__covers">
+              {p.covers.map((c) => (
+                <li>{c}</li>
+              ))}
+            </ul>
+            <a class="pci-pillars__go" href={"what-we-do/index.html#" + p.id}>
+              {p.cta}
+              <span aria-hidden="true">
+                <Icon />
+              </span>
+            </a>
+          </article>
+        ))}
+      </div>
     </div>
     <p class="pci-art-note">
-      Hero imagery illustrates our programme areas. Project records identify the work and its current status.
+      Sculptures are artwork for our programme areas. Project records identify the work and its current status.
     </p>
   </div>
 </section>
+
+<script>
+  import { initPillars } from "../../scripts/pillars";
+
+  document.querySelectorAll<HTMLElement>("[data-pillars]").forEach(initPillars);
+</script>
