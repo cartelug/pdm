@@ -94,7 +94,7 @@ The institutional pages follow the campaign through one small module, `src/lib/c
 
 ### One type system on every page
 
-Archivo (headings, menus, buttons, labels, figures) and Lexend (everything else) are used on all three page families, self-hosted as weight-only files (74.6 KB together) with fallbacks tuned to Arial's metrics. There are no italics anywhere and no third-party font host on a public page (the four admin consoles still load Google Fonts; they are protected files and not public).
+MTN Brighter Sans Bold (headings, menus, buttons, labels, figures and anything set bold) and Sky Text (everything else) are used on all three page families, self-hosted as two single-weight files (28 KB together) with fallbacks tuned to Arial's metrics. Sky Text has one weight, so its 600 to 900 weights are declared as the MTN Bold file: bold words inside paragraphs stay on brand and never become a faked bold. Figures are set in MTN Brighter Sans, which has tabular digits. There are no italics anywhere and no third-party font host on a public page (the four admin consoles still load Google Fonts; they are protected files and not public). The family names older stylesheets still write (Archivo, Lexend, Manrope, Inter Variable, Bricolage Grotesque, DM Serif Display, Instrument Serif, JetBrains Mono, Geist Mono Variable, Montserrat) are `@font-face` aliases of the same two files, listed under `fonts.aliases` in `tokens.json`, so no other typeface can be downloaded. `tests/navigation/browser.cjs` fails if any page requests a third font file. The font licence requires a credit, which sits in every page footer; the provenance and licence note is in `assets/fonts/*-LICENSE.txt`.
 
 | Page family | How it gets the system | Palette |
 | --- | --- | --- |
@@ -102,7 +102,7 @@ Archivo (headings, menus, buttons, labels, figures) and Lexend (everything else)
 | Walk for Education and Contribute | `css/brand.css` and `css/one-look.css`, loaded last (`data-brand="walk"`) | Walk: ivory, navy, gold, cyan |
 | Faith in Motion | the same two files (`data-brand="pci"`) | PCI crimson |
 
-`css/one-look.css` is a migration layer, not a design system. The protected stylesheets name their fonts directly and at high specificity, so it applies the roles with `!important` and points their font variables at the new fonts. Nested text inherits its heading, button or reading role; form controls explicitly use Lexend. It also holds the narrow-screen and large-text fixes and the 13 px floor. A page that moves to the Astro build drops it. `scripts/pages.mjs` checks that every hand-written page declares its brand, loads the two files in order, preloads only the new fonts and carries no loading screen.
+`css/one-look.css` is a migration layer, not a design system. The protected stylesheets name their fonts directly and at high specificity, so it applies the roles with `!important` and points their font variables at the new fonts. Nested text inherits its heading, button or reading role; form controls explicitly use Sky Text. It also holds the narrow-screen and large-text fixes and the 13 px floor. A page that moves to the Astro build drops it. `scripts/pages.mjs` checks that every hand-written page declares its brand, loads the two files in order, preloads only the new fonts and carries no loading screen.
 
 The institutional header is regrouped into five items (Our work, Impact and trust, Partner with us, Updates, About) with light dropdowns that open on focus as well as hover, close with Escape and stay plain links without JavaScript, a campaign chip, and a Contact button. The full header starts at 1200 px; below that the menu sheet shows the groups under small headings. `/design-system/` documents both brands from `tokens.json`, including every contrast ratio.
 
@@ -146,7 +146,7 @@ The baseline taken before the redesign is in [docs/quality/BASELINE-2026-10-21.m
 | `ARCHITECTURE.md` (this file) | Current. The one description of the platform. |
 | `README.md` | Current. Day-to-day publishing steps and the register workflow. |
 | `V3-IMPLEMENTATION.md` | Current for the Astro lane: deployment contract, protected baseline, contact configuration, release gates. |
-| `EDITORIAL-REDESIGN.md` | History of the editorial direction (arches, rings, paper and crimson). Its typography section (Inter, Instrument Serif, Geist Mono) was replaced by Archivo and Lexend in Release 1. |
+| `EDITORIAL-REDESIGN.md` | History of the editorial direction (arches, rings, paper and crimson). Its typography section (Inter, Instrument Serif, Geist Mono) was replaced by Archivo and Lexend in Release 1, and those by MTN Brighter Sans and Sky Text on 26 October 2026 (D25). |
 | `docs/quality/` | The quality baseline (before) and the Release 1 pack (after). |
 | `PESAPAL-HANDOVER.md` | Current. Payment module configuration, testing and launch gates. |
 | `SERVER-CONFIG-PACK.md` | Current. Server rules for the host administrator. |
@@ -160,8 +160,8 @@ Decisions come from the platform plan of 21 October 2026. A decision is reversib
 
 | # | Decision | Why | Status after Release 1 |
 | --- | --- | --- | --- |
-| D1 | Fonts are Archivo for headings, menus, buttons, labels and figures, and Lexend for paragraphs, forms and small text. No italics. | The owner's choice | **Applied** to every page except the admin consoles. |
-| D2 | Archivo is a weight-only file, with no width axis. | A weight-only file cannot look stretched | **Applied.** |
+| D1 | Fonts are one face for headings, menus, buttons, labels and figures, and one for paragraphs, forms and small text. No italics. | The owner's choice | **Applied** to every page except the admin consoles. The two faces were Archivo and Lexend until D25. |
+| D2 | Fonts are weight-only files, with no width axis. | A weight-only file cannot look stretched | **Applied.** MTN Brighter Sans and Sky Text are single-weight files. |
 | D3 | Three breakpoints only: 640, 900 and 1200 px, min-width. | There are 38 distinct breakpoint widths in the stylesheets today | **Partly.** Defined once in the tokens and used for the new header (1200 px). The existing stylesheets still use 35 other widths; the responsive gate passes at every tested width regardless. |
 | D4 | Faith in Motion becomes a frozen campaign archive, restyled only through `css/fim-v3.css`. | A finished campaign with a live register | **Applied with one difference:** it is restyled through the shared `css/brand.css` and `css/one-look.css` (head change on its seven pages) as well, so all three families share one layer. Its register, scripts and ledger are untouched. |
 | D5 | Protected JavaScript and PHP are not edited by the redesign. | Money safety | **Reviewed presentation exceptions:** `js/preloader.js` (decision D9) and the menu/sticky presentation blocks in `js/wfe-shell.js` (22 October repair). Attribution, country pricing, pledge and payment logic are unchanged. No PHP changed. |
@@ -181,6 +181,7 @@ Decisions come from the platform plan of 21 October 2026. A decision is reversib
 | D22 | No dark theme now; colour goes through tokens so one can be added. | Not a need today | **Unchanged.** |
 | D23 | Stop committing generated HTML once the migration is complete. | It duplicates what CI builds | **Not started**; it changes the deployment pipeline and waits for the migration. |
 | D24 | Each release ends with a short documentation pack: what changed, gate results, speed numbers, what is unchanged on purpose, the rollback point. | Fits the approval routine | **Done:** [docs/quality/RELEASE-1-2026-10-21.md](docs/quality/RELEASE-1-2026-10-21.md). |
+| D25 | The two house fonts are MTN Brighter Sans Bold (headings, labels, figures, bold) and Sky Text (reading), used on every public page and in the downloadable graphics. | The owner supplied both files on 26 October 2026 and asked for them to be used site-wide | **Applied** in tokens 1.1.0. One licence caveat is open: the download page labels both fonts CC BY 4.0, but their copyright belongs to Newlyn Works Limited and Sky, so the owner should confirm the terms with the rights holder. The credit is in every footer. To change fonts again, edit `fonts` in `tokens.json` and run `npm run tokens`. |
 
 ## 11. What changes next
 

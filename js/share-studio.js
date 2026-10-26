@@ -91,9 +91,12 @@
     c.width = w;
     c.height = h;
     const ctx = c.getContext("2d");
-    await Promise.all([document.fonts.load("800 64px Archivo"), document.fonts.load("400 28px Lexend")]);
+    await Promise.all([
+      document.fonts.load('800 64px "MTN Brighter Sans"'),
+      document.fonts.load('400 28px "Sky Text"'),
+    ]);
     await document.fonts.ready;
-    if (!document.fonts.check("800 64px Archivo") || !document.fonts.check("400 28px Lexend"))
+    if (!document.fonts.check('800 64px "MTN Brighter Sans"') || !document.fonts.check('400 28px "Sky Text"'))
       throw new Error("Brand fonts are unavailable; retry before downloading");
     const logos = await Promise.all([
       image("/assets/brand/pamodzi/pamodzi-logo-320.png"),
@@ -117,10 +120,10 @@
     contain(ctx, logos[2], 600, top + 10, 105, 104);
     contain(ctx, logos[3], 745, top + 20, 245, 84);
     ctx.fillStyle = "#82d2ef";
-    ctx.font = "600 24px Lexend";
+    ctx.font = '600 24px "Sky Text"';
     ctx.fillText("PAMODZI COMMUNITY INITIATIVE", 65, top + 182);
     ctx.fillStyle = "#ffffff";
-    ctx.font = "800 " + (format === "square" ? 60 : 70) + "px Archivo";
+    ctx.font = "800 " + (format === "square" ? 60 : 70) + 'px "MTN Brighter Sans"';
     const defaults = {
       collections: "Every contribution. Accounted for.",
       weekly: "Our weekly campaign report.",
@@ -143,14 +146,14 @@
     const currencyLines = d.totals.currencies.map((t) => t.currency + " " + Number(t.received).toLocaleString("en-UG"));
     if (type === "walk") {
       if (!d.walk) throw new Error("Publish an approved walk update before exporting this template.");
-      ctx.font = "800 68px Archivo";
+      ctx.font = '800 68px "MTN Brighter Sans"';
       ctx.fillText(d.walk.km + " km confirmed", 65, y);
       y += 68;
-      ctx.font = "500 30px Lexend";
+      ctx.font = '500 30px "Sky Text"';
       y =
         wrap(ctx, d.walk.town + " · " + d.walk.date + " · " + d.walk.physical.replaceAll("-", " "), 65, y, 930, 42, 2) +
         15;
-      ctx.font = "400 27px Lexend";
+      ctx.font = '400 27px "Sky Text"';
       y = wrap(ctx, d.walk.story, 65, y, 925, 40, format === "square" ? 3 : 5);
       if (d.walk.photo && format !== "square") {
         const photo = await image("/" + d.walk.photo);
@@ -159,9 +162,9 @@
       }
     } else if (type === "thanks") {
       const s = recognition?.[0];
-      ctx.font = "800 42px Archivo";
+      ctx.font = '800 42px "MTN Brighter Sans"';
       y = wrap(ctx, s?.name || "Our anonymous supporters", 65, y, 925, 50, 4) + 18;
-      ctx.font = "400 30px Lexend";
+      ctx.font = '400 30px "Sky Text"';
       wrap(
         ctx,
         s?.amount !== null && s?.amount !== undefined
@@ -174,7 +177,7 @@
         3,
       );
     } else {
-      ctx.font = "600 26px Lexend";
+      ctx.font = '600 26px "Sky Text"';
       ctx.fillStyle = "#82d2ef";
       ctx.fillText("FINANCE-RECONCILED COLLECTIONS", 65, y);
       y += format === "square" ? 54 : 66;
@@ -183,18 +186,18 @@
       if (lines.length > 3)
         throw new Error("More than three reporting currencies: use the full CSV report or a focused campaign graphic.");
       for (const line of lines) {
-        ctx.font = "800 66px Archivo";
+        ctx.font = '800 66px "MTN Brighter Sans"';
         while (ctx.measureText(line).width > 930) {
           const size = Number(ctx.font.match(/\d+/)[0]);
-          ctx.font = "800 " + (size - 2) + "px Archivo";
+          ctx.font = "800 " + (size - 2) + 'px "MTN Brighter Sans"';
         }
         ctx.fillText(line, 65, y);
         y += format === "square" ? 62 : 72;
       }
-      ctx.font = "600 30px Lexend";
+      ctx.font = '600 30px "Sky Text"';
       ctx.fillText(d.totals.confirmedSteps.toLocaleString("en-UG") + " confirmed sponsored steps", 65, y + 7);
       y += format === "square" ? 48 : 58;
-      ctx.font = "400 25px Lexend";
+      ctx.font = '400 25px "Sky Text"';
       if (type === "milestone") {
         if (!d.totals.milestone)
           throw new Error("An operational milestone must be approved before this template can be exported.");
@@ -226,7 +229,7 @@
     }
     ctx.fillStyle = "#82d2ef";
     ctx.fillRect(65, end - 128, 950, 2);
-    ctx.font = "400 22px Lexend";
+    ctx.font = '400 22px "Sky Text"';
     ctx.fillText(
       "Reporting cut-off: " +
         new Date(d.reportingCutoff).toLocaleString("en-GB", {
@@ -246,7 +249,7 @@
       end - 48,
     );
     ctx.fillStyle = "#ffffff";
-    ctx.font = "600 25px Archivo";
+    ctx.font = '600 25px "MTN Brighter Sans"';
     ctx.fillText("pamodzici.com/walk-for-education", 65, end);
     if (d.sample) {
       ctx.save();
@@ -254,7 +257,7 @@
       ctx.rotate(-0.36);
       ctx.globalAlpha = 0.3;
       ctx.fillStyle = "#ffffff";
-      ctx.font = "800 110px Archivo";
+      ctx.font = '800 110px "MTN Brighter Sans"';
       ctx.textAlign = "center";
       ctx.fillText("SAMPLE DATA", 0, 0);
       ctx.restore();

@@ -1,0 +1,14 @@
+MTN Brighter Sans Bold
+Copyright: Copyright 2017 Newlyn Works Limited. All rights reserved.
+Designer(s): Miles Newlyn, Elena Schneider, Riccardo Olocco, Leo Philp (Newlyn)
+Files here: mtn-brighter-sans-bold.woff2 (converted from the supplied TrueType file; glyphs and metrics are unchanged, hinting instructions removed, Latin set only)
+
+Source: Web Fonts, https://www.onlinewebfonts.com, supplied by the site owner on 26 October 2026.
+Credit required by that download (shown in every page footer):
+  Fonts made from Web Fonts is licensed by CC BY 4.0
+
+Provenance note for the owner: the download page labels this typeface CC BY 4.0, but the copyright in the font file
+belongs to the company named above, and the download's own licence file says some fonts it hosts may not allow
+embedding without a commercial licence. Before relying on it long term, confirm the terms with the rights holder
+(Newlyn: https://www.newlyn.com/licensing). To replace this font, change "fonts" in src/design/tokens.json, run
+npm run tokens, and delete this file. Nothing else in the site names the typeface.

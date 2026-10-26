@@ -1,7 +1,7 @@
 /* Renders one 1200x630 share card per page into assets/og/pages/, so a link shared on WhatsApp looks like this site.
    usage: node scripts/og-cards.cjs   (needs Playwright with a Chromium; set PCI_TEST_CHROMIUM for a custom path)
-   The headline is read from each built page, so cards follow the copy. Type is Archivo and Lexend, the accent words
-   are set in colour (no italics), and the Walk for Education and Faith in Motion cards carry their campaign colours
+   The headline is read from each built page, so cards follow the copy. Type is MTN Brighter Sans and Sky Text, the
+   accent words are set in colour (no italics), and the Walk for Education and Faith in Motion cards carry their campaign colours
    under the PCI mark. Walk for Education and Contribute keep their campaign artwork card. */
 const fs = require("fs");
 const path = require("path");
@@ -79,8 +79,8 @@ const palette = {
 
 const b64 = (f) => fs.readFileSync(path.join(root, f)).toString("base64");
 const fonts = `
-@font-face{font-family:A;src:url(data:font/woff2;base64,${b64("assets/fonts/archivo-latin-wght-normal.woff2")});font-weight:100 900}
-@font-face{font-family:L;src:url(data:font/woff2;base64,${b64("assets/fonts/lexend-latin-wght-normal.woff2")});font-weight:100 900}`;
+@font-face{font-family:A;src:url(data:font/woff2;base64,${b64("assets/fonts/mtn-brighter-sans-bold.woff2")});font-weight:100 900}
+@font-face{font-family:L;src:url(data:font/woff2;base64,${b64("assets/fonts/sky-text-regular.woff2")});font-weight:100 900}`;
 const logo = "data:image/png;base64," + b64("assets/brand/pamodzi/pamodzi-logo-transparent.png");
 const strip = (s) =>
   s

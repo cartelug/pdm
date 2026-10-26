@@ -92,11 +92,11 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "81ab02a6068ea0f79563b9a11b6e47695ab0811dedf812bd87d63341fcf3b0bb",
-    "contribute/payment/index.html": "111f4ace30092bf10372239de37da84db3a22eeca70cbd61d97e7ca4fdfa61c4",
-    "contribute/privacy/index.html": "62f8bb4cec2f01429c37a697dc0ef64e5908e83b214cd055cb52f201f8234dcd",
-    "contribute/terms/index.html": "a874ae149aecd9e732b571f949b2e07f1a6a9b499cdfa6bc386a1d9a86b73933",
-    "contribute/verify/index.html": "c4f8aed45d7b5a25a85f81df7ffb1a4156f23d6444f1eda931ccfddc14854aa4",
+    "contribute/index.html": "e77d48ae95e66d0efe88f291211775eeb88d636a7ef6ef3ca5c256cab7605cb0",
+    "contribute/payment/index.html": "0ebbb6af7892bcb71d100aac62548019930be6ff14491195369e2df435bd1325",
+    "contribute/privacy/index.html": "e2413e540f0c3b8183eebd6e4bd306041a10be4b5810311f493f43d98991cf4d",
+    "contribute/terms/index.html": "9107e95c37ec9db5ef049262cf35a68cc1edc1f948f44dc98d2afd971543f6cd",
+    "contribute/verify/index.html": "40c250c093dd0dfd67c4c003f83a0f85b512469bbfb6f0036bce39e9a0ad36ad",
     "css/base.css": "368d70b67bd5c7c3e60f7f44a9d8c93bfb8db7e2e8559cb00f223cfcf14893c5",
     "css/collections.css": "cd779925dd2f0519e39b3b7e5f577d660dcee3bf08f8ce98c67bad5615a47f23",
     "css/contribute.css": "e02336271318e777f18aa7a98cb227dd896eed88bebe9de6bc0b054622ed2c81",
@@ -127,11 +127,11 @@
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
     "js/wfe.js": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
-    "walk-for-education/accountability/index.html": "121868a9fc0d2b4add40889dae721b57796f3136b56e231b852267b0e93e3ed1",
-    "walk-for-education/index.html": "5b7dc82b20c3f24849f3a86dbdf66fa27529dbeaa992d10288b66eae48b72a5b",
-    "walk-for-education/partners/index.html": "d20d6320a680ea1751d68ecbd9feb586a24f97b95633b3cc1c95b55112bd79db",
-    "walk-for-education/take-part/index.html": "7ae02f3a0cf76954aed96a14f3e3eebb56cd43de1fe9470c6839826863333aaa",
-    "walk-for-education/updates/index.html": "2251c791c3ca276a008babc0cc3e0806de4ce7ca556e47d3f5d6f72349bdaa59"
+    "walk-for-education/accountability/index.html": "6e229c072a8d40acfa9f957b82f3ad7b27857851c86f5b84d1fdf61a81783831",
+    "walk-for-education/index.html": "0d2badcf28a0867b8442a806d3602cd3f20f30ca151212d1dbd94cd1c0efe4d0",
+    "walk-for-education/partners/index.html": "694ddc6275045b1ce4a7ab60ca2702571b8a40b4179b16dd63627f44466ddcec",
+    "walk-for-education/take-part/index.html": "403b85ea4c1d2637d81082105fee67f8b6153ada4b1cf831d813c4413f8a9d91",
+    "walk-for-education/updates/index.html": "ccb015c8d5f4ef5719e7695bec6ad255bba1fc336477e4c23a464064462d7e18"
   },
   "presentationReviews": [
     {
@@ -792,6 +792,86 @@
       "date": "2026-10-26",
       "authorisation": "User instruction in session: remove the live-reporting panel from the home page and completely redo the home page.",
       "reason": "Cache-hash query for js/operations-public.js only. That script no longer mounts the finance report panel on the home page and instead fills a compact walking-status line there; its behaviour on the Walk pages is unchanged. No markup, script order, form, payment or fragment change."
+    },
+    {
+      "file": "contribute/index.html",
+      "previousSha256": "81ab02a6068ea0f79563b9a11b6e47695ab0811dedf812bd87d63341fcf3b0bb",
+      "sha256": "e77d48ae95e66d0efe88f291211775eeb88d636a7ef6ef3ca5c256cab7605cb0",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: use the two supplied web fonts (MTN Brighter Sans Bold and Sky Text) across the whole site.",
+      "reason": "Typeface swap only. The two font preload hrefs now name the new font files, a font credit line (required by the font licence) is added to the footer, and cache-hash queries follow the stylesheets that changed. No pledge, price, payment, form, script order or fragment change."
+    },
+    {
+      "file": "contribute/payment/index.html",
+      "previousSha256": "111f4ace30092bf10372239de37da84db3a22eeca70cbd61d97e7ca4fdfa61c4",
+      "sha256": "0ebbb6af7892bcb71d100aac62548019930be6ff14491195369e2df435bd1325",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: use the two supplied web fonts (MTN Brighter Sans Bold and Sky Text) across the whole site.",
+      "reason": "Typeface swap only. The two font preload hrefs now name the new font files, a font credit line (required by the font licence) is added to the footer, and cache-hash queries follow the stylesheets that changed. No pledge, price, payment, form, script order or fragment change."
+    },
+    {
+      "file": "contribute/privacy/index.html",
+      "previousSha256": "62f8bb4cec2f01429c37a697dc0ef64e5908e83b214cd055cb52f201f8234dcd",
+      "sha256": "e2413e540f0c3b8183eebd6e4bd306041a10be4b5810311f493f43d98991cf4d",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: use the two supplied web fonts (MTN Brighter Sans Bold and Sky Text) across the whole site.",
+      "reason": "Typeface swap only. The two font preload hrefs now name the new font files, a font credit line (required by the font licence) is added to the footer, and cache-hash queries follow the stylesheets that changed. No pledge, price, payment, form, script order or fragment change."
+    },
+    {
+      "file": "contribute/terms/index.html",
+      "previousSha256": "a874ae149aecd9e732b571f949b2e07f1a6a9b499cdfa6bc386a1d9a86b73933",
+      "sha256": "9107e95c37ec9db5ef049262cf35a68cc1edc1f948f44dc98d2afd971543f6cd",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: use the two supplied web fonts (MTN Brighter Sans Bold and Sky Text) across the whole site.",
+      "reason": "Typeface swap only. The two font preload hrefs now name the new font files, a font credit line (required by the font licence) is added to the footer, and cache-hash queries follow the stylesheets that changed. No pledge, price, payment, form, script order or fragment change."
+    },
+    {
+      "file": "contribute/verify/index.html",
+      "previousSha256": "c4f8aed45d7b5a25a85f81df7ffb1a4156f23d6444f1eda931ccfddc14854aa4",
+      "sha256": "40c250c093dd0dfd67c4c003f83a0f85b512469bbfb6f0036bce39e9a0ad36ad",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: use the two supplied web fonts (MTN Brighter Sans Bold and Sky Text) across the whole site.",
+      "reason": "Typeface swap only. The two font preload hrefs now name the new font files, a font credit line (required by the font licence) is added to the footer, and cache-hash queries follow the stylesheets that changed. No pledge, price, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/accountability/index.html",
+      "previousSha256": "121868a9fc0d2b4add40889dae721b57796f3136b56e231b852267b0e93e3ed1",
+      "sha256": "6e229c072a8d40acfa9f957b82f3ad7b27857851c86f5b84d1fdf61a81783831",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: use the two supplied web fonts (MTN Brighter Sans Bold and Sky Text) across the whole site.",
+      "reason": "Typeface swap only. The two font preload hrefs now name the new font files, a font credit line (required by the font licence) is added to the footer, and cache-hash queries follow the stylesheets that changed. No pledge, price, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/index.html",
+      "previousSha256": "5b7dc82b20c3f24849f3a86dbdf66fa27529dbeaa992d10288b66eae48b72a5b",
+      "sha256": "0d2badcf28a0867b8442a806d3602cd3f20f30ca151212d1dbd94cd1c0efe4d0",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: use the two supplied web fonts (MTN Brighter Sans Bold and Sky Text) across the whole site.",
+      "reason": "Typeface swap only. The two font preload hrefs now name the new font files, a font credit line (required by the font licence) is added to the footer, and cache-hash queries follow the stylesheets that changed. No pledge, price, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/partners/index.html",
+      "previousSha256": "d20d6320a680ea1751d68ecbd9feb586a24f97b95633b3cc1c95b55112bd79db",
+      "sha256": "694ddc6275045b1ce4a7ab60ca2702571b8a40b4179b16dd63627f44466ddcec",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: use the two supplied web fonts (MTN Brighter Sans Bold and Sky Text) across the whole site.",
+      "reason": "Typeface swap only. The two font preload hrefs now name the new font files, a font credit line (required by the font licence) is added to the footer, and cache-hash queries follow the stylesheets that changed. No pledge, price, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/take-part/index.html",
+      "previousSha256": "7ae02f3a0cf76954aed96a14f3e3eebb56cd43de1fe9470c6839826863333aaa",
+      "sha256": "403b85ea4c1d2637d81082105fee67f8b6153ada4b1cf831d813c4413f8a9d91",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: use the two supplied web fonts (MTN Brighter Sans Bold and Sky Text) across the whole site.",
+      "reason": "Typeface swap only. The two font preload hrefs now name the new font files, a font credit line (required by the font licence) is added to the footer, and cache-hash queries follow the stylesheets that changed. No pledge, price, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/updates/index.html",
+      "previousSha256": "2251c791c3ca276a008babc0cc3e0806de4ce7ca556e47d3f5d6f72349bdaa59",
+      "sha256": "ccb015c8d5f4ef5719e7695bec6ad255bba1fc336477e4c23a464064462d7e18",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: use the two supplied web fonts (MTN Brighter Sans Bold and Sky Text) across the whole site.",
+      "reason": "Typeface swap only. The two font preload hrefs now name the new font files, a font credit line (required by the font licence) is added to the footer, and cache-hash queries follow the stylesheets that changed. No pledge, price, payment, form, script order or fragment change."
     }
   ],
   "functionalReviews": [

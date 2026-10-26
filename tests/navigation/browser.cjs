@@ -226,9 +226,59 @@ const server = http.createServer((req, res) => {
       "without the script all four pillars are stacked and readable",
     );
     await bare.close();
+    // Two house fonts only, on both page families: nothing else is requested, loaded or named by a heading.
+    // Older stylesheets still name other families; those names are aliases of the same two files (tokens.json).
+    const { aliases } = require("../../src/design/tokens.json").fonts;
+    const houseFonts = ["MTN Brighter Sans", "Sky Text", ...aliases.head, ...aliases.body];
+    for (const route of ["/", "/about/", "/projects/", "/walk-for-education/", "/contribute/", "/faith-in-motion/"]) {
+      const fresh = await browser.newContext({ viewport: { width: 1280, height: 850 } });
+      const typeset = await fresh.newPage();
+      const fontFiles = new Set();
+      typeset.on("request", (request) => {
+        if (/\.(woff2?|ttf|otf|eot)(\?|$)/i.test(request.url()) || /fonts\.(googleapis|gstatic)/.test(request.url()))
+          fontFiles.add(new URL(request.url()).pathname);
+      });
+      await typeset.goto(base + route);
+      await typeset.evaluate(() => document.fonts.ready);
+      assert.ok(
+        [...fontFiles].every((file) => /mtn-brighter-sans-bold|sky-text-regular/.test(file)),
+        route + " requests only the two house font files, found " + [...fontFiles].join(", "),
+      );
+      assert.ok(fontFiles.size >= 1 && fontFiles.size <= 2, route + " loads one or two font files");
+      const loaded = await typeset.evaluate(() =>
+        [...document.fonts].filter((face) => face.status === "loaded").map((face) => face.family.replace(/"/g, "")),
+      );
+      assert.ok(
+        loaded.length > 0 && loaded.every((family) => houseFonts.includes(family)),
+        route + " only loads house font families or their aliases, loaded: " + loaded.join(", "),
+      );
+      assert.match(
+        await typeset
+          .locator("h1")
+          .first()
+          .evaluate((el) => getComputedStyle(el).fontFamily),
+        /^"?MTN Brighter Sans/,
+        route + " headline is MTN Brighter Sans",
+      );
+      assert.match(
+        await typeset.evaluate(() => {
+          const longest = [...document.querySelectorAll("main p")].sort(
+            (a, b) => b.textContent.length - a.textContent.length,
+          )[0];
+          return getComputedStyle(longest).fontFamily;
+        }),
+        /^"?Sky Text/,
+        route + " longest paragraph is set in Sky Text",
+      );
+      assert.ok(
+        await typeset.evaluate(() => /onlinewebfonts\.com/.test(document.querySelector("footer")?.innerHTML || "")),
+        route + " footer carries the font credit the licence requires",
+      );
+      await fresh.close();
+    }
     assert.deepEqual(errors, []);
     console.log(
-      "Institutional browser checks passed: responsive routes, modal lifecycle, reduced motion, filters and no-JS navigation.",
+      "Institutional browser checks passed: responsive routes, modal lifecycle, reduced motion, filters, no-JS navigation and the two house fonts.",
     );
   } finally {
     await browser.close();

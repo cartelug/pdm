@@ -1,4 +1,4 @@
-/* Pamodzi institutional design tokens. Archivo for headlines, menus, buttons, labels and figures; Lexend for reading
+/* Pamodzi institutional design tokens. MTN Brighter Sans Bold for headlines, menus, buttons, labels and figures; Sky Text for reading
    and forms (decision D1). The fonts and the shared tokens come from src/design/tokens.json; the --pci-* names
    below are this site's own layer on top. Colour, type scale, space and shape live here only. */
 @layer tokens, base, components, shell, home, pages, motion;

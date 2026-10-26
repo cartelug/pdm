@@ -6,89 +6,18 @@
    and motion and never touches the pledge, pricing or payment scripts, their
    hooks, IDs or [hidden]/visibility states.
 
-   Type follows the Pamodzi system: Inter (display optical sizes) for
-   headlines and reading, Instrument Serif italic for the accent in each
-   headline, Geist Mono for labels and figures. All self-hosted from
-   assets/fonts; the legacy family names used by the shared stylesheets are
-   aliased to the same files, so no page calls an external font service.
+   Type follows the Pamodzi system: MTN Brighter Sans Bold for headlines,
+   labels and figures, Sky Text for reading. Both are self-hosted from
+   assets/fonts and declared once in css/brand.css; the legacy family names
+   used by the shared stylesheets are aliased to the same files, so no page
+   calls an external font service.
 
    Colour keeps the campaign's academic identity: navy ink on warm paper,
    gold for highlights on navy, Pamodzi crimson for the primary action.
    ========================================================================== */
 
-/* ---------- Fonts ---------- */
-@font-face {
-  font-family: "Inter Variable";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/inter-latin-opsz-normal.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Instrument Serif";
-  font-style: italic;
-  font-display: swap;
-  font-weight: 400;
-  src: url("../assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Instrument Serif";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  src: url("../assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Geist Mono Variable";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/geist-mono-latin-wght-normal.woff2") format("woff2");
-}
-
-/* Legacy names written literally in the shared pledge selector. */
-@font-face {
-  font-family: Manrope;
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/inter-latin-opsz-normal.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Bricolage Grotesque";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/inter-latin-opsz-normal.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "DM Serif Display";
-  font-style: italic;
-  font-display: swap;
-  font-weight: 400;
-  src: url("../assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "DM Serif Display";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  src: url("../assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "JetBrains Mono";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url("../assets/fonts/geist-mono-latin-wght-normal.woff2") format("woff2");
-}
+/* ---------- Fonts ----------
+   The type is the two house fonts declared once in css/brand.css; the family names written below resolve to them. */
 
 /* ---------- Tokens ---------- */
 :root {

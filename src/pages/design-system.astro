@@ -39,14 +39,14 @@ const pairs = (brand: Brand) =>
 
 const typeValue = (key: string) => (tokens.type as Record<string, string>)[key];
 const typeRoles: [string, string, string][] = [
-  ["display", "Display", "Archivo 800, hero only"],
-  ["h1", "Heading 1", "Archivo 800"],
-  ["h2", "Heading 2", "Archivo 800"],
-  ["h3", "Heading 3", "Archivo 700"],
-  ["lead", "Lead", "Lexend 400"],
-  ["body", "Body", "Lexend 400, 60 characters wide"],
-  ["small", "Small", "Lexend 400"],
-  ["caption", "Caption", "Lexend 400, 13 px is the floor"],
+  ["display", "Display", "MTN Brighter Sans Bold, hero only"],
+  ["h1", "Heading 1", "MTN Brighter Sans Bold"],
+  ["h2", "Heading 2", "MTN Brighter Sans Bold"],
+  ["h3", "Heading 3", "MTN Brighter Sans Bold"],
+  ["lead", "Lead", "Sky Text 400"],
+  ["body", "Body", "Sky Text 400, 60 characters wide"],
+  ["small", "Small", "Sky Text 400"],
+  ["caption", "Caption", "Sky Text 400, 13 px is the floor"],
 ];
 const roleStyle = (key: string) =>
   `font-size:var(--fs-${key});` +
@@ -97,12 +97,13 @@ const roleStyle = (key: string) =>
         <div>
           <span class="pci-eyebrow">Type scale</span>
           <h2>
-            Archivo leads. <em>Lexend reads.</em>
+            MTN Brighter Sans leads. <em>Sky Text reads.</em>
           </h2>
         </div>
         <p class="pci-lead">
-          Weight-only variable files (no width axis, so type can never look stretched), self-hosted, 74.6 KB together.
-          Archivo carries tabular figures, so money and counts line up. Emphasis is weight or colour, never slant.
+          Two single-weight files designed by Newlyn, self-hosted, 28 KB together. Sky Text reads; its bold is MTN
+          Brighter Sans Bold. MTN Brighter Sans carries tabular figures, so money and counts line up. Emphasis is weight
+          or colour, never slant.
         </p>
       </div>
       <div class="pci-ds-specimens">
@@ -118,8 +119,8 @@ const roleStyle = (key: string) =>
           </div>
         ))}
         <div class="pci-ds-specimen">
-          <span class="pci-card__label">Figure · Archivo 800, tabular</span>
-          <p style="font:800 var(--fs-figure)/1 var(--font-head);font-variant-numeric:tabular-nums">UGX 250,000</p>
+          <span class="pci-card__label">Figure · MTN Brighter Sans Bold, tabular</span>
+          <p style="font:700 var(--fs-figure)/1 var(--font-head);font-variant-numeric:tabular-nums">UGX 250,000</p>
           <code>--fs-figure: {tokens.type.figure}</code>
         </div>
       </div>
@@ -273,7 +274,8 @@ const roleStyle = (key: string) =>
           <b>Contrast from tokens.</b>Every pair above is a test. A change that breaks one fails the build.
         </li>
         <li>
-          <b>Fonts.</b>Archivo and Lexend only, self-hosted, no italics, no third-party font host on public pages.
+          <b>Fonts.</b>MTN Brighter Sans and Sky Text only, self-hosted, no italics, no third-party font host on public
+          pages.
         </li>
         <li>
           <b>Responsive.</b>320 px to 1536 px, landscape and 200% text, with no sideways scroll and nothing under 13 px.

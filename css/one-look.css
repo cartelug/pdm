@@ -2,11 +2,11 @@
    one-look — the shared presentation layer for the hand-written pages
    --------------------------------------------------------------------------
    Loaded last on Walk for Education, the contribution pages and Faith in Motion, after css/brand.css (design
-   tokens and the Archivo and Lexend fonts). It puts all three families on one type system without touching the
+   tokens and the MTN Brighter Sans and Sky Text fonts). It puts all three families on one type system without touching the
    protected stylesheets or any pledge, price or payment code: it only changes how things look.
 
    Rules enforced here (decisions D1, D6, D9; responsive rulebook R3, R7, R9):
-     - Archivo for headings, menus, buttons, labels and figures; Lexend for everything else
+     - MTN Brighter Sans for headings, menus, buttons, labels and figures; Sky Text for everything else
      - no italics anywhere
      - no loading screen
      - nothing smaller than 13 px, and nothing wider than the screen

@@ -6,7 +6,7 @@
    Public pages are index.html files outside admin/, plus 404.html. Each must:
      • declare a language, a viewport and a <title>;
      • on the hand-written pages: declare data-brand, load css/brand.css then css/one-look.css last,
-       preload only Archivo and Lexend, and hold no loading screen (no .site-loader, no preloader.css).
+       preload only the two house fonts (MTN Brighter Sans and Sky Text), and hold no loading screen (no .site-loader, no preloader.css).
    Root-level *.html files other than 404.html are redirects and are skipped.
    ========================================================================== */
 import fs from "node:fs";
@@ -77,8 +77,7 @@ for (const file of pages) {
   if (sheets[sheets.length - 1] !== "css/one-look.css") fail("css/one-look.css must be the last stylesheet");
   else if (brandAt === -1 || brandAt > sheets.length - 2) fail("css/brand.css must come before css/one-look.css");
   for (const preload of head.matchAll(/<link rel="preload"[^>]*href="([^"]+\.woff2)"/g)) {
-    if (!/archivo-latin-wght-normal|lexend-latin-wght-normal/.test(preload[1]))
-      fail(`preloads an old font: ${preload[1]}`);
+    if (!/mtn-brighter-sans-bold|sky-text-regular/.test(preload[1])) fail(`preloads an old font: ${preload[1]}`);
   }
 }
 

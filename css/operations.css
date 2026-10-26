@@ -3,7 +3,7 @@
   margin: 0;
   background: #f4f6f9;
   color: #112c48;
-  font-family: Lexend, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.6;
 }
 
@@ -23,7 +23,7 @@
 .ops h2,
 .ops h3,
 .ops button {
-  font-family: Archivo, sans-serif;
+  font-family: var(--font-head);
 }
 
 .ops h1 {
@@ -205,13 +205,13 @@
   border: 1px solid #c0d1e2;
   border-top: 5px solid #163d69;
   border-radius: 12px;
-  font-family: Lexend, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.7;
 }
 
 .ops-live h2,
 .ops-live h3 {
-  font-family: Archivo, sans-serif;
+  font-family: var(--font-head);
   color: #112c48;
 }
 

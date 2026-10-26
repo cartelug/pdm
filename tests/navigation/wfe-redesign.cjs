@@ -274,20 +274,21 @@ function check(value, message) {
     await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
     await page.screenshot({ path: path.join(shots, "PCI_WFE_Desktop_Hero.png") });
     check(
-      await page.locator("h1").evaluate((el) => getComputedStyle(el).fontFamily.includes("Archivo")),
-      "display type uses Archivo",
+      await page.locator("h1").evaluate((el) => getComputedStyle(el).fontFamily.includes("MTN Brighter Sans")),
+      "display type uses MTN Brighter Sans",
     );
     check(
       await page
         .locator("h1 .w-line span")
         .evaluateAll(
-          (spans) => spans.length > 0 && spans.every((span) => getComputedStyle(span).fontFamily.includes("Archivo")),
+          (spans) =>
+            spans.length > 0 && spans.every((span) => getComputedStyle(span).fontFamily.includes("MTN Brighter Sans")),
         ),
       "nested headline text inherits the heading font instead of switching to the reading font",
     );
     check(
-      await page.locator("#campaignSteps").evaluate((el) => getComputedStyle(el).fontFamily.includes("Lexend")),
-      "controls use Lexend",
+      await page.locator("#campaignSteps").evaluate((el) => getComputedStyle(el).fontFamily.includes("Sky Text")),
+      "controls use Sky Text",
     );
     await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
     const scanAccessibility = () =>
