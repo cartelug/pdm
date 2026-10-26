@@ -1,0 +1,377 @@
+/* ==========================================================================
+   Walk for Education — crimson, black and blue theme
+   --------------------------------------------------------------------------
+   Loaded last on the five Walk for Education pages only. Every rule is scoped to body.wfe-campaign, so the
+   contribution pages, Faith in Motion and the staff console keep their own palettes.
+
+   Palette: PCI crimson (#b71935) and PCI black (#1b0a0e) with the Walk for Education blues
+   (navy #0e1f3a, blue #2a9cc1, ink blue #0b6e8e, bright #5cc8e8). Gold is retired.
+   Contrast rules kept from the token system: crimson text on light is the darker #9b1630; on black surfaces
+   crimson text is the lit #ff6b82; blue text on light is #0b6e8e; on black it is #5cc8e8.
+
+   Motion is CSS only, never hides content that has not been revealed by a script, and stops for
+   prefers-reduced-motion and for the visitor's motion toggle (body.r-motion-paused).
+   ========================================================================== */
+
+/* ---------- 1. Palette ---------- */
+
+html body.wfe-campaign {
+  /* Hand-written campaign page (wfe-system.css names) */
+  --ivory: #f4ede4;
+  --paper: #faf6f1;
+  --sand: #e8dccd;
+  --sand-2: #dccdb9;
+  --navy: #130a0e;
+  --navy-2: #1d0f16;
+  --navy-3: #2b1823;
+  --ink: #1b0a0e;
+  --ink-2: #3d272c;
+  --muted: #66565a;
+  --line: rgb(27 10 14 / 14%);
+  --line-strong: rgb(27 10 14 / 28%);
+  --gold: #d91f3d;
+  --gold-ink: #9b1630;
+  --shadow: 0 1px 2px rgb(27 10 14 / 6%), 0 12px 32px -12px rgb(27 10 14 / 24%);
+  --shadow-lift: 0 2px 4px rgb(27 10 14 / 8%), 0 22px 48px -18px rgb(27 10 14 / 38%);
+
+  /* Shared brand tokens (brand.css names) */
+  --c-paper: #faf6f1;
+  --c-ivory: #f2ebe3;
+  --c-sand: #e6dacb;
+  --c-ink: #1b0a0e;
+  --c-ink-soft: #3d272c;
+  --c-muted: #66565a;
+  --c-deep: #130a0e;
+  --c-on-deep: #faf6f1;
+  --c-accent: #b71935;
+  --c-on-accent: #faf6f1;
+  --c-accent-ink: #9b1630;
+  --c-highlight: #2a9cc1;
+  --c-line: rgb(27 10 14 / 14%);
+  --c-line-strong: rgb(27 10 14 / 28%);
+  --c-on-deep-muted: rgb(250 246 241 / 74%);
+
+  /* Inner pages (wfe-editorial.css and wfe.css names) */
+  --ed-ink: #1b0a0e;
+  --ed-ink-soft: #3d272c;
+  --ed-muted: #66565a;
+  --ed-paper: #faf6f1;
+  --ed-bone: #f2ebe3;
+  --ed-line: rgb(27 10 14 / 12%);
+  --ed-line-strong: rgb(27 10 14 / 24%);
+  --ed-navy: #14090d;
+  --ed-navy-raised: #22111a;
+  --ed-night: #0b0508;
+  --ed-on-navy: #faf6f1;
+  --ed-on-navy-muted: rgb(250 246 241 / 74%);
+  --ed-on-navy-line: rgb(250 246 241 / 16%);
+  --ed-gold: #ff6b82;
+  --ed-gold-soft: #ffc9d2;
+  --ed-crimson: #b71935;
+  --ed-crimson-deep: #8c1228;
+  --wfe-red: #b71935;
+  --wfe-red-dark: #8c1228;
+  --wfe-ink: #1b0a0e;
+  --wfe-navy: #14090d;
+  --wfe-gold: #ff6b82;
+  --wfe-paper: #faf6f1;
+  --wfe-muted: #66565a;
+  --wfe-line: rgb(27 10 14 / 12%);
+  --wfp-navy: #14090d;
+  --wfp-navy-2: #22111a;
+  --wfp-navy-3: #2b1823;
+  --wfp-ink: #1b0a0e;
+  --wfp-text: #3d272c;
+  --wfp-muted: #66565a;
+  --wfp-line: rgb(27 10 14 / 12%);
+  --wfp-tint: #f2ebe3;
+  --wfp-red: #b71935;
+  --wfp-red-dark: #8c1228;
+  --wfp-gold: #ff6b82;
+  --wfp-gold-soft: #ffc9d2;
+
+  /* Theme-only helpers */
+  --k-black: #0c0608;
+  --k-red: #b71935;
+  --k-red-hot: #d91f3d;
+  --k-red-lit: #ff6b82;
+  --k-blue: #2a9cc1;
+  --k-blue-deep: #0e1f3a;
+  --k-blue-royal: #2a59a6;
+  --k-night: linear-gradient(158deg, #0c0608 0%, #160d17 46%, #0e1f3a 118%);
+  --k-glow-red: radial-gradient(60% 80% at 88% 0%, rgb(217 31 61 / 34%), transparent 62%);
+  --k-glow-blue: radial-gradient(70% 90% at 0% 100%, rgb(42 156 193 / 24%), transparent 66%);
+  --k-cta: linear-gradient(120deg, #d91f3d 0%, #b71935 55%, #8c1228 100%);
+  --k-spectrum: linear-gradient(90deg, #d91f3d, #b71935 38%, #2a59a6 72%, #2a9cc1);
+}
+
+html body.wfe-campaign ::selection {
+  background: #d91f3d;
+  color: #fff;
+}
+
+/* ---------- 2. Surfaces ---------- */
+
+/* Dark sections: black into Walk blue, with a crimson light from the top corner. */
+body.wfe-campaign
+  :is(.w-bag, .w-ambition, .w-closing, .w-approved, .w-viewer, .w-trust__card--dark) {
+  background: var(--k-glow-red), var(--k-glow-blue), var(--k-night);
+}
+
+body.wfe-campaign .w-bag__frame {
+  background: linear-gradient(160deg, #1d0f16, #0e1f3a);
+}
+
+body.wfe-campaign .w-hero__caption {
+  background: linear-gradient(135deg, #130a0e, #0e1f3a);
+}
+
+body.wfe-campaign .w-ambition__bg::after {
+  background:
+    linear-gradient(180deg, rgb(12 6 8 / 58%), rgb(12 6 8 / 92%) 70%),
+    radial-gradient(70% 60% at 20% 20%, rgb(42 156 193 / 22%), transparent 70%),
+    radial-gradient(60% 60% at 90% 10%, rgb(217 31 61 / 20%), transparent 70%);
+}
+
+body.wfe-campaign .w-closing__bg::after {
+  background: linear-gradient(
+    180deg,
+    rgb(12 6 8 / 22%) 0%,
+    rgb(12 6 8 / 60%) 45%,
+    rgb(12 6 8 / 94%) 100%
+  );
+}
+
+/* Home hero: warm paper with a crimson and a blue light. */
+body.wfe-campaign .w-hero {
+  background:
+    radial-gradient(60% 55% at 78% 26%, rgb(217 31 61 / 15%), transparent 70%),
+    radial-gradient(52% 52% at 8% 92%, rgb(42 156 193 / 16%), transparent 70%),
+    linear-gradient(180deg, #faf6f1, #f4ede4);
+}
+
+/* Light sections drift between paper tones instead of sitting flat. */
+body.wfe-campaign :is(.w-meet, .w-learn, .w-ways, .w-channels, .w-faq, .w-cert) {
+  background: linear-gradient(180deg, #faf6f1 0%, #f4ede4 100%);
+}
+
+body.wfe-campaign :is(.w-five, .w-updates, .w-gallery) {
+  background:
+    radial-gradient(50% 60% at 100% 0%, rgb(42 156 193 / 9%), transparent 70%),
+    radial-gradient(50% 60% at 0% 100%, rgb(217 31 61 / 7%), transparent 70%), #faf6f1;
+}
+
+/* Accents that were gold */
+body.wfe-campaign :is(.w-ambition__figure small, .w-ambition__qual strong, .w-priorities__n) {
+  color: var(--k-red-lit);
+}
+
+body.wfe-campaign :is(.w-steps .v3-suggested, .w-ledger li:nth-child(4) .w-ledger__n) {
+  background: var(--k-cta);
+  color: #fff;
+}
+
+body.wfe-campaign .w-approved .progress-track i,
+body.wfe-campaign .w-ledger::before {
+  background: linear-gradient(90deg, #2a9cc1, #5cc8e8 40%, #d91f3d);
+}
+
+body.wfe-campaign .w-chooser::before,
+body.wfe-campaign .w-journey__rule {
+  background: var(--k-spectrum);
+}
+
+body.wfe-campaign .w-certificate > div {
+  background:
+    radial-gradient(80% 60% at 50% 0%, rgb(217 31 61 / 9%), transparent 70%),
+    repeating-linear-gradient(45deg, rgb(27 10 14 / 1.8%) 0 2px, transparent 2px 6px), #fffdf9;
+}
+
+/* Buttons: crimson is the call to action, black is secondary. */
+body.wfe-campaign .w-btn:not(.w-btn--light, .w-btn--outline, .w-btn--whatsapp) {
+  --btn-bg: var(--k-cta);
+  --btn-ink: #fff;
+
+  background-size: 180% 100%;
+  box-shadow: 0 14px 28px -16px rgb(183 25 53 / 70%);
+}
+
+body.wfe-campaign .w-journey .w-btn--light,
+body.wfe-campaign .w-chooser .w-btn--block,
+body.wfe-campaign .w-steps [aria-pressed="true"] {
+  --btn-bg: linear-gradient(135deg, #130a0e, #1d1a2c 70%, #0e1f3a);
+}
+
+body.wfe-campaign .w-steps [aria-pressed="true"],
+body.wfe-campaign .w-country__options [aria-pressed="true"],
+body.wfe-campaign .w-filters [aria-pressed="true"] {
+  background: linear-gradient(135deg, #130a0e, #0e1f3a);
+}
+
+/* Inner pages: dark surfaces get the same black-to-blue grade. */
+body.wfe-campaign
+  :is(
+    .wfp-hero,
+    .wfp-navy,
+    .wfp-contact,
+    .v3-hero,
+    .v3-journey,
+    .wfe2-forest,
+    .wfe2-club-card,
+    .wfe2-contact-card,
+    .wfe2-footer:not(.w-footer)
+  ) {
+  background-image: var(--k-glow-red), var(--k-glow-blue), var(--k-night);
+  background-color: #0c0608;
+}
+
+body.wfe-campaign .wfp-btn-gold,
+body.wfe-campaign .v3-goal,
+body.wfe-campaign .wfp-avatar {
+  background: var(--k-cta);
+  color: #fff;
+}
+
+body.wfe-campaign :is(.wfp-hero, .wfp-navy, .v3-hero, .v3-journey, .wfe2-forest) :is(h1, h2) em {
+  color: var(--k-red-lit);
+}
+
+/* ---------- 3. Motion ---------- */
+
+@keyframes wfe-aurora {
+  from {
+    transform: translate3d(-3%, -2%, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(4%, 3%, 0) scale(1.12);
+  }
+}
+
+@keyframes wfe-sheen {
+  from {
+    background-position: 0% 50%;
+  }
+
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes wfe-rise-in {
+  from {
+    opacity: 0;
+    translate: 0 28px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes wfe-progress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* A slow crimson and blue light behind the home hero and the halo behind the portrait. */
+  body.wfe-campaign:not(.r-motion-paused) .w-hero::before,
+  body.wfe-campaign:not(.r-motion-paused) .w-hero__media::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(38% 38% at 72% 28%, rgb(217 31 61 / 20%), transparent 70%),
+      radial-gradient(42% 42% at 24% 76%, rgb(42 156 193 / 22%), transparent 70%),
+      radial-gradient(30% 30% at 88% 86%, rgb(14 31 58 / 14%), transparent 70%);
+    animation: wfe-aurora 24s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  body.wfe-campaign:not(.r-motion-paused) .w-hero::before {
+    inset: -18%;
+  }
+
+  body.wfe-campaign:not(.r-motion-paused) .w-hero__media::before {
+    inset: -8% -10%;
+    filter: blur(24px);
+  }
+
+  body.wfe-campaign:not(.r-motion-paused) .w-hero > .w-shell {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Buttons: the crimson slowly slides, and lifts on hover. */
+  body.wfe-campaign:not(.r-motion-paused)
+    .w-btn:not(.w-btn--light, .w-btn--outline, .w-btn--whatsapp):hover {
+    animation: wfe-sheen 1.4s var(--ease-out) forwards;
+    box-shadow: 0 18px 34px -16px rgb(183 25 53 / 85%);
+  }
+
+  /* The headline accent shimmers between crimson and blue. */
+  body.wfe-campaign:not(.r-motion-paused) .w-hero__title em span,
+  body.wfe-campaign:not(.r-motion-paused) .w-hero__title em {
+    background: linear-gradient(95deg, #b71935 0%, #d91f3d 30%, #2a59a6 70%, #0b6e8e 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: wfe-sheen 9s ease-in-out infinite alternate;
+  }
+
+  /* Progress fills shimmer. */
+  body.wfe-campaign:not(.r-motion-paused) .w-approved .progress-track i {
+    background-size: 220% 100%;
+    animation: wfe-sheen 5s linear infinite alternate;
+  }
+
+  /* Scroll-linked effects: only where the browser supports them, and always ending fully visible. */
+  @supports (animation-timeline: view()) {
+    body.wfe-campaign:not(.r-motion-paused)
+      :is(
+        .w-ways__grid > a,
+        .w-resources__grid > a,
+        .r-gallery-card,
+        .w-trust__card,
+        .w-channels__item,
+        .w-tiers,
+        .w-ledger li
+      ) {
+      animation: wfe-rise-in linear both;
+      animation-timeline: view();
+      animation-range: entry 4% cover 26%;
+    }
+
+    body.wfe-campaign:not(.r-motion-paused)::after {
+      content: "";
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 2000;
+      height: 3px;
+      pointer-events: none;
+      background: var(--k-spectrum);
+      transform-origin: 0 50%;
+      animation: wfe-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+/* Cards and panels lift with a crimson and blue edge light. */
+@media (hover: hover) {
+  body.wfe-campaign
+    :is(.w-ways__grid > a, .w-resources__grid > a, .r-gallery-card, .w-trust__card):hover {
+    box-shadow:
+      0 0 0 1px rgb(42 156 193 / 40%),
+      0 22px 44px -22px rgb(183 25 53 / 45%);
+  }
+}
