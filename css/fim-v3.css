@@ -453,3 +453,25 @@
   padding-block: 12px;
   margin-block: -12px;
 }
+
+/* Journey photographs: keep faces in frame when a wide or tall photograph is cropped into a card or tile.
+   Nothing set a focal point, so every photograph was cropped about its centre. */
+.pci-fim-v3 .journey-photo img[src*="walk-day-arrival-celebration"] {
+  object-position: 26% 30%;
+}
+
+.pci-fim-v3 .journey-photo img[src*="walk-day-procession-kiburara"] {
+  object-position: 52% 30%;
+}
+
+.pci-fim-v3 .journey-photo img[src*="walk-day-crowd-welcome"] {
+  object-position: 62% 40%;
+}
+
+.pci-fim-v3 .journey-photo img[src*="river-crossing"] {
+  object-position: 50% 62%;
+}
+
+.pci-fim-v3 .journey-photo img[src*="riverside-35km"] {
+  object-position: 50% 52%;
+}

@@ -1,0 +1,67 @@
+---
+import { loadCampaignRecord } from "../../lib/campaign";
+const record = loadCampaignRecord();
+const km = new Intl.NumberFormat("en-GB").format(record.distanceKm);
+---
+
+<section class="pci-section pci-route" id="the-road" aria-labelledby="route-heading">
+  <div class="pci-route__glow" aria-hidden="true"></div>
+  <div class="pci-container">
+    <div class="pci-route__head" data-reveal>
+      <span class="pci-eyebrow">The road ahead</span>
+      <h2 id="route-heading">
+        From Nairobi
+        <em>to Kagando.</em>
+      </h2>
+      <p class="pci-lead">
+        A planned route of about {km} km, walked one confirmed stage at a time. Kilometres appear here only after the
+        walking team confirms them.
+      </p>
+    </div>
+    <div class="pci-route__stage" data-reveal>
+      <svg class="pci-route__svg" viewBox="0 0 1200 260" role="presentation" focusable="false" aria-hidden="true">
+        <defs>
+          <linearGradient id="route-line" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#ff6b82"></stop>
+            <stop offset="0.5" stop-color="#d91f3d"></stop>
+            <stop offset="1" stop-color="#5cc8e8"></stop>
+          </linearGradient>
+        </defs>
+        <path
+          class="pci-route__track"
+          d="M70 190 C 230 190 250 70 420 90 S 640 210 790 150 S 1010 60 1130 80"
+          pathLength="1"
+        ></path>
+        <path
+          class="pci-route__line"
+          d="M70 190 C 230 190 250 70 420 90 S 640 210 790 150 S 1010 60 1130 80"
+          pathLength="1"
+        ></path>
+        <g class="pci-route__pin pci-route__pin--start">
+          <circle cx="70" cy="190" r="16"></circle>
+          <circle cx="70" cy="190" r="6"></circle>
+        </g>
+        <g class="pci-route__pin pci-route__pin--end">
+          <circle cx="1130" cy="80" r="16"></circle>
+          <circle cx="1130" cy="80" r="6"></circle>
+        </g>
+      </svg>
+      <div class="pci-route__labels">
+        <div>
+          <span>Start</span>
+          <strong>Nairobi</strong>
+          <small>Kenya</small>
+        </div>
+        <div>
+          <span>Destination</span>
+          <strong>UCU–Kagando</strong>
+          <small>Kasese, Uganda</small>
+        </div>
+      </div>
+    </div>
+    <p class="pci-route__note">
+      An illustrative line, not a map. The planned distance is an estimate; sponsored steps are separate from kilometres
+      walked.
+    </p>
+  </div>
+</section>

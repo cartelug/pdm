@@ -49,7 +49,14 @@ test("all twenty scenes appear in actual pages while original physical reference
     const doc = new JSDOM(fs.readFileSync(path.join(root, file), "utf8")).window.document;
     for (const picture of doc.querySelectorAll("[data-campaign-scene]")) {
       seen.add(picture.dataset.campaignScene);
-      assert.ok(picture.querySelector('source[media="(max-width: 719px)"]') || picture.closest(".w-hero__inset"));
+      // A picture has a phone source, or sits in the small inset, or deliberately uses the tall (mobile) composition at
+      // every size inside a portrait frame.
+      const portraitFrame = picture.closest(".pci-spotlight__frame");
+      assert.ok(
+        picture.querySelector('source[media="(max-width: 719px)"]') ||
+          picture.closest(".w-hero__inset") ||
+          (portraitFrame && /scene-\d+-mobile-/.test(picture.querySelector("img").getAttribute("src"))),
+      );
     }
   }
   for (const scene of manifest.scenes) assert.ok(seen.has(scene.id), `scene ${scene.id} is integrated`);
