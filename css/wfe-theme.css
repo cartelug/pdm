@@ -19,8 +19,8 @@ html body.wfe-campaign {
   /* Hand-written campaign page (wfe-system.css names) */
   --ivory: #f4ede4;
   --paper: #faf6f1;
-  --sand: #e8dccd;
-  --sand-2: #dccdb9;
+  --sand: #eee5d8;
+  --sand-2: #e3d8c3;
   --navy: #130a0e;
   --navy-2: #1d0f16;
   --navy-3: #2b1823;
@@ -37,7 +37,7 @@ html body.wfe-campaign {
   /* Shared brand tokens (brand.css names) */
   --c-paper: #faf6f1;
   --c-ivory: #f2ebe3;
-  --c-sand: #e6dacb;
+  --c-sand: #eee5d8;
   --c-ink: #1b0a0e;
   --c-ink-soft: #3d272c;
   --c-muted: #66565a;
