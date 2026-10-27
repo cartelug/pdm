@@ -94,9 +94,9 @@
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
     "contribute/index.html": "9acdddd8fc407d378ab88fbb4b798d932cef108c961178e9688c975ac1a33c59",
     "contribute/payment/index.html": "ce06a87bc3fe160618e391d69753c4ea00e51ff4349d1055da50cfcab6b1fff0",
-    "contribute/privacy/index.html": "430a4b99f000031580c131d2a56086ecfcc31ea4621e7f0a97754110b1ca4e53",
-    "contribute/terms/index.html": "da173459d7908e691360404e319ee3fba4ada86d3200c81d7877f82aa56ebd66",
-    "contribute/verify/index.html": "d7bd09d46ad63f2e92d8544c58e7b914044edfc92665ad847033103b4108d70d",
+    "contribute/privacy/index.html": "486de56622142b3cfab7f5458b4302939bb28061b77678791e1b37a48ef5aa1c",
+    "contribute/terms/index.html": "58d70f1a0e6f7542514472544a6a0f0bf287a61a9e3e4bca7d449c625965a6c6",
+    "contribute/verify/index.html": "ba96175af1b549a167f25d0f2fc10036872e1715054d07f3d60b3be9ae1aeda8",
     "css/base.css": "368d70b67bd5c7c3e60f7f44a9d8c93bfb8db7e2e8559cb00f223cfcf14893c5",
     "css/collections.css": "cd779925dd2f0519e39b3b7e5f577d660dcee3bf08f8ce98c67bad5615a47f23",
     "css/contribute.css": "e02336271318e777f18aa7a98cb227dd896eed88bebe9de6bc0b054622ed2c81",
@@ -127,11 +127,11 @@
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
     "js/wfe.js": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
-    "walk-for-education/accountability/index.html": "c32f3a855ed4dfcaef82d57e3b6497944c7425e3829ef97875ac836eb348750a",
-    "walk-for-education/index.html": "fea040009009c58011806e640d36df7346bdad2e11c033870701a5a00279df19",
-    "walk-for-education/partners/index.html": "b73175bc022c14c0ad43c815a9f43e4ff31fd7133f4997de18f66fd10d6325da",
-    "walk-for-education/take-part/index.html": "6d423b32c57fc762f776b0922ede50ff5dcf0c79f16619a20ff11e04d1e337e8",
-    "walk-for-education/updates/index.html": "081e98b54f1dabc7eabbccf9b006bd81dd174eed81456bbacdf885688f2f86e1"
+    "walk-for-education/accountability/index.html": "5137365fd8933c3470464fde5eeb751f830202dfcd5692c8004985e856ddb710",
+    "walk-for-education/index.html": "cc60350466aa594c05502e93a9e34c220e9b36951424733caae331f67b048b90",
+    "walk-for-education/partners/index.html": "339585bc6909400bc03b58da6096202f499ca980d447cba51a6e8f4732ba3cd9",
+    "walk-for-education/take-part/index.html": "f66acf08e245de47369639523dbd07d1e331b9621f9c39dff0501a54de311bcb",
+    "walk-for-education/updates/index.html": "0586bd8d3a8aa7667336ad68a818da9901a9941c273a39463575b0504af4b730"
   },
   "presentationReviews": [
     {
@@ -959,6 +959,70 @@
       "date": "2026-10-26",
       "authorisation": "User instruction in session: the PCI logo needs no background.",
       "reason": "Cache-hash query for css/one-look.css, which now removes the white plate behind the PCI logo in the Walk page footers; on the Walk home page the partner explainer links are also re-versioned for the corrected transparent PCI logo. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "contribute/privacy/index.html",
+      "previousSha256": "430a4b99f000031580c131d2a56086ecfcc31ea4621e7f0a97754110b1ca4e53",
+      "sha256": "486de56622142b3cfab7f5458b4302939bb28061b77678791e1b37a48ef5aa1c",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: make the Walk inner-page footers light and finish.",
+      "reason": "Cache-hash query for css/wfe-editorial.css and css/wfe-campaign.css, which now draw the inner Walk page footers on the light sand surface used by the Walk home footer so the whole PCI logo shows. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "contribute/terms/index.html",
+      "previousSha256": "da173459d7908e691360404e319ee3fba4ada86d3200c81d7877f82aa56ebd66",
+      "sha256": "58d70f1a0e6f7542514472544a6a0f0bf287a61a9e3e4bca7d449c625965a6c6",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: make the Walk inner-page footers light and finish.",
+      "reason": "Cache-hash query for css/wfe-editorial.css and css/wfe-campaign.css, which now draw the inner Walk page footers on the light sand surface used by the Walk home footer so the whole PCI logo shows. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "contribute/verify/index.html",
+      "previousSha256": "d7bd09d46ad63f2e92d8544c58e7b914044edfc92665ad847033103b4108d70d",
+      "sha256": "ba96175af1b549a167f25d0f2fc10036872e1715054d07f3d60b3be9ae1aeda8",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: make the Walk inner-page footers light and finish.",
+      "reason": "Cache-hash query for css/wfe-editorial.css and css/wfe-campaign.css, which now draw the inner Walk page footers on the light sand surface used by the Walk home footer so the whole PCI logo shows. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/accountability/index.html",
+      "previousSha256": "c32f3a855ed4dfcaef82d57e3b6497944c7425e3829ef97875ac836eb348750a",
+      "sha256": "5137365fd8933c3470464fde5eeb751f830202dfcd5692c8004985e856ddb710",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: make the Walk inner-page footers light and finish.",
+      "reason": "Cache-hash query for css/wfe-editorial.css and css/wfe-campaign.css, which now draw the inner Walk page footers on the light sand surface used by the Walk home footer so the whole PCI logo shows. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/index.html",
+      "previousSha256": "fea040009009c58011806e640d36df7346bdad2e11c033870701a5a00279df19",
+      "sha256": "cc60350466aa594c05502e93a9e34c220e9b36951424733caae331f67b048b90",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: make the Walk inner-page footers light and finish.",
+      "reason": "Cache-hash query for css/wfe-editorial.css and css/wfe-campaign.css, which now draw the inner Walk page footers on the light sand surface used by the Walk home footer so the whole PCI logo shows. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/partners/index.html",
+      "previousSha256": "b73175bc022c14c0ad43c815a9f43e4ff31fd7133f4997de18f66fd10d6325da",
+      "sha256": "339585bc6909400bc03b58da6096202f499ca980d447cba51a6e8f4732ba3cd9",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: make the Walk inner-page footers light and finish.",
+      "reason": "Cache-hash query for css/wfe-editorial.css and css/wfe-campaign.css, which now draw the inner Walk page footers on the light sand surface used by the Walk home footer so the whole PCI logo shows. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/take-part/index.html",
+      "previousSha256": "6d423b32c57fc762f776b0922ede50ff5dcf0c79f16619a20ff11e04d1e337e8",
+      "sha256": "f66acf08e245de47369639523dbd07d1e331b9621f9c39dff0501a54de311bcb",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: make the Walk inner-page footers light and finish.",
+      "reason": "Cache-hash query for css/wfe-editorial.css and css/wfe-campaign.css, which now draw the inner Walk page footers on the light sand surface used by the Walk home footer so the whole PCI logo shows. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/updates/index.html",
+      "previousSha256": "081e98b54f1dabc7eabbccf9b006bd81dd174eed81456bbacdf885688f2f86e1",
+      "sha256": "0586bd8d3a8aa7667336ad68a818da9901a9941c273a39463575b0504af4b730",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: make the Walk inner-page footers light and finish.",
+      "reason": "Cache-hash query for css/wfe-editorial.css and css/wfe-campaign.css, which now draw the inner Walk page footers on the light sand surface used by the Walk home footer so the whole PCI logo shows. No markup, pledge, payment, form, script order or fragment change."
     }
   ],
   "functionalReviews": [

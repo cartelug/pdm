@@ -4021,11 +4021,45 @@ body.wfe-campaign
     .v3-journey,
     .wfe2-forest,
     .wfe2-club-card,
-    .wfe2-contact-card,
-    .wfe2-footer:not(.w-footer)
+    .wfe2-contact-card
   ) {
   background-image: var(--k-glow-red), var(--k-glow-blue), var(--k-night);
   background-color: #0c0608;
+}
+
+/* Inner-page footer: light, like the Walk home footer, so the PCI logo sits on a quiet surface with no plate. The
+   editorial rules read their footer colours from these variables, so flipping them flips the whole footer. */
+body.wfe-campaign .wfe2-footer:not(.w-footer) {
+  --ed-on-navy: var(--ink);
+  --ed-on-navy-muted: var(--ink-2);
+  --ed-on-navy-line: var(--line-strong);
+  --ed-gold: #0b6e8e;
+
+  border-top: 1px solid var(--line);
+  background: var(--sand);
+  color: var(--ink-2);
+}
+
+body.wfe-campaign
+  .wfe2-footer:not(.w-footer)
+  :is(.wfe2-brand, .wfe2-brand > span, .wfe2-footer-contact > b),
+body.wfe-campaign .wfe2-footer:not(.w-footer) .wfe2-footer-contact > button {
+  color: var(--ink);
+}
+
+body.wfe-campaign .wfe2-footer:not(.w-footer) .wfe2-footer-contact #wfeShareFeedback {
+  color: var(--ink-2);
+}
+
+@media (hover: hover) {
+  body.wfe-campaign .wfe2-footer:not(.w-footer) a:hover {
+    color: #0b6e8e;
+  }
+
+  body.wfe-campaign .wfe2-footer:not(.w-footer) .campaign-socials a:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
 }
 
 body.wfe-campaign .wfp-btn-gold,

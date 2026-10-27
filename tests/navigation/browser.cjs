@@ -307,6 +307,16 @@ const server = http.createServer((req, res) => {
             .filter((logo) => logo.background || logo.padding || logo.rounded),
         );
         assert.deepEqual(plates, [], route + " at " + width + " px shows the PCI logo on a plate");
+        // The logo's dark figure disappears on a dark surface, so the footer that holds it must be light.
+        const footerLight = await logoPage.evaluate(() => {
+          const footer = document.querySelector("footer.wfe2-footer:not(.w-footer)");
+          if (!footer) return true;
+          const [r, g, b] = getComputedStyle(footer)
+            .backgroundColor.match(/\d+/g)
+            .map((v) => Number(v) / 255);
+          return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.6;
+        });
+        assert.ok(footerLight, route + " footer is light so the whole PCI logo shows");
         await framed.close();
       }
     }
