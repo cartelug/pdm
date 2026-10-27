@@ -113,6 +113,27 @@ const out = process.env.PCI_TEST_SCREENSHOTS || path.join(os.tmpdir(), "pci-oper
       return { id: r.record.id, photo: uploaded.path };
     });
     uploadedPhoto = result.photo;
+    for (const format of ["pdf", "xlsx", "json", "database"]) {
+      const pending = page.waitForEvent("download");
+      await page.click("#report-" + format);
+      const download = await pending;
+      const target = path.join(out, "collections-report." + (format === "database" ? "sqlite" : format));
+      await download.saveAs(target);
+      const bytes = fs.readFileSync(target);
+      assert(bytes.length > 100, "nonempty " + format + " download");
+      if (format === "pdf") {
+        const pdf = await require("../../admin/vendor/pdf-lib.min.js").PDFDocument.load(bytes);
+        assert(pdf.getForm().getFields().length >= 8, "actual PDF download keeps editable fields");
+      }
+      if (format === "json")
+        assert(
+          JSON.parse(bytes).rows.some((r) => r.id === result.id),
+          "report contains the latest saved receipt",
+        );
+      if (format === "xlsx") assert.equal(bytes.toString("ascii", 0, 2), "PK");
+      if (format === "database") assert.equal(bytes.toString("ascii", 0, 15), "SQLite format 3");
+    }
+    console.log("PASS actual branded PDF, Excel, JSON and SQLite downloads");
     await page.selectOption("#graphic-source", "approved");
     await page.selectOption("#graphic-template", "collections");
     await page.selectOption("#graphic-format", "square");

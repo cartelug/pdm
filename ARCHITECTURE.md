@@ -4,6 +4,8 @@ This is the one place that says how the site is built, what is protected, how a 
 
 Last verified against the repository on 24 October 2026.
 
+**27 October collections exports:** `/api/operations.php` now supplies a consistent, complete private report via `report-data` to the existing named-account console. `api/lib/operations-reports.php` reads the existing ledger inside a transaction, preserves manual/gateway eligibility and returns per-currency totals. `js/operations-reports.js` creates branded editable PDF forms and an XLSX snapshot locally using the vendored PDF-LIB/fontkit and embedded brand fonts and a self-contained OOXML ZIP writer. CSV remains unchanged. An administrator-only CSRF-protected `download-database` action streams a fresh consistent SQLite snapshot made by the existing private backup helper. Exports never write offline edits back. Supporter lists are not committed to this public repository. See `docs/COLLECTIONS-EXPORT-PLAN-2026-10-27.md`.
+
 **Live operations release:** `docs/OPERATIONS-HANDOVER.md` supersedes the legacy console, shared-password, live-publication and financial-aggregation descriptions below. `/admin/operations/` and `/api/operations.php` reuse the private SQLite ledger with additive tables, named roles, verified-only per-currency totals, import preview, consent, owner versions and snapshot-based PNG exports. `/api/campaign.php` reads that approved projection; its shared-password write route is retired. This is an explicitly authorised functional release, not a presentation-only redesign. `functionalReviews` in the protected baseline records the exact changed files and hashes. Existing pledge, checkout, certificate, pricing and frozen-fragment contracts remain tested.
 
 ## 1. What the site is

@@ -34,6 +34,7 @@ jobs:
 
       - name: Campaign ledger and HTTP fixtures
         run: |
+          node tests/operations/reports.cjs
           php tests/payments/ledger.php
           python3 tests/payments/test_http.py
           python3 tests/operations/test_http.py

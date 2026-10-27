@@ -2,7 +2,7 @@
   "baselineCommit": "15e13113ca838bfec2b193d6a52f6cedca7f61bb",
   "note": "Original protected baseline plus explicit presentationReviews and user-authorised functionalReviews. Every original pledge/payment hook and frozen fragment remains checked; no gate is removed.",
   "files": {
-    "admin/collections/index.html": "1b16d1dec2b8a655de513150cdfaa8cb2e2120d65a895be7e1aa2348edfb92c5",
+    "admin/collections/index.html": "bb7c9f2cd9b810ebd4c1950239efa05e766fe7c0b2c7987573d2d29b6db53d2b",
     "admin/index.html": "5176fe544d8b2c5880dec31e9d33bf3205112ed823b390d8ab58d42e2fd5c7db",
     "admin/quick.html": "7fd9d33fbaacc22b01532de3f2646442c188c42bb2ff7fb23154c79fd36f2146",
     "admin/vendor/jspdf.umd.min.js": "98ccf17aa10c20bb1301762618fcc9b6ab3a4e7f26b6071d64d0b41154df3875",
@@ -128,7 +128,7 @@
     "js/wfe-shell.js": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
     "js/wfe.js": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
     "walk-for-education/accountability/index.html": "6e229c072a8d40acfa9f957b82f3ad7b27857851c86f5b84d1fdf61a81783831",
-    "walk-for-education/index.html": "0d2badcf28a0867b8442a806d3602cd3f20f30ca151212d1dbd94cd1c0efe4d0",
+    "walk-for-education/index.html": "ab714a55449a12faba69dcf6a18b6f2735a090ee6fbc57aa12f1f8122a1af78c",
     "walk-for-education/partners/index.html": "694ddc6275045b1ce4a7ab60ca2702571b8a40b4179b16dd63627f44466ddcec",
     "walk-for-education/take-part/index.html": "403b85ea4c1d2637d81082105fee67f8b6153ada4b1cf831d813c4413f8a9d91",
     "walk-for-education/updates/index.html": "ccb015c8d5f4ef5719e7695bec6ad255bba1fc336477e4c23a464064462d7e18"
@@ -986,6 +986,22 @@
       "date": "2026-10-25",
       "authorisation": "User approved the complete 20-scene/40-composition official-kit plan: proceed and push one final version main after",
       "reason": "Apply the authorised official-kit image collection, responsive pictures, actual bag cutout and ongoing-walk wording. Pledge/payment fragments, financial hooks and script order remain intact; only the reviewed JSON-LD wording hash changes."
+    },
+    {
+      "file": "admin/collections/index.html",
+      "previousSha256": "1b16d1dec2b8a655de513150cdfaa8cb2e2120d65a895be7e1aa2348edfb92c5",
+      "sha256": "bb7c9f2cd9b810ebd4c1950239efa05e766fe7c0b2c7987573d2d29b6db53d2b",
+      "date": "2026-10-27",
+      "authorisation": "User requests current website fixes, removal of Rotary logos and downloadable editable collections reports/database",
+      "reason": "Correct ongoing-walk copy or outdated named-account instructions; add authenticated exports and update their cache hashes. Existing pricing, pledge forms, payment channels and frozen financial fragments remain unchanged."
+    },
+    {
+      "file": "walk-for-education/index.html",
+      "previousSha256": "0d2badcf28a0867b8442a806d3602cd3f20f30ca151212d1dbd94cd1c0efe4d0",
+      "sha256": "ab714a55449a12faba69dcf6a18b6f2735a090ee6fbc57aa12f1f8122a1af78c",
+      "date": "2026-10-27",
+      "authorisation": "User requests current website fixes, removal of Rotary logos and downloadable editable collections reports/database",
+      "reason": "Correct ongoing-walk copy or outdated named-account instructions; add authenticated exports and update their cache hashes. Existing pricing, pledge forms, payment channels and frozen financial fragments remain unchanged."
     }
   ]
 }

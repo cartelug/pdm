@@ -3,6 +3,7 @@ declare(strict_types=1);
 ini_set('display_errors','0');
 header('Content-Type: application/json; charset=utf-8');header('Cache-Control: no-store');header('X-Content-Type-Options: nosniff');header('Referrer-Policy: no-referrer');
 require __DIR__.'/lib/operations.php';
+require __DIR__.'/lib/operations-reports.php';
 function ops_respond(array $b,int $code=200): never { http_response_code($code);echo json_encode($b,JSON_THROW_ON_ERROR|JSON_UNESCAPED_UNICODE);exit; }
 try {
     $action=$_GET['action'] ?? 'public';$method=$_SERVER['REQUEST_METHOD'] ?? 'GET';
@@ -69,6 +70,17 @@ try {
           foreach($preview as $row) if($row['issues']) throw new LogicException('Resolve preview issues before importing; no rows were imported');
           foreach($preview as $row) $ids[]=ops_record($row['record'],$actor)['id'];return $ids;
         });ops_respond(['ids'=>$saved]);
+    }
+    if($action==='report-data') {
+        $actor=ops_actor('read');$report=ops_report();
+        pci_audit(null,$actor,'ops_report_downloaded');ops_respond($report);
+    }
+    if($action==='download-database') {
+        $actor=ops_actor('read');pci_require_role(['admin']);
+        pci_audit(null,$actor,'ops_database_downloaded');$name=pci_backup();
+        $file=pci_config()['private_dir'].'/backups/'.$name;
+        header('Content-Type: application/vnd.sqlite3');header('Content-Disposition: attachment; filename="'.$name.'"');
+        header('Content-Length: '.filesize($file));readfile($file);exit;
     }
     if($action==='export') {
         $actor=ops_actor('read');header('Content-Type: text/csv; charset=utf-8');header('Content-Disposition: attachment; filename="pci-operations-'.gmdate('Ymd').'.csv"');

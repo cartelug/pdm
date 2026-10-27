@@ -12,7 +12,7 @@
     publishedPrices = [],
     priceEdited = false;
   const permissions = {
-    admin: ["read", "record", "finance", "publish", "consent", "milestone", "graphic"],
+    admin: ["read", "record", "finance", "publish", "consent", "milestone", "graphic", "backup"],
     finance: ["read", "record", "finance", "consent", "milestone", "graphic"],
     coordinator: ["read", "record", "publish", "graphic"],
     recorder: ["read", "record", "graphic"],
@@ -331,6 +331,65 @@
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     }),
   );
+  for (const format of ["pdf", "xlsx", "json", "database"]) {
+    $("report-" + format).addEventListener(
+      "click",
+      run(async () => {
+        const response = await fetch(
+          "/api/operations.php?action=" + (format === "database" ? "download-database" : "report-data"),
+          {
+            method: "POST",
+            cache: "no-store",
+            credentials: "same-origin",
+            headers: { "Content-Type": "application/json", "X-CSRF-Token": csrf },
+            body: "{}",
+          },
+        );
+        if (!response.ok) throw new Error((await response.json()).error || "Download failed");
+        const date = today();
+        let blob;
+        if (format === "database") blob = await response.blob();
+        else {
+          const report = await response.json();
+          if (format === "pdf") {
+            const base64Asset = async (url) => {
+              const response = await fetch(url, { cache: "force-cache" });
+              if (!response.ok) throw new Error("Report assets could not load. Please retry.");
+              const bytes = new Uint8Array(await response.arrayBuffer());
+              let binary = "";
+              for (const byte of bytes) binary += String.fromCharCode(byte);
+              return btoa(binary);
+            };
+            const logos = await Promise.all(
+              [
+                "/assets/brand/pamodzi/pamodzi-logo-320.png",
+                "/assets/walk-for-education/walk-for-education-logo.png",
+                "/assets/walk-for-education/south-rwenzori.png",
+              ].map(async (src) => {
+                return { data: await base64Asset(src) };
+              }),
+            );
+            const fontData = await Promise.all(
+              ["/assets/fonts/sky-text-regular-pdf.ttf", "/assets/fonts/mtn-brighter-sans-bold-pdf.ttf"].map(
+                base64Asset,
+              ),
+            );
+            blob = new Blob([await window.PCIReports.pdf(report, logos, { regular: fontData[0], bold: fontData[1] })], {
+              type: "application/pdf",
+            });
+          } else if (format === "xlsx") blob = window.PCIReports.xlsx(report);
+          else blob = new Blob([JSON.stringify(report, null, 2)], { type: "application/json" });
+        }
+        const url = URL.createObjectURL(blob),
+          a = document.createElement("a");
+        a.href = url;
+        a.download = "PCI-Walk-Collections-" + date + "." + (format === "database" ? "sqlite" : format);
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        say("Downloaded a current private copy. Offline edits do not update the live register.");
+      }),
+    );
+  }
   const walkData = () => {
     const b = data($("walk-form"));
     b.km = Number(b.km);

@@ -102,7 +102,6 @@
       image("/assets/brand/pamodzi/pamodzi-logo-320.png"),
       image("/assets/walk-for-education/walk-for-education-logo.png"),
       image("/assets/walk-for-education/south-rwenzori.png"),
-      image("/assets/brand/rotary/rotary-logo.png"),
     ]);
     const top = format === "story" ? 310 : 65,
       end = format === "story" ? 1600 : h - 65;
@@ -115,10 +114,9 @@
     ctx.fill();
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(65, top, 950, 124);
-    contain(ctx, logos[0], 80, top + 10, 135, 104);
-    contain(ctx, logos[1], 245, top + 10, 330, 104);
-    contain(ctx, logos[2], 600, top + 10, 105, 104);
-    contain(ctx, logos[3], 745, top + 20, 245, 84);
+    contain(ctx, logos[0], 100, top + 10, 160, 104);
+    contain(ctx, logos[1], 320, top + 10, 390, 104);
+    contain(ctx, logos[2], 790, top + 10, 130, 104);
     ctx.fillStyle = "#82d2ef";
     ctx.font = '600 24px "Sky Text"';
     ctx.fillText("PAMODZI COMMUNITY INITIATIVE", 65, top + 182);
