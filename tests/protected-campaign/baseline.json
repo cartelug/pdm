@@ -128,7 +128,7 @@
     "js/wfe-shell.js": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
     "js/wfe.js": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
     "walk-for-education/accountability/index.html": "6e229c072a8d40acfa9f957b82f3ad7b27857851c86f5b84d1fdf61a81783831",
-    "walk-for-education/index.html": "ab714a55449a12faba69dcf6a18b6f2735a090ee6fbc57aa12f1f8122a1af78c",
+    "walk-for-education/index.html": "900333a872875b6421c4ad4e7dd515edfa1ec68c316c10822514404adeeac3e8",
     "walk-for-education/partners/index.html": "694ddc6275045b1ce4a7ab60ca2702571b8a40b4179b16dd63627f44466ddcec",
     "walk-for-education/take-part/index.html": "403b85ea4c1d2637d81082105fee67f8b6153ada4b1cf831d813c4413f8a9d91",
     "walk-for-education/updates/index.html": "ccb015c8d5f4ef5719e7695bec6ad255bba1fc336477e4c23a464064462d7e18"
@@ -872,6 +872,13 @@
       "date": "2026-10-26",
       "authorisation": "User instruction in session: use the two supplied web fonts (MTN Brighter Sans Bold and Sky Text) across the whole site.",
       "reason": "Typeface swap only. The two font preload hrefs now name the new font files, a font credit line (required by the font licence) is added to the footer, and cache-hash queries follow the stylesheets that changed. No pledge, price, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/index.html",
+      "previousSha256": "ab714a55449a12faba69dcf6a18b6f2735a090ee6fbc57aa12f1f8122a1af78c",
+      "sha256": "900333a872875b6421c4ad4e7dd515edfa1ec68c316c10822514404adeeac3e8",
+      "date": "2026-10-27",
+      "reason": "Invalidate the cleaned partner explainer and thumbnail URLs so returning visitors receive the Rotary-free artwork. No pledge/payment hooks or frozen fragments change."
     }
   ],
   "functionalReviews": [
