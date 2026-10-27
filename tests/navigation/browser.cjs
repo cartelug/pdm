@@ -35,7 +35,7 @@ const server = http.createServer((req, res) => {
   try {
     const page = await browser.newPage();
     const errors = [];
-    page.on("pageerror", (e) => errors.push(e.message));
+    page.on("pageerror", (e) => errors.push(page.url().replace(base, "") + " " + e.message));
     for (const width of [320, 360, 375, 390, 430, 768, 1024, 1280, 1440, 1920]) {
       await page.setViewportSize({ width, height: 850 });
       for (const route of ["/", "/about/", "/what-we-do/", "/projects/", "/contact/", "/model/", "/apartments/"]) {
