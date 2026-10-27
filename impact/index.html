@@ -13,7 +13,9 @@
         if (
           name === "AbortError" ||
           name === "TimeoutError" ||
-          message.indexOf("ViewTransition opt-in disabled") !== -1
+          message.indexOf("ViewTransition opt-in disabled") !== -1 ||
+          // The browser cancels a transition when the window is resized or rotated mid-navigation; nothing is wrong.
+          message.indexOf("Viewport size changed") !== -1
         )
           return;
         // Unexpected failures remain visible to monitoring and browser regression tests.

@@ -38,6 +38,7 @@ test("expected browser transition cancellation is handled for outgoing and incom
         "Transition was aborted because of invalid state. ViewTransition opt-in disabled",
         "InvalidStateError",
       ),
+      new DOMException("Transition was aborted because of invalid state. Viewport size changed", "InvalidStateError"),
     ]) {
       const f = fixture();
       f.listeners[name]({ viewTransition: { ready: Promise.reject(error) } });
