@@ -4,7 +4,7 @@ The campaign is underway. The website must say so consistently, while leaving th
 
 ## Current pledge list
 
-Neeza supplied 78 entries on 27 October 2026: **3,563 steps at UGX 5,000, worth UGX 17,815,000**. All are pledges awaiting payment confirmation. This list is not a verified received balance. Preserve the three half-step entries and Sharon Kechule's 1.5 steps. Dr Benjamin Musau's supplied amount `300,00` is normalised to UGX 300,000 from 60 steps, with the source issue retained for review. Similar names are distinct rows, not automatic duplicates.
+Neeza supplied 78 entries on 27 October 2026: **3,563 steps at UGX 5,000, worth UGX 17,815,000**. All are pledges awaiting payment confirmation. This list is not a verified received balance. Preserve the three half-step entries and entry 44's 1.5 steps. Entry 8's supplied amount `300,00` is normalised to UGX 300,000 from 60 steps, with the source issue retained for review. Similar names are distinct rows, not automatic duplicates.
 
 The private import CSV and editable working files are delivered separately. Do not commit supporter lists or private ledgers to this public repository. The list's record date is 27 October, not an asserted original pledge/payment date. Country and transaction references remain blank where not supplied.
 
