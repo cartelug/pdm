@@ -276,9 +276,52 @@ const server = http.createServer((req, res) => {
       );
       await fresh.close();
     }
+    // The PCI logo is shown as supplied: transparent artwork with no plate (background, padding or rounded box) behind it.
+    for (const route of [
+      "/",
+      "/walk-for-education/",
+      "/walk-for-education/take-part/",
+      "/walk-for-education/partners/",
+      "/walk-for-education/accountability/",
+      "/walk-for-education/updates/",
+      "/contribute/",
+      "/faith-in-motion/",
+    ]) {
+      for (const width of [1280, 390]) {
+        const framed = await browser.newContext({ viewport: { width, height: 850 } });
+        const logoPage = await framed.newPage();
+        await logoPage.goto(base + route);
+        const plates = await logoPage.evaluate(() =>
+          [...document.querySelectorAll("img")]
+            .filter((img) => /pamodzi-logo/.test(img.currentSrc || img.src))
+            .map((img) => {
+              const style = getComputedStyle(img);
+              const solid = (color) => !/rgba\(\d+, \d+, \d+, 0\)|transparent/.test(color);
+              return {
+                src: (img.currentSrc || img.src).split("/").pop(),
+                background: solid(style.backgroundColor) || style.backgroundImage !== "none",
+                padding: parseFloat(style.paddingTop) + parseFloat(style.paddingLeft) > 0,
+                rounded: parseFloat(style.borderTopLeftRadius) > 0,
+              };
+            })
+            .filter((logo) => logo.background || logo.padding || logo.rounded),
+        );
+        assert.deepEqual(plates, [], route + " at " + width + " px shows the PCI logo on a plate");
+        await framed.close();
+      }
+    }
+    // The partner explainer embeds the PCI logo as transparent artwork, never as an opaque picture with a white canvas.
+    const partners = fs.readFileSync(
+      path.join(root, "assets/wfe-2026/explainers/09-official-partner-identities.svg"),
+      "utf8",
+    );
+    for (const [, data] of partners.matchAll(/href="data:image\/png;base64,([A-Za-z0-9+/=]+)"/g)) {
+      const colourType = Buffer.from(data.slice(0, 60), "base64")[25];
+      assert.ok([4, 6].includes(colourType), "every logo in the partner explainer keeps a transparent background");
+    }
     assert.deepEqual(errors, []);
     console.log(
-      "Institutional browser checks passed: responsive routes, modal lifecycle, reduced motion, filters, no-JS navigation and the two house fonts.",
+      "Institutional browser checks passed: responsive routes, modal lifecycle, reduced motion, filters, no-JS navigation, the two house fonts and logos without plates.",
     );
   } finally {
     await browser.close();

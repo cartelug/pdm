@@ -92,11 +92,11 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "e77d48ae95e66d0efe88f291211775eeb88d636a7ef6ef3ca5c256cab7605cb0",
-    "contribute/payment/index.html": "0ebbb6af7892bcb71d100aac62548019930be6ff14491195369e2df435bd1325",
-    "contribute/privacy/index.html": "e2413e540f0c3b8183eebd6e4bd306041a10be4b5810311f493f43d98991cf4d",
-    "contribute/terms/index.html": "9107e95c37ec9db5ef049262cf35a68cc1edc1f948f44dc98d2afd971543f6cd",
-    "contribute/verify/index.html": "40c250c093dd0dfd67c4c003f83a0f85b512469bbfb6f0036bce39e9a0ad36ad",
+    "contribute/index.html": "9acdddd8fc407d378ab88fbb4b798d932cef108c961178e9688c975ac1a33c59",
+    "contribute/payment/index.html": "ce06a87bc3fe160618e391d69753c4ea00e51ff4349d1055da50cfcab6b1fff0",
+    "contribute/privacy/index.html": "430a4b99f000031580c131d2a56086ecfcc31ea4621e7f0a97754110b1ca4e53",
+    "contribute/terms/index.html": "da173459d7908e691360404e319ee3fba4ada86d3200c81d7877f82aa56ebd66",
+    "contribute/verify/index.html": "d7bd09d46ad63f2e92d8544c58e7b914044edfc92665ad847033103b4108d70d",
     "css/base.css": "368d70b67bd5c7c3e60f7f44a9d8c93bfb8db7e2e8559cb00f223cfcf14893c5",
     "css/collections.css": "cd779925dd2f0519e39b3b7e5f577d660dcee3bf08f8ce98c67bad5615a47f23",
     "css/contribute.css": "e02336271318e777f18aa7a98cb227dd896eed88bebe9de6bc0b054622ed2c81",
@@ -127,11 +127,11 @@
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
     "js/wfe.js": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
-    "walk-for-education/accountability/index.html": "6e229c072a8d40acfa9f957b82f3ad7b27857851c86f5b84d1fdf61a81783831",
-    "walk-for-education/index.html": "900333a872875b6421c4ad4e7dd515edfa1ec68c316c10822514404adeeac3e8",
-    "walk-for-education/partners/index.html": "694ddc6275045b1ce4a7ab60ca2702571b8a40b4179b16dd63627f44466ddcec",
-    "walk-for-education/take-part/index.html": "403b85ea4c1d2637d81082105fee67f8b6153ada4b1cf831d813c4413f8a9d91",
-    "walk-for-education/updates/index.html": "ccb015c8d5f4ef5719e7695bec6ad255bba1fc336477e4c23a464064462d7e18"
+    "walk-for-education/accountability/index.html": "c32f3a855ed4dfcaef82d57e3b6497944c7425e3829ef97875ac836eb348750a",
+    "walk-for-education/index.html": "fea040009009c58011806e640d36df7346bdad2e11c033870701a5a00279df19",
+    "walk-for-education/partners/index.html": "b73175bc022c14c0ad43c815a9f43e4ff31fd7133f4997de18f66fd10d6325da",
+    "walk-for-education/take-part/index.html": "6d423b32c57fc762f776b0922ede50ff5dcf0c79f16619a20ff11e04d1e337e8",
+    "walk-for-education/updates/index.html": "081e98b54f1dabc7eabbccf9b006bd81dd174eed81456bbacdf885688f2f86e1"
   },
   "presentationReviews": [
     {
@@ -879,6 +879,86 @@
       "sha256": "900333a872875b6421c4ad4e7dd515edfa1ec68c316c10822514404adeeac3e8",
       "date": "2026-10-27",
       "reason": "Invalidate the cleaned partner explainer and thumbnail URLs so returning visitors receive the Rotary-free artwork. No pledge/payment hooks or frozen fragments change."
+    },
+    {
+      "file": "contribute/index.html",
+      "previousSha256": "e77d48ae95e66d0efe88f291211775eeb88d636a7ef6ef3ca5c256cab7605cb0",
+      "sha256": "9acdddd8fc407d378ab88fbb4b798d932cef108c961178e9688c975ac1a33c59",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: the PCI logo needs no background.",
+      "reason": "Cache-hash query for css/one-look.css, which now removes the white plate behind the PCI logo in the Walk page footers; on the Walk home page the partner explainer links are also re-versioned for the corrected transparent PCI logo. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "contribute/payment/index.html",
+      "previousSha256": "0ebbb6af7892bcb71d100aac62548019930be6ff14491195369e2df435bd1325",
+      "sha256": "ce06a87bc3fe160618e391d69753c4ea00e51ff4349d1055da50cfcab6b1fff0",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: the PCI logo needs no background.",
+      "reason": "Cache-hash query for css/one-look.css, which now removes the white plate behind the PCI logo in the Walk page footers; on the Walk home page the partner explainer links are also re-versioned for the corrected transparent PCI logo. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "contribute/privacy/index.html",
+      "previousSha256": "e2413e540f0c3b8183eebd6e4bd306041a10be4b5810311f493f43d98991cf4d",
+      "sha256": "430a4b99f000031580c131d2a56086ecfcc31ea4621e7f0a97754110b1ca4e53",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: the PCI logo needs no background.",
+      "reason": "Cache-hash query for css/one-look.css, which now removes the white plate behind the PCI logo in the Walk page footers; on the Walk home page the partner explainer links are also re-versioned for the corrected transparent PCI logo. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "contribute/terms/index.html",
+      "previousSha256": "9107e95c37ec9db5ef049262cf35a68cc1edc1f948f44dc98d2afd971543f6cd",
+      "sha256": "da173459d7908e691360404e319ee3fba4ada86d3200c81d7877f82aa56ebd66",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: the PCI logo needs no background.",
+      "reason": "Cache-hash query for css/one-look.css, which now removes the white plate behind the PCI logo in the Walk page footers; on the Walk home page the partner explainer links are also re-versioned for the corrected transparent PCI logo. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "contribute/verify/index.html",
+      "previousSha256": "40c250c093dd0dfd67c4c003f83a0f85b512469bbfb6f0036bce39e9a0ad36ad",
+      "sha256": "d7bd09d46ad63f2e92d8544c58e7b914044edfc92665ad847033103b4108d70d",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: the PCI logo needs no background.",
+      "reason": "Cache-hash query for css/one-look.css, which now removes the white plate behind the PCI logo in the Walk page footers; on the Walk home page the partner explainer links are also re-versioned for the corrected transparent PCI logo. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/accountability/index.html",
+      "previousSha256": "6e229c072a8d40acfa9f957b82f3ad7b27857851c86f5b84d1fdf61a81783831",
+      "sha256": "c32f3a855ed4dfcaef82d57e3b6497944c7425e3829ef97875ac836eb348750a",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: the PCI logo needs no background.",
+      "reason": "Cache-hash query for css/one-look.css, which now removes the white plate behind the PCI logo in the Walk page footers; on the Walk home page the partner explainer links are also re-versioned for the corrected transparent PCI logo. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/index.html",
+      "previousSha256": "900333a872875b6421c4ad4e7dd515edfa1ec68c316c10822514404adeeac3e8",
+      "sha256": "fea040009009c58011806e640d36df7346bdad2e11c033870701a5a00279df19",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: the PCI logo needs no background.",
+      "reason": "Cache-hash query for css/one-look.css, which now removes the white plate behind the PCI logo in the Walk page footers; on the Walk home page the partner explainer links are also re-versioned for the corrected transparent PCI logo. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/partners/index.html",
+      "previousSha256": "694ddc6275045b1ce4a7ab60ca2702571b8a40b4179b16dd63627f44466ddcec",
+      "sha256": "b73175bc022c14c0ad43c815a9f43e4ff31fd7133f4997de18f66fd10d6325da",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: the PCI logo needs no background.",
+      "reason": "Cache-hash query for css/one-look.css, which now removes the white plate behind the PCI logo in the Walk page footers; on the Walk home page the partner explainer links are also re-versioned for the corrected transparent PCI logo. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/take-part/index.html",
+      "previousSha256": "403b85ea4c1d2637d81082105fee67f8b6153ada4b1cf831d813c4413f8a9d91",
+      "sha256": "6d423b32c57fc762f776b0922ede50ff5dcf0c79f16619a20ff11e04d1e337e8",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: the PCI logo needs no background.",
+      "reason": "Cache-hash query for css/one-look.css, which now removes the white plate behind the PCI logo in the Walk page footers; on the Walk home page the partner explainer links are also re-versioned for the corrected transparent PCI logo. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "walk-for-education/updates/index.html",
+      "previousSha256": "ccb015c8d5f4ef5719e7695bec6ad255bba1fc336477e4c23a464064462d7e18",
+      "sha256": "081e98b54f1dabc7eabbccf9b006bd81dd174eed81456bbacdf885688f2f86e1",
+      "date": "2026-10-26",
+      "authorisation": "User instruction in session: the PCI logo needs no background.",
+      "reason": "Cache-hash query for css/one-look.css, which now removes the white plate behind the PCI logo in the Walk page footers; on the Walk home page the partner explainer links are also re-versioned for the corrected transparent PCI logo. No markup, pledge, payment, form, script order or fragment change."
     }
   ],
   "functionalReviews": [

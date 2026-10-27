@@ -599,3 +599,20 @@ html[data-brand] .w-help a:not(.w-btn) {
   align-items: center;
   min-height: 44px;
 }
+
+/* The PCI logo is shown as supplied, with no plate behind it (Walk page footers used a white rounded box). */
+html[data-brand] body .wfe2-footer .wfe2-brand img {
+  padding: 0;
+  border-radius: 0;
+  background: none;
+}
+
+/* The Faith in Motion footer is dark: its wordmark was dark ink on that dark surface. */
+html[data-brand] body .fbrand b {
+  color: var(--paper, #faf6f1);
+}
+
+/* The font credit link stays inside its sentence in the footer's bottom row. */
+html[data-brand] body .fbot span a {
+  display: inline;
+}
