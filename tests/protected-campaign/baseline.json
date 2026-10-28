@@ -3,8 +3,8 @@
   "note": "Original protected baseline plus explicit presentationReviews and user-authorised functionalReviews. Every original pledge/payment hook and frozen fragment remains checked; no gate is removed.",
   "files": {
     "admin/collections/index.html": "bb7c9f2cd9b810ebd4c1950239efa05e766fe7c0b2c7987573d2d29b6db53d2b",
-    "admin/index.html": "5176fe544d8b2c5880dec31e9d33bf3205112ed823b390d8ab58d42e2fd5c7db",
-    "admin/quick.html": "7fd9d33fbaacc22b01532de3f2646442c188c42bb2ff7fb23154c79fd36f2146",
+    "admin/index.html": "98c762b6e9cda50cf729bfd9355f7e9efa656789c65c58762604f8d09d805921",
+    "admin/quick.html": "5e35e9e981bef8f19376b8436104bd862c1db2c65b894b40d03cd003771f79d9",
     "admin/vendor/jspdf.umd.min.js": "98ccf17aa10c20bb1301762618fcc9b6ab3a4e7f26b6071d64d0b41154df3875",
     "admin/wfe.html": "d9e97534c61eaa0ee4908da005935827951d928f0a16b5eda543f8ff78a50d84",
     "api/README.md": "6f37bfdeed6c6561c699b50ab70e3ced493a36db859ba1eaf8cd396c3d7b590b",
@@ -74,7 +74,7 @@
     "assets/walk-for-education/community-art-768.webp": "0488be7fec2909b25676822d6b895b242d360461d4cfc8b6610167eb62ee3965",
     "assets/walk-for-education/hero-art-1536.webp": "27f39605f7a4221ed8443b71e72bc6b5248dfa1e3c84c2927108336006c803d4",
     "assets/walk-for-education/hero-art-768.webp": "42c9b10451c6b7708c062d9cad95c7cc80f8d975e3e27e090b13e0451a403f7d",
-    "assets/walk-for-education/hero-share.jpg": "e4ab5b9a8e74a61d8e06884744e70da529e6e89f0c82afcd4ae97066176252c0",
+    "assets/walk-for-education/hero-share.jpg": "8e822e9ab328188bae0e45636fcadfe61dbea610d98a45493d2960f061188cba",
     "assets/walk-for-education/kagando-campus-enhanced-1536.webp": "ab09702c067f8c8192d31e6f2f144bcec6cb1e3d50fbeabfb119a996822c26b0",
     "assets/walk-for-education/kagando-campus-enhanced-800.webp": "00a27f86c5ed427855e0ec462c743fedc0ae0ad099dfafb4349a124c49e59468",
     "assets/walk-for-education/kagando-campus.webp": "6929bb0931c99ce1fd659a01d5eb0d5acff4680cfb768180d3ff4b8b400486e1",
@@ -92,8 +92,8 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "548ca69e8fb3bf40ad3b81cdbb1b18913d400df6e3ced415696b492b6da68c9e",
-    "contribute/payment/index.html": "b228dc649eca8989918bd11cc6fbb297074045cdab0133fcd0e8f6ec03a919cc",
+    "contribute/index.html": "c3dcc094f715b4576043d04812d224e90cb229adfa1ce871a6b04acce06c76f2",
+    "contribute/payment/index.html": "4e9ced4c73e4f773c6579709803ea7ea8c323c49e1c282e6e8b5930aedf74442",
     "contribute/privacy/index.html": "2fcb708ec612eec463312dfdb95ca465a5244336a69901cad69344dcbd185648",
     "contribute/terms/index.html": "bfa07e49c73ebb19f100abf318b3e5797212935e72d5bfdb1667ace362cdb125",
     "contribute/verify/index.html": "358de6bd7ef362ada5983be0b0b4f24b2410d943b5a5beddb89b00a29ebeab61",
@@ -114,24 +114,24 @@
     "js/collections-admin.js": "f2e0d5009d8eb409f262246404ae93d181198478fe81416d57c449630d705237",
     "js/contributions.js": "cfad5d742b5a573b330d9c360a078adfba5ce99c375f7e1ae6d4623a07c98bcf",
     "js/core.js": "dd2cc8c9df41c79cf04e196f7ec990938fdbe36176f3cbea30aa87ebaad78217",
-    "js/fim-content.js": "d521b334b4b85c4831284385c46b35dc25ba4fbae298dcf5c014478940c69860",
-    "js/fim.js": "e337eaf69e7ba1e5cad30685a0c144a63cf5641bcd62b8ee20ba3216c7844e36",
+    "js/fim-content.js": "82920d529df200ae0de186c1592247260eafb826127bd04eb90cb619178c5bf6",
+    "js/fim.js": "7248340a564cc7617201342aa56e9550ebd97008cc14b382c48a7ec91988c06a",
     "js/pci.js": "6aba35c8fcde6e71ae42f83d0bdd2beae9c3de976c7373a80bb81fa8ffae39f4",
     "js/pdm.js": "2282104c672d80439ecbdd2acac5aa1b73a400cf9b7cad927c669199157a50c8",
     "js/preloader.js": "a24fd4d4160d1d35551dc4488bf03b02503f2ea79932cc3a80f1df8dd3a52bd6",
-    "js/roll-data.js": "12639a4702202543a292ddfc95f9cc4cd1034bfc79272ac8293cb803bff0624c",
+    "js/roll-data.js": "c413879421ad9661182fa7c7af03e09ee1a7683ef53f285ba5176dc86fa1b4e9",
     "js/site-motion.js": "6c350b326056cf5a928b92a714e73da40aa7e6d54b7737ceb57af3c9483e232b",
     "js/step-pricing.js": "c0c2d4ff9607c2bfd23be319a02963042e5c1b8dbd6d0f6559a9f05aee848380",
-    "js/updates-data.js": "01ccac31e1d5781213804df801b8f805e74092afc58ca656f9989482d913c92a",
-    "js/wfe-data.js": "bfcc4f70fdef098039e6eb7864b3564327a4653048037f231798ad7521cfe18a",
+    "js/updates-data.js": "6b61f35975e7be7d8bca0a3e2376909b1bad9ee58bc21fa7888a017d5a152b8f",
+    "js/wfe-data.js": "42fb80fcd2900c86af3841e9933c7f8d3bb2bc2a070a71a39938d58a6a407094",
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
     "js/wfe.js": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
-    "walk-for-education/accountability/index.html": "a92e7eb722f626caf6f81e5ab70316d51a282b6c80dd7f8d264eb8dca63f167c",
-    "walk-for-education/index.html": "65851b30bfc3ad68d9bc8c6f7b93f1d9772b8752dc6274450d1f95b96c0cf82e",
-    "walk-for-education/partners/index.html": "062ceb8454f07264719cc260c56024e87bbd5d0de9a65b5bc2b69c71a0a371d9",
-    "walk-for-education/take-part/index.html": "121d1d4d54b92b4fa4df91d253d94607187da3ca83e21727ad843d8e6a79c2f4",
-    "walk-for-education/updates/index.html": "d21a79417fa15b0edfb2646874c47b255746b790fafb0837f843f59e7b7fd841"
+    "walk-for-education/accountability/index.html": "86951ddcd55525e88d6bfa7b32013ceaa5af132e20c67da0333971e4166b4dd4",
+    "walk-for-education/index.html": "afccee9a058d754d630416912843bc1f55da2576c1ddcf246dfde80c16641fcd",
+    "walk-for-education/partners/index.html": "e96fe0cb91b82bc57c02775e6bd0e8fbe26458c36894702ddcdb09b68a019ce3",
+    "walk-for-education/take-part/index.html": "478d4ebd1f1c784413aeb008d1a72b2902fac60e56cde2472e2f1d5f4094a00b",
+    "walk-for-education/updates/index.html": "6d1e870eba6bb2f9a65bae5662481c204928697ea103f96aa73eadec7595bf0d"
   },
   "presentationReviews": [
     {
@@ -1295,6 +1295,96 @@
       "date": "2026-10-28",
       "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
       "reason": "Cache-hash queries follow the changed one-look stylesheet (brand lockup wraps at large text). Presentation only."
+    },
+    {
+      "path": "admin/index.html",
+      "date": "2026-10-28",
+      "previousSha256": "5176fe544d8b2c5880dec31e9d33bf3205112ed823b390d8ab58d42e2fd5c7db",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "admin/quick.html",
+      "date": "2026-10-28",
+      "previousSha256": "7fd9d33fbaacc22b01532de3f2646442c188c42bb2ff7fb23154c79fd36f2146",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "assets/walk-for-education/hero-share.jpg",
+      "date": "2026-10-28",
+      "previousSha256": "e4ab5b9a8e74a61d8e06884744e70da529e6e89f0c82afcd4ae97066176252c0",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "contribute/index.html",
+      "date": "2026-10-28",
+      "previousSha256": "548ca69e8fb3bf40ad3b81cdbb1b18913d400df6e3ced415696b492b6da68c9e",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "contribute/payment/index.html",
+      "date": "2026-10-28",
+      "previousSha256": "b228dc649eca8989918bd11cc6fbb297074045cdab0133fcd0e8f6ec03a919cc",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "js/fim-content.js",
+      "date": "2026-10-28",
+      "previousSha256": "d521b334b4b85c4831284385c46b35dc25ba4fbae298dcf5c014478940c69860",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "js/roll-data.js",
+      "date": "2026-10-28",
+      "previousSha256": "12639a4702202543a292ddfc95f9cc4cd1034bfc79272ac8293cb803bff0624c",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "js/updates-data.js",
+      "date": "2026-10-28",
+      "previousSha256": "01ccac31e1d5781213804df801b8f805e74092afc58ca656f9989482d913c92a",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "js/wfe-data.js",
+      "date": "2026-10-28",
+      "previousSha256": "bfcc4f70fdef098039e6eb7864b3564327a4653048037f231798ad7521cfe18a",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "walk-for-education/accountability/index.html",
+      "date": "2026-10-28",
+      "previousSha256": "a92e7eb722f626caf6f81e5ab70316d51a282b6c80dd7f8d264eb8dca63f167c",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "walk-for-education/index.html",
+      "date": "2026-10-28",
+      "previousSha256": "65851b30bfc3ad68d9bc8c6f7b93f1d9772b8752dc6274450d1f95b96c0cf82e",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "walk-for-education/partners/index.html",
+      "date": "2026-10-28",
+      "previousSha256": "062ceb8454f07264719cc260c56024e87bbd5d0de9a65b5bc2b69c71a0a371d9",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "walk-for-education/take-part/index.html",
+      "date": "2026-10-28",
+      "previousSha256": "121d1d4d54b92b4fa4df91d253d94607187da3ca83e21727ad843d8e6a79c2f4",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "walk-for-education/updates/index.html",
+      "date": "2026-10-28",
+      "previousSha256": "d21a79417fa15b0edfb2646874c47b255746b790fafb0837f843f59e7b7fd841",
+      "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "js/fim.js",
+      "date": "2026-10-28",
+      "previousSha256": "e337eaf69e7ba1e5cad30685a0c144a63cf5641bcd62b8ee20ba3216c7844e36",
+      "reason": "Display-only image/branding cleanup and cache references. Public donor labels omit Rotary honorifics while source records, consent, amounts, funded steps, totals, reconciliation and services remain unchanged. Website and report layouts stay intact. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
     }
   ],
   "functionalReviews": [
@@ -1303,7 +1393,7 @@
       "previousSha256": "deea3c2753c31296a156ca903c2debb117b0009d3edb47aa4dc84022c6f7af04",
       "sha256": "1b16d1dec2b8a655de513150cdfaa8cb2e2120d65a895be7e1aa2348edfb92c5",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
       "reason": "Navigation-only banner points staff to the named operations console; existing gateway controls remain."
     },
     {
@@ -1311,7 +1401,7 @@
       "previousSha256": "c557b418beb68aa73928c1fd1fce21c44183c0e5d29cda4602d979e337a74146",
       "sha256": "d9e97534c61eaa0ee4908da005935827951d928f0a16b5eda543f8ff78a50d84",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
       "reason": "Navigation-only banner points staff to the named operations console and identifies retirement of shared-password publishing."
     },
     {
@@ -1319,7 +1409,7 @@
       "previousSha256": "63f3dccd9f2b81fba011e4b0b8cce9b1cec6f22c8179318a79ef7d6f2647e585",
       "sha256": "48c5fe1fd5ad5b59ed94fe3ee2592689494fdd9575bce8025f4a828d7dc55e89",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised operations release: retire shared-password writes and map existing Walk public fields to the approved per-currency ledger and named-owner projection. Legacy contact/channel configuration remains."
     },
     {
@@ -1327,7 +1417,7 @@
       "previousSha256": "5b9818ffe350c74c5ad88b5200b5f387672639f4a19a4a80cde9001866418b50",
       "sha256": "76c8ae5772a097187c76eb3031ed46718ee9e6fb77648a5b31d652952303cdbc",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised named-account release: remove shared-password finance fallback and revalidate named identity/role on every privileged request, including pre-existing sessions. No checkout, pricing, certificate or gateway verification logic changed."
     },
     {
@@ -1335,7 +1425,7 @@
       "previousSha256": "5916bb3de0dddb7d68b1e9c9a92c858ea43c317087829c7815a8c8e41ceaad07",
       "sha256": "b4770ab873928dd35070f9e791585762159c476470241cb4ca005af9f7dc241b",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
       "reason": "Document required named roles and removal of the shared-password fallback; contains no credentials."
     },
     {
@@ -1343,7 +1433,7 @@
       "previousSha256": "a945a10b57afbf9af7b13dc2e3dd27eca9d0770800c89c5a91992c3703d4068d",
       "sha256": "792ffc22bc0b51b0e6189379199d2b6861f3b6f7f1c8454bda175d2639fe0049",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised role separation: deny private gateway dashboard access to editorial accounts; public gateway progress preserves currencies and exposes actual UGX receipts only."
     },
     {
@@ -1351,7 +1441,7 @@
       "previousSha256": "01746af6d7f7ec88c36d981ac649764bde29693f2da3bb65e28f3406978bf4e2",
       "sha256": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
       "reason": "Presentation-only: large financial figures use plain readable text instead of overflowing digit reels; reduced-motion users do not receive digit animations."
     },
     {
@@ -1359,7 +1449,7 @@
       "previousSha256": "9cf735fb77fe8cd8b1dd138e6db16b42a13cec4486a237dd746ea7253c234f15",
       "sha256": "f7f15f69bb04bf38776593dd8d5182b01bc9612f2d8f54ef415347e8c42fd5a1",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised operations release: append approved live-reporting stylesheet and public script after all existing campaign scripts; preserve original script order, form hooks and frozen pledge/payment fragments. Content hashes refreshed."
     },
     {
@@ -1367,7 +1457,7 @@
       "previousSha256": "e9c347e75b5abc51f5085b2ee250a193237713bff2ec3feb364520dc4c53847c",
       "sha256": "0ce05ed88456bccd619ea3580b866b53e917887d0aaa8493336ad366a54b567e",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised operations release: append approved live-reporting stylesheet and public script after all existing campaign scripts; preserve original script order, form hooks and frozen pledge/payment fragments. Content hashes refreshed."
     },
     {
@@ -1375,7 +1465,7 @@
       "previousSha256": "4bf6de6c0566db594dcfc5102d8f7c3ee9af5532a82cdcd36449b17ece09a782",
       "sha256": "e9c341d0d8749d9b272199c6326e4e68744fbbca05eafdb76cfdf50633edf1db",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised operations release: append approved live-reporting stylesheet and public script after all existing campaign scripts; preserve original script order, form hooks and frozen pledge/payment fragments. Content hashes refreshed."
     },
     {
@@ -1383,7 +1473,7 @@
       "previousSha256": "0c4efc765d038ed91ceef41a09493d53517595e697dfb6cba9ce7f06804c231b",
       "sha256": "e85e4c54911421b47ba7f14393ad4a13fb2eeb7ba7afd33f520bae44054cc8c6",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised operations release: append approved live-reporting stylesheet and public script after all existing campaign scripts; preserve original script order, form hooks and frozen pledge/payment fragments. Content hashes refreshed."
     },
     {
@@ -1391,7 +1481,7 @@
       "previousSha256": "ccdb6263595debe80ce6c28eaa499181900ae058ebcc1402bf3f6a7eea272061",
       "sha256": "6d808eecd92404024bab8fd4d1ba0de82fe48ac7fdd9824921bf45d6c3aef971",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised operations release: append approved live-reporting stylesheet and public script after all existing campaign scripts; preserve original script order, form hooks and frozen pledge/payment fragments. Content hashes refreshed."
     },
     {

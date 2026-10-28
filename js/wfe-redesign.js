@@ -490,14 +490,14 @@
       controller.abort();
     }, 8000);
     var url = new URL("../assets/wfe-2026/gallery.json", window.location.href);
-    url.searchParams.set("v", "official-kit-20261025");
+    url.searchParams.set("v", "image-refresh-20261028");
     request = fetch(url.href, { signal: controller.signal })
       .then(function (response) {
         if (!response.ok) throw new Error("The illustration collection could not be loaded.");
         return response.json();
       })
       .then(function (data) {
-        if (!Array.isArray(data) || data.length !== 56) throw new Error("The illustration collection is incomplete.");
+        if (!Array.isArray(data) || data.length !== 46) throw new Error("The illustration collection is incomplete.");
         items = data;
         return items;
       })
@@ -530,8 +530,8 @@
     var img = document.createElement("img");
     img.src = item.thumb;
     img.alt = item.alt;
-    img.width = item.width;
-    img.height = item.height;
+    img.width = item.thumbWidth || item.width;
+    img.height = item.thumbHeight || item.height;
     img.loading = "lazy";
     img.decoding = "async";
     var arrow = document.createElement("span");

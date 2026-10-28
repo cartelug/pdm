@@ -1,5 +1,580 @@
 [
   {
+    "id": "fresh-01",
+    "title": "The walk continues",
+    "alt": "Shyaka Mbanda walking along a quiet roadside in campaign artwork.",
+    "group": "campaign",
+    "artwork": true,
+    "note": "AI-generated campaign artwork guided by authentic photographs. This is not a record of an actual event or verified impact.",
+    "sourceSha256": "1e60e8aa7c5633ecff24a7d151815dee51df7836dd24df62763f97a173128e13",
+    "width": 1672,
+    "height": 941,
+    "master": "01-master.webp",
+    "outputs": [
+      {
+        "file": "01-480.avif",
+        "width": 480,
+        "height": 270,
+        "bytes": 20707
+      },
+      {
+        "file": "01-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 33864
+      },
+      {
+        "file": "01-800.avif",
+        "width": 800,
+        "height": 450,
+        "bytes": 42987
+      },
+      {
+        "file": "01-800.webp",
+        "width": 800,
+        "height": 450,
+        "bytes": 76376
+      },
+      {
+        "file": "01-1440.avif",
+        "width": 1440,
+        "height": 810,
+        "bytes": 90347
+      },
+      {
+        "file": "01-1440.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 170024
+      }
+    ],
+    "label": "Campaign artwork",
+    "src": "../assets/wfe-2026/refresh/01-master.webp",
+    "thumb": "../assets/wfe-2026/refresh/01-800.webp",
+    "mobileSrc": "../assets/wfe-2026/refresh/02-master.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 450
+  },
+  {
+    "id": "fresh-02",
+    "title": "One step at a time",
+    "alt": "Portrait campaign artwork of Shyaka in his black education shirt and Kenya-flag wrap.",
+    "group": "campaign",
+    "artwork": true,
+    "note": "AI-generated campaign artwork guided by authentic photographs. This is not a record of an actual event or verified impact.",
+    "sourceSha256": "64c5280e1d4d2f85a12f3dfb924bdbf8e9ddd606c83193338f674d2bbbdf67b1",
+    "width": 1122,
+    "height": 1402,
+    "master": "02-master.webp",
+    "outputs": [
+      {
+        "file": "02-480.avif",
+        "width": 480,
+        "height": 600,
+        "bytes": 37429
+      },
+      {
+        "file": "02-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 64024
+      },
+      {
+        "file": "02-800.avif",
+        "width": 800,
+        "height": 1000,
+        "bytes": 70320
+      },
+      {
+        "file": "02-800.webp",
+        "width": 800,
+        "height": 1000,
+        "bytes": 130044
+      },
+      {
+        "file": "02-1440.avif",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 99622
+      },
+      {
+        "file": "02-1440.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 195784
+      }
+    ],
+    "label": "Campaign artwork",
+    "src": "../assets/wfe-2026/refresh/02-master.webp",
+    "thumb": "../assets/wfe-2026/refresh/02-gallery-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 500,
+    "thumbnail": {
+      "file": "02-gallery-800.webp",
+      "width": 800,
+      "height": 500,
+      "bytes": 114176,
+      "sourceSha256": "2a9e41b2aeca031f42171d3c0077b2fa7e7f4fafde47a00b67f006de5643519e",
+      "note": "Landscape gallery companion generated from the accepted portrait; original portrait remains the full-size identity reference."
+    }
+  },
+  {
+    "id": "fresh-03",
+    "title": "Meet Shyaka Mbanda",
+    "alt": "Portrait artwork of Shyaka guided by his original photograph.",
+    "group": "campaign",
+    "artwork": true,
+    "note": "AI-generated campaign artwork guided by authentic photographs. This is not a record of an actual event or verified impact.",
+    "sourceSha256": "4c1925e074512592d768036e4988b3874542959c0ba68451f7e7b0e47fbfead9",
+    "width": 1122,
+    "height": 1402,
+    "master": "03-master.webp",
+    "outputs": [
+      {
+        "file": "03-480.avif",
+        "width": 480,
+        "height": 600,
+        "bytes": 19654
+      },
+      {
+        "file": "03-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 39340
+      },
+      {
+        "file": "03-800.avif",
+        "width": 800,
+        "height": 1000,
+        "bytes": 41315
+      },
+      {
+        "file": "03-800.webp",
+        "width": 800,
+        "height": 1000,
+        "bytes": 83386
+      },
+      {
+        "file": "03-1440.avif",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 61524
+      },
+      {
+        "file": "03-1440.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 131526
+      }
+    ],
+    "label": "Campaign artwork",
+    "src": "../assets/wfe-2026/refresh/03-master.webp",
+    "thumb": "../assets/wfe-2026/refresh/03-gallery-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 500,
+    "thumbnail": {
+      "file": "03-gallery-800.webp",
+      "width": 800,
+      "height": 500,
+      "bytes": 30938,
+      "sourceSha256": "acb3010c753895f824e06ebd6cd9428528dbcc7358330fea093aafb5e5775b37",
+      "note": "Landscape gallery companion generated from the accepted portrait; original portrait remains the full-size identity reference."
+    }
+  },
+  {
+    "id": "fresh-04",
+    "title": "A moment to pause",
+    "alt": "Campaign artwork of Shyaka resting beside his backpack.",
+    "group": "campaign",
+    "artwork": true,
+    "note": "AI-generated campaign artwork guided by authentic photographs. This is not a record of an actual event or verified impact.",
+    "sourceSha256": "ff6fb1761370749c1b9f45fd5feb9c8717a2d419d256122156a93ab48a3dfb34",
+    "width": 1536,
+    "height": 1024,
+    "master": "04-master.webp",
+    "outputs": [
+      {
+        "file": "04-480.avif",
+        "width": 480,
+        "height": 320,
+        "bytes": 33229
+      },
+      {
+        "file": "04-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 48864
+      },
+      {
+        "file": "04-800.avif",
+        "width": 800,
+        "height": 533,
+        "bytes": 70860
+      },
+      {
+        "file": "04-800.webp",
+        "width": 800,
+        "height": 533,
+        "bytes": 110166
+      },
+      {
+        "file": "04-1440.avif",
+        "width": 1440,
+        "height": 960,
+        "bytes": 139667
+      },
+      {
+        "file": "04-1440.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 254668
+      }
+    ],
+    "label": "Campaign artwork",
+    "src": "../assets/wfe-2026/refresh/04-master.webp",
+    "thumb": "../assets/wfe-2026/refresh/04-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 533
+  },
+  {
+    "id": "fresh-05",
+    "title": "The road ahead",
+    "alt": "Rear-view campaign artwork of Shyaka carrying his backpack along a road.",
+    "group": "campaign",
+    "artwork": true,
+    "note": "AI-generated campaign artwork guided by authentic photographs. This is not a record of an actual event or verified impact.",
+    "sourceSha256": "ca6fed8c4fff19e7571c92c872a77b40e1aa72bd63022a4cfcd7a35385ce05f1",
+    "width": 1122,
+    "height": 1402,
+    "master": "05-master.webp",
+    "outputs": [
+      {
+        "file": "05-480.avif",
+        "width": 480,
+        "height": 600,
+        "bytes": 43594
+      },
+      {
+        "file": "05-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 74946
+      },
+      {
+        "file": "05-800.avif",
+        "width": 800,
+        "height": 1000,
+        "bytes": 86232
+      },
+      {
+        "file": "05-800.webp",
+        "width": 800,
+        "height": 1000,
+        "bytes": 156988
+      },
+      {
+        "file": "05-1440.avif",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 125163
+      },
+      {
+        "file": "05-1440.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 242280
+      }
+    ],
+    "label": "Campaign artwork",
+    "src": "../assets/wfe-2026/refresh/05-master.webp",
+    "thumb": "../assets/wfe-2026/refresh/05-gallery-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 500,
+    "thumbnail": {
+      "file": "05-gallery-800.webp",
+      "width": 800,
+      "height": 500,
+      "bytes": 132216,
+      "sourceSha256": "f14afd93d7239448eba69ae56015d2913e77b13e7a6b5b36e7d9bdae39fd1487",
+      "note": "Landscape gallery companion generated from the accepted portrait; original portrait remains the full-size identity reference."
+    }
+  },
+  {
+    "id": "fresh-06",
+    "title": "Carrying the purpose",
+    "alt": "Campaign artwork showing Shyaka holding his backpack strap.",
+    "group": "campaign",
+    "artwork": true,
+    "note": "AI-generated campaign artwork guided by authentic photographs. This is not a record of an actual event or verified impact.",
+    "sourceSha256": "70d98322e5e8bc2cc2b39c66a1a68b0b0a5bd0dbfba53ab3f08cda36185318a3",
+    "width": 1536,
+    "height": 1024,
+    "master": "06-master.webp",
+    "outputs": [
+      {
+        "file": "06-480.avif",
+        "width": 480,
+        "height": 320,
+        "bytes": 13718
+      },
+      {
+        "file": "06-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 23098
+      },
+      {
+        "file": "06-800.avif",
+        "width": 800,
+        "height": 533,
+        "bytes": 24474
+      },
+      {
+        "file": "06-800.webp",
+        "width": 800,
+        "height": 533,
+        "bytes": 47292
+      },
+      {
+        "file": "06-1440.avif",
+        "width": 1440,
+        "height": 960,
+        "bytes": 46771
+      },
+      {
+        "file": "06-1440.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 107378
+      }
+    ],
+    "label": "Campaign artwork",
+    "src": "../assets/wfe-2026/refresh/06-master.webp",
+    "thumb": "../assets/wfe-2026/refresh/06-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 533
+  },
+  {
+    "id": "fresh-07",
+    "title": "A destination for learning",
+    "alt": "Campaign artwork of Shyaka with the referenced UCU–Kagando main block.",
+    "group": "campaign",
+    "artwork": true,
+    "note": "AI-generated campaign artwork guided by authentic photographs. This is not a record of an actual event or verified impact.",
+    "sourceSha256": "7731e3448bd53e0cf99167c2e46c351f6d49e5771eaba9ac9013a79447269587",
+    "width": 1672,
+    "height": 941,
+    "master": "07-master.webp",
+    "outputs": [
+      {
+        "file": "07-480.avif",
+        "width": 480,
+        "height": 270,
+        "bytes": 30589
+      },
+      {
+        "file": "07-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 39900
+      },
+      {
+        "file": "07-800.avif",
+        "width": 800,
+        "height": 450,
+        "bytes": 53647
+      },
+      {
+        "file": "07-800.webp",
+        "width": 800,
+        "height": 450,
+        "bytes": 82048
+      },
+      {
+        "file": "07-1440.avif",
+        "width": 1440,
+        "height": 810,
+        "bytes": 94459
+      },
+      {
+        "file": "07-1440.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 167838
+      }
+    ],
+    "label": "Campaign artwork",
+    "src": "../assets/wfe-2026/refresh/07-master.webp",
+    "thumb": "../assets/wfe-2026/refresh/07-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 450
+  },
+  {
+    "id": "fresh-08",
+    "title": "UCU–Kagando",
+    "alt": "Architectural campaign artwork based on the supplied university main-block photograph.",
+    "group": "campaign",
+    "artwork": true,
+    "note": "AI-generated campaign artwork guided by authentic photographs. This is not a record of an actual event or verified impact.",
+    "sourceSha256": "433abbc1a9011df363ba02ad3d925fe8e9a4ab87d940ea7a706c4ee3d9e9effb",
+    "width": 1672,
+    "height": 941,
+    "master": "08-master.webp",
+    "outputs": [
+      {
+        "file": "08-480.avif",
+        "width": 480,
+        "height": 270,
+        "bytes": 20941
+      },
+      {
+        "file": "08-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 29976
+      },
+      {
+        "file": "08-800.avif",
+        "width": 800,
+        "height": 450,
+        "bytes": 46490
+      },
+      {
+        "file": "08-800.webp",
+        "width": 800,
+        "height": 450,
+        "bytes": 71596
+      },
+      {
+        "file": "08-1440.avif",
+        "width": 1440,
+        "height": 810,
+        "bytes": 105174
+      },
+      {
+        "file": "08-1440.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 183068
+      }
+    ],
+    "label": "Campaign artwork",
+    "src": "../assets/wfe-2026/refresh/08-master.webp",
+    "thumb": "../assets/wfe-2026/refresh/08-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 450
+  },
+  {
+    "id": "fresh-09",
+    "title": "An education future, together",
+    "alt": "Imagined campaign artwork of Shyaka talking with fictional adult learners.",
+    "group": "campaign",
+    "artwork": true,
+    "note": "AI-generated campaign artwork guided by authentic photographs. This is not a record of an actual event or verified impact.",
+    "sourceSha256": "f78903aaaef8cb3a7061f763ea079e1f80c5c69dc9976bdb229a0a6e9e45fe9f",
+    "width": 1536,
+    "height": 1024,
+    "master": "09-master.webp",
+    "outputs": [
+      {
+        "file": "09-480.avif",
+        "width": 480,
+        "height": 320,
+        "bytes": 37649
+      },
+      {
+        "file": "09-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 49272
+      },
+      {
+        "file": "09-800.avif",
+        "width": 800,
+        "height": 533,
+        "bytes": 72123
+      },
+      {
+        "file": "09-800.webp",
+        "width": 800,
+        "height": 533,
+        "bytes": 108126
+      },
+      {
+        "file": "09-1440.avif",
+        "width": 1440,
+        "height": 960,
+        "bytes": 132177
+      },
+      {
+        "file": "09-1440.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 230134
+      }
+    ],
+    "label": "Campaign artwork",
+    "src": "../assets/wfe-2026/refresh/09-master.webp",
+    "thumb": "../assets/wfe-2026/refresh/09-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 533
+  },
+  {
+    "id": "fresh-10",
+    "title": "Room for ideas",
+    "alt": "Imagined campaign artwork of Shyaka looking at a notebook with a fictional adult learner.",
+    "group": "campaign",
+    "artwork": true,
+    "note": "AI-generated campaign artwork guided by authentic photographs. This is not a record of an actual event or verified impact.",
+    "sourceSha256": "9812e6c1e56405f7139c3c52884fd5b3309f1d95d801804a2ef1b860ca627e69",
+    "width": 1536,
+    "height": 1024,
+    "master": "10-master.webp",
+    "outputs": [
+      {
+        "file": "10-480.avif",
+        "width": 480,
+        "height": 320,
+        "bytes": 26503
+      },
+      {
+        "file": "10-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 38488
+      },
+      {
+        "file": "10-800.avif",
+        "width": 800,
+        "height": 533,
+        "bytes": 48749
+      },
+      {
+        "file": "10-800.webp",
+        "width": 800,
+        "height": 533,
+        "bytes": 78822
+      },
+      {
+        "file": "10-1440.avif",
+        "width": 1440,
+        "height": 960,
+        "bytes": 90851
+      },
+      {
+        "file": "10-1440.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 174130
+      }
+    ],
+    "label": "Campaign artwork",
+    "src": "../assets/wfe-2026/refresh/10-master.webp",
+    "thumb": "../assets/wfe-2026/refresh/10-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 533
+  },
+  {
     "id": "life-25",
     "title": "Reading picnic from above",
     "group": "school",
@@ -106,266 +681,6 @@
     "src": "../assets/wfe-2026/campus/full/36-the-next-generation-together.webp",
     "thumb": "../assets/wfe-2026/campus/800w/36-the-next-generation-together.webp",
     "note": "AI-generated illustrative scene with fictional people. Not a record of actual school activities."
-  },
-  {
-    "id": "art-01",
-    "title": "The walk is happening",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: the walk is happening.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-01-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-01-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-01-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-02",
-    "title": "One walker, a specific destination",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: one walker, a specific destination.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-02-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-02-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-02-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-03",
-    "title": "The person behind the walk",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: the person behind the walk.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-03-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-03-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-03-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-04",
-    "title": "The actual bag carries the message",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: the actual bag carries the message.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-04-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-04-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-04-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-05",
-    "title": "Carrying it for real",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: carrying it for real.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-05-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-05-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-05-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-06",
-    "title": "Every step has effort",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: every step has effort.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-06-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-06-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-06-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-07",
-    "title": "The reason to keep walking",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: the reason to keep walking.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-07-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-07-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-07-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-08",
-    "title": "The signature main block",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: the signature main block.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-08-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-08-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-08-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-09",
-    "title": "Joy in learning",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: joy in learning.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-09-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-09-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-09-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-10",
-    "title": "From early learning to higher education",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: from early learning to higher education.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-10-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-10-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-10-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-11",
-    "title": "A community chooses to participate",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: a community chooses to participate.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-11-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-11-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-11-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-12",
-    "title": "Persistence, with a human pause",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: persistence, with a human pause.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-12-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-12-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-12-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-13",
-    "title": "The journey continues",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: the journey continues.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-13-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-13-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-13-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-14",
-    "title": "Walking alongside the next generation",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: walking alongside the next generation.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-14-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-14-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-14-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-15",
-    "title": "The destination comes into view",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: the destination comes into view.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-15-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-15-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-15-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-16",
-    "title": "An imagined arrival worth working towards",
-    "group": "campaign",
-    "label": "Imagined arrival · campaign illustration",
-    "alt": "Reference-led campaign illustration: an imagined arrival worth working towards.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-16-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-16-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-16-mobile-master.webp",
-    "note": "AI-generated campaign illustration of an imagined future welcome, not a record of arrival or a real event. Fictional supporting people."
-  },
-  {
-    "id": "art-17",
-    "title": "A welcome shared by the community",
-    "group": "campaign",
-    "label": "Imagined arrival · campaign illustration",
-    "alt": "Reference-led campaign illustration: a welcome shared by the community.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-17-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-17-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-17-mobile-master.webp",
-    "note": "AI-generated campaign illustration of an imagined future welcome, not a record of arrival or a real event. Fictional supporting people."
-  },
-  {
-    "id": "art-18",
-    "title": "Everyone can carry a part",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: everyone can carry a part.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-18-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-18-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-18-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-19",
-    "title": "The future this effort supports",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: the future this effort supports.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-19-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-19-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-19-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
-  },
-  {
-    "id": "art-20",
-    "title": "Keep the walk moving",
-    "group": "campaign",
-    "label": "Official-kit campaign illustration",
-    "alt": "Reference-led campaign illustration: keep the walk moving.",
-    "width": 1672,
-    "height": 941,
-    "src": "../assets/wfe-2026/official-kit/scene-20-desktop-master.webp",
-    "thumb": "../assets/wfe-2026/official-kit/scene-20-desktop-800.webp",
-    "mobileSrc": "../assets/wfe-2026/official-kit/scene-20-mobile-master.webp",
-    "note": "AI-generated reference-led campaign illustration using the official kit. Supporting people and events are fictional; this is not verified field reporting."
   },
   {
     "id": "life-01",

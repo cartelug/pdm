@@ -256,7 +256,7 @@
 
     <div class="card">
       <h3>Download a branded PDF</h3>
-      <p class="hint">A neat, print-ready report of the Roll of Honour as it stands right now in this console — carrying the Pamodzi, Walking Rotarian and Rotary marks, with the MTN and Centenary Bank marks beside the approved payment details. Good for the construction committee, a parish handout, or your own records. It downloads straight to this device; nothing is uploaded anywhere.</p>
+      <p class="hint">A neat, print-ready report of the Roll of Honour as it stands right now in this console — carrying the Pamodzi, Shyaka Mbanda and Rotary marks, with the MTN and Centenary Bank marks beside the approved payment details. Good for the construction committee, a parish handout, or your own records. It downloads straight to this device; nothing is uploaded anywhere.</p>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
         <button class="btn btn-b" id="dlPdf">Download branded PDF</button>
       </div>
@@ -300,8 +300,8 @@
 
 <div class="toast" id="toast">Copied</div>
 
-<script src="../js/roll-data.js?v=12639a4702"></script>
-<script src="../js/fim-content.js?v=d521b334b4"></script>
+<script src="../js/roll-data.js?v=c413879421"></script>
+<script src="../js/fim-content.js?v=82920d529d"></script>
 <script>
 (function(){
   "use strict";
@@ -748,7 +748,7 @@
     color('muted','setTextColor'); doc.setFont('helvetica','normal'); doc.setFontSize(11);
     doc.text('Walk day: Sunday 2 August 2026 — walk complete, fundraising continues toward UGX 414,000,000',M,y);
     y+=17;
-    var walkLines=doc.splitTextToSize('Rtn Shyaka walked 400 km from Kampala to Kiburara for this cause — 466,200 steps in total. Each step is sponsored at UGX 1,000.',CW);
+    var walkLines=doc.splitTextToSize('Shyaka walked 400 km from Kampala to Kiburara for this cause — 466,200 steps in total. Each step is sponsored at UGX 1,000.',CW);
     doc.text(walkLines,M,y);
     y+=walkLines.length*14+26;
 
@@ -841,8 +841,8 @@
     showToast('Building PDF…');
     Promise.all([
       loadImg('../assets/brand/pamodzi/pamodzi-logo-transparent.png'),
-      loadImg('../assets/brand/walking-rotarian/walking-rotarian-logo.jpeg'),
-      loadImg('../assets/brand/rotary/rotary-logo.png'),
+      loadImg('../assets/faith-in-motion/brand-clean/clear-portrait.png'),
+      loadImg('../assets/faith-in-motion/brand-clean/clear-wide.png'),
       loadImg('../assets/brand/mtn/mtn-logo.png'),
       loadImg('../assets/brand/centenary-bank/centenary-bank-logo.png')
     ]).then(function(imgs){ buildPdf(imgs[0],imgs[1],imgs[2],imgs[3],imgs[4]); })

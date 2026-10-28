@@ -1,6 +1,8 @@
 ---
 import { asset } from "../../config/site";
 import collection from "../../../assets/wfe-2026/official-kit/manifest.json";
+import refreshed from "../../../assets/wfe-2026/refresh/manifest.json";
+import replacements from "../../../assets/wfe-2026/refresh/scene-map.json";
 interface Props {
   scene: string;
   from?: string;
@@ -10,12 +12,28 @@ interface Props {
   portrait?: boolean;
 }
 const { scene, from = "/", alt = "", eager = false, portrait = false } = Astro.props;
-const record = collection.scenes.find((item) => item.id === scene);
-if (!record) throw new Error(`Unknown campaign scene ${scene}`);
+const original = collection.scenes.find((item) => item.id === scene);
+if (!original) throw new Error(`Unknown campaign scene ${scene}`);
+const mapping = replacements[scene as keyof typeof replacements];
+const imageFor = (orientation: string) => {
+  const id = mapping?.[orientation as "desktop" | "mobile"];
+  return refreshed.records.find((item) => item.id === id);
+};
+const record = mapping ? { compositions: { desktop: imageFor("desktop")!, mobile: imageFor("mobile")! } } : original;
+const imageAlt = alt && mapping ? imageFor(portrait ? "mobile" : "desktop")!.alt : alt;
 const base = `assets/wfe-2026/official-kit/scene-${scene}`;
-const src = (suffix: string) => asset(from, `${base}-${suffix}`);
+const src = (suffix: string) => {
+  const [orientation, size] = suffix.split("-");
+  const image = imageFor(orientation);
+  return asset(from, image ? `assets/wfe-2026/refresh/${image.id}-${size}` : `${base}-${suffix}`);
+};
 const set = (orientation: string, format: string, widths: number[]) =>
-  widths.map((width) => `${src(`${orientation}-${width}.${format}`)} ${width}w`).join(", ");
+  widths
+    .map(
+      (width) =>
+        `${src(`${orientation}-${width}.${format}`)} ${Math.min(width, record.compositions[orientation as "desktop" | "mobile"].width)}w`,
+    )
+    .join(", ");
 ---
 
 {portrait ? (
@@ -33,7 +51,7 @@ const set = (orientation: string, format: string, widths: number[]) =>
       sizes="(max-width: 959px) 90vw, 560px"
       width={record.compositions.mobile.width}
       height={record.compositions.mobile.height}
-      alt={alt}
+      alt={imageAlt}
       loading={eager ? "eager" : "lazy"}
       decoding="async"
     />
@@ -62,7 +80,7 @@ const set = (orientation: string, format: string, widths: number[]) =>
       sizes="100vw"
       width={record.compositions.desktop.width}
       height={record.compositions.desktop.height}
-      alt={alt}
+      alt={imageAlt}
       loading={eager ? "eager" : "lazy"}
       fetchpriority={eager ? "high" : "auto"}
       decoding="async"

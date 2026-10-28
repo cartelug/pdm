@@ -42,6 +42,10 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
     });
   }
+  function publicName(value) {
+    // Display-only branding cleanup; the source record and all amounts stay intact.
+    return String(value).replace(/^(?:Rotarian|Rtn\.?)\s+/i, "");
+  }
 
   /* ── totals ─────────────────────────────────────────────────── */
   function countsTowardProgress(r) {
@@ -366,7 +370,7 @@
             String(i + 1).padStart(2, "0") +
             "</span>" +
             '<span class="n">' +
-            esc(r[0]) +
+            esc(publicName(r[0])) +
             (r[4] ? "<em>" + esc(r[4]) + "</em>" : "") +
             '<i class="seg">' +
             segment +
@@ -411,7 +415,7 @@
           '<div class="lead"><span class="r">' +
           (i + 1) +
           "</span><span><b>" +
-          esc(r[0]) +
+          esc(publicName(r[0])) +
           "</b>" +
           "<span>" +
           fmt(r[2]) +

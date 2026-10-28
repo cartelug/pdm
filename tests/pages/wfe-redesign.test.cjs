@@ -38,15 +38,15 @@ test("the campaign keeps its existing contribution contract and clearly identifi
   assert.ok(doc.querySelector("dialog[aria-labelledby]"));
 });
 
-test("all 56 generated images have valid, decodable responsive exports and honest provenance", async () => {
+test("all 46 generated images have valid, decodable responsive exports and honest provenance", async () => {
   const records = JSON.parse(fs.readFileSync(path.join(root, "assets/wfe-2026/gallery.json"), "utf8"));
-  assert.equal(records.length, 56);
-  assert.equal(new Set(records.map((r) => r.id)).size, 56);
-  assert.equal(records.filter((r) => r.id.startsWith("art-")).length, 20);
+  assert.equal(records.length, 46);
+  assert.equal(new Set(records.map((r) => r.id)).size, 46);
+  assert.equal(records.filter((r) => r.id.startsWith("fresh-")).length, 10);
   assert.equal(records.filter((r) => r.id.startsWith("life-")).length, 36);
   for (const record of records) {
     assert.match(record.label, /illustration|artwork/i);
-    assert.match(record.note, /illustrat|fictional/i);
+    assert.match(record.note, /AI-generated|illustrat|fictional/i);
     for (const [field, max] of [
       ["src", 2000],
       ["thumb", 800],
@@ -57,7 +57,9 @@ test("all 56 generated images have valid, decodable responsive exports and hones
       const meta = await sharp(local).metadata();
       assert.equal(meta.format, "webp");
       assert.ok(meta.width <= max);
-      assert.ok(Math.abs(meta.width / meta.height - record.width / record.height) < 0.01);
+      const width = field === "thumb" ? record.thumbWidth || record.width : record.width;
+      const height = field === "thumb" ? record.thumbHeight || record.height : record.height;
+      assert.ok(Math.abs(meta.width / meta.height - width / height) < 0.01);
     }
   }
   assert.equal(doc.querySelectorAll(".r-resource-grid a").length, 10);

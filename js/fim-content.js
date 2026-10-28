@@ -74,7 +74,7 @@ window.FIM_UPDATES = [
     detail: "A procession of drums, branches and song carries the walk into its final stretch.",
     meta: "2 August 2026 · Kiburara",
     image: fimAssetBase + "faith-in-motion/walk-day-procession-kiburara.jpg",
-    alt: "A festive procession with a marching band and community members holding branches, escorting the Walking Rotarian into Kiburara."
+    alt: "A festive procession with a marching band and community members holding branches, escorting Shyaka Mbanda into Kiburara."
   },
   {
     label: "Walk day",
@@ -82,7 +82,7 @@ window.FIM_UPDATES = [
     detail: "Neighbours, children and well-wishers line the road as the 400 km walk reaches its end.",
     meta: "2 August 2026 · Kiburara",
     image: fimAssetBase + "faith-in-motion/walk-day-crowd-welcome.jpg",
-    alt: "A large crowd gathered along the road, phones raised, as the Walking Rotarian arrives."
+    alt: "A large crowd gathered along the road, phones raised, as Shyaka Mbanda arrives."
   },
   {
     label: "Event poster",
@@ -97,16 +97,16 @@ window.FIM_UPDATES = [
     title: "More than half the distance covered.",
     detail: "The journey continues toward Rwembyo, carrying the appeal to complete St Joseph Rwembyo Catholic Church.",
     meta: "345 km journey · Faith in Motion",
-    image: fimAssetBase + "faith-in-motion/faith-in-motion-345km-poster.jpg",
+    image: fimAssetBase + "faith-in-motion/brand-clean/faith-in-motion-345km-poster.webp",
     alt: "Faith in Motion campaign poster announcing that more than half of the 345 kilometre journey has been covered."
   },
   {
     label: "Kasese",
     title: "The road reaches Kasese.",
-    detail: "A recorded milestone from the route, with the Walking Rotarian marking the Kasese stage of the journey.",
+    detail: "A recorded milestone from the route, with Shyaka Mbanda marking the Kasese stage of the journey.",
     meta: "Route record · Kasese",
     image: fimAssetBase + "faith-in-motion/kasese-milestone-345km.jpg",
-    alt: "The Walking Rotarian smiling and raising his fist beneath a Kasese road sign."
+    alt: "Shyaka Mbanda smiling and raising his fist beneath a Kasese road sign."
   },
   {
     label: "Day 8",
@@ -114,7 +114,7 @@ window.FIM_UPDATES = [
     detail: "A 26.49 kilometre day recorded on the Faith in Motion trek.",
     meta: "26.49 km · Mpara–Biguli",
     image: fimAssetBase + "faith-in-motion/mpara-biguli-day-8.jpg",
-    alt: "The Walking Rotarian resting outdoors beside an activity record showing 26.49 kilometres."
+    alt: "Shyaka Mbanda resting outdoors beside an activity record showing 26.49 kilometres."
   },
   {
     label: "From the road",
@@ -122,7 +122,7 @@ window.FIM_UPDATES = [
     detail: "A 35.69 kilometre route record beside flowing water and green riverbank vegetation.",
     meta: "35.69 km · Journey record",
     image: fimAssetBase + "faith-in-motion/walking-rotarian-riverside-35km.jpg",
-    alt: "The Walking Rotarian standing beside a river with an activity record showing 35.69 kilometres."
+    alt: "Shyaka Mbanda standing beside a river with an activity record showing 35.69 kilometres."
   },
   {
     label: "Journey portrait",
@@ -130,7 +130,7 @@ window.FIM_UPDATES = [
     detail: "A self-portrait from a bridge above a rocky riverbed along the route.",
     meta: "On the road · Western Uganda",
     image: fimAssetBase + "faith-in-motion/walking-rotarian-river-crossing.jpg",
-    alt: "The Walking Rotarian smiling on a bridge above a wide rocky riverbed."
+    alt: "Shyaka Mbanda smiling on a bridge above a wide rocky riverbed."
   },
   {
     label: "Evening record",
@@ -138,6 +138,6 @@ window.FIM_UPDATES = [
     detail: "An evening frame from the continuing journey toward Rwembyo.",
     meta: "Journey record · Faith in Motion",
     image: fimAssetBase + "faith-in-motion/walking-rotarian-sunset-video-frame.jpg",
-    alt: "Video frame of the Walking Rotarian smiling on a road at sunset."
+    alt: "Video frame of Shyaka Mbanda smiling on a road at sunset."
   }
 ];

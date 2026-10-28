@@ -6,8 +6,8 @@
    "page": "/walk-for-education/",
    "selector": "#choose-steps",
    "reason": "Country, step chips, custom steps, live total and the continue link; carries pledge, price and bounds hooks",
-   "bytes": 7222,
-   "sha256": "e1f12c4285d6ec6cebfc9ad11791a3ad4eb410c4cf9430f15b0bea6d6ab4ac0d"
+   "bytes": 7217,
+   "sha256": "3da9d97cdfbe54d3dd214c0788cc6db232ff5b2bf237961d9b0c550e5d1c1ae9"
   },
   {
    "id": "wfe-pricing-status",
@@ -46,8 +46,8 @@
    "page": "/walk-for-education/take-part/",
    "selector": "form.wfe-enquiry-form",
    "reason": "Enquiry form field names and validation hooks",
-   "bytes": 1556,
-   "sha256": "05bfc43c13d510302e8ba7953cbd0b0d9984f0a0d078e122616306500e8bce98"
+   "bytes": 1554,
+   "sha256": "4b1a11f411038cb0a4bfe482d984134ff163be2476c15852c0dde0e665f1d93a"
   },
   {
    "id": "wfe-partners-enquiry",
@@ -78,8 +78,8 @@
    "page": "/contribute/payment/",
    "selector": "main",
    "reason": "Payment result page: status check, receipt and certificate download",
-   "bytes": 6470,
-   "sha256": "c77e0b75001ed872e97e8e5ac8ede609abc656632bbc059c5bb1164edd41c882"
+   "bytes": 6435,
+   "sha256": "2f490c538e261b860b93beb9d992eec76165b00a459e4bb9d8d4aeb72172d247"
   },
   {
    "id": "contribute-verify-form",

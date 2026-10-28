@@ -14,7 +14,7 @@ window.PDM_UPDATES = [
     "22 JUL 2026",
     "mile",
     "More than halfway to Kasese",
-    "The Walking Rotarian has passed the halfway mark of the 345 km route — with thanksgiving for journey mercies so far. The remaining kilometres are the ones your steps carry.",
+    "Shyaka Mbanda has passed the halfway mark of the 345 km route — with thanksgiving for journey mercies so far. The remaining kilometres are the ones your steps carry.",
     "../walk/",
   ],
   [

@@ -56,7 +56,7 @@ window.ROLL_DATA = [
     ["Alele Ronald",50000,50,"paid",""],
     ["Shyaka Namilyango Old Boys 1990-96",510000,510,"paid",""],
     ["Lawrence Sentongo Shyaka NGO BUS",50000,50,"paid",""],
-    ["Rotarian Betty Foni Shyaka fan",150000,150,"paid",""],
+    ["Betty Foni Shyaka fan",150000,150,"paid",""],
     ["Rtn Olive Kigenyi",100000,100,"paid",""],
     ["Rtn Tayebwa Geoffrey",100000,100,"paid",""],
     ["Nelson Katusabe",40000,40,"paid",""],
