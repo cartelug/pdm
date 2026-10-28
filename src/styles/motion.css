@@ -124,7 +124,7 @@
     gap: 18px;
     padding: clamp(20px, 2.4vw, 34px) clamp(28px, 3.4vw, 56px) clamp(20px, 2.4vw, 34px) 0;
     border: 0;
-    font-size: clamp(1.9rem, 1.1rem + 2.6vw, 3.8rem);
+    font-size: var(--pci-fs-h3);
     line-height: 1;
     white-space: nowrap;
     align-items: center;

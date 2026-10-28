@@ -27,8 +27,8 @@
   --shadow-btn-hover: none;
 
   font-family: Manrope, "Inter Variable", system-ui, sans-serif;
-  font-size: 17px;
-  line-height: 1.68;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   background: var(--paper);
 }
 
@@ -40,32 +40,36 @@
 .pci-fim-v3 .sec {
   font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: var(--ls-h2);
   line-height: 0.98;
 }
 
 .pci-fim-v3 h1 {
-  font-size: clamp(3.4rem, 1.2rem + 8vw, 8.4rem);
-  line-height: 0.97;
-  letter-spacing: -0.034em;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
 }
 
 .pci-fim-v3 h2,
 .pci-fim-v3 .sec {
-  font-size: clamp(2.5rem, 1.4rem + 3.8vw, 5rem);
+  font-size: var(--fs-h2);
   max-width: 20ch;
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
 }
 
 .pci-fim-v3 h3 {
-  font-size: clamp(1.6rem, 1.2rem + 1.1vw, 2.2rem);
+  font-size: var(--fs-h3);
   font-weight: 620;
-  letter-spacing: -0.024em;
-  line-height: 1.06;
+  letter-spacing: var(--ls-h3);
+  line-height: var(--lh-h3);
 }
 
 .pci-fim-v3 .page-hero h1 {
   max-width: 16ch;
-  font-size: clamp(3.2rem, 1rem + 6.4vw, 7rem);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
 }
 
 .pci-fim-v3 .page-hero {
@@ -81,15 +85,15 @@
 
 .pci-fim-v3 .hero h1 {
   max-width: 15ch;
-  font-size: clamp(3.4rem, 1rem + 4.4vw, 5.8rem);
-  line-height: 0.97;
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
   text-shadow: none;
+  letter-spacing: var(--ls-display);
 }
 
 .pci-fim-v3 .hero h1 .em {
   color: var(--blush, #f3c9c8);
   font-family: "Instrument Serif", "Iowan Old Style", Georgia, serif;
-  font-size: 1.08em;
   font-style: italic;
   font-weight: 400;
   letter-spacing: -0.01em;
@@ -99,12 +103,13 @@
 .pci-fim-v3 .hero .lede,
 .pci-fim-v3 .lede {
   max-width: 55ch;
-  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
-  line-height: 1.55;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
 }
 
 .pci-fim-v3 .sec-sub {
-  font-size: 1.08rem;
+  max-width: var(--measure);
+  font-size: var(--fs-body);
 }
 
 .pci-fim-v3 .blk {
@@ -120,7 +125,7 @@
 .pci-fim-v3 .survey,
 .pci-fim-v3 .eyebrow {
   font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.8125rem;
+  font-size: var(--fs-caption);
   font-weight: 500;
   letter-spacing: 0.13em;
 }
@@ -163,20 +168,20 @@
 
 .pci-fim-v3 .brand .t b {
   font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  font-size: 1.7rem;
+  font-size: var(--fs-h3);
   font-weight: 700;
-  letter-spacing: -0.038em;
-  line-height: 0.9;
+  letter-spacing: var(--ls-h3);
+  line-height: var(--lh-h3);
 }
 
 .pci-fim-v3 .brand .t span {
   margin-top: 6px;
-  font-size: 0.8125rem;
+  font-size: var(--fs-caption);
   letter-spacing: 0.16em;
 }
 
 .pci-fim-v3 .nav-links a:not(.btn) {
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
   font-weight: 560;
   color: var(--ink-2) !important;
 }
@@ -188,7 +193,7 @@
 .pci-fim-v3 .nav .btn {
   min-height: 48px;
   padding: 0 24px;
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
 }
 
 .pci-fim-v3 .burger {
@@ -266,9 +271,10 @@
 
 .pci-fim-v3 .mnav .wrap > a:not(.btn) {
   font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  font-size: clamp(2rem, 1.2rem + 4vw, 3.2rem);
+  font-size: var(--fs-h2);
   font-weight: 600;
-  letter-spacing: -0.034em;
+  letter-spacing: var(--ls-h2);
+  line-height: var(--lh-h2);
 }
 
 .pci-fim-v3 .mnav a.act,
@@ -338,17 +344,18 @@
 
 .pci-fim-v3 footer h2 {
   font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.8125rem;
+  font-size: var(--fs-caption);
   font-weight: 500;
-  letter-spacing: 0.13em;
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
 }
 
 .pci-fim-v3 .fbrand b {
   font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  font-size: 1.9rem;
+  font-size: var(--fs-h3);
   font-weight: 700;
-  letter-spacing: -0.038em;
+  letter-spacing: var(--ls-h3);
+  line-height: var(--lh-h3);
 }
 
 @media (max-width: 760px) {
@@ -357,7 +364,9 @@
   }
 
   .pci-fim-v3 .hero h1 {
-    font-size: clamp(3.2rem, 1rem + 12vw, 4.8rem);
+    font-size: var(--fs-display);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
   }
 
   .pci-fim-v3 .hero-meta {
@@ -401,18 +410,18 @@
 .pci-fim-v3 .milestone .badge > span,
 .pci-fim-v3 .verb .n,
 .pci-fim-v3 .fbot > span {
-  font-size: 13px;
+  font-size: var(--fs-caption);
 }
 
 .pci-fim-v3 .tier > span,
 .pci-fim-v3 .pill {
-  font-size: 13px;
+  font-size: var(--fs-caption);
 }
 
 .pci-fim-v3 .crumb,
 .pci-fim-v3 .crumb a,
 .pci-fim-v3 .crumb b {
-  font-size: 13px;
+  font-size: var(--fs-caption);
 }
 
 .pci-fim-v3 .crumb a {

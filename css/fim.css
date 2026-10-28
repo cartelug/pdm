@@ -12,23 +12,28 @@ h3,
   color: var(--ink);
   font-family: "Bricolage Grotesque", Manrope, sans-serif;
   font-weight: 780;
-  letter-spacing: -0.04em;
+  letter-spacing: var(--ls-h2);
   line-height: 0.99;
   text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(50px, 8vw, 102px);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
 }
 
 h2,
 .sec {
-  font-size: clamp(36px, 5.3vw, 62px);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
 }
 
 h3 {
-  font-size: clamp(22px, 2.5vw, 31px);
-  line-height: 1.08;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-h3);
 }
 
 .sec {
@@ -40,7 +45,7 @@ h3 {
   max-width: 57ch;
   margin-top: 18px;
   color: var(--muted);
-  font-size: 17px;
+  font-size: var(--fs-body);
 }
 
 .survey.gold {
@@ -89,13 +94,13 @@ h3 {
 }
 
 .liveIn b {
-  font-size: 13px;
+  font-size: var(--fs-caption);
 }
 
 .liveIn .note,
 .liveIn .upd {
   color: #cfc4c0;
-  font-size: 11px;
+  font-size: var(--fs-caption);
 }
 
 .liveIn .tr {
@@ -116,7 +121,7 @@ h3 {
 .liveIn .btn {
   min-height: 36px;
   padding: 9px 14px;
-  font-size: 12px;
+  font-size: var(--fs-caption);
 }
 
 .has-live header {
@@ -253,7 +258,8 @@ footer .fgrid {
 .hero-meta b {
   display: block;
   color: #fff;
-  font-size: clamp(18px, 2.3vw, 25px);
+  font-size: var(--fs-h4);
+  line-height: var(--lh-h4);
 }
 
 .hero-meta b .u {
@@ -267,8 +273,8 @@ footer .fgrid {
   margin-top: 7px;
   color: rgb(255 255 255 / 68%);
   font-family: "JetBrains Mono", monospace;
-  font-size: 9px;
-  letter-spacing: 0.12em;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
 }
 
@@ -293,7 +299,7 @@ footer .fgrid {
   align-items: flex-start;
   gap: 11px;
   color: #ffe7e3;
-  font-size: 13px;
+  font-size: var(--fs-caption);
   line-height: 1.45;
   padding-right: 22px;
   border-right: 1px solid rgb(255 255 255 / 16%);
@@ -368,7 +374,9 @@ footer .fgrid {
   max-width: 13ch;
   margin-top: 22px;
   color: #fff;
-  font-size: clamp(48px, 7.2vw, 86px);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
 }
 
 .page-hero .lede {
@@ -440,7 +448,7 @@ footer .fgrid {
   background: #fff;
   color: var(--ink);
   font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
+  font-size: var(--fs-caption);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -449,8 +457,8 @@ footer .fgrid {
   margin: 13px 0;
   color: var(--muted);
   font-family: "JetBrains Mono", monospace;
-  font-size: 8px;
-  letter-spacing: 0.12em;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
 }
 
@@ -540,7 +548,7 @@ footer .fgrid {
 .tier b {
   display: block;
   font-family: "JetBrains Mono", monospace;
-  font-size: 18px;
+  font-size: var(--fs-body);
 }
 
 .tier span {
@@ -548,8 +556,8 @@ footer .fgrid {
   margin-top: 4px;
   color: #d7cbc7;
   font-family: "JetBrains Mono", monospace;
-  font-size: 8px;
-  letter-spacing: 0.1em;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
 }
 
@@ -579,7 +587,7 @@ footer .fgrid {
 .customrow label {
   margin: 0;
   color: #cfc4c0;
-  font-size: 9px;
+  font-size: var(--fs-caption);
   white-space: nowrap;
 }
 
@@ -590,14 +598,15 @@ footer .fgrid {
   padding: 9px 0;
   box-shadow: none;
   font-family: "JetBrains Mono", monospace;
-  font-size: 20px;
+  font-size: var(--fs-h4);
   font-weight: 700;
+  line-height: var(--lh-h4);
 }
 
 .range-help {
   margin: 8px 0 0;
   color: #bfb4af;
-  font-size: 12px;
+  font-size: var(--fs-ui);
 }
 
 .range-help a {
@@ -612,9 +621,9 @@ footer .fgrid {
 
 .readout .amt {
   color: #ff6b60;
-  font-size: clamp(31px, 5vw, 50px);
+  font-size: var(--fs-h2);
   font-weight: 800;
-  line-height: 1;
+  line-height: var(--lh-h2);
 }
 
 .readout .sub {
@@ -659,9 +668,9 @@ footer .fgrid {
 
 .segbox .k {
   font-family: "JetBrains Mono", monospace;
-  font-size: 9px;
+  font-size: var(--fs-caption);
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
 }
 
@@ -669,27 +678,27 @@ footer .fgrid {
   margin-top: 7px;
   color: #fff;
   font-family: "JetBrains Mono", monospace;
-  font-size: 18px;
+  font-size: var(--fs-body);
   font-weight: 700;
 }
 
 .segbox .p {
   margin-top: 4px;
   color: #cfc4c0;
-  font-size: 13px;
+  font-size: var(--fs-caption);
 }
 
 .payment-details p {
   margin: 12px 0 0;
   color: #f5ece9;
-  font-size: 13px;
+  font-size: var(--fs-caption);
 }
 
 .payment-details small {
   display: block;
   margin-top: 11px;
   color: #bfb4af;
-  font-size: 11px;
+  font-size: var(--fs-caption);
 }
 
 .panel > .btn-wa {
@@ -720,21 +729,22 @@ footer .fgrid {
 .paybox .k {
   color: var(--muted);
   font-family: "JetBrains Mono", monospace;
-  font-size: 9px;
-  letter-spacing: 0.1em;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
 }
 
 .paybox .no {
   margin-top: 4px;
-  font-size: 22px;
+  font-size: var(--fs-h4);
   font-weight: 800;
+  line-height: var(--lh-h4);
 }
 
 .paybox .nm {
   margin-top: 4px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--fs-caption);
 }
 
 .copyb {
@@ -744,7 +754,7 @@ footer .fgrid {
   background: var(--paper-2);
   color: var(--ink);
   cursor: pointer;
-  font-size: 12px;
+  font-size: var(--fs-caption);
   font-weight: 750;
 }
 
@@ -762,7 +772,7 @@ footer .fgrid {
   padding: 17px 0 17px 42px;
   border-bottom: 1px solid rgb(255 255 255 / 12%);
   color: #d7cbc7;
-  font-size: 14px;
+  font-size: var(--fs-small);
   counter-increment: steps;
 }
 
@@ -783,7 +793,7 @@ footer .fgrid {
 .fineprint {
   margin-top: 18px;
   color: #bfb4af;
-  font-size: 12px;
+  font-size: var(--fs-ui);
 }
 
 .sponsor-promise {
@@ -798,7 +808,9 @@ footer .fgrid {
   max-width: 12ch;
   margin-top: 20px;
   color: #fff;
-  font-size: clamp(32px, 4.4vw, 52px);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-h3);
 }
 
 .sponsor-promise > p {
@@ -821,7 +833,7 @@ footer .fgrid {
 .sponsor-promise dt {
   color: #cfc4c0;
   font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
+  font-size: var(--fs-caption);
 }
 
 .sponsor-promise dd {
@@ -900,8 +912,8 @@ footer .fgrid {
   display: block;
   margin-top: 3px;
   color: var(--muted);
-  font-size: 9px;
-  letter-spacing: 0.1em;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
 }
 
@@ -924,7 +936,7 @@ footer .fgrid {
 .msrow .sub {
   margin-top: 3px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--fs-caption);
 }
 
 .unitline {
@@ -934,7 +946,7 @@ footer .fgrid {
   border-radius: 999px;
   color: #ffd0cb;
   font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
+  font-size: var(--fs-caption);
 }
 
 .unitline.dark {
@@ -957,15 +969,16 @@ footer .fgrid {
 
 .gap-note .big {
   color: #ff6b60;
-  font-size: clamp(28px, 5vw, 46px);
+  font-size: var(--fs-h2);
   font-weight: 800;
+  line-height: var(--lh-h2);
 }
 
 .gap-note .cap {
   max-width: 44ch;
   margin-top: 7px;
   color: #d7cbc7;
-  font-size: 14px;
+  font-size: var(--fs-ui);
 }
 
 /* Media and route story */
@@ -988,15 +1001,16 @@ footer .fgrid {
 .statline b {
   display: block;
   color: var(--red);
-  font-size: 20px;
+  font-size: var(--fs-h4);
+  line-height: var(--lh-h4);
 }
 
 .statline span {
   display: block;
   margin-top: 6px;
   color: var(--muted);
-  font-size: 9px;
-  letter-spacing: 0.1em;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
 }
 
@@ -1012,9 +1026,10 @@ footer .fgrid {
 }
 
 .bigfig {
-  font-size: clamp(28px, 4vw, 42px);
+  font-size: var(--fs-h3);
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: var(--ls-h3);
+  line-height: var(--lh-h3);
 }
 
 .slot {
@@ -1067,8 +1082,8 @@ footer .fgrid {
   background: linear-gradient(transparent, rgb(0 0 0 / 72%));
   color: #fff;
   font-family: "JetBrains Mono", monospace;
-  font-size: 9px;
-  letter-spacing: 0.1em;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
 }
 
@@ -1123,20 +1138,20 @@ footer .fgrid {
   padding-top: 2px;
   color: var(--red);
   font-family: "JetBrains Mono", monospace;
-  font-size: 9px;
+  font-size: var(--fs-caption);
   font-weight: 700;
 }
 
 .datalist b {
   display: block;
-  font-size: 14px;
+  font-size: var(--fs-ui);
 }
 
 .datalist span span {
   display: block;
   margin-top: 3px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--fs-caption);
 }
 
 .milestone {
@@ -1163,14 +1178,15 @@ footer .fgrid {
 }
 
 .milestone .badge b {
-  font-size: 24px;
+  font-size: var(--fs-h4);
+  line-height: var(--lh-h4);
 }
 
 .milestone .badge span {
   display: block;
   margin-top: -14px;
   font-family: "JetBrains Mono", monospace;
-  font-size: 8px;
+  font-size: var(--fs-caption);
 }
 
 .milestone h3 {
@@ -1180,7 +1196,7 @@ footer .fgrid {
 .milestone p {
   margin: 6px 0 0;
   color: #ffe0dc;
-  font-size: 14px;
+  font-size: var(--fs-small);
 }
 
 /* Journey collection */
@@ -1285,15 +1301,16 @@ footer .fgrid {
   border-radius: 50%;
   background: var(--red);
   box-shadow: 0 12px 34px rgb(0 0 0 / 32%);
-  font-size: 20px;
+  font-size: var(--fs-h4);
   font-style: normal;
   transition:
     transform 0.2s ease,
     background 0.2s ease;
+  line-height: var(--lh-h4);
 }
 
 .journey-play b {
-  font-size: 14px;
+  font-size: var(--fs-ui);
   letter-spacing: 0.02em;
   text-shadow: 0 2px 14px rgb(0 0 0 / 65%);
 }
@@ -1344,8 +1361,8 @@ footer .fgrid {
 .journey-meta {
   color: var(--red);
   font-family: "JetBrains Mono", monospace;
-  font-size: 9px;
-  letter-spacing: 0.11em;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
 }
 
@@ -1357,7 +1374,7 @@ footer .fgrid {
 .journey-card p {
   margin: 11px 0 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--fs-small);
 }
 
 .journey-meta {
@@ -1368,7 +1385,9 @@ footer .fgrid {
 
 .journey-card.lead h3 {
   color: #fff;
-  font-size: clamp(34px, 5vw, 58px);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-h3);
 }
 
 .journey-card.lead p {
@@ -1404,8 +1423,8 @@ footer .fgrid {
   background: linear-gradient(100deg, #221e1d, #141110);
   color: #cfc4c0;
   font-family: "JetBrains Mono", monospace;
-  font-size: 9px;
-  letter-spacing: 0.1em;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
 }
 
@@ -1413,7 +1432,7 @@ footer .fgrid {
   transition: background 0.18s ease;
   padding: 15px 18px;
   border-bottom: 1px solid var(--line);
-  font-size: 14px;
+  font-size: var(--fs-ui);
 }
 
 @media (hover: hover) {
@@ -1433,7 +1452,7 @@ footer .fgrid {
 .lrow .i {
   color: var(--muted);
   font-family: "JetBrains Mono", monospace;
-  font-size: 10px;
+  font-size: var(--fs-caption);
 }
 
 .lrow .n {
@@ -1444,7 +1463,7 @@ footer .fgrid {
   display: block;
   margin-top: 3px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--fs-caption);
   font-style: normal;
   font-weight: 400;
 }
@@ -1452,7 +1471,7 @@ footer .fgrid {
 .lrow .a {
   text-align: right;
   font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
+  font-size: var(--fs-caption);
   font-weight: 700;
 }
 
@@ -1460,7 +1479,7 @@ footer .fgrid {
   display: block;
   margin-top: 3px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--fs-caption);
   font-style: normal;
   font-weight: 400;
 }
@@ -1474,7 +1493,7 @@ footer .fgrid {
   padding: 5px 8px;
   border-radius: 999px;
   font-family: "JetBrains Mono", monospace;
-  font-size: 8px;
+  font-size: var(--fs-caption);
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1500,7 +1519,7 @@ footer .fgrid {
   display: block;
   margin-top: 3px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--fs-caption);
 }
 
 .ledger-foot {
@@ -1530,8 +1549,8 @@ footer .fgrid {
 .tally .k {
   color: var(--muted);
   font-family: "JetBrains Mono", monospace;
-  font-size: 9px;
-  letter-spacing: 0.1em;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
 }
 
@@ -1539,14 +1558,15 @@ footer .fgrid {
   margin-top: 8px;
   color: var(--ink);
   font-family: "JetBrains Mono", monospace;
-  font-size: clamp(20px, 3vw, 30px);
+  font-size: var(--fs-h3);
   font-weight: 800;
+  line-height: var(--lh-h3);
 }
 
 .tally .c {
   margin-top: 5px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--fs-caption);
 }
 
 .leadband {
@@ -1581,19 +1601,19 @@ footer .fgrid {
 .leadband .lead .r {
   color: var(--red);
   font-family: "JetBrains Mono", monospace;
-  font-size: 18px;
+  font-size: var(--fs-body);
   font-weight: 800;
 }
 
 .leadband .lead b {
   display: block;
-  font-size: 14px;
+  font-size: var(--fs-ui);
 }
 
 .leadband .lead span span {
   display: block;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--fs-caption);
 }
 
 .pf {
@@ -1625,7 +1645,7 @@ footer .fgrid {
   gap: 14px;
   margin-top: 12px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--fs-caption);
 }
 
 .legend .sw {
@@ -1651,7 +1671,7 @@ footer .fgrid {
 .tcard .n {
   color: var(--red);
   font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
+  font-size: var(--fs-caption);
   font-weight: 800;
 }
 
@@ -1662,7 +1682,7 @@ footer .fgrid {
 .tcard p {
   margin: 12px 0 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--fs-small);
 }
 
 /* Participation */
@@ -1706,7 +1726,7 @@ footer .fgrid {
 .verb .n {
   color: var(--red);
   font-family: "JetBrains Mono", monospace;
-  font-size: 10px;
+  font-size: var(--fs-caption);
   font-weight: 800;
   letter-spacing: 0.1em;
 }
@@ -1718,7 +1738,7 @@ footer .fgrid {
 .verb p {
   margin: 13px 0 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--fs-small);
 }
 
 .verb .go {
@@ -1726,7 +1746,7 @@ footer .fgrid {
   margin-top: 24px;
   color: var(--red);
   font-weight: 800;
-  font-size: 13px;
+  font-size: var(--fs-caption);
 }
 
 /* Closing band */
@@ -1739,14 +1759,16 @@ footer .fgrid {
 .closer h2 {
   max-width: 18ch;
   color: #fff;
-  font-size: clamp(36px, 5.6vw, 64px);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
 }
 
 .closer p {
   max-width: 48ch;
   margin: 20px 0 0;
   color: #ffe1dd;
-  font-size: 17px;
+  font-size: var(--fs-body);
 }
 
 @media (max-width: 1180px) {
@@ -1805,7 +1827,9 @@ footer .fgrid {
   }
 
   .hero h1 {
-    font-size: clamp(48px, 14vw, 70px);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
   }
 
   .hero-meta {
@@ -1950,7 +1974,9 @@ footer .fgrid {
 
   .hero h1 {
     max-width: 9ch;
-    font-size: clamp(58px, 6.3vw, 98px);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
   }
 
   .hero-meta {

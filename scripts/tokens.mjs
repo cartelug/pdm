@@ -61,13 +61,15 @@ function brandBlock(selector, definition) {
 }
 
 function sharedBlock() {
-  const { fonts, type, space, layout, radius, layers, motion } = tokens;
+  const { fonts, type, leading, tracking, space, layout, radius, layers, motion } = tokens;
   const lines = [
     `--font-head: "${fonts.head.family}", "${fonts.head.family} Fallback", ${fonts.fallback};`,
     `--font-body: "${fonts.body.family}", "${fonts.body.family} Fallback", ${fonts.fallback};`,
   ];
   for (const [name, value] of Object.entries(type))
     lines.push(`--${name === "measure" ? "measure" : `fs-${name}`}: ${value};`);
+  for (const [name, value] of Object.entries(leading)) lines.push(`--lh-${name}: ${value};`);
+  for (const [name, value] of Object.entries(tracking)) lines.push(`--ls-${name}: ${value};`);
   for (const [name, value] of Object.entries(space)) lines.push(`--s-${name}: ${value}px;`);
   lines.push(`--gutter: ${layout.gutter};`, `--shell: ${layout.shell};`, `--section: ${layout.section};`);
   for (const [name, value] of Object.entries(radius)) lines.push(`--r-${name}: ${value};`);

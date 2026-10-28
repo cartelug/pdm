@@ -92,22 +92,22 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "9acdddd8fc407d378ab88fbb4b798d932cef108c961178e9688c975ac1a33c59",
-    "contribute/payment/index.html": "ce06a87bc3fe160618e391d69753c4ea00e51ff4349d1055da50cfcab6b1fff0",
-    "contribute/privacy/index.html": "486de56622142b3cfab7f5458b4302939bb28061b77678791e1b37a48ef5aa1c",
-    "contribute/terms/index.html": "58d70f1a0e6f7542514472544a6a0f0bf287a61a9e3e4bca7d449c625965a6c6",
-    "contribute/verify/index.html": "ba96175af1b549a167f25d0f2fc10036872e1715054d07f3d60b3be9ae1aeda8",
+    "contribute/index.html": "548ca69e8fb3bf40ad3b81cdbb1b18913d400df6e3ced415696b492b6da68c9e",
+    "contribute/payment/index.html": "b228dc649eca8989918bd11cc6fbb297074045cdab0133fcd0e8f6ec03a919cc",
+    "contribute/privacy/index.html": "2fcb708ec612eec463312dfdb95ca465a5244336a69901cad69344dcbd185648",
+    "contribute/terms/index.html": "bfa07e49c73ebb19f100abf318b3e5797212935e72d5bfdb1667ace362cdb125",
+    "contribute/verify/index.html": "358de6bd7ef362ada5983be0b0b4f24b2410d943b5a5beddb89b00a29ebeab61",
     "css/base.css": "368d70b67bd5c7c3e60f7f44a9d8c93bfb8db7e2e8559cb00f223cfcf14893c5",
     "css/collections.css": "cd779925dd2f0519e39b3b7e5f577d660dcee3bf08f8ce98c67bad5615a47f23",
     "css/contribute.css": "e02336271318e777f18aa7a98cb227dd896eed88bebe9de6bc0b054622ed2c81",
-    "css/fim.css": "21e1423a4f5ffd03720e4325ff1342dd17cd80853871bf02db232a87388be40b",
-    "css/motion.css": "4ab6dffa59d3b19efb2fb56502b0a8a0e4642c2cf8c638d02e59d6ca331fe6c5",
+    "css/fim.css": "f6741364d4a1bd1ca697ec9efdef05873f4d9e8b1f8c67a7bb77d008eb9642f0",
+    "css/motion.css": "5b181d4abe408dfe5ad1663db27d617857a8213d5ed436454490e277d3d7f99b",
     "css/pci.css": "a59ea53b9811b0545407832beed2295976ad527323c960de2df7fe1e2faabadd",
     "css/pdm.css": "d6c45e86e307baecf378e66955d32bd681ab9cb20effcec85cfea2735b4e7cf9",
     "css/pledge-selector.css": "7c765659e4cd87f27cad75b5327f6ada838ee665b56d2f110958251028c72b83",
     "css/preloader.css": "37d89f5ee1ac3b6fbeab5d091de4ea77e4f536189dfeaba733973e5547624e4f",
-    "css/wfe-launch.css": "bbe20050a274dea703499d09b95fc5a84ce4949e822a65fd020e47f236aefa94",
-    "css/wfe.css": "34c2e76eb3f25bcac00524d1468600223c195f4ea47172337e82eb63b418f46b",
+    "css/wfe-launch.css": "fb84bcc0120669257f3715c1cb28db41be9c8b38e65db741b41f46abc3568ab1",
+    "css/wfe.css": "564d7dc5d3a25c15278105dedf9552d5690f6608d4158f311b997c3342d0c222",
     "js/campaign-contacts.js": "69a70380085e734876fb45fcee931b8036cd43c95633ade89b603f72a696fe32",
     "js/certificate-verify.js": "7648e82991c361568970b7829079a4f6ede6c346626926d2ca85da93498d2c4e",
     "js/collection-progress.js": "53838ad4580d13eb6d548ebd055291d010ea7a057e96af454b8c0c8f26b0401a",
@@ -127,11 +127,11 @@
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
     "js/wfe.js": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
-    "walk-for-education/accountability/index.html": "5137365fd8933c3470464fde5eeb751f830202dfcd5692c8004985e856ddb710",
-    "walk-for-education/index.html": "cc60350466aa594c05502e93a9e34c220e9b36951424733caae331f67b048b90",
-    "walk-for-education/partners/index.html": "339585bc6909400bc03b58da6096202f499ca980d447cba51a6e8f4732ba3cd9",
-    "walk-for-education/take-part/index.html": "f66acf08e245de47369639523dbd07d1e331b9621f9c39dff0501a54de311bcb",
-    "walk-for-education/updates/index.html": "0586bd8d3a8aa7667336ad68a818da9901a9941c273a39463575b0504af4b730"
+    "walk-for-education/accountability/index.html": "a92e7eb722f626caf6f81e5ab70316d51a282b6c80dd7f8d264eb8dca63f167c",
+    "walk-for-education/index.html": "65851b30bfc3ad68d9bc8c6f7b93f1d9772b8752dc6274450d1f95b96c0cf82e",
+    "walk-for-education/partners/index.html": "062ceb8454f07264719cc260c56024e87bbd5d0de9a65b5bc2b69c71a0a371d9",
+    "walk-for-education/take-part/index.html": "121d1d4d54b92b4fa4df91d253d94607187da3ca83e21727ad843d8e6a79c2f4",
+    "walk-for-education/updates/index.html": "d21a79417fa15b0edfb2646874c47b255746b790fafb0837f843f59e7b7fd841"
   },
   "presentationReviews": [
     {
@@ -1023,6 +1023,278 @@
       "date": "2026-10-26",
       "authorisation": "User instruction in session: make the Walk inner-page footers light and finish.",
       "reason": "Cache-hash query for css/wfe-editorial.css and css/wfe-campaign.css, which now draw the inner Walk page footers on the light sand surface used by the Walk home footer so the whole PCI logo shows. No markup, pledge, payment, form, script order or fragment change."
+    },
+    {
+      "file": "contribute/index.html",
+      "previousSha256": "9acdddd8fc407d378ab88fbb4b798d932cef108c961178e9688c975ac1a33c59",
+      "sha256": "48ca20083a2d3cf781d10f0ea00e1fce48d39b8b57c98919156eda3901bee92d",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "contribute/payment/index.html",
+      "previousSha256": "ce06a87bc3fe160618e391d69753c4ea00e51ff4349d1055da50cfcab6b1fff0",
+      "sha256": "a9a00b1d08e84f38b21cac9e116b8eabb8bddd845a10fd1a298aeab2e9f7701d",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "contribute/privacy/index.html",
+      "previousSha256": "486de56622142b3cfab7f5458b4302939bb28061b77678791e1b37a48ef5aa1c",
+      "sha256": "c377eed7929d6221a8a096e049778a42e32219f62a2e4d9e3c3ab345e60df124",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "contribute/terms/index.html",
+      "previousSha256": "58d70f1a0e6f7542514472544a6a0f0bf287a61a9e3e4bca7d449c625965a6c6",
+      "sha256": "ee995b3441968c367c1787363456c75ef37d72ff18ab83795e07d4a796ff5472",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "contribute/verify/index.html",
+      "previousSha256": "ba96175af1b549a167f25d0f2fc10036872e1715054d07f3d60b3be9ae1aeda8",
+      "sha256": "8e2e8129abfca3694fbd69a80966a7dd1d5ab6095b4751c9c16c612405a8bbd1",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "css/fim.css",
+      "previousSha256": "21e1423a4f5ffd03720e4325ff1342dd17cd80853871bf02db232a87388be40b",
+      "sha256": "f6741364d4a1bd1ca697ec9efdef05873f4d9e8b1f8c67a7bb77d008eb9642f0",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "css/motion.css",
+      "previousSha256": "4ab6dffa59d3b19efb2fb56502b0a8a0e4642c2cf8c638d02e59d6ca331fe6c5",
+      "sha256": "5b181d4abe408dfe5ad1663db27d617857a8213d5ed436454490e277d3d7f99b",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "css/wfe-launch.css",
+      "previousSha256": "bbe20050a274dea703499d09b95fc5a84ce4949e822a65fd020e47f236aefa94",
+      "sha256": "fb84bcc0120669257f3715c1cb28db41be9c8b38e65db741b41f46abc3568ab1",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "css/wfe.css",
+      "previousSha256": "34c2e76eb3f25bcac00524d1468600223c195f4ea47172337e82eb63b418f46b",
+      "sha256": "564d7dc5d3a25c15278105dedf9552d5690f6608d4158f311b997c3342d0c222",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "walk-for-education/accountability/index.html",
+      "previousSha256": "5137365fd8933c3470464fde5eeb751f830202dfcd5692c8004985e856ddb710",
+      "sha256": "b8d962b7c43a5e9f094d416a17d68312eb627613d3072490f9324c3984231b57",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "walk-for-education/index.html",
+      "previousSha256": "cc60350466aa594c05502e93a9e34c220e9b36951424733caae331f67b048b90",
+      "sha256": "22df58e98754dc678aae09fb94bcaad004d5b0790d29d1f7a379eaa9f848b84e",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "walk-for-education/partners/index.html",
+      "previousSha256": "339585bc6909400bc03b58da6096202f499ca980d447cba51a6e8f4732ba3cd9",
+      "sha256": "47dde30888963e823a5e4d8091e44273b87a2b9c6eab80352b2c1b02a5e2564b",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "walk-for-education/take-part/index.html",
+      "previousSha256": "f66acf08e245de47369639523dbd07d1e331b9621f9c39dff0501a54de311bcb",
+      "sha256": "6cc9db741601aab659054de25e2d6348e6dc3957cb58f51522fe6c37d0ab4dd3",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "walk-for-education/updates/index.html",
+      "previousSha256": "0586bd8d3a8aa7667336ad68a818da9901a9941c273a39463575b0504af4b730",
+      "sha256": "70116c578d6ee7dc1bd1b73ae0b5c00a1f1e894f81f353bfcd22c56261eea025",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Presentation only: the shared type scale (tokens 1.2.0). Font sizes, leading and tracking map onto the --fs, --lh and --ls steps; headline accent words are no longer enlarged; sub-13px labels reach the 13px floor; cache-hash queries follow the changed stylesheets. No hook, id, price, pledge, payment or register logic changed."
+    },
+    {
+      "file": "contribute/index.html",
+      "previousSha256": "48ca20083a2d3cf781d10f0ea00e1fce48d39b8b57c98919156eda3901bee92d",
+      "sha256": "4e1b26769aa07ae5648d5410f9accb212f17ccbc2b2d7c725f27f496946f816c",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (type scale, tokens 1.2.0). Presentation only."
+    },
+    {
+      "file": "contribute/payment/index.html",
+      "previousSha256": "a9a00b1d08e84f38b21cac9e116b8eabb8bddd845a10fd1a298aeab2e9f7701d",
+      "sha256": "45ae922dc75a408e27cbaf7fecae2d5ec9f7cf889c09cadd1d8e273982f9372e",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (type scale, tokens 1.2.0). Presentation only."
+    },
+    {
+      "file": "contribute/privacy/index.html",
+      "previousSha256": "c377eed7929d6221a8a096e049778a42e32219f62a2e4d9e3c3ab345e60df124",
+      "sha256": "4d04f32ba094212f586df224f0998fd93818029f9dd14203129e16047d35cc8c",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (type scale, tokens 1.2.0). Presentation only."
+    },
+    {
+      "file": "contribute/terms/index.html",
+      "previousSha256": "ee995b3441968c367c1787363456c75ef37d72ff18ab83795e07d4a796ff5472",
+      "sha256": "cd4852d5e646fe2ad99d63527ce4922b68e4a499d5b15cbaa2cc87a99f0f5077",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (type scale, tokens 1.2.0). Presentation only."
+    },
+    {
+      "file": "contribute/verify/index.html",
+      "previousSha256": "8e2e8129abfca3694fbd69a80966a7dd1d5ab6095b4751c9c16c612405a8bbd1",
+      "sha256": "8bb14f4ad0f3f2d0b53af1d25d23906a0e44efd37b4bc174fb3bf0e6b3a8299d",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (type scale, tokens 1.2.0). Presentation only."
+    },
+    {
+      "file": "walk-for-education/accountability/index.html",
+      "previousSha256": "b8d962b7c43a5e9f094d416a17d68312eb627613d3072490f9324c3984231b57",
+      "sha256": "d9864dd3a0b6682f6d88650c935448e8ab0c93371cccada43d68b6f18dafb0eb",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (type scale, tokens 1.2.0). Presentation only."
+    },
+    {
+      "file": "walk-for-education/index.html",
+      "previousSha256": "22df58e98754dc678aae09fb94bcaad004d5b0790d29d1f7a379eaa9f848b84e",
+      "sha256": "c1307ec0fa84a7e69a9b290bb86bc33e8167814d7c4c728e4e64225133c93782",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (type scale, tokens 1.2.0). Presentation only."
+    },
+    {
+      "file": "walk-for-education/partners/index.html",
+      "previousSha256": "47dde30888963e823a5e4d8091e44273b87a2b9c6eab80352b2c1b02a5e2564b",
+      "sha256": "a39bd5a9fba70ca8b67f25f1e46075fc85ea87b4716d1d54f259c5d2b947b282",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (type scale, tokens 1.2.0). Presentation only."
+    },
+    {
+      "file": "walk-for-education/take-part/index.html",
+      "previousSha256": "6cc9db741601aab659054de25e2d6348e6dc3957cb58f51522fe6c37d0ab4dd3",
+      "sha256": "0e5e9201b67f9b21d17564a4a269a79eb008886e65393a96c7580aff3c2b7be8",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (type scale, tokens 1.2.0). Presentation only."
+    },
+    {
+      "file": "walk-for-education/updates/index.html",
+      "previousSha256": "70116c578d6ee7dc1bd1b73ae0b5c00a1f1e894f81f353bfcd22c56261eea025",
+      "sha256": "8348b5969a5c6385563f047788e040decfb0e159fce94b178deaf5a5d5c10661",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (type scale, tokens 1.2.0). Presentation only."
+    },
+    {
+      "file": "contribute/index.html",
+      "previousSha256": "4e1b26769aa07ae5648d5410f9accb212f17ccbc2b2d7c725f27f496946f816c",
+      "sha256": "548ca69e8fb3bf40ad3b81cdbb1b18913d400df6e3ced415696b492b6da68c9e",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (brand lockup wraps at large text). Presentation only."
+    },
+    {
+      "file": "contribute/payment/index.html",
+      "previousSha256": "45ae922dc75a408e27cbaf7fecae2d5ec9f7cf889c09cadd1d8e273982f9372e",
+      "sha256": "b228dc649eca8989918bd11cc6fbb297074045cdab0133fcd0e8f6ec03a919cc",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (brand lockup wraps at large text). Presentation only."
+    },
+    {
+      "file": "contribute/privacy/index.html",
+      "previousSha256": "4d04f32ba094212f586df224f0998fd93818029f9dd14203129e16047d35cc8c",
+      "sha256": "2fcb708ec612eec463312dfdb95ca465a5244336a69901cad69344dcbd185648",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (brand lockup wraps at large text). Presentation only."
+    },
+    {
+      "file": "contribute/terms/index.html",
+      "previousSha256": "cd4852d5e646fe2ad99d63527ce4922b68e4a499d5b15cbaa2cc87a99f0f5077",
+      "sha256": "bfa07e49c73ebb19f100abf318b3e5797212935e72d5bfdb1667ace362cdb125",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (brand lockup wraps at large text). Presentation only."
+    },
+    {
+      "file": "contribute/verify/index.html",
+      "previousSha256": "8bb14f4ad0f3f2d0b53af1d25d23906a0e44efd37b4bc174fb3bf0e6b3a8299d",
+      "sha256": "358de6bd7ef362ada5983be0b0b4f24b2410d943b5a5beddb89b00a29ebeab61",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (brand lockup wraps at large text). Presentation only."
+    },
+    {
+      "file": "walk-for-education/accountability/index.html",
+      "previousSha256": "d9864dd3a0b6682f6d88650c935448e8ab0c93371cccada43d68b6f18dafb0eb",
+      "sha256": "a92e7eb722f626caf6f81e5ab70316d51a282b6c80dd7f8d264eb8dca63f167c",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (brand lockup wraps at large text). Presentation only."
+    },
+    {
+      "file": "walk-for-education/index.html",
+      "previousSha256": "c1307ec0fa84a7e69a9b290bb86bc33e8167814d7c4c728e4e64225133c93782",
+      "sha256": "65851b30bfc3ad68d9bc8c6f7b93f1d9772b8752dc6274450d1f95b96c0cf82e",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (brand lockup wraps at large text). Presentation only."
+    },
+    {
+      "file": "walk-for-education/partners/index.html",
+      "previousSha256": "a39bd5a9fba70ca8b67f25f1e46075fc85ea87b4716d1d54f259c5d2b947b282",
+      "sha256": "062ceb8454f07264719cc260c56024e87bbd5d0de9a65b5bc2b69c71a0a371d9",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (brand lockup wraps at large text). Presentation only."
+    },
+    {
+      "file": "walk-for-education/take-part/index.html",
+      "previousSha256": "0e5e9201b67f9b21d17564a4a269a79eb008886e65393a96c7580aff3c2b7be8",
+      "sha256": "121d1d4d54b92b4fa4df91d253d94607187da3ca83e21727ad843d8e6a79c2f4",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (brand lockup wraps at large text). Presentation only."
+    },
+    {
+      "file": "walk-for-education/updates/index.html",
+      "previousSha256": "8348b5969a5c6385563f047788e040decfb0e159fce94b178deaf5a5d5c10661",
+      "sha256": "d21a79417fa15b0edfb2646874c47b255746b790fafb0837f843f59e7b7fd841",
+      "date": "2026-10-28",
+      "authorisation": "User instruction in session: review the PCI font sizes and font usage on desktop and every view and make them far more professional.",
+      "reason": "Cache-hash queries follow the changed one-look stylesheet (brand lockup wraps at large text). Presentation only."
     }
   ],
   "functionalReviews": [

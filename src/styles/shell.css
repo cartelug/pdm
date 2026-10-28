@@ -100,8 +100,8 @@
   .pci-desktop-nav a {
     position: relative;
     padding: 10px 2px;
-    font-size: 0.95rem;
-    font-weight: 560;
+    font-size: var(--pci-fs-small);
+    font-weight: 600;
     color: var(--pci-ink-soft);
     transition: color 0.2s;
   }
@@ -144,7 +144,7 @@
     display: none;
     min-height: 50px;
     padding-left: 24px;
-    font-size: 0.95rem;
+    font-size: var(--pci-fs-small);
   }
 
   .pci-header__cta .pci-icon {
@@ -162,7 +162,7 @@
     border: 1px solid var(--pci-line-strong);
     border-radius: 999px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: var(--pci-fs-small);
     transition:
       background-color 0.2s,
       border-color 0.2s;
@@ -216,7 +216,7 @@
 
   .pci-nojs-nav a {
     padding: 8px 0;
-    font-weight: 560;
+    font-weight: 600;
     border-bottom: 1px solid var(--pci-line);
   }
 
@@ -497,7 +497,7 @@
     border: 1px solid var(--pci-on-night-line);
     border-radius: 999px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: var(--pci-fs-small);
   }
 
   .pci-menu__close .pci-icon {
@@ -582,7 +582,7 @@
     justify-content: space-between;
     padding: 11px 0;
     border-bottom: 1px solid var(--pci-on-night-line);
-    font-weight: 560;
+    font-weight: 600;
   }
 
   @media (hover: hover) {
@@ -669,8 +669,8 @@
   }
 
   .pci-footer__invitation h2 {
-    font-size: clamp(3rem, 1rem + 8vw, 8.6rem);
-    line-height: 0.97;
+    font-size: var(--pci-fs-display);
+    line-height: var(--lh-display);
     max-width: 14ch;
   }
 
@@ -742,8 +742,8 @@
     padding: 9px 16px;
     border: 1px solid var(--pci-on-night-line);
     border-radius: 999px;
-    font-size: 0.9rem;
-    font-weight: 560;
+    font-size: var(--pci-fs-ui);
+    font-weight: 600;
     transition:
       background-color 0.2s,
       color 0.2s;
@@ -775,9 +775,9 @@
     justify-content: space-between;
     padding-block: 22px 28px;
     border-top: 1px solid var(--pci-on-night-line);
-    font: 500 0.8125rem / 1.5 var(--pci-mono);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font: 400 var(--pci-fs-ui) / 1.5 var(--pci-sans);
+    letter-spacing: 0.01em;
+    text-transform: none;
     color: var(--pci-on-night-muted);
   }
 

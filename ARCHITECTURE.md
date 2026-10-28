@@ -106,6 +106,28 @@ MTN Brighter Sans Bold (headings, menus, buttons, labels, figures and anything s
 
 `css/one-look.css` is a migration layer, not a design system. The protected stylesheets name their fonts directly and at high specificity, so it applies the roles with `!important` and points their font variables at the new fonts. Nested text inherits its heading, button or reading role; form controls explicitly use Sky Text. It also holds the narrow-screen and large-text fixes and the 13 px floor. A page that moves to the Astro build drops it. `scripts/pages.mjs` checks that every hand-written page declares its brand, loads the two files in order, preloads only the new fonts and carries no loading screen.
 
+#### The type scale
+
+One scale sets every size, line height and letter-spacing on every public page (tokens 1.2.0, `src/design/tokens.json`; `npm run tokens` writes `--fs-*`, `--lh-*` and `--ls-*`). The institutional layer reaches it through `--pci-fs-*`; the hand-written stylesheets name `--fs-*` directly. No stylesheet invents a size of its own.
+
+| Step | 390 px | 1440 px | Cap | Used for |
+| --- | --- | --- | --- | --- |
+| `display` | 46 | 92 | 104 | Campaign and home hero titles, the closing band |
+| `statement` | 36 | 62 | 72 | One long sentence set large (the manifesto, the closing line) |
+| `h1` | 38 | 72 | 80 | The page title; always smaller than a campaign hero |
+| `h2` | 30 | 48 | 54 | Section titles |
+| `h3` | 22 | 30 | 32 | Card, row and step titles, large figures |
+| `h4` | 19 | 22 | 22 | Small titles, bold lead-ins |
+| `lead` | 18 | 21 | 22 | The opening paragraph |
+| `body` | 16 | 17 | 17 | Running text; line length `--measure` (54ch, about 66 characters in Sky Text) |
+| `small` | 15 | 15 | 15 | Secondary text in cards and notes; paragraphs never go below this |
+| `ui` | 14 | 14 | 14 | Form labels, fine print, notes |
+| `caption` | 13 | 13 | 13 | Capitals labels and captions; nothing on the site is smaller |
+
+Rules the scale enforces: headings use leading 1.04 to 1.25 and tracking from -0.03em (display) to 0 (h4), never the paragraph's 1.65; headline accent words differ by colour, never by size; labels are one style (bold face, capitals, `--ls-label` 0.12em) and capitals are for short labels, not sentences; money and counts use the bold face with tabular figures; `text-wrap: balance` on headings and `pretty` on paragraphs. `ch` is measured in the reading face's wide "0", so `--measure` is 54ch, not 66ch. Two typefaces with one weight each means "weight" is only regular or bold; a stylesheet that declares 450, 560 or 620 is declaring one of the two.
+
+`css/one-look.css` keeps only the cross-cutting roles: label and figure routing, balance, the legal-page title and measure, and a few rules for public pages that share `base.css` and `collections.css` with the staff console, which is deliberately left as it was. Measured at 1440 px, the pages used up to 29 distinct sizes each and 85 across the site; they now use at most 16 each and 27 across the site.
+
 The institutional header is regrouped into five items (Our work, Impact and trust, Partner with us, Updates, About) with light dropdowns that open on focus as well as hover, close with Escape and stay plain links without JavaScript, a campaign chip, and a Contact button. The full header starts at 1200 px; below that the menu sheet shows the groups under small headings. `/design-system/` documents both brands from `tokens.json`, including every contrast ratio.
 
 ## 7. Quality gates
@@ -184,6 +206,7 @@ Decisions come from the platform plan of 21 October 2026. A decision is reversib
 | D23 | Stop committing generated HTML once the migration is complete. | It duplicates what CI builds | **Not started**; it changes the deployment pipeline and waits for the migration. |
 | D24 | Each release ends with a short documentation pack: what changed, gate results, speed numbers, what is unchanged on purpose, the rollback point. | Fits the approval routine | **Done:** [docs/quality/RELEASE-1-2026-10-21.md](docs/quality/RELEASE-1-2026-10-21.md). |
 | D25 | The two house fonts are MTN Brighter Sans Bold (headings, labels, figures, bold) and Sky Text (reading), used on every public page and in the downloadable graphics. | The owner supplied both files on 26 October 2026 and asked for them to be used site-wide | **Applied** in tokens 1.1.0. One licence caveat is open: the download page labels both fonts CC BY 4.0, but their copyright belongs to Newlyn Works Limited and Sky, so the owner should confirm the terms with the rights holder. The credit is in every footer. To change fonts again, edit `fonts` in `tokens.json` and run `npm run tokens`. |
+| D26 | One type scale (display, statement, h1 to h4, lead, body, small, ui, caption) with its own leading and tracking sets every size on every public page; interior titles are smaller than campaign heroes. | The owner asked for far more professional font sizes and usage on desktop and every view | **Applied** in tokens 1.2.0 on 28 October 2026. Reviewed presentation exceptions are recorded for `fim.css`, `wfe.css`, `wfe-launch.css`, `motion.css` and the pages that carry their cache-hash queries. `base.css` and `collections.css` are shared with the staff console and are unchanged. To change a size, edit `type` in `tokens.json` and run `npm run tokens`. |
 
 ## 11. What changes next
 

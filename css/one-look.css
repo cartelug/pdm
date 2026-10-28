@@ -28,6 +28,9 @@ html[data-brand] body :where(*) {
 
 html[data-brand] body {
   font-family: var(--font-body) !important;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html[data-brand] body :is(input, select, textarea) {
@@ -112,6 +115,137 @@ html[data-brand] .wfp {
   --wfp-body: var(--font-body);
 }
 
+/* ---------- 1a. Type system ---------- */
+
+/* The size, leading and tracking steps are the shared scale in src/design/tokens.json (--fs-*, --lh-*, --ls-*).
+   The stylesheets name them directly; the rules below are the cross-cutting roles that cannot live in one place. */
+
+/* Headings and short interface text break into balanced lines; paragraphs avoid a single word on the last line. */
+html[data-brand]
+  body
+  :is(h1, h2, h3, h4, summary, figcaption, .w-display, .w-lede, .lede, [class*="lede"]) {
+  text-wrap: balance;
+}
+
+html[data-brand] body :is(p, li, dd, blockquote):not([class*="lede"]) {
+  text-wrap: pretty;
+}
+
+/* Labels are one style on every page: the bold face, capitals, the shared tracking. Several of these classes sit in
+   protected stylesheets that set them in the reading face or with their own tracking. */
+html[data-brand]
+  body
+  :is(
+    .survey,
+    .journey-meta,
+    .journey-label,
+    .tally .k,
+    .segbox .k,
+    .paybox .k,
+    .msrow .k,
+    .cap,
+    .wfp-level-name,
+    .wfe2-index,
+    .channel-type,
+    .w-way__n,
+    .brand .t span,
+    .collection-kicker,
+    .collection-label,
+    dt
+  ) {
+  font-family: var(--font-head) !important;
+  font-weight: 600;
+  letter-spacing: var(--ls-label) !important;
+}
+
+/* Money and counts: the bold face with tabular figures, so columns of amounts line up. */
+html[data-brand="pci"]
+  body
+  :is(
+    .a,
+    .v,
+    .big,
+    .bigfig,
+    .readout .amt,
+    .tally .v,
+    .statline b,
+    .gap-note .big,
+    .lrow .n,
+    .paybox .no
+  ) {
+  font-family: var(--font-head) !important;
+  font-variant-numeric: tabular-nums;
+  line-height: var(--lh-figure);
+}
+
+/* A figure is one line of large type: it never inherits the paragraph's leading. */
+html[data-brand]
+  body
+  :is(
+    .w-summary strong,
+    .w-total strong,
+    .receipt-amount,
+    .v3-goal > strong b,
+    .v3-distance strong
+  ) {
+  line-height: var(--lh-figure);
+}
+
+/* The route chart's 25, 50 and 75 per cent pins are drawn by script into a 1200-unit viewBox that is squeezed to the
+   screen width, so on a phone their labels render at about 3 px. Beyond that width they are set at the 13 px floor; the
+   chart keeps its own text alternative. */
+html[data-brand] .roadSVG .pin text {
+  font-size: var(--fs-caption);
+}
+
+@media (max-width: 899px) {
+  html[data-brand] .roadSVG .pin text {
+    display: none;
+  }
+}
+
+/* Legal and utility pages: a title one step below the campaign titles, and a readable line length. */
+html[data-brand] .collections-main h1 {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+}
+
+html[data-brand] .collections-main h2 {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-h3);
+}
+
+html[data-brand] .collections-main :is(p, li) {
+  max-width: var(--measure);
+}
+
+html[data-brand]
+  :is(.collection-notice, .collection-support, .collection-feedback, .collection-field small) {
+  font-size: var(--fs-ui);
+}
+
+html[data-brand="pci"] .pci-fim-v3 .fbot {
+  font-family: var(--font-body) !important;
+  font-size: var(--fs-ui);
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+html[data-brand="pci"] .pci-fim-v3 footer :is(p, li) {
+  font-size: var(--fs-ui);
+  line-height: var(--lh-small);
+}
+
+html[data-brand] :is(.collection-kicker, .collection-label) {
+  font-size: var(--fs-caption);
+}
+
+html[data-brand] .collections-main :is(p, li, label, small, .collection-feedback) {
+  line-height: var(--lh-body);
+}
+
 /* ---------- 1b. One Walk palette ---------- */
 
 /* The inner Walk pages were built on a red-and-blue editorial palette, the home page on navy, gold and cyan.
@@ -177,6 +311,17 @@ html[data-brand] .w-tiers {
   table-layout: fixed;
 }
 
+/* The brand lockup shrinks and wraps instead of widening the page when the text size is doubled. */
+html[data-brand] .collections-header .brand {
+  min-width: 0;
+  max-width: 100%;
+}
+
+html[data-brand] .collections-header .brand .t {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 /* The small header of the contribution pages keeps its links on screen at 320 px and with large text. */
 html[data-brand] .collections-header .wrap,
 html[data-brand] .collections-header nav {
@@ -204,14 +349,11 @@ html[data-brand="walk"] .w-pledge__intro {
   container-type: inline-size;
 }
 
+/* Sized against its copy column; each phrase of the title is its own line. */
 html[data-brand="walk"] .w-hero__title {
-  font-size: clamp(2.4rem, 1.2rem + 6vw, 4.3rem);
-}
-
-@media (min-width: 900px) {
-  html[data-brand="walk"] .w-hero__title {
-    font-size: clamp(2.65rem, 15cqi, 6.6rem);
-  }
+  font-size: var(--fs-display);
+  font-size: min(var(--fs-display), 15cqi);
+  line-height: var(--lh-display);
 }
 
 /* On short phones the headline and action come before the tall portrait. */
@@ -257,7 +399,9 @@ html[data-brand="walk"] .w-hero__title {
   html[data-brand="walk"] .wfp-hero h1,
   html[data-brand="pci"] .pci-fim-v3 .page-hero h1 {
     max-width: none;
-    font-size: clamp(2.4rem, 1.35rem + 4.5vw, 3.2rem);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
   }
 
   html[data-brand="walk"] .wfp-form-card {
@@ -265,7 +409,9 @@ html[data-brand="walk"] .w-hero__title {
   }
 
   html[data-brand="walk"] .wfp-form-card h2 {
-    font-size: clamp(1.9rem, 1.3rem + 2vw, 2.4rem);
+    font-size: var(--fs-h2);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
   }
 
   /* The archive's wrap already removes 32 px from its width; its extra padding doubled that gutter. */
@@ -275,7 +421,9 @@ html[data-brand="walk"] .w-hero__title {
 
   html[data-brand="pci"] .pci-fim-v3 .closer h2 {
     max-width: none;
-    font-size: clamp(2rem, 1.4rem + 2.4vw, 2.5rem);
+    font-size: var(--fs-h2);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
   }
 
   html[data-brand="pci"] .pci-fim-v3 .journey-card.lead .journey-copy,
@@ -285,7 +433,9 @@ html[data-brand="walk"] .w-hero__title {
 
   html[data-brand="pci"] .pci-fim-v3 .journey-card.lead h3 {
     max-width: none;
-    font-size: clamp(1.75rem, 1.2rem + 2.8vw, 2.25rem);
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
   }
 }
 
@@ -347,12 +497,12 @@ html[data-brand="pci"]
     .pf .legend span,
     .pf .legend b
   ) {
-  font-size: 0.8125rem;
+  font-size: var(--fs-caption);
 }
 
 /* The same on the contribution and Walk pages that sit on protected stylesheets. */
 html[data-brand="walk"] :is(.w-tiers td small, .wfp-index, .wfp li > a > span, .receipt-box p) {
-  font-size: 0.8125rem;
+  font-size: var(--fs-caption);
 }
 
 /* Inline styles under 13 px (a few Faith in Motion and verification captions) can only be overridden with
@@ -376,7 +526,7 @@ html[data-brand]
     [style*="font-size:12.5px"],
     [style*="font-size: 12.5px"]
   ) {
-  font-size: 0.8125rem !important;
+  font-size: var(--fs-caption) !important;
 }
 
 /* A filter on a fixed menu's ancestor makes that ancestor its containing block. Keep the blur on a separate
@@ -441,17 +591,17 @@ html[data-brand="walk"]
     flex: none;
     padding-bottom: 16px;
     color: var(--muted);
-    font-size: 0.8125rem;
+    font-size: var(--fs-caption);
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: var(--ls-label);
     text-transform: uppercase;
   }
 
   html[data-brand="walk"] .w-nav > a {
     flex: none;
     min-height: 52px;
-    font-size: clamp(1.5rem, 1.1rem + 2.6vw, 2.4rem);
-    line-height: 1.2;
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
     overflow-wrap: anywhere;
   }
 

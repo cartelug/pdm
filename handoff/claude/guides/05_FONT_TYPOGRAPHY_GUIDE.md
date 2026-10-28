@@ -1,5 +1,7 @@
 # Font and typography redesign guide
 
+> **Superseded on 26 and 28 October 2026.** The families are now MTN Brighter Sans Bold and Sky Text (decision D25), and every size, leading and tracking value comes from one type scale (decision D26, tokens 1.2.0). Read "The type scale" in `ARCHITECTURE.md` before editing type; the proposed targets below were adopted in that scale. The rest of this guide is kept for its method and verification list.
+
 The current approved public system is **Archivo + Lexend**, self-hosted. Redesign the hierarchy, wrapping, spacing and reading experience around those families first. This is not a request to reactivate older Inter, Instrument Serif or Geist Mono styling simply because their assets/packages are still present.
 
 ## Actual roles and files

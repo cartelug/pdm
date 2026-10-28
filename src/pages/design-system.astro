@@ -38,21 +38,28 @@ const pairs = (brand: Brand) =>
   });
 
 const typeValue = (key: string) => (tokens.type as Record<string, string>)[key];
+const leadingOf = (key: string) => (tokens.leading as Record<string, string>)[key === "lead" ? "lead" : key];
+const trackingOf = (key: string) => (tokens.tracking as Record<string, string>)[key];
 const typeRoles: [string, string, string][] = [
-  ["display", "Display", "MTN Brighter Sans Bold, hero only"],
-  ["h1", "Heading 1", "MTN Brighter Sans Bold"],
-  ["h2", "Heading 2", "MTN Brighter Sans Bold"],
-  ["h3", "Heading 3", "MTN Brighter Sans Bold"],
-  ["lead", "Lead", "Sky Text 400"],
-  ["body", "Body", "Sky Text 400, 60 characters wide"],
-  ["small", "Small", "Sky Text 400"],
-  ["caption", "Caption", "Sky Text 400, 13 px is the floor"],
+  ["display", "Display", "MTN Brighter Sans Bold, hero titles only"],
+  ["statement", "Statement", "MTN Brighter Sans Bold, one long sentence"],
+  ["h1", "Heading 1", "MTN Brighter Sans Bold, one per page"],
+  ["h2", "Heading 2", "MTN Brighter Sans Bold, section titles"],
+  ["h3", "Heading 3", "MTN Brighter Sans Bold, card and row titles"],
+  ["h4", "Heading 4", "MTN Brighter Sans Bold, small titles"],
+  ["lead", "Lead", "Sky Text 400, the opening paragraph"],
+  ["body", "Body", "Sky Text 400, 62 characters wide"],
+  ["small", "Small", "Sky Text 400, secondary text in cards and notes"],
+  ["ui", "Interface", "Sky Text 400, form labels and fine print"],
+  ["caption", "Label", "MTN Brighter Sans Bold, capitals, 13 px is the floor"],
 ];
 const roleStyle = (key: string) =>
-  `font-size:var(--fs-${key});` +
-  (["lead", "body", "small", "caption"].includes(key)
+  `font-size:var(--fs-${key});line-height:var(--lh-${key});` +
+  (typeof trackingOf(key) === "string" ? `letter-spacing:var(--ls-${key});` : "") +
+  (["lead", "body", "small", "ui"].includes(key)
     ? "font-family:var(--font-body);font-weight:400"
-    : "font-family:var(--font-head);font-weight:" + (key === "h3" ? 700 : 800));
+    : "font-family:var(--font-head);font-weight:700" +
+      (key === "caption" ? ";text-transform:uppercase;letter-spacing:var(--ls-label)" : ""));
 ---
 
 <Layout
@@ -114,7 +121,7 @@ const roleStyle = (key: string) =>
             </span>
             <p style={roleStyle(key)}>Every step builds a future.</p>
             <code>
-              --fs-{key}: {typeValue(key)}
+              --fs-{key}: {typeValue(key)}; --lh-{key}: {leadingOf(key)}
             </code>
           </div>
         ))}
