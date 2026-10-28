@@ -57,7 +57,9 @@ test("all 46 generated images have valid, decodable responsive exports and hones
       const meta = await sharp(local).metadata();
       assert.equal(meta.format, "webp");
       assert.ok(meta.width <= max);
-      assert.ok(Math.abs(meta.width / meta.height - record.width / record.height) < 0.01);
+      const width = field === "thumb" ? record.thumbWidth || record.width : record.width;
+      const height = field === "thumb" ? record.thumbHeight || record.height : record.height;
+      assert.ok(Math.abs(meta.width / meta.height - width / height) < 0.01);
     }
   }
   assert.equal(doc.querySelectorAll(".r-resource-grid a").length, 10);

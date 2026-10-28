@@ -51,7 +51,9 @@
     "label": "Campaign artwork",
     "src": "../assets/wfe-2026/refresh/01-master.webp",
     "thumb": "../assets/wfe-2026/refresh/01-800.webp",
-    "mobileSrc": "../assets/wfe-2026/refresh/02-master.webp"
+    "mobileSrc": "../assets/wfe-2026/refresh/02-master.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 450
   },
   {
     "id": "fresh-02",
@@ -104,7 +106,17 @@
     ],
     "label": "Campaign artwork",
     "src": "../assets/wfe-2026/refresh/02-master.webp",
-    "thumb": "../assets/wfe-2026/refresh/02-800.webp"
+    "thumb": "../assets/wfe-2026/refresh/02-gallery-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 500,
+    "thumbnail": {
+      "file": "02-gallery-800.webp",
+      "width": 800,
+      "height": 500,
+      "bytes": 114176,
+      "sourceSha256": "2a9e41b2aeca031f42171d3c0077b2fa7e7f4fafde47a00b67f006de5643519e",
+      "note": "Landscape gallery companion generated from the accepted portrait; original portrait remains the full-size identity reference."
+    }
   },
   {
     "id": "fresh-03",
@@ -157,7 +169,17 @@
     ],
     "label": "Campaign artwork",
     "src": "../assets/wfe-2026/refresh/03-master.webp",
-    "thumb": "../assets/wfe-2026/refresh/03-800.webp"
+    "thumb": "../assets/wfe-2026/refresh/03-gallery-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 500,
+    "thumbnail": {
+      "file": "03-gallery-800.webp",
+      "width": 800,
+      "height": 500,
+      "bytes": 30938,
+      "sourceSha256": "acb3010c753895f824e06ebd6cd9428528dbcc7358330fea093aafb5e5775b37",
+      "note": "Landscape gallery companion generated from the accepted portrait; original portrait remains the full-size identity reference."
+    }
   },
   {
     "id": "fresh-04",
@@ -210,7 +232,9 @@
     ],
     "label": "Campaign artwork",
     "src": "../assets/wfe-2026/refresh/04-master.webp",
-    "thumb": "../assets/wfe-2026/refresh/04-800.webp"
+    "thumb": "../assets/wfe-2026/refresh/04-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 533
   },
   {
     "id": "fresh-05",
@@ -263,7 +287,17 @@
     ],
     "label": "Campaign artwork",
     "src": "../assets/wfe-2026/refresh/05-master.webp",
-    "thumb": "../assets/wfe-2026/refresh/05-800.webp"
+    "thumb": "../assets/wfe-2026/refresh/05-gallery-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 500,
+    "thumbnail": {
+      "file": "05-gallery-800.webp",
+      "width": 800,
+      "height": 500,
+      "bytes": 132216,
+      "sourceSha256": "f14afd93d7239448eba69ae56015d2913e77b13e7a6b5b36e7d9bdae39fd1487",
+      "note": "Landscape gallery companion generated from the accepted portrait; original portrait remains the full-size identity reference."
+    }
   },
   {
     "id": "fresh-06",
@@ -316,7 +350,9 @@
     ],
     "label": "Campaign artwork",
     "src": "../assets/wfe-2026/refresh/06-master.webp",
-    "thumb": "../assets/wfe-2026/refresh/06-800.webp"
+    "thumb": "../assets/wfe-2026/refresh/06-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 533
   },
   {
     "id": "fresh-07",
@@ -369,7 +405,9 @@
     ],
     "label": "Campaign artwork",
     "src": "../assets/wfe-2026/refresh/07-master.webp",
-    "thumb": "../assets/wfe-2026/refresh/07-800.webp"
+    "thumb": "../assets/wfe-2026/refresh/07-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 450
   },
   {
     "id": "fresh-08",
@@ -422,7 +460,9 @@
     ],
     "label": "Campaign artwork",
     "src": "../assets/wfe-2026/refresh/08-master.webp",
-    "thumb": "../assets/wfe-2026/refresh/08-800.webp"
+    "thumb": "../assets/wfe-2026/refresh/08-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 450
   },
   {
     "id": "fresh-09",
@@ -475,7 +515,9 @@
     ],
     "label": "Campaign artwork",
     "src": "../assets/wfe-2026/refresh/09-master.webp",
-    "thumb": "../assets/wfe-2026/refresh/09-800.webp"
+    "thumb": "../assets/wfe-2026/refresh/09-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 533
   },
   {
     "id": "fresh-10",
@@ -528,7 +570,9 @@
     ],
     "label": "Campaign artwork",
     "src": "../assets/wfe-2026/refresh/10-master.webp",
-    "thumb": "../assets/wfe-2026/refresh/10-800.webp"
+    "thumb": "../assets/wfe-2026/refresh/10-800.webp",
+    "thumbWidth": 800,
+    "thumbHeight": 533
   },
   {
     "id": "life-25",

@@ -28,6 +28,23 @@ for (const source of sources) {
       outputs.push({ file, width: info.width, height: info.height, bytes: info.size });
     }
   }
+  let thumbnail;
+  if (source.thumbnailPath) {
+    const input = fs.readFileSync(source.thumbnailPath);
+    const file = `${id}-gallery-800.webp`;
+    const info = await sharp(input)
+      .resize({ width: 800, withoutEnlargement: true })
+      .webp({ quality: 84 })
+      .toFile(path.join(directory, file));
+    thumbnail = {
+      file,
+      width: info.width,
+      height: info.height,
+      bytes: info.size,
+      sourceSha256: crypto.createHash("sha256").update(input).digest("hex"),
+      note: "Landscape gallery companion generated from the accepted portrait; original portrait remains the full-size identity reference.",
+    };
+  }
   records.push({
     id,
     title: source.title,
@@ -42,6 +59,7 @@ for (const source of sources) {
     height: metadata.height,
     master,
     outputs,
+    ...(thumbnail ? { thumbnail } : {}),
   });
 }
 fs.writeFileSync(
@@ -60,7 +78,9 @@ fs.writeFileSync(
         group: "campaign",
         label: "Campaign artwork",
         src: `../assets/wfe-2026/refresh/${r.master}`,
-        thumb: `../assets/wfe-2026/refresh/${r.id}-800.webp`,
+        thumb: `../assets/wfe-2026/refresh/${r.thumbnail?.file || r.id + "-800.webp"}`,
+        thumbWidth: r.thumbnail?.width || r.outputs.find((output) => output.file === r.id + "-800.webp").width,
+        thumbHeight: r.thumbnail?.height || r.outputs.find((output) => output.file === r.id + "-800.webp").height,
         ...(r.id === "01" ? { mobileSrc: "../assets/wfe-2026/refresh/02-master.webp" } : {}),
       })),
       ...retained,

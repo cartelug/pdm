@@ -1,20 +1,74 @@
 {
-  "01": { "desktop": "01", "mobile": "02" },
-  "02": { "desktop": "07", "mobile": "02" },
-  "03": { "desktop": "03", "mobile": "03" },
-  "04": { "desktop": "06", "mobile": "06" },
-  "05": { "desktop": "05", "mobile": "05" },
-  "06": { "desktop": "02", "mobile": "02" },
-  "08": { "desktop": "08", "mobile": "08" },
-  "10": { "desktop": "09", "mobile": "09" },
-  "11": { "desktop": "09", "mobile": "09" },
-  "12": { "desktop": "04", "mobile": "04" },
-  "13": { "desktop": "05", "mobile": "05" },
-  "14": { "desktop": "09", "mobile": "09" },
-  "15": { "desktop": "07", "mobile": "07" },
-  "16": { "desktop": "08", "mobile": "08" },
-  "17": { "desktop": "09", "mobile": "09" },
-  "18": { "desktop": "09", "mobile": "02" },
-  "19": { "desktop": "10", "mobile": "10" },
-  "20": { "desktop": "01", "mobile": "02" }
+  "10": {
+    "desktop": "09",
+    "mobile": "09"
+  },
+  "11": {
+    "desktop": "09",
+    "mobile": "09"
+  },
+  "12": {
+    "desktop": "04",
+    "mobile": "04"
+  },
+  "13": {
+    "desktop": "05",
+    "mobile": "05"
+  },
+  "14": {
+    "desktop": "09",
+    "mobile": "09"
+  },
+  "15": {
+    "desktop": "07",
+    "mobile": "07"
+  },
+  "16": {
+    "desktop": "08",
+    "mobile": "08"
+  },
+  "17": {
+    "desktop": "09",
+    "mobile": "09"
+  },
+  "18": {
+    "desktop": "09",
+    "mobile": "02"
+  },
+  "19": {
+    "desktop": "10",
+    "mobile": "10"
+  },
+  "20": {
+    "desktop": "01",
+    "mobile": "02"
+  },
+  "01": {
+    "desktop": "01",
+    "mobile": "02"
+  },
+  "02": {
+    "desktop": "02",
+    "mobile": "02"
+  },
+  "03": {
+    "desktop": "03",
+    "mobile": "03"
+  },
+  "04": {
+    "desktop": "06",
+    "mobile": "06"
+  },
+  "05": {
+    "desktop": "05",
+    "mobile": "05"
+  },
+  "06": {
+    "desktop": "02",
+    "mobile": "02"
+  },
+  "08": {
+    "desktop": "08",
+    "mobile": "08"
+  }
 }

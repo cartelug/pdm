@@ -530,8 +530,8 @@
     var img = document.createElement("img");
     img.src = item.thumb;
     img.alt = item.alt;
-    img.width = item.width;
-    img.height = item.height;
+    img.width = item.thumbWidth || item.width;
+    img.height = item.thumbHeight || item.height;
     img.loading = "lazy";
     img.decoding = "async";
     var arrow = document.createElement("span");

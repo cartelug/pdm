@@ -99,7 +99,15 @@
           "height": 1402,
           "bytes": 195784
         }
-      ]
+      ],
+      "thumbnail": {
+        "file": "02-gallery-800.webp",
+        "width": 800,
+        "height": 500,
+        "bytes": 114176,
+        "sourceSha256": "2a9e41b2aeca031f42171d3c0077b2fa7e7f4fafde47a00b67f006de5643519e",
+        "note": "Landscape gallery companion generated from the accepted portrait; original portrait remains the full-size identity reference."
+      }
     },
     {
       "id": "03",
@@ -149,7 +157,15 @@
           "height": 1402,
           "bytes": 131526
         }
-      ]
+      ],
+      "thumbnail": {
+        "file": "03-gallery-800.webp",
+        "width": 800,
+        "height": 500,
+        "bytes": 30938,
+        "sourceSha256": "acb3010c753895f824e06ebd6cd9428528dbcc7358330fea093aafb5e5775b37",
+        "note": "Landscape gallery companion generated from the accepted portrait; original portrait remains the full-size identity reference."
+      }
     },
     {
       "id": "04",
@@ -249,7 +265,15 @@
           "height": 1402,
           "bytes": 242280
         }
-      ]
+      ],
+      "thumbnail": {
+        "file": "05-gallery-800.webp",
+        "width": 800,
+        "height": 500,
+        "bytes": 132216,
+        "sourceSha256": "f14afd93d7239448eba69ae56015d2913e77b13e7a6b5b36e7d9bdae39fd1487",
+        "note": "Landscape gallery companion generated from the accepted portrait; original portrait remains the full-size identity reference."
+      }
     },
     {
       "id": "06",

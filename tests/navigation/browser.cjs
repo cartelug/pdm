@@ -63,8 +63,8 @@ const server = http.createServer((req, res) => {
           assert.match(
             hero.source,
             width <= 719
-              ? /\/assets\/wfe-2026\/official-kit\/scene-01-mobile-\d+\.(avif|webp)$/
-              : /\/assets\/wfe-2026\/official-kit\/scene-01-desktop-\d+\.(avif|webp)$/,
+              ? /\/assets\/wfe-2026\/refresh\/02-\d+\.(avif|webp)$/
+              : /\/assets\/wfe-2026\/refresh\/01-\d+\.(avif|webp)$/,
           );
         }
       }
