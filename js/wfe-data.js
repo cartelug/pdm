@@ -106,7 +106,7 @@
         excerpt:
           "Support UCU–Kagando University College and Kagando Nursery & Primary School through a shared five-year education mission.",
         body: "Walk for Education brings people together around two linked priorities: UCU–Kagando University College and Kagando Nursery & Primary School. The campaign supports learning spaces, student accommodation, library and ICT facilities, staff and campus infrastructure, and university expansion.\n\nUGX 25 billion is the campaign's five-year mobilisation goal. It is a target, not a statement of funds received. The start date, final dates and detailed walking stages will be published after confirmation.",
-        image: "assets/wfe-2026/official-kit/scene-19-desktop-master.webp",
+        image: "assets/wfe-2026/refresh/10-master.webp",
         imageAlt: "Campaign illustration of fictional students learning near the actual UCU–Kagando main block",
         source: "Supplied campaign strategy and confirmed project decisions; artwork is illustrative.",
       },
@@ -117,7 +117,7 @@
         excerpt:
           "Pledge five symbolic steps, invite five friends, and ask each friend to bring five more into the education movement.",
         body: "Start with five symbolic steps. In Uganda, five steps represent UGX 25,000; in Kenya, five steps represent KES 1,000. Invite five friends to the campaign, and encourage each of them to invite five more. Participation remains voluntary.\n\nThe website records pledges: an intention to support, with no money collected. After a pledge is successfully recorded, supporters are offered an optional invitation to the campaign WhatsApp group.",
-        image: "assets/wfe-2026/official-kit/scene-11-desktop-master.webp",
+        image: "assets/wfe-2026/refresh/09-master.webp",
         imageAlt: "Campaign illustration of Shyaka in his official black kit walking with fictional community members",
         source: "Campaign snowball invitation approach and confirmed pledge-first website decision.",
       },

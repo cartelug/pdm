@@ -38,15 +38,15 @@ test("the campaign keeps its existing contribution contract and clearly identifi
   assert.ok(doc.querySelector("dialog[aria-labelledby]"));
 });
 
-test("all 56 generated images have valid, decodable responsive exports and honest provenance", async () => {
+test("all 46 generated images have valid, decodable responsive exports and honest provenance", async () => {
   const records = JSON.parse(fs.readFileSync(path.join(root, "assets/wfe-2026/gallery.json"), "utf8"));
-  assert.equal(records.length, 56);
-  assert.equal(new Set(records.map((r) => r.id)).size, 56);
-  assert.equal(records.filter((r) => r.id.startsWith("art-")).length, 20);
+  assert.equal(records.length, 46);
+  assert.equal(new Set(records.map((r) => r.id)).size, 46);
+  assert.equal(records.filter((r) => r.id.startsWith("fresh-")).length, 10);
   assert.equal(records.filter((r) => r.id.startsWith("life-")).length, 36);
   for (const record of records) {
     assert.match(record.label, /illustration|artwork/i);
-    assert.match(record.note, /illustrat|fictional/i);
+    assert.match(record.note, /AI-generated|illustrat|fictional/i);
     for (const [field, max] of [
       ["src", 2000],
       ["thumb", 800],

@@ -210,20 +210,20 @@ function check(value, message) {
     await page.locator("[data-gallery-filter='all']").click();
     while (await page.locator("#galleryLoadMore").isVisible()) await page.locator("#galleryLoadMore").click();
     check(
-      (await page.locator("#campaignGallery [data-image-id]").count()) === 56,
-      "the public gallery exposes all 56 generated images",
+      (await page.locator("#campaignGallery [data-image-id]").count()) === 46,
+      "the public gallery exposes all 46 generated images",
     );
     await page.locator("[data-gallery-filter='campaign']").click();
-    await page.locator("#galleryCount").filter({ hasText: "9 of 20" }).waitFor();
+    await page.locator("#galleryCount").filter({ hasText: "9 of 10" }).waitFor();
     await page.setViewportSize({ width: 390, height: 844 });
     await page.locator("#campaignGallery [data-image-id]").first().click();
     await page.waitForFunction(() =>
-      /scene-\d+-mobile-master\.webp/.test(document.getElementById("viewerImage").currentSrc),
+      /refresh\/02-master\.webp/.test(document.getElementById("viewerImage").currentSrc),
     );
     check(true, "campaign viewer selects the separately composed portrait on a phone");
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.waitForFunction(() =>
-      /scene-\d+-desktop-master\.webp/.test(document.getElementById("viewerImage").currentSrc),
+      /refresh\/01-master\.webp/.test(document.getElementById("viewerImage").currentSrc),
     );
     check(true, "campaign viewer selects the wide companion on desktop");
     await page.keyboard.press("Escape");

@@ -37,7 +37,7 @@ test("the official kit collection has twenty independently composed desktop/mobi
   assert.equal(hashes.size, 40);
 });
 
-test("all twenty scenes appear in actual pages while original physical references and honest arrival captions are retained", () => {
+test("existing scene frames serve the accepted refresh while original physical references are retained", () => {
   const pages = [
     "index.html",
     "walk-for-education/index.html",
@@ -49,13 +49,12 @@ test("all twenty scenes appear in actual pages while original physical reference
     const doc = new JSDOM(fs.readFileSync(path.join(root, file), "utf8")).window.document;
     for (const picture of doc.querySelectorAll("[data-campaign-scene]")) {
       seen.add(picture.dataset.campaignScene);
-      // A picture has a phone source, or sits in the small inset, or deliberately uses the tall (mobile) composition at
-      // every size inside a portrait frame.
+      // Preserve phone selection and the existing inset/portrait image frames.
       const portraitFrame = picture.closest(".pci-spotlight__frame");
       assert.ok(
         picture.querySelector('source[media="(max-width: 719px)"]') ||
           picture.closest(".w-hero__inset") ||
-          (portraitFrame && /scene-\d+-mobile-/.test(picture.querySelector("img").getAttribute("src"))),
+          portraitFrame,
       );
     }
   }
@@ -71,11 +70,19 @@ test("all twenty scenes appear in actual pages while original physical reference
         .digest("hex"),
       expected,
     );
-  const gallery = JSON.parse(fs.readFileSync(path.join(root, "assets/wfe-2026/gallery.json")));
-  for (const id of ["art-16", "art-17"]) {
-    const scene = gallery.find((item) => item.id === id);
-    assert.match(scene.label, /imagined arrival/i);
-    assert.match(scene.note, /not a record of arrival/);
-    assert.ok(fs.existsSync(path.resolve(root, "walk-for-education", scene.mobileSrc)));
+  const freshBase = path.join(root, "assets/wfe-2026/refresh");
+  const records = JSON.parse(fs.readFileSync(path.join(freshBase, "manifest.json"))).records;
+  assert.equal(records.length, 10);
+  assert.equal(new Set(records.map((item) => item.sourceSha256)).size, 10);
+  const page = fs.readFileSync(path.join(root, "walk-for-education/index.html"), "utf8");
+  for (const record of records) {
+    assert.equal(record.artwork, true);
+    assert.match(record.note, /not a record of an actual event/);
+    assert.ok(page.includes("refresh/" + record.id + "-"), record.id + " is integrated");
+    for (const output of record.outputs) {
+      assert.equal(fs.statSync(path.join(freshBase, output.file)).size, output.bytes);
+      assert.ok(output.width <= record.width, "no upscaled facial detail");
+    }
   }
+  assert.doesNotMatch(new JSDOM(page).window.document.body.textContent, /rotary|rotarian/i);
 });
