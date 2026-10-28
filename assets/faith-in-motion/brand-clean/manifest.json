@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-28",
+  "poster": {
+    "file": "faith-in-motion-345km-poster.webp",
+    "original": "assets/faith-in-motion/faith-in-motion-345km-poster.jpg",
+    "sourceSha256": "52a60369432db1c2fa6a3e71e76113a7c5514e72f9740ca6ca648b355291f3d6",
+    "note": "Brand-removal derivative of the historical supplied poster. Original route text, statistics and photograph retained; not a new walking update."
+  },
+  "report": {
+    "files": [
+      "clear-portrait.png",
+      "clear-wide.png"
+    ],
+    "note": "Transparent replacements retain the exact dimensions of removed marks in the legacy PDF header, preserving all report coordinates and financial data."
+  }
+}

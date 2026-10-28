@@ -3,7 +3,7 @@
   "note": "Original protected baseline plus explicit presentationReviews and user-authorised functionalReviews. Every original pledge/payment hook and frozen fragment remains checked; no gate is removed.",
   "files": {
     "admin/collections/index.html": "bb7c9f2cd9b810ebd4c1950239efa05e766fe7c0b2c7987573d2d29b6db53d2b",
-    "admin/index.html": "0d0dc81dc35bf89cbb00c382a6616d01201be19098028a7c8bd0dfc92c4bdb95",
+    "admin/index.html": "98c762b6e9cda50cf729bfd9355f7e9efa656789c65c58762604f8d09d805921",
     "admin/quick.html": "5e35e9e981bef8f19376b8436104bd862c1db2c65b894b40d03cd003771f79d9",
     "admin/vendor/jspdf.umd.min.js": "98ccf17aa10c20bb1301762618fcc9b6ab3a4e7f26b6071d64d0b41154df3875",
     "admin/wfe.html": "d9e97534c61eaa0ee4908da005935827951d928f0a16b5eda543f8ff78a50d84",
@@ -114,8 +114,8 @@
     "js/collections-admin.js": "f2e0d5009d8eb409f262246404ae93d181198478fe81416d57c449630d705237",
     "js/contributions.js": "cfad5d742b5a573b330d9c360a078adfba5ce99c375f7e1ae6d4623a07c98bcf",
     "js/core.js": "dd2cc8c9df41c79cf04e196f7ec990938fdbe36176f3cbea30aa87ebaad78217",
-    "js/fim-content.js": "6469490baa1810fc8987cf4b0481dbf124abda50bdcecbc3726d5dce4563bb64",
-    "js/fim.js": "e337eaf69e7ba1e5cad30685a0c144a63cf5641bcd62b8ee20ba3216c7844e36",
+    "js/fim-content.js": "82920d529df200ae0de186c1592247260eafb826127bd04eb90cb619178c5bf6",
+    "js/fim.js": "7248340a564cc7617201342aa56e9550ebd97008cc14b382c48a7ec91988c06a",
     "js/pci.js": "6aba35c8fcde6e71ae42f83d0bdd2beae9c3de976c7373a80bb81fa8ffae39f4",
     "js/pdm.js": "2282104c672d80439ecbdd2acac5aa1b73a400cf9b7cad927c669199157a50c8",
     "js/preloader.js": "a24fd4d4160d1d35551dc4488bf03b02503f2ea79932cc3a80f1df8dd3a52bd6",
@@ -1379,6 +1379,12 @@
       "date": "2026-10-28",
       "previousSha256": "d21a79417fa15b0edfb2646874c47b255746b790fafb0837f843f59e7b7fd841",
       "reason": "User-authorised image refresh and Rotary branding removal only. Existing element order, IDs, classes, inline styles and script order are preserved; no stylesheet changes. Image URLs/metadata, gallery art/count and requested branding text/cache references are the only public presentation changes. Form fields/actions, bounds, pricing, pledge/referral logic, verification, services and private records remain unchanged. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "path": "js/fim.js",
+      "date": "2026-10-28",
+      "previousSha256": "e337eaf69e7ba1e5cad30685a0c144a63cf5641bcd62b8ee20ba3216c7844e36",
+      "reason": "Display-only image/branding cleanup and cache references. Public donor labels omit Rotary honorifics while source records, consent, amounts, funded steps, totals, reconciliation and services remain unchanged. Website and report layouts stay intact. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
     }
   ],
   "functionalReviews": [

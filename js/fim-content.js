@@ -97,7 +97,7 @@ window.FIM_UPDATES = [
     title: "More than half the distance covered.",
     detail: "The journey continues toward Rwembyo, carrying the appeal to complete St Joseph Rwembyo Catholic Church.",
     meta: "345 km journey · Faith in Motion",
-    image: fimAssetBase + "faith-in-motion/faith-in-motion-345km-poster.jpg",
+    image: fimAssetBase + "faith-in-motion/brand-clean/faith-in-motion-345km-poster.webp",
     alt: "Faith in Motion campaign poster announcing that more than half of the 345 kilometre journey has been covered."
   },
   {
