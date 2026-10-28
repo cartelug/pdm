@@ -37,7 +37,7 @@
     "check:sitemap": "node scripts/sitemap.mjs --check"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
+    "@astrojs/check": "^0.9.12",
     "@eslint/js": "^10.0.1",
     "@types/node": "^22.20.5",
     "axe-core": "^4.14.0",
@@ -54,7 +54,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "astro": "^5.18.2",
+    "astro": "^7.4.2",
     "gsap": "^3.15.0",
     "lenis": "^1.3.26"
   }
