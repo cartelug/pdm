@@ -400,6 +400,16 @@ async function submitPledgeViaWhatsapp(page, base) {
     check((await page.locator("#receiptAmount").innerText()) === "UGX 75,000", "result retains selected amount");
     check(await page.locator("#printReceipt").isHidden(), "pledge does not produce paid receipt");
     check(await page.locator("#certificatePanel").isHidden(), "pledge does not unlock a certificate");
+    const pledgeDownloadWait = page.waitForEvent("download");
+    await page.click("#downloadPledgePdf");
+    const pledgeDownload = await pledgeDownloadWait;
+    const pledgeFile = path.join(shots, "pledge-confirmation.pdf");
+    await pledgeDownload.saveAs(pledgeFile);
+    const pledgePdf = await require("../../admin/vendor/pdf-lib.min.js").PDFDocument.load(fs.readFileSync(pledgeFile));
+    check(
+      pledgePdf.getSubject().includes("Not a payment receipt"),
+      "actual branded pledge PDF is distinct from a paid receipt",
+    );
     check(
       await page.locator("#pledgeWhatsappPanel").isVisible(),
       "private pledge record offers a WhatsApp message fallback",

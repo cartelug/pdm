@@ -183,7 +183,8 @@ function ops_walk(array $b,string $actor,bool $publish): array {
     });
 }
 function ops_public(): array {
-    $db=ops_db();$r=$db->query('SELECT * FROM ops_walk WHERE published_at IS NOT NULL ORDER BY id DESC LIMIT 1')->fetch();
+    return ops_transaction(function($db) {
+    $r=$db->query('SELECT * FROM ops_walk WHERE published_at IS NOT NULL ORDER BY id DESC LIMIT 1')->fetch();
     $t=ops_totals();unset($t['policy']);
     $supporters=[];
     foreach($db->query("SELECT r.*,c.display_name,c.display_amount FROM ops_records r JOIN ops_consent c ON c.record_id=r.id WHERE r.kind='payment' AND r.status='reconciled' AND r.environment='live' AND (c.display_name=1 OR c.display_amount=1) ORDER BY r.created_at DESC") as $s) {
@@ -191,6 +192,24 @@ function ops_public(): array {
         $supporters[]=['name'=>$s['display_name']?$s['name']:'Anonymous supporter','amount'=>$s['display_amount']?(int)$s['amount']:null,'currency'=>$s['display_amount']?$s['currency']:null];
     }
     return ['schema'=>1,'available'=>true,'reportingCutoff'=>pci_now(),'verificationLabel'=>'Finance-reconciled receipts only','totals'=>$t,'walk'=>$r?json_decode($r['payload'],true):null,'version'=>$r?(int)$r['id']:0,'approvedAt'=>$r?$r['published_at']:null,'supporters'=>$supporters];
+    });
+}
+function ops_community(): array {
+    $default=json_decode(file_get_contents(dirname(__DIR__,2).'/assets/data/campaign-community.json'),true,512,JSON_THROW_ON_ERROR);
+    $saved=json_decode(pci_setting('ops_community'),true);
+    return ['groupUrl'=>$saved['groupUrl'] ?? $default['groupUrl'],'updatedAt'=>$saved['updatedAt'] ?? null];
+}
+function ops_save_community(array $b,string $actor): array {
+    $url=ops_text($b['groupUrl'] ?? '',300,true);$parts=parse_url($url);
+    if(!$parts || ($parts['scheme'] ?? '')!=='https' || ($parts['host'] ?? '')!=='chat.whatsapp.com'
+       || isset($parts['user']) || isset($parts['pass']) || isset($parts['port']) || isset($parts['fragment'])
+       || !preg_match('#^/[A-Za-z0-9_-]{12,64}$#D',$parts['path'] ?? '')
+       || (isset($parts['query']) && $parts['query']!=='mode=gi_t')) throw new InvalidArgumentException('Use the campaign WhatsApp group invitation beginning https://chat.whatsapp.com/');
+    return ops_transaction(function() use($url,$actor) {
+        $data=['groupUrl'=>$url,'updatedAt'=>pci_now()];
+        pci_set('ops_community',json_encode($data,JSON_THROW_ON_ERROR));
+        pci_audit(null,$actor,'ops_community_updated');return $data;
+    });
 }
 function ops_snapshot(string $actor): array {
     // No names or private fields in persisted financial/graphic snapshots. Recognition is checked afresh.

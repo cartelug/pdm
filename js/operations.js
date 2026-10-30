@@ -10,7 +10,10 @@
     importBody = null,
     pledgeRecords = [],
     publishedPrices = [],
-    priceEdited = false;
+    priceEdited = false,
+    registerPage = 1,
+    registerRequest = 0,
+    searchTimer;
   const permissions = {
     admin: ["read", "record", "finance", "publish", "consent", "milestone", "graphic", "backup"],
     finance: ["read", "record", "finance", "consent", "milestone", "graphic"],
@@ -88,18 +91,14 @@
     $("logout").hidden = false;
     $("review-action").textContent = can("finance") ? "Review payments" : "View contributions";
   }
-  function renderRecords() {
-    const query = $("search").value.toLowerCase();
+  function renderRecords(result) {
     $("record-list").replaceChildren();
-    const visible = rows.filter((r) =>
-      [r.name, r.id, r.transaction_ref, r.currency, r.status].join(" ").toLowerCase().includes(query),
-    );
-    for (const r of visible) {
+    for (const r of result.rows) {
       const article = node("article", "");
       article.className = "ops-record";
       article.append(
         node("h3", r.name + " · " + money(r.amount, r.currency)),
-        node("p", r.kind + " · " + r.status + " · " + r.date + " · " + r.environment),
+        node("p", r.kind + " · " + r.financial_status + " · " + r.date + " · " + r.environment),
         node("p", r.id),
         node(
           "p",
@@ -110,6 +109,40 @@
             (r.source_row ? " row " + r.source_row : ""),
         ),
       );
+      if (r.phone) article.append(node("p", "WhatsApp: " + r.phone));
+      if (r.kind === "pledge") {
+        article.append(
+          node(
+            "p",
+            "Verified against this pledge: " +
+              money(r.received_amount, r.currency) +
+              " · Outstanding: " +
+              money(r.outstanding_amount, r.currency),
+          ),
+        );
+        if (can("record") && r.status === "pledged") {
+          const linked = node("button", "Record a payment for this pledge");
+          linked.type = "button";
+          linked.addEventListener("click", () => {
+            const form = $("record-form").elements;
+            if (![...$("pledges").options].some((option) => option.value === r.id)) {
+              $("pledges").add(new Option(r.name + " · " + money(r.amount, r.currency) + " · " + r.id, r.id));
+              pledgeRecords.push(r);
+            }
+            form.namedItem("kind").value = "payment";
+            form.namedItem("name").value = r.name;
+            form.namedItem("pledgeId").value = r.id;
+            priceEdited = false;
+            entryDefaults();
+            $("record").scrollIntoView({ block: "start" });
+            form.namedItem("amount").focus();
+            say(
+              "Related pledge selected. Record the actual payment and reference; finance verification is still required.",
+            );
+          });
+          article.append(linked);
+        }
+      }
       if (r.pledge_id || r.gateway_pledge_id)
         article.append(node("p", "Related pledge: " + (r.pledge_id || r.gateway_pledge_id)));
       for (const [action, label, cap] of [
@@ -119,6 +152,7 @@
       ]) {
         if (
           !can(cap) ||
+          r.ledger !== "manual" ||
           (action === "reconcile" && (r.kind !== "payment" || r.status !== "pending" || r.environment !== "live")) ||
           (action === "reverse" && r.status === "reversed")
         )
@@ -131,8 +165,20 @@
       $("record-list").append(article);
     }
     $("record-count").textContent =
-      visible.length +
-      " matching records. Gateway entries are reviewed in the separate gateway console; totals above include both ledgers.";
+      result.total +
+      " matching records · Page " +
+      result.page +
+      " of " +
+      result.pages +
+      ". Website and staff records are shown together. Downloads contain the complete saved register.";
+    $("records-previous").disabled = result.page <= 1;
+    $("records-next").disabled = result.page >= result.pages;
+    registerPage = result.page;
+  }
+  async function loadRecords() {
+    const request = ++registerRequest;
+    const result = await api("register", { query: $("search").value, page: registerPage, limit: 50 });
+    if (request === registerRequest) renderRecords(result);
   }
   function review(action, record) {
     const dialog = $("review-dialog");
@@ -210,13 +256,13 @@
         );
       for (const r of d.gatewayPledges)
         $("pledges").add(new Option(r.name + " · " + money(r.amount, r.currency) + " · gateway pledge", r.reference));
-      renderRecords();
-      if (d.totalRecords > d.limit)
-        say("Showing the latest " + d.limit + " records. Download the full report for all entries.");
+      await loadRecords();
     }
     const pub = await api("public");
     version = pub.version;
     if (can("publish")) {
+      const community = await api("community");
+      $("community-form").elements.namedItem("groupUrl").value = community.groupUrl;
       if (pub.walk)
         for (const [k, v] of Object.entries(pub.walk))
           if ($("walk-form").elements.namedItem(k)) $("walk-form").elements.namedItem(k).value = v;
@@ -307,13 +353,32 @@
       await api("record", b);
       requestId = crypto.randomUUID();
       $("record-form").reset();
+      registerPage = 1;
+      $("search").value = "";
       priceEdited = false;
       entryDefaults();
       await refresh();
       say("Recorded. Public collections are unchanged until finance reconciliation.");
     }),
   );
-  $("search").addEventListener("input", renderRecords);
+  $("search").addEventListener("input", () => {
+    clearTimeout(searchTimer);
+    registerPage = 1;
+    searchTimer = setTimeout(run(loadRecords), 250);
+  });
+  for (const [id, offset] of [
+    ["records-previous", -1],
+    ["records-next", 1],
+  ]) {
+    $(id).addEventListener(
+      "click",
+      run(async () => {
+        registerPage += offset;
+        await loadRecords();
+      }),
+    );
+  }
+  $("records-refresh").addEventListener("click", run(refresh));
   $("report").addEventListener(
     "click",
     run(async () => {
@@ -396,6 +461,15 @@
     b.baseVersion = version;
     return b;
   };
+  $("community-form").addEventListener(
+    "submit",
+    run(async () => {
+      await api("community-save", data($("community-form")));
+      say(
+        "Approved group invitation saved. New page loads use this link; payment channels and finance records are unchanged.",
+      );
+    }),
+  );
   $("walk-form").addEventListener("input", () => {
     $("publish-walk").disabled = true;
   });

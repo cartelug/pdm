@@ -6,14 +6,53 @@
   if (!(path === "/" || path === "/index.html" || /\/(projects|walk-for-education)\//.test(path))) return;
   const main = document.querySelector("main");
   if (!main) return;
-  const panel = document.createElement("section");
+  const panel = document.getElementById("collections") || document.createElement("section");
   panel.className = "ops-live";
+  panel.id = "collections";
   panel.setAttribute("aria-label", "Verified Walk for Education update");
   const h = document.createElement("h2");
-  h.textContent = "Walk for Education · live reporting";
+  h.textContent = "Walk for Education · latest figures";
   const body = document.createElement("div");
   body.textContent = "Checking approved campaign reporting…";
-  panel.append(h, body);
+  panel.replaceChildren(h, body);
+  const downloadButton = document.createElement("button");
+  downloadButton.type = "button";
+  downloadButton.className = "w-btn";
+  downloadButton.textContent = "Download latest update PDF";
+  downloadButton.hidden = true;
+  downloadButton.dataset.downloadBound = "true";
+  const downloadStatus = document.createElement("p");
+  downloadStatus.setAttribute("role", "status");
+  downloadStatus.setAttribute("data-download-status", "");
+  panel.append(downloadButton, downloadStatus);
+  let downloads;
+  downloadButton.addEventListener("click", async () => {
+    if (downloadButton.disabled) return;
+    downloadButton.disabled = true;
+    try {
+      if (!window.PCICampaignDownloads) {
+        if (!downloads)
+          downloads = new Promise((resolve, reject) => {
+            const script = document.createElement("script");
+            script.src = "/js/campaign-downloads.js?v=6680037f25";
+            script.onload = resolve;
+            script.onerror = () => {
+              script.remove();
+              downloads = null;
+              reject(new Error("The PDF tools could not load. Please retry."));
+            };
+            document.head.append(script);
+          });
+        await downloads;
+      }
+      downloadButton.disabled = false;
+      await window.PCICampaignDownloads.update(downloadButton);
+    } catch (error) {
+      downloadStatus.textContent = error.message;
+    } finally {
+      downloadButton.disabled = false;
+    }
+  });
   const home = path === "/" || path === "/index.html";
   if (!home) main.append(panel);
   const el = (tag, text) => {
@@ -25,6 +64,24 @@
   let last = null,
     busy = false;
   function render(d) {
+    downloadButton.hidden = false;
+    const progress = document.getElementById("wfeVerifiedProgress");
+    if (progress) {
+      const recorded = d.totals.currencies.length > 0;
+      progress.hidden = !recorded;
+      const total = document.getElementById("wfeDigitalTotal");
+      const date = document.getElementById("wfeDigitalDate");
+      if (total) total.textContent = d.totals.currencies.map((t) => money(t.received, t.currency)).join(" · ");
+      if (date)
+        date.textContent = d.totals.lastReconciledAt
+          ? "Finance verified " +
+            new Date(d.totals.lastReconciledAt).toLocaleString("en-GB", { timeZone: "Africa/Kampala" }) +
+            " EAT"
+          : "Awaiting first finance verification";
+      document.querySelectorAll("[data-digital-empty]").forEach((element) => {
+        element.hidden = recorded;
+      });
+    }
     body.replaceChildren();
     const w = d.walk;
     if (w) {
@@ -67,7 +124,7 @@
     }
     for (const t of d.totals.currencies) {
       body.append(
-        el("h3", money(t.received, t.currency) + " reconciled collections"),
+        el("h3", money(t.received, t.currency) + " verified collected"),
         el(
           "p",
           money(t.pledged, t.currency) +
@@ -117,7 +174,9 @@
       el(
         "p",
         "Finance-reconciled receipts only · last reconciliation: " +
-          (d.totals.lastReconciledAt || "none recorded") +
+          (d.totals.lastReconciledAt
+            ? new Date(d.totals.lastReconciledAt).toLocaleString("en-GB", { timeZone: "Africa/Kampala" }) + " EAT"
+            : "awaiting first finance verification") +
           " · reporting cut-off: " +
           new Date(d.reportingCutoff).toLocaleString("en-GB", { timeZone: "Africa/Kampala" }) +
           " EAT",
@@ -143,6 +202,15 @@
       render(d);
       last = d.reportingCutoff;
     } catch {
+      downloadButton.hidden = true;
+      const progress = document.getElementById("wfeVerifiedProgress");
+      if (progress) {
+        progress.hidden = true;
+        document.querySelectorAll("[data-digital-empty]").forEach((element) => {
+          element.hidden = false;
+          element.textContent = "Verified collections are temporarily unavailable. Please check again.";
+        });
+      }
       document.querySelectorAll(".pci-campaign-chip__status, [data-ops-walk-status]").forEach((n) => {
         n.textContent = "Update temporarily unavailable";
       });

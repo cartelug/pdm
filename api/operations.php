@@ -9,6 +9,8 @@ try {
     $action=$_GET['action'] ?? 'public';$method=$_SERVER['REQUEST_METHOD'] ?? 'GET';
     if(!is_string($action)) throw new InvalidArgumentException('Invalid action');
     if($method==='GET' && $action==='public') ops_respond(ops_public());
+    if($method==='GET' && $action==='public-report') ops_respond(ops_public_report());
+    if($method==='GET' && $action==='community') ops_respond(ops_community());
     if($method==='GET' && $action==='session') {
         pci_session();$signed=!empty($_SESSION['pci_admin']) && time()-(int)($_SESSION['pci_active'] ?? 0)<=1800;
         ops_respond(['csrf'=>$_SESSION['pci_csrf'],'signedIn'=>$signed,'username'=>$signed?$_SESSION['pci_admin']:null,'role'=>$signed?($_SESSION['pci_role'] ?? ''):null]);
@@ -29,6 +31,8 @@ try {
         ops_respond(['rows'=>$db->query('SELECT r.*,a.pledge_ref gateway_pledge_id FROM ops_records r LEFT JOIN ops_allocations a ON a.receipt_id=r.id ORDER BY r.created_at DESC LIMIT 2000')->fetchAll(),'gatewayPledges'=>$db->query("SELECT reference,name,amount,currency,country,step_unit FROM contributions WHERE kind='pledge' AND status='pledged' AND environment='live' ORDER BY created_at DESC")->fetchAll(),'totals'=>ops_totals(),'audit'=>$db->query("SELECT * FROM audit WHERE event LIKE 'ops_%' ORDER BY id DESC LIMIT 100")->fetchAll(),'limit'=>2000,'totalRecords'=>(int)$db->query('SELECT count(*) FROM ops_records')->fetchColumn()]);
     }
     if($action==='record') { $actor=ops_actor('record');ops_respond(['record'=>ops_record($b,$actor)]); }
+    if($action==='register') { ops_actor('read');ops_respond(ops_register($b)); }
+    if($action==='community-save') { $actor=ops_actor('publish');ops_respond(ops_save_community($b,$actor)); }
     if($action==='reconcile') { $actor=ops_actor('finance');ops_reconcile(ops_text($b['id'] ?? '',100,true),ops_text($b['evidence'] ?? '',1000,true),$actor);ops_respond(['ok'=>true]); }
     if($action==='reverse') { $actor=ops_actor('finance');ops_reverse(ops_text($b['id'] ?? '',100,true),ops_text($b['reason'] ?? '',1000,true),$actor);ops_respond(['ok'=>true]); }
     if($action==='consent') {

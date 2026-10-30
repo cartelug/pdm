@@ -316,7 +316,7 @@
             ? "Test checkout only · live payments are not open"
             : "Online checkout is open · payment handled by Pesapal"
           : pledgesOpen
-            ? "Pledges are open · online payments are being prepared"
+            ? "Pledges are open · contribute through the approved external channels"
             : "Contribution assistance is available from the campaign team",
       );
 
@@ -333,29 +333,7 @@
       setBriefs("Payment availability is checked on the contribution page.");
     });
 
-  var verifiedProgress = byId("wfeVerifiedProgress");
-  if (verifiedProgress) {
-    getJSON("progress")
-      .then(function (data) {
-        var reconciled = new Date(data.lastReconciledAt);
-        if (
-          typeof data.received !== "number" ||
-          data.received <= 0 ||
-          !data.lastReconciledAt ||
-          isNaN(reconciled.getTime())
-        )
-          return;
-        byId("wfeDigitalTotal").textContent = formatUGX(data.received);
-        byId("wfeDigitalDate").textContent = "Reconciled " + reconciled.toLocaleDateString("en-GB");
-        verifiedProgress.hidden = false;
-        all("[data-digital-empty]").forEach(function (element) {
-          element.hidden = true;
-        });
-      })
-      .catch(function () {
-        /* Unavailable totals remain unpublished. */
-      });
-  }
+  // operations-public.js owns the complete verified collections projection and its existing inline fields.
 
   /* ---------- 4. Mobile menu ---------- */
 
