@@ -92,8 +92,8 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "f3ca550da627f68e65ea45190e4b80f5b12afcac72ce92c60cf6c0b262031853",
-    "contribute/payment/index.html": "df37489d7d80551460d0396445740b20619b93605fcc99286af22c929b947435",
+    "contribute/index.html": "679a16fbc63804235e23a6ef177fee52ffa9c2cad430b7fba2d8114f764f9cd7",
+    "contribute/payment/index.html": "bffdd7720ba206559f76d0bac2e9f91889f2e820a51d165ab11f6f4b6ade5a7e",
     "contribute/privacy/index.html": "2fcb708ec612eec463312dfdb95ca465a5244336a69901cad69344dcbd185648",
     "contribute/terms/index.html": "bfa07e49c73ebb19f100abf318b3e5797212935e72d5bfdb1667ace362cdb125",
     "contribute/verify/index.html": "358de6bd7ef362ada5983be0b0b4f24b2410d943b5a5beddb89b00a29ebeab61",
@@ -112,7 +112,7 @@
     "js/certificate-verify.js": "7648e82991c361568970b7829079a4f6ede6c346626926d2ca85da93498d2c4e",
     "js/collection-progress.js": "53838ad4580d13eb6d548ebd055291d010ea7a057e96af454b8c0c8f26b0401a",
     "js/collections-admin.js": "f2e0d5009d8eb409f262246404ae93d181198478fe81416d57c449630d705237",
-    "js/contributions.js": "b29ac7d7f48f63cb94b2aef3b2b7a92e481ec901b7a132bdb7dff43d18626a7b",
+    "js/contributions.js": "96c1961e5dd96636fad1298138fe10854606958aaaaba6c07629d388b10e9ae5",
     "js/core.js": "dd2cc8c9df41c79cf04e196f7ec990938fdbe36176f3cbea30aa87ebaad78217",
     "js/fim-content.js": "82920d529df200ae0de186c1592247260eafb826127bd04eb90cb619178c5bf6",
     "js/fim.js": "7248340a564cc7617201342aa56e9550ebd97008cc14b382c48a7ec91988c06a",
@@ -1540,7 +1540,7 @@
     {
       "file": "contribute/index.html",
       "previousSha256": "c3dcc094f715b4576043d04812d224e90cb229adfa1ce871a6b04acce06c76f2",
-      "sha256": "f3ca550da627f68e65ea45190e4b80f5b12afcac72ce92c60cf6c0b262031853",
+      "sha256": "679a16fbc63804235e23a6ef177fee52ffa9c2cad430b7fba2d8114f764f9cd7",
       "date": "2026-10-29",
       "reason": "Add PDF loader and optional group/document controls inside the existing saved panel. Original pledge form and frozen chooser remain exact.",
       "authorisation": "Neeza, 29 October 2026: proceed with the pledge/WhatsApp, live register and branded-report plan; build on the current interface and preserve public layouts."
@@ -1548,7 +1548,7 @@
     {
       "file": "contribute/payment/index.html",
       "previousSha256": "4e9ced4c73e4f773c6579709803ea7ea8c323c49e1c282e6e8b5930aedf74442",
-      "sha256": "df37489d7d80551460d0396445740b20619b93605fcc99286af22c929b947435",
+      "sha256": "bffdd7720ba206559f76d0bac2e9f91889f2e820a51d165ab11f6f4b6ade5a7e",
       "date": "2026-10-29",
       "reason": "Add PDF loader and one pledge-confirmation button to the existing private record; preserve payment/certificate/status hooks.",
       "authorisation": "Neeza, 29 October 2026: proceed with the pledge/WhatsApp, live register and branded-report plan; build on the current interface and preserve public layouts."
@@ -1564,9 +1564,9 @@
     {
       "file": "js/contributions.js",
       "previousSha256": "cfad5d742b5a573b330d9c360a078adfba5ce99c375f7e1ae6d4623a07c98bcf",
-      "sha256": "b29ac7d7f48f63cb94b2aef3b2b7a92e481ec901b7a132bdb7dff43d18626a7b",
+      "sha256": "96c1961e5dd96636fad1298138fe10854606958aaaaba6c07629d388b10e9ae5",
       "date": "2026-10-29",
-      "reason": "Add optional group/copy handoff and private pledge-confirmation download after a successful existing save. No price, bounds, CSRF, request identity, viewer or certificate change.",
+      "reason": "Add optional group/copy handoff and private pledge-confirmation download after a successful existing save. No price, bounds, CSRF, request identity, viewer or certificate change. A restored name must belong to this pledge reference.",
       "authorisation": "Neeza, 29 October 2026: proceed with the pledge/WhatsApp, live register and branded-report plan; build on the current interface and preserve public layouts."
     },
     {

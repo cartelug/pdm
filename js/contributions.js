@@ -701,7 +701,10 @@
               pledgeMessage(row, "");
             document.getElementById("sendPledgeWhatsapp").href = pledgeWhatsapp(text);
             document.getElementById("pledgeWhatsappMessage").textContent = text;
-            bindPledgeDownload(row, previous && previous.name);
+            bindPledgeDownload(
+              row,
+              previous && previous.row && previous.row.reference === row.reference ? previous.name : "",
+            );
             messageActions(handoff, text, {
               text: "pledgeWhatsappCopyMessage",
               button: "copyPledgeWhatsappMessage",
