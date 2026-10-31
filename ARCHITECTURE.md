@@ -4,6 +4,8 @@ This is the one place that says how the site is built, what is protected, how a 
 
 Last verified against the repository on 24 October 2026.
 
+**29 October pledge and public reports:** The approved public layouts and all stylesheets remain unchanged. The existing live panel now has the stable #collections destination and an on-demand branded public PDF. The public-report action supplies an explicit aggregate-only snapshot from the canonical ledger; private rows and recognition are excluded. Existing inline collection fields read the same approved source instead of a separate gateway-only total. The staff register displays website and manual records together through authenticated search/pagination, preserving original IDs and finance roles. Pledge confirmations are distinct from payment receipts. Group invitations have an audited publisher-only setting; checkout remains gated and unchanged. See docs/quality/PLEDGES-REPORTS-2026-10-29.md.
+
 **28 October image-only refresh:** The existing layout and all stylesheets are preserved. `assets/wfe-2026/refresh/scene-map.json` maps existing scene frames to ten reference-led artworks; the 36 school/campus gallery images remain alongside them. Public kit derivatives and requested copy remove Rotary branding. See `docs/quality/IMAGE-REFRESH-2026-10-28.md` for image provenance and narrow protected presentation reviews.
 
 

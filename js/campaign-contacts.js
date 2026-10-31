@@ -16,6 +16,24 @@
   function whatsappUrl(text) {
     return primary.whatsappUrl + (text ? "?text=" + encodeURIComponent(text) : "");
   }
+  function refreshGroup(scope) {
+    var links = scope.querySelectorAll("[data-campaign-group], #joinCampaignGroup");
+    if (!links.length) return;
+    fetch("/api/operations.php?action=community", { cache: "no-store", credentials: "omit" })
+      .then(function (response) {
+        if (!response.ok) throw new Error("Group settings unavailable");
+        return response.json();
+      })
+      .then(function (data) {
+        if (!/^https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9_-]{12,64}(?:\?mode=gi_t)?$/.test(data.groupUrl)) return;
+        links.forEach(function (link) {
+          link.href = data.groupUrl;
+        });
+      })
+      .catch(function () {
+        // Existing approved static links and the private team contact remain available.
+      });
+  }
 
   function bind(scope) {
     var host = scope || document;
@@ -34,6 +52,7 @@
         link.href = primary.whatsappUrl + (href.indexOf("?") === -1 ? "" : href.slice(href.indexOf("?")));
       }
     });
+    refreshGroup(host);
   }
 
   window.PCICampaignContacts = Object.freeze({ primary: primary, whatsappUrl: whatsappUrl, bind: bind });

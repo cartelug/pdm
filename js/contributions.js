@@ -173,7 +173,13 @@
     var text = preparedMessage || pledgeMessage(row, name);
     write("pci-pledge-message-" + row.reference, text);
     var stored = token ? write("pci-view-" + row.reference, token) : !!read("pci-view-" + row.reference);
-    keepRecord({ row: row, token: token || read("pci-view-" + row.reference) || "", message: text });
+    if (name) write("pci-pledge-name-" + row.reference, name);
+    keepRecord({
+      row: row,
+      name: name || read("pci-pledge-name-" + row.reference) || "",
+      token: token || read("pci-view-" + row.reference) || "",
+      message: text,
+    });
     var panel = document.getElementById("pledgeSavedPanel");
     document.getElementById("contributionForm").hidden = true;
     document.getElementById("checkoutNotice").hidden = true;
@@ -204,10 +210,50 @@
       button: "copyPledgeMessage",
       status: "pledgeCopyStatus",
     });
+    bindPledgeDownload(row, name);
+    var group = document.getElementById("continuePledgeGroup");
+    if (group) {
+      group.onclick = async function () {
+        var status = document.getElementById("pledgeCopyStatus");
+        try {
+          if (!navigator.clipboard || !window.isSecureContext) throw new Error("Clipboard unavailable");
+          await navigator.clipboard.writeText(text);
+          status.textContent =
+            "Message copied. Join the group if needed, paste your pledge and tap Send. Opening WhatsApp does not send it.";
+        } catch (error) {
+          var area = document.getElementById("pledgeSavedMessage");
+          area.focus();
+          area.select();
+          status.textContent =
+            "Your pledge is saved. Copy the selected message manually, then open the group and paste it. You can also message the team privately.";
+        }
+      };
+    }
     panel.hidden = false;
     document.getElementById("pledgeCopyStatus").textContent =
       "Your pledge reference is saved. Open WhatsApp when you’re ready, or copy the message below. No payment was taken.";
     panel.focus();
+  }
+  function bindPledgeDownload(row, name) {
+    var button = document.getElementById("downloadPledgePdf");
+    if (!button) return;
+    button.onclick = function () {
+      if (!window.PCICampaignDownloads) {
+        message("The PDF tools could not load. Refresh this page and retry. Your pledge is saved.", true);
+        return;
+      }
+      window.PCICampaignDownloads.pledge(button, {
+        sample: row.environment === "sandbox",
+        name: name || read("pci-pledge-name-" + row.reference) || "",
+        reference: row.reference,
+        steps: row.steps,
+        amount: row.amount,
+        currency: row.currency,
+        country: row.country,
+        created_at: row.created_at,
+        step_unit: row.step_unit,
+      });
+    };
   }
   function pressKind(name) {
     document.querySelectorAll("[data-kind]").forEach(function (b) {
@@ -518,7 +564,7 @@
       previous.row.status === "pledged" &&
       previous.token
     )
-      savedPledge(previous.row, "", previous.token, previous.message);
+      savedPledge(previous.row, previous.name || "", previous.token, previous.message);
     try {
       var results = await Promise.all([call("status"), call("session")]);
       settings = results[0];
@@ -655,6 +701,10 @@
               pledgeMessage(row, "");
             document.getElementById("sendPledgeWhatsapp").href = pledgeWhatsapp(text);
             document.getElementById("pledgeWhatsappMessage").textContent = text;
+            bindPledgeDownload(
+              row,
+              previous && previous.row && previous.row.reference === row.reference ? previous.name : "",
+            );
             messageActions(handoff, text, {
               text: "pledgeWhatsappCopyMessage",
               button: "copyPledgeWhatsappMessage",

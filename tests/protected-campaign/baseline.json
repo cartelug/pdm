@@ -92,8 +92,8 @@
     "assets/walk-for-education/walking-rotarian-photo-480.webp": "5f5f24f2e4863f8ece444341f822595d09c185eb3211ee28e03257dc3f9a5bc6",
     "assets/walk-for-education/walking-rotarian-photo-710.webp": "369ba20ac9db2e4e73dd48513ea8304e0a9ccc84a2ae846fda95219191418f49",
     "assets/walk-for-education/walking-rotarian-photo.jpg": "0170aefebc4208c1d4814a628f185d1badc7e1cfde9da2cf5e2892437b5f57b5",
-    "contribute/index.html": "c3dcc094f715b4576043d04812d224e90cb229adfa1ce871a6b04acce06c76f2",
-    "contribute/payment/index.html": "4e9ced4c73e4f773c6579709803ea7ea8c323c49e1c282e6e8b5930aedf74442",
+    "contribute/index.html": "679a16fbc63804235e23a6ef177fee52ffa9c2cad430b7fba2d8114f764f9cd7",
+    "contribute/payment/index.html": "bffdd7720ba206559f76d0bac2e9f91889f2e820a51d165ab11f6f4b6ade5a7e",
     "contribute/privacy/index.html": "2fcb708ec612eec463312dfdb95ca465a5244336a69901cad69344dcbd185648",
     "contribute/terms/index.html": "bfa07e49c73ebb19f100abf318b3e5797212935e72d5bfdb1667ace362cdb125",
     "contribute/verify/index.html": "358de6bd7ef362ada5983be0b0b4f24b2410d943b5a5beddb89b00a29ebeab61",
@@ -108,11 +108,11 @@
     "css/preloader.css": "37d89f5ee1ac3b6fbeab5d091de4ea77e4f536189dfeaba733973e5547624e4f",
     "css/wfe-launch.css": "fb84bcc0120669257f3715c1cb28db41be9c8b38e65db741b41f46abc3568ab1",
     "css/wfe.css": "564d7dc5d3a25c15278105dedf9552d5690f6608d4158f311b997c3342d0c222",
-    "js/campaign-contacts.js": "69a70380085e734876fb45fcee931b8036cd43c95633ade89b603f72a696fe32",
+    "js/campaign-contacts.js": "540a25ff7c97202725dabb3de28a271b6de8352b5c4da1b26d48afea744faa3f",
     "js/certificate-verify.js": "7648e82991c361568970b7829079a4f6ede6c346626926d2ca85da93498d2c4e",
     "js/collection-progress.js": "53838ad4580d13eb6d548ebd055291d010ea7a057e96af454b8c0c8f26b0401a",
     "js/collections-admin.js": "f2e0d5009d8eb409f262246404ae93d181198478fe81416d57c449630d705237",
-    "js/contributions.js": "cfad5d742b5a573b330d9c360a078adfba5ce99c375f7e1ae6d4623a07c98bcf",
+    "js/contributions.js": "96c1961e5dd96636fad1298138fe10854606958aaaaba6c07629d388b10e9ae5",
     "js/core.js": "dd2cc8c9df41c79cf04e196f7ec990938fdbe36176f3cbea30aa87ebaad78217",
     "js/fim-content.js": "82920d529df200ae0de186c1592247260eafb826127bd04eb90cb619178c5bf6",
     "js/fim.js": "7248340a564cc7617201342aa56e9550ebd97008cc14b382c48a7ec91988c06a",
@@ -125,13 +125,13 @@
     "js/updates-data.js": "6b61f35975e7be7d8bca0a3e2376909b1bad9ee58bc21fa7888a017d5a152b8f",
     "js/wfe-data.js": "42fb80fcd2900c86af3841e9933c7f8d3bb2bc2a070a71a39938d58a6a407094",
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
-    "js/wfe-shell.js": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
+    "js/wfe-shell.js": "58b688e746877ad7dbbd638081b0b1d3bdd5af95ec62dab9f6e56eae73f73aab",
     "js/wfe.js": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
-    "walk-for-education/accountability/index.html": "86951ddcd55525e88d6bfa7b32013ceaa5af132e20c67da0333971e4166b4dd4",
-    "walk-for-education/index.html": "afccee9a058d754d630416912843bc1f55da2576c1ddcf246dfde80c16641fcd",
-    "walk-for-education/partners/index.html": "e96fe0cb91b82bc57c02775e6bd0e8fbe26458c36894702ddcdb09b68a019ce3",
-    "walk-for-education/take-part/index.html": "478d4ebd1f1c784413aeb008d1a72b2902fac60e56cde2472e2f1d5f4094a00b",
-    "walk-for-education/updates/index.html": "6d1e870eba6bb2f9a65bae5662481c204928697ea103f96aa73eadec7595bf0d"
+    "walk-for-education/accountability/index.html": "6a9bbb5b932463bd6507c6d176340dd1e86672816f9a65b8e42621fcc9dd49d8",
+    "walk-for-education/index.html": "3782bc5a770ef4392078e05f70980832dd01f7c03a247f98e3d8b7024fcd18e0",
+    "walk-for-education/partners/index.html": "c371fb2a573d21b29b7178f6288cb44518ead20ae435e72a702014571f891885",
+    "walk-for-education/take-part/index.html": "c6bc8ccc99178fd7e1d998d9f89a800e5a1431d0cdb9d4d7d3db624682d6e83d",
+    "walk-for-education/updates/index.html": "ea725db4fdc8726e29010e0a39d3ce26815a96ad9a46c716b486291a1a57c12f"
   },
   "presentationReviews": [
     {
@@ -1385,6 +1385,27 @@
       "date": "2026-10-28",
       "previousSha256": "e337eaf69e7ba1e5cad30685a0c144a63cf5641bcd62b8ee20ba3216c7844e36",
       "reason": "Display-only image/branding cleanup and cache references. Public donor labels omit Rotary honorifics while source records, consent, amounts, funded steps, totals, reconciliation and services remain unchanged. Website and report layouts stay intact. See docs/quality/IMAGE-REFRESH-2026-10-28.md."
+    },
+    {
+      "file": "walk-for-education/partners/index.html",
+      "previousSha256": "e96fe0cb91b82bc57c02775e6bd0e8fbe26458c36894702ddcdb09b68a019ce3",
+      "sha256": "c371fb2a573d21b29b7178f6288cb44518ead20ae435e72a702014571f891885",
+      "date": "2026-10-29",
+      "reason": "Content-hash references only for reviewed campaign scripts. Existing page structure, styling, fields and script order remain unchanged."
+    },
+    {
+      "file": "walk-for-education/take-part/index.html",
+      "previousSha256": "478d4ebd1f1c784413aeb008d1a72b2902fac60e56cde2472e2f1d5f4094a00b",
+      "sha256": "c6bc8ccc99178fd7e1d998d9f89a800e5a1431d0cdb9d4d7d3db624682d6e83d",
+      "date": "2026-10-29",
+      "reason": "Content-hash references only for reviewed campaign scripts. Existing page structure, styling, fields and script order remain unchanged."
+    },
+    {
+      "file": "walk-for-education/updates/index.html",
+      "previousSha256": "6d1e870eba6bb2f9a65bae5662481c204928697ea103f96aa73eadec7595bf0d",
+      "sha256": "ea725db4fdc8726e29010e0a39d3ce26815a96ad9a46c716b486291a1a57c12f",
+      "date": "2026-10-29",
+      "reason": "Content-hash references only for reviewed campaign scripts. Existing page structure, styling, fields and script order remain unchanged."
     }
   ],
   "functionalReviews": [
@@ -1393,7 +1414,7 @@
       "previousSha256": "deea3c2753c31296a156ca903c2debb117b0009d3edb47aa4dc84022c6f7af04",
       "sha256": "1b16d1dec2b8a655de513150cdfaa8cb2e2120d65a895be7e1aa2348edfb92c5",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
       "reason": "Navigation-only banner points staff to the named operations console; existing gateway controls remain."
     },
     {
@@ -1401,7 +1422,7 @@
       "previousSha256": "c557b418beb68aa73928c1fd1fce21c44183c0e5d29cda4602d979e337a74146",
       "sha256": "d9e97534c61eaa0ee4908da005935827951d928f0a16b5eda543f8ff78a50d84",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
       "reason": "Navigation-only banner points staff to the named operations console and identifies retirement of shared-password publishing."
     },
     {
@@ -1409,7 +1430,7 @@
       "previousSha256": "63f3dccd9f2b81fba011e4b0b8cce9b1cec6f22c8179318a79ef7d6f2647e585",
       "sha256": "48c5fe1fd5ad5b59ed94fe3ee2592689494fdd9575bce8025f4a828d7dc55e89",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised operations release: retire shared-password writes and map existing Walk public fields to the approved per-currency ledger and named-owner projection. Legacy contact/channel configuration remains."
     },
     {
@@ -1417,7 +1438,7 @@
       "previousSha256": "5b9818ffe350c74c5ad88b5200b5f387672639f4a19a4a80cde9001866418b50",
       "sha256": "76c8ae5772a097187c76eb3031ed46718ee9e6fb77648a5b31d652952303cdbc",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised named-account release: remove shared-password finance fallback and revalidate named identity/role on every privileged request, including pre-existing sessions. No checkout, pricing, certificate or gateway verification logic changed."
     },
     {
@@ -1425,7 +1446,7 @@
       "previousSha256": "5916bb3de0dddb7d68b1e9c9a92c858ea43c317087829c7815a8c8e41ceaad07",
       "sha256": "b4770ab873928dd35070f9e791585762159c476470241cb4ca005af9f7dc241b",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
       "reason": "Document required named roles and removal of the shared-password fallback; contains no credentials."
     },
     {
@@ -1433,7 +1454,7 @@
       "previousSha256": "a945a10b57afbf9af7b13dc2e3dd27eca9d0770800c89c5a91992c3703d4068d",
       "sha256": "792ffc22bc0b51b0e6189379199d2b6861f3b6f7f1c8454bda175d2639fe0049",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised role separation: deny private gateway dashboard access to editorial accounts; public gateway progress preserves currencies and exposes actual UGX receipts only."
     },
     {
@@ -1441,7 +1462,7 @@
       "previousSha256": "01746af6d7f7ec88c36d981ac649764bde29693f2da3bb65e28f3406978bf4e2",
       "sha256": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
       "reason": "Presentation-only: large financial figures use plain readable text instead of overflowing digit reels; reduced-motion users do not receive digit animations."
     },
     {
@@ -1449,7 +1470,7 @@
       "previousSha256": "9cf735fb77fe8cd8b1dd138e6db16b42a13cec4486a237dd746ea7253c234f15",
       "sha256": "f7f15f69bb04bf38776593dd8d5182b01bc9612f2d8f54ef415347e8c42fd5a1",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised operations release: append approved live-reporting stylesheet and public script after all existing campaign scripts; preserve original script order, form hooks and frozen pledge/payment fragments. Content hashes refreshed."
     },
     {
@@ -1457,7 +1478,7 @@
       "previousSha256": "e9c347e75b5abc51f5085b2ee250a193237713bff2ec3feb364520dc4c53847c",
       "sha256": "0ce05ed88456bccd619ea3580b866b53e917887d0aaa8493336ad366a54b567e",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised operations release: append approved live-reporting stylesheet and public script after all existing campaign scripts; preserve original script order, form hooks and frozen pledge/payment fragments. Content hashes refreshed."
     },
     {
@@ -1465,7 +1486,7 @@
       "previousSha256": "4bf6de6c0566db594dcfc5102d8f7c3ee9af5532a82cdcd36449b17ece09a782",
       "sha256": "e9c341d0d8749d9b272199c6326e4e68744fbbca05eafdb76cfdf50633edf1db",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised operations release: append approved live-reporting stylesheet and public script after all existing campaign scripts; preserve original script order, form hooks and frozen pledge/payment fragments. Content hashes refreshed."
     },
     {
@@ -1473,7 +1494,7 @@
       "previousSha256": "0c4efc765d038ed91ceef41a09493d53517595e697dfb6cba9ce7f06804c231b",
       "sha256": "e85e4c54911421b47ba7f14393ad4a13fb2eeb7ba7afd33f520bae44054cc8c6",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised operations release: append approved live-reporting stylesheet and public script after all existing campaign scripts; preserve original script order, form hooks and frozen pledge/payment fragments. Content hashes refreshed."
     },
     {
@@ -1481,7 +1502,7 @@
       "previousSha256": "ccdb6263595debe80ce6c28eaa499181900ae058ebcc1402bf3f6a7eea272061",
       "sha256": "6d808eecd92404024bab8fd4d1ba0de82fe48ac7fdd9824921bf45d6c3aef971",
       "date": "2026-10-24",
-      "authorisation": "User-provided PCI WEBSITE UPDATE — IMPLEMENT NOW and instruction to push main",
+      "authorisation": "User-provided PCI WEBSITE UPDATE \u2014 IMPLEMENT NOW and instruction to push main",
       "reason": "Authorised operations release: append approved live-reporting stylesheet and public script after all existing campaign scripts; preserve original script order, form hooks and frozen pledge/payment fragments. Content hashes refreshed."
     },
     {
@@ -1515,6 +1536,62 @@
       "date": "2026-10-27",
       "authorisation": "User requests current website fixes, removal of Rotary logos and downloadable editable collections reports/database",
       "reason": "Correct ongoing-walk copy or outdated named-account instructions; add authenticated exports and update their cache hashes. Existing pricing, pledge forms, payment channels and frozen financial fragments remain unchanged."
+    },
+    {
+      "file": "contribute/index.html",
+      "previousSha256": "c3dcc094f715b4576043d04812d224e90cb229adfa1ce871a6b04acce06c76f2",
+      "sha256": "679a16fbc63804235e23a6ef177fee52ffa9c2cad430b7fba2d8114f764f9cd7",
+      "date": "2026-10-29",
+      "reason": "Add PDF loader and optional group/document controls inside the existing saved panel. Original pledge form and frozen chooser remain exact.",
+      "authorisation": "Neeza, 29 October 2026: proceed with the pledge/WhatsApp, live register and branded-report plan; build on the current interface and preserve public layouts."
+    },
+    {
+      "file": "contribute/payment/index.html",
+      "previousSha256": "4e9ced4c73e4f773c6579709803ea7ea8c323c49e1c282e6e8b5930aedf74442",
+      "sha256": "bffdd7720ba206559f76d0bac2e9f91889f2e820a51d165ab11f6f4b6ade5a7e",
+      "date": "2026-10-29",
+      "reason": "Add PDF loader and one pledge-confirmation button to the existing private record; preserve payment/certificate/status hooks.",
+      "authorisation": "Neeza, 29 October 2026: proceed with the pledge/WhatsApp, live register and branded-report plan; build on the current interface and preserve public layouts."
+    },
+    {
+      "file": "js/campaign-contacts.js",
+      "previousSha256": "69a70380085e734876fb45fcee931b8036cd43c95633ade89b603f72a696fe32",
+      "sha256": "540a25ff7c97202725dabb3de28a271b6de8352b5c4da1b26d48afea744faa3f",
+      "date": "2026-10-29",
+      "reason": "Read the approved group invitation from the publisher setting while retaining the existing coordinator identity and static fallback.",
+      "authorisation": "Neeza, 29 October 2026: proceed with the pledge/WhatsApp, live register and branded-report plan; build on the current interface and preserve public layouts."
+    },
+    {
+      "file": "js/contributions.js",
+      "previousSha256": "cfad5d742b5a573b330d9c360a078adfba5ce99c375f7e1ae6d4623a07c98bcf",
+      "sha256": "96c1961e5dd96636fad1298138fe10854606958aaaaba6c07629d388b10e9ae5",
+      "date": "2026-10-29",
+      "reason": "Add optional group/copy handoff and private pledge-confirmation download after a successful existing save. No price, bounds, CSRF, request identity, viewer or certificate change. A restored name must belong to this pledge reference.",
+      "authorisation": "Neeza, 29 October 2026: proceed with the pledge/WhatsApp, live register and branded-report plan; build on the current interface and preserve public layouts."
+    },
+    {
+      "file": "js/wfe-shell.js",
+      "previousSha256": "937c1b2aba6accfba2d56661701ecc5f152d1dee5f03d9805697f1afd49421a9",
+      "sha256": "58b688e746877ad7dbbd638081b0b1d3bdd5af95ec62dab9f6e56eae73f73aab",
+      "date": "2026-10-29",
+      "reason": "Use the canonical complete collections projection for existing inline figures; preserve chooser, country prices, checkout gates and menu behaviour.",
+      "authorisation": "Neeza, 29 October 2026: proceed with the pledge/WhatsApp, live register and branded-report plan; build on the current interface and preserve public layouts."
+    },
+    {
+      "file": "walk-for-education/accountability/index.html",
+      "previousSha256": "86951ddcd55525e88d6bfa7b32013ceaa5af132e20c67da0333971e4166b4dd4",
+      "sha256": "6a9bbb5b932463bd6507c6d176340dd1e86672816f9a65b8e42621fcc9dd49d8",
+      "date": "2026-10-29",
+      "reason": "Correct pledge/external-contribution reporting copy in existing elements, preserving structure and styles. Provide a permanent target for the existing latest-figures panel.",
+      "authorisation": "Neeza, 29 October 2026: proceed with the pledge/WhatsApp, live register and branded-report plan; build on the current interface and preserve public layouts."
+    },
+    {
+      "file": "walk-for-education/index.html",
+      "previousSha256": "afccee9a058d754d630416912843bc1f55da2576c1ddcf246dfde80c16641fcd",
+      "sha256": "3782bc5a770ef4392078e05f70980832dd01f7c03a247f98e3d8b7024fcd18e0",
+      "date": "2026-10-29",
+      "reason": "Point the existing reporting link at latest figures; asset cache hashes only elsewhere.",
+      "authorisation": "Neeza, 29 October 2026: proceed with the pledge/WhatsApp, live register and branded-report plan; build on the current interface and preserve public layouts."
     }
   ]
 }

@@ -103,10 +103,12 @@
     "checkoutCustom",
     "checkoutNotice",
     "consent",
+    "continuePledgeGroup",
     "contributionForm",
     "contributionKinds",
     "copyPledgeMessage",
     "country",
+    "downloadPledgePdf",
     "email",
     "feedback",
     "give",
@@ -208,6 +210,9 @@
     "data-invite-five": [
      ""
     ],
+    "data-campaign-group": [
+     ""
+    ],
     "data-wfe-email": [
      ""
     ],
@@ -264,6 +269,7 @@
     "../js/campaign-contacts.js",
     "../js/step-pricing.js",
     "../js/wfe-data.js",
+    "../js/campaign-downloads.js",
     "../js/contributions.js",
     "../js/contribute-pay.js"
    ],
@@ -278,6 +284,7 @@
     "certificatePanel",
     "copyPledgeWhatsappMessage",
     "downloadCertificate",
+    "downloadPledgePdf",
     "feedback",
     "i-arrow",
     "i-down",
@@ -328,6 +335,7 @@
     "../../js/campaign-contacts.js",
     "../../js/step-pricing.js",
     "../../js/wfe-data.js",
+    "../../js/campaign-downloads.js",
     "../../js/contributions.js",
     "../../js/contribute-pay.js"
    ],
@@ -1247,5 +1255,15 @@
     "2be9790edec774b6"
    ]
   }
- }
+ },
+ "functionalReviews": [
+  {
+   "date": "2026-10-29",
+   "pages": [
+    "/contribute/",
+    "/contribute/payment/"
+   ],
+   "reason": "User-authorised pledge/report release: add only the lazy PDF loader before the existing contribution script and controls inside saved confirmations. Existing fields, forms, old scripts and their order are preserved."
+  }
+ ]
 }

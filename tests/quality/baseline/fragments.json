@@ -78,8 +78,8 @@
    "page": "/contribute/payment/",
    "selector": "main",
    "reason": "Payment result page: status check, receipt and certificate download",
-   "bytes": 6435,
-   "sha256": "2f490c538e261b860b93beb9d992eec76165b00a459e4bb9d8d4aeb72172d247"
+   "bytes": 6580,
+   "sha256": "16df0d3ef20b23bc60f2ec366a26ce15fd471f60e6abca3a646e0bf1561d40b9"
   },
   {
    "id": "contribute-verify-form",
@@ -88,6 +88,13 @@
    "reason": "Certificate verification form",
    "bytes": 422,
    "sha256": "95072363b37ee15bc95a8a4d3f4f2fea013b8c72e7bdeb6c596262ab29c89927"
+  }
+ ],
+ "functionalReviews": [
+  {
+   "date": "2026-10-29",
+   "id": "contribute-payment-main",
+   "reason": "User-authorised addition of one private pledge-confirmation PDF button. Status, receipt, certificate, viewer and form contracts remain intact; no other frozen fragment changes."
   }
  ]
 }

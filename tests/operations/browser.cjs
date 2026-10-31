@@ -134,6 +134,50 @@ const out = process.env.PCI_TEST_SCREENSHOTS || path.join(os.tmpdir(), "pci-oper
       if (format === "database") assert.equal(bytes.toString("ascii", 0, 15), "SQLite format 3");
     }
     console.log("PASS actual branded PDF, Excel, JSON and SQLite downloads");
+    const updateResponse = page.waitForResponse(
+      (r) => r.url().includes("action=public-report") && r.request().method() === "GET",
+    );
+    const updateDownload = page.waitForEvent("download");
+    await page.click("#report-update");
+    const approvedReport = await (await updateResponse).json();
+    const updateFile = path.join(out, "public-campaign-update.pdf");
+    await (await updateDownload).saveAs(updateFile);
+    const publicPDF = await require("../../admin/vendor/pdf-lib.min.js").PDFDocument.load(fs.readFileSync(updateFile));
+    assert(
+      publicPDF.getSubject().includes(approvedReport.reportId),
+      "Joshua's PDF matches the actual approved response snapshot",
+    );
+    assert.equal(publicPDF.getCreationDate().toISOString(), new Date(approvedReport.reportingCutoff).toISOString());
+    assert.equal(
+      publicPDF.getForm().getFields().length,
+      0,
+      "public PDF never exports private editable register fields",
+    );
+    assert(
+      !("rows" in approvedReport) && !("supporters" in approvedReport),
+      "public PDF source excludes private rows and recognition",
+    );
+    const visitor = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await visitor.route(/^https?:\/\/(?!127\.0\.0\.1|localhost)/, (r) => r.abort());
+    await visitor.goto("http://127.0.0.1:" + port + "/walk-for-education/accountability/#collections");
+    await visitor.locator("#collections button:not([hidden])").waitFor();
+    assert.equal(
+      await visitor.locator("#collections").count(),
+      1,
+      "existing live panel is the stable latest-figures destination",
+    );
+    const visitorDownload = visitor.waitForEvent("download");
+    await visitor.locator("#collections button").click();
+    const visitorFile = path.join(out, "anonymous-public-update.pdf");
+    await (await visitorDownload).saveAs(visitorFile);
+    assert(
+      (
+        await require("../../admin/vendor/pdf-lib.min.js").PDFDocument.load(fs.readFileSync(visitorFile))
+      ).getPageCount() >= 1,
+      "visitor downloads a real branded PDF without staff sign-in",
+    );
+    await visitor.close();
+    console.log("PASS Joshua and anonymous visitor actual public PDF downloads and matching cut-off");
     await page.selectOption("#graphic-source", "approved");
     await page.selectOption("#graphic-template", "collections");
     await page.selectOption("#graphic-format", "square");
