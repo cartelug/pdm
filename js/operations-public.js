@@ -17,7 +17,11 @@
   panel.replaceChildren(h, body);
   const downloadButton = document.createElement("button");
   downloadButton.type = "button";
-  downloadButton.className = "w-btn";
+  downloadButton.className = document.body.classList.contains("pci-v3")
+    ? "pci-button pci-button--ink"
+    : document.body.classList.contains("w-page")
+      ? "w-btn"
+      : "wfe-btn";
   downloadButton.textContent = "Download latest update PDF";
   downloadButton.hidden = true;
   downloadButton.dataset.downloadBound = "true";

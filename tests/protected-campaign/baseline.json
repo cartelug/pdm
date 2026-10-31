@@ -127,11 +127,11 @@
     "js/wfe-partners.js": "bd2782cf1305c979af939988e7f75f0a9737c6714621a7f828262697a8ff43bf",
     "js/wfe-shell.js": "58b688e746877ad7dbbd638081b0b1d3bdd5af95ec62dab9f6e56eae73f73aab",
     "js/wfe.js": "7aec7e25512814b40120860264b34ce49cb8debad4faae5f54edd371bd0d923a",
-    "walk-for-education/accountability/index.html": "6a9bbb5b932463bd6507c6d176340dd1e86672816f9a65b8e42621fcc9dd49d8",
-    "walk-for-education/index.html": "3782bc5a770ef4392078e05f70980832dd01f7c03a247f98e3d8b7024fcd18e0",
-    "walk-for-education/partners/index.html": "c371fb2a573d21b29b7178f6288cb44518ead20ae435e72a702014571f891885",
-    "walk-for-education/take-part/index.html": "c6bc8ccc99178fd7e1d998d9f89a800e5a1431d0cdb9d4d7d3db624682d6e83d",
-    "walk-for-education/updates/index.html": "ea725db4fdc8726e29010e0a39d3ce26815a96ad9a46c716b486291a1a57c12f"
+    "walk-for-education/accountability/index.html": "28922cb62d9af04141a6edb1c334f49a57a35bab531a6cecd06dee01a7d126f0",
+    "walk-for-education/index.html": "4525451e4d1c58e0e78caf3d566ce541c3b5ae0fcc7f6e19c902509c993d464a",
+    "walk-for-education/partners/index.html": "07186b9e879e0527146cef5114dbe5e46bf15405b72a19673919c35d550a8067",
+    "walk-for-education/take-part/index.html": "c61a3e7507064dab4802a4d187c06f0872587ea81344ed030a8398a951c112d7",
+    "walk-for-education/updates/index.html": "210626d4b37e3f094d2af2b62dfac155e271585d736dc8eae8ea26ccd3c2a081"
   },
   "presentationReviews": [
     {
@@ -1406,6 +1406,41 @@
       "sha256": "ea725db4fdc8726e29010e0a39d3ce26815a96ad9a46c716b486291a1a57c12f",
       "date": "2026-10-29",
       "reason": "Content-hash references only for reviewed campaign scripts. Existing page structure, styling, fields and script order remain unchanged."
+    },
+    {
+      "file": "walk-for-education/accountability/index.html",
+      "previousSha256": "6a9bbb5b932463bd6507c6d176340dd1e86672816f9a65b8e42621fcc9dd49d8",
+      "sha256": "28922cb62d9af04141a6edb1c334f49a57a35bab531a6cecd06dee01a7d126f0",
+      "date": "2026-10-31",
+      "reason": "Refresh only the content-hash URL for the public reporting script. Its new download button reuses each page family's existing button class; no existing layout, stylesheet, form or financial behaviour changes."
+    },
+    {
+      "file": "walk-for-education/index.html",
+      "previousSha256": "3782bc5a770ef4392078e05f70980832dd01f7c03a247f98e3d8b7024fcd18e0",
+      "sha256": "4525451e4d1c58e0e78caf3d566ce541c3b5ae0fcc7f6e19c902509c993d464a",
+      "date": "2026-10-31",
+      "reason": "Refresh only the content-hash URL for the public reporting script. Its new download button reuses each page family's existing button class; no existing layout, stylesheet, form or financial behaviour changes."
+    },
+    {
+      "file": "walk-for-education/partners/index.html",
+      "previousSha256": "c371fb2a573d21b29b7178f6288cb44518ead20ae435e72a702014571f891885",
+      "sha256": "07186b9e879e0527146cef5114dbe5e46bf15405b72a19673919c35d550a8067",
+      "date": "2026-10-31",
+      "reason": "Refresh only the content-hash URL for the public reporting script. Its new download button reuses each page family's existing button class; no existing layout, stylesheet, form or financial behaviour changes."
+    },
+    {
+      "file": "walk-for-education/take-part/index.html",
+      "previousSha256": "c6bc8ccc99178fd7e1d998d9f89a800e5a1431d0cdb9d4d7d3db624682d6e83d",
+      "sha256": "c61a3e7507064dab4802a4d187c06f0872587ea81344ed030a8398a951c112d7",
+      "date": "2026-10-31",
+      "reason": "Refresh only the content-hash URL for the public reporting script. Its new download button reuses each page family's existing button class; no existing layout, stylesheet, form or financial behaviour changes."
+    },
+    {
+      "file": "walk-for-education/updates/index.html",
+      "previousSha256": "ea725db4fdc8726e29010e0a39d3ce26815a96ad9a46c716b486291a1a57c12f",
+      "sha256": "210626d4b37e3f094d2af2b62dfac155e271585d736dc8eae8ea26ccd3c2a081",
+      "date": "2026-10-31",
+      "reason": "Refresh only the content-hash URL for the public reporting script. Its new download button reuses each page family's existing button class; no existing layout, stylesheet, form or financial behaviour changes."
     }
   ],
   "functionalReviews": [
