@@ -260,7 +260,7 @@ const out = process.env.PCI_TEST_SCREENSHOTS || path.join(os.tmpdir(), "pci-oper
       timezoneId: "America/New_York",
     });
     await coordinator.clock.install({ time: new Date("2026-10-24T22:30:00Z") });
-    await coordinator.goto(`http://127.0.0.1:${port}/admin/operations/start.html`);
+    await coordinator.goto(`http://127.0.0.1:${port}/admin/operations/start/`);
     for (const width of [320, 390, 768, 1440]) {
       await coordinator.setViewportSize({ width, height: 900 });
       assert(

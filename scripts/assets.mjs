@@ -47,8 +47,10 @@ let rewritten = 0;
 
 for (const page of htmlFiles(ROOT)) {
   const html = fs.readFileSync(page, "utf8");
+  const base = html.match(/<base\s+href=["']([^"']+)["']/i)?.[1];
+  const directory = base ? path.resolve(path.dirname(page), base) : path.dirname(page);
   const updated = html.replace(REFERENCE, (match, open, url, version, close) => {
-    const target = url.startsWith("/") ? path.join(ROOT, url) : path.resolve(path.dirname(page), url);
+    const target = url.startsWith("/") ? path.join(ROOT, url) : path.resolve(directory, url);
     const where = path.relative(ROOT, page);
     if (!fs.existsSync(target)) {
       problems.push(`${where}: ${url} does not exist`);

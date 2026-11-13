@@ -94,7 +94,8 @@ for (const page of pageFiles) {
     if (/^(mailto:|tel:|sms:|javascript:|data:|blob:|whatsapp:|#?$)/i.test(value)) continue;
     let url;
     try {
-      url = new URL(value, page.url);
+      const base = document.querySelector("base[href]")?.getAttribute("href");
+      url = new URL(value, base ? new URL(base, page.url) : page.url);
     } catch {
       problems.push(`${here}: <${el.localName}> ${attribute}="${value}" is not a valid URL`);
       continue;

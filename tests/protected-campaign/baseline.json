@@ -2,8 +2,8 @@
   "baselineCommit": "15e13113ca838bfec2b193d6a52f6cedca7f61bb",
   "note": "Original protected baseline plus explicit presentationReviews and user-authorised functionalReviews. Every original pledge/payment hook and frozen fragment remains checked; no gate is removed.",
   "files": {
-    "admin/collections/index.html": "ca54139752c92917b26d38fa5f0d1006a6ab6d41290acf910ab450152af7c265",
-    "admin/index.html": "ff8962f2c19eb07f935fda354d2e54a542c21cdd0d5d7465ee321202cdd0c3c8",
+    "admin/collections/index.html": "9ae83c4a89de67b6fdf5a63987707087792c220b7b51dacfb097c57dc6aa6228",
+    "admin/index.html": "15ad423ad0879049ae5e07576e7590719d7c390a580ca657ed4e054235ce61f4",
     "admin/quick.html": "550cf71ec99a40ec4c73d60f779b966bd97492cdcf1a4ee3d2b6dbf7bff94346",
     "admin/vendor/jspdf.umd.min.js": "98ccf17aa10c20bb1301762618fcc9b6ab3a4e7f26b6071d64d0b41154df3875",
     "admin/wfe.html": "5854ff3d80fdb2f6bc296a3670abdeae493bbdd40d7138495bf5bf5d0b4079a5",
@@ -1659,6 +1659,22 @@
       "date": "2026-11-13",
       "authorisation": "User requests extensionless page URLs and push to main.",
       "reason": "Navigation hrefs only: replace index.html with directory URLs and use extensionless staff-page URLs. Scripts, forms, pricing, ledger and payment contracts are unchanged."
+    },
+    {
+      "file": "admin/index.html",
+      "previousSha256": "ff8962f2c19eb07f935fda354d2e54a542c21cdd0d5d7465ee321202cdd0c3c8",
+      "sha256": "15ad423ad0879049ae5e07576e7590719d7c390a580ca657ed4e054235ce61f4",
+      "date": "2026-11-13",
+      "authorisation": "User requests extensionless page URLs and push to main.",
+      "reason": "Use actual directory URLs for staff pages, avoiding internal HTML aliases on LiteSpeed. Navigation hrefs only; scripts, payment and ledger behaviour remain unchanged."
+    },
+    {
+      "file": "admin/collections/index.html",
+      "previousSha256": "ca54139752c92917b26d38fa5f0d1006a6ab6d41290acf910ab450152af7c265",
+      "sha256": "9ae83c4a89de67b6fdf5a63987707087792c220b7b51dacfb097c57dc6aa6228",
+      "date": "2026-11-13",
+      "authorisation": "User requests extensionless page URLs and push to main.",
+      "reason": "Use actual directory URLs for staff pages, avoiding internal HTML aliases on LiteSpeed. Navigation hrefs only; scripts, payment and ledger behaviour remain unchanged."
     }
   ]
 }

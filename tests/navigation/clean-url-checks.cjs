@@ -1,10 +1,9 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
-const path = require("node:path");
 const { root, routes, fileFor } = require("../quality/routes.cjs");
 
 const staff = ["/admin/", "/admin/collections/", "/admin/operations/"];
-const standalone = ["/admin/quick", "/admin/wfe", "/admin/operations/start", "/admin/operations/guide", "/404"];
+const standalone = ["/admin/quick/", "/admin/wfe/", "/admin/operations/start/", "/admin/operations/guide/", "/404/"];
 const query = "?country=KE&steps=7&ref=url-check";
 
 async function verify(base) {
@@ -40,8 +39,8 @@ async function verify(base) {
   for (const route of standalone) {
     // Reuse the HTTP connection after internal rewrites, as a real browser does.
     for (let repetition = 0; repetition < 3; repetition++) {
-      await page(route, path.join(root, route + ".html"));
-      await redirect(route + ".html", route);
+      await page(route, fileFor(route));
+      await redirect(route.slice(0, -1) + ".html", route);
     }
   }
   for (const name of fs.readdirSync(root).filter((name) => /^[a-z-]+\.html$/.test(name) && name !== "index.html")) {

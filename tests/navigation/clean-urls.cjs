@@ -106,6 +106,27 @@ DocumentRoot "${documentRoot}"
     // Redirects and navigation must also work with JavaScript disabled.
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
+    await page.goto(base + "/admin/quick/");
+    assert.equal(
+      await page.evaluate(() => new URL("../api/roll.php", document.baseURI).pathname),
+      "/api/roll.php",
+      "Directory export preserves the staff API base",
+    );
+    assert.equal(await page.locator(".footlink").getAttribute("href"), "./", "Staff source link remains unchanged");
+    assert.equal(
+      await page.locator(".footlink").evaluate((link) => new URL(link.href).pathname),
+      "/admin/",
+      "Staff navigation resolves against the original parent directory",
+    );
+    await page.goto(base + "/admin/operations/start/");
+    assert.equal(
+      await page
+        .getByRole("link", { name: "Full staff guide", exact: true })
+        .first()
+        .evaluate((link) => new URL(link.href).pathname),
+      "/admin/operations/guide/",
+      "Staff guide links use real directory URLs",
+    );
     for (const width of [390, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto(base + "/faith-in-motion/index.html?ref=url-check#road");
