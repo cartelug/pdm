@@ -42,7 +42,13 @@ jobs:
           python3 tests/enquiry/test_http.py
 
       - name: Install test browser
-        run: npx playwright install --with-deps chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y apache2
+          npx playwright install --with-deps chromium
+
+      - name: Clean URLs, legacy redirects and query preservation
+        run: node tests/navigation/clean-urls.cjs
 
       - name: Walk for Education redesign regression
         run: node tests/navigation/wfe-redesign.cjs

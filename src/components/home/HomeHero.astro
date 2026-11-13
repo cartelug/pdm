@@ -4,8 +4,8 @@ import ScenePicture from "../global/ScenePicture.astro";
 import { campaignView } from "../../lib/campaign";
 const walk = campaignView();
 const choose = ["preparing", "dated", "walking"].includes(walk.state)
-  ? "walk-for-education/index.html#choose-steps"
-  : "walk-for-education/index.html";
+  ? "walk-for-education/#choose-steps"
+  : "walk-for-education/";
 ---
 
 <section class="pci-hero" id="top" aria-labelledby="home-heading">
@@ -38,23 +38,23 @@ const choose = ["preparing", "dated", "walking"].includes(walk.state)
         <a class="pci-button pci-button--cta" href={choose} data-protected>
           {walk.action} <Icon name="arrow" />
         </a>
-        <a class="pci-button pci-button--light" href="projects/index.html">
+        <a class="pci-button pci-button--light" href="projects/">
           Explore Our Work <Icon name="arrow" />
         </a>
-        <a class="pci-text-link" href="model/index.html">
+        <a class="pci-text-link" href="model/">
           Our approach <Icon />
         </a>
       </div>
     </div>
     <aside class="pci-hero__live" aria-label="Current campaigns">
-      <a class="pci-live" href="walk-for-education/index.html" data-protected>
+      <a class="pci-live" href="walk-for-education/" data-protected>
         <span class="pci-live__status">{walk.label}</span>
         <strong>Walk for Education</strong>
         <span class="pci-live__go" aria-hidden="true">
           <Icon name="external" />
         </span>
       </a>
-      <a class="pci-live" href="faith-in-motion/index.html">
+      <a class="pci-live" href="faith-in-motion/">
         <span class="pci-live__status">Journey completed · fundraising continues</span>
         <strong>Faith in Motion</strong>
         <span class="pci-live__go" aria-hidden="true">

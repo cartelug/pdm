@@ -18,5 +18,5 @@ export function asset(from: string, file: string): string {
 export function href(from: string, to: string): string {
   if (/^(https?:|mailto:|tel:|#)/.test(to)) return to;
   const [route, hash] = to.split("#");
-  return asset(from, route.replace(/^\//, "") + (route.endsWith("/") ? "index.html" : "")) + (hash ? "#" + hash : "");
+  return (asset(from, route) || "./") + (hash ? "#" + hash : "");
 }

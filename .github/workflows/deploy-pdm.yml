@@ -41,7 +41,10 @@ jobs:
           python3 tests/operations/test_http.py
           python3 tests/operations/test_setup.py
           python3 tests/enquiry/test_http.py
+          sudo apt-get update
+          sudo apt-get install -y apache2
           npx playwright install --with-deps chromium
+          node tests/navigation/clean-urls.cjs
           node tests/navigation/wfe-redesign.cjs
           node tests/operations/browser.cjs
           npm run test:browser
@@ -69,3 +72,22 @@ jobs:
           target: ${{ secrets.CPANEL_TARGET }}
           strip_components: 1
           overwrite: true
+
+      - name: Install clean URL redirects without replacing host settings
+        uses: appleboy/ssh-action@v1
+        env:
+          DEPLOY_TARGET: ${{ secrets.CPANEL_TARGET }}
+        with:
+          host: ${{ secrets.CPANEL_HOST }}
+          username: ${{ secrets.CPANEL_USERNAME }}
+          key: ${{ secrets.CPANEL_SSH_KEY }}
+          passphrase: ${{ secrets.CPANEL_SSH_PASSPHRASE }}
+          port: ${{ secrets.CPANEL_PORT }}
+          envs: DEPLOY_TARGET
+          script: |
+            set -eu
+            cd "$DEPLOY_TARGET"
+            php hosting/install-clean-urls.php .
+
+      - name: Verify production clean URLs
+        run: node tests/navigation/clean-urls-live.cjs

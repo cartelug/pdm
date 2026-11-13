@@ -102,6 +102,9 @@ for (const page of pageFiles) {
     if (!/^https?:$/.test(url.protocol)) continue;
     if (url.origin !== ORIGIN && url.origin !== "https://www.pamodzici.com") continue;
     stats.links++;
+    if (!value.startsWith("#") && (el.localName === "a" || el.localName === "area") && /\.html$/i.test(url.pathname)) {
+      problems.push(`${here}: ${attribute}="${value}" uses a legacy .html page URL`);
+    }
     const target = resolveLocal(url.pathname);
     if (!target) {
       problems.push(`${here}: <${el.localName}> ${attribute}="${value}" does not resolve to a file`);

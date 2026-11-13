@@ -120,7 +120,7 @@ const server = http.createServer((req, res) => {
     assert.equal(await trigger.evaluate((el) => el === document.activeElement), true);
     await trigger.click();
     await page.locator("dialog").getByRole("link", { name: "About Pamodzi" }).click();
-    await page.waitForURL("**/about/index.html");
+    await page.waitForURL("**/about/");
     assert.equal(await page.evaluate(() => document.body.style.position), "");
     await page.goBack();
     assert.equal(await page.locator("dialog").evaluate((el) => el.open), false);
@@ -186,7 +186,7 @@ const server = http.createServer((req, res) => {
     );
     assert.equal(
       await stage.locator('.pci-pillars__panel[data-pillar="inclusion"] a').getAttribute("href"),
-      "what-we-do/index.html#inclusion",
+      "what-we-do/#inclusion",
     );
     await stage.close();
     const swipe = await browser.newContext({

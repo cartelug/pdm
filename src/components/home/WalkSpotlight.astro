@@ -4,8 +4,8 @@ import ScenePicture from "../global/ScenePicture.astro";
 import { campaignView, loadCampaignRecord } from "../../lib/campaign";
 const walk = campaignView();
 const choose = ["preparing", "dated", "walking"].includes(walk.state)
-  ? "walk-for-education/index.html#choose-steps"
-  : "walk-for-education/index.html";
+  ? "walk-for-education/#choose-steps"
+  : "walk-for-education/";
 const record = loadCampaignRecord();
 const km = new Intl.NumberFormat("en-GB").format(record.distanceKm);
 ---
@@ -45,7 +45,7 @@ const km = new Intl.NumberFormat("en-GB").format(record.distanceKm);
         <a class="pci-button" href={choose} data-protected>
           {walk.action} <Icon name="arrow" />
         </a>
-        <a class="pci-text-link" href="walk-for-education/index.html" data-protected>
+        <a class="pci-text-link" href="walk-for-education/" data-protected>
           Meet the walk <Icon name="external" />
         </a>
       </div>

@@ -27,8 +27,8 @@ Use `/admin/operations/` for the contribution register, reconciliation, import p
 
 Institutional source lives in `src/`; build output is committed at the existing public paths. Campaign updates use PHP, and the payment module uses a private SQLite ledger on the cPanel server. The following legacy architecture notes describe preserved campaign services and the pre-V3 baseline.
 
-- Institutional pages: `index.html`, `about.html`, `what-we-do.html`, `model.html`, `impact.html`, `projects.html`, `partnerships.html`, `governance.html`, `contact.html`, and `updates.html`.
-- Project pages: `apartments.html`, `community.html`, and the Faith in Motion campaign pages.
+- Institutional page URLs: `/`, `/about/`, `/what-we-do/`, `/model/`, `/impact/`, `/projects/`, `/partnerships/`, `/governance/`, `/contact/`, and `/updates/`.
+- Project pages: `/community/` and the Faith in Motion campaign pages; `/apartments/` redirects to `/projects/`. Old `.html` links redirect permanently to clean URLs on cPanel.
 - Campaign data: `js/roll-data.js` drives the public progress, tallies, route attribution, and Roll of Honour.
 - Updates data: `js/updates-data.js` drives the updates feed.
 - Shared presentation: `css/base.css` supplies the site-wide tokens, header, navigation, buttons, grids, forms, footer and responsive rules. `css/pci.css`, `css/pdm.css` and `css/fim.css` contain only their page-family components.

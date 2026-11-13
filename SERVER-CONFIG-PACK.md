@@ -1,6 +1,6 @@
 # Server configuration pack for pamodzici.com
 
-Plan task **E2**. This is for the host admin (cPanel). Apply it on the server, not in the repository: the deploy workflow uploads files and a committed `.htaccess` would overwrite the one on the host.
+Plan task **E2**. Compression, caching and headers are for the host admin (cPanel). Apply those settings on the server: a committed root `.htaccess` would overwrite the one on the host. Clean URL redirects are now installed separately by deployment as described in section 5.
 
 What it does: compresses text, caches files by how often they change, and adds the standard security headers. Nothing here changes how a page looks or works.
 
@@ -79,20 +79,12 @@ If PCI controls the domain's DNS, the free plan adds compression, edge caching a
 
 Rollback: remove the added block and reload. Nothing else depends on it.
 
-## 5. Real redirects for the old `.html` links (optional, decision D14)
+## 5. Clean URLs and legacy redirects (decision D14)
 
-Eighteen files in the repository root (`about.html`, `walk.html`, `give.html` and so on) exist only to forward old shared links to the folder pages, using a meta refresh. A server redirect does the same job faster and tells search engines the move is permanent. The files stay as a fallback, so applying this is safe to undo.
+Navigation now uses directory URLs such as `/about/` and `/faith-in-motion/`, plus extensionless standalone staff URLs such as `/admin/operations/guide`. Physical HTML files remain in place. The eighteen root stubs remain as a fallback for static hosts, including GitHub Pages.
 
-`npm run check:links` confirms every one of the eighteen follows the pattern `name.html` to `/name/` and that every target exists, which is what lets one rule cover them. Add this above the existing rewrite rules, after the blocks in section 2 and after reading what the host's current `.htaccess` already does:
+After uploading the site, **Deploy PDM to cPanel** runs `php hosting/install-clean-urls.php .` through the existing SSH connection. It prepends or replaces only the `# BEGIN PDM CLEAN URLS` / `# END PDM CLEAN URLS` block from `hosting/clean-urls.conf`, preserving the rest of `.htaccess` and its permissions. Writes are atomic; malformed blocks or symlinked configurations fail without replacing the host file. The installer cannot run over HTTP.
 
-```apache
-# 301 for legacy root .html links: about.html -> /about/, walk.html -> /walk/, and so on
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteCond %{REQUEST_URI} !^/(404|index)\.html$
-  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
-  RewriteRule ^([a-z-]+)\.html$ /$1/ [R=301,L]
-</IfModule>
-```
+The rules redirect explicit `index.html` requests to their directories, root stubs to existing folder pages, and standalone `.html` documents to their extensionless paths. Queries and browser fragments survive the redirect. Internal DirectoryIndex and ErrorDocument requests are excluded, unknown paths remain 404s, and PHP APIs and asset URLs retain their existing paths. The existing `/apartments/` retirement redirect remains in force.
 
-The extra condition sends a request to the folder only when the folder exists, so an unknown `.html` name still reaches the 404 page. Test it on staging first with `curl -sI https://pamodzici.com/about.html` and expect `301` and `location: /about/`.
+`node tests/navigation/clean-urls.cjs` tests the actual Apache rules and no-JavaScript phone/desktop navigation before upload. `node tests/navigation/clean-urls-live.cjs` verifies the deployed HTML, permanent redirects, query preservation and missing pages after installation. `npm run check:links` rejects new `.html` navigation links on public pages. To undo the server redirects, remove only the marked block from the host's `.htaccess`; the source links still use clean directories, and legacy root stubs remain available. A future deployment reinstalls the block unless its installation step is reverted too.

@@ -2,11 +2,11 @@
   "baselineCommit": "15e13113ca838bfec2b193d6a52f6cedca7f61bb",
   "note": "Original protected baseline plus explicit presentationReviews and user-authorised functionalReviews. Every original pledge/payment hook and frozen fragment remains checked; no gate is removed.",
   "files": {
-    "admin/collections/index.html": "bb7c9f2cd9b810ebd4c1950239efa05e766fe7c0b2c7987573d2d29b6db53d2b",
-    "admin/index.html": "98c762b6e9cda50cf729bfd9355f7e9efa656789c65c58762604f8d09d805921",
-    "admin/quick.html": "5e35e9e981bef8f19376b8436104bd862c1db2c65b894b40d03cd003771f79d9",
+    "admin/collections/index.html": "ca54139752c92917b26d38fa5f0d1006a6ab6d41290acf910ab450152af7c265",
+    "admin/index.html": "ff8962f2c19eb07f935fda354d2e54a542c21cdd0d5d7465ee321202cdd0c3c8",
+    "admin/quick.html": "550cf71ec99a40ec4c73d60f779b966bd97492cdcf1a4ee3d2b6dbf7bff94346",
     "admin/vendor/jspdf.umd.min.js": "98ccf17aa10c20bb1301762618fcc9b6ab3a4e7f26b6071d64d0b41154df3875",
-    "admin/wfe.html": "d9e97534c61eaa0ee4908da005935827951d928f0a16b5eda543f8ff78a50d84",
+    "admin/wfe.html": "5854ff3d80fdb2f6bc296a3670abdeae493bbdd40d7138495bf5bf5d0b4079a5",
     "api/README.md": "6f37bfdeed6c6561c699b50ab70e3ced493a36db859ba1eaf8cd396c3d7b590b",
     "api/campaign.php": "48c5fe1fd5ad5b59ed94fe3ee2592689494fdd9575bce8025f4a828d7dc55e89",
     "api/config.php": "34198827c5cf0b8243d3a3e67ab8fd488639aa288b8f8ea592ab449957096365",
@@ -1627,6 +1627,38 @@
       "date": "2026-10-29",
       "reason": "Point the existing reporting link at latest figures; asset cache hashes only elsewhere.",
       "authorisation": "Neeza, 29 October 2026: proceed with the pledge/WhatsApp, live register and branded-report plan; build on the current interface and preserve public layouts."
+    },
+    {
+      "file": "admin/collections/index.html",
+      "previousSha256": "bb7c9f2cd9b810ebd4c1950239efa05e766fe7c0b2c7987573d2d29b6db53d2b",
+      "sha256": "ca54139752c92917b26d38fa5f0d1006a6ab6d41290acf910ab450152af7c265",
+      "date": "2026-11-13",
+      "authorisation": "User requests extensionless page URLs and push to main.",
+      "reason": "Navigation hrefs only: replace index.html with directory URLs and use extensionless staff-page URLs. Scripts, forms, pricing, ledger and payment contracts are unchanged."
+    },
+    {
+      "file": "admin/index.html",
+      "previousSha256": "98c762b6e9cda50cf729bfd9355f7e9efa656789c65c58762604f8d09d805921",
+      "sha256": "ff8962f2c19eb07f935fda354d2e54a542c21cdd0d5d7465ee321202cdd0c3c8",
+      "date": "2026-11-13",
+      "authorisation": "User requests extensionless page URLs and push to main.",
+      "reason": "Navigation hrefs only: replace index.html with directory URLs and use extensionless staff-page URLs. Scripts, forms, pricing, ledger and payment contracts are unchanged."
+    },
+    {
+      "file": "admin/quick.html",
+      "previousSha256": "5e35e9e981bef8f19376b8436104bd862c1db2c65b894b40d03cd003771f79d9",
+      "sha256": "550cf71ec99a40ec4c73d60f779b966bd97492cdcf1a4ee3d2b6dbf7bff94346",
+      "date": "2026-11-13",
+      "authorisation": "User requests extensionless page URLs and push to main.",
+      "reason": "Navigation hrefs only: replace index.html with directory URLs and use extensionless staff-page URLs. Scripts, forms, pricing, ledger and payment contracts are unchanged."
+    },
+    {
+      "file": "admin/wfe.html",
+      "previousSha256": "d9e97534c61eaa0ee4908da005935827951d928f0a16b5eda543f8ff78a50d84",
+      "sha256": "5854ff3d80fdb2f6bc296a3670abdeae493bbdd40d7138495bf5bf5d0b4079a5",
+      "date": "2026-11-13",
+      "authorisation": "User requests extensionless page URLs and push to main.",
+      "reason": "Navigation hrefs only: replace index.html with directory URLs and use extensionless staff-page URLs. Scripts, forms, pricing, ledger and payment contracts are unchanged."
     }
   ]
 }
