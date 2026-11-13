@@ -18,17 +18,24 @@ async function verify(base) {
   }
   async function redirect(from, to) {
     const response = await fetch(base + from + query, { redirect: "manual" });
+    await response.arrayBuffer();
     assert.equal(response.status, 301, from + " redirects permanently");
     const location = new URL(response.headers.get("location"), base);
     assert.equal(location.origin, new URL(base).origin, from + " stays on the same origin");
-    assert.equal(location.pathname + location.search, to + query, from + " preserves the query string");
+    const targets = [to].flat().map((route) => route + query);
+    assert.ok(
+      targets.includes(location.pathname + location.search),
+      from + " preserves the query string and target: " + location.pathname + location.search,
+    );
     checked++;
   }
   for (const route of [...routes(), ...staff]) {
     // The retired apartment concept already redirects to Projects on the host.
     if (route === "/apartments/") await redirect(route, "/projects/");
     else await page(route, fileFor(route));
-    await redirect(route + "index.html", route);
+    // LiteSpeed applies the existing child RedirectMatch before the parent rewrite;
+    // Apache applies the parent first. Both paths must end at the retired page's replacement.
+    await redirect(route + "index.html", route === "/apartments/" ? [route, "/projects/"] : route);
   }
   for (const route of standalone) {
     await page(route, path.join(root, route + ".html"));
@@ -39,6 +46,7 @@ async function verify(base) {
   }
   for (const route of ["/missing-page.html", "/missing-page", "/api/missing.php"]) {
     const response = await fetch(base + route, { redirect: "manual" });
+    await response.arrayBuffer();
     assert.equal(response.status, 404, route + " remains a real 404");
     checked++;
   }
