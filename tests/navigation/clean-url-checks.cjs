@@ -38,8 +38,11 @@ async function verify(base) {
     await redirect(route + "index.html", route === "/apartments/" ? [route, "/projects/"] : route);
   }
   for (const route of standalone) {
-    await page(route, path.join(root, route + ".html"));
-    await redirect(route + ".html", route);
+    // Reuse the HTTP connection after internal rewrites, as a real browser does.
+    for (let repetition = 0; repetition < 3; repetition++) {
+      await page(route, path.join(root, route + ".html"));
+      await redirect(route + ".html", route);
+    }
   }
   for (const name of fs.readdirSync(root).filter((name) => /^[a-z-]+\.html$/.test(name) && name !== "index.html")) {
     await redirect("/" + name, "/" + name.slice(0, -5) + "/");
