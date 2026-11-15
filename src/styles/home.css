@@ -2619,3 +2619,17 @@
     }
   }
 }
+
+/* Clip decorative overflow without making these sections scroll containers. With overflow: hidden each one
+   became its own scroller, which froze every scroll-driven tone inside it (view timelines measured against a
+   box that never scrolls) and would disable any sticky child. */
+@layer home {
+  @supports (overflow: clip) {
+    .pci-spotlight,
+    .pci-route,
+    .pci-home .pci-practice,
+    .pci-projects {
+      overflow: clip;
+    }
+  }
+}

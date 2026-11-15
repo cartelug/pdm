@@ -182,6 +182,24 @@ async function stuckElements(page) {
       "Facts carry the pointer light on a desktop",
     );
 
+    // Desktop scroll tones (CSS view timelines) follow the scroll position.
+    const toneAt = async (top) => {
+      await motion.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), top);
+      await motion.waitForTimeout(300);
+      return motion.evaluate(() => getComputedStyle(document.querySelector("#iciadm .pci-section-head h2")).translate);
+    };
+    const headTop = await motion.evaluate(
+      () => document.querySelector("#iciadm .pci-section-head").getBoundingClientRect().top + scrollY,
+    );
+    const toneA = await toneAt(headTop - 800);
+    const toneB = await toneAt(headTop - 100);
+    assert.notEqual(toneA, toneB, "Desktop scroll tones move with the page: " + toneA + " / " + toneB);
+    assert.equal(
+      await motion.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+      true,
+      "Scroll tones never add sideways scroll",
+    );
+
     // The model diagram accompanies the list on a desktop (sticky is not disabled by an ancestor).
     await motion.evaluate(() => {
       const list = document.querySelector("[data-model]");
@@ -433,6 +451,12 @@ async function stuckElements(page) {
       ]),
       ["none", null],
       "No desktop choreography on a phone",
+    );
+
+    assert.equal(
+      await phone.evaluate(() => getComputedStyle(document.querySelector(".pci-section-head h2")).animationName),
+      "none",
+      "No desktop scroll tones on a phone",
     );
 
     // Phone pillars: a swipe of the native card row selects the card that settles in view.

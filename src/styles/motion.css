@@ -904,3 +904,302 @@
     }
   }
 }
+
+/* ==========================================================================
+   Desktop scroll tones (D115–D129). CSS scroll-driven animations on the individual translate / scale / rotate
+   properties: they run on the compositor, need no script, and compose with the GSAP arrivals (which own
+   `transform`). Only elements with no other CSS animation are used. Nothing moves to the right of its column,
+   so the page never gains sideways scroll. Browsers without view timelines keep the static layout.
+   ========================================================================== */
+@layer motion {
+  @supports (animation-timeline: view()) {
+    @media (min-width: 1100px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+      .pci-section-head h2,
+      .pci-split__aside h2,
+      .pci-route__head h2,
+      .pci-section-head .pci-lead,
+      .pci-route__head .pci-lead,
+      .pci-cards > :nth-child(3n + 2),
+      .pci-cards > :nth-child(3n),
+      .pci-stats > :nth-child(even),
+      .pci-columns > :nth-child(even),
+      .pci-model li,
+      .pci-row,
+      .pci-timeline__item,
+      .pci-trust-points li,
+      .pci-checks li,
+      .pci-about__art,
+      .pci-spotlight__frame,
+      .pci-route__svg--wide,
+      .pci-duo__panel,
+      .pci-pillars,
+      .pci-footer__wordmark,
+      .pci-fig b,
+      .pci-stat b,
+      .pci-band .pci-split__main,
+      .pci-steps li:nth-child(even),
+      .pci-footer__grid > :nth-child(even),
+      .pci-section-head .pci-eyebrow::before,
+      .pci-split__aside .pci-eyebrow::before,
+      .pci-route__head .pci-eyebrow::before,
+      .pci-section-head::after {
+        animation-duration: auto;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: view();
+      }
+
+      /* D115 headings rise a little faster than the page (a nearer plane) */
+      .pci-section-head h2,
+      .pci-split__aside h2,
+      .pci-route__head h2 {
+        animation-name: pci-tone-rise;
+      }
+
+      /* D116 lead paragraphs drift the other way, so heading and text separate in depth */
+      .pci-section-head .pci-lead,
+      .pci-route__head .pci-lead {
+        animation-name: pci-tone-counter;
+      }
+
+      /* D117 / D118 card grids scroll as columns at three speeds */
+      .pci-cards > :nth-child(3n + 2) {
+        animation-name: pci-tone-column-fast;
+      }
+
+      .pci-cards > :nth-child(3n) {
+        animation-name: pci-tone-column-slow;
+      }
+
+      /* D119 statistics and practice columns stagger as the page passes */
+      .pci-stats > :nth-child(even),
+      .pci-columns > :nth-child(even),
+      .pci-steps li:nth-child(even),
+      .pci-footer__grid > :nth-child(even) {
+        animation-name: pci-tone-column-slow;
+      }
+
+      /* D120 lists read like a wheel: rows ease in from the margin, align at the reading line, ease out again */
+      .pci-model li,
+      .pci-row,
+      .pci-timeline__item,
+      .pci-trust-points li,
+      .pci-checks li {
+        animation-name: pci-tone-arc;
+      }
+
+      /* D121 the portrait zooms through: small on entry, fullest at the centre, easing back as it leaves */
+      .pci-about__art {
+        animation-name: pci-tone-zoom-through;
+      }
+
+      /* D122 the campus window swings a couple of degrees across its pass */
+      .pci-spotlight__frame {
+        animation-name: pci-tone-swing;
+      }
+
+      /* D123 the route drawing tilts gently, like a road turning under the reader */
+      .pci-route__svg--wide {
+        animation-name: pci-tone-tilt;
+      }
+
+      /* D124 campaign panels and the programme stage grow into full size as they arrive */
+      .pci-duo__panel,
+      .pci-pillars {
+        animation-name: pci-tone-grow;
+        animation-range: entry 0% cover 45%;
+      }
+
+      /* D125 the footer wordmark glides left as the page ends */
+      .pci-footer__wordmark {
+        animation-name: pci-tone-glide;
+        animation-range: entry 0% cover 100%;
+      }
+
+      /* D126 published figures grow to full size as they reach the reading line (values never change) */
+      .pci-fig b,
+      .pci-stat b {
+        transform-origin: 0 100%;
+        animation-name: pci-tone-number;
+        animation-range: entry 0% cover 45%;
+      }
+
+      /* D127 the partnership invitation block floats up against its backdrop */
+      .pci-band .pci-split__main {
+        animation-name: pci-tone-float;
+      }
+
+      /* D128 section eyebrow dots swell once as their section crosses the middle of the screen */
+      .pci-section-head .pci-eyebrow::before,
+      .pci-split__aside .pci-eyebrow::before,
+      .pci-route__head .pci-eyebrow::before {
+        animation-name: pci-tone-pulse;
+        animation-range: cover 25% cover 60%;
+      }
+
+      /* D129 a crimson-to-blue rule sweeps under each section heading as it is read */
+      .pci-section-head::after {
+        content: "";
+        grid-column: 1 / -1;
+        height: 1px;
+        margin-top: 8px;
+        background: linear-gradient(90deg, #d91f3d, #b71935 50%, #2a59a6);
+        transform-origin: 0 50%;
+        animation-name: pci-tone-sweep;
+        animation-range: entry 10% cover 50%;
+      }
+
+      @keyframes pci-tone-rise {
+        from {
+          translate: 0 36px;
+        }
+
+        to {
+          translate: 0 -36px;
+        }
+      }
+
+      @keyframes pci-tone-counter {
+        from {
+          translate: 0 -16px;
+        }
+
+        to {
+          translate: 0 16px;
+        }
+      }
+
+      @keyframes pci-tone-column-fast {
+        from {
+          translate: 0 64px;
+        }
+
+        to {
+          translate: 0 -64px;
+        }
+      }
+
+      @keyframes pci-tone-column-slow {
+        from {
+          translate: 0 32px;
+        }
+
+        to {
+          translate: 0 -32px;
+        }
+      }
+
+      @keyframes pci-tone-arc {
+        0% {
+          translate: -40px 0;
+        }
+
+        42%,
+        58% {
+          translate: 0 0;
+        }
+
+        100% {
+          translate: -40px 0;
+        }
+      }
+
+      @keyframes pci-tone-zoom-through {
+        0% {
+          scale: 0.9;
+        }
+
+        50% {
+          scale: 1.05;
+        }
+
+        100% {
+          scale: 0.97;
+        }
+      }
+
+      @keyframes pci-tone-swing {
+        from {
+          rotate: -2.4deg;
+        }
+
+        to {
+          rotate: 2.4deg;
+        }
+      }
+
+      @keyframes pci-tone-tilt {
+        from {
+          rotate: 1.6deg;
+          scale: 0.97;
+        }
+
+        to {
+          rotate: -1.6deg;
+          scale: 1;
+        }
+      }
+
+      @keyframes pci-tone-grow {
+        from {
+          scale: 0.92;
+        }
+
+        to {
+          scale: 1;
+        }
+      }
+
+      @keyframes pci-tone-glide {
+        from {
+          translate: 0 0;
+        }
+
+        to {
+          translate: -64px 0;
+        }
+      }
+
+      @keyframes pci-tone-number {
+        from {
+          scale: 0.84;
+        }
+
+        to {
+          scale: 1;
+        }
+      }
+
+      @keyframes pci-tone-float {
+        from {
+          translate: 0 56px;
+        }
+
+        to {
+          translate: 0 -56px;
+        }
+      }
+
+      @keyframes pci-tone-pulse {
+        0%,
+        100% {
+          scale: 1;
+        }
+
+        50% {
+          scale: 2;
+        }
+      }
+
+      @keyframes pci-tone-sweep {
+        from {
+          scale: 0 1;
+        }
+
+        to {
+          scale: 1 1;
+        }
+      }
+    }
+  }
+}

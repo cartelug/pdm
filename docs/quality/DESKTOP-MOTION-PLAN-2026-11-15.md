@@ -144,6 +144,40 @@ Code: `src/scripts/motion/desktop.ts` (D001–D100) and the desktop block at the
 These come on top of the six homepage scenes and shared behaviours from the earlier release (masked headings,
 image windows, route drawing, orbit, model ring, closing thread, filter FLIP and more), which also run on desktop.
 
+## Scroll tones (added 15 November, D115–D129)
+
+The owner reported that a PC showed no scroll animation at all. The cause was `page-lifecycle.ts` treating
+Chrome's `effectiveType: "3g"` as a slow connection: Chrome reports "3g" whenever round trips are long, which is
+usual on good connections in Uganda, so desktops were put in lite mode and every scripted scroll effect was
+skipped. Lite mode now needs Data Saver, a 2G connection or under 2 GB of device memory.
+
+On top of that, fifteen continuous scroll "tones" now run on desktop as CSS scroll-driven animations
+(`animation-timeline: view()`) on the individual `translate`, `scale` and `rotate` properties. They run on the
+compositor without script and compose with the GSAP arrivals, which own `transform`. Chrome, Edge and Safari 26
+support them; other browsers keep the static layout plus every scripted effect above. Sections that used
+`overflow: hidden` (campus, route, practice, projects) now use `overflow: clip`, because a hidden-overflow
+section is its own scroll container and froze the tones inside it.
+
+| ID   | Where                                                          | Tone                                                                |
+| ---- | -------------------------------------------------------------- | ------------------------------------------------------------------- |
+| D115 | Section headings                                               | Rise a little faster than the page (nearer plane)                   |
+| D116 | Lead paragraphs                                                | Counter-drift, separating heading and text in depth                 |
+| D117 | Card grids                                                     | Second column scrolls fastest                                       |
+| D118 | Card grids                                                     | Third column scrolls at half speed                                  |
+| D119 | Statistics, practice columns, governance steps, footer columns | Alternate items stagger                                             |
+| D120 | Model stages, rows, timeline, trust points, checks             | Wheel: ease in from the margin, align at the reading line, ease out |
+| D121 | About portrait                                                 | Zooms through: smallest at entry, fullest at centre                 |
+| D122 | Campus window                                                  | Swings a couple of degrees across its pass                          |
+| D123 | Route drawing                                                  | Tilts like a turning road                                           |
+| D124 | Campaign panels and programme stage                            | Grow to full size as they arrive                                    |
+| D125 | Footer wordmark                                                | Glides left as the page ends                                        |
+| D126 | Published figures                                              | Grow to full size at the reading line (values unchanged)            |
+| D127 | Partnership invitation                                         | Floats up against its backdrop                                      |
+| D128 | Section eyebrow dots                                           | Swell once as the section crosses the middle                        |
+| D129 | Section heads                                                  | A crimson-to-blue rule sweeps under the heading                     |
+
+Total desktop effects: 129, plus the six homepage scenes and shared behaviours.
+
 ## Verification
 
 - The director is its own 14.8 KB chunk (`desktop.*.js`), fetched only when the desktop query matches; phones never load it.
