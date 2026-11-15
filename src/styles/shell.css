@@ -444,6 +444,22 @@
     flex-direction: column;
   }
 
+  /* iOS Safari: height 100% resolves to the small viewport, which ends at the floating toolbar, so the sheet
+     stopped short and the page backdrop showed beneath a hard edge. Fill the large viewport instead (the sheet
+     runs behind the toolbar) and pad the end of the menu by the toolbar's height plus the safe area, so the
+     last links still scroll clear of it. Browsers without these units keep height: 100%. */
+  @supports (height: 100lvh) {
+    .pci-menu {
+      position: fixed;
+      inset: 0;
+      height: 100lvh;
+    }
+
+    .pci-menu .pci-menu__body {
+      padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px) + (100lvh - 100svh));
+    }
+  }
+
   .pci-menu[data-state="open"] {
     opacity: 1;
     transform: none;
