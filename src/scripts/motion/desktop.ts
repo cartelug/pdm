@@ -59,6 +59,11 @@ const TRANSFORM = new Set([
 export function desktop(motion: Motion) {
   if (!motion.desktop) return;
   const { gsap, ScrollTrigger, own, signal, cleanups } = motion;
+  // Load-time choreography waits for the brand intro to lift (intro.css sets --pci-intro; it is 0s when skipped).
+  const introWait = () => {
+    const intro = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--pci-intro")) || 0;
+    return Math.max(0, intro - performance.now() / 1000);
+  };
 
   const list = (targets: Targets, root: ParentNode = document): Element[] =>
     !targets
@@ -181,7 +186,7 @@ export function desktop(motion: Motion) {
   const header = qs(".pci-header");
   if (header && window.scrollY < 40) {
     own(() => {
-      const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+      const timeline = gsap.timeline({ defaults: { ease: "power3.out" }, delay: introWait() });
       const brand = qs(".pci-brand", header);
       const mark = qs(".pci-brand__mark", header);
       const navItems = qsa(".pci-desktop-nav .pci-nav-item, .pci-desktop-nav > ul > li", header);
@@ -189,11 +194,17 @@ export function desktop(motion: Motion) {
       const cta = qs(".pci-header__cta", header);
       // D001 brand slides in from the left edge
       if (brand) timeline.from(brand, { x: -24, opacity: 0, duration: 0.6, clearProps: "transform,opacity" }, 0);
-      // D002 logo mark turns into place
+      // D002 logo mark opens from its centre (brand rule: only the container moves; never rotated)
       if (mark)
         timeline.from(
           mark,
-          { rotation: -70, scale: 0.7, duration: 0.8, ease: "back.out(1.7)", clearProps: "transform" },
+          {
+            clipPath: "circle(0% at 50% 50%)",
+            scale: 0.8,
+            duration: 0.8,
+            ease: "power3.out",
+            clearProps: "transform,clipPath",
+          },
           0.05,
         );
       // D003 navigation items drop in one after another
@@ -265,7 +276,7 @@ export function desktop(motion: Motion) {
         duration: 0.8,
         ease: "back.out(1.7)",
         stagger: 0.1,
-        delay: 0.75,
+        delay: 0.75 + introWait(),
         clearProps: "transform",
       }),
     );
@@ -276,7 +287,7 @@ export function desktop(motion: Motion) {
         duration: 0.7,
         ease: "back.out(1.6)",
         stagger: 0.08,
-        delay: 0.42,
+        delay: 0.42 + introWait(),
         clearProps: "transform",
       }),
     );
@@ -296,7 +307,7 @@ export function desktop(motion: Motion) {
         transformPerspective: 400,
         duration: 0.6,
         stagger: 0.04,
-        delay: 0.7,
+        delay: 0.7 + introWait(),
         ease: "back.out(1.5)",
         clearProps: "transform,opacity",
       }),
@@ -768,7 +779,7 @@ export function desktop(motion: Motion) {
         x: -10,
         duration: 0.6,
         stagger: 0.05,
-        delay: 0.1,
+        delay: 0.1 + introWait(),
         ease: "power3.out",
         clearProps: "transform",
       }),
@@ -796,12 +807,13 @@ export function desktop(motion: Motion) {
         delay: 0.25 + index * 0.06,
       }),
     );
-    // D095 the logo turns into place
+    // D095 the logo opens from its centre (brand rule: never rotated)
     arrive(qs(".pci-brand__mark", footerEl), {
-      from: { rotation: -60, scale: 0.7 },
+      from: { clipPath: "circle(0% at 50% 50%)", scale: 0.8 },
+      to: { clipPath: "circle(75% at 50% 50%)" },
       trigger: grid,
       duration: 0.9,
-      ease: "back.out(1.7)",
+      ease: "power3.out",
     });
     // D096 social links pop in
     arrive(qsa(".pci-footer__socials a", footerEl), {

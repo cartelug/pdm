@@ -280,84 +280,87 @@
     }
 
     .pci-hero__media img {
-      animation: pci-media-settle 0.86s cubic-bezier(0.16, 1, 0.3, 1) 0.16s backwards;
+      animation: pci-media-settle 0.86s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--pci-intro) + 0.16s)
+        backwards;
     }
 
     .pci-hero__line > span {
-      animation: pci-line-rise 0.62s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+      animation: pci-line-rise 0.62s cubic-bezier(0.16, 1, 0.3, 1) var(--pci-intro) backwards;
     }
 
     .pci-hero__line:nth-child(1) > span {
-      animation-delay: 0.1s;
+      animation-delay: calc(var(--pci-intro) + 0.1s);
     }
 
     .pci-hero__line:nth-child(2) > span {
-      animation-delay: 0.18s;
+      animation-delay: calc(var(--pci-intro) + 0.18s);
     }
 
     .pci-hero__line em {
-      animation: pci-underline-draw 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.62s backwards;
+      animation: pci-underline-draw 0.6s cubic-bezier(0.16, 1, 0.3, 1)
+        calc(var(--pci-intro) + 0.62s) backwards;
     }
 
     .pci-hero__copy > :nth-child(n + 3) {
-      animation: pci-rise 0.56s var(--pci-ease) backwards;
+      animation: pci-rise 0.56s var(--pci-ease) var(--pci-intro) backwards;
     }
 
     .pci-hero__copy > .pci-eyebrow {
-      animation: pci-rise 0.44s var(--pci-ease) 0.04s backwards;
+      animation: pci-rise 0.44s var(--pci-ease) calc(var(--pci-intro) + 0.04s) backwards;
     }
 
     .pci-hero__copy > .pci-hero__intro {
-      animation-delay: 0.24s;
+      animation-delay: calc(var(--pci-intro) + 0.24s);
     }
 
     .pci-hero__copy > .pci-hero__description {
-      animation-delay: 0.3s;
+      animation-delay: calc(var(--pci-intro) + 0.3s);
     }
 
     .pci-hero__copy > .pci-actions {
       animation-duration: 0.44s;
-      animation-delay: 0.32s;
+      animation-delay: calc(var(--pci-intro) + 0.32s);
     }
 
     .pci-live {
-      animation: pci-rise 0.5s var(--pci-ease) backwards;
+      animation: pci-rise 0.5s var(--pci-ease) var(--pci-intro) backwards;
     }
 
     .pci-live:nth-child(1) {
-      animation-delay: 0.6s;
+      animation-delay: calc(var(--pci-intro) + 0.6s);
     }
 
     .pci-live:nth-child(2) {
-      animation-delay: 0.68s;
+      animation-delay: calc(var(--pci-intro) + 0.68s);
     }
 
     .pci-hero__caption {
-      animation: pci-pop 0.4s var(--pci-ease) 0.8s backwards;
+      animation: pci-pop 0.4s var(--pci-ease) calc(var(--pci-intro) + 0.8s) backwards;
     }
 
     .pci-hero__thread {
-      animation: pci-thread-draw 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.44s backwards;
+      animation: pci-thread-draw 0.7s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--pci-intro) + 0.44s)
+        backwards;
     }
 
     .pci-strip:not(.is-marquee) li {
-      animation: pci-rise 0.5s var(--pci-ease) backwards;
+      animation: pci-rise 0.5s var(--pci-ease) var(--pci-intro) backwards;
     }
 
     .pci-strip li:nth-child(1) {
-      animation-delay: 0.6s;
+      animation-delay: calc(var(--pci-intro) + 0.6s);
     }
 
     .pci-strip li:nth-child(2) {
-      animation-delay: 0.65s;
+      animation-delay: calc(var(--pci-intro) + 0.65s);
     }
 
     .pci-strip li:nth-child(3) {
-      animation-delay: 0.7s;
+      animation-delay: calc(var(--pci-intro) + 0.7s);
     }
 
     .pci-strip li:nth-child(4) {
-      animation-delay: 0.75s;
+      animation-delay: calc(var(--pci-intro) + 0.75s);
     }
 
     /* Phones: shorter travel and a quicker sequence, finished by about 0.9 s. */
@@ -365,7 +368,7 @@
       .pci-hero__media img {
         animation-name: pci-media-settle-compact;
         animation-duration: 0.7s;
-        animation-delay: 0.08s;
+        animation-delay: calc(var(--pci-intro) + 0.08s);
       }
 
       .pci-hero__line > span {
@@ -373,15 +376,15 @@
       }
 
       .pci-hero__line:nth-child(1) > span {
-        animation-delay: 0.06s;
+        animation-delay: calc(var(--pci-intro) + 0.06s);
       }
 
       .pci-hero__line:nth-child(2) > span {
-        animation-delay: 0.12s;
+        animation-delay: calc(var(--pci-intro) + 0.12s);
       }
 
       .pci-hero__line em {
-        animation-delay: 0.42s;
+        animation-delay: calc(var(--pci-intro) + 0.42s);
       }
 
       .pci-hero__copy > :nth-child(n + 3),
@@ -391,25 +394,25 @@
       }
 
       .pci-hero__copy > .pci-hero__intro {
-        animation-delay: 0.16s;
+        animation-delay: calc(var(--pci-intro) + 0.16s);
       }
 
       .pci-hero__copy > .pci-hero__description {
-        animation-delay: 0.2s;
+        animation-delay: calc(var(--pci-intro) + 0.2s);
       }
 
       .pci-hero__copy > .pci-actions {
-        animation-delay: 0.2s;
+        animation-delay: calc(var(--pci-intro) + 0.2s);
         animation-duration: 0.36s;
       }
 
       .pci-live:nth-child(n) {
         animation-name: pci-rise-compact;
-        animation-delay: 0.42s;
+        animation-delay: calc(var(--pci-intro) + 0.42s);
       }
 
       .pci-hero__thread {
-        animation-delay: 0.3s;
+        animation-delay: calc(var(--pci-intro) + 0.3s);
         animation-duration: 0.5s;
       }
     }
@@ -431,44 +434,44 @@
        A short opening: breadcrumb, title, lede, then actions, complete within about 0.9 s. The arch art
        (the page's one framed gesture) opens behind the copy at the same time. */
     .pci-breadcrumb {
-      animation: pci-rise 0.44s var(--pci-ease) 0.02s backwards;
+      animation: pci-rise 0.44s var(--pci-ease) calc(var(--pci-intro) + 0.02s) backwards;
     }
 
     .pci-page-hero__copy > * {
-      animation: pci-rise 0.6s var(--pci-ease) backwards;
+      animation: pci-rise 0.6s var(--pci-ease) var(--pci-intro) backwards;
     }
 
     .pci-page-hero__copy > :nth-child(1) {
-      animation-delay: 0.06s;
+      animation-delay: calc(var(--pci-intro) + 0.06s);
     }
 
     .pci-page-hero__copy > :nth-child(2) {
-      animation-delay: 0.12s;
+      animation-delay: calc(var(--pci-intro) + 0.12s);
       animation-duration: 0.68s;
     }
 
     .pci-page-hero__copy > :nth-child(3) {
-      animation-delay: 0.22s;
+      animation-delay: calc(var(--pci-intro) + 0.22s);
     }
 
     .pci-page-hero__copy > :nth-child(n + 4) {
-      animation-delay: 0.3s;
+      animation-delay: calc(var(--pci-intro) + 0.3s);
     }
 
     .pci-page-hero__art span {
-      animation: pci-reveal-up 0.9s cubic-bezier(0.7, 0, 0.2, 1) backwards;
+      animation: pci-reveal-up 0.9s cubic-bezier(0.7, 0, 0.2, 1) var(--pci-intro) backwards;
     }
 
     .pci-page-hero__art span:nth-child(1) {
-      animation-delay: 0.1s;
+      animation-delay: calc(var(--pci-intro) + 0.1s);
     }
 
     .pci-page-hero__art span:nth-child(2) {
-      animation-delay: 0.18s;
+      animation-delay: calc(var(--pci-intro) + 0.18s);
     }
 
     .pci-page-hero__art span:nth-child(3) {
-      animation-delay: 0.26s;
+      animation-delay: calc(var(--pci-intro) + 0.26s);
     }
 
     @media (max-width: 719px) {

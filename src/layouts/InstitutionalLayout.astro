@@ -2,6 +2,7 @@
 import SiteHeader from "../components/global/SiteHeader.astro";
 import SiteFooter from "../components/global/SiteFooter.astro";
 import TransitionGuard from "../components/global/TransitionGuard.astro";
+import BrandIntro from "../components/global/BrandIntro.astro";
 import { site, asset } from "../config/site";
 import headFont from "../../assets/fonts/mtn-brighter-sans-bold.woff2?url";
 import bodyFont from "../../assets/fonts/sky-text-regular.woff2?url";
@@ -14,6 +15,7 @@ import "../styles/shell.css";
 import "../styles/home.css";
 import "../styles/pages.css";
 import "../styles/motion.css";
+import "../styles/intro.css";
 interface Props {
   path: string;
   title: string;
@@ -121,6 +123,7 @@ const shareImage = site.url + (CARDS.includes(slug) ? `/assets/og/pages/${slug}.
     )}
   </head>
   <body class:list={["pci-v3", { "pci-home": home }]} data-pci-v3>
+    <BrandIntro {path} {title} {home} />
     <div class="pci-progress" aria-hidden="true">
       <span></span>
     </div>

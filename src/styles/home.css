@@ -2367,7 +2367,7 @@
 @media (prefers-reduced-motion: no-preference) {
   @layer home {
     .pci-hero__cue span {
-      animation: pci-cue 1.9s ease-in-out 1.2s 3 backwards;
+      animation: pci-cue 1.9s ease-in-out calc(var(--pci-intro) + 1.2s) 3 backwards;
     }
   }
 }

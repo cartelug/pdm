@@ -77,6 +77,43 @@ async function stuckElements(page) {
       page.on("console", (message) => message.type() === "error" && errors.push(message.text()));
     };
 
+    // ---- Brand intro: plays briefly, never takes clicks, ends on its own, skips on input ----
+    const introPage = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+    watch(introPage);
+    await introPage.goto(base + "/about/", { waitUntil: "commit" });
+    await introPage.waitForSelector(".pci-intro");
+    assert.equal(
+      await introPage.evaluate(() => getComputedStyle(document.querySelector(".pci-intro")).pointerEvents),
+      "none",
+      "The intro never takes clicks",
+    );
+    assert.equal(
+      (await introPage.locator(".pci-intro__title").textContent()).trim(),
+      "About Pamodzi",
+      "The intro names the page",
+    );
+    await introPage.waitForTimeout(2600);
+    assert.equal(
+      await introPage.evaluate(() => getComputedStyle(document.querySelector(".pci-intro")).visibility),
+      "hidden",
+      "The intro ends on its own",
+    );
+    await introPage.goto(base + "/impact/", { waitUntil: "commit" });
+    await introPage.waitForSelector(".pci-intro");
+    assert.ok(
+      await introPage.evaluate(() => document.documentElement.classList.contains("pci-intro-short")),
+      "Later pages in the same visit get the short intro",
+    );
+    await introPage.waitForLoadState("load");
+    await introPage.keyboard.press("Shift");
+    await introPage.waitForTimeout(400);
+    assert.equal(
+      await introPage.evaluate(() => getComputedStyle(document.querySelector(".pci-intro")).visibility),
+      "hidden",
+      "Any key skips the intro",
+    );
+    await introPage.context().close();
+
     // ---- Full motion on desktop ----
     const motion = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
     watch(motion);
@@ -363,6 +400,11 @@ async function stuckElements(page) {
       "No smooth scrolling",
     );
     assert.deepEqual(await stuckElements(still), [], "Reduced motion shows everything immediately");
+    assert.equal(
+      await still.evaluate(() => getComputedStyle(document.querySelector(".pci-intro")).display),
+      "none",
+      "No brand intro under reduced motion",
+    );
 
     // ---- Phone width ----
     const phone = await (

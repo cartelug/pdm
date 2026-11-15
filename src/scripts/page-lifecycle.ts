@@ -57,6 +57,29 @@ function boot() {
     await start();
   }, 100);
 
+  // The brand intro (BrandIntro.astro) never blocks: the first key, click, scroll or touch skips it, and the
+  // page's own entrance (which waits on --pci-intro) starts at once.
+  const root = document.documentElement;
+  const intro = document.querySelector(".pci-intro");
+  if (intro && !root.classList.contains("pci-intro-off")) {
+    const skip = () => {
+      if (getComputedStyle(intro).visibility !== "hidden") root.classList.add("pci-intro-skip");
+      stopSkip.abort();
+    };
+    const stopSkip = new AbortController();
+    controller.signal.addEventListener("abort", () => stopSkip.abort(), { once: true });
+    for (const type of ["keydown", "pointerdown", "wheel", "touchstart"])
+      window.addEventListener(type, skip, { signal: stopSkip.signal, passive: true, capture: true });
+    // After it has played there is nothing left to skip.
+    intro.addEventListener(
+      "animationend",
+      (event) => {
+        if ((event as AnimationEvent).animationName === "pci-intro-done") stopSkip.abort();
+      },
+      { signal: stopSkip.signal },
+    );
+  }
+
   // Functional controllers: these work with or without the motion bundle and are disposed with the page.
   initProjectFilter(controller.signal);
   const destroyPillars = Array.from(document.querySelectorAll<HTMLElement>("[data-pillars]")).map(initPillars);
