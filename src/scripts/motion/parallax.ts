@@ -27,9 +27,14 @@ export function parallax({ gsap, profile }: Motion) {
     if (!rings) return;
     gsap.fromTo(
       rings,
-      { "--pr": "-8deg" },
+      // Rotation goes through GSAP's own transform (not the CSS rotate variable), so the desktop pointer depth
+      // can share the element without one cancelling the other.
+      // The rings are centred with CSS translate, which GSAP replaces while it owns the transform.
+      { x: 0, y: 0, xPercent: -50, yPercent: -50, rotation: -8 },
       {
-        "--pr": "8deg",
+        xPercent: -50,
+        yPercent: -50,
+        rotation: 8,
         ease: "none",
         scrollTrigger: { trigger: band, start: "top bottom", end: "bottom top", scrub: true },
       },

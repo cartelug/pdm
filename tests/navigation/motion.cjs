@@ -123,6 +123,28 @@ async function stuckElements(page) {
     assert.equal(scenes.marker, "0", "The abstract route marker is hidden once the line is complete");
     assert.ok(Math.abs(parseFloat(scenes.heroImage)) <= 24, "Hero image depth stays within its overscan");
 
+    // Desktop director: active at 1440 px with a mouse; centred layers stay centred; pointer light works.
+    const director = await motion.evaluate(() => {
+      const centre = (selector) => {
+        const box = document.querySelector(selector).getBoundingClientRect();
+        return [box.left + box.width / 2, box.top + box.height / 2];
+      };
+      const [bx, by] = centre(".pci-band");
+      const [rx, ry] = centre(".pci-band__rings");
+      return {
+        glow: getComputedStyle(document.querySelector(".pci-hero__glow")).display,
+        ringsOffset: Math.hypot(bx - rx, by - ry),
+      };
+    });
+    assert.equal(director.glow, "block", "The desktop director's hero light exists on a desktop");
+    assert.ok(director.ringsOffset < 40, "The partnership rings stay centred under GSAP: " + director.ringsOffset);
+    await motion.locator(".pci-spotlight__facts > div").first().hover();
+    assert.equal(
+      await motion.locator(".pci-spotlight__facts > div.is-lit-pointer").count(),
+      1,
+      "Facts carry the pointer light on a desktop",
+    );
+
     // The model diagram accompanies the list on a desktop (sticky is not disabled by an ancestor).
     await motion.evaluate(() => {
       const list = document.querySelector("[data-model]");
@@ -358,6 +380,18 @@ async function stuckElements(page) {
         "Phone " + route + " fits",
       );
     }
+
+    // The desktop director never runs on a phone.
+    await phone.goto(base + "/");
+    await phone.waitForTimeout(1500);
+    assert.deepEqual(
+      await phone.evaluate(() => [
+        getComputedStyle(document.querySelector(".pci-hero__glow")).display,
+        document.querySelector(".pci-pillar__coin").getAttribute("style"),
+      ]),
+      ["none", null],
+      "No desktop choreography on a phone",
+    );
 
     // Phone pillars: a swipe of the native card row selects the card that settles in view.
     await phone.goto(base + "/");

@@ -16,6 +16,8 @@ export interface Motion {
   signal: AbortSignal;
   pointerFine: boolean;
   profile: MotionProfile;
+  // Wide screen with a fine pointer: the desktop director adds its extra choreography.
+  desktop: boolean;
   cleanups: Array<() => void>;
   own: <T>(create: () => T) => T;
 }

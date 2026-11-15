@@ -2,7 +2,7 @@ import { initGlobalNavigation } from "./navigation";
 import { recordEngagement } from "./analytics";
 import { initPillars } from "./pillars";
 import { initProjectFilter } from "./project-filter";
-import { COMPACT } from "./motion/policy";
+import { COMPACT, DESKTOP } from "./motion/policy";
 
 let cleanup: (() => void) | null = null;
 function boot() {
@@ -53,6 +53,7 @@ function boot() {
     // Phone and desktop compositions use different distances and scene choices: rebuild on a real change of
     // profile (rotation, a resized window, a pointer change), never on browser-chrome height changes.
     matchMedia(COMPACT).addEventListener("change", start, { signal: controller.signal });
+    matchMedia(DESKTOP).addEventListener("change", start, { signal: controller.signal });
     await start();
   }, 100);
 

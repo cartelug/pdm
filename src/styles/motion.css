@@ -620,3 +620,284 @@
     }
   }
 }
+
+/* ==========================================================================
+   Desktop director (scripts/motion/desktop.ts): wide screens with a mouse or trackpad and motion allowed.
+   Phones, tablets and reduced motion never match these rules. Effect IDs match
+   docs/quality/DESKTOP-MOTION-PLAN-2026-11-15.md.
+   ========================================================================== */
+@layer motion {
+  /* D007 light layer: absent everywhere except a desktop with motion. */
+  .pci-hero__glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: none;
+    width: 560px;
+    height: 560px;
+    margin: -280px 0 0 -280px;
+    border-radius: 50%;
+    background: radial-gradient(
+      closest-side,
+      rgb(217 31 61 / 30%),
+      rgb(42 89 166 / 10%) 55%,
+      transparent
+    );
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (min-width: 1100px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .pci-hero__glow {
+      display: block;
+    }
+
+    /* Overscan for the scroll drifts (D008, D020, D054, D060): travel always stays inside it. */
+    .pci-hero__media picture,
+    .pci-practice__backdrop picture,
+    .pci-band__backdrop picture {
+      display: block;
+    }
+
+    /* D100 a soft light under the pointer on cards, figures and facts. */
+    .is-lit-pointer {
+      background-image: radial-gradient(
+        280px circle at var(--mx, 50%) var(--my, 50%),
+        rgb(217 31 61 / 9%),
+        transparent 70%
+      );
+    }
+
+    /* D101 dropdown links arrive in a short cascade when a group opens (by hover or keyboard). */
+    .pci-dropdown a {
+      transition:
+        opacity 0.22s ease,
+        translate 0.32s var(--pci-ease);
+    }
+
+    .pci-nav-item:not(:focus-within) > .pci-dropdown a {
+      opacity: 0;
+      translate: -8px 0;
+    }
+
+    .pci-nav-item:focus-within > .pci-dropdown li:nth-child(2) a,
+    .pci-nav-item:hover > .pci-dropdown li:nth-child(2) a {
+      transition-delay: 40ms;
+    }
+
+    .pci-nav-item:focus-within > .pci-dropdown li:nth-child(3) a,
+    .pci-nav-item:hover > .pci-dropdown li:nth-child(3) a {
+      transition-delay: 80ms;
+    }
+
+    .pci-nav-item:focus-within > .pci-dropdown li:nth-child(n + 4) a,
+    .pci-nav-item:hover > .pci-dropdown li:nth-child(n + 4) a {
+      transition-delay: 120ms;
+    }
+
+    @media (hover: hover) {
+      .pci-nav-item:hover > .pci-dropdown a {
+        opacity: 1;
+        translate: 0 0;
+      }
+    }
+
+    /* D102 a light sweep crosses a button under the pointer; the button box never moves. */
+    .pci-button {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .pci-button::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgb(255 255 255 / 22%) 50%,
+        transparent 70%
+      );
+      translate: -110% 0;
+      transition: translate 0.7s var(--pci-ease);
+      pointer-events: none;
+    }
+
+    @media (hover: hover) {
+      .pci-button:hover::after {
+        translate: 110% 0;
+      }
+    }
+
+    /* D103 text links: a heavier underline sweeps across under the pointer. */
+    .pci-text-link {
+      background: linear-gradient(currentcolor, currentcolor) 0 100% / 0 2px no-repeat;
+      transition:
+        background-size 0.45s var(--pci-ease),
+        color 0.2s;
+    }
+
+    @media (hover: hover) {
+      .pci-text-link:hover {
+        background-size: 100% 2px;
+      }
+    }
+
+    /* D104 rows warm under the pointer and their number takes the accent. */
+    .pci-row {
+      transition: background-color 0.35s ease;
+    }
+
+    @media (hover: hover) {
+      .pci-row:hover {
+        background-color: rgb(217 31 61 / 4%);
+      }
+
+      .pci-row:hover .pci-row__no {
+        color: var(--pci-crimson);
+      }
+    }
+
+    /* D105 tags lift under the pointer. */
+    .pci-tags span {
+      transition:
+        translate 0.3s var(--pci-ease),
+        border-color 0.3s;
+    }
+
+    @media (hover: hover) {
+      .pci-tags span:hover {
+        translate: 0 -3px;
+        border-color: currentcolor;
+      }
+    }
+
+    /* D106 social links: the icon turns under the pointer. */
+    .pci-footer__socials .pci-icon {
+      transition: rotate 0.4s var(--pci-ease);
+    }
+
+    @media (hover: hover) {
+      .pci-footer__socials a:hover .pci-icon {
+        rotate: 45deg;
+      }
+    }
+
+    /* D107 carousel arrows nudge in their own direction. */
+    .pci-carousel__button .pci-icon {
+      transition: translate 0.3s var(--pci-ease);
+    }
+
+    @media (hover: hover) {
+      .pci-carousel__button:first-child:hover .pci-icon {
+        translate: -3px 0;
+      }
+
+      .pci-carousel__button:last-child:hover .pci-icon {
+        translate: 3px 0;
+      }
+    }
+
+    /* D108 card labels step toward the arrow and take the accent. */
+    .pci-card__label {
+      transition:
+        translate 0.35s var(--pci-ease),
+        color 0.25s;
+    }
+
+    @media (hover: hover) {
+      a.pci-card:hover .pci-card__label {
+        translate: 4px 0;
+        color: var(--pci-crimson);
+      }
+    }
+
+    /* D109 model stage numbers grow under the pointer. */
+    .pci-model a > span:first-child {
+      transition:
+        scale 0.35s var(--pci-ease),
+        color 0.25s;
+    }
+
+    @media (hover: hover) {
+      .pci-model a:hover > span:first-child {
+        scale: 1.3;
+      }
+    }
+
+    /* D110 check marks turn under the pointer. */
+    .pci-checks__mark {
+      transition: rotate 0.45s var(--pci-ease);
+    }
+
+    @media (hover: hover) {
+      .pci-checks li:hover .pci-checks__mark {
+        rotate: 90deg;
+      }
+    }
+
+    /* D111 the pillar link's arrow disc slides forward. */
+    .pci-pillars__go span {
+      transition: translate 0.3s var(--pci-ease);
+    }
+
+    @media (hover: hover) {
+      .pci-pillars__go:hover span {
+        translate: 4px 0;
+      }
+    }
+
+    /* D112 pillar list: on every new choice its points arrive in a short cascade. */
+    @keyframes pci-cover-in {
+      from {
+        opacity: 0;
+        translate: -14px 0;
+      }
+    }
+
+    .pci-pillars.is-changing .pci-pillars__covers li {
+      animation: pci-cover-in 0.45s var(--pci-ease) backwards;
+    }
+
+    .pci-pillars.is-changing .pci-pillars__covers li:nth-child(1) {
+      animation-delay: 0.18s;
+    }
+
+    .pci-pillars.is-changing .pci-pillars__covers li:nth-child(2) {
+      animation-delay: 0.24s;
+    }
+
+    .pci-pillars.is-changing .pci-pillars__covers li:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .pci-pillars.is-changing .pci-pillars__covers li:nth-child(n + 4) {
+      animation-delay: 0.36s;
+    }
+
+    /* D113 governance steps: each number pops once as its step lights. */
+    @keyframes pci-step-pop {
+      40% {
+        scale: 1.25;
+      }
+    }
+
+    .pci-steps.is-live li.is-lit .pci-steps__no {
+      animation: pci-step-pop 0.5s var(--pci-ease);
+    }
+
+    /* D114 the model diagram's current node swells slightly while it is read. */
+    .pci-cycle__node > circle:last-of-type {
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: scale 0.4s var(--pci-ease);
+    }
+
+    .pci-cycle__node.is-current > circle:last-of-type {
+      scale: 1.18;
+    }
+  }
+}

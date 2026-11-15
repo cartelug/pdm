@@ -1,4 +1,4 @@
-import { stagger, tokens } from "./policy";
+import { DESKTOP_BLOCKS, DESKTOP_GROUPS, stagger, tokens } from "./policy";
 import { type Motion, inView, qs, qsa } from "./types";
 
 const HEADINGS = [
@@ -23,7 +23,7 @@ const RULES: Array<[selector: string, edge: "bottom" | "top"]> = [
   [".pci-trust-points li", "top"],
 ];
 
-export function reveal({ gsap, ScrollTrigger, SplitText, profile, cleanups }: Motion) {
+export function reveal({ gsap, ScrollTrigger, SplitText, profile, desktop, cleanups }: Motion) {
   const t = tokens(profile);
   // Headlines rise line by line out of a mask that leaves descenders and italic overhang alone.
   qsa(HEADINGS)
@@ -68,7 +68,7 @@ export function reveal({ gsap, ScrollTrigger, SplitText, profile, cleanups }: Mo
 
   // Blocks fade and lift. A block that holds a split headline only fades, so the two do not fight.
   qsa("[data-reveal]:not([data-project-status])")
-    .filter((block) => !inView(block))
+    .filter((block) => !inView(block) && !(desktop && block.matches(DESKTOP_BLOCKS)))
     .forEach((block) => {
       const lift = block.matches(HEADINGS) || block.querySelector(HEADINGS) ? 0 : t.arrivalTravel;
       gsap.set(block, { opacity: 0, y: lift });
@@ -88,6 +88,7 @@ export function reveal({ gsap, ScrollTrigger, SplitText, profile, cleanups }: Mo
     });
 
   qsa("[data-reveal-group]").forEach((group) => {
+    if (desktop && group.matches(DESKTOP_GROUPS)) return;
     const items = Array.from(group.children) as HTMLElement[];
     if (!items.length || inView(group, 0.8)) return;
     gsap.set(items, { opacity: 0, y: t.arrivalTravel });

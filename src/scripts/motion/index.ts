@@ -11,7 +11,7 @@ import { filter } from "./filter";
 import { footer } from "./footer";
 import { hero } from "./hero";
 import { parallax } from "./parallax";
-import { profile } from "./policy";
+import { DESKTOP, profile } from "./policy";
 import { reveal } from "./reveal";
 import { route } from "./route";
 import { scrub } from "./scrub";
@@ -45,7 +45,7 @@ export async function initScrollMotion(cancel: AbortSignal): Promise<() => void>
   if (cancel.aborted) return noop;
   gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin);
   const abort = new AbortController();
-  const desktop = matchMedia("(min-width: 1161px) and (pointer: fine)");
+  const lenisQuery = matchMedia("(min-width: 1161px) and (pointer: fine)");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)");
   // Triggers that existed before this owner started are not ours to kill.
   const foreign = new Set(ScrollTrigger.getAll());
@@ -99,9 +99,17 @@ export async function initScrollMotion(cancel: AbortSignal): Promise<() => void>
 
   const pointerFine = matchMedia("(hover: hover) and (pointer: fine)").matches;
   const currentProfile = profile();
+  const isDesktop = matchMedia(DESKTOP).matches;
+  // The desktop director is its own chunk: phones and tablets never download or parse it.
+  const features: Array<(motion: Motion) => void> = [...FEATURES];
+  if (isDesktop) {
+    const { desktop } = await import("./desktop");
+    if (cancelled()) return noop;
+    features.push(desktop);
+  }
   // Each feature sets up in its own task and its own context, so no single stretch of work blocks the main
   // thread for long, and a feature that fails is reverted on its own while the rest of the page carries on.
-  for (const feature of FEATURES) {
+  for (const feature of features) {
     const context = gsap.context(() => {});
     const cleanups: Array<() => void> = [];
     owners.push({ context, cleanups });
@@ -113,6 +121,7 @@ export async function initScrollMotion(cancel: AbortSignal): Promise<() => void>
       signal: abort.signal,
       pointerFine,
       profile: currentProfile,
+      desktop: isDesktop,
       cleanups,
       own: <T>(create: () => T): T => {
         let result: T | undefined;
@@ -174,16 +183,16 @@ export async function initScrollMotion(cancel: AbortSignal): Promise<() => void>
   async function prepareLenis() {
     const generation = ++lenisGeneration;
     stopLenis();
-    if (!desktop.matches || !alive || reduce.matches) return;
+    if (!lenisQuery.matches || !alive || reduce.matches) return;
     const { default: Lenis } = await import("lenis");
-    if (!alive || !desktop.matches || reduce.matches || generation !== lenisGeneration) return;
+    if (!alive || !lenisQuery.matches || reduce.matches || generation !== lenisGeneration) return;
     lenis = new Lenis({ autoRaf: false, duration: 0.9, anchors: true });
     lenis.on("scroll", ScrollTrigger.update);
     ticker = (time) => lenis?.raf(time * 1000);
     gsap.ticker.add(ticker);
     gsap.ticker.lagSmoothing(0);
   }
-  desktop.addEventListener("change", prepareLenis, { signal: abort.signal });
+  lenisQuery.addEventListener("change", prepareLenis, { signal: abort.signal });
 
   // The menu owns scrolling while it is open: the body is fixed, so window.scrollY reads 0. Hold every scene
   // where it is instead of letting it interpret that as "back at the top", and resume once the menu has put

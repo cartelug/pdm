@@ -16,6 +16,8 @@ export function filter({ gsap, Flip, profile, cleanups }: Motion) {
     const state = Flip.getState(cards);
     // Finish the previous reflow so no card keeps its temporary absolute position or opacity.
     active?.progress(1).kill();
+    // A card still arriving (desktop director) hands its transform to the reflow.
+    gsap.killTweensOf(cards);
     gsap.set(cards, { clearProps: "opacity,transform,scale,pointerEvents" });
     apply();
     active = Flip.from(state, {
