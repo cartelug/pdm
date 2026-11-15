@@ -433,8 +433,8 @@
     opacity: 0;
     transform: translateY(-14px);
     transition:
-      opacity 0.22s ease,
-      transform 0.22s var(--pci-ease);
+      opacity 0.28s ease,
+      transform 0.28s var(--pci-ease);
     overflow-y: auto;
     overscroll-behavior: contain;
   }
@@ -447,6 +447,12 @@
   .pci-menu[data-state="open"] {
     opacity: 1;
     transform: none;
+  }
+
+  /* Closing is quicker than opening, so the page comes back promptly. */
+  .pci-menu[data-state="closing"],
+  .pci-menu[data-state="navigating"] {
+    transition-duration: 0.18s;
   }
 
   .pci-menu::backdrop {

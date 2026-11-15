@@ -1,27 +1,35 @@
 import { type Motion, qsa } from "./types";
 
-export function parallax({ gsap }: Motion) {
-  // Photographs drift against their frames.
+// Bounded image depth. Each photograph drifts inside its frame by less than its own overscan, so no edge is
+// ever exposed: for a centred image scaled by s, the safe travel either way is (s - 1) / 2 of its height
+// (project cards: 1.08 → 4 %, campaign panels: 1.1 → 5 %). Phones use half the travel.
+export function parallax({ gsap, profile }: Motion) {
+  const share = profile === "full" ? 0.75 : 0.4;
   qsa(".pci-project__media img, .pci-duo__media img").forEach((image) => {
     const frame = (image.closest(".pci-duo__panel") ?? image.parentElement) as HTMLElement;
+    // Overscan from the stylesheet's own base scale; never more travel than the image can cover.
+    const base = parseFloat(getComputedStyle(image).getPropertyValue("--img-base")) || 1;
+    const travel = Math.max(0, ((base - 1) / 2) * 100 * share).toFixed(2);
     gsap.fromTo(
       image,
-      { "--img-y": "-6%" },
+      { "--img-y": `-${travel}%` },
       {
-        "--img-y": "6%",
+        "--img-y": `${travel}%`,
         ease: "none",
         scrollTrigger: { trigger: frame, start: "top bottom", end: "bottom top", scrub: true },
       },
     );
   });
 
-  // The concentric rings of the partnership band slowly turn.
+  // The partnership rings turn a few degrees while the band is on screen, then rest.
   qsa(".pci-band").forEach((band) => {
+    const rings = band.querySelector(".pci-band__rings");
+    if (!rings) return;
     gsap.fromTo(
-      band.querySelector(".pci-band__rings"),
-      { "--pr": "-35deg" },
+      rings,
+      { "--pr": "-8deg" },
       {
-        "--pr": "55deg",
+        "--pr": "8deg",
         ease: "none",
         scrollTrigger: { trigger: band, start: "top bottom", end: "bottom top", scrub: true },
       },

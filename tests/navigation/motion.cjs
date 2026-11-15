@@ -48,6 +48,9 @@ async function stuckElements(page) {
       ".pci-project__media",
       ".pci-campaign-panel__media",
       ".pci-footer__invitation .pci-actions > *",
+      ".pci-spotlight__copy > *",
+      ".pci-spotlight__facts > div",
+      ".pci-spotlight__media figcaption",
     ];
     const stuck = [];
     for (const selector of selectors)
@@ -99,6 +102,85 @@ async function stuckElements(page) {
       ),
       "1",
       "The footer wordmark fills as the footer arrives",
+    );
+
+    // The six homepage scenes end in their complete, still state after a scroll through the page.
+    const scenes = await motion.evaluate(() => {
+      const t = (selector) => getComputedStyle(document.querySelector(selector)).transform;
+      return {
+        cover: t(".pci-spotlight__cover"),
+        thread: t(".pci-spotlight__thread"),
+        footerThread: t(".pci-footer__thread"),
+        routeLine: getComputedStyle(document.querySelector(".pci-route__svg--wide [data-route-line]")).strokeDashoffset,
+        marker: getComputedStyle(document.querySelector(".pci-route__svg--wide [data-route-marker]")).opacity,
+        heroImage: getComputedStyle(document.querySelector(".pci-hero__media img")).getPropertyValue("--img-y").trim(),
+      };
+    });
+    assert.equal(scenes.cover, "matrix(1, 0, 0, 0, 0, 0)", "The campus cover has fully retracted");
+    assert.equal(scenes.thread, "none", "The campus thread is fully drawn");
+    assert.equal(scenes.footerThread, "none", "The closing thread is fully drawn");
+    assert.ok(["0", "0px"].includes(scenes.routeLine), "The route line is complete at the end: " + scenes.routeLine);
+    assert.equal(scenes.marker, "0", "The abstract route marker is hidden once the line is complete");
+    assert.ok(Math.abs(parseFloat(scenes.heroImage)) <= 24, "Hero image depth stays within its overscan");
+
+    // The model diagram accompanies the list on a desktop (sticky is not disabled by an ancestor).
+    await motion.evaluate(() => {
+      const list = document.querySelector("[data-model]");
+      window.scrollTo({ top: list.getBoundingClientRect().top + scrollY + list.offsetHeight / 2, behavior: "instant" });
+    });
+    await motion.waitForTimeout(700);
+    const stick = await motion.evaluate(() => document.querySelector(".pci-cycle__stick").getBoundingClientRect().top);
+    assert.ok(stick > 0 && stick < 200, "The model diagram stays in view beside its list: " + stick);
+    assert.equal(await motion.locator(".pci-model a.is-current").count(), 1, "One stage is current while reading");
+
+    // The menu holds every scene still while it locks the page, and puts the reading position back.
+    const before = await motion.evaluate(() => window.scrollY);
+    const ringBefore = await motion.evaluate(
+      () => document.querySelector("[data-model-progress]").style.strokeDashoffset,
+    );
+    await motion.setViewportSize({ width: 1000, height: 900 });
+    await motion.waitForTimeout(600);
+    const scrolled = await motion.evaluate(() => window.scrollY);
+    // A direct click: Playwright's own click would first scroll the toggle "into view".
+    await motion.evaluate(() => document.querySelector("[data-menu-open]").click());
+    await motion.waitForTimeout(400);
+    const ringOpen = await motion.evaluate(
+      () => document.querySelector("[data-model-progress]").style.strokeDashoffset,
+    );
+    await motion.keyboard.press("Escape");
+    await motion.waitForTimeout(500);
+    assert.equal(
+      await motion.evaluate(() => window.scrollY),
+      scrolled,
+      "Closing the menu restores the reading position",
+    );
+    assert.notEqual(ringOpen, "1", "Locking the page does not rewind the model ring to the start");
+    assert.ok(before > 0 && ringBefore !== "");
+    await motion.setViewportSize({ width: 1440, height: 900 });
+
+    // Pillars: one controller, even after the page is restored from the back/forward cache.
+    await motion.evaluate(() => {
+      window.dispatchEvent(new PageTransitionEvent("pagehide", { persisted: true }));
+      window.dispatchEvent(new PageTransitionEvent("pageshow", { persisted: true }));
+    });
+    await motion.waitForTimeout(300);
+    await motion.locator('#our-pillars [role="tab"][aria-selected="true"]').focus();
+    const selected = await motion
+      .locator('#our-pillars [role="tab"][aria-selected="true"]')
+      .getAttribute("data-pillar");
+    await motion.keyboard.press("ArrowRight");
+    await motion.waitForTimeout(100);
+    const order = ["education", "health", "climate", "inclusion"];
+    assert.equal(
+      await motion.locator('#our-pillars [role="tab"][aria-selected="true"]').getAttribute("data-pillar"),
+      order[(order.indexOf(selected) + 1) % 4],
+      "One arrow key press moves exactly one pillar (no duplicate controller after restore)",
+    );
+    await motion.waitForTimeout(700);
+    assert.equal(
+      await motion.locator("#our-pillars [role=tabpanel]:visible a").count(),
+      1,
+      "Only the chosen pillar's link is reachable on a desktop",
     );
 
     for (const route of [
@@ -172,6 +254,38 @@ async function stuckElements(page) {
       "No card is left faded after filtering",
     );
 
+    // Rapid alternating filters: the latest choice wins and nothing is left mid-flight.
+    for (const name of ["Pipeline", "All projects", "Pipeline", "All projects", "Pipeline", "All projects"]) {
+      await motion.getByRole("button", { name, exact: true }).click();
+      await motion.waitForTimeout(60);
+    }
+    await motion.waitForTimeout(1200);
+    assert.equal(await motion.locator("[data-project-status]:visible").count(), 4, "Rapid filters end on All");
+    assert.deepEqual(
+      await motion
+        .locator("[data-project-status]")
+        .evaluateAll((cards) => cards.map((card) => [getComputedStyle(card).opacity, card.style.position || ""])),
+      [
+        ["1", ""],
+        ["1", ""],
+        ["1", ""],
+        ["1", ""],
+      ],
+      "No card keeps a temporary position or fade after rapid filtering",
+    );
+    assert.equal(await motion.locator("[data-filter-count]").textContent(), "4 projects shown");
+
+    // Focus wins over a pending reveal: focusing a control below the fold shows it at once.
+    await motion.goto(base + "/");
+    await motion.waitForFunction(() => document.querySelector(".pci-strip.is-marquee"), null, { timeout: 8000 });
+    await motion.locator(".pci-spotlight__copy .pci-button").focus();
+    await motion.waitForTimeout(150);
+    assert.equal(
+      await motion.locator(".pci-spotlight__copy > .pci-actions").evaluate((el) => getComputedStyle(el).opacity),
+      "1",
+      "A focused action is never left hidden by its entrance",
+    );
+
     // Turning reduced motion on while the page is open removes every scripted change.
     await motion.goto(base + "/");
     await motion.waitForFunction(() => document.querySelector(".pci-strip.is-marquee"), null, { timeout: 8000 });
@@ -179,6 +293,33 @@ async function stuckElements(page) {
     await motion.waitForFunction(() => !document.querySelector(".pci-strip.is-marquee"), null, { timeout: 5000 });
     assert.equal(await motion.locator(".pci-split-mask").count(), 0, "Split headlines are restored");
     assert.equal(await motion.locator(".pci-strip__track").count(), 0, "The principle strip is a plain list again");
+    assert.deepEqual(
+      await motion.evaluate(() =>
+        [
+          ".pci-spotlight__cover",
+          ".pci-spotlight__thread",
+          ".pci-footer__thread",
+          "[data-route-line]",
+          ".pci-hero__media img",
+        ]
+          .flatMap((selector) => Array.from(document.querySelectorAll(selector)))
+          .filter((element) => element.getAttribute("style"))
+          .map((element) => element.className.baseVal ?? element.className),
+      ),
+      [],
+      "Every scene owner removes its inline state on teardown",
+    );
+
+    // Reduced motion switched on while the motion bundle is still waiting on fonts and imports.
+    const early = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+    watch(early);
+    await early.goto(base + "/");
+    await early.emulateMedia({ reducedMotion: "reduce" });
+    await early.waitForTimeout(2500);
+    assert.equal(await early.locator(".pci-split-mask").count(), 0, "A cancelled setup leaves no split text");
+    assert.equal(await early.locator(".pci-strip.is-marquee").count(), 0, "A cancelled setup leaves no marquee");
+    await scrollThrough(early);
+    assert.deepEqual(await stuckElements(early), [], "A cancelled setup hides nothing");
 
     // ---- Reduced motion from the start ----
     const still = await (
@@ -218,6 +359,25 @@ async function stuckElements(page) {
       );
     }
 
+    // Phone pillars: a swipe of the native card row selects the card that settles in view.
+    await phone.goto(base + "/");
+    await phone.waitForTimeout(900);
+    await phone.locator("[data-pillars-panels]").evaluate((track) => {
+      const cards = track.querySelectorAll('[role="tabpanel"]');
+      track.scrollTo({ left: cards[2].offsetLeft - cards[0].offsetLeft, behavior: "instant" });
+    });
+    await phone.waitForTimeout(400);
+    assert.equal(
+      await phone.locator('#our-pillars [role="tab"][aria-selected="true"]').getAttribute("data-pillar"),
+      "climate",
+      "Swiping the cards keeps the stage in step",
+    );
+    assert.equal(
+      await phone.evaluate(() => getComputedStyle(document.querySelector(".pci-route__svg--compact")).display),
+      "block",
+      "Phones get the compact route composition",
+    );
+
     // ---- JavaScript off: nothing is hidden, nothing moves ----
     const plain = await (
       await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1440, height: 900 } })
@@ -229,7 +389,7 @@ async function stuckElements(page) {
 
     assert.deepEqual(errors, []);
     console.log(
-      "Motion checks passed: entrance, scroll effects, filter reflow, reduced motion, phone width and no-JS.",
+      "Motion checks passed: six scenes, ownership and teardown, menu lock, filter transaction, pillars restore, focus, reduced motion, phone and no-JS.",
     );
   } finally {
     await browser.close();

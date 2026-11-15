@@ -1,7 +1,7 @@
 import { type Motion, qsa } from "./types";
 
 // Sequences that read as a path: the money trail lights up step by step and a timeline draws itself.
-export function flow({ gsap, ScrollTrigger, cleanups }: Motion) {
+export function flow({ gsap, ScrollTrigger, profile, own, cleanups }: Motion) {
   qsa(".pci-steps").forEach((steps) => {
     const items = qsa("li", steps);
     steps.classList.add("is-live");
@@ -9,8 +9,13 @@ export function flow({ gsap, ScrollTrigger, cleanups }: Motion) {
       trigger: steps,
       start: "top 78%",
       once: true,
+      // Owned, so leaving the page or turning motion off cancels any step still waiting to light.
       onEnter: () =>
-        items.forEach((item, index) => gsap.delayedCall(0.22 + index * 0.2, () => item.classList.add("is-lit"))),
+        own(() =>
+          items.forEach((item, index) =>
+            gsap.delayedCall(0.12 + index * (profile === "full" ? 0.12 : 0.08), () => item.classList.add("is-lit")),
+          ),
+        ),
     });
     cleanups.push(() => {
       steps.classList.remove("is-live");

@@ -91,8 +91,19 @@
 
   @media (hover: hover) {
     .pci-button:hover .pci-icon {
-      transform: translateX(3px);
+      transform: translateX(4px);
     }
+  }
+
+  /* Keyboard focus gets the same affordance as hover; a press answers at once inside the disc, while the
+     button box and its hit area stay exactly where they are. */
+  .pci-button:focus-visible .pci-icon {
+    transform: translateX(4px);
+  }
+
+  .pci-button:active .pci-icon {
+    scale: 0.92;
+    transition-duration: 0.1s;
   }
 
   .pci-button--ink {
@@ -257,6 +268,15 @@
     background: var(--pci-crimson);
     color: #fff;
     overflow: hidden;
+  }
+
+  /* Clip the decorative glows without making the section a scroll container: overflow: hidden silently
+     disabled every sticky companion inside these sections (the model diagram, process asides). */
+  @supports (overflow: clip) {
+    .pci-section--night,
+    .pci-section--crimson {
+      overflow: clip;
+    }
   }
 
   .pci-section--night h1 em,

@@ -1114,17 +1114,22 @@
   }
 
   .pci-project__media img {
+    /* Overscan, an arrival settle and a hover lift each own one factor, so none overwrites another:
+       --img-base (hover), --img-settle (reveal.ts) and --img-y (parallax.ts, bounded by the overscan). */
+    --img-base: 1.08;
+
     width: 100%;
     height: 100%;
     object-fit: cover;
-    scale: 1.08;
+    scale: calc(var(--img-base) * var(--img-settle, 1));
     transform: translate3d(0, var(--img-y, 0%), 0);
-    transition: scale 0.9s var(--pci-ease);
+    transition: --img-base 0.6s var(--pci-ease);
   }
 
   @media (hover: hover) {
-    .pci-project:hover .pci-project__media img {
-      scale: 1.13;
+    .pci-project:hover .pci-project__media img,
+    .pci-project:focus-within .pci-project__media img {
+      --img-base: 1.105;
     }
   }
 
@@ -1430,12 +1435,14 @@
   }
 
   .pci-duo__media img {
+    --img-base: 1.1;
+
     width: 100%;
     height: 100%;
     object-fit: cover;
-    scale: 1.1;
+    scale: calc(var(--img-base) * var(--img-settle, 1));
     transform: translate3d(0, var(--img-y, 0%), 0);
-    transition: scale 1.2s var(--pci-ease);
+    transition: --img-base 0.8s var(--pci-ease);
   }
 
   .pci-duo__panel::before {
@@ -1516,7 +1523,7 @@
     }
 
     .pci-duo__panel:hover .pci-duo__media img {
-      scale: 1.16;
+      --img-base: 1.13;
     }
   }
 
@@ -2120,16 +2127,6 @@
 }
 
 /* ---------- Motion ---------- */
-@keyframes pci-aurora {
-  from {
-    transform: translate3d(-3%, -2%, 0) scale(1);
-  }
-
-  to {
-    transform: translate3d(4%, 3%, 0) scale(1.12);
-  }
-}
-
 @keyframes pci-ping {
   0% {
     transform: scale(0.6);
@@ -2142,35 +2139,13 @@
   }
 }
 
-@keyframes pci-home-rise {
-  from {
-    opacity: 0;
-    translate: 0 26px;
-  }
-
-  to {
-    opacity: 1;
-    translate: 0 0;
-  }
-}
-
+/* Persistent movement is limited: the background glows are still, and the live-status ping gives three
+   beats and stops. The spotlight facts and the campaign duo are revealed by scripts/motion (one owner),
+   not by CSS view timelines. */
 @media (prefers-reduced-motion: no-preference) {
   @layer home {
-    .pci-spotlight__glow {
-      animation: pci-aurora 22s ease-in-out infinite alternate;
-    }
-
     .pci-pulse::after {
-      animation: pci-ping 2.4s ease-out infinite;
-    }
-
-    @supports (animation-timeline: view()) {
-      .pci-spotlight__facts > div,
-      .pci-home .pci-duo__panel {
-        animation: pci-home-rise linear both;
-        animation-timeline: view();
-        animation-range: entry 4% cover 26%;
-      }
+      animation: pci-ping 2.4s ease-out 0.8s 3 backwards;
     }
   }
 }
@@ -2280,7 +2255,6 @@
   }
 
   .pci-route__line {
-    stroke: url("#route-line");
     stroke-width: 6;
     stroke-dasharray: 1;
     stroke-dashoffset: 0;
@@ -2372,16 +2346,6 @@
   }
 }
 
-@keyframes pci-draw {
-  from {
-    stroke-dashoffset: 1;
-  }
-
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
 @keyframes pci-cue {
   0% {
     opacity: 0;
@@ -2398,26 +2362,12 @@
   }
 }
 
+/* The route line is drawn by scripts/motion/route.ts alone. Without it the line is simply complete. The scroll
+   cue gives three beats after the entrance and then rests. */
 @media (prefers-reduced-motion: no-preference) {
   @layer home {
-    .pci-route__glow {
-      animation: pci-aurora 24s ease-in-out infinite alternate;
-    }
-
-    .pci-route__pin--end circle:first-child {
-      animation: pci-ping 2.6s ease-out infinite;
-    }
-
     .pci-hero__cue span {
-      animation: pci-cue 1.9s ease-in-out infinite;
-    }
-
-    @supports (animation-timeline: view()) {
-      .pci-route__line {
-        animation: pci-draw linear both;
-        animation-timeline: view();
-        animation-range: entry 8% cover 48%;
-      }
+      animation: pci-cue 1.9s ease-in-out 1.2s 3 backwards;
     }
   }
 }
@@ -2451,5 +2401,221 @@
   .pci-pillars__sculpture {
     transform: none;
     transition: opacity 0.2s;
+  }
+}
+
+/* ---------- Signature scenes: the crimson thread, frames and circles ----------
+   Every rule here describes the finished, static state. Scripts and keyframes only travel towards it, so
+   without JavaScript, under reduced motion, or after a failed import, each scene is complete. */
+@layer home {
+  /* Scene 1: the thread leaves the hero along its lower edge and runs straight into the principle strip. */
+  .pci-hero__thread {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b82, #d91f3d 38%, #b71935 62%, #2a9cc1);
+    transform-origin: 0 50%;
+    pointer-events: none;
+  }
+
+  /* The accent phrase carries a fine underline, drawn once with the entrance. */
+  .pci-hero__line em {
+    background: linear-gradient(90deg, #ff6b82, #d91f3d) 0 94% / 100% 0.07em no-repeat;
+  }
+
+  /* A thread rule: a short line that runs towards the next action. */
+  .pci-thread {
+    display: block;
+    width: min(100%, 22rem);
+    height: 2px;
+    margin: 26px 0 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #d91f3d, #b71935 55%, #2a59a6);
+    transform-origin: 0 50%;
+  }
+
+  .pci-spotlight__thread {
+    margin-top: 0;
+  }
+
+  .pci-spotlight__thread + .pci-actions {
+    margin-top: 18px;
+  }
+
+  /* Phones and narrow tablets: status and heading first, then the campus, then facts and the action, as one
+     natural flow with no decorative gap. Only the visual order changes; the figure holds nothing focusable. */
+  @media (max-width: 959px) {
+    .pci-spotlight__grid {
+      gap: 0;
+    }
+
+    .pci-spotlight__copy {
+      display: contents;
+    }
+
+    .pci-spotlight__copy > .pci-eyebrow,
+    .pci-spotlight__status,
+    .pci-spotlight__thread {
+      justify-self: start;
+    }
+
+    .pci-spotlight__media {
+      order: 1;
+      margin-top: 32px;
+    }
+
+    .pci-spotlight__facts,
+    .pci-spotlight__thread,
+    .pci-spotlight__copy > .pci-actions,
+    .pci-spotlight__note {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .pci-spotlight__frame {
+      aspect-ratio: 1;
+      border-radius: 28px 28px 88px;
+    }
+
+    .pci-spotlight__edge {
+      left: -9px;
+    }
+  }
+
+  /* Scene 2: the campus window. The cover is the paper colour of the section and normally has no height;
+     the reveal starts it full and retracts it once. The edge is a thin crimson rule on the frame's open side. */
+  .pci-spotlight__cover {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(180deg, #f4ede4, #efe6db);
+    transform: scaleY(0);
+    transform-origin: 50% 0;
+    pointer-events: none;
+  }
+
+  /* A thin crimson-to-blue rule standing just off the frame's open edge: the thread meeting the building. */
+  .pci-spotlight__edge {
+    position: absolute;
+    top: 9%;
+    left: -12px;
+    width: 3px;
+    height: 54%;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #d91f3d, #2a59a6);
+    transform-origin: 50% 0;
+    pointer-events: none;
+  }
+
+  .pci-spotlight__frame img {
+    transform-origin: 50% 46%;
+  }
+
+  /* Scene 3: two authored compositions of the same illustrative route. Phones get a taller path whose
+     endpoints stay readable; the labels are ordinary text below either one. */
+  .pci-route__svg--compact {
+    display: none;
+    max-width: 440px;
+    margin-inline: auto;
+  }
+
+  @media (max-width: 639px) {
+    .pci-route__svg--wide {
+      display: none;
+    }
+
+    .pci-route__svg--compact {
+      display: block;
+    }
+  }
+
+  .pci-route__marker {
+    fill: #fff;
+    stroke: #d91f3d;
+    stroke-width: 4;
+    opacity: 0;
+  }
+
+  .pci-route__arrive {
+    fill: none;
+    stroke: #5cc8e8;
+    stroke-width: 2;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  /* Scene 4: the ring lights the segment where the chosen pillar stands, in that pillar's colour. */
+  .pci-pillars__arc {
+    position: absolute;
+    inset: -2px;
+    border: 2px solid transparent;
+    border-bottom-color: var(--lit);
+    border-radius: 50%;
+    transition: border-color 0.6s ease;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @layer home {
+    @keyframes pci-arc-sweep {
+      from {
+        rotate: calc(var(--dir, 1) * 70deg);
+        opacity: 0.2;
+      }
+    }
+
+    .pci-pillars.is-changing .pci-pillars__arc {
+      animation: pci-arc-sweep 0.72s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    @keyframes pci-arrive {
+      0% {
+        opacity: 0.9;
+        scale: 1;
+      }
+
+      100% {
+        opacity: 0;
+        scale: 2.2;
+      }
+    }
+
+    .pci-route.is-arrived .pci-route__arrive {
+      animation: pci-arrive 1.1s ease-out 1;
+    }
+  }
+}
+
+/* Registered so the hover lift transitions smoothly while the settle factor is driven by script. */
+@property --img-base {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --img-settle {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+/* Scene 5: the model diagram stays beside the list only when it fits (cycle.ts measures it). */
+@layer home {
+  .is-unfit .pci-cycle__stick {
+    position: static;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @layer home {
+    /* Reaching the last stage closes the cycle once on the first node. */
+    .is-closed [data-cycle-node="1"] .pci-cycle__pulse {
+      animation: pci-ping 1.2s ease-out 1;
+    }
   }
 }

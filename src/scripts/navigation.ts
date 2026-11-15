@@ -50,7 +50,7 @@ export function initGlobalNavigation(): () => void {
     stopPending();
     setState(navigating ? "navigating" : "closing");
     if (immediate || reduced.matches) finishClose(restoreFocus);
-    else timer = window.setTimeout(() => finishClose(restoreFocus), 220);
+    else timer = window.setTimeout(() => finishClose(restoreFocus), 190);
   }
   function open() {
     stopPending();

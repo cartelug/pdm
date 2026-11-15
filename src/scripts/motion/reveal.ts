@@ -1,7 +1,10 @@
+import { stagger, tokens } from "./policy";
 import { type Motion, inView, qs, qsa } from "./types";
 
 const HEADINGS = [
   ".pci-section-head h2",
+  ".pci-spotlight__copy h2",
+  ".pci-route__head h2",
   ".pci-split__aside h2",
   ".pci-statement",
   ".pci-quote",
@@ -20,7 +23,8 @@ const RULES: Array<[selector: string, edge: "bottom" | "top"]> = [
   [".pci-trust-points li", "top"],
 ];
 
-export function reveal({ gsap, ScrollTrigger, SplitText, cleanups }: Motion) {
+export function reveal({ gsap, ScrollTrigger, SplitText, profile, cleanups }: Motion) {
+  const t = tokens(profile);
   // Headlines rise line by line out of a mask that leaves descenders and italic overhang alone.
   qsa(HEADINGS)
     .filter((heading) => !inView(heading))
@@ -43,11 +47,20 @@ export function reveal({ gsap, ScrollTrigger, SplitText, cleanups }: Motion) {
           const timeline = gsap.timeline({
             scrollTrigger: { trigger: heading, start: "top 88%", once: true, onEnter: () => (played = true) },
           });
-          timeline.from(self.lines, { yPercent: 115, duration: 1.15, ease: "power4.out", stagger: 0.11 });
-          // The italic accent arrives a beat later and slides into place, so the pairing reads as a pair.
+          timeline.from(self.lines, {
+            yPercent: 112,
+            duration: t.sectionArrival,
+            ease: "power4.out",
+            stagger: t.headingStagger,
+          });
+          // The accent phrase arrives a beat later, so the pairing reads as a pair.
           const accents = qsa("em", heading);
           if (accents.length)
-            timeline.from(accents, { opacity: 0, x: -22, duration: 1.1, ease: "power3.out", stagger: 0.08 }, 0.28);
+            timeline.from(
+              accents,
+              { opacity: 0, x: profile === "full" ? -12 : 0, duration: t.sectionArrival, ease: "power3.out" },
+              t.headingStagger * 2,
+            );
           return timeline;
         },
       });
@@ -57,21 +70,27 @@ export function reveal({ gsap, ScrollTrigger, SplitText, cleanups }: Motion) {
   qsa("[data-reveal]:not([data-project-status])")
     .filter((block) => !inView(block))
     .forEach((block) => {
-      const lift = block.matches(HEADINGS) || block.querySelector(HEADINGS) ? 0 : 34;
+      const lift = block.matches(HEADINGS) || block.querySelector(HEADINGS) ? 0 : t.arrivalTravel;
       gsap.set(block, { opacity: 0, y: lift });
       ScrollTrigger.create({
         trigger: block,
         start: "top 90%",
         once: true,
         onEnter: () =>
-          gsap.to(block, { opacity: 1, y: 0, duration: 0.95, ease: "power3.out", clearProps: "opacity,transform" }),
+          gsap.to(block, {
+            opacity: 1,
+            y: 0,
+            duration: t.sectionArrival,
+            ease: "power3.out",
+            clearProps: "opacity,transform",
+          }),
       });
     });
 
   qsa("[data-reveal-group]").forEach((group) => {
     const items = Array.from(group.children) as HTMLElement[];
     if (!items.length || inView(group, 0.8)) return;
-    gsap.set(items, { opacity: 0, y: 44 });
+    gsap.set(items, { opacity: 0, y: t.arrivalTravel });
     ScrollTrigger.create({
       trigger: group,
       start: "top 88%",
@@ -80,15 +99,16 @@ export function reveal({ gsap, ScrollTrigger, SplitText, cleanups }: Motion) {
         gsap.to(items, {
           opacity: 1,
           y: 0,
-          duration: 0.95,
-          stagger: 0.1,
+          duration: t.sectionArrival,
+          stagger: stagger(items.length, profile),
           ease: "power3.out",
           clearProps: "opacity,transform",
         }),
     });
   });
 
-  // Photographs wipe open from the bottom edge while the picture inside settles from a slight zoom.
+  // Photographs open from the bottom edge (an inset mask on the frame) while the picture settles from a slight
+  // overscan. The settle is its own factor (--img-settle), so it never overwrites the parallax offset.
   qsa(".pci-project__media, .pci-duo__media, .pci-about__art")
     .filter((media) => !inView(media))
     .forEach((media) => {
@@ -98,10 +118,25 @@ export function reveal({ gsap, ScrollTrigger, SplitText, cleanups }: Motion) {
       timeline.fromTo(
         media,
         { clipPath: `inset(100% 0 0 0 round ${radius})` },
-        { clipPath: `inset(0% 0 0 0 round ${radius})`, duration: 1.4, ease: "power4.inOut", clearProps: "clipPath" },
+        {
+          clipPath: `inset(0% 0 0 0 round ${radius})`,
+          duration: profile === "full" ? 0.85 : 0.6,
+          ease: "power4.inOut",
+          clearProps: "clipPath",
+        },
       );
       if (picture)
-        timeline.from(picture, { scale: 1.16, duration: 1.9, ease: "power3.out", clearProps: "transform" }, 0.05);
+        timeline.fromTo(
+          picture,
+          { "--img-settle": t.imageSettleScale },
+          {
+            "--img-settle": 1,
+            duration: profile === "full" ? 1.1 : 0.8,
+            ease: "power3.out",
+            clearProps: "--img-settle",
+          },
+          0.05,
+        );
     });
 
   // Hairlines draw left to right.
@@ -136,22 +171,11 @@ export function reveal({ gsap, ScrollTrigger, SplitText, cleanups }: Motion) {
     if (!paths.length || inView(mark)) return;
     gsap.from(paths, {
       drawSVG: "0%",
-      duration: 1.4,
+      duration: profile === "full" ? 0.9 : 0.6,
       ease: "power2.inOut",
-      stagger: 0.16,
+      stagger: 0.08,
       scrollTrigger: { trigger: mark, start: "top 88%", once: true },
     });
   });
-
-  const note = qs(".pci-footer__invitation");
-  if (note && !inView(note)) {
-    gsap.from(qsa(".pci-footer__invitation .pci-actions > *"), {
-      opacity: 0,
-      y: 30,
-      duration: 0.9,
-      stagger: 0.12,
-      ease: "power3.out",
-      scrollTrigger: { trigger: note, start: "top 70%", once: true },
-    });
-  }
+  // The closing invitation keeps its actions visible and still; footer.ts owns its thread and wordmark.
 }

@@ -24,7 +24,9 @@ const art = (id: string) => `assets/pillars/sculpture-${id}`;
     <div class="pci-pillars" data-pillars data-active="education">
       <div class="pci-pillars__stage">
         <span class="pci-pillars__halo" aria-hidden="true"></span>
-        <span class="pci-pillars__ring" aria-hidden="true"></span>
+        <span class="pci-pillars__ring" aria-hidden="true">
+          <span class="pci-pillars__arc"></span>
+        </span>
         <div class="pci-pillars__art" aria-hidden="true">
           {programmes.map((p) => (
             <picture class="pci-pillars__sculpture" data-for={p.id}>
@@ -89,9 +91,3 @@ const art = (id: string) => `assets/pillars/sculpture-${id}`;
     </p>
   </div>
 </section>
-
-<script>
-  import { initPillars } from "../../scripts/pillars";
-
-  document.querySelectorAll<HTMLElement>("[data-pillars]").forEach(initPillars);
-</script>

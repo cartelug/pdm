@@ -13,7 +13,7 @@ const km = new Intl.NumberFormat("en-GB").format(record.distanceKm);
 <section class="pci-section pci-spotlight" id="the-walk" aria-labelledby="spotlight-heading">
   <div class="pci-spotlight__glow" aria-hidden="true"></div>
   <div class="pci-container pci-spotlight__grid">
-    <div class="pci-spotlight__copy" data-reveal>
+    <div class="pci-spotlight__copy">
       <span class="pci-eyebrow">{walk.label}</span>
       <h2 id="spotlight-heading">
         One walker. One long road.
@@ -41,6 +41,7 @@ const km = new Intl.NumberFormat("en-GB").format(record.distanceKm);
           <dd>Sponsor steps · give · join</dd>
         </div>
       </dl>
+      <span class="pci-thread pci-spotlight__thread" aria-hidden="true"></span>
       <div class="pci-actions">
         <a class="pci-button" href={choose} data-protected>
           {walk.action} <Icon name="arrow" />
@@ -53,10 +54,12 @@ const km = new Intl.NumberFormat("en-GB").format(record.distanceKm);
         Distance is a planning estimate. Kilometres walked are shown only once confirmed.
       </p>
     </div>
-    <figure class="pci-spotlight__media" data-reveal>
+    <figure class="pci-spotlight__media">
       <div class="pci-spotlight__frame">
         <ScenePicture scene="08" portrait alt="Campaign illustration of the UCU–Kagando main university block." />
+        <span class="pci-spotlight__cover" aria-hidden="true"></span>
       </div>
+      <span class="pci-spotlight__edge" aria-hidden="true"></span>
       <figcaption>Campaign illustration · the main block at UCU–Kagando</figcaption>
     </figure>
   </div>

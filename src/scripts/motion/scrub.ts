@@ -12,7 +12,7 @@ export function scrub({ gsap, SplitText }: Motion) {
       onSplit(self) {
         return gsap.fromTo(
           self.words,
-          { opacity: 0.5 },
+          { opacity: 0.62 },
           {
             opacity: 1,
             ease: "none",

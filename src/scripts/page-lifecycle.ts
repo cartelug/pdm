@@ -1,5 +1,8 @@
 import { initGlobalNavigation } from "./navigation";
 import { recordEngagement } from "./analytics";
+import { initPillars } from "./pillars";
+import { initProjectFilter } from "./project-filter";
+import { COMPACT } from "./motion/policy";
 
 let cleanup: (() => void) | null = null;
 function boot() {
@@ -22,22 +25,40 @@ function boot() {
     (memory !== undefined && memory <= 2),
   );
   document.documentElement.toggleAttribute("data-lite", lite);
+  // Each start gets its own abort signal: a newer start, a reduced-motion change or leaving the page cancels
+  // any setup still waiting on fonts or imports, and that setup then reverts itself instead of finishing.
+  let pending: AbortController | undefined;
   const idle = window.setTimeout(async () => {
     if (lite) return;
-    const { initScrollMotion } = await import("./motion");
     const start = async () => {
       const ticket = ++generation;
+      pending?.abort();
       destroyMotion?.();
       destroyMotion = undefined;
       if (!alive || reduce.matches) return;
-      const destroy = await initScrollMotion();
-      if (alive && ticket === generation) destroyMotion = destroy;
-      else destroy();
+      const attempt = (pending = new AbortController());
+      try {
+        const { initScrollMotion } = await import("./motion");
+        if (attempt.signal.aborted || !alive || ticket !== generation || reduce.matches) return;
+        const destroy = await initScrollMotion(attempt.signal);
+        if (alive && ticket === generation && !attempt.signal.aborted) destroyMotion = destroy;
+        else destroy();
+      } catch (error) {
+        // The page is already complete; an optional motion module that fails to load leaves it as it is.
+        console.warn("Scroll motion unavailable:", error);
+      }
     };
     if (!alive) return;
     reduce.addEventListener("change", start, { signal: controller.signal });
+    // Phone and desktop compositions use different distances and scene choices: rebuild on a real change of
+    // profile (rotation, a resized window, a pointer change), never on browser-chrome height changes.
+    matchMedia(COMPACT).addEventListener("change", start, { signal: controller.signal });
     await start();
   }, 100);
+
+  // Functional controllers: these work with or without the motion bundle and are disposed with the page.
+  initProjectFilter(controller.signal);
+  const destroyPillars = Array.from(document.querySelectorAll<HTMLElement>("[data-pillars]")).map(initPillars);
 
   document.addEventListener(
     "click",
@@ -55,27 +76,6 @@ function boot() {
     { signal: controller.signal },
   );
 
-  document.querySelectorAll<HTMLButtonElement>("[data-project-filter]").forEach((button) => {
-    button.addEventListener(
-      "click",
-      () => {
-        const value = button.dataset.projectFilter!;
-        document
-          .querySelectorAll("[data-project-filter]")
-          .forEach((el) => el.setAttribute("aria-pressed", String(el === button)));
-        let count = 0;
-        document.querySelector("[data-project-grid]")?.classList.toggle("is-filtered", value !== "all");
-        document.querySelectorAll<HTMLElement>("[data-project-status]").forEach((card) => {
-          card.hidden = value !== "all" && card.dataset.projectStatus !== value;
-          if (!card.hidden) count++;
-        });
-        window.dispatchEvent(new Event("pci:layout"));
-        const status = document.querySelector("[data-filter-count]");
-        if (status) status.textContent = `${count} ${count === 1 ? "project" : "projects"} shown`;
-      },
-      { signal: controller.signal },
-    );
-  });
   // Project carousel: native scrolling with snap, plus buttons and a progress line when scripted.
   document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((carousel) => {
     const track = carousel.querySelector<HTMLElement>("[data-carousel-track]");
@@ -95,8 +95,10 @@ function boot() {
       );
     };
     const step = (direction: number) => {
+      // One card plus the gap the stylesheet actually uses, measured rather than assumed.
       const card = track.querySelector<HTMLElement>("[data-project-status]");
-      const distance = (card?.offsetWidth ?? track.clientWidth * 0.8) + 24;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      const distance = (card?.offsetWidth ?? track.clientWidth * 0.8) + gap;
       track.scrollBy({ left: direction * distance, behavior: reduce.matches ? "auto" : "smooth" });
     };
     prev?.addEventListener("click", () => step(-1), { signal: controller.signal });
@@ -125,7 +127,9 @@ function boot() {
     alive = false;
     generation++;
     clearTimeout(idle);
+    pending?.abort();
     destroyMotion?.();
+    destroyPillars.forEach((destroy) => destroy());
     destroyNavigation();
     controller.abort();
     cleanup = null;
